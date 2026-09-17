@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Newton School of Technology · B.Tech in CS &amp; AI</title>
+<meta name="description" content="Code from day one. Paid internships by year two. The 2027 NST website, mobile first.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#010101">
+<link rel="icon" href="assets/nst-logo-mark.svg" type="image/svg+xml">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100,500;100,600;125,600&display=swap">
+<style>
+/* NST website 2027, mobile home: hero + quick summary. Source: Figma "NST Website 2026-27", frame 76:7927 (402 wide). */
+:root{
+  color-scheme:light;
+  --black:#010101; --ink:#16191D; --ink-invert:#0B0C0E;
+  --brand:#0673F9; --brand-300:#61A8FF; --brand-800:#003270; --brand-50:#E5F1FF;
+  --yellow:#F59700; --muted:#B2B9C7; --grey:#8C95A6;
+  --paper:#FFFFFF; --bg2:#F6F7F9; --line:#E1E5EA; --line2:#EDEFF3; --stage:#E6E8EC;
+  --font:"Mona Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --btn-shadow:0 2px 5px rgba(0,0,0,.25), inset 0 1px .5px rgba(255,255,255,.3), inset 0 -1.5px .5px rgba(0,0,0,.3);
+}
+html,body{background:var(--stage);margin:0;padding:0}
+body{font-family:var(--font);color:var(--ink);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:geometricPrecision}
+*{box-sizing:border-box}
+/* phones: the page fills the viewport at every width (design width is 402; layout is fluid). Desktop: a 402 px phone column on a grey stage. */
+.page{width:100%;background:var(--paper);position:relative;overflow-x:clip;container-type:inline-size;min-height:100vh}
+@media (min-width:600px){
+  .page{width:402px;margin:0 auto;box-shadow:0 0 0 1px rgba(16,19,24,.05)}
+}
+@media (max-width:599px){
+  html,body{background:var(--paper)}
+}
+.page img{max-width:none;display:block}
+a{color:inherit}
+button{font-family:var(--font)}
+
+/* ---------- top bar (76:7980) ---------- */
+.nav{position:sticky;top:calc(12px + env(safe-area-inset-top,0px));z-index:40;margin:12px 12px -68px;height:56px;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:12px;background:rgba(255,255,255,.8);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 8px 12px rgba(0,0,0,.08)}
+.logo{position:relative;width:108px;height:27px;display:block;flex:none}
+.logo-mark{position:absolute;left:0;top:0;width:21.6px;height:27px}
+.logo-text{position:absolute;left:27px;top:3.17px;width:81px;height:21.26px}
+.nav-actions{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:0;margin:0;text-decoration:none;cursor:pointer;white-space:nowrap;font-family:var(--font);transition:transform .16s ease;-webkit-tap-highlight-color:transparent}
+.btn:active,.play:active,.menu:active{transform:scale(.96)}
+.btn-brand{background:var(--brand);color:#fff}
+.btn-white{background:#fff;color:var(--ink)}
+.btn-sm{height:39px;padding:8px 24px;border-radius:8px;font-size:14px;line-height:22.4px;font-weight:500;letter-spacing:-.32px;box-shadow:var(--btn-shadow)}
+.menu{width:40px;height:40px;flex:none;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;border-radius:8px;background:#fff;cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.25), inset 0 1px .5px rgba(255,255,255,.3), inset 0 -1.25px .5px rgba(0,0,0,.3);transition:transform .16s ease;-webkit-tap-highlight-color:transparent}
+.menu img{width:24px;height:24px}
+.btn:focus-visible,.menu:focus-visible,.play:focus-visible,.dot:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+
+/* ---------- hero (76:7929 + 76:7930) ---------- */
+.hero-media{position:relative;height:262.2px;overflow:hidden;background:var(--black)}
+.hero-poster,.hero-video{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+.hero-video{display:none}
+.hero-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(1,1,1,0) 65.38%,#010101 95.67%);display:none}
+.hero-media.has-video .hero-video,.hero-media.has-video .hero-fade{display:block}
+.hero-body{position:relative;overflow:hidden;background:var(--black);padding:12px 16px 30px;display:flex;flex-direction:column;gap:16px}
+.rays{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;filter:blur(2px)}
+.hero-text{position:relative;display:flex;flex-direction:column;gap:8px}
+.kicker{margin:0;padding:0 1px;font-size:14px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--yellow);white-space:nowrap}
+.headline{margin:0;font-size:min(24px, calc((100cqw - 32px) / 362 * 24));line-height:28px;font-weight:600;font-stretch:125%;letter-spacing:0;color:#fff}
+.tags{display:flex;flex-direction:column;gap:2px}
+.tag-row{margin:0;display:flex;align-items:center;gap:6px;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:var(--muted);white-space:nowrap}
+.star{width:7.09px;height:6.96px;margin:0 .29px;flex:none}
+.info-row{position:relative;display:flex;gap:8px}
+.info{flex:1 0 0;min-width:0;display:flex;flex-direction:column;gap:8px;padding:8px 12px;border-radius:8px;background:rgba(22,25,29,.42)}
+.info-label{font-size:10px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--brand-300);white-space:nowrap}
+.info-value{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px;color:#fff;white-space:nowrap}
+.badge-row{position:relative;display:flex;gap:8px}
+.badge{flex:1 0 0;min-width:0;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 12px;border-radius:4px;background:var(--ink);font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;color:#fff;white-space:nowrap}
+.badge-icon{width:26px;height:26px;overflow:hidden;display:flex;align-items:center;justify-content:center;flex:none}
+.badge-icon img{flex:none}
+.cta{position:relative;display:flex;flex-direction:column;gap:12px}
+.btn-lg{height:50px;padding:10px 60px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;box-shadow:var(--btn-shadow)}
+.btn-lg img{width:22px;height:22px;flex:none}
+.cta-row{display:flex;gap:10px}
+.cta-row .btn{flex:1 0 0;min-width:0;padding:10px 20px}
+.play{position:relative;width:50px;height:50px;flex:none;border:0;padding:0;border-radius:99px;background:#fff;cursor:pointer;overflow:hidden;transition:transform .16s ease;-webkit-tap-highlight-color:transparent}
+/* the play glyph and the NST mark trade places every 3 s: a soft cross-dissolve, white/blue play to blue/white mark */
+.face{position:absolute;inset:0;border-radius:99px;display:flex;align-items:center;justify-content:center;will-change:opacity,filter,transform}
+.face-play{background:#fff;animation:facePlay 6s ease-in-out infinite}
+.face-play svg{margin-left:6px}
+.face-logo{background:var(--brand);opacity:0;box-shadow:inset 0 1px .5px rgba(255,255,255,.35), inset 0 -1.5px .5px rgba(0,0,0,.25);animation:faceLogo 6s ease-in-out infinite}
+@keyframes faceLogo{0%,38%{opacity:0;filter:blur(6px);transform:scale(.9)}48%,88%{opacity:1;filter:blur(0);transform:scale(1)}98%,100%{opacity:0;filter:blur(6px);transform:scale(.9)}}
+@keyframes facePlay{0%,38%{opacity:1;filter:blur(0);transform:scale(1)}48%,88%{opacity:0;filter:blur(5px);transform:scale(1.06)}98%,100%{opacity:1;filter:blur(0);transform:scale(1)}}
+
+/* ---------- quick summary (76:10559) ---------- */
+.proof{background:var(--paper);padding-bottom:92px}
+.stat{position:relative;isolation:isolate;overflow:hidden;height:138px;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--paper);touch-action:pan-y;cursor:default}
+.stat-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(427.16px circle at calc(50% - .45px) calc(50% - .21px), rgba(245,151,0,0) 0, rgba(245,151,0,.11) 45%, rgba(245,151,0,.08) 55%, rgba(245,151,0,0) 80%)}
+.particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.stat-track{position:relative;width:370px;max-width:100%;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x pan-y}
+.stat-track::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;gap:4px;margin:0}
+.stat-num{margin:0;font-size:40px;line-height:48px;font-weight:600;letter-spacing:0;color:var(--yellow);font-variant-numeric:tabular-nums}
+.stat-desc{margin:0;text-align:center;font-size:14px;line-height:20px;font-weight:500;letter-spacing:.1px;color:var(--ink);white-space:nowrap}
+.dots{position:relative;display:flex;gap:8px;height:6px}
+.dot{width:6px;height:6px;border-radius:999px;border:0;padding:0;margin:0;background:var(--grey);opacity:.5;cursor:pointer;transition:background .2s,opacity .2s}
+.dot.is-on{background:var(--yellow);opacity:1}
+.hatch{position:relative;height:26px;overflow:hidden;background:var(--bg2);border-bottom:1px solid var(--line)}
+.hatch img{position:absolute;left:calc(50% - 223.41px);top:-13.46px;width:447.64px;height:53.16px}
+.hatch-flip{transform:scaleY(-1)}
+.grid{display:grid;grid-template-columns:1fr 1fr;background:var(--paper)}
+.tile{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 12px;height:78px;margin:0;border-bottom:1px solid var(--line2);min-width:0}
+.tile:nth-child(odd){border-right:1px solid var(--line2)}
+.tile:nth-child(n+3){height:79.5px;padding:14.5px 12.5px 15px;justify-content:center}
+.tile p{margin:0;font-size:13px;line-height:18px;font-weight:600;letter-spacing:.06px;color:var(--brand-800);white-space:nowrap}
+.stack{display:flex;height:24px;flex:none}
+.av{position:relative;width:24px;height:24px;border-radius:999px;flex:none}
+.stack .av + .av{margin-left:-12px}
+.stack .av:nth-child(1){z-index:3}.stack .av:nth-child(2){z-index:2}.stack .av:nth-child(3){z-index:1}
+.av-logo{background:#fff}
+.ring{position:absolute;inset:-.425px;border:1px solid var(--line2);border-radius:999px;pointer-events:none}
+.ring-thin{border-width:.857px}
+.mark{position:absolute;left:50%;top:calc(50% + .43px);width:16px;height:16px;transform:translate(-50%,-50%);padding:1.333px}
+.mark-fixed{left:4.57px;top:4.57px;transform:none}
+.mark-inner{position:relative;display:block;width:13.33px;height:13.33px}
+.gmask{clip-path:path("M13.2053 5.42984H6.80868V7.99297H10.4842C10.4251 8.35571 10.2924 8.71255 10.0982 9.03794C9.87557 9.41073 9.60037 9.69455 9.3183 9.91069C8.47339 10.5581 7.48833 10.6905 6.80422 10.6905C5.07606 10.6905 3.59946 9.57359 3.02784 8.05588C3.00477 8.0008 2.98946 7.94391 2.9708 7.88767C2.84449 7.5014 2.77547 7.0923 2.77547 6.66709C2.77547 6.22457 2.85021 5.80097 2.98648 5.40089C3.524 3.82301 5.03388 2.64448 6.80546 2.64448C7.16179 2.64448 7.50494 2.68689 7.83035 2.77149C8.57403 2.96484 9.10008 3.34562 9.42242 3.64682L11.3674 1.74209C10.1843 0.657315 8.64197 1.6401e-09 6.80223 1.6401e-09C5.33148 -3.16551e-05 3.97361 0.458212 2.86089 1.23266C1.95851 1.86071 1.21842 2.7016 0.718958 3.6782C0.254384 4.5837 0 5.58717 0 6.66609C0 7.74506 0.254773 8.75896 0.719349 9.65609V9.66214C1.21006 10.6146 1.92764 11.4346 2.79978 12.0598C3.56169 12.6059 4.92787 13.3333 6.80223 13.3333C7.88012 13.3333 8.83543 13.139 9.67793 12.7748C10.2857 12.5121 10.8242 12.1694 11.3117 11.729C11.9559 11.1471 12.4604 10.4273 12.8048 9.59916C13.1491 8.77103 13.3333 7.83456 13.3333 6.81926C13.3333 6.34642 13.2858 5.86623 13.2053 5.4298V5.42984Z")}
+.gmask img{position:absolute;left:-.93px;top:-1.7px;width:14.67px;height:15.46px}
+.am-a{position:absolute;inset:73.02% 2.22% 1.93% 2.61%}
+.am-b{position:absolute;inset:0 17.33% 25.86% 20.64%}
+.am-a img,.am-b img{width:100%;height:100%}
+.mark-inner > img.full{width:13.33px;height:13.33px}
+.av-photo{background:var(--brand-50);overflow:hidden}
+.av-photo img{position:absolute}
+.av-photo::after{content:"";position:absolute;inset:0;border:1px solid var(--line);border-radius:999px}
+.av-dark{background:var(--ink-invert)}
+.av-dark img{position:absolute;left:6.67px;top:6.43px;width:10.61px;height:12px}
+.av-expert{background:#fff}
+.av-expert .cut{position:absolute;left:-.75px;top:0;width:24px;height:24px;border-radius:999px;overflow:hidden}
+.av-expert .cut img{position:absolute}
+.av-expert .cut::after{content:"";position:absolute;inset:0;border:1px solid var(--line);border-radius:999px}
+.companies{display:flex;flex-direction:column;align-items:center;gap:24px;padding:24px 0;overflow:hidden}
+.label{margin:0;font-size:13px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.marquee{width:100%;height:28px;overflow:hidden;position:relative}
+.marquee-track{position:absolute;left:0;top:0;display:flex;gap:27px;height:28px;will-change:transform;transform:translateX(-56.21px);animation:marquee 18s linear infinite}
+@keyframes marquee{from{transform:translateX(-56.21px)}to{transform:translateX(-467.97px)}}
+.lg{flex:none;height:28px;position:relative;display:block}
+.lg img{position:absolute}
+.lg-google{width:71.27px}.lg-google img{left:0;top:2.12px;width:71.27px;height:23.76px}
+.lg-ms{width:102.67px}.lg-ms img{left:0;top:3.82px;width:102.67px;height:20.36px}
+.lg-uber{width:49.21px}.lg-uber img{left:0;top:0;width:49.21px;height:28px}
+.lg-meta{width:80.61px}
+.meta-sym{position:absolute;left:0;top:6.15px;width:24.41px;height:15.69px;clip-path:path("M17.5215 0C15.5197 0 13.9548 1.45794 12.5382 3.30998C10.5916 0.913258 8.96357 0 7.01533 0C3.04333 0 0 4.9984 0 10.2889C0 13.5995 1.65636 15.6876 4.43074 15.6876C6.42755 15.6876 7.86366 14.7773 10.4167 10.462C10.4167 10.462 11.4809 8.64475 12.2131 7.39292C12.4696 7.79345 12.7398 8.22504 13.0237 8.68769L14.2209 10.6351C16.553 14.4087 17.8524 15.6876 20.2068 15.6876C22.9096 15.6876 24.4138 13.571 24.4138 10.1915C24.4138 4.65219 21.3019 0 17.5215 0ZM8.46987 9.29356C6.39995 12.4311 5.68387 13.1343 4.53143 13.1343C3.34543 13.1343 2.64054 12.1275 2.64054 10.3322C2.64054 6.49143 4.62094 2.56411 6.98176 2.56411C8.26021 2.56411 9.32858 3.27806 10.965 5.5434C9.41115 7.84808 8.46987 9.29356 8.46987 9.29356ZM16.282 8.89858L14.8506 6.59017C14.4632 5.98099 14.091 5.42026 13.7338 4.90799C15.0239 2.98257 16.0881 2.02317 17.3537 2.02317C19.9831 2.02317 22.0866 5.76656 22.0866 10.3647C22.0866 12.1173 21.4929 13.1343 20.2628 13.1343C19.0838 13.1343 18.5206 12.3814 16.282 8.89858Z")}
+.meta-sym img{left:-.09px;top:-.09px;width:24.59px;height:15.85px;object-fit:cover}
+.meta-hl{left:6.98px;top:6.15px;width:7.87px;height:8.98px}
+.meta-word{left:29.54px;top:6.67px;width:50.96px;height:15.17px}
+
+@media (hover:hover){
+  .btn-brand:hover{background:#0566DD}
+  .btn-white:hover{background:#F6F7F9}
+}
+@media (prefers-reduced-motion:reduce){
+  .marquee-track{animation:none}
+  .btn,.play,.menu{transition:none}
+  .face-play,.face-logo{animation:none}
+}
+</style>
+</head>
+<body>
+<div class="page" id="page">
+
+  <header class="nav" data-node="76:7980">
+    <a class="logo" href="#top" aria-label="Newton School of Technology, home">
+      <img class="logo-mark" src="assets/nst-logo-mark.svg" alt="">
+      <img class="logo-text" src="assets/nst-logo-text.svg" alt="">
+    </a>
+    <div class="nav-actions">
+      <a class="btn btn-brand btn-sm" href="#apply">Apply Now</a>
+      <button class="menu" type="button" aria-label="Open menu"><img src="assets/icon-menu.svg" alt=""></button>
+    </div>
+  </header>
+
+  <section class="hero" id="top" aria-label="B. Tech in CS and AI">
+    <div class="hero-media" id="heroMedia" data-node="76:7929">
+      <img class="hero-poster" src="assets/hero-campus.jpg" alt="Aerial view of the NST campus">
+      <video class="hero-video" playsinline muted loop autoplay preload="none" aria-hidden="true"></video>
+      <div class="hero-fade"></div>
+    </div>
+    <div class="hero-body" data-node="76:7930">
+      <canvas class="rays" id="rays" aria-hidden="true"></canvas>
+      <div class="hero-text">
+        <p class="kicker">B. Tech in CS &amp; AI</p>
+        <h1 class="headline">Code from day one.<br>Paid Internships by year two.</h1>
+        <div class="tags">
+          <p class="tag-row"><span>Computer Science</span><img class="star" src="assets/icon-star.svg" alt=""><span>Artificial Intelligence</span></p>
+          <p class="tag-row"><span>Machine Learning</span><img class="star" src="assets/icon-star.svg" alt=""><span>Data Science</span></p>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info"><span class="info-label">Course Duration</span><span class="info-value">4 Years On-Campus</span></div>
+        <div class="info"><span class="info-label">NSAT Exam Date</span><span class="info-value">24 Dec, 2026</span></div>
+      </div>
+      <div class="badge-row">
+        <div class="badge"><span class="badge-icon"><img src="assets/img-4672-ugc.png" alt="" style="width:24px;height:26px"></span><span>UGC Approved</span></div>
+        <div class="badge"><span class="badge-icon"><img src="assets/img-4671-nsdc.png" alt="" style="width:30px;height:30px"></span><span>Certificate by NSDC</span></div>
+      </div>
+      <div class="cta">
+        <a class="btn btn-brand btn-lg" id="apply" href="#">Apply Now <img src="assets/icon-arrow-right.svg" alt=""></a>
+        <div class="cta-row">
+          <button class="play" type="button" id="playBtn" aria-label="Play the campus film"><span class="face face-play"><svg viewBox="0 0 18 26" width="18" height="26" aria-hidden="true"><path d="M3 3.6 L15.4 13 L3 22.4 Z" fill="#0673F9" stroke="#0673F9" stroke-width="3.6" stroke-linejoin="round"/></svg></span><span class="face face-logo"><svg viewBox="0 0 21.6 27" width="20" height="25" aria-hidden="true"><path d="M14.85 0V2.7H16.9897L12.2175 7.47225C11.0093 6.75338 9.60525 6.33488 8.1 6.33488H1.35V9.03488H8.1C11.0767 9.03488 13.5 11.4581 13.5 14.4349V23.8849H16.2V14.4349C16.2 12.4504 15.4777 10.6313 14.2897 9.2205L18.9 4.61025V6.75H21.6V0H14.85Z" fill="#fff"/><path d="M18.9 16.3755L18.873 16.7029C18.603 21.1005 14.8331 24.5126 10.3883 24.2899C6.24038 24.0806 2.97338 20.6584 2.71688 16.5139L2.7 16.2405V2.7H13.5V0H0V16.281L0.03375 16.8683C0.38475 22.5484 5.11312 27 10.8 27C16.173 27 20.7225 23.031 21.5021 17.8335C21.5798 17.3239 21.6 16.8075 21.6 16.2945V8.1H18.9V16.3755Z" fill="#fff" opacity=".72"/></svg></span></button>
+          <a class="btn btn-white btn-lg" href="#"><img src="assets/icon-users.svg" alt=""> Talk to a senior</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof" data-node="76:10559" aria-label="Quick summary">
+    <div class="stat" id="stat" data-node="123:12268">
+      <div class="stat-bg"></div>
+      <canvas class="particles" id="particles" aria-hidden="true"></canvas>
+      <div class="stat-track" id="statTrack">
+        <article class="slide">
+          <p class="stat-num">93%</p>
+          <p class="stat-desc">of the 2023 batch held a paid internship<br>by their second year</p>
+        </article>
+        <article class="slide">
+          <p class="stat-num">₹2.5L</p>
+          <p class="stat-desc">highest monthly stipend earned by<br>a second-year student on internship</p>
+        </article>
+      </div>
+      <div class="dots" id="dots">
+        <button class="dot is-on" type="button" aria-label="Show slide 1"></button>
+        <button class="dot" type="button" aria-label="Show slide 2"></button>
+      </div>
+    </div>
+
+    <div class="hatch hatch-flip" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
+
+    <div class="grid" data-node="76:10567">
+      <article class="tile">
+        <div class="stack">
+          <span class="av av-logo"><i class="ring"></i><span class="mark"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt="Google"></span></span></span>
+          <span class="av av-logo"><i class="ring"></i><span class="mark"><span class="mark-inner"><span class="am-a"><img src="assets/logo2-vector-a.svg" alt=""></span><span class="am-b"><img src="assets/logo2-vector-b.svg" alt="Amazon"></span></span></span></span>
+          <span class="av av-logo"><i class="ring"></i><span class="mark mark-fixed"><span class="mark-inner"><img class="full" src="assets/logo3-group.svg" alt="Zomato"></span></span></span>
+        </div>
+        <p>92% Placement Rate</p>
+      </article>
+      <article class="tile">
+        <div class="stack">
+          <span class="av av-photo"><img src="assets/avatar-1.png" alt="" style="left:-4.81px;top:.08px;width:35.41px;height:34.67px"></span>
+          <span class="av av-photo"><img src="assets/avatar-2.png" alt="" style="left:-6.09px;top:3.5px;width:31.53px;height:24.08px"></span>
+          <span class="av av-photo"><img src="assets/avatar-3.png" alt="" style="left:-3.52px;top:2.66px;width:31.54px;height:25.75px"></span>
+        </div>
+        <p>8 LPA Average Placement</p>
+      </article>
+      <article class="tile">
+        <div class="stack">
+          <span class="av av-dark"><i class="ring ring-thin"></i><img src="assets/package-icon.svg" alt=""></span>
+        </div>
+        <p>1.3 Cr Highest Package</p>
+      </article>
+      <article class="tile">
+        <div class="stack">
+          <span class="av av-expert"><span class="cut"><img src="assets/expert-4909.png" alt="" style="left:-3.64px;top:.43px;width:32.57px;height:32.57px"></span></span>
+          <span class="av av-expert"><span class="cut"><img src="assets/expert-4910.png" alt="" style="left:-3.64px;top:.43px;width:32.57px;height:32.57px"></span></span>
+          <span class="av av-expert"><span class="cut"><img src="assets/expert-4908.png" alt="" style="left:-1.07px;top:.43px;width:27.05px;height:27.05px"></span></span>
+        </div>
+        <p>800+ Industry Experts</p>
+      </article>
+    </div>
+
+    <div class="companies" data-node="123:11986">
+      <p class="label">companies hiring from us</p>
+      <div class="marquee" aria-label="Google, Microsoft, Uber, Meta">
+        <div class="marquee-track" id="marqueeTrack"></div>
+      </div>
+    </div>
+
+    <div class="hatch" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- company marquee: repeat the logo sequence so the loop is seamless ---- */
+  var seq = '' +
+    '<span class="lg lg-google"><img src="assets/company-google.svg" alt="Google"></span>' +
+    '<span class="lg lg-ms"><img src="assets/company-microsoft.svg" alt="Microsoft"></span>' +
+    '<span class="lg lg-uber"><img src="assets/company-uber.svg" alt="Uber"></span>' +
+    '<span class="lg lg-meta"><span class="meta-sym"><img src="assets/meta-rect.png" alt=""></span><img class="meta-hl" src="assets/meta-vector.svg" alt=""><img class="meta-word" src="assets/meta-wordmark.svg" alt="Meta"></span>';
+  document.getElementById('marqueeTrack').innerHTML = seq + seq + seq;
+
+  /* ---- stat carousel dots ---- */
+  var track = document.getElementById('statTrack');
+  var dots = Array.prototype.slice.call(document.querySelectorAll('#dots .dot'));
+  function syncDots(){
+    var i = Math.round(track.scrollLeft / track.clientWidth);
+    dots.forEach(function(d, k){ d.classList.toggle('is-on', k === i); d.setAttribute('aria-pressed', k === i); });
+  }
+  track.addEventListener('scroll', syncDots, {passive:true});
+  dots.forEach(function(d, k){ d.addEventListener('click', function(){ track.scrollTo({left: k * track.clientWidth, behavior: reduce ? 'auto' : 'smooth'}); }); });
+
+  /* ---- interactive particles (replaces the static particle image, 123:12791) ----
+     Idle: the ring flows slowly along its arc, every dot breathes in radius and wanders on its own phase.
+     Pointer: dots within 78 px are pushed away and carry some pointer velocity, then spring home. */
+  var stat = document.getElementById('stat');
+  var cv = document.getElementById('particles');
+  var ctx = cv.getContext('2d');
+  var W = 0, H = 0, parts = [], t = 0, raf = 0, visible = false, last = 0;
+  var geo = {cx:0, cy:0, R:0, maxA:0};
+  var ptr = {x:-9999, y:-9999, on:false, vx:0, vy:0};
+  function rand(a, b){ return a + Math.random() * (b - a); }
+  function gauss(){ var u = 0, v = 0; while (u === 0) u = Math.random(); while (v === 0) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2831853 * v); }
+  function build(){
+    var r = cv.getBoundingClientRect();
+    W = r.width; H = r.height;
+    var dpr = Math.min(window.devicePixelRatio || 1, 3);
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    parts = [];
+    geo.cx = W / 2 - .45; geo.cy = H / 2 - .21; geo.R = W * .5;
+    var band = H / 2 + 36;
+    geo.maxA = Math.asin(Math.min(1, band / geo.R));
+    var N = Math.round(W * 1.35);
+    for (var i = 0; i < N; i++){
+      var side = Math.random() < .5 ? 0 : Math.PI;
+      var spread = Math.random() < .7 ? 11 : 40;
+      var big = Math.random() < .12;
+      parts.push({
+        kind: 'ring', side: side, th: side + rand(-geo.maxA, geo.maxA),
+        r0: geo.R - 4 + gauss() * spread,
+        om: (.04 + rand(0, .05)) * (Math.random() < .85 ? 1 : -1),   /* rad/s along the arc: 8–18 px/s */
+        br: rand(2, 7), bf: rand(.15, .45),                          /* radial breathing */
+        amp: rand(1.5, 4.5), f: rand(.25, .7), ph: rand(0, 6.28),    /* individual wander */
+        x: 0, y: 0, vx: 0, vy: 0, r: big ? rand(1.3, 2.1) : rand(.55, 1.25), al: rand(.45, 1), tint: Math.random()
+      });
+    }
+    for (var j = 0; j < Math.round(W * .06); j++){ /* a few strays floating across the band */
+      parts.push({kind: 'stray', x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, dx: rand(-6, 6), dy: rand(-4, 4),
+        amp: rand(2, 5), f: rand(.2, .6), ph: rand(0, 6.28), r: rand(.5, 1.1), al: rand(.25, .6), tint: Math.random()});
+    }
+    for (var k = 0; k < parts.length; k++){ if (parts[k].kind === 'ring'){ var q = parts[k]; q.x = geo.cx + Math.cos(q.th) * q.r0; q.y = geo.cy + Math.sin(q.th) * q.r0; } }
+    draw();
+  }
+  function draw(){
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < parts.length; i++){
+      var p = parts[i];
+      if (p.x < -4 || p.x > W + 4 || p.y < -4 || p.y > H + 4) continue;
+      var tw = reduce ? 1 : (.82 + .18 * Math.sin(t * p.f * 1.7 + p.ph));
+      ctx.globalAlpha = p.al * tw;
+      ctx.fillStyle = p.tint < .74 ? '#F09000' : (p.tint < .9 ? '#E9A62A' : '#C97A08');
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2831853); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+  }
+  function step(now){
+    var dt = last ? Math.min((now - last) / 1000, .05) : 1 / 60;
+    last = now; t += dt;
+    var RR = 78, K = .045, D = .84, tx, ty;
+    for (var i = 0; i < parts.length; i++){
+      var p = parts[i];
+      if (p.kind === 'ring'){
+        if (!reduce){
+          p.th += p.om * dt;
+          if (p.th > p.side + geo.maxA) p.th -= 2 * geo.maxA;
+          else if (p.th < p.side - geo.maxA) p.th += 2 * geo.maxA;
+        }
+        var rr = p.r0 + (reduce ? 0 : Math.sin(t * p.bf + p.ph) * p.br);
+        tx = geo.cx + Math.cos(p.th) * rr; ty = geo.cy + Math.sin(p.th) * rr;
+        if (!reduce){ tx += Math.sin(t * p.f + p.ph) * p.amp; ty += Math.cos(t * p.f * .8 + p.ph * 1.3) * p.amp; }
+      } else {
+        if (!reduce){
+          p.x += p.dx * dt; p.y += p.dy * dt;
+          if (p.x < -6) p.x = W + 6; else if (p.x > W + 6) p.x = -6;
+          if (p.y < -6) p.y = H + 6; else if (p.y > H + 6) p.y = -6;
+        }
+        tx = p.x + (reduce ? 0 : Math.sin(t * p.f + p.ph) * p.amp * .3);
+        ty = p.y + (reduce ? 0 : Math.cos(t * p.f + p.ph) * p.amp * .3);
+      }
+      var ax = (tx - p.x) * K, ay = (ty - p.y) * K;
+      if (ptr.on){
+        var dx = p.x - ptr.x, dy = p.y - ptr.y, d2 = dx * dx + dy * dy;
+        if (d2 < RR * RR){
+          var d = Math.sqrt(d2) || .001, f = 1 - d / RR, s = f * f * 5.5;
+          ax += dx / d * s + ptr.vx * f * .12;
+          ay += dy / d * s + ptr.vy * f * .12;
+        }
+      }
+      p.vx = (p.vx + ax) * D; p.vy = (p.vy + ay) * D;
+      p.x += p.vx; p.y += p.vy;
+    }
+    ptr.vx *= .8; ptr.vy *= .8;
+    draw();
+    raf = visible ? requestAnimationFrame(step) : 0;
+    if (!visible) last = 0;
+  }
+  function setPtr(e){
+    var r = cv.getBoundingClientRect();
+    var nx = e.clientX - r.left, ny = e.clientY - r.top;
+    if (ptr.on){ ptr.vx = nx - ptr.x; ptr.vy = ny - ptr.y; }
+    ptr.x = nx; ptr.y = ny; ptr.on = true;
+  }
+  function endPtr(){ ptr.on = false; ptr.vx = 0; ptr.vy = 0; }
+  stat.addEventListener('pointermove', setPtr);
+  stat.addEventListener('pointerdown', setPtr);
+  stat.addEventListener('pointerleave', endPtr);
+  stat.addEventListener('pointercancel', endPtr);
+  stat.addEventListener('pointerup', function(e){ if (e.pointerType !== 'mouse') endPtr(); });
+  var ro = new ResizeObserver(function(){ build(); });
+  ro.observe(cv);
+  var io = new IntersectionObserver(function(en){ visible = en[0].isIntersecting; if (visible && !raf) raf = requestAnimationFrame(step); }, {threshold: 0});
+  io.observe(stat);
+
+  /* ---- sun rays behind the hero copy (76:7931, 76:7932: animated beams from both edges) ---- */
+  var rc = document.getElementById('rays');
+  var rctx = rc.getContext('2d');
+  var RW = 0, RH = 0, beams = [], rt = 0, rraf = 0, rvis = false;
+  function buildRays(){
+    var r = rc.getBoundingClientRect();
+    RW = r.width; RH = r.height;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    rc.width = Math.round(RW * dpr); rc.height = Math.round(RH * dpr);
+    rctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    beams = [];
+    [-1, 1].forEach(function(side){
+      for (var i = 0; i < 7; i++){
+        beams.push({side: side, a0: (i - 3) * 9 + rand(-3, 3), w: rand(3, 7), amp: rand(2, 5), f: rand(.12, .3), ph: rand(0, 6.28), al: rand(.07, .15), len: rand(150, 230)});
+      }
+    });
+    drawRays();
+  }
+  function drawRays(){
+    rctx.clearRect(0, 0, RW, RH);
+    var cy = RH / 2 - 32.71;
+    rctx.save();
+    rctx.beginPath(); rctx.rect(0, cy - 177.5, RW, 355); rctx.clip();
+    rctx.globalCompositeOperation = 'lighter';
+    for (var i = 0; i < beams.length; i++){
+      var b = beams[i];
+      var ox = b.side < 0 ? -34 : RW + 34;
+      var ang = (b.side < 0 ? 0 : Math.PI) + (b.a0 + (reduce ? 0 : Math.sin(rt * b.f + b.ph) * b.amp)) * Math.PI / 180;
+      var L = b.len, hw = Math.tan(b.w * Math.PI / 360) * L;
+      var dx = Math.cos(ang), dy = Math.sin(ang), nx = -dy, ny = dx;
+      var g = rctx.createLinearGradient(ox, cy, ox + dx * L, cy + dy * L);
+      var a = b.al * (reduce ? 1 : (.7 + .3 * Math.sin(rt * b.f * 1.4 + b.ph)));
+      g.addColorStop(0, 'rgba(255,255,255,' + a.toFixed(3) + ')');
+      g.addColorStop(1, 'rgba(255,255,255,0)');
+      rctx.fillStyle = g;
+      rctx.beginPath();
+      rctx.moveTo(ox, cy);
+      rctx.lineTo(ox + dx * L + nx * hw, cy + dy * L + ny * hw);
+      rctx.lineTo(ox + dx * L - nx * hw, cy + dy * L - ny * hw);
+      rctx.closePath(); rctx.fill();
+    }
+    rctx.restore();
+  }
+  function stepRays(){ rt += 1 / 60; drawRays(); rraf = (rvis && !reduce) ? requestAnimationFrame(stepRays) : 0; }
+  new ResizeObserver(function(){ buildRays(); }).observe(rc);
+  new IntersectionObserver(function(en){ rvis = en[0].isIntersecting; if (rvis && !rraf && !reduce) rraf = requestAnimationFrame(stepRays); }, {threshold: 0}).observe(rc);
+
+  /* ---- campus film: wire a source here when the video file is available ---- */
+  var media = document.getElementById('heroMedia'), vid = media.querySelector('video');
+  var src = media.getAttribute('data-video');
+  if (src){ vid.src = src; media.classList.add('has-video'); }
+  document.getElementById('playBtn').addEventListener('click', function(){ if (src){ vid.muted = false; vid.play(); } });
+})();
+</script>
+</body>
+</html>
