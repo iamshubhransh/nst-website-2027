@@ -6,8 +6,8 @@ Live preview: https://iamshubhransh.github.io/nst-website-2027/
 
 ## What is in the page
 
-- Top bar, hero and quick-summary section (Figma frame 76:7927).
-- Live pieces: sun rays behind the hero copy, the play button that trades places with the NST mark, the particle field behind the 93% stat (drifts on its own, scatters away from the cursor or finger), the stat carousel, the company marquee.
+- Figma frame 153:23441, top to bottom: top bar, hero, quick summary (93% stat, stats grid, companies), companies orbit with the CTC card, campus internship card, swipeable internship-win cards, placement-auditor card. A bottom bar with the play button and Apply Now (frame 153:32692) slides in once the hero has scrolled off the top and stays fixed.
+- Live pieces so far: sun rays behind the hero copy, the play button that trades places with the NST mark, the particle field behind the 93% stat (drifts on its own, scatters away from the cursor or finger), the stat carousel, the company marquee, the swipeable win cards with dots, the sliding bottom bar. Scroll and entrance animations for the newer sections are not built yet.
 
 ## Working on it
 
