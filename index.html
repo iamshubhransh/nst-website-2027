@@ -163,15 +163,20 @@ button{font-family:var(--font)}
 .co{position:relative;overflow:hidden;background:var(--paper);padding:64px 16px 16px;display:flex;flex-direction:column;align-items:center;gap:48px}
 .co-ring{position:absolute;left:calc(50% - 543px);top:218px;width:1086px;height:1086px;pointer-events:none}
 .co-head{position:relative;display:flex;flex-direction:column;align-items:center;gap:24px}
-.co-orbit{position:relative;width:358px;max-width:100%;display:flex;flex-direction:column;align-items:center;gap:45px}
-.co-title{margin:0;width:100%;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#005ED1;text-wrap:balance}
+.co-orbit{position:relative;width:358px;max-width:100%;height:181px}
+.co-title{position:relative;margin:0;width:100%;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#005ED1;text-wrap:balance}
 .co-title .dim,.campus-title .dim{opacity:.5}
-.co-logo{position:relative;width:64px;height:64px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--line),0 1px 3px rgba(0,0,0,.03),0 5px 5px rgba(0,0,0,.03),0 11px 6px rgba(0,0,0,.02);display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}
+/* scroll-linked highlight: JS splits the copy into characters and lifts them from 50% to 100% as the block moves up the screen */
+.reveal .rw{display:inline;white-space:nowrap}
+.reveal .rc{opacity:.5}
+.co-logo{position:absolute;left:147px;top:117px;width:64px;height:64px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px var(--line),0 1px 3px rgba(0,0,0,.03),0 5px 5px rgba(0,0,0,.03),0 11px 6px rgba(0,0,0,.02);display:flex;align-items:center;justify-content:center;overflow:hidden;will-change:left,top}
 .co-logo img{object-fit:cover}
 .co-logo-c img{margin-top:.58px}
-.co-logo-l{position:absolute;left:12px;top:134.29px}
-.co-logo-r{position:absolute;right:12px;top:134.29px}
-.co-label{margin:0;font-size:13px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#DE5A02}
+.co-logo-l{left:12px;top:134.29px}
+.co-logo-r{left:auto;right:12px;top:134.29px}
+.co-orbit.is-live .co-logo{right:auto}
+.co-label{margin:0;font-size:13px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#DE5A02;transition:opacity .3s ease,transform .3s ease}
+.co-label.is-hidden{opacity:0;transform:translateY(6px)}
 .ctc{position:relative;width:100%;background:var(--bg2);border-radius:12px;padding:8px 8px 12px;display:flex;flex-direction:column;gap:12px}
 .ctc-card{background:#fff;box-shadow:inset 0 0 0 1px var(--line2);border-radius:8px;padding:12px;display:flex;flex-direction:column;align-items:center;gap:16px}
 .ctc-title{margin:0;font-size:16px;line-height:20px;font-weight:600;letter-spacing:.1px;color:#002452;white-space:nowrap}
@@ -192,11 +197,22 @@ button{font-family:var(--font)}
 .fade-bot{bottom:0;background:linear-gradient(0deg,#fff,rgba(255,255,255,0))}
 
 /* ---------- campus carousel (153:23864) ---------- */
-.campus{background:var(--paper);padding:0 16px 28px}
+/* The campus card rides up with the page, pins just above the bottom bar, and holds for --campus-travel of scrolling:
+   slide 1 highlights, the card switches to slide 2 at the halfway point, slide 2 highlights, then the page moves on. */
+.campus{--campus-travel:120vh;position:relative;background:var(--paper);padding:0 16px;display:flex;flex-direction:column;justify-content:flex-end;height:calc(528px + var(--campus-travel))}
+.campus-pin{position:sticky;bottom:calc(86px + env(safe-area-inset-bottom,0px));padding-bottom:28px}
 .campus-card{position:relative;overflow:hidden;height:500px;border-radius:12px;background:var(--bg2);box-shadow:inset 0 0 0 1px rgba(225,229,234,.5);padding:0 16px 16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.campus-tab span{transition:opacity .25s ease}
+.campus-tab.is-swapping span{opacity:0}
+.campus-body{position:relative;height:233px}
+.campus-slide{position:absolute;left:0;top:0;width:100%;display:flex;flex-direction:column;gap:24px;transition:opacity .35s ease,transform .35s cubic-bezier(.22,1,.36,1)}
+.campus-slide[hidden]{display:flex!important;opacity:0;transform:translateY(14px);pointer-events:none}
+.campus-progress span{position:relative;overflow:hidden}
+.campus-progress span::after{content:"";position:absolute;left:0;top:0;height:100%;width:100%;background:#6138D3;transform:scaleX(var(--fill,0));transform-origin:left center}
+@media (prefers-reduced-motion:reduce){.campus-slide,.campus-tab span{transition:none}}
 .campus-card .dots-bg{left:-44px;top:-41.04px;width:458px;height:583px}
-.campus-card .fade-top{height:61px}
-.campus-card .fade-bot{height:53px}
+.campus-card .fade-top{height:61px;background:linear-gradient(180deg,#F6F7F9,rgba(246,247,249,0))}
+.campus-card .fade-bot{height:53px;background:linear-gradient(0deg,#F6F7F9,rgba(246,247,249,0))}
 .campus-tab{position:relative;display:flex;align-items:flex-start;justify-content:center;margin-top:1px;height:28px}
 .campus-tab img{width:16px;height:16px;flex:none}
 .campus-tab .tab-l{transform:rotate(-90deg)}
@@ -214,17 +230,17 @@ button{font-family:var(--font)}
 .sc-value{margin:0;font-size:19.1px;line-height:24px;font-weight:600;letter-spacing:.1px;white-space:nowrap;background:linear-gradient(180deg,#6138D3,#004599);-webkit-background-clip:text;background-clip:text;color:transparent;width:max-content}
 .campus-progress{position:relative;width:336px;max-width:100%;display:flex;gap:12px;height:2px}
 .campus-progress span{flex:1 0 0;height:2px;background:#B49DFE;opacity:.5}
-.campus-progress span.on{background:#6138D3;opacity:1}
 
 /* ---------- internship wins, swipeable cards (153:23775) ---------- */
 .wins{background:var(--paper);padding:0 16px;display:flex;flex-direction:column;gap:16px}
 .wins-track{display:flex;gap:12px;align-items:center;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;margin:0 -16px;padding:0 16px;scroll-padding:0 16px}
 .wins-track::-webkit-scrollbar{display:none}
-.win{flex:none;scroll-snap-align:start;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;color:#fff}
+.win{flex:none;scroll-snap-align:start;border-radius:12px;overflow:hidden;display:flex;flex-direction:column;color:#fff;transform-origin:left center;will-change:transform}
+.win-btn{cursor:pointer}
 .win h3,.win p{margin:0}
 .win-head{display:flex;align-items:center;justify-content:space-between}
 .win-tile{background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;flex:none}
-.win-btn{display:flex;align-items:center;justify-content:center;flex:none;background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(2,2,2,.1))}
+.win-btn{display:flex;align-items:center;justify-content:center;flex:none;border:0;padding:0;margin:0;background:linear-gradient(180deg,rgba(0,0,0,.03),rgba(2,2,2,.1));-webkit-tap-highlight-color:transparent}
 .win-text{display:flex;flex-direction:column}
 .win-orange{width:300px}
 .win-orange .win-top{background:linear-gradient(180deg,#C3491E 0%,#D86A43 100%);padding:16.67px 16.67px 13.33px;display:flex;flex-direction:column;gap:13.33px}
@@ -243,24 +259,24 @@ button{font-family:var(--font)}
 .win-photos .p1{margin-right:-35.52px}
 .win-photos .p2,.win-photos .p3{margin-right:-47.37px}
 .win-photos .p3{width:121.6px;height:152px}
-.win-green{width:272px;height:310.38px;border-radius:10.88px}
-.win-green .win-top{background:linear-gradient(180deg,#09542F 55.99%,#105634 100%);padding:15.11px 15.11px 12.09px;display:flex;flex-direction:column;gap:12.09px}
-.win-green .win-tile{width:30.22px;height:30.22px;border-radius:9.07px}
-.win-green .win-tile img{width:21.15px;height:21.15px}
-.win-green .win-btn{width:27.2px;height:27.2px;border-radius:6.04px;box-shadow:0 0 0 .756px rgba(255,255,255,.25),inset 0 .756px 0 rgba(255,255,255,.05),inset 0 -.756px 0 rgba(0,0,0,.2)}
-.win-green .win-btn img{width:12.09px;height:12.09px}
-.win-green .win-text{gap:6.04px}
-.win-green h3{font-size:16.32px;line-height:25.39px;font-weight:600;letter-spacing:.054px}
-.win-green p{font-size:10.58px;line-height:16.62px;font-weight:500;letter-spacing:.076px}
+.win-green{width:300px;height:342.33px;border-radius:12px}
+.win-green .win-top{background:linear-gradient(180deg,#09542F 55.99%,#105634 100%);padding:16.67px 16.67px 13.33px;display:flex;flex-direction:column;gap:13.33px}
+.win-green .win-tile{width:33.33px;height:33.33px;border-radius:10px}
+.win-green .win-tile img{width:23.33px;height:23.33px}
+.win-green .win-btn{width:30px;height:30px;border-radius:6.67px;box-shadow:0 0 0 .83px rgba(255,255,255,.25),inset 0 .83px 0 rgba(255,255,255,.05),inset 0 -.83px 0 rgba(0,0,0,.2)}
+.win-green .win-btn img{width:13.33px;height:13.33px}
+.win-green .win-text{gap:6.67px}
+.win-green h3{font-size:18px;line-height:28px;font-weight:600;letter-spacing:.06px}
+.win-green p{font-size:11.67px;line-height:18.33px;font-weight:500;letter-spacing:.083px}
 .win-prize{position:relative;flex:1 0 0;min-height:1px;background:linear-gradient(180deg,#105634 8.5%,#099650 100%)}
-.win-prize .inner{position:absolute;left:calc(50% + .04px);top:25.34px;transform:translateX(-50%);width:125.44px;display:flex;flex-direction:column;align-items:center;gap:10.26px}
-.win-prize .txt{display:flex;flex-direction:column;align-items:center;gap:3.08px;height:54.71px;font-family:Inter,var(--font);white-space:nowrap}
-.win-prize .k{margin:0;font-size:11.11px;line-height:20.81px;font-weight:400;letter-spacing:.69px;text-transform:uppercase;color:rgba(255,255,255,.4)}
-.win-prize .v{margin:0;font-size:30.83px;line-height:30.83px;font-weight:700;color:#fff}
-.win-avs{position:relative;width:75.23px;height:20.52px}
-.win-avs span{position:absolute;top:0;width:20.52px;height:20.52px;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1.71px #76B280}
+.win-prize .inner{position:absolute;left:calc(50% + .04px);top:27.95px;transform:translateX(-50%);width:138.35px;display:flex;flex-direction:column;align-items:center;gap:11.31px}
+.win-prize .txt{display:flex;flex-direction:column;align-items:center;gap:3.4px;height:60.34px;font-family:Inter,var(--font);white-space:nowrap}
+.win-prize .k{margin:0;font-size:12.25px;line-height:22.95px;font-weight:400;letter-spacing:.76px;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.win-prize .v{margin:0;font-size:34px;line-height:34px;font-weight:700;color:#fff}
+.win-avs{position:relative;width:82.97px;height:22.63px}
+.win-avs span{position:absolute;top:0;width:22.63px;height:22.63px;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1.886px #76B280}
 .win-avs span img{width:100%;height:100%;object-fit:cover}
-.win-avs .plus{display:flex;align-items:center;justify-content:center;background:#fff;font-family:Inter,var(--font);font-size:6.84px;line-height:10.26px;font-weight:600;color:#000}
+.win-avs .plus{display:flex;align-items:center;justify-content:center;background:#fff;font-family:Inter,var(--font);font-size:7.54px;line-height:11.31px;font-weight:600;color:#000}
 .win-adyp{width:300px;background:radial-gradient(693.46px 269.29px at 150px 116.5px,#0A8A4B 0%,#105634 100%);padding-top:16px;display:flex;flex-direction:column;gap:24px}
 .win-adyp .win-head{padding:0 16px}
 .win-adyp .win-tile{width:32px;height:32px;border-radius:9.6px;margin-right:12px}
@@ -453,12 +469,12 @@ button{font-family:var(--font)}
     <svg class="co-ring" viewBox="0 0 1086 1086" aria-hidden="true"><circle cx="543" cy="543" r="541.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="8 8"/></svg>
     <div class="co-head">
       <div class="co-orbit">
-        <h2 class="co-title"><span>Our students are already on track for placements at top co</span><span class="dim">mpanies with CTC offered for freshers</span></h2>
-        <div class="co-logo co-logo-c"><img src="assets/co-logo-swiggy.png" alt="Swiggy" style="width:24px;height:35.13px"></div>
-        <div class="co-logo co-logo-l"><img src="assets/co-logo-cube.png" alt="" style="width:34px;height:34px"></div>
-        <div class="co-logo co-logo-r"><img src="assets/co-logo-emergent.png" alt="Emergent" style="width:38px;height:38px"></div>
+        <h2 class="co-title" data-reveal><span>Our students are already on track for placements at top co</span><span class="dim">mpanies with CTC offered for freshers</span></h2>
+        <div class="co-logo co-logo-l" data-company="Company" data-color="#0673F9"><img src="assets/co-logo-cube.png" alt="" style="width:34px;height:34px"></div>
+        <div class="co-logo co-logo-c" data-company="Swiggy" data-color="#DE5A02"><img src="assets/co-logo-swiggy.png" alt="Swiggy" style="width:24px;height:35.13px"></div>
+        <div class="co-logo co-logo-r" data-company="Emergent" data-color="#16191D"><img src="assets/co-logo-emergent.png" alt="Emergent" style="width:38px;height:38px"></div>
       </div>
-      <p class="co-label">swiggy</p>
+      <p class="co-label" id="coLabel">swiggy</p>
     </div>
     <div class="ctc">
       <div class="ctc-card">
@@ -473,23 +489,37 @@ button{font-family:var(--font)}
     </div>
   </section>
 
-  <section class="campus" data-node="153:23864" aria-label="Campus internship record">
-    <div class="campus-card">
+  <section class="campus" id="campus" data-node="153:23864" aria-label="Campus internship record">
+    <div class="campus-pin">
+    <div class="campus-card" id="campusCard">
       <div class="dots-bg" aria-hidden="true"></div>
       <div class="fade fade-top" aria-hidden="true"></div>
       <div class="fade fade-bot" aria-hidden="true"></div>
-      <div class="campus-tab"><img class="tab-l" src="assets/tab-corner.svg" alt=""><span>ady patil university, pune</span><img class="tab-r" src="assets/tab-corner.svg" alt=""></div>
+      <div class="campus-tab" id="campusTab"><img class="tab-l" src="assets/tab-corner.svg" alt=""><span id="campusTabText">ady patil university, pune</span><img class="tab-r" src="assets/tab-corner.svg" alt=""></div>
       <div class="campus-body">
-        <h2 class="campus-title"><span>300+ student batch has already sec</span><span class="dim">ured paid internships</span></h2>
-        <div class="stat-card">
-          <div class="stat-cell stat-cell-top"><p class="sc-label">Paid internships in their 2nd Year</p><p class="sc-value">97%+</p></div>
-          <div class="stat-row">
-            <div class="stat-cell sc-r"><p class="sc-label">Highest Earned</p><p class="sc-value">₹ 1,90,000/mo</p></div>
-            <div class="stat-cell"><p class="sc-label">Average Earned</p><p class="sc-value">₹ 23,364/mo</p></div>
+        <div class="campus-slide" data-campus="ady patil university, pune">
+          <h2 class="campus-title" data-pin-reveal><span>300+ student batch has already sec</span><span class="dim">ured paid internships</span></h2>
+          <div class="stat-card">
+            <div class="stat-cell stat-cell-top"><p class="sc-label">Paid internships in their 2nd Year</p><p class="sc-value">97%+</p></div>
+            <div class="stat-row">
+              <div class="stat-cell sc-r"><p class="sc-label">Highest Earned</p><p class="sc-value">₹ 1,90,000/mo</p></div>
+              <div class="stat-cell"><p class="sc-label">Average Earned</p><p class="sc-value">₹ 23,364/mo</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="campus-slide" data-campus="rishihood university, sonipat" hidden>
+          <h2 class="campus-title" data-pin-reveal><span>500+ student batch has already secured paid internships</span></h2>
+          <div class="stat-card">
+            <div class="stat-cell stat-cell-top"><p class="sc-label">Paid internships in their 2nd Year</p><p class="sc-value">93%+</p></div>
+            <div class="stat-row">
+              <div class="stat-cell sc-r"><p class="sc-label">Highest Earned</p><p class="sc-value">₹ 2,50,000/mo</p></div>
+              <div class="stat-cell"><p class="sc-label">Average Earned</p><p class="sc-value">₹ 25,000/mo</p></div>
+            </div>
           </div>
         </div>
       </div>
-      <div class="campus-progress" aria-hidden="true"><span class="on"></span><span></span></div>
+      <div class="campus-progress" id="campusProgress" aria-hidden="true"><span></span><span></span></div>
+    </div>
     </div>
   </section>
 
@@ -497,25 +527,25 @@ button{font-family:var(--font)}
     <div class="wins-track" id="winsTrack">
       <article class="win win-orange">
         <div class="win-top">
-          <div class="win-head"><span class="win-tile"><img src="assets/co-logo-emergent.png" alt="Emergent AI"></span><span class="win-btn"><img src="assets/icon-arrow-sm.svg" alt=""></span></div>
+          <div class="win-head"><span class="win-tile"><img src="assets/co-logo-emergent.png" alt="Emergent AI"></span><button class="win-btn" type="button" aria-label="Next card"><img src="assets/icon-arrow-sm.svg" alt=""></button></div>
           <div class="win-text"><h3>11 Students secured internships at Emergent AI</h3><p class="nw">Emergent reaches $100M ARR in 8 months,<br>becoming one of the fastest growing vibe-coded<br>platform in the country</p></div>
         </div>
         <div class="win-photos"><div class="row"><img class="p1" src="assets/card-photo-7708.png" alt=""><div class="grp"><img class="p2" src="assets/card-photo-7703.png" alt=""><img class="p3" src="assets/card-photo-aditya.png" alt=""><img class="p4" src="assets/card-photo-7726.png" alt=""></div></div></div>
       </article>
       <article class="win win-green">
         <div class="win-top">
-          <div class="win-head"><span class="win-tile"><img src="assets/icon-laptop.svg" alt=""></span><span class="win-btn"><img src="assets/icon-arrow-sm2.svg" alt=""></span></div>
+          <div class="win-head"><span class="win-tile"><img src="assets/icon-laptop.svg" alt=""></span><button class="win-btn" type="button" aria-label="Next card"><img src="assets/icon-arrow-sm2.svg" alt=""></button></div>
           <div class="win-text"><h3>ICPC Students secured internships at Emergent AI</h3><p>Build real AI projects. Compete &amp; Win*. <br>*Top 3 Winners to win a  prize pool of ₹75,000</p></div>
         </div>
         <div class="win-prize">
           <div class="inner">
             <div class="txt"><p class="k">Prize Pool</p><p class="v">Upto ₹75,000*</p></div>
-            <div class="win-avs"><span style="left:0"><img src="assets/card-av-1.png" alt=""></span><span style="left:13.68px;background:#C8E1FF"><img src="assets/card-av-2.png" alt=""></span><span style="left:27.36px;background:#D8F5C8"><img src="assets/card-av-3.png" alt=""></span><span style="left:41.04px;background:#F5D8E8"><img src="assets/card-av-4.png" alt=""></span><span class="plus" style="left:54.71px">+84</span></div>
+            <div class="win-avs"><span style="left:0"><img src="assets/card-av-1.png" alt=""></span><span style="left:15.09px;background:#C8E1FF"><img src="assets/card-av-2.png" alt=""></span><span style="left:30.18px;background:#D8F5C8"><img src="assets/card-av-3.png" alt=""></span><span style="left:45.26px;background:#F5D8E8"><img src="assets/card-av-4.png" alt=""></span><span class="plus" style="left:60.34px">+84</span></div>
           </div>
         </div>
       </article>
       <article class="win win-adyp">
-        <div class="win-head"><span class="win-tile"><img src="assets/icon-headphone.svg" alt=""></span><h3>ADYP University, Pune</h3><span class="win-btn"><img src="assets/icon-arrow-sm3.svg" alt=""></span></div>
+        <div class="win-head"><span class="win-tile"><img src="assets/icon-headphone.svg" alt=""></span><h3>ADYP University, Pune</h3><button class="win-btn" type="button" aria-label="Next card"><img src="assets/icon-arrow-sm3.svg" alt=""></button></div>
         <div class="win-table">
           <div class="cell cell-top"><p class="v">97%+</p><p class="k">Paid internships in their 2nd Year</p></div>
           <div class="row2">
@@ -753,6 +783,135 @@ button{font-family:var(--font)}
   new IntersectionObserver(function(en){ rvis = en[0].isIntersecting; if (rvis && !rraf && !reduce) rraf = requestAnimationFrame(stepRays); }, {threshold: 0}).observe(rc);
 
 
+
+  /* ---- scroll-linked text highlight (no pinning): characters lift from 50% to 100% as the block rises ---- */
+  function makeReveal(el){
+    var text = el.textContent.replace(/\s+/g, ' ').trim();
+    el.textContent = ''; el.classList.add('reveal');
+    var chars = [];
+    text.split(' ').forEach(function(w, wi, arr){
+      var ws = document.createElement('span'); ws.className = 'rw';
+      for (var i = 0; i < w.length; i++){ var c = document.createElement('span'); c.className = 'rc'; c.textContent = w[i]; ws.appendChild(c); chars.push(c); }
+      el.appendChild(ws);
+      if (wi < arr.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+    var r = {el: el, chars: chars, last: -1};
+    r.set = function(p){                                   /* p 0..1 -> characters lift from 50% to 100% */
+      var k = p * (chars.length + 4) - 1;
+      if (Math.abs(k - r.last) < .02) return; r.last = k;
+      for (var i = 0; i < chars.length; i++){ chars[i].style.opacity = (.5 + .5 * Math.min(1, Math.max(0, (k - i) / 3))).toFixed(3); }
+    };
+    return r;
+  }
+  var reveals = Array.prototype.map.call(document.querySelectorAll('[data-reveal]'), makeReveal);
+  function revealTick(){
+    var vh = window.innerHeight || 800, start = vh * .92, end = vh * .34;
+    reveals.forEach(function(r){
+      var top = r.el.getBoundingClientRect().top;
+      r.set(Math.min(1, Math.max(0, (start - top) / (start - end))));
+    });
+    campusTick();
+  }
+
+  /* ---- campus card: pinned above the bottom bar; scroll travel drives slide 1 highlight, the switch, slide 2 highlight ---- */
+  var campus = document.getElementById('campus'), campusPin = campus.querySelector('.campus-pin');
+  var slides = Array.prototype.slice.call(campus.querySelectorAll('.campus-slide'));
+  var slideReveals = slides.map(function(sl){ return makeReveal(sl.querySelector('[data-pin-reveal]')); });
+  var bars = Array.prototype.slice.call(document.querySelectorAll('#campusProgress span'));
+  var tab = document.getElementById('campusTab'), tabText = document.getElementById('campusTabText'), activeSlide = 0;
+  function showSlide(i){
+    if (i === activeSlide) return; activeSlide = i;
+    slides.forEach(function(sl, k){ sl.hidden = k !== i; });
+    tab.classList.add('is-swapping');
+    setTimeout(function(){ tabText.textContent = slides[i].getAttribute('data-campus'); tab.classList.remove('is-swapping'); }, reduce ? 0 : 200);
+  }
+  function campusTick(){
+    var dockH = document.getElementById('dock').offsetHeight || 86;
+    var vh = window.innerHeight || 800, rect = campus.getBoundingClientRect();
+    var travel = campus.offsetHeight - campusPin.offsetHeight;
+    var pinnedTop = vh - dockH - campusPin.offsetHeight;
+    var p = travel > 0 ? Math.min(1, Math.max(0, (pinnedTop - rect.top) / travel)) : 1;
+    var n = slides.length, seg = 1 / n, idx = Math.min(n - 1, Math.floor(p / seg));
+    showSlide(idx);
+    slides.forEach(function(sl, k){
+      var q = Math.min(1, Math.max(0, (p - k * seg) / seg));
+      slideReveals[k].set(q);
+      bars[k].style.setProperty('--fill', q.toFixed(3));
+    });
+  }
+  var revealQueued = false;
+  function revealSchedule(){ if (!revealQueued){ revealQueued = true; requestAnimationFrame(function(){ revealQueued = false; revealTick(); }); } }
+  window.addEventListener('scroll', revealSchedule, {passive: true});
+  window.addEventListener('resize', revealSchedule);
+  revealTick();
+
+  /* ---- companies orbit: discs sweep in from the right along the dashed circle, settle one by one,
+          the centre company's name appears, then the ring keeps stepping left and the name follows ---- */
+  (function(){
+    var orbit = document.querySelector('.co-orbit'), section = document.querySelector('.co'), label = document.getElementById('coLabel');
+    if (!orbit || reduce) return;
+    var seed = Array.prototype.slice.call(orbit.querySelectorAll('.co-logo'));
+    var logos = seed.map(function(d){ return {src: d.querySelector('img').getAttribute('src'), style: d.querySelector('img').getAttribute('style'), alt: d.querySelector('img').alt, name: d.getAttribute('data-company'), color: d.getAttribute('data-color')}; });
+    seed.forEach(function(d){ d.remove(); });
+    orbit.classList.add('is-live');
+    var R = 543, SLOT = Math.asin(135 / R), START = 52 * Math.PI / 180;
+    var ENTER = 1100, STAGGER = 170, HOLD = 2400, ADVANCE = 850;
+    function easeOut(t){ return 1 - Math.pow(1 - t, 5); }
+    function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    var discs = [];
+    for (var i = 0; i < 5; i++){
+      var d = document.createElement('div'); d.className = 'co-logo'; var im = document.createElement('img');
+      d.appendChild(im); orbit.appendChild(d);
+      discs.push({el: d, img: im, slot: i - 2, idx: 0, from: 0, to: 0});
+    }
+    var nextIdx = 0;
+    function assign(disc, idx){ disc.idx = idx; var L = logos[((idx % logos.length) + logos.length) % logos.length]; disc.img.src = L.src; disc.img.setAttribute('style', L.style); disc.img.alt = L.alt; disc.name = L.name; disc.color = L.color; }
+    discs.forEach(function(disc){ assign(disc, disc.slot + 1); });
+    nextIdx = 4;
+    function place(disc, ang){
+      var w = orbit.clientWidth, cx = w / 2, cy = 692;
+      var x = cx + R * Math.sin(ang) - 32, y = cy - R * Math.cos(ang) - 32;
+      disc.el.style.left = x.toFixed(2) + 'px'; disc.el.style.top = y.toFixed(2) + 'px';
+      var a = Math.abs(ang) / SLOT; disc.el.style.opacity = a <= 1 ? 1 : Math.max(0, 1 - (a - 1)).toFixed(3);
+    }
+    function setLabel(disc){ label.textContent = disc.name; label.style.color = disc.color; }
+    var phase = 'wait', t = 0, last = 0, visible = false, raf = 0;
+    label.classList.add('is-hidden');
+    discs.forEach(function(disc){ place(disc, START); });
+    function frame(now){
+      var dt = last ? Math.min(now - last, 50) : 0; last = now; t += dt;
+      if (phase === 'enter'){
+        var done = true;
+        discs.forEach(function(disc){
+          var order = disc.slot === -1 ? 0 : disc.slot === 0 ? 1 : disc.slot === 1 ? 2 : 3;
+          var k = Math.min(1, Math.max(0, (t - order * STAGGER) / ENTER));
+          if (order < 3 && k < 1) done = false;
+          place(disc, order < 3 ? START + (disc.slot * SLOT - START) * easeOut(k) : disc.slot * SLOT);
+          if (disc.slot === 0 && k >= 1 && label.classList.contains('is-hidden')){ setLabel(disc); label.classList.remove('is-hidden'); }
+        });
+        if (done){ phase = 'hold'; t = 0; }
+      } else if (phase === 'hold'){
+        if (t >= HOLD){ phase = 'advance'; t = 0; discs.forEach(function(disc){ disc.from = disc.slot; disc.to = disc.slot - 1; }); }
+      } else if (phase === 'advance'){
+        var k2 = Math.min(1, t / ADVANCE), e = easeInOut(k2);
+        discs.forEach(function(disc){ place(disc, (disc.from + (disc.to - disc.from) * e) * SLOT); });
+        if (k2 < .5) label.classList.add('is-hidden');
+        else { var centre = discs.filter(function(d){ return d.to === 0; })[0]; if (centre && label.textContent !== centre.name) setLabel(centre); label.classList.remove('is-hidden'); }
+        if (k2 >= 1){
+          discs.forEach(function(disc){ disc.slot = disc.to; if (disc.slot < -2){ disc.slot = 2; assign(disc, nextIdx++); place(disc, 2 * SLOT); } });
+          phase = 'hold'; t = 0;
+        }
+      }
+      raf = visible ? requestAnimationFrame(frame) : 0;
+      if (!visible) last = 0;
+    }
+    new IntersectionObserver(function(en){
+      visible = en[0].isIntersecting;
+      if (visible){ if (phase === 'wait'){ phase = 'enter'; t = 0; } if (!raf) raf = requestAnimationFrame(frame); }
+    }, {threshold: .35}).observe(orbit);
+    window.addEventListener('resize', function(){ if (phase === 'hold') discs.forEach(function(disc){ place(disc, disc.slot * SLOT); }); });
+  })();
+
   /* ---- sticky bottom bar: slides in once the hero has scrolled off the top ---- */
   var dock = document.getElementById('dock'), hero = document.querySelector('.hero');
   function dockCheck(){ dock.classList.toggle('is-on', hero.getBoundingClientRect().bottom < 0); }
@@ -763,12 +922,25 @@ button{font-family:var(--font)}
 
   /* ---- internship cards: dots follow the swipe ---- */
   var wt = document.getElementById('winsTrack'), wd = Array.prototype.slice.call(document.querySelectorAll('#winsDots span'));
-  var cards = Array.prototype.slice.call(wt.children);
-  wt.addEventListener('scroll', function(){
+  var cards = Array.prototype.slice.call(wt.children), winsQueued = false;
+  function winsTick(){
+    winsQueued = false;
     var x = wt.scrollLeft, best = 0, bd = 1e9;
-    cards.forEach(function(c, i){ var d = Math.abs(c.offsetLeft - 16 - x); if (d < bd){ bd = d; best = i; } });
+    cards.forEach(function(c, i){
+      var d = Math.abs(c.offsetLeft - 16 - x);
+      if (d < bd){ bd = d; best = i; }
+      var f = 1 - Math.min(1, d / (c.offsetWidth + 12));        /* 1 in focus, 0 one card away */
+      c.style.transform = 'scale(' + (.90667 + .09333 * f).toFixed(4) + ')';
+    });
     wd.forEach(function(d, i){ d.classList.toggle('on', i === best); });
-  }, {passive: true});
+  }
+  wt.addEventListener('scroll', function(){ if (!winsQueued){ winsQueued = true; requestAnimationFrame(winsTick); } }, {passive: true});
+  window.addEventListener('resize', winsTick);
+  winsTick();
+  cards.forEach(function(c, i){
+    var b = c.querySelector('.win-btn');
+    if (b) b.addEventListener('click', function(){ var n = cards[(i + 1) % cards.length]; wt.scrollTo({left: n.offsetLeft - 16, behavior: reduce ? 'auto' : 'smooth'}); });
+  });
 
   /* ---- campus film: wire a source here when the video file is available ---- */
   var media = document.getElementById('heroMedia'), vid = media.querySelector('video');
