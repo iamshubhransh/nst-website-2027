@@ -199,9 +199,10 @@ button{font-family:var(--font)}
 /* ---------- campus carousel (153:23864) ---------- */
 /* The campus card rides up with the page, pins just above the bottom bar, and holds for --campus-travel of scrolling:
    slide 1 highlights, the card switches to slide 2 at the halfway point, slide 2 highlights, then the page moves on. */
-.campus{--campus-travel:120vh;position:relative;background:var(--paper);padding:0 16px;display:flex;flex-direction:column;justify-content:flex-end;height:calc(528px + var(--campus-travel))}
-.campus-pin{position:sticky;bottom:calc(86px + env(safe-area-inset-bottom,0px));padding-bottom:28px}
-.campus-card{position:relative;overflow:hidden;height:500px;border-radius:12px;background:var(--bg2);box-shadow:inset 0 0 0 1px rgba(225,229,234,.5);padding:0 16px 16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.campus{--campus-travel:120vh;--campus-top:80px;--campus-pin:calc(100vh - var(--campus-top) - 86px - env(safe-area-inset-bottom,0px));position:relative;background:var(--paper);padding:0 16px 28px;height:calc(var(--campus-pin) + 28px + var(--campus-travel));min-height:calc(528px + var(--campus-travel))}
+@supports (height:100svh){.campus{--campus-pin:calc(100svh - var(--campus-top) - 86px - env(safe-area-inset-bottom,0px))}}
+.campus-pin{position:sticky;top:var(--campus-top);height:var(--campus-pin);min-height:500px}
+.campus-card{position:relative;overflow:hidden;height:100%;min-height:500px;border-radius:12px;background:var(--bg2);box-shadow:inset 0 0 0 1px rgba(225,229,234,.5);padding:0 16px 16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
 .campus-tab span{transition:opacity .25s ease}
 .campus-tab.is-swapping span{opacity:0}
 .campus-body{position:relative;height:233px}
@@ -210,7 +211,7 @@ button{font-family:var(--font)}
 .campus-progress span{position:relative;overflow:hidden}
 .campus-progress span::after{content:"";position:absolute;left:0;top:0;height:100%;width:100%;background:#6138D3;transform:scaleX(var(--fill,0));transform-origin:left center}
 @media (prefers-reduced-motion:reduce){.campus-slide,.campus-tab span{transition:none}}
-.campus-card .dots-bg{left:-44px;top:-41.04px;width:458px;height:583px}
+.campus-card .dots-bg{left:-44px;right:-44px;top:-41.04px;bottom:-41px}
 .campus-card .fade-top{height:61px;background:linear-gradient(180deg,#F6F7F9,rgba(246,247,249,0))}
 .campus-card .fade-bot{height:53px;background:linear-gradient(0deg,#F6F7F9,rgba(246,247,249,0))}
 .campus-tab{position:relative;display:flex;align-items:flex-start;justify-content:center;margin-top:1px;height:28px}
@@ -826,10 +827,9 @@ button{font-family:var(--font)}
     setTimeout(function(){ tabText.textContent = slides[i].getAttribute('data-campus'); tab.classList.remove('is-swapping'); }, reduce ? 0 : 200);
   }
   function campusTick(){
-    var dockH = document.getElementById('dock').offsetHeight || 86;
-    var vh = window.innerHeight || 800, rect = campus.getBoundingClientRect();
-    var travel = campus.offsetHeight - campusPin.offsetHeight;
-    var pinnedTop = vh - dockH - campusPin.offsetHeight;
+    var rect = campus.getBoundingClientRect();
+    var travel = campus.offsetHeight - 28 - campusPin.offsetHeight;
+    var pinnedTop = parseFloat(getComputedStyle(campusPin).top) || 80;
     var p = travel > 0 ? Math.min(1, Math.max(0, (pinnedTop - rect.top) / travel)) : 0;
     var n = slides.length, seg = 1 / n, idx = Math.min(n - 1, Math.floor(p / seg));
     showSlide(idx);
