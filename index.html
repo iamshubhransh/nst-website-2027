@@ -755,10 +755,10 @@ button{font-family:var(--font)}
 
   /* ---- sticky bottom bar: slides in once the hero has scrolled off the top ---- */
   var dock = document.getElementById('dock'), hero = document.querySelector('.hero');
-  new IntersectionObserver(function(en){
-    var e = en[0]; var past = !e.isIntersecting && e.boundingClientRect.bottom < 0;
-    dock.classList.toggle('is-on', past);
-  }, {threshold: 0}).observe(hero);
+  function dockCheck(){ dock.classList.toggle('is-on', hero.getBoundingClientRect().bottom < 0); }
+  window.addEventListener('scroll', dockCheck, {passive: true});
+  window.addEventListener('resize', dockCheck);
+  dockCheck();
   document.getElementById('playBtnDock').addEventListener('click', function(){ document.getElementById('playBtn').click(); });
 
   /* ---- internship cards: dots follow the swipe ---- */
