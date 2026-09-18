@@ -343,6 +343,23 @@ button{font-family:var(--font)}
 .dock-cta{flex:1 0 0;min-width:0;height:50px;padding:10px 60px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:500;letter-spacing:-.32px;box-shadow:var(--btn-shadow)}
 @media (prefers-reduced-motion:reduce){.dock{transition:none}}
 
+/* ---------- video overlay (177:32701 / 182:37578): vertical reels, neighbours peeking, swipe to switch ---------- */
+.vid{position:fixed;inset:0;z-index:45;opacity:0;transition:opacity .3s ease;pointer-events:none;--vh:min(500px,calc(100dvh - 196px));--vw:calc(var(--vh) * .696)}
+.vid.is-open{opacity:1;pointer-events:auto}
+.vid-back{position:absolute;inset:0;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.vid-stage{position:absolute;inset:0;touch-action:none;transform:scale(.96);transition:transform .35s cubic-bezier(.22,1,.36,1);cursor:grab}
+.vid.is-open .vid-stage{transform:none}
+.vid-card{position:absolute;left:50%;top:50%;width:var(--vw);height:var(--vh);margin:calc(var(--vh) / -2 - 25px) 0 0 calc(var(--vw) / -2);border-radius:12px;overflow:hidden;background:#fff url(assets/video-poster-campus-tour.png) center/cover no-repeat;transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1));opacity:var(--o,1);transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .38s ease;will-change:transform}
+.vid-card.is-dragging{transition:none}
+.vid-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent}
+.vid-card::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 2px var(--line);pointer-events:none}
+body.is-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
+.dock.is-video .dock-inner{background:rgba(0,0,0,.36)}
+.dock .face-back{opacity:0;background:rgba(255,255,255,.9);transition:opacity .25s ease}
+.dock .face-back img{width:28px;height:28px}
+.dock.is-video .face-play,.dock.is-video .face-logo{opacity:0;animation:none}
+.dock.is-video .face-back{opacity:1}
+
 </style>
 </head>
 <body>
@@ -575,9 +592,13 @@ button{font-family:var(--font)}
 
 </div>
 
+<div class="vid" id="vid" aria-hidden="true" data-node="182:37578">
+  <div class="vid-back"></div>
+  <div class="vid-stage" id="vidStage"></div>
+</div>
 <div class="dock" id="dock" data-node="153:32692">
   <div class="dock-inner">
-    <button class="play" type="button" id="playBtnDock" aria-label="Play the campus film"><span class="face face-play"><svg viewBox="0 0 18 26" width="18" height="26" aria-hidden="true"><path d="M3 3.6 L15.4 13 L3 22.4 Z" fill="#0673F9" stroke="#0673F9" stroke-width="3.6" stroke-linejoin="round"/></svg></span><span class="face face-logo"><svg viewBox="0 0 21.6 27" width="20" height="25" aria-hidden="true"><path d="M14.85 0V2.7H16.9897L12.2175 7.47225C11.0093 6.75338 9.60525 6.33488 8.1 6.33488H1.35V9.03488H8.1C11.0767 9.03488 13.5 11.4581 13.5 14.4349V23.8849H16.2V14.4349C16.2 12.4504 15.4777 10.6313 14.2897 9.2205L18.9 4.61025V6.75H21.6V0H14.85Z" fill="#fff"/><path d="M18.9 16.3755L18.873 16.7029C18.603 21.1005 14.8331 24.5126 10.3883 24.2899C6.24038 24.0806 2.97338 20.6584 2.71688 16.5139L2.7 16.2405V2.7H13.5V0H0V16.281L0.03375 16.8683C0.38475 22.5484 5.11312 27 10.8 27C16.173 27 20.7225 23.031 21.5021 17.8335C21.5798 17.3239 21.6 16.8075 21.6 16.2945V8.1H18.9V16.3755Z" fill="#fff" opacity=".72"/></svg></span></button>
+    <button class="play" type="button" id="playBtnDock" aria-label="Play the campus film"><span class="face face-play"><svg viewBox="0 0 18 26" width="18" height="26" aria-hidden="true"><path d="M3 3.6 L15.4 13 L3 22.4 Z" fill="#0673F9" stroke="#0673F9" stroke-width="3.6" stroke-linejoin="round"/></svg></span><span class="face face-logo"><svg viewBox="0 0 21.6 27" width="20" height="25" aria-hidden="true"><path d="M14.85 0V2.7H16.9897L12.2175 7.47225C11.0093 6.75338 9.60525 6.33488 8.1 6.33488H1.35V9.03488H8.1C11.0767 9.03488 13.5 11.4581 13.5 14.4349V23.8849H16.2V14.4349C16.2 12.4504 15.4777 10.6313 14.2897 9.2205L18.9 4.61025V6.75H21.6V0H14.85Z" fill="#fff"/><path d="M18.9 16.3755L18.873 16.7029C18.603 21.1005 14.8331 24.5126 10.3883 24.2899C6.24038 24.0806 2.97338 20.6584 2.71688 16.5139L2.7 16.2405V2.7H13.5V0H0V16.281L0.03375 16.8683C0.38475 22.5484 5.11312 27 10.8 27C16.173 27 20.7225 23.031 21.5021 17.8335C21.5798 17.3239 21.6 16.8075 21.6 16.2945V8.1H18.9V16.3755Z" fill="#fff" opacity=".72"/></svg></span><span class="face face-back"><img src="assets/icon-arrow-left.svg" alt=""></span></button>
     <a class="btn btn-brand dock-cta" href="#apply">Apply Now</a>
   </div>
 </div>
@@ -898,7 +919,7 @@ button{font-family:var(--font)}
   window.addEventListener('scroll', dockCheck, {passive: true});
   window.addEventListener('resize', dockCheck);
   dockCheck();
-  document.getElementById('playBtnDock').addEventListener('click', function(){ document.getElementById('playBtn').click(); });
+  document.getElementById('playBtnDock').addEventListener('click', function(){ if (dock.classList.contains('is-video')) closeVideo(); else openVideo(); });
 
   /* ---- internship cards: two cards on an endless loop.
           Track = [B', A, B, A', B'']; the user lands on a clone, and once the swipe settles the track re-centres on the real card. ---- */
@@ -936,10 +957,91 @@ button{font-family:var(--font)}
   winsTick();
 
   /* ---- campus film: wire a source here when the video file is available ---- */
-  var media = document.getElementById('heroMedia'), vid = media.querySelector('video');
+  var media = document.getElementById('heroMedia'), heroVid = media.querySelector('video');
   var src = media.getAttribute('data-video');
-  if (src){ vid.src = src; media.classList.add('has-video'); }
-  document.getElementById('playBtn').addEventListener('click', function(){ if (src){ vid.muted = false; vid.play(); } });
+  if (src){ heroVid.src = src; media.classList.add('has-video'); }
+
+  /* ---- video overlay: the play buttons open it; the dock's play becomes a back arrow while it is open ---- */
+  var VIDEOS = [
+    {src: 'assets/videos/reel-1.mp4', poster: 'assets/videos/reel-1.jpg'},   /* instagram.com/reel/DcTb80jyP7i */
+    {src: 'assets/videos/reel-3.mp4', poster: 'assets/videos/reel-3.jpg'},   /* instagram.com/reel/DcBxEemyV21 */
+    {src: 'assets/videos/reel-4.mp4', poster: 'assets/videos/reel-4.jpg'}    /* instagram.com/reel/Da8BRQ7MdBq; reel DcMBR6dSDpd needs its MP4 dropped in as reel-2 */
+  ];
+  var vo = document.getElementById('vid'), voStage = document.getElementById('vidStage');
+  var voCards = [], voCur = 0, voOpen = false, voBuilt = false, lockY = 0, voDrag = null;
+  var SIDE_SCALE = 300 / 348, SIDE_OPACITY = .5, SIDE_DY = 21.5, PEEK = 7;
+  function voBuild(){
+    VIDEOS.forEach(function(v, i){
+      var c = document.createElement('article'); c.className = 'vid-card'; c.setAttribute('data-i', i);
+      var el = document.createElement('video'); el.setAttribute('playsinline', ''); el.setAttribute('webkit-playsinline', ''); el.preload = i === 0 ? 'auto' : 'metadata'; el.loop = true;
+      if (v.poster) el.poster = v.poster; el.src = v.src;
+      c.appendChild(el); voStage.appendChild(c); voCards.push({el: c, video: el});
+    });
+    voBuilt = true;
+  }
+  function voStep(){ return voStage.clientWidth / 2 - PEEK + SIDE_SCALE * voCards[0].el.offsetWidth / 2; }
+  function voSlot(i, dir){ var n = VIDEOS.length, d = ((i - voCur) % n + n) % n; if (d > n / 2 || (d * 2 === n && dir < 0)) d -= n; return d; }
+  function voLayout(frac){
+    var step = voStep();
+    voCards.forEach(function(c, i){
+      var p = voSlot(i, frac) - frac, a = Math.min(1, Math.abs(p));
+      var sc = 1 - (1 - SIDE_SCALE) * a, o = Math.abs(p) > 1.6 ? 0 : 1 - (1 - SIDE_OPACITY) * a;
+      c.el.style.setProperty('--x', (p * step).toFixed(2) + 'px');
+      c.el.style.setProperty('--y', (SIDE_DY * a).toFixed(2) + 'px');
+      c.el.style.setProperty('--s', sc.toFixed(4));
+      c.el.style.setProperty('--o', o.toFixed(3));
+      c.el.style.zIndex = a < .5 ? 3 : 2;
+    });
+  }
+  function voPlay(){
+    voCards.forEach(function(c, i){
+      if (i === voCur){ c.video.muted = false; var pr = c.video.play(); if (pr && pr.catch) pr.catch(function(){ c.video.muted = true; c.video.play().catch(function(){}); }); }
+      else { c.video.pause(); try { c.video.currentTime = 0; } catch(e){} }
+    });
+  }
+  function voGo(delta){ voCur = ((voCur + delta) % VIDEOS.length + VIDEOS.length) % VIDEOS.length; voLayout(0); voPlay(); }
+  function openVideo(){
+    if (voOpen) return;
+    if (!voBuilt) voBuild();
+    lockY = window.scrollY; document.body.style.top = -lockY + 'px'; document.body.classList.add('is-locked');
+    vo.classList.add('is-open'); vo.setAttribute('aria-hidden', 'false'); voOpen = true;
+    dock.classList.add('is-video'); dock.classList.add('is-on');
+    voLayout(0); requestAnimationFrame(voPlay);
+  }
+  function closeVideo(){
+    if (!voOpen) return;
+    voOpen = false; vo.classList.remove('is-open'); vo.setAttribute('aria-hidden', 'true');
+    voCards.forEach(function(c){ c.video.pause(); });
+    document.body.classList.remove('is-locked'); document.body.style.top = ''; window.scrollTo(0, lockY);
+    dock.classList.remove('is-video'); dockCheck();
+  }
+  voStage.addEventListener('pointerdown', function(e){
+    if (!voOpen) return;
+    voDrag = {x: e.clientX, t: e.timeStamp, moved: false};
+    try { voStage.setPointerCapture(e.pointerId); } catch(err){}
+    voCards.forEach(function(c){ c.el.classList.add('is-dragging'); });
+  });
+  voStage.addEventListener('pointermove', function(e){
+    if (!voDrag) return;
+    var dx = e.clientX - voDrag.x;
+    if (Math.abs(dx) > 4) voDrag.moved = true;
+    voLayout(-dx / voStep());
+  });
+  function voEnd(e){
+    if (!voDrag) return;
+    var dx = e.clientX - voDrag.x, v = dx / Math.max(1, e.timeStamp - voDrag.t), d = voDrag; voDrag = null;
+    voCards.forEach(function(c){ c.el.classList.remove('is-dragging'); });
+    if (!d.moved){
+      var card = e.target.closest ? e.target.closest('.vid-card') : null;
+      if (!card) closeVideo();
+      else { var i = +card.getAttribute('data-i'); if (i === voCur){ var vv = voCards[i].video; if (vv.paused) vv.play().catch(function(){}); else vv.pause(); } else voGo(voSlot(i, 0) > 0 ? 1 : -1); }
+    } else if (dx < -50 || v < -.35) voGo(1); else if (dx > 50 || v > .35) voGo(-1); else voLayout(0);
+  }
+  voStage.addEventListener('pointerup', voEnd);
+  voStage.addEventListener('pointercancel', function(){ if (voDrag){ voDrag = null; voCards.forEach(function(c){ c.el.classList.remove('is-dragging'); }); voLayout(0); } });
+  window.addEventListener('resize', function(){ if (voOpen) voLayout(0); });
+  document.addEventListener('keydown', function(e){ if (!voOpen) return; if (e.key === 'Escape') closeVideo(); else if (e.key === 'ArrowRight') voGo(1); else if (e.key === 'ArrowLeft') voGo(-1); });
+  document.getElementById('playBtn').addEventListener('click', openVideo);
 })();
 </script>
 </body>
