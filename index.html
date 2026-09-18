@@ -353,7 +353,8 @@ button{font-family:var(--font)}
 .vid-card.is-dragging{transition:none}
 .vid-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent}
 .vid-card::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 2px var(--line);pointer-events:none}
-body.is-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
+html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
+.vid{overscroll-behavior:none}
 .dock.is-video .dock-inner{background:rgba(0,0,0,.36)}
 .dock .face-back{opacity:0;background:rgba(255,255,255,.9);transition:opacity .25s ease}
 .dock .face-back img{width:28px;height:28px}
@@ -915,7 +916,7 @@ body.is-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
 
   /* ---- sticky bottom bar: slides in once the hero has scrolled off the top ---- */
   var dock = document.getElementById('dock'), hero = document.querySelector('.hero');
-  function dockCheck(){ dock.classList.toggle('is-on', hero.getBoundingClientRect().bottom < 0); }
+  function dockCheck(){ dock.classList.toggle('is-on', !!voOpen || hero.getBoundingClientRect().bottom < 0); }
   window.addEventListener('scroll', dockCheck, {passive: true});
   window.addEventListener('resize', dockCheck);
   dockCheck();
@@ -1003,7 +1004,7 @@ body.is-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
   function openVideo(){
     if (voOpen) return;
     if (!voBuilt) voBuild();
-    lockY = window.scrollY; document.body.style.top = -lockY + 'px'; document.body.classList.add('is-locked');
+    lockY = window.scrollY; document.documentElement.classList.add('is-locked');
     vo.classList.add('is-open'); vo.setAttribute('aria-hidden', 'false'); voOpen = true;
     dock.classList.add('is-video'); dock.classList.add('is-on');
     voLayout(0); requestAnimationFrame(voPlay);
@@ -1012,7 +1013,7 @@ body.is-locked{position:fixed;left:0;right:0;width:100%;overflow:hidden}
     if (!voOpen) return;
     voOpen = false; vo.classList.remove('is-open'); vo.setAttribute('aria-hidden', 'true');
     voCards.forEach(function(c){ c.video.pause(); });
-    document.body.classList.remove('is-locked'); document.body.style.top = ''; window.scrollTo(0, lockY);
+    document.documentElement.classList.remove('is-locked'); if (window.scrollY !== lockY) window.scrollTo(0, lockY);
     dock.classList.remove('is-video'); dockCheck();
   }
   voStage.addEventListener('pointerdown', function(e){
