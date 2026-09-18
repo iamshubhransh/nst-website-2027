@@ -278,22 +278,6 @@ button{font-family:var(--font)}
 .win-avs span{position:absolute;top:0;width:22.63px;height:22.63px;border-radius:999px;overflow:hidden;box-shadow:inset 0 0 0 1.886px #76B280}
 .win-avs span img{width:100%;height:100%;object-fit:cover}
 .win-avs .plus{display:flex;align-items:center;justify-content:center;background:#fff;font-family:Inter,var(--font);font-size:7.54px;line-height:11.31px;font-weight:600;color:#000}
-.win-adyp{width:300px;background:radial-gradient(693.46px 269.29px at 150px 116.5px,#0A8A4B 0%,#105634 100%);padding-top:16px;display:flex;flex-direction:column;gap:24px}
-.win-adyp .win-head{padding:0 16px}
-.win-adyp .win-tile{width:32px;height:32px;border-radius:9.6px;margin-right:12px}
-.win-adyp .win-tile img{width:22.4px;height:22.4px}
-.win-adyp h3{flex:1 0 0;min-width:0;font-size:16px;line-height:26px;font-weight:600;letter-spacing:.06px;padding-bottom:.84px}
-.win-adyp .win-btn{width:32px;height:32px;border-radius:7.11px;box-shadow:0 0 0 .889px rgba(255,255,255,.25),inset 0 .889px 0 rgba(255,255,255,.05),inset 0 -.889px 0 rgba(0,0,0,.2)}
-.win-adyp .win-btn img{width:14.22px;height:14.22px}
-.win-table{box-shadow:inset 0 0 0 1px rgba(225,229,234,.24),0 2px 24px rgba(43,48,59,.08);display:flex;flex-direction:column}
-.win-table .cell{display:flex;flex-direction:column;gap:6px;padding:12px 16px}
-.win-table .cell-top{box-shadow:inset 0 -1px 0 rgba(225,229,234,.12)}
-.win-table .row2{display:flex}
-.win-table .row2 .cell{flex:1 0 0;min-width:0}
-.win-table .row2 .cell:first-child{box-shadow:inset -1px 0 0 rgba(225,229,234,.12)}
-.win-table .row2 .cell:last-child{box-shadow:inset 0 1px 0 rgba(225,229,234,.12),inset 0 -1px 0 rgba(225,229,234,.12),inset -1px 0 0 rgba(225,229,234,.12)}
-.win-table .v{font-size:16px;line-height:26px;font-weight:600;letter-spacing:.06px;color:#fff;white-space:nowrap}
-.win-table .k{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px;color:#fff;opacity:.7;white-space:nowrap}
 .wins-foot{display:flex;align-items:center;justify-content:space-between}
 .wins-dots{display:flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--bg2)}
 .wins-dots span{width:6px;height:6px;border-radius:999px;background:var(--grey);opacity:.5}
@@ -315,7 +299,15 @@ button{font-family:var(--font)}
 .audit-titles p{margin:0}
 .audit-kicker{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#007A51}
 .audit-sub{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px;color:var(--ink)}
-.audit-logos{display:flex;align-items:center;justify-content:center;gap:24px;width:100%}
+.audit-logos{position:relative;width:100%;height:24px;overflow:hidden}
+.audit-track{position:absolute;left:0;top:0;height:24px;display:flex;align-items:center;gap:24px;transform:translateX(-111.47px);animation:auditMarquee 16s linear infinite;will-change:transform}
+@keyframes auditMarquee{from{transform:translateX(-111.47px)}to{transform:translateX(-513.43px)}}
+/* the two cursor decorations wander a few pixels, like idle visitors */
+.cursor-john{animation:hoverA 7s ease-in-out infinite}
+.cursor-roza{animation:hoverB 8.5s ease-in-out infinite}
+@keyframes hoverA{0%,100%{translate:0 0}22%{translate:6px -5px}48%{translate:-4px 4px}74%{translate:5px 6px}}
+@keyframes hoverB{0%,100%{translate:0 0}30%{translate:-5px 5px}55%{translate:6px -3px}80%{translate:-3px -6px}}
+@media (prefers-reduced-motion:reduce){.audit-track,.cursor-john,.cursor-roza{animation:none}}
 .al{position:relative;overflow:hidden;flex:none}
 .al img{position:absolute}
 .al-iima{width:166.96px;height:24px}
@@ -545,19 +537,9 @@ button{font-family:var(--font)}
           </div>
         </div>
       </article>
-      <article class="win win-adyp">
-        <div class="win-head"><span class="win-tile"><img src="assets/icon-headphone.svg" alt=""></span><h3>ADYP University, Pune</h3><button class="win-btn" type="button" aria-label="Next card"><img src="assets/icon-arrow-sm3.svg" alt=""></button></div>
-        <div class="win-table">
-          <div class="cell cell-top"><p class="v">97%+</p><p class="k">Paid internships in their 2nd Year</p></div>
-          <div class="row2">
-            <div class="cell"><p class="v">₹ 1,90,000/mo</p><p class="k">Highest Earned</p></div>
-            <div class="cell"><p class="v">₹ 23,364/mo</p><p class="k">Avg. Earned</p></div>
-          </div>
-        </div>
-      </article>
     </div>
     <div class="wins-foot">
-      <div class="wins-dots" id="winsDots" aria-hidden="true"><span class="on"></span><span></span><span></span></div>
+      <div class="wins-dots" id="winsDots" aria-hidden="true"><span class="on"></span><span></span></div>
       <p class="wins-hint"><img src="assets/icon-swipe-hand.svg" alt=""><span>Swipe to see results</span></p>
     </div>
   </section>
@@ -573,9 +555,7 @@ button{font-family:var(--font)}
           <div class="audit-titles"><p class="audit-kicker">Certified by Placement Auditors</p><p class="audit-sub">From multiple IIMs across India</p></div>
         </div>
         <div class="audit-logos" aria-label="IIM Ahmedabad, Sorab S. Engineer and Co.">
-          <span class="al al-iima"><img src="assets/auditor-iima.png" alt=""></span>
-          <span class="al al-sorab"><img src="assets/auditor-sorab.png" alt=""></span>
-          <span class="al al-iima"><img src="assets/auditor-iima.png" alt=""></span>
+          <div class="audit-track"><span class="al al-iima"><img src="assets/auditor-iima.png" alt=""></span><span class="al al-sorab"><img src="assets/auditor-sorab.png" alt=""></span><span class="al al-iima"><img src="assets/auditor-iima.png" alt=""></span><span class="al al-sorab"><img src="assets/auditor-sorab.png" alt=""></span><span class="al al-iima"><img src="assets/auditor-iima.png" alt=""></span><span class="al al-sorab"><img src="assets/auditor-sorab.png" alt=""></span><span class="al al-iima"><img src="assets/auditor-iima.png" alt=""></span><span class="al al-sorab"><img src="assets/auditor-sorab.png" alt=""></span></div>
         </div>
       </div>
       <div class="reports">
@@ -920,27 +900,40 @@ button{font-family:var(--font)}
   dockCheck();
   document.getElementById('playBtnDock').addEventListener('click', function(){ document.getElementById('playBtn').click(); });
 
-  /* ---- internship cards: dots follow the swipe ---- */
+  /* ---- internship cards: two cards on an endless loop.
+          Track = [B', A, B, A', B'']; the user lands on a clone, and once the swipe settles the track re-centres on the real card. ---- */
   var wt = document.getElementById('winsTrack'), wd = Array.prototype.slice.call(document.querySelectorAll('#winsDots span'));
-  var cards = Array.prototype.slice.call(wt.children), winsQueued = false;
+  var real = Array.prototype.slice.call(wt.children), A = real[0], B = real[1];
+  var Bc1 = B.cloneNode(true), Ac = A.cloneNode(true), Bc2 = B.cloneNode(true);
+  [Bc1, Ac, Bc2].forEach(function(c){ c.setAttribute('aria-hidden', 'true'); });
+  wt.insertBefore(Bc1, A); wt.appendChild(Ac); wt.appendChild(Bc2);
+  var all = [Bc1, A, B, Ac, Bc2], logical = [1, 0, 1, 0, 1], winsQueued = false, settleTimer = 0;
+  function cardX(c){ return c.offsetLeft - 16; }
+  function nearest(){ var x = wt.scrollLeft, best = 0, bd = 1e9; all.forEach(function(c, i){ var d = Math.abs(cardX(c) - x); if (d < bd){ bd = d; best = i; } }); return best; }
+  function goTo(i, smooth){ wt.scrollTo({left: cardX(all[i]), behavior: smooth && !reduce ? 'smooth' : 'auto'}); }
   function winsTick(){
     winsQueued = false;
-    var x = wt.scrollLeft, best = 0, bd = 1e9;
-    cards.forEach(function(c, i){
-      var d = Math.abs(c.offsetLeft - 16 - x);
-      if (d < bd){ bd = d; best = i; }
-      var f = 1 - Math.min(1, d / (c.offsetWidth + 12));        /* 1 in focus, 0 one card away */
+    var x = wt.scrollLeft;
+    all.forEach(function(c){
+      var f = 1 - Math.min(1, Math.abs(cardX(c) - x) / (c.offsetWidth + 12));   /* 1 in focus, 0 one card away */
       c.style.transform = 'scale(' + (.90667 + .09333 * f).toFixed(4) + ')';
     });
-    wd.forEach(function(d, i){ d.classList.toggle('on', i === best); });
+    var li = logical[nearest()];
+    wd.forEach(function(d, i){ d.classList.toggle('on', i === li); });
   }
-  wt.addEventListener('scroll', function(){ if (!winsQueued){ winsQueued = true; requestAnimationFrame(winsTick); } }, {passive: true});
-  window.addEventListener('resize', winsTick);
-  winsTick();
-  cards.forEach(function(c, i){
+  function settle(){ var i = nearest(); if (i === 0 || i === 4) goTo(2, false); else if (i === 3) goTo(1, false); }
+  wt.addEventListener('scroll', function(){
+    if (!winsQueued){ winsQueued = true; requestAnimationFrame(winsTick); }
+    if (!('onscrollend' in window)){ clearTimeout(settleTimer); settleTimer = setTimeout(settle, 140); }
+  }, {passive: true});
+  if ('onscrollend' in window) wt.addEventListener('scrollend', settle);
+  window.addEventListener('resize', function(){ goTo(logical[nearest()] === 0 ? 1 : 2, false); winsTick(); });
+  all.forEach(function(c, i){
     var b = c.querySelector('.win-btn');
-    if (b) b.addEventListener('click', function(){ var n = cards[(i + 1) % cards.length]; wt.scrollTo({left: n.offsetLeft - 16, behavior: reduce ? 'auto' : 'smooth'}); });
+    if (b) b.addEventListener('click', function(){ goTo(Math.min(i + 1, all.length - 1), true); });
   });
+  goTo(1, false);
+  winsTick();
 
   /* ---- campus film: wire a source here when the video file is available ---- */
   var media = document.getElementById('heroMedia'), vid = media.querySelector('video');
