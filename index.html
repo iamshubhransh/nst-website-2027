@@ -202,10 +202,10 @@ button{font-family:var(--font)}
 .campus{--campus-travel:120vh;--campus-top:80px;--campus-pin:calc(100vh - var(--campus-top) - 86px - env(safe-area-inset-bottom,0px));position:relative;background:var(--paper);padding:0 16px 28px;height:calc(var(--campus-pin) + 28px + var(--campus-travel));min-height:calc(475px + var(--campus-travel))}
 @supports (height:100dvh){.campus{--campus-pin:calc(100dvh - var(--campus-top) - 86px - env(safe-area-inset-bottom,0px))}}
 .campus-pin{position:sticky;top:var(--campus-top);height:var(--campus-pin);min-height:447px}
-.campus-card{position:relative;overflow:hidden;height:100%;min-height:447px;border-radius:12px;background:#fff;padding:0 0 17px;display:flex;flex-direction:column;align-items:center}
+.campus-card{position:relative;overflow:hidden;height:100%;min-height:447px;border-radius:12px;background:var(--bg2);padding:0 0 17px;display:flex;flex-direction:column;align-items:center}
 .campus-card::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line);pointer-events:none;z-index:3}
-.campus-card .fade-top{height:61px;z-index:1}
-.campus-card .fade-bot{height:53px;z-index:1}
+.campus-card .fade-top{height:61px;z-index:1;background:linear-gradient(180deg,#F6F7F9,rgba(246,247,249,0))}
+.campus-card .fade-bot{height:53px;z-index:1;background:linear-gradient(0deg,#F6F7F9,rgba(246,247,249,0))}
 .campus-tab{position:relative;z-index:2;flex:none;display:flex;align-items:flex-start;justify-content:center;margin-top:1px;height:28px}
 .campus-tab img{width:16px;height:16px;flex:none}
 .campus-tab .tab-l{transform:rotate(-90deg)}
@@ -322,7 +322,7 @@ button{font-family:var(--font)}
 .report{position:relative;background:var(--bg2);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
 .report-row{display:flex;align-items:center;gap:16px;height:64px}
 .report-rev .report-row{flex-direction:row-reverse}
-.report-row p{margin:0;flex:1 0 0;min-width:0;padding-bottom:8px;font-size:16px;line-height:24px;font-weight:600;letter-spacing:.06px;color:var(--ink)}
+.report-row p{margin:0;flex:1 0 0;min-width:0;padding-bottom:8px;font-size:16px;line-height:24px;font-weight:600;letter-spacing:.06px;color:var(--ink);white-space:nowrap}
 .report-rev .report-row p{text-align:right}
 .cal{position:relative;width:56.26px;height:64px;flex:none}
 .cal img{position:absolute}
@@ -348,11 +348,10 @@ button{font-family:var(--font)}
 /* ---------- video overlay (177:32701 / 182:37578): vertical reels, neighbours peeking, swipe to switch ---------- */
 .vid{position:fixed;inset:0;z-index:45;opacity:0;transition:opacity .3s ease;pointer-events:none;--vw:min(calc(100vw - 48px),calc((100dvh - 196px) * .696),420px);--vh:calc(var(--vw) / .696)}
 .vid.is-open{opacity:1;pointer-events:auto}
-.vid-back{position:absolute;inset:0;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
+.vid-back{position:absolute;inset:0;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);transform:translateZ(0)}
 .vid-stage{position:absolute;inset:0;touch-action:none;transform:scale(.96);transition:transform .35s cubic-bezier(.22,1,.36,1);cursor:grab}
 .vid.is-open .vid-stage{transform:none}
-.vid-card{position:absolute;left:50%;top:50%;width:var(--vw);height:var(--vh);margin:calc(var(--vh) / -2 - 25px) 0 0 calc(var(--vw) / -2);border-radius:12px;overflow:hidden;background:#fff url(assets/video-poster-campus-tour.png) center/cover no-repeat;transform:translate(var(--x,0px),var(--y,0px)) scale(var(--s,1));opacity:var(--o,1);transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .38s ease;will-change:transform}
-.vid-card.is-dragging{transition:none}
+.vid-card{position:absolute;left:50%;top:50%;width:var(--vw);height:var(--vh);margin:calc(var(--vh) / -2 - 25px) 0 0 calc(var(--vw) / -2);border-radius:12px;overflow:hidden;background:#fff url(assets/video-poster-campus-tour.png) center/cover no-repeat;transform:translate3d(0,0,0);will-change:transform,opacity;backface-visibility:hidden;-webkit-backface-visibility:hidden;contain:layout paint}
 .vid-card video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:transparent}
 .vid-card::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 2px var(--line);pointer-events:none}
 html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
@@ -583,11 +582,11 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       </div>
       <div class="reports">
         <article class="report">
-          <div class="report-row"><span class="cal" aria-hidden="true"><img class="cal-a" src="assets/report-cal-a.svg" alt=""><img class="cal-b" src="assets/report-cal-b.svg" alt=""><img class="cal-c" src="assets/report-cal-c.svg" alt=""><img class="cal-q" src="assets/report-quiz-purple.svg" alt=""><span class="cal-bar">2026</span></span><p>98.3% of students secured internships by second year.</p></div>
+          <div class="report-row"><span class="cal" aria-hidden="true"><img class="cal-a" src="assets/report-cal-a.svg" alt=""><img class="cal-b" src="assets/report-cal-b.svg" alt=""><img class="cal-c" src="assets/report-cal-c.svg" alt=""><img class="cal-q" src="assets/report-quiz-purple.svg" alt=""><span class="cal-bar">2026</span></span><p>98.3% of students<br>secured internships by 2nd year.</p></div>
           <a class="btn btn-dark btn-md" href="#">View Official Report <img src="assets/icon-arrow-right-20.svg" alt=""></a>
         </article>
         <article class="report report-rev">
-          <div class="report-row"><span class="cal cal-green" aria-hidden="true"><img class="cal-a" src="assets/report-cal-a.svg" alt=""><img class="cal-b" src="assets/report-cal-b.svg" alt=""><img class="cal-c" src="assets/report-cal-c.svg" alt=""><img class="cal-q" src="assets/report-quiz-green.svg" alt=""><span class="cal-bar">2026</span></span><p>93.07% of students secured internships by second year.</p></div>
+          <div class="report-row"><span class="cal cal-green" aria-hidden="true"><img class="cal-a" src="assets/report-cal-a.svg" alt=""><img class="cal-b" src="assets/report-cal-b.svg" alt=""><img class="cal-c" src="assets/report-cal-c.svg" alt=""><img class="cal-q" src="assets/report-quiz-green.svg" alt=""><span class="cal-bar">2025</span></span><p>93.07% of students<br>secured internships by 2nd year.</p></div>
           <a class="btn btn-dark btn-md" href="#">View Official Report <img src="assets/icon-arrow-right-20.svg" alt=""></a>
         </article>
       </div>
@@ -976,76 +975,100 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   var vo = document.getElementById('vid'), voStage = document.getElementById('vidStage');
   var voCards = [], voCur = 0, voOpen = false, voBuilt = false, lockY = 0, voDrag = null;
   var SIDE_SCALE = 300 / 348, SIDE_OPACITY = .5, SIDE_DY = 21.5, GAP = 10;   /* fixed 10 px gap between the playing card and its neighbours */
+  var voStepPx = 1, voFrac = 0, voRaf = 0, voSeekTimer = 0, VO_EASE = 'cubic-bezier(.22,1,.36,1)';
   function voBuild(){
     VIDEOS.forEach(function(v, i){
       var c = document.createElement('article'); c.className = 'vid-card'; c.setAttribute('data-i', i);
-      var el = document.createElement('video'); el.setAttribute('playsinline', ''); el.setAttribute('webkit-playsinline', ''); el.preload = i === 0 ? 'auto' : 'metadata'; el.loop = true;
+      var el = document.createElement('video'); el.setAttribute('playsinline', ''); el.setAttribute('webkit-playsinline', ''); el.preload = 'auto'; el.loop = true;
       if (v.poster) el.poster = v.poster; el.src = v.src;
-      c.appendChild(el); voStage.appendChild(c); voCards.push({el: c, video: el});
+      c.appendChild(el); voStage.appendChild(c); voCards.push({el: c, video: el, z: 0, slot: 0});
     });
     voBuilt = true;
   }
-  function voStep(){ var cw = voCards[0].el.offsetWidth; return cw / 2 + GAP + SIDE_SCALE * cw / 2; }
+  /* geometry is read once (open, resize); moves only write transform + opacity, so a drag never touches layout */
+  function voMeasure(){ var cw = voCards[0].el.offsetWidth; voStepPx = cw / 2 + GAP + SIDE_SCALE * cw / 2; }
   function voSlot(i, dir){ var n = VIDEOS.length, d = ((i - voCur) % n + n) % n; if (d > n / 2 || (d * 2 === n && dir < 0)) d -= n; return d; }
-  function voLayout(frac){
-    var step = voStep();
-    voCards.forEach(function(c, i){
-      var p = voSlot(i, frac) - frac, a = Math.min(1, Math.abs(p));
-      var sc = 1 - (1 - SIDE_SCALE) * a, o = Math.abs(p) > 1.6 ? 0 : 1 - (1 - SIDE_OPACITY) * a;
-      c.el.style.setProperty('--x', (p * step).toFixed(2) + 'px');
-      c.el.style.setProperty('--y', (SIDE_DY * a).toFixed(2) + 'px');
-      c.el.style.setProperty('--s', sc.toFixed(4));
-      c.el.style.setProperty('--o', o.toFixed(3));
-      c.el.style.zIndex = a < .5 ? 3 : 2;
-    });
+  function voApply(frac){
+    for (var i = 0; i < voCards.length; i++){
+      var c = voCards[i], p = voSlot(i, frac) - frac, a = Math.min(1, Math.abs(p));
+      var sc = 1 - (1 - SIDE_SCALE) * a, o = Math.abs(p) > 1.6 ? 0 : 1 - (1 - SIDE_OPACITY) * a, z = a < .5 ? 3 : 2;
+      c.el.style.transform = 'translate3d(' + (p * voStepPx).toFixed(2) + 'px,' + (SIDE_DY * a).toFixed(2) + 'px,0) scale(' + sc.toFixed(4) + ')';
+      c.el.style.opacity = o.toFixed(3);
+      if (c.z !== z){ c.z = z; c.el.style.zIndex = z; }
+    }
   }
-  function voPlay(){
-    voCards.forEach(function(c, i){
-      if (i === voCur){ c.video.muted = false; var pr = c.video.play(); if (pr && pr.catch) pr.catch(function(){ c.video.muted = true; c.video.play().catch(function(){}); }); }
-      else { c.video.pause(); try { c.video.currentTime = 0; } catch(e){} }
-    });
+  function voTransition(c, ms){ c.el.style.transition = ms ? 'transform ' + ms + 'ms ' + VO_EASE + ',opacity ' + ms + 'ms linear' : 'none'; }
+  function voPlayCurrent(){
+    var c = voCards[voCur]; c.video.muted = false;
+    var pr = c.video.play(); if (pr && pr.catch) pr.catch(function(){ c.video.muted = true; c.video.play().catch(function(){}); });
   }
-  function voGo(delta){ voCur = ((voCur + delta) % VIDEOS.length + VIDEOS.length) % VIDEOS.length; voLayout(0); voPlay(); }
+  function voRewindOthers(){ voCards.forEach(function(c, i){ if (i !== voCur){ try { c.video.currentTime = 0; } catch(e){} } }); }
+  /* settle on a neighbour (delta ±1) or back on the current card (0), continuing from wherever the finger let go */
+  function voSettle(delta){
+    var from = voFrac, n = VIDEOS.length;
+    if (voRaf){ cancelAnimationFrame(voRaf); voRaf = 0; }
+    var before = voCards.map(function(c, i){ return voSlot(i, from) - from; });
+    if (delta){ voCards[voCur].video.pause(); voCur = ((voCur + delta) % n + n) % n; }
+    var start = from - delta;                      /* same picture, expressed against the new current card */
+    voCards.forEach(function(c){ voTransition(c, 0); });
+    voFrac = start; voApply(start);
+    var wrapped = voCards.filter(function(c, i){ return Math.abs((voSlot(i, start) - start) - before[i]) > .5; });   /* card that jumped to the other side */
+    wrapped.forEach(function(c){ c.el.style.opacity = '0'; });
+    if (delta) voPlayCurrent();                     /* inside the gesture, so sound is allowed */
+    var ms = Math.round(Math.min(420, Math.max(180, 180 + 260 * Math.abs(start))));
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){
+      voCards.forEach(function(c){ voTransition(c, ms); });
+      voFrac = 0; voApply(0);
+    }); });
+    clearTimeout(voSeekTimer);
+    voSeekTimer = setTimeout(voRewindOthers, ms + 80);   /* seeking is decode work: keep it out of the animation */
+  }
+  function voGo(delta){ voFrac = 0; voSettle(delta); }
   function openVideo(){
     if (voOpen) return;
     if (!voBuilt) voBuild();
     lockY = window.scrollY; document.documentElement.classList.add('is-locked');
     vo.classList.add('is-open'); vo.setAttribute('aria-hidden', 'false'); voOpen = true;
     dock.classList.add('is-video'); dock.classList.add('is-on');
-    voLayout(0); requestAnimationFrame(voPlay);
+    voMeasure(); voCards.forEach(function(c){ voTransition(c, 0); }); voFrac = 0; voApply(0);
+    voPlayCurrent();
   }
   function closeVideo(){
     if (!voOpen) return;
     voOpen = false; vo.classList.remove('is-open'); vo.setAttribute('aria-hidden', 'true');
-    voCards.forEach(function(c){ c.video.pause(); });
+    clearTimeout(voSeekTimer); voCards.forEach(function(c){ c.video.pause(); });
     document.documentElement.classList.remove('is-locked'); if (window.scrollY !== lockY) window.scrollTo(0, lockY);
     dock.classList.remove('is-video'); dockCheck();
   }
   voStage.addEventListener('pointerdown', function(e){
     if (!voOpen) return;
-    voDrag = {x: e.clientX, t: e.timeStamp, moved: false};
+    voDrag = {x: e.clientX, lx: e.clientX, lt: e.timeStamp, v: 0, moved: false};
     try { voStage.setPointerCapture(e.pointerId); } catch(err){}
-    voCards.forEach(function(c){ c.el.classList.add('is-dragging'); });
+    voCards.forEach(function(c){ voTransition(c, 0); });
   });
   voStage.addEventListener('pointermove', function(e){
     if (!voDrag) return;
-    var dx = e.clientX - voDrag.x;
+    var dx = e.clientX - voDrag.x, dt = e.timeStamp - voDrag.lt;
     if (Math.abs(dx) > 4) voDrag.moved = true;
-    voLayout(-dx / voStep());
-  });
+    if (dt > 0){ voDrag.v = .7 * voDrag.v + .3 * ((e.clientX - voDrag.lx) / dt); voDrag.lx = e.clientX; voDrag.lt = e.timeStamp; }
+    voFrac = Math.max(-1, Math.min(1, -dx / voStepPx));
+    if (!voRaf) voRaf = requestAnimationFrame(function(){ voRaf = 0; voApply(voFrac); });   /* one write per displayed frame */
+  }, {passive: true});
   function voEnd(e){
     if (!voDrag) return;
-    var dx = e.clientX - voDrag.x, v = dx / Math.max(1, e.timeStamp - voDrag.t), d = voDrag; voDrag = null;
-    voCards.forEach(function(c){ c.el.classList.remove('is-dragging'); });
+    var d = voDrag, dx = e.clientX - d.x; voDrag = null;
     if (!d.moved){
       var card = e.target.closest ? e.target.closest('.vid-card') : null;
       if (!card) closeVideo();
       else { var i = +card.getAttribute('data-i'); if (i === voCur){ var vv = voCards[i].video; if (vv.paused) vv.play().catch(function(){}); else vv.pause(); } else voGo(voSlot(i, 0) > 0 ? 1 : -1); }
-    } else if (dx < -50 || v < -.35) voGo(1); else if (dx > 50 || v > .35) voGo(-1); else voLayout(0);
+      return;
+    }
+    var next = dx < -voStepPx * .22 || d.v < -.35, prev = dx > voStepPx * .22 || d.v > .35;
+    voSettle(next ? 1 : prev ? -1 : 0);
   }
   voStage.addEventListener('pointerup', voEnd);
-  voStage.addEventListener('pointercancel', function(){ if (voDrag){ voDrag = null; voCards.forEach(function(c){ c.el.classList.remove('is-dragging'); }); voLayout(0); } });
-  window.addEventListener('resize', function(){ if (voOpen) voLayout(0); });
+  voStage.addEventListener('pointercancel', function(){ if (voDrag){ voDrag = null; voSettle(0); } });
+  window.addEventListener('resize', function(){ if (voOpen){ voMeasure(); voCards.forEach(function(c){ voTransition(c, 0); }); voApply(0); } });
   document.addEventListener('keydown', function(e){ if (!voOpen) return; if (e.key === 'Escape') closeVideo(); else if (e.key === 'ArrowRight') voGo(1); else if (e.key === 'ArrowLeft') voGo(-1); });
   document.getElementById('playBtn').addEventListener('click', openVideo);
 })();
