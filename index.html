@@ -10,7 +10,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mona+Sans:wdth,wght@100,500;100,600;100,800;125,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Mona+Sans:wdth,wght@100,500;100,600;100,700;100,800;125,600&display=swap">
 <style>
 /* NST website 2027, mobile home: hero + quick summary. Source: Figma "NST Website 2026-27", frame 76:7927 (402 wide). */
 :root{
@@ -92,12 +92,12 @@ button{font-family:var(--font)}
 .proof{background:var(--paper)}
 .stat{position:relative;isolation:isolate;overflow:hidden;height:138px;padding:16px 0;display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--paper);touch-action:pan-y;cursor:default}
 .stat-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(427.16px circle at calc(50% - .45px) calc(50% - .21px), rgba(245,151,0,0) 0, rgba(245,151,0,.11) 45%, rgba(245,151,0,.08) 55%, rgba(245,151,0,0) 80%)}
-.particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .stat-track{position:relative;width:370px;max-width:100%;display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;touch-action:pan-x pan-y}
 .stat-track::-webkit-scrollbar{display:none}
-.slide{flex:0 0 100%;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;gap:4px;margin:0}
 .stat-num{margin:0;font-size:40px;line-height:48px;font-weight:600;letter-spacing:0;color:var(--yellow);font-variant-numeric:tabular-nums}
 .stat-desc{margin:0;text-align:center;font-size:14px;line-height:20px;font-weight:500;letter-spacing:.1px;color:var(--ink);white-space:nowrap}
+.particles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.slide{flex:0 0 100%;scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;gap:4px;margin:0}
 .dots{position:relative;display:flex;gap:8px;height:6px}
 .dot{width:6px;height:6px;border-radius:999px;border:0;padding:0;margin:0;background:var(--grey);opacity:.5;cursor:pointer;transition:background .2s,opacity .2s}
 .dot.is-on{background:var(--yellow);opacity:1}
@@ -196,41 +196,50 @@ button{font-family:var(--font)}
 .fade-top{top:0;background:linear-gradient(180deg,#fff,rgba(255,255,255,0))}
 .fade-bot{bottom:0;background:linear-gradient(0deg,#fff,rgba(255,255,255,0))}
 
-/* ---------- campus carousel (153:23864) ---------- */
-/* The campus card rides up with the page, pins just above the bottom bar, and holds for --campus-travel of scrolling:
-   slide 1 highlights, the card switches to slide 2 at the halfway point, slide 2 highlights, then the page moves on. */
-.campus{--campus-travel:120vh;--campus-top:80px;--campus-pin:calc(100vh - var(--campus-top) - 86px - env(safe-area-inset-bottom,0px));position:relative;background:var(--paper);padding:0 16px 28px;height:calc(var(--campus-pin) + 28px + var(--campus-travel));min-height:calc(528px + var(--campus-travel))}
+/* ---------- campus card (234:14083): pins under the top bar and fills the screen while locked; two slides ----------
+   At the frame's 447 px the geometry is exact: tab 1–29, headline 57, photos 108, stats 239–400, bars 428. Taller screens keep the
+   tab on top and the bars at the bottom and centre the 343 px content block between them. */
+.campus{--campus-travel:120vh;--campus-top:80px;--campus-pin:calc(100vh - var(--campus-top) - 86px - env(safe-area-inset-bottom,0px));position:relative;background:var(--paper);padding:0 16px 28px;height:calc(var(--campus-pin) + 28px + var(--campus-travel));min-height:calc(475px + var(--campus-travel))}
 @supports (height:100dvh){.campus{--campus-pin:calc(100dvh - var(--campus-top) - 86px - env(safe-area-inset-bottom,0px))}}
-.campus-pin{position:sticky;top:var(--campus-top);height:var(--campus-pin);min-height:500px}
-.campus-card{position:relative;overflow:hidden;height:100%;min-height:500px;border-radius:12px;background:var(--bg2);box-shadow:inset 0 0 0 1px rgba(225,229,234,.5);padding:0 16px 16px;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
-.campus-tab span{transition:opacity .25s ease}
-.campus-tab.is-swapping span{opacity:0}
-.campus-body{position:relative;height:233px}
-.campus-slide{position:absolute;left:0;top:0;width:100%;display:flex;flex-direction:column;gap:24px;transition:opacity .35s ease,transform .35s cubic-bezier(.22,1,.36,1)}
-.campus-slide[hidden]{display:flex!important;opacity:0;transform:translateY(14px);pointer-events:none}
-.campus-progress span{position:relative;overflow:hidden}
-.campus-progress span::after{content:"";position:absolute;left:0;top:0;height:100%;width:100%;background:#6138D3;transform:scaleX(var(--fill,0));transform-origin:left center}
-@media (prefers-reduced-motion:reduce){.campus-slide,.campus-tab span{transition:none}}
-.campus-card .dots-bg{left:-44px;right:-44px;top:-41.04px;bottom:-41px}
-.campus-card .fade-top{height:61px;background:linear-gradient(180deg,#F6F7F9,rgba(246,247,249,0))}
-.campus-card .fade-bot{height:53px;background:linear-gradient(0deg,#F6F7F9,rgba(246,247,249,0))}
-.campus-tab{position:relative;display:flex;align-items:flex-start;justify-content:center;margin-top:1px;height:28px}
+.campus-pin{position:sticky;top:var(--campus-top);height:var(--campus-pin);min-height:447px}
+.campus-card{position:relative;overflow:hidden;height:100%;min-height:447px;border-radius:12px;background:#fff;padding:0 0 17px;display:flex;flex-direction:column;align-items:center}
+.campus-card::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line);pointer-events:none;z-index:3}
+.campus-card .fade-top{height:61px;z-index:1}
+.campus-card .fade-bot{height:53px;z-index:1}
+.campus-tab{position:relative;z-index:2;flex:none;display:flex;align-items:flex-start;justify-content:center;margin-top:1px;height:28px}
 .campus-tab img{width:16px;height:16px;flex:none}
 .campus-tab .tab-l{transform:rotate(-90deg)}
 .campus-tab .tab-r{transform:rotate(-90deg) scaleY(-1)}
-.campus-tab span{display:block;padding:8px 24px;border-radius:0 0 16px 16px;background:#7B55EE;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;white-space:nowrap}
-.campus-body{position:relative;width:336px;max-width:100%;display:flex;flex-direction:column;gap:24px}
-.campus-title{margin:0;text-align:center;font-size:16px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:var(--ink);text-wrap:balance}
-.stat-card{background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 2px 12px rgba(43,48,59,.08);display:flex;flex-direction:column;overflow:hidden}
+.campus-tab span{display:block;padding:8px 24px;border-radius:0 0 16px 16px;background:#7B55EE;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;white-space:nowrap;transition:opacity .25s ease}
+.campus-tab.is-swapping span{opacity:0}
+.campus-body{position:relative;flex:1 0 0;width:100%;min-height:399px;display:flex;align-items:center}
+.campus-stage{position:relative;width:100%;height:343px}
+.campus-stage .dots-bg{left:-44px;right:-44px;height:626px;opacity:.23}
+.campus-stage .dots-top{top:-454px}
+.campus-stage .dots-bot{top:353px}
+.campus-slide{position:absolute;inset:0;z-index:2;transition:opacity .35s ease,transform .35s cubic-bezier(.22,1,.36,1)}
+.campus-slide[hidden]{display:block!important;opacity:0;transform:translateY(14px);pointer-events:none}
+.campus-title{position:absolute;left:50%;top:0;width:336px;max-width:calc(100% - 34px);transform:translateX(-50%);margin:0;text-align:center;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:var(--ink)}
+.campus-title .dim{opacity:.26}
+.campus-photos{position:absolute;left:50%;top:51.14px;width:267.85px;height:164px;transform:translateX(-50%);display:flex;align-items:flex-start}
+.campus-photos .grp{display:flex;align-items:center}
+.campus-photos img{width:92.21px;height:164px;object-fit:cover;flex:none}
+.campus-photos .p1{margin-right:-36.03px}
+.campus-photos .p2,.campus-photos .p3{margin-right:-48.04px}
+.campus-photos .p3{width:123.33px;height:154.16px}
+.stat-card{position:absolute;left:0;right:0;top:182px;height:161px;background:#fff;border:1px solid var(--line);box-shadow:0 2px 24px rgba(43,48,59,.08);display:flex;flex-direction:column}
 .stat-cell{display:flex;flex-direction:column;gap:9px;padding:16px}
-.stat-cell-top{box-shadow:inset 0 -1px 0 var(--line)}
-.stat-row{display:flex}
-.stat-row .stat-cell{flex:1 0 0;min-width:0}
-.stat-row .sc-r{padding:16px 12px;box-shadow:inset -1px 0 0 var(--line)}
-.sc-label{margin:0;font-size:11.4px;line-height:14px;font-weight:500;letter-spacing:.4px;color:#5B6271;white-space:nowrap}
-.sc-value{margin:0;font-size:19.1px;line-height:24px;font-weight:600;letter-spacing:.1px;white-space:nowrap;background:linear-gradient(180deg,#6138D3,#004599);-webkit-background-clip:text;background-clip:text;color:transparent;width:max-content}
-.campus-progress{position:relative;width:336px;max-width:100%;display:flex;gap:12px;height:2px}
-.campus-progress span{flex:1 0 0;height:2px;background:#B49DFE;opacity:.5}
+.stat-cell-top{height:80px;border-bottom:1px solid var(--line)}
+.stat-row{display:flex;height:79px}
+.stat-row .stat-cell{box-sizing:content-box;flex:1 0 0;min-width:0}
+.stat-row .sc-r{padding:16px 12px;border-right:1px solid var(--line)}
+.sc-label{margin:0;font-size:11.4px;line-height:14px;font-weight:500;letter-spacing:.4px;color:var(--ink);white-space:nowrap}
+.sc-value{margin:0;font-size:19.1px;line-height:24px;font-weight:600;letter-spacing:.1px;color:#6138D3;white-space:nowrap}
+.campus-progress{position:relative;z-index:2;flex:none;width:336px;max-width:calc(100% - 34px);display:flex;gap:12px;height:2px}
+.campus-progress span{position:relative;flex:1 0 0;height:2px;overflow:hidden}
+.campus-progress span::before{content:"";position:absolute;inset:0;background:#7B55EE;opacity:.32}
+.campus-progress span::after{content:"";position:absolute;inset:0;background:#7B55EE;transform:scaleX(var(--fill,0));transform-origin:left center}
+@media (prefers-reduced-motion:reduce){.campus-slide,.campus-tab span{transition:none}}
 
 /* ---------- internship wins, swipeable cards (153:23775) ---------- */
 .wins{background:var(--paper);padding:0 16px;display:flex;flex-direction:column;gap:16px}
@@ -286,28 +295,23 @@ button{font-family:var(--font)}
 .wins-hint img{width:11.43px;height:16px}
 .wins-hint span{opacity:.5}
 
-/* ---------- placement auditors (153:26010) ---------- */
+/* ---------- placement auditors (234:18365) ---------- */
 .audit{position:relative;overflow:hidden;background:var(--paper);padding:42px 16px;display:flex;flex-direction:column;align-items:center}
-.audit > .dots-bg{left:-28px;top:1.64px;width:458px;height:583px}
+.audit > .dots-bg{left:-28px;top:7.64px;width:458px;height:583px}
 .audit > .fade-top,.audit > .fade-bot{height:96px}
-.audit-card{position:relative;width:100%;background:#fff;box-shadow:inset 0 0 0 1px rgba(225,229,234,.5);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:24px;overflow:hidden}
+.audit-card{position:relative;width:100%;background:#fff;border:1px solid rgba(225,229,234,.5);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:24px;overflow:hidden}
 .audit-top{display:flex;flex-direction:column;align-items:center;gap:24px}
-.audit-head{display:flex;align-items:center;gap:12px;width:100%}
-.audit-badge{width:48px;height:48px;overflow:hidden;display:flex;align-items:center;justify-content:center;flex:none}
-.audit-badge img{width:48px;height:48px;transform:rotate(-15deg);margin-top:-.36px}
-.audit-titles{width:284px;max-width:100%;padding-top:2px;display:flex;flex-direction:column;gap:4px}
-.audit-titles p{margin:0}
+.audit-head{display:flex;flex-direction:column;align-items:center;gap:12px;width:100%}
+.audit-badge{width:56px;height:56px;overflow:hidden;display:flex;align-items:center;justify-content:center;flex:none}
+.audit-badge img{width:56px;height:56px;transform:rotate(-15deg);margin-top:-.42px}
+.audit-titles{width:284px;max-width:100%;padding-top:2px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.audit-titles p{margin:0;white-space:nowrap}
 .audit-kicker{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#007A51}
 .audit-sub{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px;color:var(--ink)}
-.audit-logos{position:relative;width:100%;height:24px;overflow:hidden}
-.audit-track{position:absolute;left:0;top:0;height:24px;display:flex;align-items:center;gap:24px;transform:translateX(-111.47px);animation:auditMarquee 16s linear infinite;will-change:transform}
-@keyframes auditMarquee{from{transform:translateX(-111.47px)}to{transform:translateX(-513.43px)}}
-/* the two cursor decorations wander a few pixels, like idle visitors */
-.cursor-john{animation:hoverA 7s ease-in-out infinite}
-.cursor-roza{animation:hoverB 8.5s ease-in-out infinite}
-@keyframes hoverA{0%,100%{translate:0 0}22%{translate:6px -5px}48%{translate:-4px 4px}74%{translate:5px 6px}}
-@keyframes hoverB{0%,100%{translate:0 0}30%{translate:-5px 5px}55%{translate:6px -3px}80%{translate:-3px -6px}}
-@media (prefers-reduced-motion:reduce){.audit-track,.cursor-john,.cursor-roza{animation:none}}
+.audit-logos{position:relative;width:100%;height:24px}
+.audit-track{position:absolute;left:0;top:0;height:24px;display:flex;align-items:center;gap:24px;transform:translateX(-112.45px);animation:auditMarquee 16s linear infinite;will-change:transform}
+@keyframes auditMarquee{from{transform:translateX(-112.45px)}to{transform:translateX(-514.41px)}}
+@media (prefers-reduced-motion:reduce){.audit-track{animation:none}}
 .al{position:relative;overflow:hidden;flex:none}
 .al img{position:absolute}
 .al-iima{width:166.96px;height:24px}
@@ -316,23 +320,21 @@ button{font-family:var(--font)}
 .al-sorab img{left:0;top:0;width:187px;height:22px}
 .reports{display:flex;flex-direction:column;gap:12px}
 .report{position:relative;background:var(--bg2);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:16px;overflow:hidden}
-.report-row{display:flex;align-items:flex-start;gap:16px}
+.report-row{display:flex;align-items:center;gap:16px;height:64px}
 .report-rev .report-row{flex-direction:row-reverse}
-.report-doc{position:relative;width:80.16px;height:91.18px;flex:none}
-.report-doc img{position:absolute;left:-4.01px;top:-2.01px;width:88.18px;height:93.19px}
-.report-row p{margin:0;flex:1 0 0;min-width:0;font-size:16px;line-height:26px;font-weight:600;letter-spacing:.06px;color:var(--ink)}
+.report-row p{margin:0;flex:1 0 0;min-width:0;padding-bottom:8px;font-size:16px;line-height:24px;font-weight:600;letter-spacing:.06px;color:var(--ink)}
 .report-rev .report-row p{text-align:right}
+.cal{position:relative;width:56.26px;height:64px;flex:none}
+.cal img{position:absolute}
+.cal-a{left:4.22px;top:7.03px;width:47.82px;height:56.97px}
+.cal-b{left:2.11px;top:3.52px;width:52.04px;height:56.97px}
+.cal-c{left:-2.81px;top:-1.41px;width:61.89px;height:64px}
+.cal-q{left:17px;top:25.67px;width:22px;height:22px}
+.cal-bar{position:absolute;left:0;top:.29px;width:56px;height:18px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#6138D3,#B49DFE);text-align:center;font-size:10px;line-height:18px;font-weight:700;letter-spacing:.06px;color:#fff}
+.cal-green .cal-bar{background:linear-gradient(180deg,#009965,#50CE99)}
 .btn-dark{background:var(--ink-invert);color:#fff}
 .btn-md{height:40px;padding:10px 60px;border-radius:12px;font-size:14px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;box-shadow:var(--btn-shadow);width:100%}
 .btn-md img{width:20px;height:20px;flex:none}
-.cursor{position:absolute;pointer-events:none}
-.cursor img{position:absolute}
-.cursor-john{left:75.68%;top:49.03%;width:58.3px;height:56px}
-.cj-arrow{left:-10.53px;top:-7.16px;width:32.4px;height:35.6px}
-.cj-pill{left:3.06px;top:11.17px;width:48.56px;height:30.34px}
-.cj-text{left:18.6px;top:46.5px;width:34.8px;height:9.5px}
-.cursor-roza{left:calc(10.68% - 5.5px);top:calc(46.49% - 7.7px);width:67.4px;height:59.7px}
-.cursor-roza img{left:0;top:0;width:100%;height:100%}
 
 /* ---------- sticky bottom bar (153:32692), shows once the hero has scrolled away ---------- */
 .dock{position:fixed;left:50%;bottom:0;width:100%;max-width:402px;z-index:50;padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px));transform:translate(-50%,115%);transition:transform .4s cubic-bezier(.22,1,.36,1);pointer-events:none}
@@ -344,7 +346,7 @@ button{font-family:var(--font)}
 @media (prefers-reduced-motion:reduce){.dock{transition:none}}
 
 /* ---------- video overlay (177:32701 / 182:37578): vertical reels, neighbours peeking, swipe to switch ---------- */
-.vid{position:fixed;inset:0;z-index:45;opacity:0;transition:opacity .3s ease;pointer-events:none;--vh:min(500px,calc(100dvh - 196px));--vw:calc(var(--vh) * .696)}
+.vid{position:fixed;inset:0;z-index:45;opacity:0;transition:opacity .3s ease;pointer-events:none;--vw:min(calc(100vw - 48px),calc((100dvh - 196px) * .696),420px);--vh:calc(var(--vw) / .696)}
 .vid.is-open{opacity:1;pointer-events:auto}
 .vid-back{position:absolute;inset:0;background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px)}
 .vid-stage{position:absolute;inset:0;touch-action:none;transform:scale(.96);transition:transform .35s cubic-bezier(.22,1,.36,1);cursor:grab}
@@ -500,16 +502,18 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     </div>
   </section>
 
-  <section class="campus" id="campus" data-node="153:23864" aria-label="Campus internship record">
+  <section class="campus" id="campus" data-node="234:14083" aria-label="Campus internship record">
     <div class="campus-pin">
     <div class="campus-card" id="campusCard">
-      <div class="dots-bg" aria-hidden="true"></div>
       <div class="fade fade-top" aria-hidden="true"></div>
       <div class="fade fade-bot" aria-hidden="true"></div>
       <div class="campus-tab" id="campusTab"><img class="tab-l" src="assets/tab-corner.svg" alt=""><span id="campusTabText">ady patil university, pune</span><img class="tab-r" src="assets/tab-corner.svg" alt=""></div>
-      <div class="campus-body">
+      <div class="campus-body"><div class="campus-stage">
+        <div class="dots-bg dots-top" aria-hidden="true"></div>
+        <div class="dots-bg dots-bot" aria-hidden="true"></div>
         <div class="campus-slide" data-campus="ady patil university, pune">
-          <h2 class="campus-title" data-pin-reveal><span>300+ student batch has already sec</span><span class="dim">ured paid internships</span></h2>
+          <h2 class="campus-title" data-pin-reveal data-dim=".26"><span>300+ student batch has already sec</span><span class="dim">ured paid internships</span></h2>
+          <div class="campus-photos" aria-hidden="true"><img class="p1" src="assets/card-photo-7708.png" alt=""><div class="grp"><img class="p2" src="assets/card-photo-7703.png" alt=""><img class="p3" src="assets/card-photo-aditya.png" alt=""><img class="p4" src="assets/card-photo-7726.png" alt=""></div></div>
           <div class="stat-card">
             <div class="stat-cell stat-cell-top"><p class="sc-label">Paid internships in their 2nd Year</p><p class="sc-value">97%+</p></div>
             <div class="stat-row">
@@ -519,7 +523,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
           </div>
         </div>
         <div class="campus-slide" data-campus="rishihood university, sonipat" hidden>
-          <h2 class="campus-title" data-pin-reveal><span>500+ student batch has already secured paid internships</span></h2>
+          <h2 class="campus-title" data-pin-reveal data-dim=".26"><span>500+ student batch has already secured paid internships</span></h2>
+          <div class="campus-photos" aria-hidden="true"><img class="p1" src="assets/card-photo-7708.png" alt=""><div class="grp"><img class="p2" src="assets/card-photo-7703.png" alt=""><img class="p3" src="assets/card-photo-aditya.png" alt=""><img class="p4" src="assets/card-photo-7726.png" alt=""></div></div>
           <div class="stat-card">
             <div class="stat-cell stat-cell-top"><p class="sc-label">Paid internships in their 2nd Year</p><p class="sc-value">93%+</p></div>
             <div class="stat-row">
@@ -528,7 +533,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
             </div>
           </div>
         </div>
-      </div>
+      </div></div>
       <div class="campus-progress" id="campusProgress" aria-hidden="true"><span></span><span></span></div>
     </div>
     </div>
@@ -562,7 +567,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     </div>
   </section>
 
-  <section class="audit" data-node="153:26010" aria-label="Certified by placement auditors">
+  <section class="audit" data-node="234:18365" aria-label="Certified by placement auditors">
     <div class="dots-bg" aria-hidden="true"></div>
     <div class="fade fade-top" aria-hidden="true"></div>
     <div class="fade fade-bot" aria-hidden="true"></div>
@@ -578,14 +583,12 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       </div>
       <div class="reports">
         <article class="report">
-          <div class="report-row"><span class="report-doc"><img src="assets/report-doc.svg" alt=""></span><p>98.3% of students secured internships by second year.</p></div>
+          <div class="report-row"><span class="cal" aria-hidden="true"><img class="cal-a" src="assets/report-cal-a.svg" alt=""><img class="cal-b" src="assets/report-cal-b.svg" alt=""><img class="cal-c" src="assets/report-cal-c.svg" alt=""><img class="cal-q" src="assets/report-quiz-purple.svg" alt=""><span class="cal-bar">2026</span></span><p>98.3% of students secured internships by second year.</p></div>
           <a class="btn btn-dark btn-md" href="#">View Official Report <img src="assets/icon-arrow-right-20.svg" alt=""></a>
-          <span class="cursor cursor-john" aria-hidden="true"><img class="cj-arrow" src="assets/cursor-john-arrow.svg" alt=""><img class="cj-pill" src="assets/cursor-john-pill.svg" alt=""><img class="cj-text" src="assets/cursor-john-text.svg" alt=""></span>
         </article>
         <article class="report report-rev">
-          <div class="report-row"><span class="report-doc"><img src="assets/report-doc.svg" alt=""></span><p>93.07% of students secured internships by second year.</p></div>
+          <div class="report-row"><span class="cal cal-green" aria-hidden="true"><img class="cal-a" src="assets/report-cal-a.svg" alt=""><img class="cal-b" src="assets/report-cal-b.svg" alt=""><img class="cal-c" src="assets/report-cal-c.svg" alt=""><img class="cal-q" src="assets/report-quiz-green.svg" alt=""><span class="cal-bar">2026</span></span><p>93.07% of students secured internships by second year.</p></div>
           <a class="btn btn-dark btn-md" href="#">View Official Report <img src="assets/icon-arrow-right-20.svg" alt=""></a>
-          <span class="cursor cursor-roza" aria-hidden="true"><img src="assets/cursor-roza.svg" alt=""></span>
         </article>
       </div>
     </div>
@@ -798,11 +801,13 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       el.appendChild(ws);
       if (wi < arr.length - 1) el.appendChild(document.createTextNode(' '));
     });
+    var dim = parseFloat(el.getAttribute('data-dim')) || .5;
+    chars.forEach(function(c){ c.style.opacity = dim; });
     var r = {el: el, chars: chars, last: -1};
     r.set = function(p){                                   /* p 0..1 -> characters lift from 50% to 100% */
       var k = p * (chars.length + 4) - 1;
       if (Math.abs(k - r.last) < .02) return; r.last = k;
-      for (var i = 0; i < chars.length; i++){ chars[i].style.opacity = (.5 + .5 * Math.min(1, Math.max(0, (k - i) / 3))).toFixed(3); }
+      for (var i = 0; i < chars.length; i++){ chars[i].style.opacity = (dim + (1 - dim) * Math.min(1, Math.max(0, (k - i) / 3))).toFixed(3); }
     };
     return r;
   }
@@ -857,7 +862,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     seed.forEach(function(d){ d.remove(); });
     orbit.classList.add('is-live');
     var R = 543, SLOT = Math.asin(135 / R), START = 52 * Math.PI / 180;
-    var ENTER = 1100, STAGGER = 170, HOLD = 2400, ADVANCE = 850;
+    var ENTER = 900, STAGGER = 130, HOLD = 1200, ADVANCE = 620;
     function easeOut(t){ return 1 - Math.pow(1 - t, 5); }
     function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     var discs = [];
@@ -970,7 +975,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   ];
   var vo = document.getElementById('vid'), voStage = document.getElementById('vidStage');
   var voCards = [], voCur = 0, voOpen = false, voBuilt = false, lockY = 0, voDrag = null;
-  var SIDE_SCALE = 300 / 348, SIDE_OPACITY = .5, SIDE_DY = 21.5, PEEK = 7;
+  var SIDE_SCALE = 300 / 348, SIDE_OPACITY = .5, SIDE_DY = 21.5, GAP = 10;   /* fixed 10 px gap between the playing card and its neighbours */
   function voBuild(){
     VIDEOS.forEach(function(v, i){
       var c = document.createElement('article'); c.className = 'vid-card'; c.setAttribute('data-i', i);
@@ -980,7 +985,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     });
     voBuilt = true;
   }
-  function voStep(){ return voStage.clientWidth / 2 - PEEK + SIDE_SCALE * voCards[0].el.offsetWidth / 2; }
+  function voStep(){ var cw = voCards[0].el.offsetWidth; return cw / 2 + GAP + SIDE_SCALE * cw / 2; }
   function voSlot(i, dir){ var n = VIDEOS.length, d = ((i - voCur) % n + n) % n; if (d > n / 2 || (d * 2 === n && dir < 0)) d -= n; return d; }
   function voLayout(frac){
     var step = voStep();
