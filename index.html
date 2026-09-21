@@ -1007,7 +1007,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   (function(){
     var win = document.getElementById('foundWindow'), track = document.getElementById('foundTrack');
     var dots = Array.prototype.slice.call(document.querySelectorAll('#foundDots span'));
-    var rows = Array.prototype.slice.call(track.children), N = rows.length, ROW = 54, STEP = 1200, k = 0, timer = 0, first = 0, hover = false;
+    var rows = Array.prototype.slice.call(track.children), N = rows.length, ROW = 54, STEP = 1900, k = 0, timer = 0, first = 0, hover = false;
     rows.slice(0, 4).forEach(function(r){ var c = r.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });   /* clones fill the window while wrapping */
     function paint(){ track.style.transform = 'translate3d(0,' + (-k * ROW) + 'px,0)'; dots.forEach(function(d, i){ d.classList.toggle('on', i === k % N); }); }
     function next(){
