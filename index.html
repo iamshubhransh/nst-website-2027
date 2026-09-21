@@ -1047,7 +1047,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     function draw(now){
       var el = started ? now - t0 : 0, sec_t = el / 1000;
       ctx.clearRect(0, 0, W, H); ctx.fillStyle = COL;
-      var c = (NL - 1) * (.5 + .5 * Math.sin(sec_t * .55)), idle = clamp((el - 2300) / 900);   /* swell centre, and how much idle motion is mixed in */
+      var c = (NL - 1) * (.5 + .5 * Math.sin(sec_t * 1.15)), idle = clamp((el - 2300) / 900);   /* swell centre, and how much idle motion is mixed in */
       for (var i = 0; i < NL; i++){
         var l = L[i], x = X0 + i * PITCH, rest = TIPS[i];
         var dotA = reduce ? 1 : clamp((el - l.dotAt) / 320);
