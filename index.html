@@ -365,8 +365,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 /* ---------- seven foundations (234:36816): hanging lines with travelling pulses, looping vertical list ---------- */
 .found{position:relative;height:463px;background:var(--paper);border-top:1px solid var(--line);overflow:hidden}
 .found-lines{position:absolute;left:calc(50% - 230px);top:-1.04px;width:460px;height:180px;pointer-events:none}
-.found-title{position:absolute;left:50%;top:139px;width:358px;max-width:calc(100% - 44px);transform:translateX(-50%);margin:0;text-align:center;font-size:17px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:var(--ink)}
-.found-list{position:absolute;left:27px;right:27px;top:207.96px;display:flex;flex-direction:column;align-items:center;gap:24px}
+.found-title{position:absolute;left:50%;top:139px;width:358px;max-width:calc(100% - 44px);transform:translateX(-50%);margin:0;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:var(--ink)}
+.found-list{position:absolute;left:16px;right:16px;top:207.96px;display:flex;flex-direction:column;align-items:center;gap:24px}
 .found-window{position:relative;width:100%;height:193px;overflow:hidden}
 .found-window::before{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:var(--line);z-index:2}
 .found-track{list-style:none;margin:0;padding:0;will-change:transform;transition:transform .5s cubic-bezier(.22,1,.36,1)}
@@ -374,6 +374,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .found-row{height:54px;padding:16px;display:flex;align-items:center;justify-content:space-between;background:#fff;border:solid var(--line2);border-width:0 1px 1px}
 .found-row a{display:flex;align-items:center;justify-content:space-between;width:100%;text-decoration:none}
 .found-name{display:flex;align-items:center;gap:8px;font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px;color:#005ED1;white-space:nowrap}
+.found-label{text-decoration:underline dotted transparent;text-decoration-thickness:.75px;text-underline-offset:3.5px;text-decoration-skip-ink:none;transition:text-decoration-color .3s ease}
+.found-row.is-top .found-label{text-decoration-color:currentColor}
 .found-ico{position:relative;width:20px;height:20px;flex:none}
 .found-ico .mark-inner{position:absolute;left:1.667px;top:1.667px;transform:scale(1.25);transform-origin:0 0}
 .found-row img.arr{width:20px;height:20px;flex:none}
@@ -613,17 +615,17 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   <section class="found" id="found" data-node="234:36816" aria-label="The seven foundations">
     <canvas class="found-lines" id="foundLines" aria-hidden="true"></canvas>
-    <h2 class="found-title">We specifically work on these 7 foundations to give best outcomes</h2>
+    <h2 class="found-title">We specifically work on these 7 foundations to give outcomes</h2>
     <div class="found-list">
       <div class="found-window" id="foundWindow">
         <ul class="found-track" id="foundTrack">
-          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span>Open Source</span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
-          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span>Competitive Coding</span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
-          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span>Building Culture</span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
-          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span>Entrepreneurship</span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
-          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span>Learning Pedagogy</span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
-          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span>Research</span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
-          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span>Internships &amp; Placements</span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
+          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span><span class="found-label">Open Source</span></span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
+          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span><span class="found-label">Competitive Coding</span></span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
+          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span><span class="found-label">Building Culture</span></span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
+          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span><span class="found-label">Entrepreneurship</span></span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
+          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span><span class="found-label">Learning Pedagogy</span></span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
+          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span><span class="found-label">Research</span></span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
+          <li class="found-row"><a href="#"><span class="found-name"><span class="found-ico"><span class="mark-inner gmask"><img src="assets/google-mark.svg" alt=""></span></span><span class="found-label">Internships &amp; Placements</span></span><img class="arr" src="assets/icon-arrow-right-ink.svg" alt=""></a></li>
         </ul>
         <div class="found-fade" aria-hidden="true"></div>
       </div>
@@ -1009,7 +1011,11 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var dots = Array.prototype.slice.call(document.querySelectorAll('#foundDots span'));
     var rows = Array.prototype.slice.call(track.children), N = rows.length, ROW = 54, STEP = 1900, k = 0, timer = 0, first = 0, hover = false;
     rows.slice(0, 4).forEach(function(r){ var c = r.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });   /* clones fill the window while wrapping */
-    function paint(){ track.style.transform = 'translate3d(0,' + (-k * ROW) + 'px,0)'; dots.forEach(function(d, i){ d.classList.toggle('on', i === k % N); }); }
+    function paint(){
+      track.style.transform = 'translate3d(0,' + (-k * ROW) + 'px,0)';
+      dots.forEach(function(d, i){ d.classList.toggle('on', i === k % N); });
+      Array.prototype.forEach.call(track.children, function(r, i){ r.classList.toggle('is-top', i >= k && i < k + 3); });   /* dotted underline lives on the top three slots, not on fixed items */
+    }
     function next(){
       if (hover) return;
       k++; paint();
