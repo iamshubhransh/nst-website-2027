@@ -389,17 +389,263 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .found .wins-dots span.on{background:var(--brand)}
 @media (prefers-reduced-motion:reduce){.found-track,.found-label{transition:none}}
 
-/* ---------- open source culture (267:51819): header and an empty dashed card, as far as the frame goes today ---------- */
-.oss{background:#16191D;padding:42px 16px;display:flex;flex-direction:column;align-items:center;gap:24px;overflow:hidden}
-.oss-head{width:100%;display:flex;align-items:center;gap:16px}
-.oss-bar{flex:none;width:2px;height:48px;margin:0 -1px;border-radius:2px;background:#fff}   /* 46 px line, 2 px stroke, round caps */
-.oss-text{flex:1 0 0;min-width:0;display:flex;flex-direction:column;gap:6px}
-.oss-title{margin:0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#fff;white-space:nowrap}
-.oss-title span{font-weight:500;color:rgba(255,255,255,.5)}
-.oss-sub{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#fff}
-.oss-card{position:relative;width:100%;height:506px;border-radius:12px;overflow:hidden}
-.oss-ring{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.oss-ring rect{x:.5px;y:.5px;width:calc(100% - 1px);height:calc(100% - 1px);rx:11.5px;fill:none;stroke:#30363D;stroke-width:1;stroke-dasharray:4 4}
+/* ---------- achievement buckets: shared skin. Dark buckets on #16191D with #0B0C0E cards, light ones on white; each bucket is
+   42/16 padding with a 24 px gap. The header bar is the "thread": it draws in when the header arrives, and between buckets a
+   runner travels a dashed track through the two paddings and docks as the next header's bar ---------- */
+.bk{position:relative;padding:42px 16px;display:flex;flex-direction:column;gap:24px;overflow:hidden;background:var(--bk-bg);color:var(--bk-ink)}
+.bk-dark{--bk-bg:#16191D;--bk-card:#0B0C0E;--bk-line:#23282F;--bk-line2:#30363D;--bk-ink:#fff;--bk-ink-2:rgba(255,255,255,.5);--bk-brand:#61A8FF;--bk-band:#16191D;--bk-track:#30363D}
+.bk-light{--bk-bg:#fff;--bk-card:#fff;--bk-line:#EDEFF3;--bk-line2:#E1E5EA;--bk-ink:#16191D;--bk-ink-2:rgba(0,0,0,.5);--bk-brand:#0673F9;--bk-band:#F6F7F9;--bk-track:#E1E5EA}
+.bk-head{display:flex;align-items:center;gap:16px;padding:0 3px}
+.bk-bar{flex:none;width:2px;height:48px;margin:0 -1px;border-radius:2px;background:var(--bk-ink);transform-origin:50% 0}
+.bk-text{flex:1 0 0;min-width:0;display:flex;flex-direction:column;gap:6px}
+.bk-title{margin:0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:var(--bk-ink);white-space:nowrap}
+.bk-title span{font-weight:500;color:var(--bk-ink-2)}
+.bk-sub{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:var(--bk-ink)}
+.bk-sub b{font-weight:700}
+.bk-bar.is-dock{animation:bkBar .5s cubic-bezier(.22,1,.36,1) both}
+.bk.is-in .bk-text{animation:bkText .6s .18s cubic-bezier(.22,1,.36,1) both}
+@keyframes bkBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes bkText{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+/* card, band, kicker, pill, dots, CTA: the pieces every bucket shares */
+.bk-card{position:relative;width:100%;background:var(--bk-card);border:1px solid var(--bk-line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.bk-band{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;background:var(--bk-band)}
+.bk-kicker{font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--bk-ink)}
+.bk-note{font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;color:var(--bk-ink);opacity:.5}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#16191D;border:1px solid #30363D;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#61A8FF;white-space:nowrap}
+.pill-light{background:#fff;border-color:#E1E5EA;color:#0673F9;padding:3px 8px}
+.pill i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.pdots{display:inline-flex;align-items:center;gap:6px;padding:6px 6px 6px 0;border-radius:100px;background:#16191D}
+.pdots i{display:block;width:6px;height:6px;border-radius:3px;background:#fff;transition:width .3s ease,background .3s ease}
+.pdots i.on{width:14px;background:#61A8FF}
+.pdots-light{background:#F6F7F9;padding:6px 12px;gap:8px;align-self:flex-start}
+.pdots-light i{background:rgba(140,149,166,.5)}
+.pdots-light i.on{width:6px;background:#0673F9}
+.bk-cta{display:flex;align-items:center;justify-content:center;gap:6px;height:48px;padding:10px 60px;border-radius:12px;text-decoration:none;font-size:15px;line-height:26px;font-weight:600;letter-spacing:.1px;white-space:nowrap;box-shadow:var(--btn-shadow);transition:transform .16s ease;-webkit-tap-highlight-color:transparent}
+.bk-cta:active{transform:scale(.98)}
+.bk-cta img{width:20px;height:20px;transition:transform .2s ease}
+.bk-cta:active img{transform:translateX(3px)}
+.bk-cta-white{background:#fff;color:#16191D}
+.bk-cta-dark{background:#0B0C0E;color:#fff}
+/* enter reveals: children rise in once the bucket is seen */
+.bk-rise{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.bk.is-in .bk-rise{opacity:1;transform:none}
+.bk.is-in .bk-rise:nth-child(2){transition-delay:.08s}.bk.is-in .bk-rise:nth-child(3){transition-delay:.16s}.bk.is-in .bk-rise:nth-child(4){transition-delay:.24s}.bk.is-in .bk-rise:nth-child(5){transition-delay:.32s}
+/* the thread: one seam element per boundary, absolutely placed over the two paddings by script; runner + index label */
+.seam{position:absolute;left:16px;width:40px;pointer-events:none;z-index:3}
+.seam-track{position:absolute;left:0;top:0;width:1px;border-left:1px dashed}
+.seam-runner{position:absolute;left:-.5px;top:0;width:2px;height:46px;border-radius:1px;background:var(--brand);box-shadow:0 0 14px 1px rgba(6,115,249,.7);opacity:0}
+.seam-index{position:absolute;left:12px;top:17px;font-size:11px;line-height:12px;font-weight:500;letter-spacing:1px;color:var(--brand);white-space:nowrap;opacity:0}
+.seam.is-live .seam-runner,.seam.is-live .seam-index{opacity:1}
+.bk-bar.is-away{opacity:0}
+@media (prefers-reduced-motion:reduce){.bk-bar.is-dock,.bk.is-in .bk-text{animation:none}.bk-rise{opacity:1;transform:none;transition:none}.seam{display:none}}
+
+/* ---------- open source (282:72461): proof card with the contributor marquee, stories focus carousel, CTA ---------- */
+.oss{--bk-bg:#16191D}
+.oss-proof{border-radius:0 12px 12px 12px;padding:16px 0 20px;gap:20px}
+.oss-prog{display:flex;align-items:center;gap:8px;height:24px;padding:0 16px}
+.oss-sun{width:24px;height:24px;border-radius:6px;object-fit:cover}
+.oss-progname{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px;color:#fff}
+.oss-prog .pill{margin-left:auto}
+.oss-stat{margin:0;padding:0 16px;font-size:19px;line-height:24px;font-weight:600;letter-spacing:.1px;color:#fff}
+.oss-stat b{font-weight:600;color:#61A8FF}
+.oss-strip-wrap{position:relative;overflow:hidden}
+.oss-strip{display:flex;gap:10px;padding-left:16px;will-change:transform;touch-action:pan-y;cursor:grab}
+.oss-strip.is-drag{cursor:grabbing}
+.oss-c{flex:none;width:132px;height:192px;background:#0B0C0E;border:1px solid #23282F;border-radius:8px;overflow:hidden;-webkit-user-select:none;user-select:none}
+.oss-c img{width:130px;height:132px;object-fit:cover;pointer-events:none}
+.oss-c-cap{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px}
+.oss-c-name{font-size:13px;line-height:18px;font-weight:600;letter-spacing:.02px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.oss-c-batch{font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.5)}
+.oss-fade{position:absolute;right:0;top:-3px;width:28px;height:190px;background:linear-gradient(90deg,rgba(11,12,14,0),#0B0C0E);pointer-events:none}
+.oss-stories{border-color:#30363D;padding-bottom:16px;gap:16px}
+/* focus carousel: scroll-snap strip, cards 300 wide; the card in front is full height, the others sit at .6 with a shorter thumb */
+.focus{display:flex;gap:10px;padding:0 16px;scroll-padding-left:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;align-items:center;-webkit-overflow-scrolling:touch}
+.focus::-webkit-scrollbar{display:none}
+.focus-card{flex:none;width:300px;scroll-snap-align:start;background:#0B0C0E;border:1px solid #23282F;border-radius:12px;overflow:hidden;opacity:.6;transition:opacity .35s ease}
+.focus-card.is-front{opacity:1}
+.focus-thumb{position:relative;height:169px;overflow:hidden;transition:height .35s cubic-bezier(.22,1,.36,1)}
+.focus-card.is-front .focus-thumb{height:188px}
+.focus-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.focus-thumb::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,.18)}
+.focus-play{position:absolute;left:50%;top:50%;width:60px;height:60px;margin:-30px 0 0 -30px;border:0;padding:0;border-radius:50%;background:rgba(11,12,14,.2);-webkit-backdrop-filter:blur(8.57px);backdrop-filter:blur(8.57px);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:1;transition:transform .16s ease}
+.focus-play:active{transform:scale(.94)}
+.focus-play img{width:37.14px;height:37.14px}
+.focus-cap{background:#16191D;padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px}
+.focus-title{font-size:14px;line-height:20px;font-weight:600;letter-spacing:.02px;color:#fff}
+.focus-who{font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:#fff}
+.focus-wrap{position:relative}
+.focus-fade{position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(90deg,rgba(22,25,29,0),#16191D);pointer-events:none}
+.oss .focus-fade{background:linear-gradient(90deg,rgba(11,12,14,0),#0B0C0E)}
+@media (prefers-reduced-motion:reduce){.focus-card,.focus-thumb{transition:none}}
+
+/* ---------- competitive coding (282:80431): light. ICPC card with the rank count, two rank cards, the standings ladder,
+   the blue lead story with the mirrored team, two small stories, dark CTA ---------- */
+.cc-proof{border-radius:0 12px 12px 12px;padding-bottom:20px;gap:12px}
+.cc-band{display:flex;flex-direction:column;align-items:center;gap:11px;padding:10px 16px 14px;background:#F6F7F9}
+.cc-band img{width:49.5px;height:22px;object-fit:contain}
+.cc-band span{font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#16191D}
+.cc-num{padding:0 16px;display:flex;flex-direction:column;gap:16px}
+.cc-big{font-size:52px;line-height:64px;font-weight:600;color:#0673F9;font-variant-numeric:tabular-nums}
+.cc-rank{margin:0;font-size:16px;line-height:26px;font-weight:600;letter-spacing:.1px;color:#0673F9}
+.cc-desc{margin:4px 0 0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#16191D}
+.cc-cards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:-16px;padding-right:16px}
+.cc-cards::-webkit-scrollbar{display:none}
+.cc-rc{position:relative;flex:none;width:300px;height:82.7px;border-radius:12px;overflow:hidden;scroll-snap-align:start;padding:16.7px 16.7px 13.3px;color:#fff;display:flex;flex-direction:column;gap:6.7px;background:linear-gradient(100deg,#C3491E,#D86A43)}
+.cc-rc-purple{background:linear-gradient(100deg,#630E82,#B42FE5)}
+.cc-rc img{position:absolute;left:106px;top:-44.2px;width:259.3px;height:171px;pointer-events:none}
+.cc-rc b{position:relative;font-size:20px;line-height:24px;font-weight:600;letter-spacing:.1px}
+.cc-rc span{position:relative;font-size:14px;line-height:22px;font-weight:600;white-space:pre}
+.cc-ladder{border-color:#E1E5EA;padding-bottom:16px;gap:8px}
+.cc-lhead{display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px 16px 14px;background:#F6F7F9}
+.cc-lhead .bk-kicker{color:#16191D}
+.rail{position:relative;display:flex;flex-direction:column}
+.rail-line{position:absolute;left:59.5px;top:49px;width:0;height:231px;border-left:1px dashed rgba(22,25,29,.2);transform-origin:top;pointer-events:none}
+.rail-cols{display:flex;align-items:center;gap:10px;padding:0 16px 8px;border-bottom:1px solid #E1E5EA;margin-bottom:4px}
+.rail-cols span{font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:#16191D}
+.rail-row{position:relative;display:flex;align-items:center;gap:10px;padding:9px 16px;height:40px}
+.rail-row.is-nst{height:59px;padding:10px 16px;color:#fff;background:linear-gradient(100deg,#137244,#099650);background-size:200% 100%;background-position:100% 0;margin:6px 0}
+.rail-rank{flex:none;width:24px;text-align:right;font-size:13px;line-height:18px;font-weight:600}
+.rail-dot{flex:none;width:20px;height:20px;display:flex;align-items:center;justify-content:center}
+.rail-dot i{width:8px;height:8px;border-radius:50%;background:#F6F7F9;box-shadow:inset 0 0 0 1.5px rgba(22,25,29,.5)}
+.is-nst .rail-dot i{width:12px;height:12px;background:#fff;box-shadow:none}
+.rail-name{flex:1 1 0;min-width:0;font-size:15px;line-height:22px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.is-nst .rail-name{font-weight:600;white-space:normal}
+.rail-name small{display:block;font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;margin-top:1px;white-space:nowrap}
+.rail-cat{flex:none;width:52px;text-align:center;font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px}
+.is-nst .rail-cat{font-weight:700}
+.rail-score{flex:none;width:44px;text-align:right;font-size:13px;line-height:18px;font-weight:600}
+.rail-cols .rail-rank{width:54px;text-align:left;font-weight:500}.rail-cols .rail-name{font-size:11px;line-height:16px}.rail-cols .rail-cat{text-align:left}.rail-cols .rail-score{font-weight:500}
+/* ladder motion: rows arrive one by one as the rail draws; the NST row lands last with a sweep across its gradient */
+.cc.is-in .rail-line{animation:railDraw 1.1s .15s cubic-bezier(.22,1,.36,1) both}
+@keyframes railDraw{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+.rail-row{opacity:0;transform:translateX(-6px)}
+.cc.is-in .rail-row{animation:railRow .45s cubic-bezier(.22,1,.36,1) both}
+.cc.is-in .rail-row:nth-of-type(1){animation-delay:.2s}.cc.is-in .rail-row:nth-of-type(2){animation-delay:.32s}.cc.is-in .rail-row:nth-of-type(3){animation-delay:.44s}.cc.is-in .rail-row:nth-of-type(4){animation-delay:.9s}.cc.is-in .rail-row:nth-of-type(5){animation-delay:.62s}.cc.is-in .rail-row:nth-of-type(6){animation-delay:.74s}
+@keyframes railRow{from{opacity:0;transform:translateX(-6px)}to{opacity:1;transform:none}}
+.cc.is-in .rail-row.is-nst{animation:railRow .45s .9s cubic-bezier(.22,1,.36,1) both,railSweep 1.2s 1.1s ease both}
+@keyframes railSweep{from{background-position:100% 0}to{background-position:0 0}}
+.cc-lead{border-radius:12px;overflow:hidden;background:#073962}
+.cc-lead-top{padding:16px 16px 12px;background:linear-gradient(180deg,#073962,#2A7ABD);display:flex;flex-direction:column;gap:16px}
+.cc-lead-ico{width:32px;height:32px;border-radius:9.6px;background:#fff;display:flex;align-items:center;justify-content:center}
+.cc-lead-ico img{width:19.2px;height:19.2px}
+.cc-lead-title{margin:0;font-size:20px;line-height:24px;font-weight:600;letter-spacing:.1px;color:#fff}
+.cc-lead-sub{margin:8px 0 0;width:274.4px;max-width:100%;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;color:#fff}
+.cc-lead-photo{position:relative;height:197px;background:linear-gradient(180deg,#2A7ABD,#499DE2)}
+.cc-lead-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.watch{position:absolute;left:16px;bottom:16px;display:inline-flex;align-items:center;gap:8px;height:38px;padding:9px 16px 9px 12px;border:0;border-radius:100px;background:#fff;font-family:var(--font);font-size:13px;line-height:18px;font-weight:600;color:#16191D;cursor:pointer;transition:transform .16s ease}
+.watch:active{transform:scale(.96)}
+.watch i{width:20px;height:20px;border-radius:50%;background:#16191D;position:relative;flex:none}
+.watch i::after{content:"";position:absolute;left:7px;top:6px;border-style:solid;border-width:4px 0 4px 7px;border-color:transparent transparent transparent #fff}
+.cc-two{display:flex;gap:12px}
+.cc-sc{flex:1 1 0;min-width:0;background:#fff;border:1px solid #E1E5EA;border-radius:12px;overflow:hidden;text-decoration:none;color:#16191D;display:flex;flex-direction:column}
+.cc-sc-img{position:relative;height:135px;overflow:hidden}
+.cc-sc-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cc-badge{position:absolute;left:10px;top:93px;display:inline-flex;align-items:center;gap:6.7px;height:32px;padding:7.6px 13.5px 7.6px 10.1px;border-radius:84px;background:#fff;font-size:10.95px;line-height:15.16px;font-weight:600;color:#16191D}
+.cc-badge img{width:16.8px;height:16.8px;border-radius:50%}
+.cc-badge-play{padding:7.6px 10.1px}
+.cc-badge-play i{width:16.8px;height:16.8px;border-radius:50%;background:#16191D;position:relative}
+.cc-badge-play i::after{content:"";position:absolute;left:6px;top:5px;border-style:solid;border-width:3.35px 0 3.35px 5.9px;border-color:transparent transparent transparent #fff}
+.cc-sc-cap{padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px}
+.cc-sc-title{font-size:13px;line-height:18px;font-weight:600}
+.cc-sc-sub{font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;opacity:.5}
+@media (prefers-reduced-motion:reduce){.cc.is-in .rail-line,.cc.is-in .rail-row,.cc.is-in .rail-row.is-nst{animation:none}.rail-row{opacity:1;transform:none}.rail-row.is-nst{background-position:0 0}}
+
+/* ---------- entrepreneurship (328:1959): dark. Statement, Start-X row, the fund pipeline, three startup rows with phones ---------- */
+.ent-stat{margin:0;font-size:19px;line-height:24px;font-weight:600;letter-spacing:.1px;color:#fff}
+.ent-stat b{font-weight:600;color:#61A8FF}
+.ent-top{display:flex;flex-direction:column;gap:16px}
+.ent-hr{height:1px;background:#30363D}
+.ent-row{display:flex;align-items:center;gap:12px;padding:0 1px}
+.ent-row img{width:66px;height:22px;object-fit:contain}
+.pipe{display:flex;flex-direction:column;gap:8px;padding-top:14px}
+.pipe-track{position:relative;height:12px}
+.pipe-line{position:absolute;left:46px;top:5.5px;width:278px;height:1px;background:#30363D}
+.pipe-prog{position:absolute;left:8.1px;top:5.5px;width:353.9px;height:1px;background:#61A8FF;transform-origin:left;transform:scaleX(0)}
+.pipe-stop{position:absolute;top:2px;width:8px;height:8px;border-radius:50%;background:#16191D;box-shadow:inset 0 0 0 1.5px #61A8FF;transition:background .3s ease}
+.pipe-stop.is-lit{background:#61A8FF}
+.pipe-stop.is-grant{top:0;width:12px;height:12px;background:#16191D;transform:scale(.67);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s ease}
+.pipe-stop.is-grant.is-lit{background:#61A8FF;transform:none}
+.pipe-dot{position:absolute;top:2px;left:0;width:8px;height:8px;border-radius:50%;background:#61A8FF;box-shadow:0 0 10px rgba(97,168,255,.8);opacity:0}
+.pipe-labels{display:flex}
+.pipe-labels div{flex:1 1 0;display:flex;flex-direction:column;gap:2px;align-items:center;text-align:center}
+.pipe-labels div:first-child{align-items:flex-start;text-align:left}
+.pipe-labels b{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.5px;color:#fff}
+.pipe-labels span{font-size:11px;line-height:14px;font-weight:500;letter-spacing:.1px;color:#fff}
+.ent-list{border-color:#30363D;padding-bottom:16px;gap:16px}
+.ent-rows{padding:0 12px;display:flex;flex-direction:column}
+.ent-r{position:relative;display:flex;gap:12px;height:132px;overflow:hidden;text-decoration:none;color:#fff}
+.ent-r + .ent-r{border-top:1px solid #23282F}
+.ent-r-text{flex:1 1 0;min-width:0;padding:18px 0;display:flex;flex-direction:column;gap:6px}
+.ent-r-text img{height:22px;width:auto;align-self:flex-start}
+.ent-r-h{font-size:16px;line-height:22px;font-weight:600}
+.ent-r-s{font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px}
+.ent-r-arrow{position:absolute;left:194px;top:19px;width:20px;height:20px}
+.ent-phone{position:relative;flex:none;width:118px;height:132px;overflow:hidden}
+.ent-glow{position:absolute;left:-51px;top:-30px;width:220px;height:170px;border-radius:50%;background:radial-gradient(closest-side,var(--tint-a),var(--tint-b) 60%,var(--tint-c))}
+.ent-phone img{position:absolute;left:11px;top:22px;width:96px;height:132px;border-radius:12px 12px 0 0;object-fit:cover;object-position:top;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.ent-r.is-near .ent-phone img{transform:translateY(-6px)}
+@media (prefers-reduced-motion:reduce){.pipe-stop.is-grant{transition:none}.ent-phone img{transition:none}}
+
+/* ---------- global exposure (328:4384): light. Dot-matrix map with arcs from Delhi, country chips, the trip's line and
+   description, a fanned photo stack you swipe through, dark CTA. Chips, map and stack stay in sync ---------- */
+.glob-map{position:relative;width:100%;height:157px;overflow:hidden}
+.glob-map canvas,.glob-map svg{position:absolute;left:0;top:0;width:370px;height:157px}
+.glob-arc{fill:none;stroke:#0673F9;stroke-width:1;stroke-opacity:.3;stroke-linecap:round;transition:stroke-opacity .4s ease,stroke-width .4s ease}
+.glob-arc.is-on{stroke-width:1.5;stroke-opacity:1}
+.glob-pin{fill:#fff;stroke:#0673F9;stroke-width:1.2;transition:r .3s ease,fill .3s ease}
+.glob-pin.is-on{fill:#0673F9;stroke:none}
+.glob-ring{fill:#0673F9;fill-opacity:.18;opacity:0;transition:opacity .3s ease}
+.glob-ring.is-on{opacity:1}
+.glob-body{display:flex;flex-direction:column;gap:16px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:0 16px;scroll-padding-left:16px;scroll-snap-type:x proximity}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;display:inline-flex;align-items:center;gap:7px;height:32px;padding:7px 12px 7px 9px;border:1px solid #E1E5EA;border-radius:100px;background:#fff;font-family:var(--font);font-size:12px;line-height:16px;font-weight:600;color:#16191D;cursor:pointer;scroll-snap-align:start;transition:background .25s ease,color .25s ease,border-radius .25s ease;-webkit-tap-highlight-color:transparent}
+.chip img{width:18px;height:13px;border-radius:2px;object-fit:cover}
+.chip.is-on{background:#16191D;border-color:#16191D;color:#fff;border-radius:10px 100px 100px 10px}
+.glob-text{display:flex;flex-direction:column;gap:4px;min-height:144px}
+.glob-title{margin:0;font-size:16px;line-height:26px;font-weight:600;letter-spacing:.1px;color:#16191D}
+.glob-desc{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#5B6271}
+.glob-text.is-swap .glob-title,.glob-text.is-swap .glob-desc{opacity:0;transform:translateY(4px)}
+.glob-title,.glob-desc{transition:opacity .22s ease,transform .22s ease}
+.stack{position:relative;height:364px;touch-action:pan-y}
+.stack-card.is-back{width:288px;height:327.6px;margin:-163.8px 0 0 -144px}
+.stack-card{position:absolute;left:50%;top:50%;width:320px;height:364px;margin:-182px 0 0 -160px;border-radius:12px;border:1px solid #E1E5EA;background:#fff;overflow:hidden;will-change:transform;transform:translate(0,0) rotate(0deg);-webkit-user-select:none;user-select:none}
+.stack-card img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.stack-card.is-anim{transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s ease}
+.stack-hint{display:none;position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:#8C95A6;white-space:nowrap}
+
+/* ---------- research (328:9279): dark. Three white "first pages" in a snap carousel, each with a stamp and a folded corner ---------- */
+.res-wrap{position:relative;margin:0 -16px}
+.papers{display:flex;gap:16px;padding:0 16px 30px;scroll-padding-left:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.papers::-webkit-scrollbar{display:none}
+.paper{position:relative;flex:none;width:318px;scroll-snap-align:start;background:#fff;border-radius:10px;padding:40px 16px 16px;display:flex;flex-direction:column;gap:12px;color:#16191D;box-shadow:0 10px 28px rgba(0,0,0,.5);overflow:hidden}
+.paper-venue{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.55)}
+.paper-title{margin:0;font-size:20px;line-height:26px;font-weight:600;letter-spacing:-.2px}
+.paper-auth{display:flex;align-items:center;gap:8px}
+.paper-auth img{width:24px;height:24px;border-radius:50%;object-fit:cover;flex:none}
+.paper-auth div{display:flex;flex-direction:column;min-width:0}
+.paper-name{font-size:12px;line-height:18px;font-weight:600}
+.paper-aff{font-size:11px;line-height:16px;font-weight:500;color:rgba(22,25,29,.55);white-space:nowrap;overflow:hidden}
+.paper-rule{height:1px;background:rgba(22,25,29,.12)}
+.paper-lab{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+.paper-abs{margin:0;font-size:13px;line-height:20px;font-weight:500;color:rgba(22,25,29,.78)}
+.paper-foot{display:flex;align-items:center;justify-content:space-between;padding-top:6px}
+.paper-src{font-size:12px;line-height:18px;font-weight:600;color:#0673F9;text-decoration:none}
+.paper-n{font-size:11px;line-height:12px;font-weight:500;letter-spacing:1px;color:rgba(22,25,29,.45)}
+.paper-corner{position:absolute;right:0;top:0;width:26px;height:26px;background:linear-gradient(225deg,#16191D 50%,rgba(22,25,29,.12) 50%)}
+.stamp{position:absolute;left:215px;top:17px;padding:4px 8px;border:1.5px solid #0673F9;border-radius:4px;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#0673F9;opacity:.9;transform:rotate(-6deg);white-space:nowrap}
+.stamp-review{border-style:dashed}
+.paper{opacity:0;transform:translateY(20px)}
+.res.is-in .paper{animation:paperIn .55s cubic-bezier(.22,1,.36,1) both}
+.res.is-in .paper:nth-child(2){animation-delay:.12s}.res.is-in .paper:nth-child(3){animation-delay:.24s}
+@keyframes paperIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.res.is-in .paper:first-child .stamp{animation:stampIn .32s .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes stampIn{from{opacity:0;transform:rotate(-6deg) scale(1.35)}to{opacity:.9;transform:rotate(-6deg) scale(1)}}
+.res-foot{display:flex;align-items:center;justify-content:space-between;margin-top:-30px}
+.res-foot .pdots{background:#0B0C0E;border:1px solid #30363D;padding:6px 10px}
+.res-hint{display:flex;align-items:center;gap:6px;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;color:#B2B9C7;opacity:.5}
+.res-hint img{width:11.4px;height:16px}
+@media (prefers-reduced-motion:reduce){.paper{opacity:1;transform:none}.res.is-in .paper,.res.is-in .paper:first-child .stamp{animation:none}}
 
 </style>
 </head>
@@ -653,15 +899,223 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     </div>
   </section>
 
-  <section class="oss" id="oss" data-node="267:51819" aria-label="Open source culture at NST">
-    <div class="oss-head">
-      <span class="oss-bar" aria-hidden="true"></span>
-      <div class="oss-text">
-        <h2 class="oss-title">Open Source <span>culture at NST.</span></h2>
-        <p class="oss-sub">From multiple IIMs across India</p>
+  <!-- ===== bucket 01 · open source (282:72461) ===== -->
+  <section class="bk bk-dark oss" id="oss" data-node="282:72461" data-index="01" aria-label="Open source culture at NST">
+    <header class="bk-head">
+      <span class="bk-bar" aria-hidden="true"></span>
+      <div class="bk-text">
+        <h2 class="bk-title">Open Source <span>culture at NST.</span></h2>
+        <p class="bk-sub">12 GSoC contributors across three batches</p>
+      </div>
+    </header>
+    <div class="bk-card oss-proof bk-rise" data-node="282:75097">
+      <div class="oss-prog">
+        <img class="oss-sun" src="assets/oss/gsoc-sun.png" alt="">
+        <span class="oss-progname">Google Summer of Code</span>
+        <span class="pill">2023 → 2025</span>
+      </div>
+      <p class="oss-stat"><b class="count" data-to="12">12</b> students got into GSoC, each on a stipend of over <b>₹2.5 lakh</b>.</p>
+      <div class="bk-band">
+        <span class="bk-kicker">The 12 contributors</span>
+        <span class="pdots" id="ossDots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="oss-strip-wrap">
+        <div class="oss-strip" id="ossStrip" aria-label="The twelve contributors">
+          <div class="oss-c"><img src="assets/oss/c-01.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Agnik Mishra</span><span class="oss-c-batch">Batch of 2024</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-02.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Kartik Yadav</span><span class="oss-c-batch">Batch of 2023</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-03.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Tarunya Kesharwani</span><span class="oss-c-batch">Batch of 2025</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-04.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Kartikey Gupta</span><span class="oss-c-batch">Batch of 2024</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-05.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Geetansh Goyal</span><span class="oss-c-batch">Batch of 2025</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-06.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Manshu Saini</span><span class="oss-c-batch">Batch of 2023</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-07.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Krishna</span><span class="oss-c-batch">Batch of 2025</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-08.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Birajit</span><span class="oss-c-batch">Batch of 2025</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-09.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Yakshit</span><span class="oss-c-batch">Batch of 2025</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-10.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Aashu</span><span class="oss-c-batch">Batch of 2025</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-11.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Mehek</span><span class="oss-c-batch">Batch of 2023</span></div></div>
+          <div class="oss-c"><img src="assets/oss/c-12.jpg" alt=""><div class="oss-c-cap"><span class="oss-c-name">Tushar Verma</span><span class="oss-c-batch">Batch of 2024</span></div></div>
+        </div>
+        <span class="oss-fade" aria-hidden="true"></span>
       </div>
     </div>
-    <div class="oss-card" data-node="267:53944"><svg class="oss-ring" aria-hidden="true"><rect/></svg></div>
+    <div class="bk-card oss-stories bk-rise" data-node="282:75015">
+      <div class="bk-band">
+        <span class="bk-kicker">In their words</span>
+        <span class="pdots" id="ossStoryDots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+      </div>
+      <div class="focus-wrap">
+        <div class="focus" id="ossFocus" aria-label="Four stories">
+          <article class="focus-card is-front" data-reel="0"><div class="focus-thumb"><img src="assets/oss/thumb-1.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: Coding for Google in 1st year"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">Coding for Google in 1st year</span><span class="focus-who">Agnik · Batch of 2024</span></div></article>
+          <article class="focus-card" data-reel="1"><div class="focus-thumb"><img src="assets/oss/thumb-2.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: ₹1.25 lakh GSoC internship"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">₹1.25 lakh GSoC internship</span><span class="focus-who">Kartik · Batch of 2023</span></div></article>
+          <article class="focus-card" data-reel="2"><div class="focus-thumb"><img src="assets/oss/thumb-3.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: My GSoC coding secret"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">My GSoC coding secret</span><span class="focus-who">Tarunya · Batch of 2025</span></div></article>
+          <article class="focus-card" data-reel="3"><div class="focus-thumb"><img src="assets/oss/thumb-4.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: Medical aspirant turned GSoC contributor"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">Medical aspirant turned GSoC contributor</span><span class="focus-who">Manshu · Batch of 2023</span></div></article>
+        </div>
+        <span class="focus-fade" aria-hidden="true"></span>
+      </div>
+    </div>
+    <a class="bk-cta bk-cta-white bk-rise" href="#">See all 12 contributions <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
+  </section>
+
+  <!-- ===== bucket 02 · competitive coding (282:80431) ===== -->
+  <section class="bk bk-light cc" id="cc" data-node="282:80431" data-index="02" aria-label="Competitive coding at NST">
+    <header class="bk-head">
+      <span class="bk-bar" aria-hidden="true"></span>
+      <div class="bk-text">
+        <h2 class="bk-title">Competitive Coding <span>at NST.</span></h2>
+        <p class="bk-sub">Where first-years stand with <b>IITs and NITs</b></p>
+      </div>
+    </header>
+    <div class="bk-card cc-proof bk-rise" data-node="282:82558">
+      <div class="cc-band"><img src="assets/cc/icpc-icons.png" alt=""><span>ICPC, the Olympics of coding</span></div>
+      <div class="cc-num">
+        <div>
+          <div class="cc-big"><span class="count" data-to="31" data-prefix="#">#31</span></div>
+          <p class="cc-rank">Asia West Rank, 2025.</p>
+          <p class="cc-desc">Up 150 places from #172 the year before, and above every NIT on the board.</p>
+        </div>
+        <div class="cc-cards" id="ccCards">
+          <div class="cc-rc"><img src="assets/cc/worldmap.png" alt=""><b># 22 Rank</b><span>India Regionals  ·  2025</span></div>
+          <div class="cc-rc cc-rc-purple"><img src="assets/cc/worldmap.png" alt=""><b># 31 Rank</b><span>Asia West Rank  ·  2025</span></div>
+        </div>
+        <span class="pdots pdots-light" id="ccDots" aria-hidden="true"><i class="on"></i><i></i></span>
+      </div>
+    </div>
+    <div class="bk-card cc-ladder bk-rise" data-node="282:82639">
+      <div class="cc-lhead"><span class="pill pill-light"><i></i>Latest</span><span class="bk-kicker">ICPC Chennai onsite · 2025</span></div>
+      <div class="rail" data-node="282:82647">
+        <span class="rail-line" aria-hidden="true"></span>
+        <div class="rail-cols"><span class="rail-rank">Rank</span><span class="rail-name">Institute</span><span class="rail-cat">Category</span><span class="rail-score">Score</span></div>
+        <div class="rail-row"><span class="rail-rank">1</span><span class="rail-dot"><i></i></span><span class="rail-name">IIT Delhi</span><span class="rail-cat">IIT</span><span class="rail-score">1000</span></div>
+        <div class="rail-row"><span class="rail-rank">2</span><span class="rail-dot"><i></i></span><span class="rail-name">IIT Roorkee</span><span class="rail-cat">IIT</span><span class="rail-score">900</span></div>
+        <div class="rail-row"><span class="rail-rank">7</span><span class="rail-dot"><i></i></span><span class="rail-name">IISc Bangalore</span><span class="rail-cat">IISc</span><span class="rail-score">700</span></div>
+        <div class="rail-row is-nst"><span class="rail-rank">22</span><span class="rail-dot"><i></i></span><span class="rail-name">Rishihood University<small>Above every NIT on the board</small></span><span class="rail-cat">NST</span><span class="rail-score">600</span></div>
+        <div class="rail-row"><span class="rail-rank">27</span><span class="rail-dot"><i></i></span><span class="rail-name">NIT Tiruchirappalli</span><span class="rail-cat">NIT</span><span class="rail-score">600</span></div>
+        <div class="rail-row"><span class="rail-rank">30</span><span class="rail-dot"><i></i></span><span class="rail-name">BITS Pilani, Goa</span><span class="rail-cat">BITS</span><span class="rail-score">500</span></div>
+      </div>
+    </div>
+    <div class="bk-rise" data-node="282:82999" style="display:flex;flex-direction:column;gap:12px">
+      <article class="cc-lead" data-node="328:1888">
+        <div class="cc-lead-top">
+          <span class="cc-lead-ico"><img src="assets/cc/py-mark.svg" alt=""></span>
+          <div><h3 class="cc-lead-title">First-years beat senior IIT-ians at ICPC regionals</h3><p class="cc-lead-sub">Ahead of 3rd and 4th-year IIT teams, in their first year at NST</p></div>
+        </div>
+        <div class="cc-lead-photo"><img src="assets/cc/lead-photo.jpg" alt="Three first-year NST students in ICPC Asia West polos"><button class="watch" type="button" data-reel="0"><i></i>Watch Video</button></div>
+      </article>
+      <div class="cc-two">
+        <a class="cc-sc" href="#"><div class="cc-sc-img"><img src="assets/cc/prometeo.jpg" alt=""><span class="cc-badge"><img src="assets/cc/jodhpur.png" alt="">IIT Jodhpur</span></div><div class="cc-sc-cap"><span class="cc-sc-title">Winners at IIT Jodhpur Tech Fest</span><span class="cc-sc-sub">Prometeo 2026</span></div></a>
+        <a class="cc-sc" href="#" data-reel="0"><div class="cc-sc-img"><img src="assets/cc/gold.jpg" alt=""><span class="cc-badge cc-badge-play"><i></i></span></div><div class="cc-sc-cap"><span class="cc-sc-title">Go for Gold</span><span class="cc-sc-sub">NST × ICPC film</span></div></a>
+      </div>
+    </div>
+    <a class="bk-cta bk-cta-dark bk-rise" href="#">See all contest results <img src="assets/icon-arrow-right-white.svg" alt=""></a>
+  </section>
+
+  <!-- ===== bucket 03 · entrepreneurship (328:1959) ===== -->
+  <section class="bk bk-dark ent" id="ent" data-node="328:1959" data-index="03" aria-label="Entrepreneurship culture at NST">
+    <header class="bk-head">
+      <span class="bk-bar" aria-hidden="true"></span>
+      <div class="bk-text">
+        <h2 class="bk-title">Entrepreneurship <span>culture at NST.</span></h2>
+        <p class="bk-sub">Student startups, funded from campus</p>
+      </div>
+    </header>
+    <div class="ent-top bk-rise" data-node="328:4382">
+      <p class="ent-stat">Up to <b>₹1 Cr</b> in funding for student startups, with <b>1,000+ experts</b> as mentors.</p>
+      <span class="ent-hr" aria-hidden="true"></span>
+      <div class="ent-row"><img src="assets/ent/startx.png" alt="Newton StartX"><span class="pill">NST Startup fund</span></div>
+    </div>
+    <div class="pipe bk-rise" id="pipe" data-node="328:4329" aria-label="Start-X fund pipeline">
+      <div class="pipe-track">
+        <span class="pipe-line"></span><span class="pipe-prog" id="pipeProg"></span>
+        <span class="pipe-stop" style="left:0"></span><span class="pipe-stop" style="left:135px"></span><span class="pipe-stop" style="left:227px"></span><span class="pipe-stop is-grant" style="left:358px"></span>
+        <span class="pipe-dot" id="pipeDot"></span>
+      </div>
+      <div class="pipe-labels"><div><b>01</b><span>Ideation</span></div><div><b>02</b><span>Prototype</span></div><div><b>03</b><span>MVP</span></div><div><b>₹10 L</b><span>Pre-seed grant</span></div></div>
+    </div>
+    <div class="bk-card ent-list bk-rise" data-node="328:4167">
+      <div class="bk-band"><span class="bk-kicker">Launched from campus</span><span class="bk-note">3 startups</span></div>
+      <div class="ent-rows" id="entRows">
+        <a class="ent-r" href="#" style="--tint-a:rgba(245,140,38,.45);--tint-b:rgba(245,140,38,.12);--tint-c:rgba(245,140,38,0)"><div class="ent-r-text"><img src="assets/ent/inc-logo.png" alt="in.culcate"><span class="ent-r-h">Funded by ISB</span><span class="ent-r-s">Built by a 2nd-year NST student</span></div><img class="ent-r-arrow" src="assets/icon-arrow-right-white.svg" alt=""><span class="ent-phone"><span class="ent-glow"></span><img src="assets/ent/inc-phone.png" alt=""></span></a>
+        <a class="ent-r" href="#" style="--tint-a:rgba(201,163,74,.45);--tint-b:rgba(201,163,74,.12);--tint-c:rgba(201,163,74,0)"><div class="ent-r-text"><img src="assets/ent/cc-logo.png" alt="CarbonCraft"><span class="ent-r-h">Profitable · ₹5.5 M earned</span><span class="ent-r-s">Premium laser-engraved metal cards</span></div><img class="ent-r-arrow" src="assets/icon-arrow-right-white.svg" alt=""><span class="ent-phone"><span class="ent-glow"></span><img src="assets/ent/cc-phone.png" alt=""></span></a>
+        <a class="ent-r" href="#" style="--tint-a:rgba(61,214,163,.45);--tint-b:rgba(61,214,163,.12);--tint-c:rgba(61,214,163,0)"><div class="ent-r-text"><img src="assets/ent/kx-logo.png" alt="Kixar"><span class="ent-r-h">₹3 M+ in revenue</span><span class="ent-r-s">Turf booking · Jitesh Sharma as brand ambassador</span></div><img class="ent-r-arrow" src="assets/icon-arrow-right-white.svg" alt=""><span class="ent-phone"><span class="ent-glow"></span><img src="assets/ent/kx-phone.png" alt=""></span></a>
+      </div>
+    </div>
+    <a class="bk-cta bk-cta-white bk-rise" href="#">Apply to StartX <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
+  </section>
+
+  <!-- ===== bucket 04 · global exposure (328:4384) ===== -->
+  <section class="bk bk-light glob" id="glob" data-node="328:4384" data-index="04" aria-label="Global exposure at NST">
+    <header class="bk-head">
+      <span class="bk-bar" aria-hidden="true"></span>
+      <div class="bk-text">
+        <h2 class="bk-title">Global Exposure <span>at NST.</span></h2>
+        <p class="bk-sub">Five countries, from Alibaba to Harvard</p>
+      </div>
+    </header>
+    <div class="glob-map bk-rise" id="globMap" data-node="328:8255" aria-label="Map: trips from Delhi to China, the US, Thailand, Singapore and Germany">
+      <canvas id="globDots" width="1110" height="471" aria-hidden="true"></canvas>
+      <svg id="globArcs" viewBox="0 0 370 157" aria-hidden="true"></svg>
+    </div>
+    <div class="glob-body bk-rise">
+      <div class="chips" id="globChips" role="tablist" aria-label="Country">
+        <button class="chip is-on" type="button" role="tab" aria-selected="true" data-trip="cn"><img src="assets/glob/flag-cn.png" alt="">China</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-trip="us"><img src="assets/glob/flag-us.png" alt="">USA</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-trip="th"><img src="assets/glob/flag-th.png" alt="">Thailand</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-trip="sg"><img src="assets/glob/flag-sg.png" alt="">Singapore</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-trip="de"><img src="assets/glob/flag-de.png" alt="">Germany</button>
+      </div>
+      <div class="glob-text" id="globText"><h3 class="glob-title" id="globTitle">Exploring AGI in the world's most advanced tech ecosystem</h3><p class="glob-desc" id="globDesc">Alibaba AI Labs, a robotics floor and the Great Wall: a week inside the world's most advanced tech ecosystem, seeing AI systems at scale.</p></div>
+    </div>
+    <div class="stack bk-rise" id="globStack" aria-label="Photos from the trip"></div>
+    <a class="bk-cta bk-cta-dark bk-rise" href="#">See all trips <img src="assets/icon-arrow-right-white.svg" alt=""></a>
+  </section>
+
+  <!-- ===== bucket 05 · research (328:9279) ===== -->
+  <section class="bk bk-dark res" id="res" data-node="328:9279" data-index="05" aria-label="Research at NST">
+    <header class="bk-head">
+      <span class="bk-bar" aria-hidden="true"></span>
+      <div class="bk-text">
+        <h2 class="bk-title">Research<span> at NST.</span></h2>
+        <p class="bk-sub">Three papers, straight off the desk</p>
+      </div>
+    </header>
+    <div class="res-wrap">
+      <div class="papers" id="papers" aria-label="Three papers">
+        <article class="paper" data-node="328:11527">
+          <span class="paper-venue">ICML 2026 · AI for Science</span>
+          <h3 class="paper-title">Research paper accepted at ICML 2026</h3>
+          <div class="paper-auth"><img src="assets/res/ronit.png" alt=""><div><span class="paper-name">Ronit Choudhary</span><span class="paper-aff">Newton School of Technology · Machine Learning</span></div></div>
+          <span class="paper-rule"></span>
+          <span class="paper-lab">Abstract</span>
+          <p class="paper-abs">Accepted at one of the most selective machine-learning conferences in the world, placing undergraduate work alongside leading academic and industry research labs.</p>
+          <div class="paper-foot"><a class="paper-src" href="https://timesofindia.indiatimes.com/education/news/ronit-choudhary-who-is-a-21-year-old-nst-student-publishes-ai-for-science-paper-accepted-at-icml-2026-workshop/articleshow/131656583.cms" target="_blank" rel="noopener">Featured by Times of India →</a><span class="paper-n">1 / 3</span></div>
+          <span class="paper-corner" aria-hidden="true"></span><span class="stamp">Accepted</span>
+        </article>
+        <article class="paper">
+          <span class="paper-venue">Happy City Index · UK Parliament</span>
+          <h3 class="paper-title">Happy City Index — Researcher &amp; Validator</h3>
+          <div class="paper-auth"><img src="assets/res/shibaditya.png" alt=""><div><span class="paper-name">Shibaditya Deb</span><span class="paper-aff">Newton School of Technology · Data Engineering</span></div></div>
+          <span class="paper-rule"></span>
+          <span class="paper-lab">Abstract</span>
+          <p class="paper-abs">Joined a global urban-wellbeing study of 251 cities through a cold LinkedIn message, engineered Delhi's data from messy public portals, and was promoted to validator.</p>
+          <div class="paper-foot"><a class="paper-src" href="https://medium.com/@aydinender/happy-city-index-2026-a45d8bbb8ee4" target="_blank" rel="noopener">Announced at UK Parliament →</a><span class="paper-n">2 / 3</span></div>
+          <span class="paper-corner" aria-hidden="true"></span><span class="stamp">Published</span>
+        </article>
+        <article class="paper">
+          <span class="paper-venue">IEEE · Nexus of Digitalization</span>
+          <h3 class="paper-title">Heartline — a gesture-based IoT interface</h3>
+          <div class="paper-auth"><img src="assets/res/yogesh.png" alt=""><div><span class="paper-name">Yogesh Bawane · Hemant Yadav</span><span class="paper-aff">Newton School of Technology · IRIS Robotics Club</span></div></div>
+          <span class="paper-rule"></span>
+          <span class="paper-lab">Abstract</span>
+          <p class="paper-abs">An open-source, multi-modal emotional communication system on ESP32 + MQTT: 142 ms average latency over 50 test cycles, the first IEEE paper from IRIS Robotics Club.</p>
+          <div class="paper-foot"><a class="paper-src" href="#">IRIS Robotics Club →</a><span class="paper-n">3 / 3</span></div>
+          <span class="paper-corner" aria-hidden="true"></span><span class="stamp stamp-review">In review</span>
+        </article>
+      </div>
+    </div>
+    <div class="res-foot">
+      <span class="pdots" id="resDots" aria-hidden="true"><i class="on"></i><i></i><i></i></span>
+      <span class="res-hint"><img src="assets/res/icon-swipe.svg" alt="">Swipe to see papers</span>
+    </div>
+    <a class="bk-cta bk-cta-white bk-rise" href="#">Read the papers <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
   </section>
 
 
@@ -1219,6 +1673,244 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   window.addEventListener('resize', function(){ if (voOpen){ voMeasure(); voCards.forEach(function(c){ voTransition(c, 0); }); voApply(0); } });
   document.addEventListener('keydown', function(e){ if (!voOpen) return; if (e.key === 'Escape') closeVideo(); else if (e.key === 'ArrowRight') voGo(1); else if (e.key === 'ArrowLeft') voGo(-1); });
   document.getElementById('playBtn').addEventListener('click', openVideo);
+
+  /* ==================== achievement buckets ==================== */
+  var buckets = Array.prototype.slice.call(document.querySelectorAll('.bk'));
+  var seen = {};
+  function easeOutCubic(t){ return 1 - Math.pow(1 - t, 3); }
+  /* count-ups: every .count inside a bucket runs once, 0 → data-to over 1.1 s */
+  function runCounts(sec){
+    Array.prototype.forEach.call(sec.querySelectorAll('.count'), function(el){
+      var to = +el.getAttribute('data-to'), pre = el.getAttribute('data-prefix') || '';
+      if (reduce){ el.textContent = pre + to; return; }
+      var t0 = performance.now();
+      (function tick(now){ var p = Math.min(1, (now - t0) / 1100); el.textContent = pre + Math.round(to * easeOutCubic(p)); if (p < 1) requestAnimationFrame(tick); })(t0);
+    });
+  }
+  var bucketIO = new IntersectionObserver(function(en){
+    en.forEach(function(e){
+      if (!e.isIntersecting || seen[e.target.id]) return;
+      seen[e.target.id] = true; e.target.classList.add('is-in'); runCounts(e.target);
+      if (e.target.id === 'oss') e.target.querySelector('.bk-bar').classList.add('is-dock');
+      var fn = bucketEnter[e.target.id]; if (fn) fn();
+    });
+  }, {threshold: .12});
+  var bucketEnter = {};
+  buckets.forEach(function(b){ bucketIO.observe(b); });
+
+  /* dots for a scroll-snap strip: the card whose left edge is nearest the strip's padding edge is "front" */
+  function snapDots(strip, cardSel, dotsEl, onFront){
+    var cards = Array.prototype.slice.call(strip.querySelectorAll(cardSel)), dots = dotsEl ? Array.prototype.slice.call(dotsEl.children) : [], cur = -1, raf = 0;
+    function pick(){
+      raf = 0; var left = strip.scrollLeft, best = 0, bd = 1e9;
+      cards.forEach(function(c, i){ var d = Math.abs(c.offsetLeft - strip.offsetLeft - left - parseFloat(getComputedStyle(strip).paddingLeft)); if (d < bd){ bd = d; best = i; } });
+      if (best === cur) return; cur = best;
+      cards.forEach(function(c, i){ c.classList.toggle('is-front', i === best); });
+      dots.forEach(function(d, i){ d.classList.toggle('on', i === Math.min(dots.length - 1, best)); });
+      if (onFront) onFront(best);
+    }
+    strip.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(pick); }, {passive: true});
+    pick();
+  }
+
+  /* ---- open source: contributor marquee (drifts, pauses under a finger, drags, resumes) and the stories carousel ---- */
+  (function(){
+    var strip = document.getElementById('ossStrip'); if (!strip) return;
+    var seed = Array.prototype.slice.call(strip.children), n = seed.length;
+    seed.forEach(function(c){ strip.appendChild(c.cloneNode(true)); });   /* second copy makes the wrap seamless */
+    var dots = Array.prototype.slice.call(document.getElementById('ossDots').children);
+    var x = 0, loopW = 0, last = 0, raf = 0, drag = null, resumeAt = 0, SPEED = 28;
+    function measure(){ loopW = n * 142; }   /* 132 card + 10 gap */
+    measure();
+    function apply(){
+      var xx = ((x % loopW) + loopW) % loopW;
+      strip.style.transform = 'translate3d(' + (-xx).toFixed(2) + 'px,0,0)';
+      var d = Math.floor(xx / loopW * dots.length) % dots.length;
+      dots.forEach(function(el, i){ el.classList.toggle('on', i === d); });
+    }
+    function step(now){
+      raf = 0;
+      if (!drag && now > resumeAt && !reduce){ var dt = Math.min(64, now - last); x += SPEED * dt / 1000; }
+      last = now; apply();
+      if (visible) raf = requestAnimationFrame(step);
+    }
+    var visible = false;
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; if (visible && !raf){ last = performance.now(); raf = requestAnimationFrame(step); } }, {threshold: 0}).observe(strip);
+    strip.addEventListener('pointerdown', function(e){ drag = {x: e.clientX, start: x, moved: false}; strip.classList.add('is-drag'); try { strip.setPointerCapture(e.pointerId); } catch(err){} });
+    strip.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - drag.x; if (Math.abs(dx) > 3) drag.moved = true; x = drag.start - dx; if (!raf) raf = requestAnimationFrame(step); });
+    function end(){ if (!drag) return; drag = null; strip.classList.remove('is-drag'); resumeAt = performance.now() + 1500; }
+    strip.addEventListener('pointerup', end); strip.addEventListener('pointercancel', end);
+    window.addEventListener('resize', measure);
+    apply();
+    /* stories */
+    var focus = document.getElementById('ossFocus');
+    snapDots(focus, '.focus-card', document.getElementById('ossStoryDots'));
+    Array.prototype.forEach.call(document.querySelectorAll('.focus-play, .watch, [data-reel].cc-sc'), function(btn){
+      btn.addEventListener('click', function(e){ e.preventDefault(); openVideo(); });
+    });
+  })();
+
+  /* ---- competitive coding: rank cards dots ---- */
+  (function(){ var s = document.getElementById('ccCards'); if (s) snapDots(s, '.cc-rc', document.getElementById('ccDots')); })();
+
+  /* ---- entrepreneurship: the pipeline dot travels stop to stop when the bucket arrives; the row nearest the middle lifts its phone ---- */
+  (function(){
+    var pipe = document.getElementById('pipe'); if (!pipe) return;
+    var stops = Array.prototype.slice.call(pipe.querySelectorAll('.pipe-stop')), prog = document.getElementById('pipeProg'), dot = document.getElementById('pipeDot');
+    var X = stops.map(function(s){ return parseFloat(s.style.left) + s.offsetWidth / 2; });   /* stop centres */
+    var progL = 8.1, progW = 353.9;
+    if (reduce){ stops[3].classList.add('is-lit'); prog.style.transform = 'none'; }
+    bucketEnter.ent = function(){
+      if (reduce){ stops[3].classList.add('is-lit'); prog.style.transform = 'none'; return; }
+      var t0 = performance.now(), SEG = 380, DELAY = 300;
+      (function tick(now){
+        var t = now - t0 - DELAY; if (t < 0){ requestAnimationFrame(tick); return; }
+        var seg = Math.min(3, Math.floor(t / SEG)), p = Math.min(1, (t - seg * SEG) / SEG), e = easeOutCubic(p);
+        var cx = seg < 3 ? X[seg] + (X[seg + 1] - X[seg]) * e : X[3];
+        dot.style.opacity = t < 3 * SEG ? '1' : '0';
+        dot.style.transform = 'translateX(' + (cx - 4).toFixed(1) + 'px)';
+        prog.style.transform = 'scaleX(' + Math.max(0, Math.min(1, (cx - progL) / progW)).toFixed(4) + ')';
+        if (cx >= X[3] - .5) stops[3].classList.add('is-lit');
+        if (t < 3 * SEG + 60) requestAnimationFrame(tick);
+      })(t0);
+    };
+    var rows = Array.prototype.slice.call(document.querySelectorAll('#entRows .ent-r')), nearRaf = 0;
+    function near(){
+      nearRaf = 0; var mid = (window.innerHeight || 800) / 2, best = -1, bd = 1e9;
+      rows.forEach(function(r, i){ var rc = r.getBoundingClientRect(); var d = Math.abs(rc.top + rc.height / 2 - mid); if (d < bd){ bd = d; best = i; } });
+      rows.forEach(function(r, i){ r.classList.toggle('is-near', i === best && bd < 140); });
+    }
+    window.addEventListener('scroll', function(){ if (!nearRaf) nearRaf = requestAnimationFrame(near); }, {passive: true});
+  })();
+
+  /* ---- global exposure: dot-matrix map (canvas), arcs and pins (svg), chips, text and the photo stack, all in sync ---- */
+  (function(){
+    var mapEl = document.getElementById('globMap'); if (!mapEl) return;
+    var BITS = ["10011110010111110000011111100000000000011100000000001111111111111111111111","11111111111100011100111110000000000001111110111111111111111111111111111111","11111111110000001000011000000000000011101111111111111111111111111111111111","11111111110000111100000000000000000011101111111111111111111111111111111000","11111111111101111110000000000000110011011111111111111111111111111111110000","11111111111111111110000000000000011111111111111111111111111111111111111100","01111111111011111000000000000000011111111111111111111111111111111111111100","01111111111111110000000000000000111101111100011011111111111111111111110100","00111111111111100000000000000000110000110111111011111111111111111101000000","00111111111111000000000000000000101110000000111111111111111111111101001000","00011111111110000000000000000000111111011001111111111111111111111100100000","00001111100010000000000000000001111111111111111011111111111111111100000000","00000011000000000000000000000011111111111110111110001111111111111000000000","00000011101000000000000000000011111111111111011111000111101111000000000000","00000000111000000000000000000011111111111111011100000111000111000000000000","00000000000100000000000000000011111111111111110000000010000011100000000000","00000000000010111100000000000001111111111111111000000010000000000010000000","00000000000000111111000000000000110111111111111000000000000110001000000000","00000000000001111111100000000000000001111111110000000000000010011000000000","00000000000001111111111000000000000001111111100000000000000001011100011000","00000000000001111111111110000000000001111111000000000000000000100000001110","00000000000000111111111110000000000000111111100000000000000000000000000000","00000000000000111111111100000000000001111111100000000000000000000001110100","00000000000000011111111100000000000001111111001000000000000000000011111100","00000000000000001111111000000000000000111110011000000000000000001111111110","00000000000000001111100000000000000000111110000000000000000000001111111111","00000000000000011111100000000000000000011100000000000000000000001111111111","00000000000000011111000000000000000000011000000000000000000000001110011111","00000000000000011110000000000000000000000000000000000000000000000000000110","00000000000000011100000000000000000000000000000000000000000000000000000000","00000000000000011000000000000000000000000000000000000000000000000000000000"];
+    var PINS = {delhi:[271.9,56.8], hangzhou:[328.3,54.6], boston:[77.3,38.7], bangkok:[302.4,76.1], singapore:[306.8,92.4], berlin:[188.1,25.5]};
+    var TRIPS = {
+      cn:{pin:'hangzhou', title:"Exploring AGI in the world's most advanced tech ecosystem", desc:"Alibaba AI Labs, a robotics floor and the Great Wall: a week inside the world's most advanced tech ecosystem, seeing AI systems at scale.", photos:['cn-1','cn-2','cn-3']},
+      us:{pin:'boston', title:"Learning leadership at Harvard, the world's most prestigious university", desc:"HPAIR at Harvard and an AI policy discussion at the Kennedy School: global frameworks guiding the future of AI, in their first year.", photos:['us-1','us-2','us-3']},
+      th:{pin:'bangkok', title:"Innovating with visionaries, impacting real-world challenges", desc:"HPAIR 2024 in Bangkok, and a conversation with Grab's Thailand CEO on building for Southeast Asia.", photos:['th-1','th-2','th-3']},
+      sg:{pin:'singapore', title:"Exploring innovation in one of Asia's leading tech nations", desc:"Graviton's office, a Smart Nation briefing and Marina Bay: understanding how AI powers a nation at scale.", photos:['sg-1','sg-2','sg-3']},
+      de:{pin:'berlin', title:"Germany International Immersion Program 2026", desc:"Exploring Germany's world-class innovation, startup, manufacturing, and sustainability ecosystem through industry visits, startup interactions, and global learning experiences.", photos:['de-1','de-2','de-3']}
+    };
+    /* dots */
+    var cv = document.getElementById('globDots'), ctx = cv.getContext('2d'), dots = [];
+    BITS.forEach(function(row, r){ for (var c = 0; c < row.length; c++) if (row[c] === '1') dots.push({x: c * 5 + 2.5, y: r * 5 + 2.5, d: Math.random()}); });
+    function drawDots(p){   /* p: 0 → 1 reveal progress; each dot has its own start */
+      ctx.setTransform(3, 0, 0, 3, 0, 0); ctx.clearRect(0, 0, 370, 157);
+      dots.forEach(function(d){ var a = p >= 1 ? 1 : Math.min(1, Math.max(0, (p - d.d * .7) / .3)); if (a <= 0) return; ctx.globalAlpha = .18 * a; ctx.fillStyle = '#16191D'; ctx.beginPath(); ctx.arc(d.x, d.y, 1.1, 0, 6.2832); ctx.fill(); });
+      ctx.globalAlpha = 1;
+    }
+    /* arcs + pins */
+    var svg = document.getElementById('globArcs'), NS = 'http://www.w3.org/2000/svg', arcs = {}, pins = {}, rings = {};
+    function arcPath(a, b){ var d = Math.hypot(b[0] - a[0], b[1] - a[1]); var cx = (a[0] + b[0]) / 2, cy = (a[1] + b[1]) / 2 - .28 * d; return 'M ' + a[0] + ' ' + a[1] + ' Q ' + cx.toFixed(1) + ' ' + cy.toFixed(1) + ' ' + b[0] + ' ' + b[1]; }
+    Object.keys(PINS).forEach(function(k){
+      if (k === 'delhi') return;
+      var p = document.createElementNS(NS, 'path'); p.setAttribute('d', arcPath(PINS.delhi, PINS[k])); p.setAttribute('class', 'glob-arc'); svg.appendChild(p); arcs[k] = p;
+    });
+    Object.keys(PINS).forEach(function(k){
+      var ring = document.createElementNS(NS, 'circle'); ring.setAttribute('cx', PINS[k][0]); ring.setAttribute('cy', PINS[k][1]); ring.setAttribute('r', 6); ring.setAttribute('class', 'glob-ring' + (k === 'delhi' ? ' is-on' : '')); svg.appendChild(ring); rings[k] = ring;
+      var c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', PINS[k][0]); c.setAttribute('cy', PINS[k][1]); c.setAttribute('r', k === 'delhi' ? 3 : 2.5); c.setAttribute('class', 'glob-pin' + (k === 'delhi' ? ' is-on' : '')); svg.appendChild(c); pins[k] = c;
+    });
+    var arcLen = {}; Object.keys(arcs).forEach(function(k){ var L = arcs[k].getTotalLength(); arcLen[k] = L; arcs[k].style.strokeDasharray = L; arcs[k].style.strokeDashoffset = L; });
+    var cur = 'cn';
+    function light(trip){
+      var pin = TRIPS[trip].pin;
+      Object.keys(arcs).forEach(function(k){ arcs[k].classList.toggle('is-on', k === pin); });
+      Object.keys(pins).forEach(function(k){ var on = k === 'delhi' || k === pin; pins[k].classList.toggle('is-on', on); pins[k].setAttribute('r', on ? 3 : 2.5); rings[k].classList.toggle('is-on', on); });
+    }
+    bucketEnter.glob = function(){
+      if (reduce){ drawDots(1); Object.keys(arcs).forEach(function(k){ arcs[k].style.strokeDashoffset = 0; }); light(cur); return; }
+      var t0 = performance.now();
+      (function tick(now){ var p = Math.min(1, (now - t0) / 1000); drawDots(p); if (p < 1) requestAnimationFrame(tick); })(t0);
+      var order = ['hangzhou', 'boston', 'bangkok', 'singapore', 'berlin'];
+      order.forEach(function(k, i){ setTimeout(function(){ arcs[k].style.transition = 'stroke-dashoffset .55s ease-out, stroke-opacity .4s ease, stroke-width .4s ease'; arcs[k].style.strokeDashoffset = 0; }, 500 + i * 320); });
+      setTimeout(function(){ light(cur); }, 500);
+    };
+    if (reduce){ drawDots(1); Object.keys(arcs).forEach(function(k){ arcs[k].style.strokeDashoffset = 0; }); light(cur); } else drawDots(0);
+    /* photo stack: three cards; drag the front one aside, it flies off and goes to the back */
+    var stack = document.getElementById('globStack'), cards = [], order = [0, 1, 2], drag = null, busy = false;
+    function poseAll(anim){
+      order.forEach(function(ci, depth){
+        var c = cards[ci]; c.classList.toggle('is-anim', !!anim); c.style.zIndex = 3 - depth; c.style.opacity = '1';
+        c.classList.toggle('is-back', depth > 0);
+        c.style.transform = depth === 0 ? 'translate(0,0) rotate(0deg)' : depth === 1 ? 'translate(-24px,10px) rotate(4.9deg)' : 'translate(24px,10px) rotate(-4.9deg)';
+      });
+    }
+    function build(trip){
+      stack.innerHTML = ''; cards = [];
+      TRIPS[trip].photos.forEach(function(ph){ var c = document.createElement('div'); c.className = 'stack-card'; var im = document.createElement('img'); im.src = 'assets/glob/' + ph + '.jpg'; im.alt = ''; c.appendChild(im); stack.appendChild(c); cards.push(c); });
+      var hint = document.createElement('span'); hint.className = 'stack-hint'; hint.textContent = 'Swipe the photo aside'; stack.appendChild(hint);
+      order = [0, 1, 2]; poseAll(false);
+    }
+    build(cur);
+    function advance(dir){
+      if (busy) return; busy = true;
+      var top = cards[order[0]]; top.classList.add('is-anim');
+      top.style.transform = 'translate(' + (dir * 460) + 'px,' + (dir * -40) + 'px) rotate(' + (dir * 22) + 'deg)'; top.style.opacity = '0';
+      setTimeout(function(){ order.push(order.shift()); top.classList.remove('is-anim'); poseAll(true); setTimeout(function(){ busy = false; }, 460); }, reduce ? 0 : 380);
+    }
+    stack.addEventListener('pointerdown', function(e){ var top = cards[order[0]]; if (busy || !top || !top.contains(e.target)) return; drag = {x: e.clientX, y: e.clientY, moved: false}; top.classList.remove('is-anim'); try { stack.setPointerCapture(e.pointerId); } catch(err){} });
+    stack.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) > 4) drag.moved = true; var top = cards[order[0]]; top.style.transform = 'translate(' + dx + 'px,' + (dy * .3) + 'px) rotate(' + (dx / 14) + 'deg)'; }, {passive: true});
+    function endDrag(e){ if (!drag) return; var dx = e.clientX - drag.x, moved = drag.moved; drag = null; if (!moved){ advance(1); return; } if (Math.abs(dx) > 90) advance(dx > 0 ? 1 : -1); else { var top = cards[order[0]]; top.classList.add('is-anim'); top.style.transform = 'translate(0,0) rotate(0deg)'; } }
+    stack.addEventListener('pointerup', endDrag); stack.addEventListener('pointercancel', function(){ if (drag){ drag = null; poseAll(true); } });
+    /* chips */
+    var chips = Array.prototype.slice.call(document.querySelectorAll('#globChips .chip')), text = document.getElementById('globText'), title = document.getElementById('globTitle'), desc = document.getElementById('globDesc');
+    chips.forEach(function(ch){
+      ch.addEventListener('click', function(){
+        var trip = ch.getAttribute('data-trip'); if (trip === cur) return; cur = trip;
+        chips.forEach(function(c){ var on = c === ch; c.classList.toggle('is-on', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
+        ch.scrollIntoView({block: 'nearest', inline: 'nearest', behavior: reduce ? 'auto' : 'smooth'});
+        text.classList.add('is-swap');
+        setTimeout(function(){ title.textContent = TRIPS[trip].title; desc.textContent = TRIPS[trip].desc; text.classList.remove('is-swap'); build(trip); }, reduce ? 0 : 220);
+        if (seen.glob) light(trip);
+      });
+    });
+  })();
+
+  /* ---- research: paper dots ---- */
+  (function(){ var s = document.getElementById('papers'); if (s) snapDots(s, '.paper', document.getElementById('resDots')); })();
+
+  /* ---- the thread: between consecutive buckets a dashed track runs through both paddings; a runner travels it as the
+          seam passes mid-viewport, then docks as the next header's bar, which draws in ---- */
+  (function(){
+    var page = document.getElementById('page'), seams = [];
+    if (reduce || buckets.length < 2) return;
+    for (var i = 0; i < buckets.length - 1; i++){
+      var a = buckets[i], b = buckets[i + 1], el = document.createElement('div'); el.className = 'seam';
+      el.innerHTML = '<span class="seam-track seam-track-a"></span><span class="seam-track seam-track-b"></span><span class="seam-runner"></span><span class="seam-index">' + b.getAttribute('data-index') + ' / 07</span>';
+      page.appendChild(el);
+      var bar = b.querySelector('.bk-bar'); bar.classList.add('is-away');
+      seams.push({el: el, a: a, b: b, bar: bar, ta: el.children[0], tb: el.children[1], run: el.children[2], docked: false, top: 0, h: 0});
+    }
+    function layout(){
+      seams.forEach(function(s){
+        s.top = s.a.offsetTop + s.a.offsetHeight - 42; s.h = (s.b.offsetTop + 44) - s.top;
+        s.el.style.top = s.top + 'px'; s.el.style.height = s.h + 'px';
+        s.ta.style.height = '42px'; s.ta.style.borderColor = getComputedStyle(s.a).getPropertyValue('--bk-track');
+        s.tb.style.top = '42px'; s.tb.style.height = (s.h - 42) + 'px'; s.tb.style.borderColor = getComputedStyle(s.b).getPropertyValue('--bk-track');
+      });
+    }
+    var raf = 0;
+    function tick(){
+      raf = 0; var line = (window.innerHeight || 800) * .55, sy = window.scrollY, pageTop = page.getBoundingClientRect().top + sy;
+      seams.forEach(function(s){
+        var topV = pageTop + s.top - sy, span = s.h;           /* runner travels from the track top to the bar's top */
+        var p = Math.min(1, Math.max(0, (line - topV) / span));
+        var live = p > 0 && p < 1;
+        s.el.classList.toggle('is-live', live);
+        if (live) s.run.style.transform = 'translateY(' + (p * span).toFixed(1) + 'px)';
+        if (p >= 1 && !s.docked){ s.docked = true; s.bar.classList.remove('is-away'); s.bar.classList.add('is-dock'); }
+        else if (p < 1 && s.docked){ s.docked = false; s.bar.classList.add('is-away'); s.bar.classList.remove('is-dock'); }
+      });
+    }
+    layout(); tick();
+    window.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(tick); }, {passive: true});
+    window.addEventListener('resize', function(){ layout(); tick(); });
+    window.addEventListener('load', function(){ layout(); tick(); });
+  })();
 })();
 </script>
 </body>
