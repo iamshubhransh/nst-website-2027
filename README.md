@@ -21,6 +21,8 @@ Live preview: https://iamshubhransh.github.io/nst-website-2027/
 
 ## Working on it
 
+- Design decisions, Figma node IDs, token keys and the verification method are kept in the season folder, not here: `~/Documents/Newton School Code/nst2027/context/website-2027-handoff.md` (map) and `context/website-mobile-build-2026-09.md` (per-section notes).
+
 - `index.html` is the whole page: styles at the top, markup, then the scripts. `assets/` holds every icon, logo and photo exported from Figma.
 - Preview locally by opening `index.html`, or run `python3 -m http.server 8000` in this folder and open http://localhost:8000.
 - Fonts come from Google Fonts (Mona Sans, widths 100 and 125).
