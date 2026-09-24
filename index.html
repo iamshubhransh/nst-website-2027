@@ -339,7 +339,7 @@ button{font-family:var(--font)}
 /* ---------- sticky bottom bar (153:32692), shows once the hero has scrolled away ---------- */
 .dock{position:fixed;left:50%;bottom:0;width:100%;max-width:402px;z-index:50;padding:12px 12px calc(12px + env(safe-area-inset-bottom,0px));transform:translate(-50%,115%);transition:transform .4s cubic-bezier(.22,1,.36,1);pointer-events:none}
 .dock.is-on{transform:translate(-50%,0);pointer-events:auto}
-.dock-inner{height:62px;border-radius:12px;background:rgba(0,0,0,.08);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);padding:6px;display:flex;align-items:center;gap:6px}
+.dock-inner{height:62px;border-radius:12px;background:rgba(0,0,0,.08);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:6px;display:flex;align-items:center;gap:6px;transition:background .3s ease}
 .dock .play{background:rgba(255,255,255,.9)}
 .dock .face-play{background:rgba(255,255,255,.9)}
 .dock-cta{flex:1 0 0;min-width:0;height:50px;padding:10px 60px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:500;letter-spacing:-.32px;box-shadow:var(--btn-shadow)}
@@ -390,8 +390,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 @media (prefers-reduced-motion:reduce){.found-track,.found-label{transition:none}}
 
 /* ---------- achievement buckets: shared skin. Dark buckets on #16191D with #0B0C0E cards, light ones on white; each bucket is
-   42/16 padding with a 24 px gap. The header bar is the "thread": it draws in when the header arrives, and between buckets a
-   runner travels a dashed track through the two paddings and docks as the next header's bar ---------- */
+   42/16 padding with a 24 px gap. The header bar draws in when the header arrives. ---------- */
 .bk{position:relative;padding:42px 16px;display:flex;flex-direction:column;gap:24px;overflow:hidden;background:var(--bk-bg);color:var(--bk-ink)}
 .bk-dark{--bk-bg:#16191D;--bk-card:#0B0C0E;--bk-line:#23282F;--bk-line2:#30363D;--bk-ink:#fff;--bk-ink-2:rgba(255,255,255,.5);--bk-brand:#61A8FF;--bk-band:#16191D;--bk-track:#30363D}
 .bk-light{--bk-bg:#fff;--bk-card:#fff;--bk-line:#EDEFF3;--bk-line2:#E1E5EA;--bk-ink:#16191D;--bk-ink-2:rgba(0,0,0,.5);--bk-brand:#0673F9;--bk-band:#F6F7F9;--bk-track:#E1E5EA}
@@ -402,7 +401,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .bk-title span{font-weight:500;color:var(--bk-ink-2)}
 .bk-sub{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:var(--bk-ink)}
 .bk-sub b{font-weight:700}
-.bk-bar.is-dock{animation:bkBar .5s cubic-bezier(.22,1,.36,1) both}
+.bk.is-in .bk-bar{animation:bkBar .5s cubic-bezier(.22,1,.36,1) both}
 .bk.is-in .bk-text{animation:bkText .6s .18s cubic-bezier(.22,1,.36,1) both}
 @keyframes bkBar{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes bkText{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
@@ -430,14 +429,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .bk-rise{opacity:0;transform:translateY(14px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
 .bk.is-in .bk-rise{opacity:1;transform:none}
 .bk.is-in .bk-rise:nth-child(2){transition-delay:.08s}.bk.is-in .bk-rise:nth-child(3){transition-delay:.16s}.bk.is-in .bk-rise:nth-child(4){transition-delay:.24s}.bk.is-in .bk-rise:nth-child(5){transition-delay:.32s}
-/* the thread: one seam element per boundary, absolutely placed over the two paddings by script; runner + index label */
-.seam{position:absolute;left:16px;width:40px;pointer-events:none;z-index:3}
-.seam-track{position:absolute;left:0;top:0;width:1px;border-left:1px dashed}
-.seam-runner{position:absolute;left:-.5px;top:0;width:2px;height:46px;border-radius:1px;background:var(--brand);box-shadow:0 0 14px 1px rgba(6,115,249,.7);opacity:0}
-.seam-index{position:absolute;left:12px;top:17px;font-size:11px;line-height:12px;font-weight:500;letter-spacing:1px;color:var(--brand);white-space:nowrap;opacity:0}
-.seam.is-live .seam-runner,.seam.is-live .seam-index{opacity:1}
-.bk-bar.is-away{opacity:0}
-@media (prefers-reduced-motion:reduce){.bk-bar.is-dock,.bk.is-in .bk-text{animation:none}.bk-rise{opacity:1;transform:none;transition:none}.seam{display:none}}
+@media (prefers-reduced-motion:reduce){.bk.is-in .bk-bar,.bk.is-in .bk-text{animation:none}.bk-rise{opacity:1;transform:none;transition:none}}
 
 /* ---------- open source (282:72461): proof card with the contributor marquee, stories focus carousel, CTA ---------- */
 .oss{--bk-bg:#16191D}
@@ -607,12 +599,12 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .glob-desc{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#5B6271}
 .glob-text.is-swap .glob-title,.glob-text.is-swap .glob-desc{opacity:0;transform:translateY(4px)}
 .glob-title,.glob-desc{transition:opacity .22s ease,transform .22s ease}
-.stack{position:relative;height:364px;touch-action:pan-y}
-.stack-card.is-back{width:288px;height:327.6px;margin:-163.8px 0 0 -144px}
-.stack-card{position:absolute;left:50%;top:50%;width:320px;height:364px;margin:-182px 0 0 -160px;border-radius:12px;border:1px solid #E1E5EA;background:#fff;overflow:hidden;will-change:transform;transform:translate(0,0) rotate(0deg);-webkit-user-select:none;user-select:none}
-.stack-card img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
-.stack-card.is-anim{transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s ease}
-.stack-hint{display:none;position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:#8C95A6;white-space:nowrap}
+.gstack{position:relative;height:364px;touch-action:pan-y}
+.gstack-card.is-back{width:288px;height:327.6px;margin:-163.8px 0 0 -144px}
+.gstack-card{position:absolute;left:50%;top:50%;width:320px;height:364px;margin:-182px 0 0 -160px;border-radius:12px;border:1px solid #E1E5EA;background:#fff;overflow:hidden;will-change:transform;transform:translate(0,0) rotate(0deg);-webkit-user-select:none;user-select:none}
+.gstack-card img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.gstack-card.is-anim{transition:transform .45s cubic-bezier(.22,1,.36,1),opacity .45s ease}
+.gstack-hint{display:none;position:absolute;left:50%;bottom:-2px;transform:translateX(-50%);font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:#8C95A6;white-space:nowrap}
 
 /* ---------- research (328:9279): dark. Three white "first pages" in a snap carousel, each with a stamp and a folded corner ---------- */
 .res-wrap{position:relative;margin:0 -16px}
@@ -646,6 +638,46 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .res-hint{display:flex;align-items:center;gap:6px;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;color:#B2B9C7;opacity:.5}
 .res-hint img{width:11.4px;height:16px}
 @media (prefers-reduced-motion:reduce){.paper{opacity:1;transform:none}.res.is-in .paper,.res.is-in .paper:first-child .stamp{animation:none}}
+
+/* ---------- Newton, the AI chat (385:86140 button, 385:86567 first screen). The dock gains a purple orb button; tapping it opens a
+   full-screen white sheet (96% white, 16 px backdrop blur) with the thinking-orbs "searching" globe, the greeting and prompt chips,
+   while the dock turns into the input pill + send. The orb engine is assets/vendor/thinking-orbs-engine.js (MIT). ---------- */
+.ai-btn{position:relative;flex:none;width:50px;height:50px;padding:0;border:0;border-radius:99px;background:linear-gradient(160deg,#883DA3,#B42FE5);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;transition:transform .16s ease}
+.ai-btn:active{transform:scale(.94)}
+.ai-btn::before{content:"";position:absolute;inset:-6px;border-radius:50%;background:radial-gradient(closest-side,rgba(180,47,229,.45),rgba(180,47,229,0));opacity:.6;animation:aiBreathe 3.5s ease-in-out infinite;pointer-events:none}
+@keyframes aiBreathe{0%,100%{opacity:.35;transform:scale(.96)}50%{opacity:.75;transform:scale(1.08)}}
+.ai-btn img{position:relative;width:20px;height:19px;transition:opacity .25s ease,transform .25s ease}
+.ai-btn .ai-send{position:absolute;width:20px;height:14.4px;opacity:0;transform:scale(.6)}
+.dock.is-ai .ai-btn::before{animation:none;opacity:0}
+.dock.is-ai .ai-btn .ai-spark{opacity:0;transform:scale(.6)}
+.dock.is-ai .ai-btn .ai-send{opacity:1;transform:none}
+.ai-input{display:none;flex:1 0 0;min-width:0;height:50px;align-items:center;padding:0 16px;border-radius:99px;background:rgba(255,255,255,.9);border:1px solid var(--line)}
+.ai-input input{width:100%;min-width:0;border:0;outline:0;background:transparent;font-family:var(--font);font-size:15px;line-height:20px;font-weight:500;color:var(--ink);padding:0;margin:0}
+.ai-input input::placeholder{color:rgba(22,25,29,.45)}
+.dock.is-ai .dock-inner{background:rgba(0,0,0,0)}
+.dock.is-ai .play,.dock.is-ai .dock-cta{display:none}
+.dock.is-ai .ai-input{display:flex}
+.ai{position:fixed;inset:0;z-index:45;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:opacity .32s ease;overflow:hidden}
+.ai.is-open{opacity:1;pointer-events:auto}
+.ai-mark{position:absolute;left:50%;top:24px;width:25.6px;height:32px;margin-left:-12.8px;padding:0;border:0;background:none;color:#0B0C0E;opacity:.2;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ai-mark svg{display:block;width:25.6px;height:32px}
+.ai-mark::after{content:"";position:absolute;inset:-14px}   /* a comfortable tap target: tapping the mark closes the chat */
+.ai-center{position:absolute;left:0;right:0;top:50%;transform:translateY(calc(-50% + 12px));display:flex;flex-direction:column;align-items:center;gap:36px;opacity:0;transition:opacity .5s ease .08s,transform .5s cubic-bezier(.22,1,.36,1) .08s}
+.ai.is-open .ai-center{opacity:1;transform:translateY(-50%)}
+.ai-orb{width:72px;height:72px;position:relative}
+.ai-orb canvas{display:block;width:72px;height:72px;animation:aiFloat 4s ease-in-out infinite}
+@keyframes aiFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.ai-text{display:flex;flex-direction:column;align-items:center;gap:20px;width:100%}
+.ai-copy{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 16px;width:100%}
+.ai-h{margin:0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:var(--ink);text-align:center}
+.ai-p{margin:0;width:289px;max-width:100%;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:var(--ink);text-align:center}
+.ai-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;padding:0 16px;width:100%}
+.ai-chip{border:1px solid rgba(0,0,0,.1);border-radius:8px;background:#fff;padding:5px 12px;font-family:var(--font);font-size:13px;line-height:22px;font-weight:500;color:var(--ink);cursor:pointer;box-shadow:0 3px 6px -2px rgba(97,56,211,.08),0 2px 4px -2px rgba(97,56,211,.12);opacity:0;transform:translateY(8px);transition:opacity .4s ease,transform .4s cubic-bezier(.22,1,.36,1),background .15s ease;-webkit-tap-highlight-color:transparent}
+.ai-chip:active{background:var(--bg2)}
+.ai.is-open .ai-chip{opacity:1;transform:none}
+.ai.is-open .ai-chip:nth-child(1){transition-delay:.22s}.ai.is-open .ai-chip:nth-child(2){transition-delay:.27s}.ai.is-open .ai-chip:nth-child(3){transition-delay:.32s}.ai.is-open .ai-chip:nth-child(4){transition-delay:.37s}.ai.is-open .ai-chip:nth-child(5){transition-delay:.42s}
+.ai-note{position:absolute;left:41px;right:41px;bottom:calc(86px + env(safe-area-inset-bottom,0px));margin:0;font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.45);text-align:center}
+@media (prefers-reduced-motion:reduce){.ai-btn::before{animation:none}.ai,.ai-center,.ai-chip{transition:none}.ai-orb canvas{animation:none}}
 
 </style>
 </head>
@@ -1064,7 +1096,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       </div>
       <div class="glob-text" id="globText"><h3 class="glob-title" id="globTitle">Exploring AGI in the world's most advanced tech ecosystem</h3><p class="glob-desc" id="globDesc">Alibaba AI Labs, a robotics floor and the Great Wall: a week inside the world's most advanced tech ecosystem, seeing AI systems at scale.</p></div>
     </div>
-    <div class="stack bk-rise" id="globStack" aria-label="Photos from the trip"></div>
+    <div class="gstack bk-rise" id="globStack" aria-label="Photos from the trip"></div>
     <a class="bk-cta bk-cta-dark bk-rise" href="#">See all trips <img src="assets/icon-arrow-right-white.svg" alt=""></a>
   </section>
 
@@ -1126,13 +1158,33 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   <div class="vid-back"></div>
   <div class="vid-stage" id="vidStage"></div>
 </div>
-<div class="dock" id="dock" data-node="153:32692">
+<div class="ai" id="ai" aria-hidden="true" data-node="385:86567" role="dialog" aria-label="Ask Newton">
+  <button class="ai-mark" type="button" id="aiClose" aria-label="Close the chat"><svg viewBox="0 0 26 32" aria-hidden="true"><path d="M17.5996 0V3.2H20.1356L14.4796 8.856C13.0476 8.004 11.3836 7.508 9.59961 7.508H1.59961V10.708H9.59961C13.1276 10.708 15.9996 13.58 15.9996 17.108V28.308H19.1996V17.108C19.1996 14.756 18.3436 12.6 16.9356 10.928L22.3996 5.464V8H25.5996V0H17.5996Z" fill="currentColor"/><path d="M22.4 19.408L22.368 19.796C22.048 25.008 17.58 29.052 12.312 28.788C7.396 28.54 3.524 24.484 3.22 19.572L3.2 19.248V3.2H16V0H0V19.296L0.04 19.992C0.456 26.724 6.06 32 12.8 32C19.168 32 24.56 27.296 25.484 21.136C25.576 20.532 25.6 19.92 25.6 19.312V9.6H22.4V19.408Z" fill="currentColor"/></svg></button>
+  <div class="ai-center">
+    <div class="ai-orb"><canvas id="aiOrb" width="144" height="144" role="img" aria-label="Newton is listening"></canvas></div>
+    <div class="ai-text">
+      <div class="ai-copy"><h2 class="ai-h">Hi, Ask me anything!</h2><p class="ai-p">Ask me anything about NST: fees, campus, curriculum, or how to get in.</p></div>
+      <div class="ai-chips" id="aiChips">
+        <button class="ai-chip" type="button">How do I get in?</button>
+        <button class="ai-chip" type="button">What’s the curriculum for 4 year?</button>
+        <button class="ai-chip" type="button">Is there a scholarship?</button>
+        <button class="ai-chip" type="button">What’s the fee?</button>
+        <button class="ai-chip" type="button">Show me details of Bengaluru campus</button>
+      </div>
+    </div>
+  </div>
+  <p class="ai-note">Disclaimer: Answers come from NST's own pages.</p>
+</div>
+<div class="dock" id="dock" data-node="385:86139">
   <div class="dock-inner">
     <button class="play" type="button" id="playBtnDock" aria-label="Play the campus film"><span class="face face-play"><svg viewBox="0 0 18 26" width="18" height="26" aria-hidden="true"><path d="M3 3.6 L15.4 13 L3 22.4 Z" fill="#0673F9" stroke="#0673F9" stroke-width="3.6" stroke-linejoin="round"/></svg></span><span class="face face-logo"><svg viewBox="0 0 21.6 27" width="20" height="25" aria-hidden="true"><path d="M14.85 0V2.7H16.9897L12.2175 7.47225C11.0093 6.75338 9.60525 6.33488 8.1 6.33488H1.35V9.03488H8.1C11.0767 9.03488 13.5 11.4581 13.5 14.4349V23.8849H16.2V14.4349C16.2 12.4504 15.4777 10.6313 14.2897 9.2205L18.9 4.61025V6.75H21.6V0H14.85Z" fill="#fff"/><path d="M18.9 16.3755L18.873 16.7029C18.603 21.1005 14.8331 24.5126 10.3883 24.2899C6.24038 24.0806 2.97338 20.6584 2.71688 16.5139L2.7 16.2405V2.7H13.5V0H0V16.281L0.03375 16.8683C0.38475 22.5484 5.11312 27 10.8 27C16.173 27 20.7225 23.031 21.5021 17.8335C21.5798 17.3239 21.6 16.8075 21.6 16.2945V8.1H18.9V16.3755Z" fill="#fff" opacity=".72"/></svg></span><span class="face face-back"><img src="assets/icon-arrow-left.svg" alt=""></span></button>
     <a class="btn btn-brand dock-cta" href="#apply">Apply Now</a>
+    <label class="ai-input" for="aiField"><input id="aiField" type="text" placeholder="Ask anything about NST" autocomplete="off" enterkeyhint="send"></label>
+    <button class="ai-btn" type="button" id="aiBtn" aria-label="Ask Newton"><img class="ai-spark" src="assets/ai/icon-sparkle.svg" alt=""><img class="ai-send" src="assets/icon-arrow-right-white.svg" alt=""></button>
   </div>
 </div>
 
+<script src="assets/vendor/thinking-orbs-engine.js"></script>
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1447,7 +1499,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   /* ---- sticky bottom bar: slides in once the hero has scrolled off the top ---- */
   var dock = document.getElementById('dock'), hero = document.querySelector('.hero');
-  function dockCheck(){ dock.classList.toggle('is-on', !!voOpen || hero.getBoundingClientRect().bottom < 0); }
+  function dockCheck(){ dock.classList.toggle('is-on', !!voOpen || dock.classList.contains('is-ai') || hero.getBoundingClientRect().bottom < 0); }
   window.addEventListener('scroll', dockCheck, {passive: true});
   window.addEventListener('resize', dockCheck);
   dockCheck();
@@ -1691,7 +1743,6 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     en.forEach(function(e){
       if (!e.isIntersecting || seen[e.target.id]) return;
       seen[e.target.id] = true; e.target.classList.add('is-in'); runCounts(e.target);
-      if (e.target.id === 'oss') e.target.querySelector('.bk-bar').classList.add('is-dock');
       var fn = bucketEnter[e.target.id]; if (fn) fn();
     });
   }, {threshold: .12});
@@ -1841,8 +1892,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     }
     function build(trip){
       stack.innerHTML = ''; cards = [];
-      TRIPS[trip].photos.forEach(function(ph){ var c = document.createElement('div'); c.className = 'stack-card'; var im = document.createElement('img'); im.src = 'assets/glob/' + ph + '.jpg'; im.alt = ''; c.appendChild(im); stack.appendChild(c); cards.push(c); });
-      var hint = document.createElement('span'); hint.className = 'stack-hint'; hint.textContent = 'Swipe the photo aside'; stack.appendChild(hint);
+      TRIPS[trip].photos.forEach(function(ph){ var c = document.createElement('div'); c.className = 'gstack-card'; var im = document.createElement('img'); im.src = 'assets/glob/' + ph + '.jpg'; im.alt = ''; c.appendChild(im); stack.appendChild(c); cards.push(c); });
+      var hint = document.createElement('span'); hint.className = 'gstack-hint'; hint.textContent = 'Swipe the photo aside'; stack.appendChild(hint);
       order = [0, 1, 2]; poseAll(false);
     }
     build(cur);
@@ -1873,43 +1924,49 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   /* ---- research: paper dots ---- */
   (function(){ var s = document.getElementById('papers'); if (s) snapDots(s, '.paper', document.getElementById('resDots')); })();
 
-  /* ---- the thread: between consecutive buckets a dashed track runs through both paddings; a runner travels it as the
-          seam passes mid-viewport, then docks as the next header's bar, which draws in ---- */
+
+  /* ==================== Newton, the AI chat: first screen ==================== */
   (function(){
-    var page = document.getElementById('page'), seams = [];
-    if (reduce || buckets.length < 2) return;
-    for (var i = 0; i < buckets.length - 1; i++){
-      var a = buckets[i], b = buckets[i + 1], el = document.createElement('div'); el.className = 'seam';
-      el.innerHTML = '<span class="seam-track seam-track-a"></span><span class="seam-track seam-track-b"></span><span class="seam-runner"></span><span class="seam-index">' + b.getAttribute('data-index') + ' / 07</span>';
-      page.appendChild(el);
-      var bar = b.querySelector('.bk-bar'); bar.classList.add('is-away');
-      seams.push({el: el, a: a, b: b, bar: bar, ta: el.children[0], tb: el.children[1], run: el.children[2], docked: false, top: 0, h: 0});
+    var ai = document.getElementById('ai'), aiBtn = document.getElementById('aiBtn'), aiClose = document.getElementById('aiClose'), field = document.getElementById('aiField'), chips = document.getElementById('aiChips');
+    if (!ai || !aiBtn) return;
+    var open = false, orb = null, orbRaf = 0, orbRunning = false;
+    /* the orb: thinking-orbs "searching" (a scan meridian sweeping a dotted globe), the 64 px preset drawn at 72 px, dark ink on the white sheet */
+    function mountOrb(){
+      var T = window.ThinkingOrbs, cv = document.getElementById('aiOrb'); if (!T || !cv || orb) return;
+      var size = 72, dpr = Math.min(2, window.devicePixelRatio || 1);
+      cv.width = Math.round(size * dpr); cv.height = Math.round(size * dpr);
+      var ctx = cv.getContext('2d'); if (!ctx) return;
+      var r = T.resolvePreset('searching', 64), frameFn = T.MODE_FRAMES[r.mode];
+      orb = { draw: function(t){ ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, size, size); T.paintFrame(ctx, frameFn(size, t, r.opts), false); }, speed: r.speed };
     }
-    function layout(){
-      seams.forEach(function(s){
-        s.top = s.a.offsetTop + s.a.offsetHeight - 42; s.h = (s.b.offsetTop + 44) - s.top;
-        s.el.style.top = s.top + 'px'; s.el.style.height = s.h + 'px';
-        s.ta.style.height = '42px'; s.ta.style.borderColor = getComputedStyle(s.a).getPropertyValue('--bk-track');
-        s.tb.style.top = '42px'; s.tb.style.height = (s.h - 42) + 'px'; s.tb.style.borderColor = getComputedStyle(s.b).getPropertyValue('--bk-track');
-      });
+    function orbLoop(){ orbRaf = 0; if (!orbRunning || !orb) return; orb.draw(performance.now() / 1000 * orb.speed); orbRaf = requestAnimationFrame(orbLoop); }
+    function orbStart(){ mountOrb(); if (!orb) return; if (reduce){ orb.draw(0.6); return; } orb.draw(performance.now() / 1000 * orb.speed); if (!orbRunning){ orbRunning = true; orbRaf = requestAnimationFrame(orbLoop); } }
+    function orbStop(){ orbRunning = false; if (orbRaf) cancelAnimationFrame(orbRaf); orbRaf = 0; }
+    document.addEventListener('visibilitychange', function(){ if (!open) return; if (document.visibilityState === 'hidden') orbStop(); else orbStart(); });
+    function openAI(){
+      if (open || voOpen) return; open = true;
+      lockY = window.scrollY; document.documentElement.classList.add('is-locked');
+      ai.classList.add('is-open'); ai.setAttribute('aria-hidden', 'false');
+      dock.classList.add('is-ai'); dock.classList.add('is-on');
+      orbStart();
     }
-    var raf = 0;
-    function tick(){
-      raf = 0; var line = (window.innerHeight || 800) * .55, sy = window.scrollY, pageTop = page.getBoundingClientRect().top + sy;
-      seams.forEach(function(s){
-        var topV = pageTop + s.top - sy, span = s.h;           /* runner travels from the track top to the bar's top */
-        var p = Math.min(1, Math.max(0, (line - topV) / span));
-        var live = p > 0 && p < 1;
-        s.el.classList.toggle('is-live', live);
-        if (live) s.run.style.transform = 'translateY(' + (p * span).toFixed(1) + 'px)';
-        if (p >= 1 && !s.docked){ s.docked = true; s.bar.classList.remove('is-away'); s.bar.classList.add('is-dock'); }
-        else if (p < 1 && s.docked){ s.docked = false; s.bar.classList.add('is-away'); s.bar.classList.remove('is-dock'); }
-      });
+    function closeAI(){
+      if (!open) return; open = false;
+      ai.classList.remove('is-open'); ai.setAttribute('aria-hidden', 'true');
+      dock.classList.remove('is-ai'); field.blur();
+      document.documentElement.classList.remove('is-locked'); if (window.scrollY !== lockY) window.scrollTo(0, lockY);
+      orbStop(); dockCheck();
     }
-    layout(); tick();
-    window.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(tick); }, {passive: true});
-    window.addEventListener('resize', function(){ layout(); tick(); });
-    window.addEventListener('load', function(){ layout(); tick(); });
+    aiBtn.addEventListener('click', function(){ if (!open) openAI(); else if (field.value.trim()) { /* sending arrives with the conversation screen */ field.value = ''; } else field.focus(); });
+    aiClose.addEventListener('click', closeAI);
+    chips.addEventListener('click', function(e){ var c = e.target.closest('.ai-chip'); if (!c) return; field.value = c.textContent; field.focus(); });
+    field.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); aiBtn.click(); } });
+    document.addEventListener('keydown', function(e){ if (open && e.key === 'Escape') closeAI(); });
+    /* swipe down anywhere on the sheet closes it */
+    var sw = null;
+    ai.addEventListener('pointerdown', function(e){ if (e.target.closest('button, input, label')) return; sw = {y: e.clientY, x: e.clientX}; }, {passive: true});
+    ai.addEventListener('pointerup', function(e){ if (!sw) return; var dy = e.clientY - sw.y, dx = Math.abs(e.clientX - sw.x); sw = null; if (dy > 80 && dx < 60) closeAI(); });
+    ai.addEventListener('pointercancel', function(){ sw = null; });
   })();
 })();
 </script>
