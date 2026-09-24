@@ -736,6 +736,171 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .cur-card .pdots{margin:12px 0 0 16px}
 @media (prefers-reduced-motion:reduce){.cur-h-bar,.cur.is-in .cur-h-bar{animation:none;transform:none}.cur-years.is-nudge .yr{animation:none}.ask-caret{animation:none}.ask.is-searching .ask-pill::after{animation:none}.cur-pane{transition:none}}
 
+/* ---------- faculty (364:63430): white. A dashed ring (r 543, centre 590.86 px down) shows only its crown inside a 173 px clipped
+   band; 42 px company bubbles sit on it and step left like the placement orbit. Heading 121, line 151, card strip 221, dots 483. ---------- */
+.fac{position:relative;background:#fff;padding:0 0 16px}
+.fac-top{position:relative;height:173px;overflow:hidden}
+.fac-ring{position:absolute;left:calc(50% - 543px);top:47.86px;width:1086px;height:1086px;pointer-events:none}
+.fac-orbit{position:absolute;inset:0}
+.fac-bub{position:absolute;width:42px;height:42px;border-radius:999px;background:#F6F7F9;display:flex;align-items:center;justify-content:center;will-change:left,top}
+.fac-bub img{display:block}
+.fac-bub-l{left:35px;top:52.73px}
+.fac-bub-c{left:179.69px;top:27.15px;left:calc(50% - 21.31px)}
+.fac-bub-r{left:325.73px;top:44px}
+.fac-bub.is-seed{display:none}
+.fac-title{position:absolute;left:22px;right:22px;top:121.15px;margin:0;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D}
+.fac-sub{position:absolute;left:16px;right:16px;top:151.15px;margin:0;text-align:center;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#16191D}
+.fac-strip{display:flex;margin-top:48px;padding-left:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.fac-strip::-webkit-scrollbar{display:none}
+.fac-card{position:relative;flex:none;width:307.08px;height:246px;padding:0 24px 0 25px;border-left:1px solid #D6DAE0;scroll-snap-align:start;display:flex;flex-direction:column}
+.fac-card::after{content:"";position:absolute;left:14.91px;bottom:0;width:292px;height:40px;background:repeating-linear-gradient(90deg,#E4E7EC 0 1px,transparent 1px 13.91px)}   /* 21 hairlines under every card */
+.fac-photo{width:72px;height:72px;border-radius:12px;object-fit:cover;display:block}
+.fac-photo-ph{display:flex;align-items:center;justify-content:center;background:#F6F7F9}
+.fac-photo-ph img{width:26px;height:32.5px;opacity:.35}
+.fac-row{display:flex;align-items:center;justify-content:space-between;margin-top:16px;height:48px}
+.fac-row>div{display:flex;flex-direction:column;min-width:0}
+.fac-name{font-size:16px;line-height:26px;font-weight:700;letter-spacing:.06px;color:#232529;white-space:nowrap}
+.fac-role{font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#6F7988;white-space:nowrap}
+.fac-badge{width:48px;height:48px;flex:none}
+.fac-logo{height:28px;margin-top:4px;object-fit:contain;object-position:left;align-self:flex-start}
+.fac-dots{margin:16px auto 0;display:flex}
+.fac .pdots-light{align-self:center}
+
+/* ---------- four cities (390:129078): white. The campus sketch at 40% across the top, heading at 252, the cities line, then four
+   400 px gradient cards 20 px apart, each: mark tile, "In collaboration with", name, line, a tour video block and a white Explore button. ---------- */
+.cities{position:relative;background:#fff;padding:252.15px 16px 42px;overflow:hidden}
+.cities-art{position:absolute;left:calc(50% - 241px);top:0;width:482px;height:270.15px;opacity:.4;pointer-events:none}
+.cities-title{position:relative;margin:0 6px;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D}
+.cities-list{position:relative;display:flex;justify-content:center;margin:6px 0 0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#16191D;opacity:.5;white-space:nowrap}
+.cities-list i{font-style:normal;width:21px;text-align:center}
+.city{position:relative;margin-top:20px;border-radius:12px;overflow:hidden;color:#fff;--g1:linear-gradient(180deg,#073962,#2A7ABD);--g2:linear-gradient(180deg,#2A7ABD,#499DE2)}
+.cities-title+.cities-list+.city{margin-top:20px}
+.city-green{--g1:linear-gradient(180deg,#09542F,#105634);--g2:linear-gradient(180deg,#105634,#099650)}
+.city-purple{--g1:linear-gradient(180deg,#630E82,#B42FE5);--g2:linear-gradient(180deg,#B42FE5,#9813C9)}
+.city-orange{--g1:linear-gradient(180deg,#C3491E,#D86A43);--g2:linear-gradient(180deg,#D86A43,#D86F39 28%,#D7762B 69%,#C3491E)}
+.city-top{height:170px;padding:16px 16px 12px;background:var(--g1);display:flex;flex-direction:column}
+.city-mark{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9.6px;background:#fff}
+.city-mark svg{width:15px;height:18px;display:block}
+.city-with{margin-top:16px;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;opacity:.5}
+.city-name{margin:8px 0 0;font-size:20px;line-height:24px;font-weight:600;letter-spacing:.1px;white-space:nowrap}
+.city-desc{margin:8px 0 0;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px}
+.city-bot{height:230px;padding:0 16px 16px;background:var(--g2)}
+/* the tour block (shared with the fest): dark rounded stage, a shade to 55% black at the foot, a 50 px play disc, two small labels */
+.tour{position:relative;display:block;width:100%;height:150px;padding:0;border:0;border-radius:12px;background:#16191D;overflow:hidden;cursor:pointer;color:#fff;font-family:var(--font);-webkit-tap-highlight-color:transparent}
+.tour>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tour::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55))}
+.tour-play{position:absolute;left:calc(50% - 25px);top:calc(50% - 25px);width:50px;height:50px;border-radius:99px;background:#fff;box-shadow:0 4px 10px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;transition:transform .2s ease}
+.tour:active .tour-play{transform:scale(.94)}
+.tour-play img{width:22px;height:22px;display:block}
+.tour-lab,.tour-time{position:absolute;bottom:14px;font-size:10px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.tour-lab{left:14px}
+.tour-time{right:14px}
+.city-cta{display:flex;align-items:center;justify-content:center;gap:6px;height:48px;margin-top:16px;border-radius:12px;background:#fff;box-shadow:var(--btn-shadow);text-decoration:none;font-size:15px;line-height:26px;font-weight:600;letter-spacing:.06px;color:#16191D;transition:transform .16s ease}
+.city-cta:active{transform:scale(.985)}
+.city-cta img{width:20px;height:20px}
+.city{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.city.is-in{opacity:1;transform:none}
+
+/* ---------- three ways in (396:131019): white with a top line and the hanging hairlines. Avatar row at 128 (42 px circles 66 px
+   apart, the 64 px NST tile at the centre), heading 216, the route selector 264, the route card 320. ---------- */
+.ways{position:relative;background:#fff;border-top:1px solid #E1E5EA;padding:127px 16px 42px;overflow:hidden}
+.ways-lines{position:absolute;left:calc(50% - 230px);top:0;width:460px;height:150px;pointer-events:none}
+.ways-row{position:relative;height:64px}
+.way-tile{position:absolute;left:calc(50% - 32px);top:0;width:64px;height:64px;border-radius:12px;background:#F6F7F9;box-shadow:inset 0 0 0 1px #E1E5EA;display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+.way-tile svg{width:26px;height:32px;display:block}
+.way-tile.is-pulse{transform:scale(1.06)}
+.way-av{position:absolute;top:11px;left:calc(50% - 21px);width:42px;height:42px;border-radius:999px;object-fit:cover;box-shadow:inset 0 0 0 1px #E1E5EA;will-change:transform,opacity}
+.way-av[data-slot="-3"]{transform:translateX(-209px)}.way-av[data-slot="-2"]{transform:translateX(-143px)}.way-av[data-slot="-1"]{transform:translateX(-77px)}
+.way-av[data-slot="1"]{transform:translateX(77px)}.way-av[data-slot="2"]{transform:translateX(143px)}.way-av[data-slot="3"]{transform:translateX(209px)}
+.ways-title{margin:24px 6px 0;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D}
+.routes{display:flex;gap:4px;margin-top:24px;padding:4px;border:1px solid rgba(22,25,29,.1);border-radius:12px;background:#fff}
+.route{flex:1 1 0;height:34px;padding:0 6px;border:0;border-radius:8px;background:transparent;font-family:var(--font);font-size:13px;line-height:18px;font-weight:600;color:#16191D;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .25s ease,color .25s ease}
+.route.is-on{background:#0673F9;color:#fff}
+.route-card{margin-top:12px;padding:16px;border:1px solid rgba(22,25,29,.08);border-radius:12px;background:#fff;display:flex;flex-direction:column;gap:10px;transition:opacity .18s ease,transform .18s ease}
+.route-card.is-out{opacity:0;transform:translateY(6px)}
+.route-lab{font-size:10px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#004599}
+.route-h{margin:0;font-size:20px;line-height:24px;font-weight:600;letter-spacing:.1px;color:#16191D;min-height:48px}
+.route-p{margin:0;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;color:#5B6271;min-height:36px}
+.route-acts{display:flex;gap:8px}
+.rbtn{display:flex;align-items:center;justify-content:center;gap:6px;height:44px;padding:0 20px;border-radius:10px;box-shadow:var(--btn-shadow);text-decoration:none;font-size:15px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;color:#fff;white-space:nowrap;transition:transform .16s ease}
+.rbtn:active{transform:scale(.985)}
+.rbtn img{width:22px;height:22px}
+.rbtn-blue{flex:1 1 auto;background:#0673F9}
+.rbtn-ink{flex:none;width:120px;background:#0B0C0E}
+.rbtn-sm{height:40px;border-radius:8px;font-size:14px}
+.rbtn-sm.rbtn-blue{flex:none;width:184px}
+
+/* ---------- admission process (397:133518): 26 px of white, the hatched band with lines above and below, heading at 68, a card of six
+   numbered rows; step 02 is the live one with the buttons and the mock-test note. ---------- */
+.adm{position:relative;background:#fff;padding:26px 16px 42px}
+.adm .hatch{margin:0 -16px;border-top:1px solid var(--line)}
+.adm-title{margin:16px 6px 0;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D}
+.adm-card{margin-top:24px;border:1px solid #E1E5EA;border-radius:12px;background:#fff;overflow:hidden}
+.adm-head{display:flex;align-items:center;justify-content:center;height:38px;background:#F6F7F9;font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.5)}
+.adm-rows{list-style:none;margin:16px 0 0;padding:0 12px;display:flex;flex-direction:column;gap:16px}
+.adm-row{display:flex;gap:12px;align-items:flex-start}
+.adm-n{flex:none;width:20px;font-size:14px;line-height:22px;font-weight:600;letter-spacing:.02px;color:rgba(22,25,29,.5)}
+.adm-t{flex:1 1 auto;min-width:0;display:flex;flex-direction:column;gap:6px;padding-bottom:10px;border-bottom:1px solid #E1E5EA}
+.adm-row:last-child .adm-t{border-bottom:0}
+.adm-h{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.02px;color:#16191D}
+.adm-p{font-size:12px;line-height:18px;font-weight:500;letter-spacing:.05px;color:#16191D}
+.adm-p.dim{opacity:.5}
+.adm-row-live .adm-t{gap:12px}
+.adm-row-live .adm-h+.adm-p{margin-top:-6px}
+.adm-acts{display:flex;gap:8px}
+.adm-note{display:flex;gap:8px;font-size:12px;line-height:18px;font-weight:500;letter-spacing:.05px;color:#16191D}
+.adm-note img{width:16px;height:16px;flex:none;margin-top:1px}
+.adm-row{opacity:0;transform:translateY(10px);transition:opacity .45s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+.adm.is-in .adm-row{opacity:1;transform:none}
+.adm.is-in .adm-row:nth-child(2){transition-delay:.08s}.adm.is-in .adm-row:nth-child(3){transition-delay:.16s}.adm.is-in .adm-row:nth-child(4){transition-delay:.24s}.adm.is-in .adm-row:nth-child(5){transition-delay:.32s}.adm.is-in .adm-row:nth-child(6){transition-delay:.4s}
+
+/* ---------- fests (396:131320): #16191D with a top line. A notch tab with the two-fest pager, the two fest tiles (Neutron in front),
+   arrows at 66, a black dome (1086 × 1026 ellipse from y 140) carrying kicker 201, title 219, the aftermovie 271, the sponsor
+   marquee 511, a 2 × 2 photo grid 583/673, the drifting poster strip 775, the button 1048; dark hairlines rise from the foot. ---------- */
+.fest{position:relative;height:1320px;background:#16191D;box-shadow:inset 0 1px 0 #30363D;overflow:hidden;color:#fff}
+.fest-dome{position:absolute;left:calc(50% - 543px);top:140.04px;width:1086px;height:1026px;border-radius:50%;background:#0B0C0E;box-shadow:inset 0 0 0 1.5px #30363D}
+.fest-tab{position:absolute;left:calc(50% - 47px);top:0;width:94px;height:26px;background:#0B0C0E;border-radius:0 0 14px 14px;display:flex;align-items:flex-start;justify-content:center;padding-top:5px}
+.fest-tab-c{position:absolute;top:0;width:16px;height:16px;background:radial-gradient(circle at var(--cx) 100%,transparent 15.5px,#0B0C0E 16px)}
+.fest-tab-cl{left:-16px;--cx:0}
+.fest-tab-cr{right:-16px;--cx:100%}
+.fest-pg{display:flex;align-items:center;gap:6px;padding:6px 10px;height:18px}
+.fest-pg b{display:block;width:6px;height:6px;border-radius:3px;background:rgba(97,168,255,.5);transition:width .3s ease,background .3s ease}
+.fest-pg b.on{width:14px;background:#0673F9}
+.fest-logos{position:absolute;left:0;right:0;top:0;height:120px;pointer-events:none}
+.fest-tile{position:absolute;width:48.22px;height:50px;border-radius:8px;background:var(--tg);box-shadow:inset 0 0 0 1px var(--tb),0 4px 24px var(--glow);display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform .55s cubic-bezier(.22,1,.36,1),filter .4s ease;will-change:transform}
+.fest-tile-n{left:calc(50% - 47px);top:60.71px;transform:rotate(8deg);z-index:2;--tg:linear-gradient(135deg,#6138D3,#321D6D);--tb:#CEBCFE;--glow:rgba(133,95,238,.85)}
+.fest-tile-n img{width:42.36px;height:43.92px;display:block}
+.fest-tile-t{left:calc(50% - .33px);top:54px;transform:rotate(-8deg);z-index:1;--tg:linear-gradient(135deg,#A83E00,#5C1F00);--tb:#FFD2BA;--glow:rgba(238,160,95,.5)}
+.fest-tile-t i{display:block;width:41px;height:42px;background:url(assets/fest/tekron-mark.png) 54.5% 0/136.6% 103.2% no-repeat}
+.fest.is-tekron .fest-tile-n{z-index:1;transform:rotate(8deg) translate(-4px,2px) scale(.94);filter:brightness(.7)}
+.fest.is-tekron .fest-tile-t{z-index:2;transform:rotate(-8deg) translate(-22px,-2px) scale(1.06)}
+.fest-arr{position:absolute;top:66.04px;width:32px;height:32px;padding:0;border:0;border-radius:8px;background:#0B0C0E;box-shadow:inset 0 0 0 1.5px #30363D;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;-webkit-tap-highlight-color:transparent;transition:transform .16s ease,background .2s ease}
+.fest-arr:active{transform:scale(.94)}
+.fest-arr img{width:20px;height:20px;display:block}
+.fest-arr-l{left:20px}
+.fest-arr-r{right:20px}
+.fest-body{position:absolute;left:0;right:0;top:201px;transition:opacity .2s ease,transform .2s ease}
+.fest-body.is-out{opacity:0;transform:translateY(8px)}
+.fest-kick{display:block;margin:0 22px;text-align:center;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;opacity:.5}
+.fest-title{margin:6px 22px 0;text-align:center;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px}
+.fest-video{width:calc(100% - 32px);height:212px;margin:28px 16px 0}
+.fest-video .tour-lab,.fest-video .tour-time{bottom:10px}
+.fest-sponsors{position:relative;height:32.25px;margin-top:28px;overflow:hidden;touch-action:pan-y}
+.fest-spstrip{position:absolute;left:0;top:0;display:flex;align-items:center;gap:20.08px;height:32.25px;padding-left:15.06px;will-change:transform}
+.fest-spstrip img{flex:none;display:block}
+.fest-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:40px 16px 0}
+.fest-grid span{display:block;height:78px;border-radius:12px;background:#0B0C0E;box-shadow:inset 0 0 0 1px #30363D;overflow:hidden}
+.fest-grid img{width:100%;height:100%;object-fit:cover;display:block;border-radius:12px}
+.fest-posters{position:relative;height:249px;margin-top:24px;overflow:hidden;cursor:grab;touch-action:pan-y}
+.fest-posters.is-drag{cursor:grabbing}
+.fest-pstrip{position:absolute;left:calc(50% - 327px);top:0;display:flex;gap:12px;height:249px;will-change:transform}
+.fest-pstrip img{flex:none;width:210px;height:249px;object-fit:cover;object-position:top;border-radius:12px;box-shadow:inset 0 0 0 1px #30363D;display:block;-webkit-user-drag:none;user-select:none}
+.fest-cta{display:flex;align-items:center;justify-content:center;gap:6px;height:48px;margin:24px 16px 0;border-radius:12px;background:#fff;box-shadow:var(--btn-shadow);text-decoration:none;font-size:15px;line-height:26px;font-weight:600;letter-spacing:.06px;color:#16191D;transition:transform .16s ease}
+.fest-cta:active{transform:scale(.985)}
+.fest-cta img{width:20px;height:20px}
+.fest-lines{position:absolute;left:calc(50% - 230px);bottom:0;width:460px;height:150px;pointer-events:none}
+@media (prefers-reduced-motion:reduce){.city{opacity:1;transform:none;transition:none}.adm-row{opacity:1;transform:none;transition:none}.route-card,.fest-body,.fest-tile,.way-tile{transition:none}}
+
 /* ---------- Newton, the AI chat (385:86140 button, 385:86567 first screen). The dock gains a purple orb button; tapping it opens a
    full-screen white sheet (96% white, 16 px backdrop blur) with the thinking-orbs "searching" globe, the greeting and prompt chips,
    while the dock turns into the input pill + send. The orb engine is assets/vendor/thinking-orbs-engine.js (MIT). ---------- */
@@ -1320,6 +1485,113 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <symbol id="ico-fn" viewBox="0 0 24 24"><path transform="translate(3 3)" d="M 2.5250 18 C 1.7750 18 1.1666 17.8 0.7000 17.4000 C 0.2333 17.0000 0 16.4666 0 15.8 C 0 15.2666 0.1416 14.8375 0.4250 14.5125 C 0.7083 14.1875 1.0666 14.025 1.5 14.025 C 1.9166 14.025 2.2708 14.1666 2.5625 14.4500 C 2.8541 14.7333 3 15.0750 3 15.4750 C 3 15.5583 2.9958 15.6333 2.9875 15.7000 C 2.9791 15.7666 2.9666 15.8416 2.95 15.925 C 3.0333 15.9083 3.1041 15.8625 3.1625 15.7875 C 3.2208 15.7125 3.2666 15.6083 3.3000 15.4750 L 4.8500 7 L 3 7 C 2.7166 7 2.4791 6.9041 2.2875 6.7125 C 2.0958 6.5208 2 6.2833 2 6 C 2 5.7166 2.0958 5.4791 2.2875 5.2875 C 2.4791 5.0958 2.7166 5 3 5 L 5.2250 5 L 5.75 2.15 C 5.8666 1.5166 6.1791 1 6.6875 0.6000 C 7.1958 0.2000 7.8 0 8.5 0 C 9.2333 0 9.8333 0.2166 10.3 0.65 C 10.7666 1.0833 11 1.625 11 2.275 C 11 2.775 10.8583 3.1875 10.5750 3.5125 C 10.2916 3.8375 9.9333 4 9.5 4 C 9.0833 4 8.7291 3.8583 8.4375 3.575 C 8.1458 3.2916 8 2.9416 8 2.5250 C 8 2.4416 8.0041 2.3666 8.0125 2.3000 C 8.0208 2.2333 8.0333 2.1583 8.05 2.075 C 7.9500 2.1083 7.875 2.1583 7.825 2.225 C 7.775 2.2916 7.7333 2.3916 7.7 2.5250 L 7.275 5 L 11 5 C 11.2833 5 11.5208 5.0958 11.7125 5.2875 C 11.9041 5.4791 12 5.7166 12 6 C 12 6.25 11.9208 6.4666 11.7625 6.65 C 11.6041 6.8333 11.4083 6.9416 11.175 6.9750 L 12.5 8.475 L 13.8250 6.9750 C 13.5916 6.9416 13.3958 6.8333 13.2375 6.65 C 13.0791 6.4666 13 6.25 13 6 C 13 5.7166 13.0958 5.4791 13.2875 5.2875 C 13.4791 5.0958 13.7166 5 14 5 L 17 5 C 17.2833 5 17.5208 5.0958 17.7125 5.2875 C 17.9041 5.4791 18 5.7166 18 6 C 18 6.2833 17.9041 6.5208 17.7125 6.7125 C 17.5208 6.9041 17.2833 7 17 7 L 16.45 7 L 13.8250 10 L 16.45 13 L 17 13 C 17.2833 13 17.5208 13.0958 17.7125 13.2875 C 17.9041 13.4791 18 13.7166 18 14 C 18 14.2833 17.9041 14.5208 17.7125 14.7125 C 17.5208 14.9041 17.2833 15 17 15 L 14 15 C 13.7166 15 13.4791 14.9041 13.2875 14.7125 C 13.0958 14.5208 13 14.2833 13 14 C 13 13.75 13.0791 13.5333 13.2375 13.3500 C 13.3958 13.1666 13.5916 13.0583 13.8250 13.025 L 12.5 11.5 L 11.175 13.025 C 11.4083 13.0583 11.6041 13.1666 11.7625 13.3500 C 11.9208 13.5333 12 13.75 12 14 C 12 14.2833 11.9041 14.5208 11.7125 14.7125 C 11.5208 14.9041 11.2833 15 11 15 L 8 15 C 7.7166 15 7.4791 14.9041 7.2875 14.7125 C 7.0958 14.5208 7 14.2833 7 14 C 7 13.7166 7.0958 13.4791 7.2875 13.2875 C 7.4791 13.0958 7.7166 13 8 13 L 8.55 13 L 11.175 10 L 8.55 7 L 6.9 7 L 5.3000 15.6000 C 5.1666 16.35 4.8583 16.9375 4.375 17.3625 C 3.8916 17.7875 3.2750 18 2.5250 18 Z"/></symbol>
     </svg>
     <div class="cur-pane" id="curPane" data-node="364:57977"></div>
+  </section>
+
+  <!-- ===== faculty (364:63430): company bubbles step left along a dashed ring, then a card carousel of instructors ===== -->
+  <section class="fac" id="fac" data-node="364:63430" aria-label="Faculty">
+    <div class="fac-top">
+      <svg class="fac-ring" viewBox="0 0 1086 1086" aria-hidden="true"><circle cx="543" cy="543" r="541.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="8 8"/></svg>
+      <div class="fac-orbit" id="facOrbit" aria-hidden="true">
+        <span class="fac-bub fac-bub-l" data-src="assets/meta-vector.svg" data-w="20" data-h="13.28"><img src="assets/meta-vector.svg" alt="" style="width:20px;height:13.28px"></span>
+        <span class="fac-bub fac-bub-c" data-src="assets/google-mark.svg" data-w="20" data-h="20"><img src="assets/google-mark.svg" alt="" style="width:20px;height:20px"></span>
+        <span class="fac-bub fac-bub-r" data-src="assets/fac/logo-linkedin.svg" data-w="20" data-h="20"><img src="assets/fac/logo-linkedin.svg" alt="" style="width:20px;height:20px"></span>
+        <span class="fac-bub is-seed" data-src="assets/company-microsoft.svg" data-w="20" data-h="20"></span>
+        <span class="fac-bub is-seed" data-src="assets/company-uber.svg" data-w="20" data-h="20"></span>
+      </div>
+      <h2 class="fac-title">With our best in-class faculty</h2>
+      <p class="fac-sub">equipped to teaching the next generation</p>
+    </div>
+    <div class="fac-strip" id="facStrip" aria-label="Instructors">
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/gaurav.png" alt=""><div class="fac-row"><div><span class="fac-name">Gaurav Gehlot</span><span class="fac-role">SDE 3 + Senior Instructor</span></div><img class="fac-badge" src="assets/fac/badge-5y.png" alt="5 years experience"></div><img class="fac-logo" src="assets/fac/logo-goldman.png" alt="Goldman Sachs" style="width:45.25px"></article>
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/deepak.png" alt=""><div class="fac-row"><div><span class="fac-name">Deepak Kumar Gour</span><span class="fac-role">TPM &amp; Instructor</span></div><img class="fac-badge" src="assets/fac/badge-5y.png" alt="5 years experience"></div><img class="fac-logo" src="assets/fac/logo-google.png" alt="Google" style="width:56.85px"></article>
+      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Kunal Goyal</span><span class="fac-role">SDE + Associate Instructor</span></div><img class="fac-badge" src="assets/fac/badge-5y.png" alt="5 years experience"></div><img class="fac-logo" src="assets/fac/logo-google.png" alt="Google" style="width:56.85px"></article>
+      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/company-microsoft.svg" alt="Microsoft" style="width:28px"></article>
+      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/company-uber.svg" alt="Uber" style="width:28px"></article>
+      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/fac/logo-goldman.png" alt="Goldman Sachs" style="width:45.25px"></article>
+    </div>
+    <span class="pdots pdots-light fac-dots" id="facDots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
+  </section>
+
+  <!-- ===== four cities (390:129078): the campus sketch, then a gradient card per campus with a tour video and an Explore button ===== -->
+  <section class="cities" id="cities" data-node="390:129078" aria-label="Campuses in four cities">
+    <img class="cities-art" src="assets/found-campus-sketch.png" alt="">
+    <h2 class="cities-title">Spread across 4 cities in India</h2>
+    <p class="cities-list"><span>Delhi NCR</span><i>•</i><span>Pune</span><i>•</i><span>Hyderabad</span><i>•</i><span>Bengaluru</span></p>
+    <article class="city city-blue" data-node="390:129292">
+      <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">Rishihood University, Delhi NCR</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
+      <div class="city-bot"><button class="tour" type="button" data-reel="0" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore RU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+    </article>
+    <article class="city city-green" data-node="390:129369">
+      <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">ADY Patil University, Pune</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
+      <div class="city-bot"><button class="tour" type="button" data-reel="1" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore ADYPU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+    </article>
+    <article class="city city-purple" data-node="396:129620">
+      <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">S-VYASA University, Bengaluru</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
+      <div class="city-bot"><button class="tour" type="button" data-reel="2" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore S-VYASA <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+    </article>
+    <article class="city city-orange" data-node="396:129646">
+      <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">St. Mary University, Hyderabad</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
+      <div class="city-bot"><button class="tour" type="button" data-reel="0" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore SMRU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+    </article>
+    <svg style="display:none" aria-hidden="true"><symbol id="nst-mark-15" viewBox="0 0 15 18"><path d="M9.90039 0V1.8H11.3269L8.14539 4.9815C7.33989 4.50225 6.40389 4.22325 5.40039 4.22325H0.900391V6.02325H5.40039C7.38489 6.02325 9.00039 7.63875 9.00039 9.62325V15.9233H10.8004V9.62325C10.8004 8.30025 10.3189 7.0875 9.52689 6.147L12.6004 3.0735V4.5H14.4004V0H9.90039Z" fill="#0673F9"/><path d="M12.6 10.917L12.582 11.1353C12.402 14.067 9.88875 16.3417 6.9255 16.1933C4.16025 16.0537 1.98225 13.7722 1.81125 11.0092L1.8 10.827V1.8H9V0H0V10.854L0.0225 11.2455C0.2565 15.0322 3.40875 18 7.2 18C10.782 18 13.815 15.354 14.3348 11.889C14.3865 11.5492 14.4 11.205 14.4 10.863V5.4H12.6V10.917Z" fill="#004599"/></symbol></svg>
+  </section>
+
+  <!-- ===== three ways in (396:131019): students flow into the NST tile and come out the other side in merch; route tabs + card ===== -->
+  <section class="ways" id="ways" data-node="396:131019" aria-label="Three ways to get into NST">
+    <canvas class="ways-lines" id="waysLines" aria-hidden="true"></canvas>
+    <div class="ways-row" id="waysRow" aria-hidden="true">
+      <span class="way-tile"><svg viewBox="0 0 26 32" aria-hidden="true"><path d="M17.875 0V3.2H20.4506L14.7063 8.856C13.2519 8.004 11.5619 7.508 9.75 7.508H1.625V10.708H9.75C13.3331 10.708 16.25 13.58 16.25 17.108V28.308H19.5V17.108C19.5 14.756 18.6306 12.6 17.2006 10.928L22.75 5.464V8H26V0H17.875Z" fill="#0673F9"/><path d="M22.75 19.408L22.7175 19.796C22.3925 25.008 17.8547 29.052 12.5044 28.788C7.51156 28.54 3.57906 24.484 3.27031 19.572L3.25 19.248V3.2H16.25V0H0V19.296L0.040625 19.992C0.463125 26.724 6.15469 32 13 32C19.4675 32 24.9438 27.296 25.8822 21.136C25.9756 20.532 26 19.92 26 19.312V9.6H22.75V19.408Z" fill="#004599"/></svg></span>
+      <img class="way-av" data-slot="-3" src="assets/ways/left-1.png" alt=""><img class="way-av" data-slot="-2" src="assets/ways/left-2.png" alt=""><img class="way-av" data-slot="-1" src="assets/ways/left-3.png" alt="">
+      <img class="way-av" data-slot="1" src="assets/ways/right-1.png" alt=""><img class="way-av" data-slot="2" src="assets/ways/right-2.png" alt=""><img class="way-av" data-slot="3" src="assets/ways/right-3.png" alt="">
+    </div>
+    <h2 class="ways-title">Three ways to get into NST</h2>
+    <div class="routes" id="routes" role="tablist" aria-label="Routes">
+      <button class="route is-on" type="button" role="tab" aria-selected="true" data-r="0">NSAT</button>
+      <button class="route" type="button" role="tab" aria-selected="false" data-r="1">Coding NSAT</button>
+      <button class="route" type="button" role="tab" aria-selected="false" data-r="2">JEE percentile</button>
+    </div>
+    <div class="route-card" id="routeCard">
+      <span class="route-lab" id="routeLab">Route 1 · NSAT</span>
+      <h3 class="route-h" id="routeH">Maths, English and general aptitude. No chemistry.</h3>
+      <p class="route-p" id="routeP">Online and proctored, ₹1,200, three attempts. The prep kit and two mock tests unlock the moment you register.</p>
+      <div class="route-acts"><a class="rbtn rbtn-blue" id="routeA" href="#apply">Register <img src="assets/icon-arrow-right-22w.svg" alt=""></a><a class="rbtn rbtn-ink" id="routeB" href="#">Prep kit</a></div>
+    </div>
+  </section>
+
+  <!-- ===== admission process (397:133518): the hatched band, then six numbered steps in a card; step 02 carries the buttons ===== -->
+  <section class="adm" id="adm" data-node="397:133518" aria-label="Admission process">
+    <div class="hatch hatch-top" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
+    <h2 class="adm-title">Admission Process</h2>
+    <div class="adm-card">
+      <div class="adm-head">Your gateway to NST</div>
+      <ol class="adm-rows">
+        <li class="adm-row"><span class="adm-n">01</span><div class="adm-t"><span class="adm-h">Register for NSAT</span><span class="adm-p dim">Pay for NSAT Exam &amp; pick a slot</span></div></li>
+        <li class="adm-row adm-row-live"><span class="adm-n">02</span><div class="adm-t"><span class="adm-h">Appear for NSAT</span><span class="adm-p">Subjects include Mathematics, English and General Aptitude</span><div class="adm-acts"><a class="rbtn rbtn-blue rbtn-sm" href="#apply">Apply Now <img src="assets/icon-arrow-right-22w.svg" alt=""></a><a class="rbtn rbtn-ink rbtn-sm" href="#">Prep kit</a></div><span class="adm-note"><img src="assets/icon-info-16.svg" alt="">3 mock tests will be unlocked after registration for best preparation</span></div></li>
+        <li class="adm-row"><span class="adm-n">03</span><div class="adm-t"><span class="adm-h">Online Interview Round</span><span class="adm-p dim">You will be assessed on problem solving skills &amp; given the opportunity to showcase your projects &amp; achievements</span></div></li>
+        <li class="adm-row"><span class="adm-n">04</span><div class="adm-t"><span class="adm-h">Counselling</span><span class="adm-p dim">Once you clear the interview, you’ll be invited to the University campus counselling session</span></div></li>
+        <li class="adm-row"><span class="adm-n">05</span><div class="adm-t"><span class="adm-h">Block your seat</span><span class="adm-p dim">Receive your admission letter upon successful completion of the above steps</span></div></li>
+        <li class="adm-row"><span class="adm-n">06</span><div class="adm-t"><span class="adm-h">Pack your bags for Campus &amp; Hostel</span><span class="adm-p dim">Finally, head to the campus &amp; settle in. Welcome to NST!</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== fests (396:131320): a dark dome; Neutron by default, the arrows bring Tekron's tile to the front and swap the content ===== -->
+  <section class="fest" id="fest" data-node="396:131320" aria-label="Fests">
+    <div class="fest-dome" aria-hidden="true"></div>
+    <div class="fest-tab" aria-hidden="true"><i class="fest-tab-c fest-tab-cl"></i><i class="fest-tab-c fest-tab-cr"></i><span class="fest-pg" id="festPg"><b></b><b></b></span></div>
+    <div class="fest-logos" id="festLogos" aria-hidden="true"><span class="fest-tile fest-tile-n"><img src="assets/fest/neutron-mark.svg" alt=""></span><span class="fest-tile fest-tile-t"><i></i></span></div>
+    <button class="fest-arr fest-arr-l" type="button" id="festPrev" aria-label="Previous fest"><img src="assets/icon-arrow-left-20.svg" alt=""></button>
+    <button class="fest-arr fest-arr-r" type="button" id="festNext" aria-label="Next fest"><img src="assets/icon-arrow-right-20w.svg" alt=""></button>
+    <div class="fest-body" id="festBody">
+      <span class="fest-kick" id="festKick">Neutron | Rishihood University</span>
+      <h2 class="fest-title" id="festTitle">India's first techno-cultural fest</h2>
+      <button class="tour fest-video" type="button" data-reel="0" aria-label="Play the aftermovie"><img id="festStill" src="assets/fest/neutron-still.jpg" alt=""><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button>
+      <div class="fest-sponsors" aria-label="Sponsors"><div class="fest-spstrip" id="festSp"><img src="assets/fest/sponsor-1.png" alt="" style="width:131.76px;height:17.35px"><img src="assets/fest/sponsor-2.png" alt="" style="width:106.67px;height:28.92px"><img src="assets/fest/sponsor-3.png" alt="" style="width:130.51px;height:29.9px"><img src="assets/fest/sponsor-4.png" alt="" style="width:157.49px;height:32.25px"></div></div>
+      <div class="fest-grid"><span><img src="assets/fest/photo-1.jpg" alt=""></span><span><img src="assets/fest/photo-2.jpg" alt=""></span><span><img src="assets/fest/photo-3.jpg" alt=""></span><span><img src="assets/fest/photo-4.jpg" alt=""></span></div>
+      <div class="fest-posters" id="festPosters" aria-label="Event posters" data-node="397:131905"><div class="fest-pstrip" id="festPstrip"><img src="assets/fest/poster-1.jpg" alt=""><img src="assets/fest/poster-2.jpg" alt=""><img src="assets/fest/poster-3.jpg" alt=""></div></div>
+      <a class="fest-cta" id="festCta" href="#">Know more about Neutron <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
+    </div>
+    <canvas class="fest-lines" id="festLines" aria-hidden="true"></canvas>
   </section>
 
 </div>
@@ -1927,6 +2199,186 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     strip.addEventListener('pointerup', endDrag); strip.addEventListener('pointercancel', endDrag);
     strip.addEventListener('click', function(e){ var b = e.target.closest('.ysl-y'); if (!b || swallow) return; unlock(); snapTo(+b.getAttribute('data-y')); });   /* touch and keyboard */
     window.addEventListener('resize', function(){ strip.scrollLeft = cur * PITCH; });
+  })();
+
+  /* ---- a drifting strip: translates its children left at `speed` px/s inside `box`, wraps seamlessly (the children are cloned once),
+          pauses under a finger, drags, resumes 1.5 s after release. Used by the fest sponsors and posters. ---- */
+  function drift(box, strip, speed, gap){
+    if (!box || !strip) return;
+    var seed = Array.prototype.slice.call(strip.children);
+    var loopW = 0; seed.forEach(function(c){ loopW += c.getBoundingClientRect().width + gap; });
+    seed.forEach(function(c){ strip.appendChild(c.cloneNode(true)); });
+    var x = 0, last = 0, raf = 0, drag = null, resumeAt = 0, visible = false;
+    function apply(){ var xx = ((x % loopW) + loopW) % loopW; strip.style.transform = 'translate3d(' + (-xx).toFixed(2) + 'px,0,0)'; }
+    function step(now){
+      raf = 0;
+      if (!drag && now > resumeAt && !reduce){ var dt = Math.min(64, now - last); x += speed * dt / 1000; }
+      last = now; apply();
+      if (visible) raf = requestAnimationFrame(step);
+    }
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; if (visible && !raf){ last = performance.now(); raf = requestAnimationFrame(step); } }, {threshold: 0}).observe(box);
+    box.addEventListener('pointerdown', function(e){ drag = {x: e.clientX, start: x, moved: false}; box.classList.add('is-drag'); try { box.setPointerCapture(e.pointerId); } catch(err){} });
+    box.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - drag.x; if (Math.abs(dx) > 3) drag.moved = true; x = drag.start - dx; if (!raf) raf = requestAnimationFrame(step); });
+    function end(){ if (!drag) return; drag = null; box.classList.remove('is-drag'); resumeAt = performance.now() + 1500; }
+    box.addEventListener('pointerup', end); box.addEventListener('pointercancel', end);
+    apply();
+    return { remeasure: function(){ loopW = 0; seed.forEach(function(c){ loopW += c.getBoundingClientRect().width + gap; }); } };
+  }
+
+  /* ---- faculty: the company bubbles step left along the dashed ring (same mechanics as the placement orbit: five discs on slots
+          −2…2, a hold, then everyone advances one slot and the disc that leaves re-enters on the right with the next logo) ---- */
+  (function(){
+    var orbit = document.getElementById('facOrbit'); if (!orbit || reduce) return;
+    var seed = Array.prototype.slice.call(orbit.querySelectorAll('.fac-bub'));
+    var logos = seed.map(function(b){ return {src: b.getAttribute('data-src'), w: b.getAttribute('data-w'), h: b.getAttribute('data-h')}; });
+    seed.forEach(function(b){ b.remove(); });
+    var R = 543, CY = 590.86, SLOT = Math.asin(145 / R), HOLD = 1300, ADVANCE = 640;
+    function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    var discs = [], nextIdx = 0;
+    for (var i = 0; i < 5; i++){
+      var d = document.createElement('span'); d.className = 'fac-bub'; var im = document.createElement('img'); im.alt = ''; d.appendChild(im); orbit.appendChild(d);
+      discs.push({el: d, img: im, slot: i - 2, from: 0, to: 0});
+    }
+    function assign(disc, idx){ var L = logos[((idx % logos.length) + logos.length) % logos.length]; disc.img.src = L.src; disc.img.style.width = L.w + 'px'; disc.img.style.height = L.h + 'px'; }
+    discs.forEach(function(disc){ assign(disc, disc.slot + 1); });   /* Meta, Google, LinkedIn in view; Microsoft and Uber waiting */
+    nextIdx = 4;
+    function place(disc, ang){
+      var cx = orbit.clientWidth / 2, x = cx + R * Math.sin(ang) - 21, y = CY - R * Math.cos(ang) - 21;
+      disc.el.style.left = x.toFixed(2) + 'px'; disc.el.style.top = y.toFixed(2) + 'px';
+      var a = Math.abs(ang) / SLOT; disc.el.style.opacity = a <= 1 ? 1 : Math.max(0, 1 - (a - 1)).toFixed(3);
+    }
+    var phase = 'hold', t = 0, last = 0, visible = false, raf = 0;
+    discs.forEach(function(disc){ place(disc, disc.slot * SLOT); });
+    function frame(now){
+      var dt = last ? Math.min(now - last, 50) : 0; last = now; t += dt;
+      if (phase === 'hold'){ if (t >= HOLD){ phase = 'advance'; t = 0; discs.forEach(function(disc){ disc.from = disc.slot; disc.to = disc.slot - 1; }); } }
+      else {
+        var k = Math.min(1, t / ADVANCE), e = easeInOut(k);
+        discs.forEach(function(disc){ place(disc, (disc.from + (disc.to - disc.from) * e) * SLOT); });
+        if (k >= 1){ discs.forEach(function(disc){ disc.slot = disc.to; if (disc.slot < -2){ disc.slot = 2; assign(disc, nextIdx++); place(disc, 2 * SLOT); } }); phase = 'hold'; t = 0; }
+      }
+      raf = visible ? requestAnimationFrame(frame) : 0;
+      if (!visible) last = 0;
+    }
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; if (visible && !raf) raf = requestAnimationFrame(frame); }, {threshold: .3}).observe(orbit);
+    window.addEventListener('resize', function(){ if (phase === 'hold') discs.forEach(function(disc){ place(disc, disc.slot * SLOT); }); });
+  })();
+  snapDots(document.getElementById('facStrip'), '.fac-card', document.getElementById('facDots'));
+
+  /* ---- four cities: cards rise in as they arrive; every tour block opens the reels overlay ---- */
+  (function(){
+    var cards = document.querySelectorAll('.city'); if (!cards.length) return;
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }); }, {threshold: .15});
+    Array.prototype.forEach.call(cards, function(c){ io.observe(c); });
+  })();
+  Array.prototype.forEach.call(document.querySelectorAll('.tour'), function(b){ b.addEventListener('click', function(e){ e.preventDefault(); openVideo(); }); });
+
+  /* ---- three ways in: the conveyor. Six visible avatars on slots −3…3 around the NST tile (slot 0). Every 1.3 s everyone moves one
+          slot to the right over 700 ms: the avatar reaching the tile shrinks into it, a new one grows out of the far side wearing NST
+          merch, the last one slides off the right edge and a fresh face slides in from the left. The tile pulses as they pass. ---- */
+  (function(){
+    var row = document.getElementById('waysRow'); if (!row) return;
+    var tile = row.querySelector('.way-tile'), avs = Array.prototype.slice.call(row.querySelectorAll('.way-av'));
+    var LEFT = ['assets/ways/left-1.png', 'assets/ways/left-2.png', 'assets/ways/left-3.png'], RIGHT = ['assets/ways/right-1.png', 'assets/ways/right-2.png', 'assets/ways/right-3.png'];
+    if (reduce) return;
+    var HOLD = 1300, MOVE = 700, items = avs.map(function(el){ return {el: el, slot: +el.getAttribute('data-slot')}; }), nl = 1, nr = 1;   /* start the queues one step in so no face sits next to its twin */
+    /* two off-screen buffers: one waiting at −4, one that will be born at the tile */
+    function mk(slot, src){ var im = document.createElement('img'); im.className = 'way-av'; im.alt = ''; im.src = src; row.appendChild(im); var it = {el: im, slot: slot}; place(it, slot); return it; }
+    items.push(mk(-4, LEFT[nl++ % 3]));
+    function ease(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function place(it, s){
+      var a = Math.abs(s), x, sc = 1, op = 1;
+      if (a >= 1) x = (s < 0 ? -1 : 1) * (77 + 66 * (a - 1));
+      else { x = s * 77; sc = .25 + .75 * a; op = a; }
+      it.el.style.transform = 'translateX(' + x.toFixed(2) + 'px) scale(' + sc.toFixed(3) + ')';
+      it.el.style.opacity = op.toFixed(3);
+      it.el.style.zIndex = a < 1 ? 1 : 3;
+    }
+    items.forEach(function(it){ it.el.removeAttribute('data-slot'); place(it, it.slot); });
+    var t = 0, last = 0, phase = 'hold', visible = false, raf = 0, born = null;
+    function frame(now){
+      var dt = last ? Math.min(now - last, 50) : 0; last = now; t += dt;
+      if (phase === 'hold'){
+        if (t >= HOLD){
+          phase = 'move'; t = 0;
+          born = mk(0, RIGHT[nr++ % 3]); born.from = 0; born.to = 1; items.push(born);   /* the merch-clad one about to emerge */
+          items.forEach(function(it){ if (it !== born){ it.from = it.slot; it.to = it.slot + 1; } });
+          tile.classList.add('is-pulse'); setTimeout(function(){ tile.classList.remove('is-pulse'); }, 420);
+        }
+      } else {
+        var k = Math.min(1, t / MOVE), e = ease(k);
+        items.forEach(function(it){ place(it, it.from + (it.to - it.from) * e); });
+        if (k >= 1){
+          items.forEach(function(it){ it.slot = it.to; });
+          items = items.filter(function(it){ if (it.slot === 0 || it.slot > 3){ it.el.remove(); return false; } return true; });   /* swallowed by the tile, or off the right edge */
+          items.push(mk(-4, LEFT[nl++ % 3]));
+          items.forEach(function(it){ place(it, it.slot); });
+          phase = 'hold'; t = 0;
+        }
+      }
+      raf = visible ? requestAnimationFrame(frame) : 0;
+      if (!visible) last = 0;
+    }
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; if (visible && !raf) raf = requestAnimationFrame(frame); }, {threshold: .3}).observe(row);
+  })();
+  hairlines(document.getElementById('waysLines'), document.getElementById('ways'), '#E1E5EA', true);
+
+  /* ---- three ways in: the route selector swaps the card (Route 1 copy is the frame's; 2 and 3 are placeholders) ---- */
+  (function(){
+    var tabs = document.getElementById('routes'), card = document.getElementById('routeCard'); if (!tabs) return;
+    var R = [
+      ['Route 1 · NSAT', 'Maths, English and general aptitude. No chemistry.', 'Online and proctored, ₹1,200, three attempts. The prep kit and two mock tests unlock the moment you register.', 'Register', 'Prep kit'],
+      ['Route 2 · Coding NSAT', 'Already code? Skip the aptitude paper.', 'A 90-minute coding round in the language you know. Clear it and you move straight to the interview.', 'Take the test', 'Sample paper'],
+      ['Route 3 · JEE percentile', 'A JEE Main percentile can take you straight in.', 'Share your JEE Main score. Above the cut-off you skip NSAT altogether and go to the interview round.', 'Submit score', 'See cut-offs']
+    ];
+    var cur = 0, btns = Array.prototype.slice.call(tabs.querySelectorAll('.route'));
+    function show(i){
+      if (i === cur) return; cur = i;
+      btns.forEach(function(b, k){ b.classList.toggle('is-on', k === i); b.setAttribute('aria-selected', k === i ? 'true' : 'false'); });
+      card.classList.add('is-out');
+      setTimeout(function(){
+        var r = R[i];
+        document.getElementById('routeLab').textContent = r[0]; document.getElementById('routeH').textContent = r[1]; document.getElementById('routeP').textContent = r[2];
+        var a = document.getElementById('routeA'); a.firstChild.nodeValue = r[3] + ' '; document.getElementById('routeB').textContent = r[4];
+        card.classList.remove('is-out');
+      }, reduce ? 0 : 180);
+    }
+    tabs.addEventListener('click', function(e){ var b = e.target.closest('.route'); if (b) show(+b.getAttribute('data-r')); });
+  })();
+
+  /* ---- admission process: the rows step in when the card arrives ---- */
+  (function(){
+    var sec = document.getElementById('adm'); if (!sec) return;
+    new IntersectionObserver(function(en){ if (en[0].isIntersecting){ sec.classList.add('is-in'); } }, {threshold: .1}).observe(sec.querySelector('.adm-card'));
+  })();
+
+  /* ---- fests: sponsors and posters drift left (drag to browse); the arrows toggle Neutron ↔ Tekron: the chosen tile comes to the
+          front and the dome's content fades to that fest's copy (Tekron's is placeholder until its assets arrive) ---- */
+  (function(){
+    var sec = document.getElementById('fest'); if (!sec) return;
+    hairlines(document.getElementById('festLines'), sec, '#30363D', false);
+    drift(document.querySelector('.fest-sponsors'), document.getElementById('festSp'), 22, 20.08);
+    drift(document.getElementById('festPosters'), document.getElementById('festPstrip'), 18, 12);
+    var FESTS = [
+      {kick: 'Neutron | Rishihood University', title: "India's first techno-cultural fest", cta: 'Know more about Neutron'},
+      {kick: 'Tekron | ADY Patil University', title: 'The tech fest built by students', cta: 'Know more about Tekron'}
+    ];
+    var cur = 0, body = document.getElementById('festBody'), pg = document.getElementById('festPg').children, busy = false;
+    pg[0].classList.add('on');
+    function go(i){
+      if (busy || i === cur) return; busy = true; cur = i;
+      sec.classList.toggle('is-tekron', i === 1);
+      Array.prototype.forEach.call(pg, function(b, k){ b.classList.toggle('on', k === i); });
+      body.classList.add('is-out');
+      setTimeout(function(){
+        var f = FESTS[i];
+        document.getElementById('festKick').textContent = f.kick; document.getElementById('festTitle').textContent = f.title;
+        document.getElementById('festCta').firstChild.nodeValue = f.cta + ' ';
+        body.classList.remove('is-out'); busy = false;
+      }, reduce ? 0 : 200);
+    }
+    document.getElementById('festPrev').addEventListener('click', function(){ go(cur ? 0 : 1); });
+    document.getElementById('festNext').addEventListener('click', function(){ go(cur ? 0 : 1); });
   })();
 
   /* ---- campus film: wire a source here when the video file is available ---- */
