@@ -657,7 +657,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .dock.is-ai .dock-inner{background:rgba(0,0,0,0)}
 .dock.is-ai .play,.dock.is-ai .dock-cta{display:none}
 .dock.is-ai .ai-input{display:flex}
-.ai{position:fixed;inset:0;z-index:45;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:opacity .32s ease;overflow:hidden}
+.ai{position:fixed;inset:0;z-index:45;background:rgba(255,255,255,.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:opacity .32s ease;overflow:hidden;touch-action:none}
 .ai.is-open{opacity:1;pointer-events:auto}
 .ai-mark{position:absolute;left:50%;top:24px;width:25.6px;height:32px;margin-left:-12.8px;padding:0;border:0;background:none;color:#0B0C0E;opacity:.2;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .ai-mark svg{display:block;width:25.6px;height:32px}
@@ -678,6 +678,38 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .ai.is-open .ai-chip:nth-child(1){transition-delay:.22s}.ai.is-open .ai-chip:nth-child(2){transition-delay:.27s}.ai.is-open .ai-chip:nth-child(3){transition-delay:.32s}.ai.is-open .ai-chip:nth-child(4){transition-delay:.37s}.ai.is-open .ai-chip:nth-child(5){transition-delay:.42s}
 .ai-note{position:absolute;left:41px;right:41px;bottom:calc(86px + env(safe-area-inset-bottom,0px));margin:0;font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.45);text-align:center}
 @media (prefers-reduced-motion:reduce){.ai-btn::before{animation:none}.ai,.ai-center,.ai-chip{transition:none}.ai-orb canvas{animation:none}}
+/* chat state (390:107938): the thread replaces the welcome block, the mark turns brand-coloured, a close button sits top-right */
+.ai-x{position:absolute;right:16px;top:18px;width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.9);color:rgba(22,25,29,.8);font-family:var(--font);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;transition:transform .16s ease}
+.ai-x:active{transform:scale(.94)}
+.ai-mark svg path{fill:currentColor;transition:fill .3s ease}
+.ai.is-chat .ai-mark{opacity:1}
+.ai.is-chat .ai-mark svg path:first-child{fill:#0673F9}.ai.is-chat .ai-mark svg path:last-child{fill:#004599}
+.ai.is-chat .ai-center{opacity:0;pointer-events:none;transform:translateY(calc(-50% - 10px))}
+.ai.is-chat .ai-note{display:none}
+.ai-thread{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:132px 16px calc(110px + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;gap:14px;-webkit-overflow-scrolling:touch}
+.ai.is-chat .ai-thread{display:flex}
+.ai-you{display:flex;justify-content:flex-end;animation:aiIn .32s cubic-bezier(.22,1,.36,1) both}
+.ai-bubble{max-width:280px;padding:10px 14px;border-radius:18px 18px 4px 18px;background:#F5E5FF;font-size:14px;line-height:20px;font-weight:500;color:var(--ink);word-wrap:break-word}
+.ai-newton{display:flex;align-items:center;gap:6px;height:24px;animation:aiIn .32s cubic-bezier(.22,1,.36,1) both}
+.ai-av{display:block;width:24px;height:24px;flex:none}
+.ai-status{font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.45);animation:aiPulse 1.4s ease-in-out infinite}
+@keyframes aiPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.ai-msg{margin:0;font-size:14px;line-height:22px;font-weight:500;color:var(--ink)}
+.ai-msg .w{opacity:0;filter:blur(4px);transition:opacity .22s ease,filter .22s ease}
+.ai-msg .w.on{opacity:1;filter:blur(0)}
+.ai-step{display:flex;gap:12px;align-items:flex-start;opacity:0;transform:translateY(6px);transition:opacity .35s ease,transform .35s cubic-bezier(.22,1,.36,1)}
+.ai-step.on{opacity:1;transform:none}
+.ai-step b{flex:none;font-size:12px;line-height:18px;font-weight:600;letter-spacing:.5px;color:var(--brand)}
+.ai-step div{display:flex;flex-direction:column;gap:4px;min-width:0}
+.ai-step strong{font-size:13px;line-height:18px;font-weight:600;color:var(--ink)}
+.ai-step span{font-size:12px;line-height:16px;font-weight:500;letter-spacing:.1px;color:#5B6271}
+.ai-fu{display:flex;flex-wrap:wrap;gap:8px}
+.ai-fu .ai-chip{font-size:12px;line-height:18px;transition-delay:0s!important}
+.ai-fu .ai-chip.on{opacity:1;transform:none}
+@keyframes aiIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.dock.is-ai.is-busy .ai-btn{opacity:.55}
+@media (prefers-reduced-motion:reduce){.ai-you,.ai-newton{animation:none}.ai-msg .w{transition:none;opacity:1;filter:none}.ai-step{transition:none}.ai-status{animation:none}}
+
 
 </style>
 </head>
@@ -1159,7 +1191,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   <div class="vid-stage" id="vidStage"></div>
 </div>
 <div class="ai" id="ai" aria-hidden="true" data-node="385:86567" role="dialog" aria-label="Ask Newton">
-  <button class="ai-mark" type="button" id="aiClose" aria-label="Close the chat"><svg viewBox="0 0 26 32" aria-hidden="true"><path d="M17.5996 0V3.2H20.1356L14.4796 8.856C13.0476 8.004 11.3836 7.508 9.59961 7.508H1.59961V10.708H9.59961C13.1276 10.708 15.9996 13.58 15.9996 17.108V28.308H19.1996V17.108C19.1996 14.756 18.3436 12.6 16.9356 10.928L22.3996 5.464V8H25.5996V0H17.5996Z" fill="currentColor"/><path d="M22.4 19.408L22.368 19.796C22.048 25.008 17.58 29.052 12.312 28.788C7.396 28.54 3.524 24.484 3.22 19.572L3.2 19.248V3.2H16V0H0V19.296L0.04 19.992C0.456 26.724 6.06 32 12.8 32C19.168 32 24.56 27.296 25.484 21.136C25.576 20.532 25.6 19.92 25.6 19.312V9.6H22.4V19.408Z" fill="currentColor"/></svg></button>
+  <button class="ai-mark" type="button" id="aiHome" aria-label="Start a new chat"><svg viewBox="0 0 26 32" aria-hidden="true"><path d="M17.5996 0V3.2H20.1356L14.4796 8.856C13.0476 8.004 11.3836 7.508 9.59961 7.508H1.59961V10.708H9.59961C13.1276 10.708 15.9996 13.58 15.9996 17.108V28.308H19.1996V17.108C19.1996 14.756 18.3436 12.6 16.9356 10.928L22.3996 5.464V8H25.5996V0H17.5996Z" fill="currentColor"/><path d="M22.4 19.408L22.368 19.796C22.048 25.008 17.58 29.052 12.312 28.788C7.396 28.54 3.524 24.484 3.22 19.572L3.2 19.248V3.2H16V0H0V19.296L0.04 19.992C0.456 26.724 6.06 32 12.8 32C19.168 32 24.56 27.296 25.484 21.136C25.576 20.532 25.6 19.92 25.6 19.312V9.6H22.4V19.408Z" fill="currentColor"/></svg></button>
   <div class="ai-center">
     <div class="ai-orb"><canvas id="aiOrb" width="144" height="144" role="img" aria-label="Newton is listening"></canvas></div>
     <div class="ai-text">
@@ -1173,7 +1205,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       </div>
     </div>
   </div>
+  <div class="ai-thread" id="aiThread" aria-live="polite"></div>
   <p class="ai-note">Disclaimer: Answers come from NST's own pages.</p>
+  <button class="ai-x" type="button" id="aiX" aria-label="Close the chat">×</button>
 </div>
 <div class="dock" id="dock" data-node="385:86139">
   <div class="dock-inner">
@@ -1925,48 +1959,109 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   (function(){ var s = document.getElementById('papers'); if (s) snapDots(s, '.paper', document.getElementById('resDots')); })();
 
 
-  /* ==================== Newton, the AI chat: first screen ==================== */
+  /* ==================== Newton, the AI chat ====================
+     Placeholder build: answers come from a small local table so the whole flow can be tested. Orbs are thinking-orbs states,
+     kept to three: "searching" (the welcome globe), "working" (while Newton thinks), "breathing" (the avatar once it has answered). */
   (function(){
-    var ai = document.getElementById('ai'), aiBtn = document.getElementById('aiBtn'), aiClose = document.getElementById('aiClose'), field = document.getElementById('aiField'), chips = document.getElementById('aiChips');
+    var ai = document.getElementById('ai'), aiBtn = document.getElementById('aiBtn'), field = document.getElementById('aiField'), chips = document.getElementById('aiChips'), thread = document.getElementById('aiThread'), home = document.getElementById('aiHome'), xBtn = document.getElementById('aiX');
     if (!ai || !aiBtn) return;
-    var open = false, orb = null, orbRaf = 0, orbRunning = false;
-    /* the orb: thinking-orbs "searching" (a scan meridian sweeping a dotted globe), the 64 px preset drawn at 72 px, dark ink on the white sheet */
-    function mountOrb(){
-      var T = window.ThinkingOrbs, cv = document.getElementById('aiOrb'); if (!T || !cv || orb) return;
-      var size = 72, dpr = Math.min(2, window.devicePixelRatio || 1);
+    var open = false, busy = false, chat = false, dpr = Math.min(2, window.devicePixelRatio || 1), T = window.ThinkingOrbs;
+    /* ---- orbs: every canvas registers here; one loop drives them all while the sheet is open ---- */
+    var orbs = [], orbRaf = 0, TINT = {r:136, g:61, b:163};   /* #883DA3, the deep end of the button gradient */
+    function orbMake(cv, state, preset, size, tint){
+      if (!T) return null;
       cv.width = Math.round(size * dpr); cv.height = Math.round(size * dpr);
-      var ctx = cv.getContext('2d'); if (!ctx) return;
-      var r = T.resolvePreset('searching', 64), frameFn = T.MODE_FRAMES[r.mode], tint = {r:136, g:61, b:163};   /* #883DA3, the deep end of the button's gradient; far dots fade toward white */
-      orb = { draw: function(t){ ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, size, size); T.paintFrame(ctx, frameFn(size, t, r.opts), false, tint); }, speed: r.speed };
+      var ctx = cv.getContext('2d'), r = T.resolvePreset(state, preset), o = {cv: cv, ctx: ctx, size: size, r: r, fn: T.MODE_FRAMES[r.mode], tint: tint, dead: false};
+      o.set = function(st){ o.r = T.resolvePreset(st, preset); o.fn = T.MODE_FRAMES[o.r.mode]; };
+      o.draw = function(t){ ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.clearRect(0, 0, size, size); T.paintFrame(ctx, o.fn(size, t, o.r.opts), false, tint); };
+      orbs.push(o); o.draw(reduce ? .6 : performance.now() / 1000 * o.r.speed); return o;
     }
-    function orbLoop(){ orbRaf = 0; if (!orbRunning || !orb) return; orb.draw(performance.now() / 1000 * orb.speed); orbRaf = requestAnimationFrame(orbLoop); }
-    function orbStart(){ mountOrb(); if (!orb) return; if (reduce){ orb.draw(0.6); return; } orb.draw(performance.now() / 1000 * orb.speed); if (!orbRunning){ orbRunning = true; orbRaf = requestAnimationFrame(orbLoop); } }
-    function orbStop(){ orbRunning = false; if (orbRaf) cancelAnimationFrame(orbRaf); orbRaf = 0; }
-    document.addEventListener('visibilitychange', function(){ if (!open) return; if (document.visibilityState === 'hidden') orbStop(); else orbStart(); });
+    function orbLoop(){ orbRaf = 0; if (!open || reduce) return; var now = performance.now() / 1000; orbs.forEach(function(o){ if (!o.dead && o.cv.isConnected) o.draw(now * o.r.speed); }); orbRaf = requestAnimationFrame(orbLoop); }
+    function orbsStart(){ if (!orbRaf && open && !reduce) orbRaf = requestAnimationFrame(orbLoop); }
+    function orbsStop(){ if (orbRaf) cancelAnimationFrame(orbRaf); orbRaf = 0; }
+    document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') orbsStop(); else orbsStart(); });
+    var welcomeOrb = null;
+    /* ---- placeholder answers (to be replaced by the real agent) ---- */
+    var KB = {
+      admit: { text: 'Five steps, all online except the last one. Most students finish the first three in about a week.', steps: [['Register', 'Phone and OTP, then a short form'], ['NSAT', 'Online, proctored, ₹1,200. Maths, English, aptitude. Three attempts'], ['Interview', 'An intro round and a technical one'], ['Counselling', 'Pick a campus and talk through fees and scholarships'], ['Block your seat', 'Then hostel, MacBook and the semester fee']], next: ['When is the next NSAT?', 'Am I eligible with 12th PCM?', 'Book a counselling call with NST'] },
+      curriculum: { text: 'Four years, one verb each: Build, Achieve, Innovate, Succeed. Coding from week one, machine learning by year two, your own models by year three, internships and a capstone in year four.', steps: [['Year 1 · Build', 'Python, JavaScript, DSA and the web, coding alongside AI from week one'], ['Year 2 · Achieve', 'Backend, databases, machine learning and real data pipelines'], ['Year 3 · Innovate', 'Deep learning, GPT models, networks and system design'], ['Year 4 · Succeed', 'OS, NLP, computer vision; an internship, research or a capstone']], next: ['What projects will I build?', 'Show me year 1 in detail', 'How do I get in?'] },
+      scholarship: { text: 'Yes. Your NSAT score and JEE percentile can both unlock a scholarship, and a counsellor tells you the exact amount before you pay anything.', steps: [['NSAT scholarship', 'Decided on your NSAT score, announced with the result'], ['JEE Excellence Scholarship', 'For strong JEE Main percentiles, written into the offer letter'], ['Talk it through', 'Counselling covers fees, scholarships and instalments in one call']], next: ["What's the fee?", 'Book a counselling call with NST', 'Can I pay in instalments?'] },
+      fee: { text: 'The exact fee depends on the campus and your scholarship, so a counsellor confirms the number for you. This is how it is structured.', steps: [['Block fee', 'A seat-booking payment after counselling'], ['Semester fee', 'Paid each semester through your timeline'], ['Hostel and MacBook', 'Chosen separately and added to the first semester']], next: ['Is there a scholarship?', 'Book a counselling call with NST', 'Can I pay in instalments?'] },
+      bengaluru: { text: 'RR Nagar, Bengaluru: labs, a robotics lab, a startup floor and the library, in the city students called “the tech city” when they chose it.', steps: [['Where', 'RR Nagar, south-west Bengaluru'], ['What is there', 'Labs, robotics and drones, a startup space, the library'], ['See it', 'Campus tours run on weekends; you can book one below']], next: ['Book a campus visit', 'Show me the Pune campus', 'What is the hostel like?'] },
+      pune: { text: 'The Pune campus sits with ADY Patil: labs, a hackathon floor and hostels on campus, with the internship record students point to first.', steps: [['Where', 'ADY Patil campus, Pune'], ['What is there', 'Labs, a hackathon floor, hostels on campus'], ['See it', 'Campus tours run on weekends; you can book one below']], next: ['Book a campus visit', 'Show me details of Bengaluru campus', 'How do I get in?'] },
+      nsat: { text: 'The next NSAT is on 24 December 2026. It is online and proctored, ₹1,200, and you get three attempts, with a free prep kit and mock tests once you register.', steps: [['24 Dec 2026', 'The next test date'], ['Maths, English, aptitude', 'No chemistry, no physics'], ['Three attempts', 'One main attempt and two retries']], next: ['How do I get in?', 'Am I eligible with 12th PCM?', 'Book a counselling call with NST'] },
+      eligible: { text: 'Yes. Any 12th stream works for NSAT; there is no maths-marks cut-off. The test itself measures maths, English and aptitude, and coding is taught from zero in year one.', steps: [['Any stream', 'PCM, PCB or commerce, all eligible'], ['No coding needed', 'Year one starts from zero'], ['NSAT decides', 'Your score, not your board result']], next: ['When is the next NSAT?', 'How do I get in?', 'Is there a scholarship?'] },
+      counsel: { text: 'I can set that up. Counselling is free, about thirty minutes on a call, and it is where fees, scholarships and campuses get settled.', steps: [['Pick a slot', 'Weekdays 10 am to 7 pm, weekends 11 am to 5 pm'], ['We call you', 'On the number you signed up with'], ['Walk out with numbers', 'Fee, scholarship and a campus recommendation']], next: ["What's the fee?", 'Is there a scholarship?', 'How do I get in?'] },
+      visit: { text: 'Campus visits run on weekends, forty-five minutes with a current student, and they are free. Tell me the campus and a day and I will hold a slot.', steps: [['Bengaluru', 'RR Nagar, Saturdays and Sundays'], ['Pune', 'ADY Patil campus, Saturdays'], ['Delhi NCR', 'Rishihood University, Sonipat, Sundays']], next: ['Show me details of Bengaluru campus', 'Show me the Pune campus', 'How do I get in?'] },
+      projects: { text: 'Every year ends in things you can show. Year one starts with open source, year two ships products to real users, and by year four you have trained your own model.', steps: [['Year 1', 'Open Source for an Open World, a GenAI CRM, Algorithm vs AI'], ['Year 2', 'Last-mile delivery routing, an eBay-style auction, the Product Hunt Challenge'], ['Year 3', 'IPL auction models for CSK, a Google-Docs-style editor, live streaming at scale'], ['Year 4', 'Train your own LLM, deep-tech projects']], next: ["What's the curriculum for 4 year?", 'How do I get in?', 'Show me details of Bengaluru campus'] },
+      fallback: { text: 'I do not have that on NST’s pages yet, so I will not guess. A counsellor will know, and I can set up a call.', steps: [], next: ['Book a counselling call with NST', 'How do I get in?', "What's the curriculum for 4 year?"] }
+    };
+    var RULES = [[/next nsat|nsat date|when is|exam date/, 'nsat'], [/eligib|12th|pcm|pcb|stream/, 'eligible'], [/counsel|call with|talk to/, 'counsel'], [/visit|tour/, 'visit'], [/project|build/, 'projects'], [/curricul|year|syllabus|learn|subject/, 'curriculum'], [/scholar/, 'scholarship'], [/fee|cost|price|instal|pay/, 'fee'], [/pune/, 'pune'], [/bengaluru|bangalore|campus|hostel/, 'bengaluru'], [/get in|apply|admission|admit|join|process/, 'admit']];
+    function answerFor(q){ var t = q.toLowerCase(); for (var i = 0; i < RULES.length; i++) if (RULES[i][0].test(t)) return KB[RULES[i][1]]; return KB.fallback; }
+    /* ---- rendering ---- */
+    function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+    function scrollDown(){ thread.scrollTo({top: thread.scrollHeight, behavior: reduce ? 'auto' : 'smooth'}); }
+    function enterChat(){ if (chat) return; chat = true; ai.classList.add('is-chat'); }
+    function newChat(){ thread.innerHTML = ''; chat = false; busy = false; dock.classList.remove('is-busy'); ai.classList.remove('is-chat'); orbs = orbs.filter(function(o){ return o === welcomeOrb; }); field.value = ''; }
+    function sleep(ms){ return new Promise(function(res){ setTimeout(res, reduce ? 0 : ms); }); }
+    function send(q){
+      q = (q || '').trim(); if (!q || busy) return;
+      busy = true; dock.classList.add('is-busy'); field.value = ''; field.blur();
+      enterChat();
+      var you = el('div', 'ai-you'); you.appendChild(el('div', 'ai-bubble', q)); thread.appendChild(you);
+      var row = el('div', 'ai-newton'); var cv = document.createElement('canvas'); cv.className = 'ai-av'; cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', 'Newton'); row.appendChild(cv);
+      var status = el('span', 'ai-status', 'Thinking…'); row.appendChild(status); thread.appendChild(row); scrollDown();
+      var orb = orbMake(cv, 'working', 20, 24, TINT); orbsStart();
+      var a = answerFor(q);
+      sleep(900 + Math.min(900, q.length * 12)).then(function(){
+        status.remove(); if (orb) orb.set('breathing'); cv.setAttribute('aria-label', 'Newton has answered');
+        var msg = el('p', 'ai-msg'); thread.appendChild(msg);
+        var words = a.text.split(' '), spans = words.map(function(w, i){ var sp = el('span', 'w', w + (i < words.length - 1 ? ' ' : '')); msg.appendChild(sp); return sp; });
+        return new Promise(function(done){ var i = 0; (function tick(){ if (i < spans.length){ spans[i++].classList.add('on'); if (i % 6 === 0) scrollDown(); setTimeout(tick, reduce ? 0 : 38); } else done(); })(); });
+      }).then(function(){
+        var steps = a.steps.map(function(st, i){ var r = el('div', 'ai-step'); r.appendChild(el('b', '', (i < 9 ? '0' : '') + (i + 1))); var d = el('div'); d.appendChild(el('strong', '', st[0])); d.appendChild(el('span', '', st[1])); r.appendChild(d); thread.appendChild(r); return r; });
+        var fu = el('div', 'ai-fu'); a.next.forEach(function(n){ var b = el('button', 'ai-chip', n); b.type = 'button'; fu.appendChild(b); }); thread.appendChild(fu);
+        scrollDown();
+        return new Promise(function(done){ var i = 0; (function tick(){ if (i < steps.length){ steps[i++].classList.add('on'); scrollDown(); setTimeout(tick, reduce ? 0 : 110); } else { Array.prototype.forEach.call(fu.children, function(c, k){ setTimeout(function(){ c.classList.add('on'); }, reduce ? 0 : 80 * k); }); setTimeout(done, reduce ? 0 : 80 * fu.children.length + 200); } })(); });
+      }).then(function(){ busy = false; dock.classList.remove('is-busy'); scrollDown(); });
+    }
+    /* ---- open / close ---- */
     function openAI(){
       if (open || voOpen) return; open = true;
       lockY = window.scrollY; document.documentElement.classList.add('is-locked');
       ai.classList.add('is-open'); ai.setAttribute('aria-hidden', 'false');
       dock.classList.add('is-ai'); dock.classList.add('is-on');
-      orbStart();
+      if (!welcomeOrb) welcomeOrb = orbMake(document.getElementById('aiOrb'), 'searching', 64, 72, TINT);
+      orbsStart();
     }
     function closeAI(){
       if (!open) return; open = false;
       ai.classList.remove('is-open'); ai.setAttribute('aria-hidden', 'true');
       dock.classList.remove('is-ai'); field.blur();
       document.documentElement.classList.remove('is-locked'); if (window.scrollY !== lockY) window.scrollTo(0, lockY);
-      orbStop(); dockCheck();
+      orbsStop(); dockCheck();
     }
-    aiBtn.addEventListener('click', function(){ if (!open) openAI(); else if (field.value.trim()) { /* sending arrives with the conversation screen */ field.value = ''; } else field.focus(); });
-    aiClose.addEventListener('click', closeAI);
-    chips.addEventListener('click', function(e){ var c = e.target.closest('.ai-chip'); if (!c) return; field.value = c.textContent; field.focus(); });
-    field.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); aiBtn.click(); } });
+    aiBtn.addEventListener('click', function(){ if (!open) openAI(); else if (field.value.trim()) send(field.value); else field.focus(); });
+    xBtn.addEventListener('click', closeAI);
+    home.addEventListener('click', function(){ if (chat) newChat(); else closeAI(); });
+    chips.addEventListener('click', function(e){ var c = e.target.closest('.ai-chip'); if (c) send(c.textContent); });
+    thread.addEventListener('click', function(e){ var c = e.target.closest('.ai-chip'); if (c) send(c.textContent); });
+    field.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); send(field.value); } });
     document.addEventListener('keydown', function(e){ if (open && e.key === 'Escape') closeAI(); });
-    /* swipe down anywhere on the sheet closes it */
+    /* swipe down on the welcome sheet closes it; the thread scrolls instead */
     var sw = null;
-    ai.addEventListener('pointerdown', function(e){ if (e.target.closest('button, input, label')) return; sw = {y: e.clientY, x: e.clientX}; }, {passive: true});
+    ai.addEventListener('pointerdown', function(e){ if (chat || e.target.closest('button, input, label')) return; sw = {y: e.clientY, x: e.clientX}; }, {passive: true});
     ai.addEventListener('pointerup', function(e){ if (!sw) return; var dy = e.clientY - sw.y, dx = Math.abs(e.clientX - sw.x); sw = null; if (dy > 80 && dx < 60) closeAI(); });
     ai.addEventListener('pointercancel', function(){ sw = null; });
+    /* iOS keeps scrolling the page under an overflow:hidden lock, so touch moves on the sheet are swallowed unless they scroll the thread */
+    var ty = 0;
+    ai.addEventListener('touchstart', function(e){ ty = e.touches[0].clientY; }, {passive: true});
+    ai.addEventListener('touchmove', function(e){
+      var inThread = chat && e.target.closest && e.target.closest('.ai-thread');
+      if (!inThread){ e.preventDefault(); return; }
+      var dy = e.touches[0].clientY - ty, atTop = thread.scrollTop <= 0, atEnd = thread.scrollTop + thread.clientHeight >= thread.scrollHeight - 1;
+      if ((dy > 0 && atTop) || (dy < 0 && atEnd)) e.preventDefault();   /* at either end the gesture would leak to the page */
+    }, {passive: false});
   })();
 })();
 </script>
