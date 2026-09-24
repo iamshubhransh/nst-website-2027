@@ -652,8 +652,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .dock.is-ai .ai-btn .ai-spark{opacity:0;transform:scale(.6)}
 .dock.is-ai .ai-btn .ai-send{opacity:1;transform:none}
 .ai-input{display:none;flex:1 0 0;min-width:0;height:50px;align-items:center;padding:0 16px;border-radius:99px;background:rgba(255,255,255,.9);border:1px solid var(--line)}
-.ai-input input{width:100%;min-width:0;border:0;outline:0;background:transparent;font-family:var(--font);font-size:15px;line-height:20px;font-weight:500;color:var(--ink);padding:0;margin:0}
+.ai-input input{width:100%;min-width:0;border:0;outline:0;background:transparent;font-family:var(--font);font-size:16px;line-height:20px;font-weight:500;color:var(--ink);padding:0;margin:0}
 .ai-input input::placeholder{color:rgba(22,25,29,.45)}
+.dock.is-ai{bottom:var(--kb,0px)}
 .dock.is-ai .dock-inner{background:rgba(0,0,0,0)}
 .dock.is-ai .play,.dock.is-ai .dock-cta{display:none}
 .dock.is-ai .ai-input{display:flex}
@@ -679,6 +680,17 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .ai-note{position:absolute;left:41px;right:41px;bottom:calc(86px + env(safe-area-inset-bottom,0px));margin:0;font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.45);text-align:center}
 @media (prefers-reduced-motion:reduce){.ai-btn::before{animation:none}.ai,.ai-center,.ai-chip{transition:none}.ai-orb canvas{animation:none}}
 /* chat state (390:107938): the thread replaces the welcome block, the mark turns brand-coloured, a close button sits top-right */
+/* progressive blur under the mark and the close button: four backdrop-blur layers, each masked to a band, blur growing toward the top,
+   and a white fade on top of them, so thread text dissolves before it reaches the top elements */
+.ai-top{position:absolute;left:0;right:0;top:0;height:124px;pointer-events:none;z-index:2}
+.ai-top i{position:absolute;inset:0;display:block}
+.ai-top i:nth-child(1){-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px);-webkit-mask-image:linear-gradient(180deg,#000 0,#000 55%,transparent 100%);mask-image:linear-gradient(180deg,#000 0,#000 55%,transparent 100%)}
+.ai-top i:nth-child(2){-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);-webkit-mask-image:linear-gradient(180deg,#000 0,#000 40%,transparent 80%);mask-image:linear-gradient(180deg,#000 0,#000 40%,transparent 80%)}
+.ai-top i:nth-child(3){-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);-webkit-mask-image:linear-gradient(180deg,#000 0,#000 25%,transparent 60%);mask-image:linear-gradient(180deg,#000 0,#000 25%,transparent 60%)}
+.ai-top i:nth-child(4){-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);-webkit-mask-image:linear-gradient(180deg,#000 0,#000 10%,transparent 42%);mask-image:linear-gradient(180deg,#000 0,#000 10%,transparent 42%)}
+.ai-top i:nth-child(5){background:linear-gradient(180deg,rgba(255,255,255,.96) 0,rgba(255,255,255,.9) 38%,rgba(255,255,255,.55) 66%,rgba(255,255,255,0) 100%)}
+.ai-mark,.ai-x{z-index:3}
+
 .ai-x{position:absolute;right:16px;top:18px;width:44px;height:44px;padding:0;border:1px solid var(--line);border-radius:50%;background:rgba(255,255,255,.9);color:rgba(22,25,29,.8);font-family:var(--font);font-size:22px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;-webkit-tap-highlight-color:transparent;transition:transform .16s ease}
 .ai-x:active{transform:scale(.94)}
 .ai-mark svg path{fill:currentColor;transition:fill .3s ease}
@@ -686,7 +698,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .ai.is-chat .ai-mark svg path:first-child{fill:#0673F9}.ai.is-chat .ai-mark svg path:last-child{fill:#004599}
 .ai.is-chat .ai-center{opacity:0;pointer-events:none;transform:translateY(calc(-50% - 10px))}
 .ai.is-chat .ai-note{display:none}
-.ai-thread{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:132px 16px calc(110px + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;gap:14px;-webkit-overflow-scrolling:touch}
+.ai-thread{position:absolute;inset:0;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;padding:132px 16px calc(110px + var(--kb,0px) + env(safe-area-inset-bottom,0px));display:none;flex-direction:column;gap:14px;-webkit-overflow-scrolling:touch}
 .ai.is-chat .ai-thread{display:flex}
 .ai-you{display:flex;justify-content:flex-end;animation:aiIn .32s cubic-bezier(.22,1,.36,1) both}
 .ai-bubble{max-width:280px;padding:10px 14px;border-radius:18px 18px 4px 18px;background:#F5E5FF;font-size:14px;line-height:20px;font-weight:500;color:var(--ink);word-wrap:break-word}
@@ -1206,6 +1218,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     </div>
   </div>
   <div class="ai-thread" id="aiThread" aria-live="polite"></div>
+  <div class="ai-top" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   <p class="ai-note">Disclaimer: Answers come from NST's own pages.</p>
   <button class="ai-x" type="button" id="aiX" aria-label="Close the chat">×</button>
 </div>
@@ -2000,7 +2013,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     function answerFor(q){ var t = q.toLowerCase(); for (var i = 0; i < RULES.length; i++) if (RULES[i][0].test(t)) return KB[RULES[i][1]]; return KB.fallback; }
     /* ---- rendering ---- */
     function el(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
-    function scrollDown(){ thread.scrollTo({top: thread.scrollHeight, behavior: reduce ? 'auto' : 'smooth'}); }
+    function scrollDown(force){ var near = thread.scrollHeight - thread.scrollTop - thread.clientHeight < 160; if (force || near) thread.scrollTo({top: thread.scrollHeight, behavior: reduce ? 'auto' : 'smooth'}); }
     function enterChat(){ if (chat) return; chat = true; ai.classList.add('is-chat'); }
     function newChat(){ thread.innerHTML = ''; chat = false; busy = false; dock.classList.remove('is-busy'); ai.classList.remove('is-chat'); orbs = orbs.filter(function(o){ return o === welcomeOrb; }); field.value = ''; }
     function sleep(ms){ return new Promise(function(res){ setTimeout(res, reduce ? 0 : ms); }); }
@@ -2010,7 +2023,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       enterChat();
       var you = el('div', 'ai-you'); you.appendChild(el('div', 'ai-bubble', q)); thread.appendChild(you);
       var row = el('div', 'ai-newton'); var cv = document.createElement('canvas'); cv.className = 'ai-av'; cv.setAttribute('role', 'img'); cv.setAttribute('aria-label', 'Newton'); row.appendChild(cv);
-      var status = el('span', 'ai-status', 'Thinking…'); row.appendChild(status); thread.appendChild(row); scrollDown();
+      var status = el('span', 'ai-status', 'Thinking…'); row.appendChild(status); thread.appendChild(row); scrollDown(true);
       var orb = orbMake(cv, 'working', 20, 24, TINT); orbsStart();
       var a = answerFor(q);
       sleep(900 + Math.min(900, q.length * 12)).then(function(){
@@ -2037,10 +2050,19 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     function closeAI(){
       if (!open) return; open = false;
       ai.classList.remove('is-open'); ai.setAttribute('aria-hidden', 'true');
-      dock.classList.remove('is-ai'); field.blur();
+      dock.classList.remove('is-ai'); field.blur(); setKb(0);
       document.documentElement.classList.remove('is-locked'); if (window.scrollY !== lockY) window.scrollTo(0, lockY);
       orbsStop(); dockCheck();
     }
+    var vv = window.visualViewport;
+    function kbSync(){
+      if (!open || !vv){ setKb(0); return; }
+      var kb = Math.max(0, Math.round(window.innerHeight - vv.height - vv.offsetTop));
+      setKb(kb < 80 ? 0 : kb);   /* anything smaller is browser chrome, not a keyboard */
+    }
+    function setKb(px){ dock.style.setProperty('--kb', px + 'px'); ai.style.setProperty('--kb', px + 'px'); if (px && chat) scrollDown(true); }
+    if (vv){ vv.addEventListener('resize', kbSync); vv.addEventListener('scroll', kbSync); }
+    field.addEventListener('blur', function(){ setTimeout(kbSync, 60); });
     aiBtn.addEventListener('click', function(){ if (!open) openAI(); else if (field.value.trim()) send(field.value); else field.focus(); });
     xBtn.addEventListener('click', closeAI);
     home.addEventListener('click', function(){ if (chat) newChat(); else closeAI(); });
