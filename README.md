@@ -24,7 +24,8 @@ Live preview: https://iamshubhransh.github.io/nst-website-2027/
 - Three ways in (396:131019): a conveyor of students flows into the NST tile and comes out the other side in NST merch; route tabs (NSAT, Coding NSAT, JEE percentile) swap the card. Routes 2–3 are placeholder copy.
 - Admission process (397:133518): six numbered steps in a card, step 02 live with Apply Now / Prep kit; rows step in on arrival.
 - Fests (396:131320): a dark dome with the aftermovie, a sponsor marquee, a photo grid, a drifting poster strip (drag to browse) and the button. The arrows switch Neutron ↔ Tekron: the chosen tile comes to the front and the copy swaps (Tekron is placeholder until its assets arrive). Assets under `assets/fac`, `ways`, `fest`.
-- Internship wins: focus carousel. The card in focus is full size, the next one waits at 0.907 scale; swiping brings it to the front. The small arrow on each card jumps to the next.
+- Internship wins: two cards on a snap strip with dots. The card in focus is full size, the next one waits at 0.907 scale; swiping brings it to the front. The small arrow on each card goes to the other one.
+- Rules of motion (25 Sep 2026): anything with dots is swipe-driven, never auto-playing; marquees without dots (hero logos, auditors, fest sponsors and posters) and the two orbits move on their own. Placeholder links (`href="#"`) do nothing; real anchors glide to just under the top bar. The menu button opens a "Jump to" sheet.
 
 ## Working on it
 
