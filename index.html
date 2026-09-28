@@ -209,8 +209,10 @@ button{font-family:var(--font)}
 .campus-tab img{width:16px;height:16px;flex:none}
 .campus-tab .tab-l{transform:rotate(-90deg)}
 .campus-tab .tab-r{transform:rotate(-90deg) scaleY(-1)}
-.campus-tab span{display:block;padding:8px 24px;border-radius:0 0 16px 16px;background:#7B55EE;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;white-space:nowrap;transition:opacity .25s ease}
-.campus-tab.is-swapping span{opacity:0}
+/* the pill keeps its purple while switching: only the name fades, and the pill's width glides to the new name's width */
+.campus-pill{display:block;box-sizing:border-box;padding:8px 24px;border-radius:0 0 16px 16px;background:#7B55EE;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;white-space:nowrap;overflow:hidden;transition:width .4s cubic-bezier(.22,1,.36,1)}
+.campus-pill b{display:block;font-weight:600;transition:opacity .16s ease}
+.campus-tab.is-swapping .campus-pill b{opacity:0}
 .campus-body{position:relative;flex:1 0 0;width:100%;min-height:399px;display:flex;align-items:center}
 .campus-stage{position:relative;width:100%;height:343px}
 .campus-stage .dots-bg{left:-44px;right:-44px;height:626px;opacity:.23}
@@ -238,7 +240,7 @@ button{font-family:var(--font)}
 .campus-progress span{position:relative;flex:1 0 0;height:2px;overflow:hidden}
 .campus-progress span::before{content:"";position:absolute;inset:0;background:#7B55EE;opacity:.32}
 .campus-progress span::after{content:"";position:absolute;inset:0;background:#7B55EE;transform:scaleX(var(--fill,0));transform-origin:left center;transition:transform .9s cubic-bezier(.22,1,.36,1)}
-@media (prefers-reduced-motion:reduce){.campus-slide,.campus-tab span{transition:none}}
+@media (prefers-reduced-motion:reduce){.campus-slide,.campus-pill,.campus-pill b{transition:none}}
 
 /* ---------- internship wins, swipeable cards (153:23775) ---------- */
 .wins{background:var(--paper);padding:0 16px;display:flex;flex-direction:column;gap:16px}
@@ -1140,7 +1142,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     <div class="campus-card" id="campusCard">
       <div class="fade fade-top" aria-hidden="true"></div>
       <div class="fade fade-bot" aria-hidden="true"></div>
-      <div class="campus-tab" id="campusTab"><img class="tab-l" src="assets/tab-corner.svg" alt=""><span id="campusTabText">ady patil university, pune</span><img class="tab-r" src="assets/tab-corner.svg" alt=""></div>
+      <div class="campus-tab" id="campusTab"><img class="tab-l" src="assets/tab-corner.svg" alt=""><span class="campus-pill" id="campusPill"><b id="campusTabText">ady patil university, pune</b></span><img class="tab-r" src="assets/tab-corner.svg" alt=""></div>
       <div class="campus-body"><div class="campus-stage">
         <div class="dots-bg dots-top" aria-hidden="true"></div>
         <div class="dots-bg dots-bot" aria-hidden="true"></div>
@@ -1883,7 +1885,16 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     if (i === activeSlide && !silent) return; activeSlide = i;
     slides.forEach(function(sl, k){ sl.hidden = k !== i; });
     bars.forEach(function(b, k){ b.style.setProperty('--fill', k < i ? '1' : '0'); });
-    if (!silent){ tab.classList.add('is-swapping'); setTimeout(function(){ tabText.textContent = slides[i].getAttribute('data-campus'); tab.classList.remove('is-swapping'); }, reduce ? 0 : 200); }
+    if (!silent){
+      var pill = document.getElementById('campusPill'), name = slides[i].getAttribute('data-campus'), w0 = pill.offsetWidth;
+      var probe = pill.cloneNode(true); probe.style.cssText = 'position:absolute;left:-9999px;top:0;width:auto;visibility:hidden;transition:none'; probe.firstChild.textContent = name; tab.appendChild(probe);
+      var w1 = probe.offsetWidth; probe.remove();
+      pill.style.width = w0 + 'px'; pill.offsetWidth;                          /* lock the current width, then let it glide */
+      tab.classList.add('is-swapping'); pill.style.width = w1 + 'px';
+      clearTimeout(showSlide.t1); clearTimeout(showSlide.t2);
+      showSlide.t1 = setTimeout(function(){ tabText.textContent = name; tab.classList.remove('is-swapping'); }, reduce ? 0 : 170);   /* the name changes only once it is invisible */
+      showSlide.t2 = setTimeout(function(){ pill.style.width = ''; }, reduce ? 0 : 440);
+    }
     slideReveals.forEach(function(r, k){ if (k !== i) r.set(0); });
     if (campusSeen){ liftSlide(i); requestAnimationFrame(function(){ bars[i].style.setProperty('--fill', '1'); }); }
   }
