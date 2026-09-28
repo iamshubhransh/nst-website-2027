@@ -2724,7 +2724,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       order.forEach(function(ci, depth){
         var c = cards[ci]; c.classList.toggle('is-anim', !!anim); c.style.zIndex = 3 - depth; c.style.opacity = '1';
         c.classList.toggle('is-back', depth > 0);
-        c.style.transform = depth === 0 ? 'translate(0,0) rotate(0deg)' : depth === 1 ? 'translate(-30.5px,21px) rotate(4.9deg)' : 'translate(30.5px,21px) rotate(-4.9deg)';
+        c.style.transform = depth === 0 ? 'translate(0,0) rotate(0deg)' : depth === 1 ? 'translate(-30.5px,0) rotate(4.9deg)' : 'translate(30.5px,0) rotate(-4.9deg)';   /* 364:45653: back cards level with the front card's top, 28 px past each side, bottoms hidden behind it */
       });
     }
     function build(trip){
