@@ -371,7 +371,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .found-window{position:relative;width:100%;height:205px;overflow:hidden;border-radius:12px;touch-action:pan-y}
 .found-window::before{content:"";position:absolute;inset:0 0 -24px 0;border-radius:12px 12px 0 0;box-shadow:inset 0 0 0 1px #23282F;pointer-events:none;z-index:2}   /* top edge and rounded corners, drawn above the rows' solid fills; its bottom edge is clipped away */
 .found-track{list-style:none;margin:0;padding:0;will-change:transform;transition:transform .5s cubic-bezier(.22,1,.36,1)}
-.found-row{padding:16px 16px 15px;display:flex;align-items:center;justify-content:space-between;background:#0B0C0E;border:solid #23282F;border-width:0 1px 1px}
+.found-row{position:relative;padding:16px 16px 15px;display:flex;align-items:center;justify-content:space-between;background:#0B0C0E;border:solid #23282F;border-width:0 1px 1px;transition:transform .55s cubic-bezier(.22,1,.36,1),opacity .45s ease}
+.found-row.is-leaving{transform:translateY(84px) scale(.96);opacity:0;pointer-events:none}   /* the top row sinks and fades as the next one rises over it */
+.found-track.is-jump .found-row{transition:none}
 .found-row a{display:flex;align-items:center;justify-content:space-between;width:100%;text-decoration:none}
 .found-name{display:flex;align-items:center;gap:8px;white-space:nowrap}
 /* rows in the top three slots: 16/26 with a dotted underline (58 px tall); every other row: 14/22 (54 px). Size, leading and
@@ -383,9 +385,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .found-ico .mark-inner{position:absolute;left:1.667px;top:1.667px;transform:scale(1.25);transform-origin:0 0}
 .found-row img.arr{width:20px;height:20px;flex:none}
 .found-fade{position:absolute;left:0;right:0;bottom:0;height:38px;background:linear-gradient(180deg,rgba(11,12,14,0),#0B0C0E);pointer-events:none;z-index:1}
-.found .wins-dots{background:#16191D}
-.found .wins-dots span{background:#30363D}
-.found .wins-dots span.on{background:var(--brand)}
+.found .wins-dots{position:relative;background:#16191D}
+.found .wins-dots span{background:#30363D;opacity:1}
+.found .wins-dots span.on{background:#30363D}
+.found-runner{position:absolute;left:12px;top:6px;width:6px;height:6px;border-radius:999px;background:var(--brand);transition:transform .5s cubic-bezier(.22,1,.36,1)}   /* the lit dot moves forward along the row */
 @media (prefers-reduced-motion:reduce){.found-track,.found-label{transition:none}}
 
 /* ---------- achievement buckets: shared skin. Dark buckets on #16191D with #0B0C0E cards, light ones on white; each bucket is
@@ -415,6 +418,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .pdots{display:inline-flex;align-items:center;gap:6px;padding:6px 6px 6px 0;border-radius:100px;background:#16191D}
 .pdots i{display:block;width:6px;height:6px;border-radius:3px;background:#fff;transition:width .3s ease,background .3s ease}
 .pdots i.on{width:14px;background:#61A8FF}
+.pbar{position:relative;display:block;width:56px;height:18px;flex:none}   /* a scroll slider in the footprint of a four-dot pager */
+.pbar::before{content:"";position:absolute;left:0;right:0;top:7px;height:4px;border-radius:2px;background:rgba(255,255,255,.18)}
+.pbar i{position:absolute;left:0;top:7px;width:18px;height:4px;border-radius:2px;background:#61A8FF;will-change:transform}
 .pdots-light{background:#F6F7F9;padding:6px 12px;gap:8px;align-self:flex-start}
 .pdots-light i{background:rgba(140,149,166,.5)}
 .pdots-light i.on{width:6px;background:#0673F9}
@@ -462,7 +468,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .focus-play:active{transform:scale(.94)}
 .focus-play img{width:37.14px;height:37.14px}
 .focus-cap{background:#16191D;padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px}
-.focus-title{font-size:14px;line-height:20px;font-weight:600;letter-spacing:.02px;color:#fff}
+.focus-title{font-size:14px;line-height:20px;font-weight:600;letter-spacing:.02px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .focus-who{font-size:11px;line-height:16px;font-weight:500;letter-spacing:.1px;color:#fff}
 .focus-wrap{position:relative}
 .focus-fade{position:absolute;right:0;top:0;bottom:0;width:28px;background:linear-gradient(90deg,rgba(22,25,29,0),#16191D);pointer-events:none}
@@ -479,7 +485,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .cc-big{font-size:52px;line-height:64px;font-weight:600;color:#0673F9;font-variant-numeric:tabular-nums}
 .cc-rank{margin:0;font-size:16px;line-height:26px;font-weight:600;letter-spacing:.1px;color:#0673F9}
 .cc-desc{margin:4px 0 0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#16191D}
-.cc-cards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin-right:-16px;padding-right:16px}
+.cc-cards{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;margin:0 -16px;padding:0 16px;scroll-padding:0 16px}
 .cc-cards::-webkit-scrollbar{display:none}
 .cc-rc{position:relative;flex:none;width:300px;height:82.7px;border-radius:12px;overflow:hidden;scroll-snap-align:start;padding:16.7px 16.7px 13.3px;color:#fff;display:flex;flex-direction:column;gap:6.7px;background:linear-gradient(100deg,#C3491E,#D86A43)}
 .cc-rc-purple{background:linear-gradient(100deg,#630E82,#B42FE5)}
@@ -560,6 +566,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .pipe-labels{display:flex}
 .pipe-labels div{flex:1 1 0;display:flex;flex-direction:column;gap:2px;align-items:center;text-align:center}
 .pipe-labels div:first-child{align-items:flex-start;text-align:left}
+.pipe-labels div:last-child{align-items:flex-end;text-align:right}   /* the grant label sits flush with the right edge, both lines right-aligned */
 .pipe-labels b{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.5px;color:#fff}
 .pipe-labels span{font-size:11px;line-height:14px;font-weight:500;letter-spacing:.1px;color:#fff}
 .ent-list{border-color:#30363D;padding-bottom:16px;gap:16px}
@@ -1244,7 +1251,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         </ul>
         <div class="found-fade" aria-hidden="true"></div>
       </div>
-      <div class="wins-dots" id="foundDots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+      <div class="wins-dots" id="foundDots" aria-hidden="true"><span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span><i class="found-runner" id="foundRunner"></i></div>
     </div>
   </section>
 
@@ -1266,7 +1273,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <p class="oss-stat"><b class="count" data-to="12">12</b> students got into GSoC, each on a stipend of over <b>₹2.5 lakh</b>.</p>
       <div class="bk-band">
         <span class="bk-kicker">The 12 contributors</span>
-        <span class="pdots" id="ossDots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span>
+        <span class="pbar" id="ossBar" aria-hidden="true"><i id="ossThumb"></i></span>
       </div>
       <div class="oss-strip-wrap">
         <div class="oss-strip" id="ossStrip" aria-label="The twelve contributors">
@@ -1296,7 +1303,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
           <article class="focus-card is-front" data-reel="0"><div class="focus-thumb"><img src="assets/oss/thumb-1.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: Coding for Google in 1st year"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">Coding for Google in 1st year</span><span class="focus-who">Agnik · Batch of 2024</span></div></article>
           <article class="focus-card" data-reel="1"><div class="focus-thumb"><img src="assets/oss/thumb-2.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: ₹1.25 lakh GSoC internship"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">₹1.25 lakh GSoC internship</span><span class="focus-who">Kartik · Batch of 2023</span></div></article>
           <article class="focus-card" data-reel="2"><div class="focus-thumb"><img src="assets/oss/thumb-3.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: My GSoC coding secret"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">My GSoC coding secret</span><span class="focus-who">Tarunya · Batch of 2025</span></div></article>
-          <article class="focus-card" data-reel="3"><div class="focus-thumb"><img src="assets/oss/thumb-4.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: Medical aspirant turned GSoC contributor"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">Medical aspirant turned GSoC contributor</span><span class="focus-who">Manshu · Batch of 2023</span></div></article>
+          <article class="focus-card" data-reel="3"><div class="focus-thumb"><img src="assets/oss/thumb-4.jpg" alt=""><button class="focus-play" type="button" aria-label="Play: From medical aspirant to GSoC"><img src="assets/oss/icon-play-circle.svg" alt=""></button></div><div class="focus-cap"><span class="focus-title">From medical aspirant to GSoC</span><span class="focus-who">Manshu · Batch of 2023</span></div></article>
         </div>
         <span class="focus-fade" aria-hidden="true"></span>
       </div>
@@ -2035,28 +2042,42 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   wd.forEach(function(d, i){ d.addEventListener('click', function(){ goTo(i, true); }); });
   winsTick();
 
-  /* ---- seven foundations: the list steps one row per tap on a dot or a horizontal swipe on the list (no auto-play); the top three
-          slots carry the larger underlined style; the rows link to their sections ---- */
+  /* ---- seven foundations: the list steps one row every 2.4 s while on screen. On a step the top row sinks and fades while the
+          rest rise one slot (the second row takes its place) and the lit dot slides forward. A dot tap or a horizontal swipe on
+          the list steps by hand and restarts the clock; the rows link to their sections. ---- */
   (function(){
-    var win = document.getElementById('foundWindow'), track = document.getElementById('foundTrack');
+    var win = document.getElementById('foundWindow'), track = document.getElementById('foundTrack'), runner = document.getElementById('foundRunner');
     var dots = Array.prototype.slice.call(document.querySelectorAll('#foundDots span'));
-    var rows = Array.prototype.slice.call(track.children), N = rows.length, ROW = 54, k = 0;
+    var rows = Array.prototype.slice.call(track.children), N = rows.length, ROW = 54, STEP = 2400, k = 0, timer = 0, hover = false, visible = false;
     rows.slice(0, 4).forEach(function(r){ var c = r.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });   /* clones fill the window while wrapping */
     function paint(){
       track.style.transform = 'translate3d(0,' + (-k * ROW) + 'px,0)';
-      dots.forEach(function(d, i){ d.classList.toggle('on', i === k % N); });
+      runner.style.transform = 'translateX(' + ((k % N) * 14) + 'px)';
       Array.prototype.forEach.call(track.children, function(r, i){ r.classList.toggle('is-top', i >= k && i < k + 3); });
     }
+    function jumpTo(n){ track.classList.add('is-jump'); k = n; paint(); track.offsetHeight; track.classList.remove('is-jump'); }
     function step(dir){
-      if (dir > 0){ k++; paint(); if (k === N) setTimeout(function(){ track.classList.add('is-jump'); k = 0; paint(); track.offsetHeight; track.classList.remove('is-jump'); }, 540); }
-      else { if (k === 0){ track.classList.add('is-jump'); k = N; paint(); track.offsetHeight; track.classList.remove('is-jump'); } k--; paint(); }
+      if (dir > 0){
+        var leaving = track.children[k];
+        if (!reduce){ leaving.classList.add('is-leaving'); setTimeout(function(){ leaving.style.transition = 'none'; leaving.classList.remove('is-leaving'); leaving.offsetHeight; leaving.style.transition = ''; }, 600); }
+        k++; paint();
+        if (k === N) setTimeout(function(){ jumpTo(0); }, 620);
+      } else {
+        if (k === 0) jumpTo(N);
+        k--; paint();
+      }
     }
+    function stop(){ clearInterval(timer); timer = 0; }
+    function start(){ stop(); if (reduce || !visible) return; timer = setInterval(function(){ if (!hover) step(1); }, STEP); }
     paint();
-    dots.forEach(function(d, i){ d.addEventListener('click', function(){ k = i; paint(); }); });
+    new IntersectionObserver(function(en){ visible = en[0].isIntersecting; if (visible) start(); else stop(); }, {threshold: .25}).observe(win);
+    win.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') hover = true; });
+    win.addEventListener('pointerleave', function(){ hover = false; });
+    dots.forEach(function(d, i){ d.addEventListener('click', function(){ jumpTo(i); start(); }); });
     var drag = null;
     win.addEventListener('pointerdown', function(e){ drag = {x: e.clientX, moved: false}; });
     win.addEventListener('pointermove', function(e){ if (drag && Math.abs(e.clientX - drag.x) > 8) drag.moved = true; }, {passive: true});
-    win.addEventListener('pointerup', function(e){ if (!drag) return; var dx = e.clientX - drag.x, m = drag.moved; drag = null; if (m && Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); });
+    win.addEventListener('pointerup', function(e){ if (!drag) return; var dx = e.clientX - drag.x, m = drag.moved; drag = null; if (m && Math.abs(dx) > 40){ step(dx < 0 ? 1 : -1); start(); } });
     win.addEventListener('pointercancel', function(){ drag = null; });
   })();
 
@@ -2580,14 +2601,13 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   /* ---- open source: the contributor strip snaps card by card, the four dots follow its progress; the stories carousel ---- */
   (function(){
     var strip = document.getElementById('ossStrip'); if (!strip) return;
-    var dots = Array.prototype.slice.call(document.getElementById('ossDots').children), raf = 0;
-    function pick(){
-      raf = 0; var max = strip.scrollWidth - strip.clientWidth, p = max > 0 ? strip.scrollLeft / max : 0;
-      var d = Math.min(dots.length - 1, Math.round(p * (dots.length - 1)));
-      dots.forEach(function(el, i){ el.classList.toggle('on', i === d); });
+    var bar = document.getElementById('ossBar'), thumb = document.getElementById('ossThumb'), raf = 0;
+    function pick(){   /* the thumb slides across the bar with the strip's scroll fraction */
+      raf = 0; var max = strip.scrollWidth - strip.clientWidth, p = max > 0 ? Math.min(1, Math.max(0, strip.scrollLeft / max)) : 0;
+      thumb.style.transform = 'translateX(' + (p * (bar.clientWidth - thumb.offsetWidth)).toFixed(1) + 'px)';
     }
     strip.addEventListener('scroll', function(){ if (!raf) raf = requestAnimationFrame(pick); }, {passive: true});
-    dots.forEach(function(el, i){ el.addEventListener('click', function(){ var max = strip.scrollWidth - strip.clientWidth; strip.scrollTo({left: max * i / (dots.length - 1), behavior: reduce ? 'auto' : 'smooth'}); }); });
+    window.addEventListener('resize', pick);
     pick();
     /* stories */
     var focus = document.getElementById('ossFocus');
