@@ -554,10 +554,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .ent-hr{height:1px;background:#30363D}
 .ent-row{display:flex;align-items:center;gap:12px;padding:0 1px}
 .ent-row img{width:66px;height:22px;object-fit:contain}
-.pipe{display:flex;flex-direction:column;gap:8px;padding-top:14px}
+.pipe{display:flex;flex-direction:column;gap:8px;padding:14px 8px 0}
 .pipe-track{position:relative;height:12px}
-.pipe-line{position:absolute;left:46px;top:5.5px;width:278px;height:1px;background:#30363D}
-.pipe-prog{position:absolute;left:8.1px;top:5.5px;width:353.9px;height:1px;background:#61A8FF;transform-origin:left;transform:scaleX(0)}
+.pipe-line{position:absolute;left:4px;right:6px;top:5.5px;height:1px;background:#30363D}
+.pipe-prog{position:absolute;left:4px;right:6px;top:5.5px;height:1px;background:#61A8FF;transform-origin:left;transform:scaleX(0)}
 .pipe-stop{position:absolute;top:2px;width:8px;height:8px;border-radius:50%;background:#16191D;box-shadow:inset 0 0 0 1.5px #61A8FF;transition:background .3s ease}
 .pipe-stop.is-lit{background:#61A8FF}
 .pipe-stop.is-grant{top:0;width:12px;height:12px;background:#16191D;transform:scale(.67);transition:transform .35s cubic-bezier(.34,1.56,.64,1),background .3s ease}
@@ -570,7 +570,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .pipe-labels b{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.5px;color:#fff}
 .pipe-labels span{font-size:11px;line-height:14px;font-weight:500;letter-spacing:.1px;color:#fff}
 .ent-list{border-color:#30363D;padding-bottom:16px;gap:16px}
-.ent-rows{padding:0 12px;display:flex;flex-direction:column}
+.ent-rows{padding:0 16px;display:flex;flex-direction:column}
 .ent-r{position:relative;display:flex;gap:12px;height:132px;overflow:hidden;text-decoration:none;color:#fff}
 .ent-r + .ent-r{border-top:1px solid #23282F}
 .ent-r-text{flex:1 1 0;min-width:0;padding:18px 0;display:flex;flex-direction:column;gap:6px}
@@ -2643,8 +2643,15 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   (function(){
     var pipe = document.getElementById('pipe'); if (!pipe) return;
     var stops = Array.prototype.slice.call(pipe.querySelectorAll('.pipe-stop')), prog = document.getElementById('pipeProg'), dot = document.getElementById('pipeDot');
-    var X = stops.map(function(s){ return parseFloat(s.style.left) + s.offsetWidth / 2; });   /* stop centres */
-    var progL = 8.1, progW = 353.9;
+    var labels = Array.prototype.slice.call(pipe.querySelectorAll('.pipe-labels > div')), track = pipe.querySelector('.pipe-track'), X = [], progL = 4, progW = 1;
+    function layout(){   /* stop centres follow the labels: 01 at the left edge, 02 and 03 under their label centres, the grant at the right edge */
+      var W = track.clientWidth; X = [4, 0, 0, W - 6];
+      var tr = track.getBoundingClientRect();
+      [1, 2].forEach(function(i){ var r = labels[i].getBoundingClientRect(); X[i] = r.left + r.width / 2 - tr.left; });
+      stops.forEach(function(st, i){ st.style.left = (X[i] - st.offsetWidth / 2).toFixed(2) + 'px'; });
+      progL = 4; progW = W - 10;
+    }
+    layout(); window.addEventListener('resize', layout);
     if (reduce){ stops[3].classList.add('is-lit'); prog.style.transform = 'none'; }
     bucketEnter.ent = function(){
       if (reduce){ stops[3].classList.add('is-lit'); prog.style.transform = 'none'; return; }
@@ -2724,7 +2731,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       order.forEach(function(ci, depth){
         var c = cards[ci]; c.classList.toggle('is-anim', !!anim); c.style.zIndex = 3 - depth; c.style.opacity = '1';
         c.classList.toggle('is-back', depth > 0);
-        c.style.transform = depth === 0 ? 'translate(0,0) rotate(0deg)' : depth === 1 ? 'translate(-30.5px,0) rotate(4.9deg)' : 'translate(30.5px,0) rotate(-4.9deg)';   /* 364:45653: back cards level with the front card's top, 28 px past each side, bottoms hidden behind it */
+        c.style.transform = depth === 0 ? 'translate(0,0) rotate(0deg)' : depth === 1 ? 'translate(-30.5px,-24px) rotate(4.9deg)' : 'translate(30.5px,-24px) rotate(-4.9deg)';   /* back cards peek 28 px past each side and ~18 px above the front card; their bottoms stay hidden behind it */
       });
     }
     function build(trip){
