@@ -1554,29 +1554,61 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .stat-bg{background:radial-gradient(106.27% 309.6% at 50% 50%, rgba(245,151,0,0) 0, rgba(245,151,0,.11) 45%, rgba(245,151,0,.08) 55%, rgba(245,151,0,0) 80%)}
 }
 @media (min-width:1024px){
-  /* ---- open source pixel pass (516:35282): 888 tall, 486 + 64 + 650, the phone's card internals ---- */
-  .oss{padding:96px var(--side) 69px;grid-template-columns:minmax(0,1fr) 650px;column-gap:64px}
-  .oss .bk-side{gap:46px;top:96px}
-  .oss .bk-head{gap:16px;align-items:stretch}
-  .oss .bk-bar{width:2px;margin:6px -1px 0;border-radius:1px;background:#fff}   /* a zero-width column with a 2 px centred stroke */
-  .oss .bk-text{gap:8px}
-  .oss .bk-title{font-size:32px;line-height:48px;white-space:nowrap}
-  .oss .bk-title>span{display:inline;color:rgba(255,255,255,.5)}
-  .oss .bk-title span span{display:none}
+  /* ---- bucket header, shared (from 516:35282 / 516:35747): single-line 32/48 title, 2 px bar, 18/28 sub and lede, 370 x 48 CTA.
+          The side column scrolls with the page: sticky let it slide over the full-width rows below it. ---- */
+  .bk{padding:96px var(--side);grid-template-columns:minmax(0,1fr) 650px;column-gap:64px}
+  .bk-side{gap:0;position:static}
+  .bk-lede{margin-top:18px}
+  .bk-lede+.bk-cta-side{margin-top:26px}   /* 516:35747, 516:37412: head, 18, lede, 26, CTA */
+  .bk-head{gap:16px;align-items:stretch}
+  .bk-bar{width:2px;margin:6px -1px 0;border-radius:1px;background:var(--bk-ink)}   /* a zero-width column with a 2 px centred stroke */
+  .bk-text{gap:8px}
+  .bk-title{font-size:32px;line-height:48px;white-space:normal}   /* one line wherever it fits; Entrepreneurship wraps, as in 516:37221 */
+  .bk-title>span{display:inline;color:var(--bk-ink-2)}
+  .bk-title span span{display:none}
+  .bk-sub{font-size:18px;line-height:28px;font-weight:500;letter-spacing:.1px;color:var(--bk-ink)}
+  .bk-lede{max-width:493px;font-size:18px;line-height:28px;font-weight:500;letter-spacing:.1px}
+  .bk-dark .bk-lede{color:#B2B9C7;opacity:1}
+  .bk-cta-side{width:370px;height:48px;margin:0;padding:10px 60px;gap:6px;font-size:15px;line-height:26px;letter-spacing:.06px;box-shadow:0 2px 5px rgba(0,0,0,.25),inset 0 -1.5px .5px rgba(0,0,0,.3),inset 0 1px .5px rgba(255,255,255,.3)}
+  .bk-main{gap:24px}
+  .bk-card{border-radius:12px}
+  .bk-band{padding:10px 16px}
+  .bk-kicker{font-size:12px;line-height:12px;letter-spacing:1px}
+  /* ---- open source (516:35282): 888 tall ---- */
+  .oss{padding-bottom:69px}
+  .oss .bk-lede,.oss .bk-lede+.bk-cta-side{margin-top:46px}   /* 516:35282 spaces its side column wider */
+  .oss .oss-proof{border-radius:12px}
   .oss .focus{height:251px}
-  .oss .bk-sub{font-size:18px;line-height:28px;font-weight:500;letter-spacing:.1px;color:#fff}
-  .oss .bk-lede{max-width:493px;font-size:18px;line-height:28px;font-weight:500;letter-spacing:.1px;color:#B2B9C7;opacity:1}
-  .oss .bk-cta-side{width:370px;height:48px;margin:0;padding:10px 60px;gap:6px;font-size:15px;line-height:26px;letter-spacing:.06px;box-shadow:0 2px 5px rgba(0,0,0,.25),inset 0 -1.5px .5px rgba(0,0,0,.3),inset 0 1px .5px rgba(255,255,255,.3)}
-  .oss .bk-main{gap:24px}
-  .oss .bk-card,.oss .oss-proof{border-radius:12px}
-  .oss .bk-band{padding:10px 16px}
-  .oss .bk-kicker{font-size:12px;line-height:12px;letter-spacing:1px}
   .oss .pdots{display:inline-flex}
   .oss .oss-prog{padding:0 16px}
   .oss .oss-stat{padding:0 16px;font-size:19px;line-height:24px}
   .oss .oss-strip,.oss .focus{padding:0 16px;scroll-padding-left:16px}
   .oss .focus-card{opacity:.55}
   .oss .focus-card.is-front{opacity:1}
+  /* ---- competitive coding (516:35747): rank cards 300 each, bottom row 384 + 24 + 390 + 12 + 390 ---- */
+  .cc{row-gap:24px}
+  .cc .cc-rc{flex:0 0 300px}
+  .cc .cc-row{display:grid!important;grid-template-columns:384px minmax(0,1fr);gap:24px!important}
+  .cc .cc-row .cc-two{gap:12px}
+  /* ---- global exposure (516:37412): map 588 at x 876, chips 32 tall across the column, trip text, three 319-tall photos ---- */
+  .glob{row-gap:16px}
+  .glob .glob-map{width:588px;margin:6px 0 0 62px}
+  .glob .glob-body{margin-top:70.5px;gap:16px}
+  .glob .chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+  .glob .chip{height:32px;padding:7px 12px 7px 9px;gap:7px;font-size:12px;line-height:16px;letter-spacing:.02px;border-radius:100px}
+  .glob .chip img{width:18px;height:13px;border-radius:2px}
+  .glob .glob-text{min-height:74px;gap:4px}
+  .glob .glob-title{font-size:16px;line-height:26px;letter-spacing:.06px}
+  .glob .glob-desc{max-width:827px;font-size:14px;line-height:22px;letter-spacing:.1px}
+  .glob .gstack{margin-top:0;gap:16px}
+  .glob .gstack-card,.glob .gstack-card.is-back{height:319px;border-radius:12px;border:0;background:#F6F7F9}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  .bk{grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:40px}
+  .bk-title{white-space:normal;font-size:28px;line-height:38px}
+  .bk-cta-side{width:auto;padding:10px 40px}
+  .cc .cc-rc{flex:1 1 0}
+  .cc .cc-row{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
 }
 </style>
 </head>
