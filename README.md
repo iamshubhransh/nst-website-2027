@@ -42,3 +42,5 @@ GitHub Pages serves the `main` branch root. Push to `main` and the site updates 
 
 ## Desktop (≥ 1024 px)
 A layer at the end of the stylesheet (`@media (min-width:1024px)`) re-lays the same DOM from Figma 511:3609: a 1200 px column, 40/48 section titles, header + device columns for the buckets, side-by-side campuses, a three-card wins carousel, wider rings and dome. Desktop-only nodes carry `.dt-only`; `.bk-side`, `.bk-main`, `.found-side` and `.wa` are `display:contents` on phones. Script branches read `isDT`. Below 1024 px the phone design is unchanged.
+
+Pixel-matched so far: hero (512:24656), quick summary band, placement / campus / wins (514:26056). The desktop hero plays `assets/dt/hero-film.mp4`, exported from the Figma video fill (59 s loop, gradient baked in); phones keep the still.
