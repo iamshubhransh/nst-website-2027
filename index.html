@@ -1476,6 +1476,78 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 @media (min-width:1024px) and (max-width:1279px){ .headline{font-size:40px} }
 @media (prefers-reduced-motion:reduce){ .hero-logos-track{animation:none} }
 
+@media (min-width:1024px){
+  /* quick summary (512:24757): the band is the frame's 212 px; hatch dividers span the full width (the frame's 289 lines at 6.4 px pitch, 60°) */
+  .hatch{height:26px}
+  .hatch img{display:none}
+  .hatch{background:repeating-linear-gradient(120deg,transparent 0 4.75px,#E1E5EA 4.75px 5.55px),#F6F7F9}
+  .hatch-flip{transform:none;background:repeating-linear-gradient(60deg,transparent 0 4.75px,#E1E5EA 4.75px 5.55px),#F6F7F9}
+}
+
+@media (min-width:1024px){
+  .grid{gap:12px}
+  .tile,.tile:nth-child(n+3){width:163.5px;height:126px;padding:20px;gap:12px}
+}
+
+/* ======================================================================================================================
+   PLACEMENT + CAMPUS + WINS, pixel-matched to Figma 514:26056 (1728 × 1666): title 28/38 at y 64, the arc r 1835 (crown y 255),
+   discs 295 px apart, label y 311, CTC card the full 1200 column at y 409, campus cards 588 × 428 at y 617, pager y 1124, wins y 1163.
+   ====================================================================================================================== */
+@media (min-width:1024px){
+  .co{padding:63.7px 0 0;gap:0}
+  .co-head{gap:0}
+  .co-ring{left:calc(50% - 1835px);top:255px;width:3670px;height:3670px}
+  .co-orbit{width:100%;height:247px;display:block}
+  .co-title{width:574px;max-width:none;margin:0 auto;font-size:28px;line-height:38px;letter-spacing:.1px;text-wrap:wrap}
+  .co-label{height:16px;font-size:13px;line-height:16px;letter-spacing:1.6px}
+  .ctc{width:var(--wrap);margin-top:82.3px;padding:8px 8px 12px;gap:12px;border-radius:12px}
+  .ctc-card{padding:12px;gap:16px;border-radius:8px;box-shadow:inset 0 0 0 1px #EDEFF3}
+  .ctc-title{font-size:16px;line-height:20px}
+  .ctc-value{font-size:24px;line-height:28px}
+  .ctc-value span{font-size:18px}
+  .ctc-avg{padding:0 12px;gap:8px}
+  .ctc-avg-label{font-size:14px;line-height:22px}
+  .ctc-avg-value{font-size:12px;line-height:18px}
+
+  .campus{padding:24px 0 0}
+  .campus-stage{gap:24px}
+  .campus-slide,.campus-slide[hidden]{height:428px;border-radius:12px;background:#F6F7F9;box-shadow:inset 0 0 0 1px #E1E5EA}
+  .campus-slide::before{content:"";position:absolute;left:calc(50% - 229px);width:458px;top:0;bottom:0;background-image:radial-gradient(circle,#B8BEC9 1px,transparent 1.3px);background-size:12px 12px;opacity:.5;pointer-events:none}
+  .campus-slide::after{content:"";position:absolute;left:0;right:0;top:0;bottom:0;background:linear-gradient(180deg,#F6F7F9 0,rgba(246,247,249,0) 61px,rgba(246,247,249,0) calc(100% - 53px),#F6F7F9 100%);pointer-events:none;border-radius:12px}
+  .campus-slide>*{z-index:1}
+  .campus-slide-tab{top:1px;height:28px;padding:8px 24px;border-radius:0 0 16px 16px;font-size:11px;line-height:12px;letter-spacing:2px;overflow:visible;z-index:3}
+  .campus-slide-tab::before,.campus-slide-tab::after{content:"";position:absolute;top:0;width:16px;height:16px;background:radial-gradient(circle at var(--cx) 100%,transparent 15.5px,#7B55EE 16px)}
+  .campus-slide-tab::before{left:-16px;--cx:0}
+  .campus-slide-tab::after{right:-16px;--cx:100%}
+  .campus-title{top:57px;width:336px;font-size:18px;line-height:24px;z-index:2}
+  .campus-photos{top:108px;transform:translateX(-50%);z-index:1}
+  .stat-card{left:28px;right:28px;top:239px;bottom:auto;height:161px;border-radius:12px;border:1px solid #E1E5EA;box-shadow:0 2px 24px rgba(43,48,59,.1);z-index:2}
+  .stat-cell-top{height:80px;flex:none;justify-content:flex-start;gap:9px}
+  .stat-row{height:79px;flex:none}
+  .stat-row .stat-cell{justify-content:flex-start;gap:9px}
+  .sc-label{font-size:11.4px;line-height:14px}
+  .sc-value{font-size:19.1px;line-height:24px}
+
+  .wins{padding:79px 0 64px;gap:21px}
+  .wins-foot{order:-1}
+  .wins-view{width:var(--wrap);margin:0 auto;padding:0;clip-path:none;overflow:visible}
+  .wins-view{overflow:hidden;margin:-24px auto;padding:24px 0}
+  .win,.win.is-focus{zoom:var(--z);width:calc(384px / var(--z));scale:1;box-shadow:none}
+  .win{--z:1.152}
+  .win.is-focus{--z:1.28}
+  .wins-track{gap:24px}
+}
+
+@media (min-width:1024px){
+  .btn-lg,.cta-row .btn{height:52px}
+  .cta-row .play{width:52px;height:52px}
+}
+
+@media (min-width:1024px){
+  .hero-media.is-baked .hero-fade{display:none}          /* the veil is in the film itself */
+  .hero-media.is-baked .hero-video{display:block;object-fit:cover}
+}
+
 </style>
 </head>
 <body>
@@ -1496,7 +1568,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   <section class="hero" id="top" aria-label="B. Tech in CS and AI">
     <div class="hero-media" id="heroMedia" data-node="76:7929">
-      <picture><source media="(min-width:1024px)" srcset="assets/dt/hero-campus-wide.jpg"><img class="hero-poster" src="assets/hero-campus.jpg" alt="Aerial view of the NST campus"></picture>
+      <picture><source media="(min-width:1024px)" srcset="assets/dt/hero-film-poster.jpg"><img class="hero-poster" src="assets/hero-campus.jpg" alt="Aerial view of the NST campus"></picture>
       <video class="hero-video" playsinline muted loop autoplay preload="none" aria-hidden="true"></video>
       <div class="hero-fade"></div>
     </div>
@@ -2180,6 +2252,18 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     parts = [];
+    if (isDT){   /* desktop (frame 512:24757): two edge fields, dense against each border and thinning out over ~260 px, every dot roaming */
+      for (var e = 0; e < 2; e++){
+        var n = Math.round(H * 2.1);
+        for (var m = 0; m < n; m++){
+          var d = Math.min(300, -Math.log(1 - Math.random() * .995) * (Math.random() < .7 ? 34 : 105)), big = Math.random() < .14;
+          var hx = e ? W - d : d, hy = rand(-4, H + 4);
+          parts.push({kind: 'edge', hx: hx, hy: hy, x: hx, y: hy, vx: 0, vy: 0, dx: rand(-5, 5) * (1 + d / 120), dy: rand(-7, 7), amp: rand(2, 6), f: rand(.2, .6), ph: rand(0, 6.28), r: big ? rand(1.4, 2.3) : rand(.55, 1.3), al: Math.max(.25, 1 - d / 330) * rand(.55, 1), tint: Math.random(), side: e});
+        }
+      }
+      for (var q = 0; q < 40; q++) parts.push({kind: 'stray', x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, dx: rand(-6, 6), dy: rand(-4, 4), amp: rand(2, 5), f: rand(.2, .6), ph: rand(0, 6.28), r: rand(.5, 1.1), al: rand(.2, .45), tint: Math.random()});
+      draw(); return;
+    }
     geo.cx = W / 2 - .45; geo.cy = H / 2 - .21; geo.R = W * .5;
     var band = H / 2 + 36;
     geo.maxA = Math.asin(Math.min(1, band / geo.R));
@@ -2231,6 +2315,11 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         var rr = p.r0 + (reduce ? 0 : Math.sin(t * p.bf + p.ph) * p.br);
         tx = geo.cx + Math.cos(p.th) * rr; ty = geo.cy + Math.sin(p.th) * rr;
         if (!reduce){ tx += Math.sin(t * p.f + p.ph) * p.amp; ty += Math.cos(t * p.f * .8 + p.ph * 1.3) * p.amp; }
+      } else if (p.kind === 'edge'){   /* each dot drifts around its home on a slow loop, and the home itself creeps up or down the border */
+        if (!reduce){ p.hy += p.dy * dt * .35; if (p.hy < -6) p.hy = H + 6; else if (p.hy > H + 6) p.hy = -6; }
+        tx = p.hx + (reduce ? 0 : Math.sin(t * p.f + p.ph) * (p.amp + Math.abs(p.dx) * 2.2));
+        ty = p.hy + (reduce ? 0 : Math.cos(t * p.f * .8 + p.ph * 1.3) * p.amp * 1.6);
+        if (Math.abs(ty - p.y) > H / 2){ p.y = ty; p.vy = 0; }   /* wrapped: jump, don't streak */
       } else {
         if (!reduce){
           p.x += p.dx * dt; p.y += p.dy * dt;
@@ -2423,8 +2512,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var logos = seed.map(function(d){ return {src: d.querySelector('img').getAttribute('src'), style: d.querySelector('img').getAttribute('style'), alt: d.querySelector('img').alt, name: d.getAttribute('data-company'), color: d.getAttribute('data-color')}; });
     seed.forEach(function(d){ d.remove(); });
     orbit.classList.add('is-live');
-    var R = isDT ? 1600 : 543, SLOT = Math.asin((isDT ? 300 : 135) / R), START = isDT ? 3.2 * SLOT : 52 * Math.PI / 180, CY = isDT ? 284 + R : 692;   /* desktop: a flatter, wider ring (r 1600), discs 300 px apart */
-    if (isDT){ var ringSvg = document.querySelector('.co-ring'); ringSvg.setAttribute('viewBox', '0 0 3200 3200'); ringSvg.innerHTML = '<circle cx="1600" cy="1600" r="1598.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="8 8"/>'; }
+    var R = isDT ? 1835 : 543, SLOT = Math.asin((isDT ? 295 : 135) / R), START = isDT ? 3.2 * SLOT : 52 * Math.PI / 180, CY = isDT ? 2026.3 : 692;   /* desktop: the frame's arc (r 1835, crown at y 255; the orbit box starts at 63.7) */   /* desktop: a flatter, wider ring (r 1600), discs 300 px apart */
+    if (isDT){ var ringSvg = document.querySelector('.co-ring'); ringSvg.setAttribute('viewBox', '0 0 3670 3670'); ringSvg.innerHTML = '<circle cx="1835" cy="1835" r="1833.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="27.03 27.03"/>'; }
     var ENTER = 900, STAGGER = 130, HOLD = 1200, ADVANCE = 620;
     function easeOut(t){ return 1 - Math.pow(1 - t, 5); }
     function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
@@ -2997,6 +3086,11 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   var media = document.getElementById('heroMedia'), heroVid = media.querySelector('video');
   var src = media.getAttribute('data-video');
   if (src){ heroVid.src = src; media.classList.add('has-video'); }
+  else if (isDT){   /* desktop: the frame's campus film (exported from 512:24659 with its gradient baked in; one 59.2 s loop) */
+    heroVid.preload = 'auto'; heroVid.src = 'assets/dt/hero-film.mp4'; media.classList.add('has-video', 'is-baked');
+    var hp = heroVid.play(); if (hp && hp.catch) hp.catch(function(){});
+    new IntersectionObserver(function(en){ if (en[0].isIntersecting) heroVid.play().catch(function(){}); else heroVid.pause(); }, {threshold: 0}).observe(media);
+  }
 
   /* ---- video overlay: the play buttons open it; the dock's play becomes a back arrow while it is open ---- */
   var VIDEOS = [
