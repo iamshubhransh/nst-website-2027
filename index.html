@@ -1590,16 +1590,26 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .cc .cc-rc{flex:0 0 300px}
   .cc .cc-row{display:grid!important;grid-template-columns:384px minmax(0,1fr);gap:24px!important}
   .cc .cc-row .cc-two{gap:12px}
+  /* ---- entrepreneurship (516:37221): head, 36, 24/32 stat, 48, CTA; rows inset 12, arrow at the text column's end ---- */
+  .ent .ent-top{margin-top:36px}
+  .ent .ent-stat{font-size:24px;line-height:32px}
+  .ent .bk-cta-side{margin-top:48px}
+  .ent .ent-rows{padding:0 12px}
+  .ent .ent-r-arrow{left:476px;top:21px;width:16px;height:16px}
+  /* ---- research: the CTA sits on the header's centre line ---- */
+  .res .bk-cta-side{align-self:center}
   /* ---- global exposure (516:37412): map 588 at x 876, chips 32 tall across the column, trip text, three 319-tall photos ---- */
   .glob{row-gap:16px}
   .glob .glob-map{width:588px;margin:6px 0 0 62px}
   .glob .glob-body{margin-top:70.5px;gap:16px}
   .glob .chips{grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-  .glob .chip{height:32px;padding:7px 12px 7px 9px;gap:7px;font-size:12px;line-height:16px;letter-spacing:.02px;border-radius:100px}
-  .glob .chip img{width:18px;height:13px;border-radius:2px}
-  .glob .glob-text{min-height:74px;gap:4px}
-  .glob .glob-title{font-size:16px;line-height:26px;letter-spacing:.06px}
-  .glob .glob-desc{max-width:827px;font-size:14px;line-height:22px;letter-spacing:.1px}
+  /* chips and trip text sized up from the frame at Shubhransh's request (9 Oct): 44 px chips, 15 px labels, 22/30 title, 16/26 description */
+  .glob .glob-body{gap:20px}
+  .glob .chip{height:44px;padding:0 16px;gap:10px;font-size:15px;line-height:20px;letter-spacing:.02px;border-radius:100px}
+  .glob .chip img{width:24px;height:17px;border-radius:2px}
+  .glob .glob-text{min-height:88px;gap:6px}
+  .glob .glob-title{font-size:22px;line-height:30px;letter-spacing:.06px}
+  .glob .glob-desc{max-width:900px;font-size:16px;line-height:26px;letter-spacing:.1px}
   .glob .gstack{margin-top:0;gap:16px}
   .glob .gstack-card,.glob .gstack-card.is-back{height:319px;border-radius:12px;border:0;background:#F6F7F9}
 }
