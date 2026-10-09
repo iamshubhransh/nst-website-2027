@@ -1019,6 +1019,413 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 @media (prefers-reduced-motion:reduce){.ai-you,.ai-newton{animation:none}.ai-msg .w{transition:none;opacity:1;filter:none}.ai-step{transition:none}.ai-status{animation:none}}
 
 
+
+/* ======================================================================================================================
+   DESKTOP LAYER (Figma 511:3609, Shubhransh's desktop draft; type, spacing and hierarchy normalised).
+   Below 1024 px nothing here applies except the four neutral rules right below (wrappers collapse, desktop-only nodes hide),
+   so the phone layout is unchanged. At 1024 px and up: a 1200 px content column (--wrap) centred on the viewport.
+   Type: hero 56/64 · section titles 40/48 Expanded · sub-lines 18/28 · body 16/26 · kickers 12/16 ls 2 · nothing under 12 px.
+   Rhythm: 120 px section padding, 24 px between cards, 48–56 px between a header and its content.
+   ====================================================================================================================== */
+.dt-only{display:none}
+.bk-side,.bk-main,.found-side,.wa{display:contents}
+.tile p b{font-weight:inherit}
+.bk.is-in .bk-main>.bk-rise:nth-child(1){transition-delay:.08s}.bk.is-in .bk-main>.bk-rise:nth-child(2){transition-delay:.16s}.bk.is-in .bk-main>.bk-rise:nth-child(3){transition-delay:.24s}
+
+@media (min-width:1024px){
+  :root{--wrap:min(1200px,calc(100vw - 96px));--side:calc((100vw - var(--wrap)) / 2)}
+  html,body{background:#fff}
+  .page{width:100%;margin:0;box-shadow:none;padding-bottom:0;container-type:normal;overflow-x:clip}
+  .dt-only{display:revert}
+  .dock{display:none}
+  .dock.is-ai{display:block;max-width:760px}
+  .menu{display:none}
+
+  /* ---- nav: the floating pill, container + 36 px each side; section links in the middle, Ask Newton beside Apply ---- */
+  .nav{max-width:calc(var(--wrap) + 72px);margin:16px auto -72px;height:60px;padding:8px 10px 8px 20px;gap:24px}
+  .nav-links{display:flex;align-items:center;gap:28px;margin:0 auto}
+  .nav-links a{font-size:15px;line-height:22px;font-weight:500;letter-spacing:-.1px;color:#16191D;text-decoration:none;opacity:.78;transition:opacity .2s ease}
+  .nav-links a:hover{opacity:1}
+  .nav-actions{gap:10px}
+  .nav-ask{display:inline-flex;align-items:center;gap:8px;height:42px;padding:0 16px 0 12px;border:1px solid var(--line);border-radius:99px;background:#fff;font-size:14px;line-height:22px;font-weight:600;color:#16191D;cursor:pointer;transition:border-color .2s ease,box-shadow .2s ease}
+  .nav-ask i{width:18px;height:18px;border-radius:50%;background:linear-gradient(160deg,#883DA3,#B42FE5);box-shadow:0 0 10px rgba(180,47,229,.45)}
+  .nav-ask:hover{border-color:#D5C2F0;box-shadow:0 2px 10px rgba(136,61,163,.12)}
+  .nav .btn-sm{height:42px;padding:8px 22px}
+
+  /* ---- hero: the campus film full-bleed under a 50 % → black veil; copy in the left 640 px; logo marquee along the foot ---- */
+  .hero{position:relative;height:clamp(760px,100vh,912px);background:#010101;overflow:hidden}
+  .hero-media{position:absolute;inset:0;height:auto}
+  .hero-fade{display:block;background:linear-gradient(180deg,rgba(1,1,1,.5) 0%,rgba(1,1,1,.5) 58%,#010101 92%),linear-gradient(90deg,rgba(1,1,1,.45),rgba(1,1,1,0) 62%)}
+  .hero-body{position:absolute;left:var(--side);top:0;bottom:0;width:min(820px,var(--wrap));padding:72px 0 140px;background:none;overflow:visible;justify-content:center;gap:32px}
+  .rays{display:none}
+  .hero-text{gap:16px}
+  .kicker{font-size:14px;line-height:16px;letter-spacing:2px}
+  .headline{font-size:clamp(40px,3.6vw,52px);line-height:1.17;white-space:nowrap}
+  .tags{flex-direction:row;flex-wrap:nowrap;gap:4px 14px;margin-top:4px}
+  .tag-row{gap:14px;font-size:18px;line-height:28px;color:rgba(255,255,255,.88)}
+  .tag-row+.tag-row::before{content:"";width:7.09px;height:6.96px;background:url(assets/icon-star.svg) center/contain no-repeat}
+  .star{width:7.09px}
+  .info-row{gap:0}
+  .info{flex:none;background:none;padding:0 32px 0 0;border-radius:0;gap:6px}
+  .info+.info{padding-left:32px;border-left:1px solid rgba(225,229,234,.35)}
+  .info-label{font-size:12px;line-height:14px;letter-spacing:2px;color:rgba(255,255,255,.62)}
+  .info-value{font-size:20px;line-height:28px;font-weight:500}
+  .badge-row{gap:12px}
+  .badge{flex:none;width:264px;height:48px;border-radius:6px;background:rgba(22,25,29,.84);font-size:14px;line-height:22px}
+  .cta{flex-direction:row;align-items:center;gap:12px}
+  .btn-lg{height:60px;width:264px;padding:0;font-size:18px}
+  .cta-row{flex:none;gap:12px}
+  .cta-row .btn{flex:none;width:264px;padding:0}
+  .cta-row .play{order:2;width:60px;height:60px}
+  .hero-logos{position:absolute;left:0;right:0;bottom:56px;height:49px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+  .hero-logos-track{display:flex;width:max-content;animation:heroLogos 48s linear infinite}
+  .hero-logos-track img{width:1760px;height:49px;flex:none;display:block}
+  .hero-logos:hover .hero-logos-track{animation-play-state:paused}
+  @keyframes heroLogos{to{transform:translateX(-1760px)}}
+
+  /* ---- quick summary: one warm band; the 93 % stat left, four proof tiles right; the particle ring runs behind both ---- */
+  .proof{position:relative}
+  .stat{height:212px;padding:0 var(--side);align-items:flex-start;justify-content:center}
+  .stat-track{width:auto;max-width:none;overflow:visible}
+  .slide{flex:none;flex-direction:row;align-items:center;gap:20px}
+  .slide+.slide,.dots,.proof .hatch-flip,.companies{display:none}
+  .stat-num{font-size:64px;line-height:76px}
+  .stat-desc{width:300px;text-align:left;white-space:normal;font-size:18px;line-height:28px}
+  .stat-desc br{display:none}
+  .grid{position:absolute;top:0;right:var(--side);height:212px;display:flex;align-items:center;gap:16px;background:none}
+  .tile,.tile:nth-child(n+3){width:164px;height:auto;padding:16px;gap:12px;align-items:flex-start;justify-content:flex-start;background:#fff;border:1px solid var(--line2);border-radius:12px}
+  .tile:nth-child(odd){border-right:1px solid var(--line2)}
+  .tile p{display:flex;flex-direction:column;gap:2px;white-space:nowrap}
+  .tile p b{font-size:24px;line-height:30px;font-weight:600;letter-spacing:0;color:#16191D}
+  .tile p span{font-size:13px;line-height:18px;font-weight:500;letter-spacing:.1px;color:#5B6271}
+
+  /* ---- placement record: centred title, a flat wide ring (r 1600) with three companies on its crown, the CTC card ---- */
+  .co{padding:112px 0 0;gap:40px}
+  .co-head{gap:20px}
+  .co-orbit{display:flex;flex-direction:column;justify-content:flex-start}
+  .co-ring{left:calc(50% - 1600px);top:362px;width:3200px;height:3200px}
+  .co-orbit{width:var(--wrap);max-width:none;height:290px}
+  .co-title{width:min(800px,100%);margin:0 auto;font-size:40px;line-height:48px;text-wrap:balance}
+  .co-label{font-size:14px;line-height:16px;letter-spacing:2px}
+  .ctc{width:640px;padding:10px 10px 16px}
+  .ctc-card{padding:16px}
+  .ctc-title{font-size:18px;line-height:24px}
+  .ctc-value{font-size:32px;line-height:38px}
+  .ctc-value span{font-size:20px}
+  .ctc-avg-label{font-size:16px;line-height:24px}
+  .ctc-avg-value{font-size:14px;line-height:20px}
+
+  /* ---- campus internships: the two campuses side by side, each its own card with its tab; no switching ---- */
+  .campus{padding:56px 0 0}
+  .campus-pin{height:auto;width:var(--wrap);margin:0 auto}
+  .campus-card{height:auto;min-height:0;padding:0;background:none;overflow:visible;cursor:default}
+  .campus-card::after,.campus-card>.fade,.campus-tab,.campus-progress,.campus-stage>.dots-bg{display:none}
+  .campus-body{flex:none;min-height:0;display:block}
+  .campus-stage{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .campus-slide,.campus-slide[hidden]{display:block!important;position:relative;inset:auto;height:500px;opacity:1;transform:none;pointer-events:auto;border-radius:12px;background:radial-gradient(circle,rgba(140,149,166,.28) 1px,transparent 1.3px) 0 0/14px 14px,#F6F7F9;box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+  .campus-slide-tab{display:block;position:absolute;left:50%;top:0;transform:translateX(-50%);padding:9px 26px;border-radius:0 0 16px 16px;background:#7B55EE;font-size:12px;line-height:14px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#fff;white-space:nowrap;z-index:2}
+  .campus-title{top:72px;width:440px;font-size:24px;line-height:32px}
+  .campus-photos{top:150px;transform:translateX(-50%) scale(1.08);transform-origin:50% 0}
+  .stat-card{left:24px;right:24px;top:312px;bottom:24px;height:auto;border-radius:10px;overflow:hidden}
+  .stat-cell-top{height:auto;flex:1;justify-content:center;gap:6px}
+  .stat-row{height:auto;flex:1}
+  .stat-row .stat-cell{justify-content:center;gap:6px}
+  .sc-label{font-size:13px;line-height:18px}
+  .sc-value{font-size:22px;line-height:28px}
+
+  /* ---- internship wins: three cards, the middle one in focus; side cards step it (the pair loops) ---- */
+  .wins{padding:72px 0 0;gap:24px;align-items:center;overflow:hidden}
+  .wins-track{width:max-content;margin:0;padding:0;overflow:visible;scroll-snap-type:none;gap:24px;align-items:center;transition:transform .6s cubic-bezier(.22,1,.36,1)}
+  .win{zoom:1.28;flex:none;scroll-snap-align:none;transform:none!important;transition:filter .4s ease,opacity .4s ease;cursor:pointer}
+  .win.is-side{opacity:.92}
+  .win{transition:scale .6s cubic-bezier(.22,1,.36,1),opacity .4s ease,box-shadow .4s ease}
+  .win.is-focus{scale:1.06;cursor:default;box-shadow:0 18px 40px rgba(16,19,24,.16);z-index:1}
+  .wins-view{width:calc(384px * 3 + 48px);margin:-32px auto;padding:32px 0;overflow:hidden;clip-path:inset(0 -16px)}
+  .wins-foot{justify-content:center}
+  .wins-hint{display:none}
+
+  /* ---- auditors: a grey band; the certification left, the two reports right ---- */
+  .audit{padding:88px var(--side);background:#F6F7F9}
+  .audit>.dots-bg,.audit>.fade{display:none}
+  .audit-card{display:grid;grid-template-columns:400px 1fr;gap:72px;align-items:center;padding:0;background:none;border:0;overflow:visible}
+  .audit-top{align-items:flex-start;gap:20px;overflow:hidden}
+  .audit-head{align-items:flex-start}
+  .audit-titles{align-items:flex-start;text-align:left;width:auto}
+  .audit-kicker{font-size:12px;line-height:14px;letter-spacing:2px}
+  .audit-sub{font-size:18px;line-height:28px}
+  .audit-logos{-webkit-mask-image:linear-gradient(90deg,#000 80%,transparent);mask-image:linear-gradient(90deg,#000 80%,transparent)}
+  .reports{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .report{background:#fff;box-shadow:inset 0 0 0 1px var(--line);padding:20px;gap:20px}
+  .report-row p{font-size:17px;line-height:26px}
+  .report .btn-md{height:44px;font-size:15px}
+
+  /* ---- seven foundations: text column left, the seven rows right (no stepping), hairlines along the foot ---- */
+  .found{height:auto;padding:120px var(--side) 220px;display:grid;grid-template-columns:minmax(0,1fr) 588px;column-gap:96px;align-items:start}
+  .found-art{left:0;top:0;width:900px;height:auto;opacity:.22}
+  .found-lines{left:0;width:100%}
+  .found-side{display:flex;flex-direction:column;gap:20px;position:relative}
+  .found-kick{margin:0;font-size:12px;line-height:16px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#61A8FF}
+  .found-title{position:static;width:auto;max-width:none;transform:none;text-align:left;font-size:40px;line-height:48px}
+  .found-lede{margin:0;max-width:420px;font-size:16px;line-height:26px;font-weight:500;color:#B2B9C7}
+  .found-list{position:relative;left:auto;right:auto;top:auto}
+  .found-window{height:auto;overflow:visible;border:1px solid #23282F;border-radius:12px;overflow:hidden}
+  .found-window::before,.found-fade,.found .wins-dots,.found-track>[aria-hidden="true"]{display:none}
+  .found-track{transform:none!important;transition:none}
+  .found-row{padding:0;border-width:0 0 1px;transition:background .2s ease}
+  .found-row:last-child{border-bottom:0}
+  .found-row a{padding:19px 24px}
+  .found-row:hover{background:#16191D}
+  .found-label,.found-row.is-top .found-label{font-size:17px;line-height:26px;letter-spacing:.06px;text-decoration-color:transparent}
+  .found-row:hover .found-label{text-decoration-color:currentColor}
+  .found-row img.arr{transition:transform .2s ease}
+  .found-row:hover img.arr{transform:translateX(4px)}
+
+  /* ---- achievement buckets: header column (sticky) + device column 616 px; full-width rows below where the draft has them ---- */
+  .bk{padding:120px var(--side);display:grid;grid-template-columns:minmax(0,1fr) 616px;column-gap:84px;row-gap:56px;align-items:start;overflow:visible}
+  .bk-side{display:flex;flex-direction:column;gap:24px;grid-column:1;grid-row:1;position:sticky;top:112px}
+  .bk-main{display:flex;flex-direction:column;gap:24px;grid-column:2;grid-row:1}
+  .bk>:not(.bk-side):not(.bk-main){grid-column:1/-1}
+  .bk>.bk-cta{display:none}
+  .bk-head{align-items:stretch;gap:20px;padding:0}
+  .bk-bar{width:3px;height:auto;margin:0;align-self:stretch}
+  .bk-text{gap:8px}
+  .bk-title{font-size:40px;line-height:48px;white-space:normal}
+  .bk-sub{font-size:18px;line-height:28px}
+  .bk-lede{display:block;margin:0;max-width:440px;font-size:16px;line-height:26px;font-weight:500;color:var(--bk-ink);opacity:.62}
+  .bk-cta-side{display:flex;align-self:flex-start;height:52px;padding:0 28px;margin-top:8px}
+  .bk-cta-side:hover img{transform:translateX(3px)}
+  .bk-card{border-radius:14px}
+  .bk-kicker{font-size:12px;line-height:14px;letter-spacing:1.4px}
+  .bk-band{padding:14px 20px}
+  /* open source */
+  .oss-prog{padding:0 20px}
+  .oss-stat{padding:0 20px;font-size:22px;line-height:30px}
+  .oss-strip{padding:0 20px;scroll-padding-left:20px}
+  .focus{padding:0 20px;scroll-padding-left:20px}
+  /* competitive coding */
+  .cc-cards{margin:0;padding:0;overflow:visible}
+  .cc-rc{flex:1 1 0}
+  #ccDots{display:none}
+  .cc .cc-row{flex-direction:row!important;gap:24px!important;align-items:stretch}
+  .cc .cc-row .cc-lead{flex:1 1 0}
+  .cc .cc-row .cc-two{flex:2 1 0;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  /* entrepreneurship */
+  .ent-top{padding:0;gap:0;background:none;border:0}
+  .ent-stat{font-size:26px;line-height:36px}
+  .ent-hr,.ent-row,.ent .pipe{display:none}
+  /* global exposure */
+  .glob-map{width:616px;height:auto;margin:0}
+  .glob-body{display:flex;flex-direction:column;gap:24px}
+  .chips{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:0;padding:0;overflow:visible}
+  .chip{height:44px;justify-content:center;font-size:14px;border-radius:100px}
+  .chip img{width:20px;height:14px}
+  .glob-title{font-size:24px;line-height:32px}
+  .glob-desc{max-width:820px;font-size:16px;line-height:26px}
+  .glob .gstack{margin-top:-24px}
+  .gstack{height:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;touch-action:auto}
+  .gstack-card,.gstack-card.is-back{position:relative;left:auto;top:auto;margin:0;width:auto;height:300px;transform:none!important;opacity:1!important;border-radius:14px;transition:opacity .35s ease}
+  .gstack.is-swap .gstack-card{opacity:0!important}
+  .gstack-hint{display:none!important}
+  /* research */
+  .res .bk-side{grid-column:1/-1;flex-direction:row;align-items:center;justify-content:space-between;position:static}
+  .res .bk-cta-side{margin:0}
+  .res .bk-main{display:none}
+  .res-wrap{margin:0;overflow:visible}
+  .papers{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0;overflow:visible}
+  .paper{width:auto}
+  .res-foot{display:none}
+}
+@media (min-width:1024px){
+  /* ---- fixes from the first pass ---- */
+  .bk-title span{display:block}                                  /* the grey tail ("culture at NST.") always takes its own line */
+  .glob-map{aspect-ratio:370/157}
+  .glob-map canvas,.glob-map svg{width:100%;height:100%}
+  .cc .cc-two .cc-sc{display:flex;flex-direction:column;height:100%}
+  .cc .cc-two .cc-sc-img{flex:1 1 auto;height:auto;min-height:200px}
+  .cc .cc-two .cc-sc-img img{height:100%;object-fit:cover}
+  .audit-card{grid-template-columns:360px 1fr;gap:56px}
+  .report-row{height:auto;min-height:64px}
+  .report-row p{white-space:normal;font-size:16px;line-height:24px}
+
+  /* ---- curriculum: hairlines, then a centred column (ask bar, year cards, heading, slider), then the pane 5/7 ---- */
+  .cur{padding:156px var(--side) 120px}
+  .cur-lines{left:0;width:100%}
+  .ask{width:600px;max-width:100%;margin:0 auto;height:48px;border-radius:10px;padding:0 8px 0 16px}
+  .ask-text{font-size:15px;line-height:20px;height:20px}
+  .ask-send{width:32px;height:32px}
+  .ask-pill{top:14px;right:16px}
+  .cur-years{margin-top:56px;transform:scale(1.15);transform-origin:50% 0}
+  .cur-title{margin:32px auto 0;max-width:760px;font-size:40px;line-height:48px}
+  .ysl{width:600px;margin:40px auto 0}
+  .ysl-y{font-size:16px}
+  .cur-pane{display:grid;grid-template-columns:486px minmax(0,1fr);grid-template-rows:auto auto auto 1fr;column-gap:72px;margin-top:72px}
+  .cur-pane>.cur-h,.cur-pane>.cur-desc,.cur-pane>.cur-chips{grid-column:1}
+  .cur-pane>.cur-card{grid-column:2;margin:0}
+  .cur-pane>.cur-card:nth-child(4){grid-row:1/4}
+  .cur-pane>.cur-card:nth-child(5){grid-row:4;margin-top:24px}
+  .cur-h{margin:0;padding:0;min-height:56px}
+  .cur-h-bar{height:56px}
+  .cur-kick{font-size:12px;line-height:16px}
+  .cur-h-t{font-size:26px;line-height:34px}
+  .cur-desc{margin:20px 0 0;font-size:17px;line-height:28px}
+  .cur-chips{margin:24px 0 0;gap:10px;align-content:flex-start}
+  .cur-chip{height:34px;padding:0 14px;font-size:14px}
+  .cur-card-h{height:44px;padding:0 20px;font-size:12px;letter-spacing:1.4px}
+  .kcs{padding:0 20px;scroll-padding-left:20px}
+  .pjs{padding:0 20px;scroll-padding-left:20px}
+  .cur-card .pdots{margin-left:20px}
+
+  /* ---- faculty: a wide flat ring over the title, four instructors in view, arrows step ---- */
+  .fac{padding:0 0 120px}
+  .fac-top{height:300px}
+  .fac-ring{left:calc(50% - 1600px);top:96px;width:3200px;height:3200px}
+  .fac-title{top:184px;font-size:40px;line-height:48px}
+  .fac-sub{top:240px;font-size:18px;line-height:28px}
+  .fac-strip{width:var(--wrap);margin:56px auto 0;padding:0;scroll-padding-left:0}
+  .fac-card{width:calc(var(--wrap) / 4);height:268px;padding:0 24px}
+  .fac-card::after{left:0;width:100%;background:repeating-linear-gradient(90deg,#E4E7EC 0 1px,transparent 1px 14px)}
+  .fac-photo{width:80px;height:80px}
+  .fac-name{font-size:18px;line-height:26px}
+  .fac-role{font-size:15px;line-height:22px}
+  .fac-dots{display:none}
+  .fac-arrows{display:flex;justify-content:center;gap:12px;margin-top:40px}
+  .fac-arr{width:48px;height:48px;padding:0;border:1px solid var(--line);border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease,opacity .2s ease,transform .16s ease}
+  .fac-arr img{width:20px;height:20px}
+  .fac-arr-l img{transform:scaleX(-1)}
+  .fac-arr:hover{background:#F6F7F9}
+  .fac-arr:active{transform:scale(.96)}
+  .fac-arr:disabled{opacity:.35;cursor:default;background:#fff}
+
+  /* ---- campuses: 2 × 2 ---- */
+  .cities{padding:120px var(--side);display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .page .cities-art{display:none}
+  .cities-title,.cities-list{grid-column:1/-1;margin:0}
+  .cities-title{font-size:40px;line-height:48px}
+  .cities-list{font-size:18px;line-height:28px;margin:-12px 0 32px}
+  .city{margin:0;border-radius:16px}
+  .city-top{height:auto;padding:28px 28px 24px}
+  .city-mark{width:40px;height:40px;border-radius:12px}
+  .city-mark svg{width:19px;height:23px}
+  .city-with{margin-top:20px;font-size:13px;line-height:18px}
+  .city-name{font-size:26px;line-height:32px}
+  .city-desc{font-size:15px;line-height:24px}
+  .city-bot{height:auto;padding:0 28px 28px}
+  .city .tour{height:240px;border-radius:14px}
+  .tour-play{width:60px;height:60px;left:calc(50% - 30px);top:calc(50% - 30px)}
+  .tour-lab,.tour-time{font-size:11px;line-height:14px;bottom:18px}
+  .tour-lab{left:20px}.tour-time{right:20px}
+  .city-cta{height:52px;margin-top:20px;font-size:16px}
+  .city:hover .tour-play{transform:scale(1.06)}
+
+  /* ---- three ways in + admission process: conveyor and title across, then the route column and the steps column ---- */
+  .wa{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto auto auto auto 1fr;column-gap:48px;padding:0 var(--side) 120px;position:relative;border-top:1px solid #E1E5EA}
+  .ways,.adm{display:contents}
+  .ways-lines{position:absolute;left:0;top:0;width:100%}
+  .ways-row{grid-column:1/-1;grid-row:1;margin-top:168px}
+  .ways-title{grid-column:1/-1;grid-row:2;margin:32px 0 0;font-size:40px;line-height:48px}
+  .wa-h,.adm-title{margin:72px 0 20px;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D;text-align:left}
+  .wa-h{display:block;grid-column:1;grid-row:3}
+  .adm-title{grid-column:2;grid-row:3}
+  .routes{grid-column:1;grid-row:4;margin:0;height:52px}
+  .route{height:42px;font-size:15px}
+  .route-card{grid-column:1;grid-row:5;margin-top:16px;padding:24px;gap:12px;align-self:start}
+  .route-lab{font-size:11px;line-height:14px}
+  .route-h{font-size:28px;line-height:36px;min-height:72px}
+  .route-p{font-size:16px;line-height:26px;min-height:52px}
+  .route-acts .rbtn{height:52px}
+  .adm .hatch{display:none}
+  .adm-card{grid-column:2;grid-row:4/7;margin:0;align-self:start}
+  .adm-head{height:44px;font-size:12px}
+  .adm-rows{padding:0 20px;gap:18px;margin-top:20px}
+  .adm-n,.adm-h{font-size:16px;line-height:24px}
+  .adm-n{width:24px}
+  .adm-p{font-size:14px;line-height:22px}
+  .adm-note{font-size:14px;line-height:22px}
+
+  /* ---- fests: the dome widens with the page; content in the container; posters run full-bleed ---- */
+  .fest{height:auto;padding-bottom:240px}
+  .fest-dome{left:calc(50% - 1400px);width:2800px;top:140px;bottom:140px;height:auto}
+  .fest-arr-l{left:calc(50% - 196px)}
+  .fest-arr-r{right:calc(50% - 196px)}
+  .fest-body{position:relative;left:auto;right:auto;top:auto;padding-top:201px;width:var(--wrap);margin:0 auto}
+  .fest-body.is-out{transform:translateY(8px)}
+  .fest-kick{font-size:12px;line-height:16px}
+  .fest-title{margin-top:12px;font-size:40px;line-height:48px}
+  .fest-video{width:100%;height:auto;aspect-ratio:16/8;margin:40px 0 0;border-radius:16px}
+  .fest-video .tour-play{width:72px;height:72px;left:calc(50% - 36px);top:calc(50% - 36px)}
+  .fest-video .tour-lab,.fest-video .tour-time{font-size:13px;line-height:16px;bottom:24px}
+  .fest-video .tour-lab{left:28px}.fest-video .tour-time{right:28px}
+  .fest-sponsors{margin-top:40px;height:40px}
+  .fest-spstrip{height:40px}
+  .fest-grid{grid-template-columns:repeat(4,1fr);gap:24px;margin:40px 0 0}
+  .fest-grid span{height:180px;border-radius:14px}
+  .fest-grid img{border-radius:14px}
+  .fest-posters{height:332px;margin:56px calc(var(--side) * -1) 0}
+  .fest-pstrip{left:0;height:332px;gap:16px}
+  .fest-pstrip img{width:280px;height:332px;border-radius:14px}
+  .fest-cta{width:400px;height:56px;margin:56px auto 0;font-size:16px}
+  .fest-lines{left:0;width:100%}
+
+  /* ---- Newton chat: the conversation runs in a 720 px column; the input dock sits under it ---- */
+  .ai-thread{padding-left:calc(50% - 360px);padding-right:calc(50% - 360px)}
+  .ai-note{left:calc(50% - 360px);right:calc(50% - 360px)}
+}
+
+@media (min-width:1024px){
+  /* papers: the stamp sits in the top-right corner; give the venue line room under it */
+  .paper{padding-top:56px}
+  .nav-links a,.nav-ask{white-space:nowrap}
+}
+/* ---- 1024–1279: same layout, tighter. The text columns keep a readable width, the wins row and faculty strip shrink ---- */
+@media (min-width:1024px) and (max-width:1279px){
+  :root{--wrap:calc(100vw - 80px)}
+  .nav-links{gap:20px}
+  .nav-links a:nth-child(2),.nav-links a:nth-child(6){display:none}
+  .headline{font-size:40px}
+  .stat-desc{width:210px;font-size:16px;line-height:24px}
+  .tile,.tile:nth-child(n+3){width:130px;padding:12px}
+  .tile p b{font-size:20px;line-height:26px}
+  .grid{gap:10px}
+  .co-title{font-size:34px;line-height:42px}
+  .found{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);column-gap:56px}
+  .found-title{font-size:32px;line-height:40px}
+  .bk{grid-template-columns:minmax(0,5fr) minmax(0,6fr);column-gap:48px}
+  .bk-title{font-size:32px;line-height:40px}
+  .ent-stat{font-size:22px;line-height:30px}
+  .glob-map{width:100%}
+  .win{zoom:.96}
+  .wins-view{width:calc(288px * 3 + 48px)}
+  .fac-card{width:calc(var(--wrap) / 3)}
+  .cur-pane{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:48px}
+  .audit-card{grid-template-columns:300px 1fr;gap:40px}
+  .cities-title,.cur-title,.ways-title,.fac-title,.fest-title{font-size:34px;line-height:42px}
+}
+
+@media (min-width:1024px){
+  /* Newton on desktop: the same sheet, type one step up, the conversation in a 720 px column */
+  .ai{background:#fff}
+  .ai-orb,.ai-orb canvas{width:88px;height:88px}
+  .ai-h{font-size:32px;line-height:40px}
+  .ai-p{width:440px;font-size:17px;line-height:26px}
+  .ai-chips{max-width:760px;gap:12px}
+  .ai-chip{padding:8px 16px;font-size:15px;line-height:22px;border-radius:10px}
+  .ai-mark{top:32px}
+  .ai-x{right:32px;top:28px}
+  .ai-thread{padding-top:140px;gap:18px}
+  .ai-bubble{max-width:480px;padding:12px 18px;font-size:16px;line-height:24px}
+  .ai-status{font-size:14px}
+  .ai-msg{font-size:17px;line-height:28px}
+  .ai-step{gap:14px}
+  .ai-step b{font-size:14px;line-height:22px}
+  .ai-step strong{font-size:16px;line-height:24px}
+  .ai-step span{font-size:15px;line-height:22px}
+  .ai-fu .ai-chip{font-size:14px;padding:6px 14px}
+  .ai-note{font-size:12px;bottom:96px}
+  .dock.is-ai .ai-input{height:54px}
+  .dock.is-ai .ai-input input{font-size:17px}
+  .dock.is-ai .ai-btn{width:54px;height:54px}
+}
+
 </style>
 </head>
 <body>
@@ -1029,7 +1436,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <img class="logo-mark" src="assets/nst-logo-mark.svg" alt="">
       <img class="logo-text" src="assets/nst-logo-text.svg" alt="">
     </a>
+    <nav class="nav-links dt-only" aria-label="Sections"><a href="#co">Placements</a><a href="#oss">Student life</a><a href="#cur">Curriculum</a><a href="#cities">Campuses</a><a href="#ways">Admissions</a><a href="#fest">Fests</a></nav>
     <div class="nav-actions">
+      <button class="nav-ask dt-only" type="button" id="navAsk"><i aria-hidden="true"></i>Ask Newton</button>
       <a class="btn btn-brand btn-sm" href="#ways">Apply Now</a>
       <button class="menu" type="button" aria-label="Open menu"><img src="assets/icon-menu.svg" alt=""></button>
     </div>
@@ -1037,7 +1446,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   <section class="hero" id="top" aria-label="B. Tech in CS and AI">
     <div class="hero-media" id="heroMedia" data-node="76:7929">
-      <img class="hero-poster" src="assets/hero-campus.jpg" alt="Aerial view of the NST campus">
+      <picture><source media="(min-width:1024px)" srcset="assets/dt/hero-campus-wide.jpg"><img class="hero-poster" src="assets/hero-campus.jpg" alt="Aerial view of the NST campus"></picture>
       <video class="hero-video" playsinline muted loop autoplay preload="none" aria-hidden="true"></video>
       <div class="hero-fade"></div>
     </div>
@@ -1067,6 +1476,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         </div>
       </div>
     </div>
+    <div class="hero-logos dt-only" aria-label="Companies hiring from NST"><div class="hero-logos-track"><img src="assets/dt/logos-hero.svg" alt=""><img src="assets/dt/logos-hero.svg" alt=""></div></div>
   </section>
 
   <section class="proof" data-node="76:10559" aria-label="Quick summary">
@@ -1076,7 +1486,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <div class="stat-track" id="statTrack">
         <article class="slide">
           <p class="stat-num">93%</p>
-          <p class="stat-desc">of the 2023 batch held a paid internship<br>by their second year</p>
+          <p class="stat-desc">of the 2023 batch held a paid internship <br>by their second year</p>
         </article>
         <article class="slide">
           <p class="stat-num">₹2.5L</p>
@@ -1098,7 +1508,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
           <span class="av av-logo"><i class="ring"></i><span class="mark"><span class="mark-inner"><span class="am-a"><img src="assets/logo2-vector-a.svg" alt=""></span><span class="am-b"><img src="assets/logo2-vector-b.svg" alt="Amazon"></span></span></span></span>
           <span class="av av-logo"><i class="ring"></i><span class="mark mark-fixed"><span class="mark-inner"><img class="full" src="assets/logo3-group.svg" alt="Zomato"></span></span></span>
         </div>
-        <p>92% Placement Rate</p>
+        <p><b>92%</b> <span>Placement Rate</span></p>
       </article>
       <article class="tile">
         <div class="stack">
@@ -1106,13 +1516,13 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
           <span class="av av-photo"><img src="assets/avatar-2.png" alt="" style="left:-6.09px;top:3.5px;width:31.53px;height:24.08px"></span>
           <span class="av av-photo"><img src="assets/avatar-3.png" alt="" style="left:-3.52px;top:2.66px;width:31.54px;height:25.75px"></span>
         </div>
-        <p>8 LPA Average Placement</p>
+        <p><b>8 LPA</b> <span>Average Placement</span></p>
       </article>
       <article class="tile">
         <div class="stack">
           <span class="av av-dark"><i class="ring ring-thin"></i><img src="assets/package-icon.svg" alt=""></span>
         </div>
-        <p>1.3 Cr Highest Package</p>
+        <p><b>1.3 Cr</b> <span>Highest Package</span></p>
       </article>
       <article class="tile">
         <div class="stack">
@@ -1120,7 +1530,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
           <span class="av av-expert"><span class="cut"><img src="assets/expert-4910.png" alt="" style="left:-3.64px;top:.43px;width:32.57px;height:32.57px"></span></span>
           <span class="av av-expert"><span class="cut"><img src="assets/expert-4908.png" alt="" style="left:-1.07px;top:.43px;width:27.05px;height:27.05px"></span></span>
         </div>
-        <p>800+ Industry Experts</p>
+        <p><b>800+</b> <span>Industry Experts</span></p>
       </article>
     </div>
 
@@ -1167,7 +1577,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <div class="campus-body"><div class="campus-stage">
         <div class="dots-bg dots-top" aria-hidden="true"></div>
         <div class="dots-bg dots-bot" aria-hidden="true"></div>
-        <div class="campus-slide" data-campus="ady patil university, pune">
+        <div class="campus-slide" data-campus="ady patil university, pune"><span class="campus-slide-tab dt-only">ady patil university, pune</span>
           <h2 class="campus-title" data-pin-reveal data-dim=".26"><span>300+ student batch has already sec</span><span class="dim">ured paid internships</span></h2>
           <div class="campus-photos" aria-hidden="true"><img class="p1" src="assets/card-photo-7708.png" alt=""><div class="grp"><img class="p2" src="assets/card-photo-7703.png" alt=""><img class="p3" src="assets/card-photo-aditya.png" alt=""><img class="p4" src="assets/card-photo-7726.png" alt=""></div></div>
           <div class="stat-card">
@@ -1178,7 +1588,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
             </div>
           </div>
         </div>
-        <div class="campus-slide" data-campus="rishihood university, sonipat" hidden>
+        <div class="campus-slide" data-campus="rishihood university, sonipat" hidden><span class="campus-slide-tab dt-only">rishihood university, sonipat</span>
           <h2 class="campus-title" data-pin-reveal data-dim=".26"><span>500+ student batch has already secured paid internships</span></h2>
           <div class="campus-photos" aria-hidden="true"><img class="p1" src="assets/card-photo-7708.png" alt=""><div class="grp"><img class="p2" src="assets/card-photo-7703.png" alt=""><img class="p3" src="assets/card-photo-aditya.png" alt=""><img class="p4" src="assets/card-photo-7726.png" alt=""></div></div>
           <div class="stat-card">
@@ -1253,7 +1663,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   <section class="found" id="found" data-node="267:51724" aria-label="The seven foundations">
     <img class="found-art" src="assets/found-campus-sketch.webp" alt="">
     <canvas class="found-lines" id="foundLines" aria-hidden="true"></canvas>
-    <h2 class="found-title">We specifically work on these 7 foundations to give outcomes</h2>
+    <div class="found-side"><p class="found-kick dt-only">The seven foundations</p><h2 class="found-title">We specifically work on these 7 foundations to give outcomes</h2><p class="found-lede dt-only">Seven ways students build a real track record long before placements. Pick one to see it in action.</p></div>
     <div class="found-list">
       <div class="found-window" id="foundWindow">
         <ul class="found-track" id="foundTrack">
@@ -1273,13 +1683,13 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   <!-- ===== bucket 01 · open source (282:72461) ===== -->
   <section class="bk bk-dark oss" id="oss" data-node="282:72461" data-index="01" aria-label="Open source culture at NST">
-    <header class="bk-head">
+    <div class="bk-side"><header class="bk-head">
       <span class="bk-bar" aria-hidden="true"></span>
       <div class="bk-text">
         <h2 class="bk-title">Open Source <span>culture at NST.</span></h2>
         <p class="bk-sub">12 GSoC contributors across three batches</p>
       </div>
-    </header>
+    </header><p class="bk-lede dt-only">Each stipend is over ₹2.5 lakh, earned through Google’s own open-source programme, most of it in the first or second year.</p><a class="bk-cta bk-cta-white bk-cta-side dt-only" href="#">See all 12 contributions <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div><div class="bk-main">
     <div class="bk-card oss-proof bk-rise" data-node="282:75097">
       <div class="oss-prog">
         <img class="oss-sun" src="assets/oss/gsoc-sun.png" alt="">
@@ -1324,18 +1734,18 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         <span class="focus-fade" aria-hidden="true"></span>
       </div>
     </div>
-    <a class="bk-cta bk-cta-white bk-rise" href="#">See all 12 contributions <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
+    </div><a class="bk-cta bk-cta-white bk-rise" href="#">See all 12 contributions <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
   </section>
 
   <!-- ===== bucket 02 · competitive coding (282:80431) ===== -->
   <section class="bk bk-light cc" id="cc" data-node="282:80431" data-index="02" aria-label="Competitive coding at NST">
-    <header class="bk-head">
+    <div class="bk-side"><header class="bk-head">
       <span class="bk-bar" aria-hidden="true"></span>
       <div class="bk-text">
         <h2 class="bk-title">Competitive Coding <span>at NST.</span></h2>
         <p class="bk-sub">Where first-years stand with <b>IITs and NITs</b></p>
       </div>
-    </header>
+    </header><p class="bk-lede dt-only">#31 in Asia West in 2025, up 150 places in a year and above every NIT on the board.</p><a class="bk-cta bk-cta-dark bk-cta-side dt-only" href="#">See all contest results <img src="assets/icon-arrow-right-white.svg" alt=""></a></div><div class="bk-main">
     <div class="bk-card cc-proof bk-rise" data-node="282:82558">
       <div class="cc-band"><img src="assets/cc/icpc-icons.png" alt=""><span>ICPC, the Olympics of coding</span></div>
       <div class="cc-num">
@@ -1364,7 +1774,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         <div class="rail-row"><span class="rail-rank">30</span><span class="rail-dot"><i></i></span><span class="rail-name">BITS Pilani, Goa</span><span class="rail-cat">BITS</span><span class="rail-score">500</span></div>
       </div>
     </div>
-    <div class="bk-rise" data-node="282:82999" style="display:flex;flex-direction:column;gap:12px">
+    </div><div class="bk-rise cc-row" data-node="282:82999" style="display:flex;flex-direction:column;gap:12px">
       <article class="cc-lead" data-node="328:1888">
         <div class="cc-lead-top">
           <span class="cc-lead-ico"><img src="assets/cc/py-mark.svg" alt=""></span>
@@ -1382,7 +1792,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   <!-- ===== bucket 03 · entrepreneurship (328:1959) ===== -->
   <section class="bk bk-dark ent" id="ent" data-node="328:1959" data-index="03" aria-label="Entrepreneurship culture at NST">
-    <header class="bk-head">
+    <div class="bk-side"><header class="bk-head">
       <span class="bk-bar" aria-hidden="true"></span>
       <div class="bk-text">
         <h2 class="bk-title">Entrepreneurship <span>culture at NST.</span></h2>
@@ -1402,31 +1812,31 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       </div>
       <div class="pipe-labels"><div><b>01</b><span>Ideation</span></div><div><b>02</b><span>Prototype</span></div><div><b>03</b><span>MVP</span></div><div><b>₹10 L</b><span>Pre-seed grant</span></div></div>
     </div>
-    <div class="bk-card ent-list bk-rise" data-node="328:4167">
+    <a class="bk-cta bk-cta-white bk-cta-side dt-only" href="#">Apply to StartX <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div><div class="bk-main"><div class="bk-card ent-list bk-rise" data-node="328:4167">
       <div class="bk-band"><span class="bk-kicker">Launched from campus</span><span class="bk-note">3 startups</span></div>
       <div class="ent-rows" id="entRows">
         <a class="ent-r" href="#" style="--tint-a:rgba(245,140,38,.45);--tint-b:rgba(245,140,38,.12);--tint-c:rgba(245,140,38,0)"><div class="ent-r-text"><img src="assets/ent/inc-logo.png" alt="in.culcate"><span class="ent-r-h">Funded by ISB</span><span class="ent-r-s">Built by a 2nd-year NST student</span></div><img class="ent-r-arrow" src="assets/icon-arrow-right-white.svg" alt=""><span class="ent-phone"><span class="ent-glow"></span><img src="assets/ent/inc-phone.png" alt=""></span></a>
         <a class="ent-r" href="#" style="--tint-a:rgba(201,163,74,.45);--tint-b:rgba(201,163,74,.12);--tint-c:rgba(201,163,74,0)"><div class="ent-r-text"><img src="assets/ent/cc-logo.png" alt="CarbonCraft"><span class="ent-r-h">Profitable · ₹5.5 M earned</span><span class="ent-r-s">Premium laser-engraved metal cards</span></div><img class="ent-r-arrow" src="assets/icon-arrow-right-white.svg" alt=""><span class="ent-phone"><span class="ent-glow"></span><img src="assets/ent/cc-phone.png" alt=""></span></a>
         <a class="ent-r" href="#" style="--tint-a:rgba(61,214,163,.45);--tint-b:rgba(61,214,163,.12);--tint-c:rgba(61,214,163,0)"><div class="ent-r-text"><img src="assets/ent/kx-logo.png" alt="Kixar"><span class="ent-r-h">₹3 M+ in revenue</span><span class="ent-r-s">Turf booking · Jitesh Sharma as brand ambassador</span></div><img class="ent-r-arrow" src="assets/icon-arrow-right-white.svg" alt=""><span class="ent-phone"><span class="ent-glow"></span><img src="assets/ent/kx-phone.png" alt=""></span></a>
       </div>
-    </div>
+    </div></div>
     <a class="bk-cta bk-cta-white bk-rise" href="#">Apply to StartX <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
   </section>
 
   <!-- ===== bucket 04 · global exposure (328:4384) ===== -->
   <section class="bk bk-light glob" id="glob" data-node="328:4384" data-index="04" aria-label="Global exposure at NST">
-    <header class="bk-head">
+    <div class="bk-side"><header class="bk-head">
       <span class="bk-bar" aria-hidden="true"></span>
       <div class="bk-text">
         <h2 class="bk-title">Global Exposure <span>at NST.</span></h2>
         <p class="bk-sub">Five countries, from Alibaba to Harvard</p>
       </div>
-    </header>
+    </header><p class="bk-lede dt-only">Five countries in three years, from Alibaba’s AI labs to a policy room at Harvard.</p><a class="bk-cta bk-cta-dark bk-cta-side dt-only" href="#">See all trips <img src="assets/icon-arrow-right-white.svg" alt=""></a></div><div class="bk-main">
     <div class="glob-map bk-rise" id="globMap" data-node="328:8255" aria-label="Map: trips from Delhi to China, the US, Thailand, Singapore and Germany">
       <canvas id="globDots" width="1110" height="471" aria-hidden="true"></canvas>
       <svg id="globArcs" viewBox="0 0 370 157" aria-hidden="true"></svg>
     </div>
-    <div class="glob-body bk-rise">
+    </div><div class="glob-body bk-rise">
       <div class="chips" id="globChips" role="tablist" aria-label="Country">
         <button class="chip is-on" type="button" role="tab" aria-selected="true" data-trip="cn"><img src="assets/glob/flag-cn.png" alt="">China</button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-trip="us"><img src="assets/glob/flag-us.png" alt="">USA</button>
@@ -1442,14 +1852,14 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   <!-- ===== bucket 05 · research (328:9279) ===== -->
   <section class="bk bk-dark res" id="res" data-node="328:9279" data-index="05" aria-label="Research at NST">
-    <header class="bk-head">
+    <div class="bk-side"><header class="bk-head">
       <span class="bk-bar" aria-hidden="true"></span>
       <div class="bk-text">
         <h2 class="bk-title">Research<span> at NST.</span></h2>
         <p class="bk-sub">Three papers, straight off the desk</p>
       </div>
-    </header>
-    <div class="res-wrap">
+    </header><a class="bk-cta bk-cta-white bk-cta-side dt-only" href="#">Read the papers <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div><div class="bk-main">
+    </div><div class="res-wrap">
       <div class="papers" id="papers" aria-label="Three papers">
         <article class="paper" data-node="328:11527">
           <span class="paper-venue">ICML 2026 · AI for Science</span>
@@ -1543,6 +1953,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/company-uber.svg" alt="Uber" style="width:28px"></article>
       <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/fac/logo-goldman.png" alt="Goldman Sachs" style="width:45.25px"></article>
     </div>
+    <div class="fac-arrows dt-only"><button class="fac-arr fac-arr-l" type="button" id="facPrev" aria-label="Previous instructors"><img src="assets/icon-arrow-right-ink.svg" alt=""></button><button class="fac-arr" type="button" id="facNext" aria-label="Next instructors"><img src="assets/icon-arrow-right-ink.svg" alt=""></button></div>
     <span class="pdots pdots-light fac-dots" id="facDots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
   </section>
 
@@ -1571,6 +1982,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   </section>
 
   <!-- ===== three ways in (396:131019): students flow into the NST tile and come out the other side in merch; route tabs + card ===== -->
+  <div class="wa">
   <section class="ways" id="ways" data-node="396:131019" aria-label="Three ways to get into NST">
     <canvas class="ways-lines" id="waysLines" aria-hidden="true"></canvas>
     <div class="ways-row" id="waysRow" aria-hidden="true">
@@ -1579,6 +1991,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <img class="way-av" data-slot="1" src="assets/ways/right-1.png" alt=""><img class="way-av" data-slot="2" src="assets/ways/right-2.png" alt=""><img class="way-av" data-slot="3" src="assets/ways/right-3.png" alt="">
     </div>
     <h2 class="ways-title">Three ways to get into NST</h2>
+    <h3 class="wa-h dt-only">Choose your route</h3>
     <div class="routes" id="routes" role="tablist" aria-label="Routes">
       <button class="route is-on" type="button" role="tab" aria-selected="true" data-r="0">NSAT</button>
       <button class="route" type="button" role="tab" aria-selected="false" data-r="1">Coding NSAT</button>
@@ -1608,6 +2021,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       </ol>
     </div>
   </section>
+  </div>
 
   <!-- ===== fests (396:131320): a dark dome; Neutron by default, the arrows bring Tekron's tile to the front and swap the content ===== -->
   <section class="fest" id="fest" data-node="396:131320" aria-label="Fests">
@@ -1675,6 +2089,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 <script>
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  /* desktop layer (≥ 1024 px): a few behaviours differ (campus cards side by side, wins focus carousel, foundations without stepping,
+     wider rings, photo grid). Crossing the breakpoint reloads, so each layout initialises cleanly. */
+  var DTQ = window.matchMedia('(min-width:1024px)'), isDT = DTQ.matches;
+  (function(){ var t = 0; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(function(){ if (window.matchMedia('(min-width:1024px)').matches !== isDT && !document.documentElement.classList.contains('is-locked')) location.reload(); }, 500); }); })();
 
   /* ---- company marquee: repeat the logo sequence so the loop is seamless ---- */
   var seq = '' +
@@ -1921,8 +2339,15 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     if (campusSeen){ liftSlide(i); requestAnimationFrame(function(){ bars[i].style.setProperty('--fill', '1'); }); }
   }
   showSlide(0, true);
-  new IntersectionObserver(function(en){ if (en[0].isIntersecting && !campusSeen){ campusSeen = true; liftSlide(activeSlide); bars[activeSlide].style.setProperty('--fill', '1'); } }, {threshold: .45}).observe(campusCard);
-  (function(){
+  if (isDT){   /* desktop: both campuses side by side; both headlines lift together when the pair arrives */
+    new IntersectionObserver(function(en){
+      if (!en[0].isIntersecting || campusSeen) return; campusSeen = true;
+      if (reduce){ slideReveals.forEach(function(r){ r.set(1); }); return; }
+      var t0 = performance.now();
+      (function tick(now){ var p = Math.min(1, (now - t0) / 1300); slideReveals.forEach(function(r, k){ r.set(easeOutCubic(Math.max(0, Math.min(1, p * 1.15 - k * .15)))); }); if (p < 1) requestAnimationFrame(tick); })(t0);
+    }, {threshold: .35}).observe(campusCard);
+  } else new IntersectionObserver(function(en){ if (en[0].isIntersecting && !campusSeen){ campusSeen = true; liftSlide(activeSlide); bars[activeSlide].style.setProperty('--fill', '1'); } }, {threshold: .45}).observe(campusCard);
+  if (!isDT) (function(){
     var drag = null;
     campusCard.addEventListener('pointerdown', function(e){ drag = {x: e.clientX, y: e.clientY, moved: false}; });
     campusCard.addEventListener('pointermove', function(e){ if (drag && Math.abs(e.clientX - drag.x) > 6) drag.moved = true; }, {passive: true});
@@ -1948,7 +2373,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var logos = seed.map(function(d){ return {src: d.querySelector('img').getAttribute('src'), style: d.querySelector('img').getAttribute('style'), alt: d.querySelector('img').alt, name: d.getAttribute('data-company'), color: d.getAttribute('data-color')}; });
     seed.forEach(function(d){ d.remove(); });
     orbit.classList.add('is-live');
-    var R = 543, SLOT = Math.asin(135 / R), START = 52 * Math.PI / 180;
+    var R = isDT ? 1600 : 543, SLOT = Math.asin((isDT ? 300 : 135) / R), START = isDT ? 3.2 * SLOT : 52 * Math.PI / 180, CY = isDT ? 284 + R : 692;   /* desktop: a flatter, wider ring (r 1600), discs 300 px apart */
+    if (isDT){ var ringSvg = document.querySelector('.co-ring'); ringSvg.setAttribute('viewBox', '0 0 3200 3200'); ringSvg.innerHTML = '<circle cx="1600" cy="1600" r="1598.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="8 8"/>'; }
     var ENTER = 900, STAGGER = 130, HOLD = 1200, ADVANCE = 620;
     function easeOut(t){ return 1 - Math.pow(1 - t, 5); }
     function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
@@ -1963,7 +2389,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     discs.forEach(function(disc){ assign(disc, disc.slot + 1); });
     nextIdx = 4;
     function place(disc, ang){
-      var w = orbit.clientWidth, cx = w / 2, cy = 692;
+      var w = orbit.clientWidth, cx = w / 2, cy = CY;
       var x = cx + R * Math.sin(ang) - 32, y = cy - R * Math.cos(ang) - 32;
       disc.el.style.left = x.toFixed(2) + 'px'; disc.el.style.top = y.toFixed(2) + 'px';
       var a = Math.abs(ang) / SLOT; disc.el.style.opacity = a <= 1 ? 1 : Math.max(0, 1 - (a - 1)).toFixed(3);
@@ -2021,9 +2447,11 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     if (href.length < 2){ e.preventDefault(); return; }
     var target = document.getElementById(href.slice(1)); if (!target) { e.preventDefault(); return; }
     e.preventDefault();
-    var y = href === '#top' ? 0 : target.getBoundingClientRect().top + window.scrollY - 84;
+    var box = target; while (box && !box.getClientRects().length) box = box.firstElementChild;   /* desktop wraps some sections in display:contents */
+    var y = href === '#top' ? 0 : (box || target).getBoundingClientRect().top + window.scrollY - (isDT ? 96 : 84);
     window.scrollTo({top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth'});
   });
+  (function(){ var b = document.getElementById('navAsk'); if (b) b.addEventListener('click', function(){ document.getElementById('aiBtn').click(); }); })();
   /* ---- menu sheet ---- */
   (function(){
     var sheet = document.getElementById('menuSheet'), btn = document.querySelector('.menu'); if (!sheet || !btn) return;
@@ -2038,6 +2466,38 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   /* ---- internship cards: two cards on a snap strip; the one in focus is full size, the next waits at .907; dots follow; the small
           arrow on a card goes to the other one ---- */
+  if (isDT) (function(){
+    /* desktop: three cards in view, the middle one in focus (scaled 1.06, shadow). Track = [A, B, A', B', A'']: the two wins
+       alternate, so stepping is a seamless loop (after a step to an end slot the track jumps back one period, unseen).
+       A side card, the focus card's arrow, the dots or ←/→ step it; nothing moves on its own. */
+    var wt = document.getElementById('winsTrack'), wd = Array.prototype.slice.call(document.querySelectorAll('#winsDots span'));
+    var A = wt.children[0], B = wt.children[1];
+    [A, B, A].forEach(function(src){ var c = src.cloneNode(true); c.setAttribute('aria-hidden', 'true'); wt.appendChild(c); });
+    var cards = Array.prototype.slice.call(wt.children), c = 2, busy = false;
+    var view = document.createElement('div'); view.className = 'wins-view'; wt.parentNode.insertBefore(view, wt); view.appendChild(wt);
+    function step(){ return cards[0].getBoundingClientRect().width + 24; }
+    function paint(anim){
+      wt.style.transition = anim && !reduce ? '' : 'none';
+      wt.style.transform = 'translate3d(' + (-(c - 1) * step()) + 'px,0,0)';
+      cards.forEach(function(k, i){ k.classList.toggle('is-focus', i === c); k.classList.toggle('is-side', i !== c); });
+      wd.forEach(function(d, i){ d.classList.toggle('on', i === c % 2); });
+      if (!anim){ wt.offsetWidth; wt.style.transition = ''; }
+    }
+    function go(dir){
+      if (busy) return; busy = true; c += dir; paint(true);
+      setTimeout(function(){ if (c >= 3) { c -= 2; paint(false); } else if (c <= 1) { c += 2; paint(false); } busy = false; }, reduce ? 0 : 620);
+    }
+    wt.addEventListener('click', function(e){
+      var card = e.target.closest('.win'); if (!card) return; var i = cards.indexOf(card);
+      if (i !== c){ go(i < c ? -1 : 1); return; }
+      if (e.target.closest('.win-btn')) go(1);
+    });
+    wd.forEach(function(d, i){ d.addEventListener('click', function(){ if (i !== c % 2) go(1); }); });
+    document.addEventListener('keydown', function(e){ var r = view.getBoundingClientRect(); if (r.top > innerHeight || r.bottom < 0) return; if (e.key === 'ArrowRight') go(1); else if (e.key === 'ArrowLeft') go(-1); });
+    window.addEventListener('resize', function(){ paint(false); });
+    paint(false);
+  })();
+  else (function(){
   var wt = document.getElementById('winsTrack'), wd = Array.prototype.slice.call(document.querySelectorAll('#winsDots span'));
   var all = Array.prototype.slice.call(wt.children), winsQueued = false;
   function cardX(c){ return c.offsetLeft - 16; }
@@ -2059,6 +2519,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   all.forEach(function(c, i){ var b = c.querySelector('.win-btn'); if (b) b.addEventListener('click', function(){ goTo((i + 1) % all.length, true); }); });
   wd.forEach(function(d, i){ d.addEventListener('click', function(){ goTo(i, true); }); });
   winsTick();
+  })();
 
   /* ---- seven foundations: the list steps one row every 2.4 s while on screen. On a step the top row sinks and fades while the
           rest rise one slot (the second row takes its place) and the lit dot slides forward. A dot tap or a horizontal swipe on
@@ -2086,7 +2547,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       }
     }
     function stop(){ clearInterval(timer); timer = 0; }
-    function start(){ stop(); if (reduce || !visible) return; timer = setInterval(function(){ if (!hover) step(1); }, STEP); }
+    function start(){ stop(); if (reduce || isDT || !visible) return;   /* desktop shows all seven rows at once */ timer = setInterval(function(){ if (!hover) step(1); }, STEP); }
     paint();
     new IntersectionObserver(function(en){ visible = en[0].isIntersecting; if (visible) start(); else stop(); }, {threshold: .25}).observe(win);
     win.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') hover = true; });
@@ -2108,12 +2569,15 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     if (!cv) return;
     var ctx = cv.getContext('2d'), NL = 39, X0 = 2, PITCH = 12, W = 460, H = 150, LEN = 103, REST = H - LEN;
     var L = [], vis = false, started = false, t0 = 0, raf = 0, ptr = {x: -999, on: false};
-    for (var i = 0; i < NL; i++) L.push({
-      scatter: (Math.random() < .25 ? 1 : -1) * (4 + Math.random() * (Math.random() < .25 ? 8 : 30)),   /* first appearance relative to the resting tip; mostly above it */
-      dotAt: Math.random() * 650, growAt: 700 + Math.random() * 650, growFor: 520 + Math.random() * 520, settleFor: 1500 + Math.random() * 500,
-      ph: Math.random() * 6.283, fr: .5 + Math.random() * .7, push: 0
-    });
-    function size(){ var d = Math.min(window.devicePixelRatio || 1, 2); cv.width = W * d; cv.height = H * d; if (flip) ctx.setTransform(d, 0, 0, -d, 0, H * d); else ctx.setTransform(d, 0, 0, d, 0, 0); }
+    function fit(){   /* 460 px (39 lines) on the phone; on desktop the canvas spans the section and the line count follows its width */
+      W = Math.round(cv.clientWidth) || 460; NL = Math.floor((W - 4) / PITCH) + 1;
+      while (L.length < NL) L.push({
+        scatter: (Math.random() < .25 ? 1 : -1) * (4 + Math.random() * (Math.random() < .25 ? 8 : 30)),   /* first appearance relative to the resting tip; mostly above it */
+        dotAt: Math.random() * 650, growAt: 700 + Math.random() * 650, growFor: 520 + Math.random() * 520, settleFor: 1500 + Math.random() * 500,
+        ph: Math.random() * 6.283, fr: .5 + Math.random() * .7, push: 0
+      });
+    }
+    function size(){ fit(); var d = Math.min(window.devicePixelRatio || 1, 2); cv.width = W * d; cv.height = H * d; if (flip) ctx.setTransform(d, 0, 0, -d, 0, H * d); else ctx.setTransform(d, 0, 0, d, 0, 0); }
     function clamp(u){ return u < 0 ? 0 : u > 1 ? 1 : u; }
     function outCubic(u){ return 1 - Math.pow(1 - u, 3); }
     function inOut(u){ return u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2; }
@@ -2124,7 +2588,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       for (var i = 0; i < NL; i++){
         var l = L[i], x = X0 + i * PITCH;
         var dotA = reduce ? 1 : clamp((el - l.dotAt) / 320), settle = reduce ? 1 : inOut(clamp((el - 500) / l.settleFor)), grow = reduce ? 1 : outCubic(clamp((el - l.growAt) / l.growFor));
-        var dI = i - c, swell = -14 * Math.exp(-dI * dI / 26) * idle, shimmer = -1.2 * (.5 + .5 * Math.sin(st * l.fr + l.ph)) * idle;
+        var dI = i - c, swell = -14 * Math.exp(-dI * dI / (NL > 60 ? 70 : 26)) * idle, shimmer = -1.2 * (.5 + .5 * Math.sin(st * l.fr + l.ph)) * idle;
         var dP = (x - ptr.x) / PITCH, want = ptr.on ? -18 * Math.exp(-dP * dP / 9) : 0;
         l.push += (want - l.push) * .12;
         var tip = REST + l.scatter * (1 - settle) + (reduce ? 0 : swell + shimmer + l.push);
@@ -2318,7 +2782,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var seed = Array.prototype.slice.call(orbit.querySelectorAll('.fac-bub'));
     var logos = seed.map(function(b){ return {src: b.getAttribute('data-src'), w: b.getAttribute('data-w'), h: b.getAttribute('data-h')}; });
     seed.forEach(function(b){ b.remove(); });
-    var R = 543, CY = 590.86, SLOT = Math.asin(145 / R), HOLD = 1300, ADVANCE = 640;
+    var R = isDT ? 1600 : 543, CY = isDT ? 96 + 1600 : 590.86, SLOT = Math.asin((isDT ? 300 : 145) / R), HOLD = 1300, ADVANCE = 640;
+    if (isDT){ var fr = document.querySelector('.fac-ring'); fr.setAttribute('viewBox', '0 0 3200 3200'); fr.innerHTML = '<circle cx="1600" cy="1600" r="1598.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="8 8"/>'; }
     function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     var discs = [], nextIdx = 0;
     for (var i = 0; i < 5; i++){
@@ -2350,6 +2815,14 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     window.addEventListener('resize', function(){ if (phase === 'hold') discs.forEach(function(disc){ place(disc, disc.slot * SLOT); }); });
   })();
   snapDots(document.getElementById('facStrip'), '.fac-card', document.getElementById('facDots'));
+  (function(){   /* desktop: four instructors in view; the arrows step one card, and dim at the ends */
+    var strip = document.getElementById('facStrip'), prev = document.getElementById('facPrev'), next = document.getElementById('facNext'); if (!isDT || !prev) return;
+    function w(){ var c = strip.querySelector('.fac-card'); return c ? c.getBoundingClientRect().width : 300; }
+    function sync(){ prev.disabled = strip.scrollLeft < 4; next.disabled = strip.scrollLeft > strip.scrollWidth - strip.clientWidth - 4; }
+    prev.addEventListener('click', function(){ strip.scrollBy({left: -w(), behavior: reduce ? 'auto' : 'smooth'}); });
+    next.addEventListener('click', function(){ strip.scrollBy({left: w(), behavior: reduce ? 'auto' : 'smooth'}); });
+    strip.addEventListener('scroll', sync, {passive: true}); sync();
+  })();
 
   /* ---- four cities: cards rise in as they arrive; every tour block opens the reels overlay ---- */
   (function(){
@@ -2370,7 +2843,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var HOLD = 1300, MOVE = 700, items = avs.map(function(el){ return {el: el, slot: +el.getAttribute('data-slot')}; }), nl = 1, nr = 1;   /* start the queues one step in so no face sits next to its twin */
     /* two off-screen buffers: one waiting at −4, one that will be born at the tile */
     function mk(slot, src){ var im = document.createElement('img'); im.className = 'way-av'; im.alt = ''; im.src = src; row.appendChild(im); var it = {el: im, slot: slot}; place(it, slot); return it; }
-    items.push(mk(-4, LEFT[nl++ % 3]));
+    var MAXS = isDT ? 6 : 3;   /* desktop shows six faces each side of the tile */
+    if (isDT){ for (var q = 4; q <= 6; q++){ items.push(mk(-q, LEFT[(q + 1) % 3])); items.push(mk(q, RIGHT[q % 3])); } }
+    items.push(mk(-(MAXS + 1), LEFT[nl++ % 3]));
     function ease(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     function place(it, s){
       var a = Math.abs(s), x, sc = 1, op = 1;
@@ -2396,8 +2871,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         items.forEach(function(it){ place(it, it.from + (it.to - it.from) * e); });
         if (k >= 1){
           items.forEach(function(it){ it.slot = it.to; });
-          items = items.filter(function(it){ if (it.slot === 0 || it.slot > 3){ it.el.remove(); return false; } return true; });   /* swallowed by the tile, or off the right edge */
-          items.push(mk(-4, LEFT[nl++ % 3]));
+          items = items.filter(function(it){ if (it.slot === 0 || it.slot > MAXS){ it.el.remove(); return false; } return true; });   /* swallowed by the tile, or off the right edge */
+          items.push(mk(-(MAXS + 1), LEFT[nl++ % 3]));
           items.forEach(function(it){ place(it, it.slot); });
           phase = 'hold'; t = 0;
         }
@@ -2747,7 +3222,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       top.style.transform = 'translate(' + (dir * 460) + 'px,' + (dir * -40) + 'px) rotate(' + (dir * 22) + 'deg)'; top.style.opacity = '0';
       setTimeout(function(){ order.push(order.shift()); top.classList.remove('is-anim'); poseAll(true); setTimeout(function(){ busy = false; }, 460); }, reduce ? 0 : 380);
     }
-    stack.addEventListener('pointerdown', function(e){ var top = cards[order[0]]; if (busy || !top || !top.contains(e.target)) return; drag = {x: e.clientX, y: e.clientY, moved: false}; top.classList.remove('is-anim'); try { stack.setPointerCapture(e.pointerId); } catch(err){} });
+    stack.addEventListener('pointerdown', function(e){ var top = cards[order[0]]; if (isDT || busy || !top || !top.contains(e.target)) return; drag = {x: e.clientX, y: e.clientY, moved: false}; top.classList.remove('is-anim'); try { stack.setPointerCapture(e.pointerId); } catch(err){} });
     stack.addEventListener('pointermove', function(e){ if (!drag) return; var dx = e.clientX - drag.x, dy = e.clientY - drag.y; if (Math.abs(dx) > 4) drag.moved = true; var top = cards[order[0]]; top.style.transform = 'translate(' + dx + 'px,' + (dy * .3) + 'px) rotate(' + (dx / 14) + 'deg)'; }, {passive: true});
     function endDrag(e){ if (!drag) return; var dx = e.clientX - drag.x, moved = drag.moved; drag = null; if (!moved){ advance(1); return; } if (Math.abs(dx) > 90) advance(dx > 0 ? 1 : -1); else { var top = cards[order[0]]; top.classList.add('is-anim'); top.style.transform = 'translate(0,0) rotate(0deg)'; } }
     stack.addEventListener('pointerup', endDrag); stack.addEventListener('pointercancel', function(){ if (drag){ drag = null; poseAll(true); } });
@@ -2758,8 +3233,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         var trip = ch.getAttribute('data-trip'); if (trip === cur) return; cur = trip;
         chips.forEach(function(c){ var on = c === ch; c.classList.toggle('is-on', on); c.setAttribute('aria-selected', on ? 'true' : 'false'); });
         ch.scrollIntoView({block: 'nearest', inline: 'nearest', behavior: reduce ? 'auto' : 'smooth'});
-        text.classList.add('is-swap');
-        setTimeout(function(){ title.textContent = TRIPS[trip].title; desc.textContent = TRIPS[trip].desc; text.classList.remove('is-swap'); build(trip); }, reduce ? 0 : 220);
+        text.classList.add('is-swap'); if (isDT) stack.classList.add('is-swap');
+        setTimeout(function(){ title.textContent = TRIPS[trip].title; desc.textContent = TRIPS[trip].desc; text.classList.remove('is-swap'); build(trip); if (isDT) requestAnimationFrame(function(){ requestAnimationFrame(function(){ stack.classList.remove('is-swap'); }); }); }, reduce ? 0 : 220);
         if (seen.glob) light(trip);
       });
     });
