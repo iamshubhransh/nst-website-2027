@@ -1277,19 +1277,19 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .cur-card .pdots{margin-left:20px}
 
   /* ---- faculty: a wide flat ring over the title, four instructors in view, arrows step ---- */
-  .fac{padding:0 0 120px}
-  .fac-top{height:300px}
-  .fac-ring{left:calc(50% - 1600px);top:96px;width:3200px;height:3200px}
-  .fac-title{top:184px;font-size:40px;line-height:48px}
-  .fac-sub{top:240px;font-size:18px;line-height:28px}
-  .fac-strip{width:var(--wrap);margin:56px auto 0;padding:0;scroll-padding-left:0}
-  .fac-card{width:calc(var(--wrap) / 4);height:268px;padding:0 24px}
+  /* faculty (516:39185): arc crown at 96, r 1835, running off both window edges; title 142 below the crown; cards 300 x 246; arrows 54 below */
+  .fac{padding:0 0 60px;overflow:hidden}
+  .fac-top{height:314px;overflow:visible}
+  .fac-ring{left:calc(50% - 1835px);top:96px;width:3670px;height:3670px}
+  .fac-bub{width:64px;height:64px}
+  .fac-title{top:238px;font-size:32px;line-height:40px}
+  .fac-sub{top:286px;font-size:18px;line-height:28px}
+  .fac-strip{position:relative;width:var(--wrap);margin:70px auto 0;padding:0;scroll-padding-left:0;background:#fff}
+  .fac-card{width:calc(var(--wrap) / 4);height:246px;padding:0 24px}
   .fac-card::after{left:0;width:100%;background:repeating-linear-gradient(90deg,#E4E7EC 0 1px,transparent 1px 14px)}
-  .fac-photo{width:80px;height:80px}
-  .fac-name{font-size:18px;line-height:26px}
-  .fac-role{font-size:15px;line-height:22px}
+
   .fac-dots{display:none}
-  .fac-arrows{display:flex;justify-content:center;gap:12px;margin-top:40px}
+  .fac-arrows{display:flex;justify-content:center;gap:24px;margin-top:54px}
   .fac-arr{width:48px;height:48px;padding:0;border:1px solid var(--line);border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s ease,opacity .2s ease,transform .16s ease}
   .fac-arr img{width:20px;height:20px}
   .fac-arr-l img{transform:scaleX(-1)}
@@ -1298,24 +1298,27 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .fac-arr:disabled{opacity:.35;cursor:default;background:#fff}
 
   /* ---- campuses: 2 × 2 ---- */
-  .cities{padding:120px var(--side);display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  /* cities (516:42946): heading 32/40 at 96, list 8 below, cards 40 below in a 2 x 2 grid with 24 gaps; internals kept readable (the frame scales the phone card) */
+  .cities{padding:96px var(--side);display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:stretch}
   .page .cities-art{display:none}
   .cities-title,.cities-list{grid-column:1/-1;margin:0}
-  .cities-title{font-size:40px;line-height:48px}
-  .cities-list{font-size:18px;line-height:28px;margin:-12px 0 32px}
-  .city{margin:0;border-radius:16px}
-  .city-top{height:auto;padding:28px 28px 24px}
+  .cities-title{font-size:32px;line-height:40px}
+  .cities-list{font-size:18px;line-height:28px;margin:-16px 0 16px}
+  .city{margin:0;border-radius:12px;clip-path:inset(0 round 12px);display:flex;flex-direction:column}   /* the clip holds the rounded corners while the card rises (Safari drops overflow radius under a transform) */
+  .city-bot{flex:1 0 auto}
+  .cities-title+.cities-list+.city{margin-top:0}
+  .city-top{height:auto;padding:24px 24px 20px}
   .city-mark{width:40px;height:40px;border-radius:12px}
   .city-mark svg{width:19px;height:23px}
   .city-with{margin-top:20px;font-size:13px;line-height:18px}
-  .city-name{font-size:26px;line-height:32px}
+  .city-name{font-size:24px;line-height:30px}
   .city-desc{font-size:15px;line-height:24px}
-  .city-bot{height:auto;padding:0 28px 28px}
-  .city .tour{height:240px;border-radius:14px}
+  .city-bot{height:auto;padding:0 24px 24px}
+  .city .tour{height:220px;border-radius:12px}
   .tour-play{width:60px;height:60px;left:calc(50% - 30px);top:calc(50% - 30px)}
   .tour-lab,.tour-time{font-size:11px;line-height:14px;bottom:18px}
   .tour-lab{left:20px}.tour-time{right:20px}
-  .city-cta{height:52px;margin-top:20px;font-size:16px}
+  .city-cta{height:48px;margin-top:16px;font-size:15px}
   .city:hover .tour-play{transform:scale(1.06)}
 
   /* ---- three ways in + admission process: conveyor and title across, then the route column and the steps column ---- */
@@ -1324,7 +1327,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .ways-lines{position:absolute;left:0;top:0;width:100%}
   .ways-row{grid-column:1/-1;grid-row:1;margin-top:168px}
   .ways-title{grid-column:1/-1;grid-row:2;margin:32px 0 0;font-size:40px;line-height:48px}
-  .wa-h,.adm-title{margin:72px 0 20px;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D;text-align:left}
+  .wa-h,.adm-title{margin:72px 0 20px;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D;text-align:center}   /* centred over their own card (9 Oct) */
   .wa-h{display:block;grid-column:1;grid-row:3}
   .adm-title{grid-column:2;grid-row:3}
   .routes{grid-column:1;grid-row:4;margin:0;height:52px}
@@ -1344,27 +1347,31 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .adm-note{font-size:14px;line-height:22px}
 
   /* ---- fests: the dome widens with the page; content in the container; posters run full-bleed ---- */
-  .fest{height:auto;padding-bottom:240px}
-  .fest-dome{left:calc(50% - 1400px);width:2800px;top:140px;bottom:140px;height:auto}
-  .fest-arr-l{left:calc(50% - 196px)}
-  .fest-arr-r{right:calc(50% - 196px)}
-  .fest-body{position:relative;left:auto;right:auto;top:auto;padding-top:201px;width:var(--wrap);margin:0 auto}
+  /* fests (516:44798), spaced out at Shubhransh's request: logos at 74, arrows at +-165, dome at 189, heading 56 into the dome,
+     video 54 below the title, sponsors 42, photos 50, posters 123, CTA 64 */
+  .fest{height:auto;padding-bottom:200px}
+  .fest-logos{top:17px}
+  .fest-arr{top:86px}
+  .fest-arr-l{left:calc(50% - 181px)}
+  .fest-arr-r{right:calc(50% - 181px)}
+  .fest-dome{left:calc(50% - 1958px);width:3916px;top:189px;bottom:140px;height:auto}
+  .fest-body{position:relative;left:auto;right:auto;top:auto;padding-top:245px;width:var(--wrap);margin:0 auto}
   .fest-body.is-out{transform:translateY(8px)}
-  .fest-kick{font-size:12px;line-height:16px}
-  .fest-title{margin-top:12px;font-size:40px;line-height:48px}
-  .fest-video{width:100%;height:auto;aspect-ratio:16/8;margin:40px 0 0;border-radius:16px}
+  .fest-kick{font-size:14px;line-height:28px}
+  .fest-title{margin-top:8px;font-size:32px;line-height:40px}
+  .fest-video{width:100%;height:auto;aspect-ratio:1200/688;margin:54px 0 0;border-radius:16px}
   .fest-video .tour-play{width:72px;height:72px;left:calc(50% - 36px);top:calc(50% - 36px)}
-  .fest-video .tour-lab,.fest-video .tour-time{font-size:13px;line-height:16px;bottom:24px}
-  .fest-video .tour-lab{left:28px}.fest-video .tour-time{right:28px}
-  .fest-sponsors{margin-top:40px;height:40px}
+  .fest-video .tour-lab,.fest-video .tour-time{font-size:13px;line-height:16px;bottom:28px}
+  .fest-video .tour-lab{left:32px}.fest-video .tour-time{right:32px}
+  .fest-sponsors{margin-top:42px;height:40px}
   .fest-spstrip{height:40px}
-  .fest-grid{grid-template-columns:repeat(4,1fr);gap:24px;margin:40px 0 0}
-  .fest-grid span{height:180px;border-radius:14px}
-  .fest-grid img{border-radius:14px}
-  .fest-posters{height:332px;margin:56px calc(var(--side) * -1) 0}
-  .fest-pstrip{left:0;height:332px;gap:16px}
-  .fest-pstrip img{width:280px;height:332px;border-radius:14px}
-  .fest-cta{width:400px;height:56px;margin:56px auto 0;font-size:16px}
+  .fest-grid{grid-template-columns:repeat(4,1fr);gap:16px;margin:50px 0 0}
+  .fest-grid span{height:152px;border-radius:12px}
+  .fest-grid img{border-radius:12px}
+  .fest-posters{height:348px;margin:123px calc(var(--side) * -1) 0}
+  .fest-pstrip{left:0;height:348px;gap:16.8px}
+  .fest-pstrip img{width:293px;height:348px;border-radius:12px}
+  .fest-cta{width:370px;height:48px;margin:64px auto 0;font-size:15px}
   .fest-lines{left:0;width:100%}
 
   /* ---- Newton chat: the conversation runs in a 720 px column; the input dock sits under it ---- */
@@ -2993,19 +3000,19 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var seed = Array.prototype.slice.call(orbit.querySelectorAll('.fac-bub'));
     var logos = seed.map(function(b){ return {src: b.getAttribute('data-src'), w: b.getAttribute('data-w'), h: b.getAttribute('data-h')}; });
     seed.forEach(function(b){ b.remove(); });
-    var R = isDT ? 1600 : 543, CY = isDT ? 96 + 1600 : 590.86, SLOT = Math.asin((isDT ? 300 : 145) / R), HOLD = 1300, ADVANCE = 640;
-    if (isDT){ var fr = document.querySelector('.fac-ring'); fr.setAttribute('viewBox', '0 0 3200 3200'); fr.innerHTML = '<circle cx="1600" cy="1600" r="1598.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="8 8"/>'; }
+    var R = isDT ? 1835 : 543, CY = isDT ? 96 + 1835 : 590.86, SLOT = Math.asin((isDT ? 400 : 145) / R), HOLD = 1300, ADVANCE = 640, HB = isDT ? 32 : 21, LS = isDT ? 1.83 : 1;   /* desktop (516:39185): r 1835 like the placement arc, 64 px discs 400 px apart, logos x1.83 */
+    if (isDT){ var fr = document.querySelector('.fac-ring'); fr.setAttribute('viewBox', '0 0 3670 3670'); fr.innerHTML = '<circle cx="1835" cy="1835" r="1833.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="27.03 27.03"/>'; }
     function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     var discs = [], nextIdx = 0;
     for (var i = 0; i < 5; i++){
       var d = document.createElement('span'); d.className = 'fac-bub'; var im = document.createElement('img'); im.alt = ''; d.appendChild(im); orbit.appendChild(d);
       discs.push({el: d, img: im, slot: i - 2, from: 0, to: 0});
     }
-    function assign(disc, idx){ var L = logos[((idx % logos.length) + logos.length) % logos.length]; disc.img.src = L.src; disc.img.style.width = L.w + 'px'; disc.img.style.height = L.h + 'px'; }
+    function assign(disc, idx){ var L = logos[((idx % logos.length) + logos.length) % logos.length]; disc.img.src = L.src; disc.img.style.width = (L.w * LS) + 'px'; disc.img.style.height = (L.h * LS) + 'px'; }
     discs.forEach(function(disc){ assign(disc, disc.slot + 1); });   /* Meta, Google, LinkedIn in view; Microsoft and Uber waiting */
     nextIdx = 4;
     function place(disc, ang){
-      var cx = orbit.clientWidth / 2, x = cx + R * Math.sin(ang) - 21, y = CY - R * Math.cos(ang) - 21;
+      var cx = orbit.clientWidth / 2, x = cx + R * Math.sin(ang) - HB, y = CY - R * Math.cos(ang) - HB;
       disc.el.style.left = x.toFixed(2) + 'px'; disc.el.style.top = y.toFixed(2) + 'px';
       var a = Math.abs(ang) / SLOT; disc.el.style.opacity = a <= 1 ? 1 : Math.max(0, 1 - (a - 1)).toFixed(3);
     }
@@ -3038,7 +3045,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   /* ---- four cities: cards rise in as they arrive; every tour block opens the reels overlay ---- */
   (function(){
     var cards = document.querySelectorAll('.city'); if (!cards.length) return;
-    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }); }, {threshold: .15});
+    var list = Array.prototype.slice.call(cards);
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if (!e.isIntersecting) return; var i = list.indexOf(e.target), mates = isDT ? [list[i - i % 2], list[i - i % 2 + 1]] : [e.target];   /* desktop: both cards of a row rise together, so the grid never shows a stagger */
+      mates.forEach(function(c){ if (c){ c.classList.add('is-in'); io.unobserve(c); } }); }); }, {threshold: .15});
     Array.prototype.forEach.call(cards, function(c){ io.observe(c); });
   })();
   Array.prototype.forEach.call(document.querySelectorAll('.tour'), function(b){ b.addEventListener('click', function(e){ e.preventDefault(); openVideo(); }); });
