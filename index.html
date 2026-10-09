@@ -917,6 +917,44 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .fest-lines{position:absolute;left:calc(50% - 230px);bottom:0;width:460px;height:150px;pointer-events:none}
 @media (prefers-reduced-motion:reduce){.city{opacity:1;transform:none;transition:none}.adm-row{opacity:1;transform:none;transition:none}.route-card,.fest-body,.fest-tile,.way-tile{transition:none}.fest.is-live .fest-beam{animation:none;opacity:0}.fest.is-live .fest-beam-soft{opacity:0}}
 
+/* ---------- talk to a senior (549:67454 phone, 549:69749 desktop). Light threads hang from the fests' foot on the same 12 px grid the
+   fest hairlines rise on (canvas, lengths from the frames); the long threads carry senior discs that drop in, hang as damped
+   pendulums, sway when the pointer passes and become the active (blue-ringed) senior on tap. Centred head, three senior cards. ---------- */
+.snr{position:relative;background:#fff;padding:0 0 42px}
+.snr-top{position:relative;height:260px}
+.snr-lines{position:absolute;left:0;top:0;width:100%;height:80px;pointer-events:none}
+.snr-hang{position:absolute;top:0;left:calc(50% - 201px + var(--x));width:0;height:0;transform-origin:0 0;will-change:transform}
+.snr-hang.dt{display:none}
+.snr-thr{position:absolute;left:-.5px;top:0;width:1px;height:var(--len);background:#C9CFD8;transform-origin:50% 0}
+.snr-av{--s:44px;position:absolute;left:calc(var(--s) / -2);top:var(--len);width:var(--s);height:var(--s);padding:0;border:0;border-radius:50%;background:var(--bg);color:var(--fg);box-shadow:0 0 0 3px #fff,0 4px 12px rgba(22,25,29,.1);display:flex;align-items:center;justify-content:center;font-family:var(--font);font-size:17px;line-height:20px;font-weight:600;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.snr-av i{position:absolute;left:calc(var(--s) - 13px);top:calc(var(--s) - 13px);width:14px;height:14px;border-radius:50%;background:#1DB954;box-shadow:0 0 0 2.5px #fff;opacity:0;transform:scale(.4);transition:opacity .2s ease,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.snr-hang.is-on .snr-thr{background:rgba(6,115,249,.5)}
+.snr-hang.is-on .snr-av{--s:64px;font-size:24px;line-height:28px;box-shadow:0 0 0 2px #0673F9,0 4px 12px rgba(22,25,29,.16)}
+.snr-hang.is-on .snr-av i{opacity:1;transform:none;transition-delay:.15s}
+.snr .snr-thr{transform:scaleY(0)}
+.snr .snr-av{opacity:0;translate:0 -14px}
+.snr.is-in .snr-thr{transform:none;transition:transform .7s var(--d,0s) cubic-bezier(.22,1,.36,1),background-color .3s ease}
+.snr.is-in .snr-av{opacity:1;translate:none;transition:opacity .3s calc(var(--d,0s) + .45s) ease,translate .5s calc(var(--d,0s) + .45s) cubic-bezier(.34,1.56,.64,1),left .3s cubic-bezier(.22,1,.36,1),top .3s cubic-bezier(.22,1,.36,1),width .3s cubic-bezier(.22,1,.36,1),height .3s cubic-bezier(.22,1,.36,1),font-size .3s ease,box-shadow .3s ease}
+.snr-head{display:flex;flex-direction:column;gap:12px;margin:0 22px;text-align:center}
+.snr-kick{font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(22,25,29,.5)}
+.snr-title{margin:0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D}
+.snr-list{display:flex;flex-direction:column;gap:16px;margin:28px 16px 0}
+.snr-card{display:flex;flex-direction:column;gap:12px;padding:15px;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px rgba(22,25,29,.08);opacity:0;transform:translateY(16px);transition:opacity .45s ease,transform .55s cubic-bezier(.22,1,.36,1)}
+.snr-card.is-in{opacity:1;transform:none}
+.snr-who{display:flex;align-items:center;gap:10px;height:40px}
+.snr-pic{flex:none;width:36px;height:36px;border-radius:99px;background:#004599;color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;line-height:18px;font-weight:600}
+.snr-name{flex:1;min-width:0;display:flex;flex-direction:column}
+.snr-name b{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.02px;color:#16191D}
+.snr-name span{font-size:12px;line-height:18px;font-weight:500;letter-spacing:.1px;color:#5B6271;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.snr-on{flex:none;display:flex;align-items:center;gap:4px;margin-right:-2px;font-size:10px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#5B6271}
+.snr-on i{width:6px;height:6px;border-radius:50%;background:#009965;animation:snrPulse 2.4s ease-in-out infinite}
+@keyframes snrPulse{0%,100%{box-shadow:0 0 0 0 rgba(0,153,101,.35)}50%{box-shadow:0 0 0 4px rgba(0,153,101,0)}}
+.snr-q{flex:1 0 auto;margin:0;padding:10px 28px 10px 12px;border-radius:4px 12px 12px 12px;background:#EDEFF3;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:#16191D}
+.snr-call{display:flex;align-items:center;justify-content:center;gap:6px;height:44px;border-radius:12px;background:#0673F9;box-shadow:var(--btn-shadow);text-decoration:none;font-size:14px;line-height:20px;font-weight:600;letter-spacing:-.2px;color:#fff;transition:transform .16s ease}
+.snr-call:active{transform:scale(.985)}
+.snr-call svg{width:18px;height:18px}
+@media (prefers-reduced-motion:reduce){.snr .snr-thr,.snr .snr-av{transform:none;opacity:1;translate:none;transition:none}.snr-card{opacity:1;transform:none;transition:none}.snr-on i{animation:none}}
+
 /* ---------- menu sheet: the top bar's menu button opens a section list (no frame for this yet; kept to the page's own language) ---------- */
 .sheet{position:fixed;inset:0;z-index:46;opacity:0;pointer-events:none;transition:opacity .25s ease}
 .sheet.is-open{opacity:1;pointer-events:auto}
@@ -1627,6 +1665,26 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .cc .cc-rc{flex:1 1 0}
   .cc .cc-row{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}
 }
+@media (min-width:1024px){
+  /* talk to a senior, desktop (549:69749): 320 px of threads, seven seniors placed on the 1728 frame and pulled in proportionally
+     on narrower screens so the outer ones stay inside the page; centred head; three 370 px cards centred */
+  .snr{padding-bottom:96px}
+  .snr-top{height:320px}
+  .snr-lines{height:96px}
+  .snr-hang{left:calc(50% + var(--dxn) * min(546px, 50vw - 96px))}
+  .snr-hang.mo{display:none}
+  .snr-hang.dt{display:block}
+  .snr-thr{height:var(--lend)}
+  .snr-av{--s:56px;top:var(--lend);background:var(--bgd);color:var(--fgd);font-size:21px;line-height:24px;box-shadow:0 0 0 3px #fff,0 6px 8px rgba(22,25,29,.02)}
+  .snr-av i{width:18px;height:18px;left:calc(var(--s) - 20px);top:calc(var(--s) - 20px);box-shadow:0 0 0 3px #fff}
+  .snr-hang.is-on .snr-av{--s:88px;font-size:32px;line-height:36px;box-shadow:0 0 0 2px #0673F9,0 6px 8px rgba(22,25,29,.04)}
+  .snr-head{gap:8px;width:var(--wrap);margin:0 auto}
+  .snr-kick{font-size:14px;line-height:28px}
+  .snr-title{font-size:32px;line-height:40px}
+  .snr-list{flex-direction:row;justify-content:center;width:var(--wrap);margin:48px auto 0}
+  .snr-card{flex:0 1 370px;min-width:0}
+  .snr-q{min-height:108px}
+}
 </style>
 </head>
 <body>
@@ -2243,6 +2301,43 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     <canvas class="fest-lines" id="festLines" aria-hidden="true"></canvas>
   </section>
 
+  <!-- ===== talk to a senior (549:67454 phone, 549:69749 desktop): threads hang from the fests' foot; seniors on the long ones; three senior cards ===== -->
+  <section class="snr" id="seniors" data-node="549:67454" aria-label="Talk to a senior">
+    <div class="snr-top" id="snrTop">
+      <canvas class="snr-lines" id="snrLines" aria-hidden="true"></canvas>
+      <div class="snr-hang mo" style="--x:50px;--len:92px;--d:0.1s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bg:#E6F4EE;--fg:#007A51" aria-label="Senior A" aria-pressed="false">A<i></i></button></div>
+      <div class="snr-hang mo" style="--x:122px;--len:148px;--d:0.28s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bg:#F0EBFD;--fg:#7B55EE" aria-label="Senior R" aria-pressed="false">R<i></i></button></div>
+      <div class="snr-hang mo is-on" style="--x:200px;--len:118px;--d:0s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bg:#E5F1FF;--fg:#0673F9" aria-label="Senior M" aria-pressed="true">M<i></i></button></div>
+      <div class="snr-hang mo" style="--x:278px;--len:164px;--d:0.36s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bg:#FEF3E0;--fg:#C77A00" aria-label="Senior K" aria-pressed="false">K<i></i></button></div>
+      <div class="snr-hang mo" style="--x:350px;--len:100px;--d:0.18s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bg:#FDECEC;--fg:#D14343" aria-label="Senior S" aria-pressed="false">S<i></i></button></div>
+      <div class="snr-hang dt" style="--dxn:-1.0000;--lend:118px;--d:0.3s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bgd:#E6F4EE;--fgd:#007A51" aria-label="Senior T" aria-pressed="false">T<i></i></button></div>
+      <div class="snr-hang dt" style="--dxn:-0.6923;--lend:206px;--d:0.12s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bgd:#F0EBFD;--fgd:#7B55EE" aria-label="Senior A" aria-pressed="false">A<i></i></button></div>
+      <div class="snr-hang dt" style="--dxn:-0.3846;--lend:150px;--d:0.4s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bgd:#FDECEC;--fgd:#D14343" aria-label="Senior R" aria-pressed="false">R<i></i></button></div>
+      <div class="snr-hang dt is-on" style="--dxn:0.0000;--lend:176px;--d:0s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bgd:#E5F1FF;--fgd:#0673F9" aria-label="Senior M" aria-pressed="true">M<i></i></button></div>
+      <div class="snr-hang dt" style="--dxn:0.3846;--lend:132px;--d:0.22s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bgd:#FEF3E0;--fgd:#C77A00" aria-label="Senior K" aria-pressed="false">K<i></i></button></div>
+      <div class="snr-hang dt" style="--dxn:0.6923;--lend:214px;--d:0.34s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bgd:#E6F4EE;--fgd:#007A51" aria-label="Senior S" aria-pressed="false">S<i></i></button></div>
+      <div class="snr-hang dt" style="--dxn:1.0000;--lend:124px;--d:0.16s"><i class="snr-thr"></i><button class="snr-av" type="button" style="--bgd:#F0EBFD;--fgd:#7B55EE" aria-label="Senior N" aria-pressed="false">N<i></i></button></div>
+    </div>
+    <div class="snr-head"><span class="snr-kick">Talk to a senior</span><h2 class="snr-title">Ask someone who’s already there.</h2></div>
+    <div class="snr-list" id="snrList">
+      <article class="snr-card">
+        <div class="snr-who"><span class="snr-pic">R</span><span class="snr-name"><b>Ritika</b><span>Bengaluru · 2nd year</span></span><span class="snr-on"><i></i>Online</span></div>
+        <p class="snr-q">“The first month is brutal, the second is fun. Ask me about the hostel, not just the code.”</p>
+        <a class="snr-call" href="#"><svg viewBox="0 0 18 18" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.27437 3.28712C6.6444 3.28605 6.99543 3.39071 7.2917 3.57716C7.42283 3.65948 7.52513 3.77606 7.59493 3.865C7.67266 3.96406 7.74846 4.07912 7.81978 4.19825C7.96293 4.4374 8.10796 4.72754 8.23726 5.0171C8.36686 5.30735 8.48598 5.60906 8.57344 5.8755C8.65275 6.11709 8.73154 6.40254 8.73091 6.62476C8.73033 6.818 8.63031 6.99761 8.46651 7.10011L7.18697 7.90064C7.43014 8.58496 7.82518 9.2266 8.37276 9.77418C8.87259 10.274 9.4497 10.6461 10.0661 10.8919L10.9011 9.542C11.0033 9.37672 11.1836 9.27599 11.3779 9.2754C11.6182 9.27477 11.9184 9.35819 12.1792 9.44752C12.4621 9.54446 12.7782 9.67705 13.08 9.82325C13.3806 9.96883 13.6809 10.1344 13.9267 10.3023C14.0494 10.386 14.1682 10.4773 14.2695 10.5725C14.3628 10.6603 14.4781 10.7851 14.5493 10.9431C14.6597 11.1865 14.7171 11.4546 14.7163 11.7312C14.7158 11.8643 14.6917 12.0861 14.6643 12.3047C14.6351 12.5374 14.5961 12.8098 14.5581 13.0679C14.5199 13.3266 14.4818 13.5737 14.4533 13.7556C14.4391 13.8466 14.4272 13.9216 14.4189 13.9739L14.4057 14.0559C14.3686 14.2853 14.1943 14.4684 13.967 14.5166C11.0867 15.1265 8.1357 14.3118 5.91402 12.0901C3.69354 9.8696 2.86755 6.92501 3.48238 4.04005C3.53073 3.81324 3.71344 3.63929 3.94234 3.60206L4.0251 3.58888C4.07772 3.58043 4.15327 3.56816 4.24483 3.55372C4.42812 3.52481 4.67691 3.48621 4.93697 3.44752C5.19653 3.4089 5.47029 3.36947 5.70308 3.33985C5.92111 3.31212 6.1432 3.28751 6.27437 3.28712ZM6.2773 4.41212C6.22905 4.41231 6.08084 4.42608 5.84517 4.45606C5.62382 4.48422 5.35888 4.52192 5.1025 4.56007C4.88764 4.59203 4.68041 4.62453 4.51216 4.65089C4.12173 7.03999 4.8555 9.44073 6.70943 11.2947C8.56207 13.1473 10.9679 13.8739 13.3569 13.4861C13.3827 13.3199 13.4135 13.1156 13.4448 12.9038C13.4824 12.6489 13.5203 12.3852 13.5481 12.1641C13.5775 11.9291 13.5911 11.779 13.5913 11.7275C13.5916 11.6175 13.5705 11.5157 13.5327 11.4258C13.5271 11.4193 13.5162 11.4083 13.499 11.3921C13.4541 11.3499 13.3857 11.2954 13.2924 11.2317C13.1064 11.1047 12.8585 10.9655 12.59 10.8355C12.3227 10.706 12.0483 10.5919 11.8144 10.5117C11.7576 10.4922 11.7044 10.475 11.6555 10.4605L10.7861 11.8674C10.652 12.0843 10.3885 12.1837 10.1445 12.1099C9.20322 11.8249 8.31894 11.3111 7.57735 10.5696C6.78236 9.7746 6.249 8.8147 5.97847 7.7981C5.915 7.55956 6.01457 7.30719 6.22383 7.17628L7.54292 6.35084C7.53146 6.31213 7.51853 6.27027 7.50411 6.22633C7.43077 6.00296 7.32728 5.73733 7.21041 5.47559C7.09311 5.21291 6.96786 4.96559 6.85445 4.77613C6.79755 4.68108 6.7482 4.60874 6.70943 4.55933C6.6927 4.53803 6.68101 4.52542 6.675 4.51905C6.5603 4.45111 6.42404 4.41169 6.2773 4.41212Z" fill="#fff"/></svg>Request a call</a>
+      </article>
+      <article class="snr-card">
+        <div class="snr-who"><span class="snr-pic">R</span><span class="snr-name"><b>Ritika</b><span>Bengaluru · 2nd year</span></span><span class="snr-on"><i></i>Online</span></div>
+        <p class="snr-q">“The first month is brutal, the second is fun. Ask me about the hostel, not just the code.”</p>
+        <a class="snr-call" href="#"><svg viewBox="0 0 18 18" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.27437 3.28712C6.6444 3.28605 6.99543 3.39071 7.2917 3.57716C7.42283 3.65948 7.52513 3.77606 7.59493 3.865C7.67266 3.96406 7.74846 4.07912 7.81978 4.19825C7.96293 4.4374 8.10796 4.72754 8.23726 5.0171C8.36686 5.30735 8.48598 5.60906 8.57344 5.8755C8.65275 6.11709 8.73154 6.40254 8.73091 6.62476C8.73033 6.818 8.63031 6.99761 8.46651 7.10011L7.18697 7.90064C7.43014 8.58496 7.82518 9.2266 8.37276 9.77418C8.87259 10.274 9.4497 10.6461 10.0661 10.8919L10.9011 9.542C11.0033 9.37672 11.1836 9.27599 11.3779 9.2754C11.6182 9.27477 11.9184 9.35819 12.1792 9.44752C12.4621 9.54446 12.7782 9.67705 13.08 9.82325C13.3806 9.96883 13.6809 10.1344 13.9267 10.3023C14.0494 10.386 14.1682 10.4773 14.2695 10.5725C14.3628 10.6603 14.4781 10.7851 14.5493 10.9431C14.6597 11.1865 14.7171 11.4546 14.7163 11.7312C14.7158 11.8643 14.6917 12.0861 14.6643 12.3047C14.6351 12.5374 14.5961 12.8098 14.5581 13.0679C14.5199 13.3266 14.4818 13.5737 14.4533 13.7556C14.4391 13.8466 14.4272 13.9216 14.4189 13.9739L14.4057 14.0559C14.3686 14.2853 14.1943 14.4684 13.967 14.5166C11.0867 15.1265 8.1357 14.3118 5.91402 12.0901C3.69354 9.8696 2.86755 6.92501 3.48238 4.04005C3.53073 3.81324 3.71344 3.63929 3.94234 3.60206L4.0251 3.58888C4.07772 3.58043 4.15327 3.56816 4.24483 3.55372C4.42812 3.52481 4.67691 3.48621 4.93697 3.44752C5.19653 3.4089 5.47029 3.36947 5.70308 3.33985C5.92111 3.31212 6.1432 3.28751 6.27437 3.28712ZM6.2773 4.41212C6.22905 4.41231 6.08084 4.42608 5.84517 4.45606C5.62382 4.48422 5.35888 4.52192 5.1025 4.56007C4.88764 4.59203 4.68041 4.62453 4.51216 4.65089C4.12173 7.03999 4.8555 9.44073 6.70943 11.2947C8.56207 13.1473 10.9679 13.8739 13.3569 13.4861C13.3827 13.3199 13.4135 13.1156 13.4448 12.9038C13.4824 12.6489 13.5203 12.3852 13.5481 12.1641C13.5775 11.9291 13.5911 11.779 13.5913 11.7275C13.5916 11.6175 13.5705 11.5157 13.5327 11.4258C13.5271 11.4193 13.5162 11.4083 13.499 11.3921C13.4541 11.3499 13.3857 11.2954 13.2924 11.2317C13.1064 11.1047 12.8585 10.9655 12.59 10.8355C12.3227 10.706 12.0483 10.5919 11.8144 10.5117C11.7576 10.4922 11.7044 10.475 11.6555 10.4605L10.7861 11.8674C10.652 12.0843 10.3885 12.1837 10.1445 12.1099C9.20322 11.8249 8.31894 11.3111 7.57735 10.5696C6.78236 9.7746 6.249 8.8147 5.97847 7.7981C5.915 7.55956 6.01457 7.30719 6.22383 7.17628L7.54292 6.35084C7.53146 6.31213 7.51853 6.27027 7.50411 6.22633C7.43077 6.00296 7.32728 5.73733 7.21041 5.47559C7.09311 5.21291 6.96786 4.96559 6.85445 4.77613C6.79755 4.68108 6.7482 4.60874 6.70943 4.55933C6.6927 4.53803 6.68101 4.52542 6.675 4.51905C6.5603 4.45111 6.42404 4.41169 6.2773 4.41212Z" fill="#fff"/></svg>Request a call</a>
+      </article>
+      <article class="snr-card">
+        <div class="snr-who"><span class="snr-pic">R</span><span class="snr-name"><b>Ritika</b><span>Bengaluru · 2nd year</span></span><span class="snr-on"><i></i>Online</span></div>
+        <p class="snr-q">“The first month is brutal, the second is fun. Ask me about the hostel, not just the code.”</p>
+        <a class="snr-call" href="#"><svg viewBox="0 0 18 18" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.27437 3.28712C6.6444 3.28605 6.99543 3.39071 7.2917 3.57716C7.42283 3.65948 7.52513 3.77606 7.59493 3.865C7.67266 3.96406 7.74846 4.07912 7.81978 4.19825C7.96293 4.4374 8.10796 4.72754 8.23726 5.0171C8.36686 5.30735 8.48598 5.60906 8.57344 5.8755C8.65275 6.11709 8.73154 6.40254 8.73091 6.62476C8.73033 6.818 8.63031 6.99761 8.46651 7.10011L7.18697 7.90064C7.43014 8.58496 7.82518 9.2266 8.37276 9.77418C8.87259 10.274 9.4497 10.6461 10.0661 10.8919L10.9011 9.542C11.0033 9.37672 11.1836 9.27599 11.3779 9.2754C11.6182 9.27477 11.9184 9.35819 12.1792 9.44752C12.4621 9.54446 12.7782 9.67705 13.08 9.82325C13.3806 9.96883 13.6809 10.1344 13.9267 10.3023C14.0494 10.386 14.1682 10.4773 14.2695 10.5725C14.3628 10.6603 14.4781 10.7851 14.5493 10.9431C14.6597 11.1865 14.7171 11.4546 14.7163 11.7312C14.7158 11.8643 14.6917 12.0861 14.6643 12.3047C14.6351 12.5374 14.5961 12.8098 14.5581 13.0679C14.5199 13.3266 14.4818 13.5737 14.4533 13.7556C14.4391 13.8466 14.4272 13.9216 14.4189 13.9739L14.4057 14.0559C14.3686 14.2853 14.1943 14.4684 13.967 14.5166C11.0867 15.1265 8.1357 14.3118 5.91402 12.0901C3.69354 9.8696 2.86755 6.92501 3.48238 4.04005C3.53073 3.81324 3.71344 3.63929 3.94234 3.60206L4.0251 3.58888C4.07772 3.58043 4.15327 3.56816 4.24483 3.55372C4.42812 3.52481 4.67691 3.48621 4.93697 3.44752C5.19653 3.4089 5.47029 3.36947 5.70308 3.33985C5.92111 3.31212 6.1432 3.28751 6.27437 3.28712ZM6.2773 4.41212C6.22905 4.41231 6.08084 4.42608 5.84517 4.45606C5.62382 4.48422 5.35888 4.52192 5.1025 4.56007C4.88764 4.59203 4.68041 4.62453 4.51216 4.65089C4.12173 7.03999 4.8555 9.44073 6.70943 11.2947C8.56207 13.1473 10.9679 13.8739 13.3569 13.4861C13.3827 13.3199 13.4135 13.1156 13.4448 12.9038C13.4824 12.6489 13.5203 12.3852 13.5481 12.1641C13.5775 11.9291 13.5911 11.779 13.5913 11.7275C13.5916 11.6175 13.5705 11.5157 13.5327 11.4258C13.5271 11.4193 13.5162 11.4083 13.499 11.3921C13.4541 11.3499 13.3857 11.2954 13.2924 11.2317C13.1064 11.1047 12.8585 10.9655 12.59 10.8355C12.3227 10.706 12.0483 10.5919 11.8144 10.5117C11.7576 10.4922 11.7044 10.475 11.6555 10.4605L10.7861 11.8674C10.652 12.0843 10.3885 12.1837 10.1445 12.1099C9.20322 11.8249 8.31894 11.3111 7.57735 10.5696C6.78236 9.7746 6.249 8.8147 5.97847 7.7981C5.915 7.55956 6.01457 7.30719 6.22383 7.17628L7.54292 6.35084C7.53146 6.31213 7.51853 6.27027 7.50411 6.22633C7.43077 6.00296 7.32728 5.73733 7.21041 5.47559C7.09311 5.21291 6.96786 4.96559 6.85445 4.77613C6.79755 4.68108 6.7482 4.60874 6.70943 4.55933C6.6927 4.53803 6.68101 4.52542 6.675 4.51905C6.5603 4.45111 6.42404 4.41169 6.2773 4.41212Z" fill="#fff"/></svg>Request a call</a>
+      </article>
+    </div>
+  </section>
+
 </div>
 
 <div class="vid" id="vid" aria-hidden="true" data-node="182:37578">
@@ -2282,7 +2377,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   <div class="sheet-back" id="menuBack"></div>
   <nav class="sheet-panel" aria-label="Jump to a section">
     <div class="sheet-head"><span>Jump to</span><button class="sheet-x" type="button" id="menuX" aria-label="Close the menu">×</button></div>
-    <a href="#" id="sheetAsk" class="sheet-ask">Ask Newton</a><a href="#top">Top</a><a href="#co">Placement record</a><a href="#campus">Campus internships</a><a href="#found">Seven foundations</a><a href="#oss">Open source</a><a href="#cc">Competitive coding</a><a href="#ent">Entrepreneurship</a><a href="#glob">Global exposure</a><a href="#res">Research</a><a href="#cur">Curriculum</a><a href="#fac">Faculty</a><a href="#cities">Campuses</a><a href="#ways">Ways to get in</a><a href="#adm">Admission process</a><a href="#fest">Fests</a>
+    <a href="#" id="sheetAsk" class="sheet-ask">Ask Newton</a><a href="#top">Top</a><a href="#co">Placement record</a><a href="#campus">Campus internships</a><a href="#found">Seven foundations</a><a href="#oss">Open source</a><a href="#cc">Competitive coding</a><a href="#ent">Entrepreneurship</a><a href="#glob">Global exposure</a><a href="#res">Research</a><a href="#cur">Curriculum</a><a href="#fac">Faculty</a><a href="#cities">Campuses</a><a href="#ways">Ways to get in</a><a href="#adm">Admission process</a><a href="#fest">Fests</a><a href="#seniors">Talk to a senior</a>
   </nav>
 </div>
 
@@ -3161,6 +3256,80 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     }
     document.getElementById('festPrev').addEventListener('click', function(){ go(cur ? 0 : 1); });
     document.getElementById('festNext').addEventListener('click', function(){ go(cur ? 0 : 1); });
+  })();
+
+  /* ---- talk to a senior: the short threads grow down from the fests' foot (lengths read off the frames: the 402 phone frame or the
+          1728 desktop frame, centred, the pattern repeating outward on wider screens); the long threads drop their senior in, which
+          then hangs as a damped pendulum (set swinging by the drop, nudged by the passing pointer, always faintly alive); tapping a
+          senior makes it the active, blue-ringed one ---- */
+  (function(){
+    var sec = document.getElementById('seniors'); if (!sec) return;
+    var top = document.getElementById('snrTop'), cv = document.getElementById('snrLines'), ctx = cv.getContext('2d');
+    var MO = [30,16,27,18,0,28,27,17,21,20,0,30,15,67,17,24,27,25,24,20,24,21,21,0,18,26,20,28,43,0,16,16,15,40];
+    var DT = [47,21,68,57,24,53,18,42,18,20,23,38,33,24,55,18,17,22,29,21,53,66,18,17,29,32,61,32,55,23,22,21,17,22,29,32,30,40,59,39,39,19,33,16,16,23,24,47,42,59,31,57,27,40,16,87,20,32,24,52,22,29,16,63,39,19,69,30,17,17,16,25,0,29,29,22,42,29,18,47,26,43,16,29,19,58,23,39,17,23,61,27,19,17,25,34,22,18,34,73,57,35,19,22,19,39,21,21,74,30,51,17,61,23,50,20,18,65,17,60,74,37,35,17,72,73,48,20,59,35,71,18,19,59,23,29,20,49,42,26,24,30,37,17,16];
+    var LEN = isDT ? DT : MO, FW = isDT ? 1728 : 402, X0 = isDT ? 0 : 2, H = isDT ? 96 : 80;
+    var W = 0, lines = [], started = false, t0 = 0, raf = 0, vis = false, last = 0, ptr = {x: -999, on: false, vx: 0, lx: 0};
+    function size(){
+      W = Math.round(cv.clientWidth) || FW; var d = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = W * d; cv.height = H * d; ctx.setTransform(d, 0, 0, d, 0, 0);
+      var off = (W - FW) / 2, n = LEN.length; lines = [];
+      for (var k = Math.floor(-off / 12) - 1; k <= Math.ceil((W - off) / 12) + 1; k++){
+        var x = off + X0 + k * 12; if (x < -2 || x > W + 2) continue;
+        var m = ((k % n) + n) % n;
+        if (k >= 0 && k < n && !LEN[k]) continue;   /* a senior's column */
+        lines.push({x: x, len: LEN[m] || 24, at: Math.random() * 520, ph: Math.random() * 6.283, fr: .5 + Math.random() * .7, push: 0});
+      }
+    }
+    function clamp(u){ return u < 0 ? 0 : u > 1 ? 1 : u; }
+    function outCubic(u){ return 1 - Math.pow(1 - u, 3); }
+    var hangs = Array.prototype.slice.call(sec.querySelectorAll(isDT ? '.snr-hang.dt' : '.snr-hang.mo')).map(function(el, i){
+      return {el: el, th: 0, w: 0, ph: i * 1.7, kicked: false, d: (parseFloat(el.style.getPropertyValue('--d')) || 0) * 1000};
+    });
+    function draw(now){
+      var el = started ? now - t0 : 0, st = el / 1000, idle = clamp((el - 1400) / 800);
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < lines.length; i++){
+        var l = lines[i], g = reduce ? 1 : outCubic(clamp((el - l.at) / 560));
+        var dP = (l.x - ptr.x) / 12, want = ptr.on ? 9 * Math.exp(-dP * dP / 8) : 0; l.push += (want - l.push) * .12;
+        var len = (l.len + (reduce ? 0 : 1.2 * Math.sin(st * l.fr + l.ph) * idle + l.push)) * g;
+        if (len > .5){ ctx.fillStyle = '#E1E5EA'; ctx.fillRect(l.x - .25, 0, .5, len); }
+        if (g > .9){ ctx.globalAlpha = (g - .9) * 10; ctx.fillStyle = '#D5DAE1'; ctx.beginPath(); ctx.arc(l.x, len, 1.333, 0, 6.2832); ctx.fill(); ctx.globalAlpha = 1; }
+      }
+    }
+    function swing(now){
+      var dt = Math.min(.033, (now - (last || now)) / 1000); last = now;
+      var st = (now - t0) / 1000;
+      hangs.forEach(function(h){
+        if (!h.kicked && now - t0 > h.d + 450){ h.kicked = true; h.w = (h.ph % 2 ? 1 : -1) * 1.1; }   /* the drop sets it swinging */
+        var near = ptr.on ? Math.exp(-Math.pow((h.el.offsetLeft - ptr.x) / 40, 2)) : 0;
+        h.w += (-26 * h.th - 2.2 * h.w + near * ptr.vx * .9 + .05 * Math.sin(st * 1.1 + h.ph)) * dt; h.th += h.w * dt;
+        h.el.style.transform = 'rotate(' + (h.th * 57.2958).toFixed(3) + 'deg)';
+      });
+      ptr.vx *= .85;
+    }
+    function frame(now){ draw(now); if (!reduce) swing(now); raf = vis ? requestAnimationFrame(frame) : 0; }
+    size(); draw(0);
+    window.addEventListener('resize', function(){ size(); if (!raf) draw(performance.now()); });
+    if (reduce) sec.classList.add('is-in');
+    new IntersectionObserver(function(en){
+      vis = en[0].isIntersecting;
+      if (vis){ if (!started){ started = true; t0 = performance.now(); sec.classList.add('is-in'); } if (!raf && !reduce) raf = requestAnimationFrame(frame); }
+    }, {threshold: .25}).observe(top);
+    function move(e){
+      var r = top.getBoundingClientRect(); if (e.clientY < r.top - 20 || e.clientY > r.bottom){ ptr.on = false; return; }
+      var x = e.clientX - r.left; ptr.vx = ptr.on ? x - ptr.lx : 0; ptr.lx = x; ptr.x = x; ptr.on = true;
+    }
+    top.addEventListener('pointermove', move, {passive: true});
+    top.addEventListener('pointerdown', move, {passive: true});
+    ['pointerleave', 'pointercancel'].forEach(function(n){ top.addEventListener(n, function(){ ptr.on = false; }, {passive: true}); });
+    top.addEventListener('click', function(e){
+      var b = e.target.closest('.snr-av'); if (!b) return;
+      var h = b.parentNode; if (h.classList.contains('is-on')) return;
+      hangs.forEach(function(x){ var on = x.el === h; x.el.classList.toggle('is-on', on); x.el.querySelector('.snr-av').setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) x.w += .9; });
+    });
+    /* the cards rise as each reaches the screen */
+    var io = new IntersectionObserver(function(en){ en.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } }); }, {threshold: .2});
+    sec.querySelectorAll('.snr-card').forEach(function(c){ io.observe(c); });
   })();
 
   /* ---- campus film: wire a source here when the video file is available ---- */
