@@ -1426,6 +1426,56 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .dock.is-ai .ai-btn{width:54px;height:54px}
 }
 
+/* ======================================================================================================================
+   DESKTOP HERO, pixel-matched to Figma 512:24656 (1728 × 912). Values are the frame's; the copy column starts 24 px inside
+   the nav pill (x 252 at 1728). The nav is the mobile pill widened to 1272: logo, Apply Now, menu (no section links).
+   ====================================================================================================================== */
+@media (min-width:1024px){
+  .nav{height:56px;margin:12px auto -68px;padding:8px 12px;gap:0}
+  .nav-links,.nav-ask{display:none!important}
+  .menu{display:inline-flex}
+  .nav .btn-sm{height:39px;padding:8px 24px}
+  .sheet-panel{left:auto;right:calc(var(--side) - 36px);width:360px;top:80px}
+  .sheet-ask{color:#883DA3!important}
+
+  .hero{height:912px;background:#0B0C0E}
+  .hero-media{inset:auto;left:0;right:0;top:0;height:1021px}
+  .hero-poster{object-fit:cover;object-position:50% 50%}
+  .hero-fade{display:block;background:linear-gradient(180deg,rgba(1,1,1,.5) 0,rgba(1,1,1,.5) 569px,#010101 840px)}   /* the frame's stops .65 → .96 along its 1.167 × transform */
+  .mob-only{display:none}
+  .info:first-child{flex:0 0 187px}
+  .info{min-height:63px}
+  .cta-row .play .face-play path{fill:#4CB57F;stroke:#4CB57F}
+  .hero-body{left:calc(var(--side) - 12px);top:240px;bottom:auto;width:691px;padding:0;gap:0;justify-content:flex-start}
+  .hero-text{gap:8px}
+  .kicker{padding:0 2px;font-size:14px;line-height:16px;letter-spacing:1.6px}
+  .headline{font-size:40px;line-height:48px;letter-spacing:0;white-space:nowrap}
+  .tags{flex-direction:row;flex-wrap:nowrap;gap:10px;margin-top:17px}
+  .tag-row{gap:10px;font-size:18px;line-height:28px;letter-spacing:.1px;color:#fff}
+  .star,.tag-row+.tag-row::before{width:9px;height:9px;margin:0;flex:none}
+  .tag-row+.tag-row::before{content:"";background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M4.5 0 5.74 3.26 9 4.5 5.74 5.74 4.5 9 3.26 5.74 0 4.5 3.26 3.26Z' fill='%23F59700'/%3E%3C/svg%3E") center/9px 9px no-repeat}
+  .tag-row .star{content:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 9 9'%3E%3Cpath d='M4.5 0 5.74 3.26 9 4.5 5.74 5.74 4.5 9 3.26 5.74 0 4.5 3.26 3.26Z' fill='%23F59700'/%3E%3C/svg%3E")}
+  .info-row{margin-top:42px;gap:0}
+  .info,.info+.info{flex:none;position:relative;padding:8px 0;gap:4px;background:none;border:0;border-radius:0}
+  .info+.info{margin-left:34px;padding-left:35px}
+  .info+.info::before{content:"";position:absolute;left:0;top:3.5px;width:1px;height:48px;background:#E1E5EA}
+  .info-label{font-size:11.79px;line-height:10.4px;letter-spacing:2px;color:#fff}
+  .info-value{font-size:19.29px;line-height:31.3px;font-weight:500;letter-spacing:.1px;color:#fff}
+  .badge-row{margin-top:12px;gap:12px}
+  .badge{flex:none;width:264px;height:46px;padding:10px 16px;gap:10px;border-radius:6px;background:rgba(22,25,29,.8);font-size:14px;line-height:22px;letter-spacing:.1px}
+  .cta{margin-top:64px;flex-direction:row;align-items:center;gap:12px}
+  .btn-lg,.cta-row .btn{flex:none;width:264px;height:60px;padding:10px 0;gap:6px;border-radius:12px;font-size:18px;line-height:22.4px;font-weight:600;letter-spacing:-.3px;box-shadow:0 2px 5px rgba(0,0,0,.3),inset 0 -1.5px .5px rgba(0,0,0,.3),inset 0 1px .5px rgba(255,255,255,.3)}
+  .btn-lg img{width:22px;height:22px}
+  .cta-row{gap:10px}
+  .cta-row .play{order:2;width:60px;height:60px}
+  .hero-logos{top:801px;bottom:auto;height:49px;-webkit-mask-image:none;mask-image:none}
+  .hero-logos-track{gap:42px;margin-left:-7px;animation:heroLogos 60s linear infinite}
+  .hero-logos-track img{width:1742px;height:49px}
+  @keyframes heroLogos{to{transform:translateX(-1784px)}}
+}
+@media (min-width:1024px) and (max-width:1279px){ .headline{font-size:40px} }
+@media (prefers-reduced-motion:reduce){ .hero-logos-track{animation:none} }
+
 </style>
 </head>
 <body>
@@ -1462,7 +1512,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       </div>
       <div class="info-row">
         <div class="info"><span class="info-label">Course Duration</span><span class="info-value">4 Years On-Campus</span></div>
-        <div class="info"><span class="info-label">NSAT Exam Date</span><span class="info-value">24 Dec, 2026</span></div>
+        <div class="info"><span class="info-label">NSAT Exam Date</span><span class="info-value"><span class="mob-only">24 Dec, 2026</span><span class="dt-only">7 Jan, 2027</span></span></div>
       </div>
       <div class="badge-row">
         <div class="badge"><span class="badge-icon"><img src="assets/img-4672-ugc.png" alt="" style="width:24px;height:26px"></span><span>UGC Approved</span></div>
@@ -2081,7 +2131,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   <div class="sheet-back" id="menuBack"></div>
   <nav class="sheet-panel" aria-label="Jump to a section">
     <div class="sheet-head"><span>Jump to</span><button class="sheet-x" type="button" id="menuX" aria-label="Close the menu">×</button></div>
-    <a href="#top">Top</a><a href="#co">Placement record</a><a href="#campus">Campus internships</a><a href="#found">Seven foundations</a><a href="#oss">Open source</a><a href="#cc">Competitive coding</a><a href="#ent">Entrepreneurship</a><a href="#glob">Global exposure</a><a href="#res">Research</a><a href="#cur">Curriculum</a><a href="#fac">Faculty</a><a href="#cities">Campuses</a><a href="#ways">Ways to get in</a><a href="#adm">Admission process</a><a href="#fest">Fests</a>
+    <a href="#" id="sheetAsk" class="sheet-ask">Ask Newton</a><a href="#top">Top</a><a href="#co">Placement record</a><a href="#campus">Campus internships</a><a href="#found">Seven foundations</a><a href="#oss">Open source</a><a href="#cc">Competitive coding</a><a href="#ent">Entrepreneurship</a><a href="#glob">Global exposure</a><a href="#res">Research</a><a href="#cur">Curriculum</a><a href="#fac">Faculty</a><a href="#cities">Campuses</a><a href="#ways">Ways to get in</a><a href="#adm">Admission process</a><a href="#fest">Fests</a>
   </nav>
 </div>
 
@@ -2451,7 +2501,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var y = href === '#top' ? 0 : (box || target).getBoundingClientRect().top + window.scrollY - (isDT ? 96 : 84);
     window.scrollTo({top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth'});
   });
-  (function(){ var b = document.getElementById('navAsk'); if (b) b.addEventListener('click', function(){ document.getElementById('aiBtn').click(); }); })();
+  ['navAsk', 'sheetAsk'].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener('click', function(e){ e.preventDefault(); document.getElementById('aiBtn').click(); }); });
   /* ---- menu sheet ---- */
   (function(){
     var sheet = document.getElementById('menuSheet'), btn = document.querySelector('.menu'); if (!sheet || !btn) return;
