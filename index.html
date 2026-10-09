@@ -1160,22 +1160,23 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .report .btn-md{height:44px;font-size:15px}
 
   /* ---- seven foundations: text column left, the seven rows right (no stepping), hairlines along the foot ---- */
-  .found{height:auto;padding:120px var(--side) 220px;display:grid;grid-template-columns:minmax(0,1fr) 588px;column-gap:96px;align-items:start}
-  .found-art{left:0;top:0;width:900px;height:auto;opacity:.22}
+  .found{height:auto;border-top:0;padding:96px var(--side) 167px;display:grid;grid-template-columns:minmax(0,1fr) 690px;column-gap:24px;align-items:start}   /* 516:34892: 683 tall, 486 + 24 + 690 */
+  .found-art{left:0;top:-16.8px;width:780px;height:436.6px;opacity:.12;-webkit-mask-image:linear-gradient(90deg,#000 675px,transparent 780px);mask-image:linear-gradient(90deg,#000 675px,transparent 780px)}
   .found-lines{left:0;width:100%}
   .found-side{display:flex;flex-direction:column;gap:20px;position:relative}
-  .found-kick{margin:0;font-size:12px;line-height:16px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#61A8FF}
-  .found-title{position:static;width:auto;max-width:none;transform:none;text-align:left;font-size:40px;line-height:48px}
-  .found-lede{margin:0;max-width:420px;font-size:16px;line-height:26px;font-weight:500;color:#B2B9C7}
+  .found-kick{margin:0;font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:#61A8FF}
+  .found-title{position:static;width:auto;max-width:486px;transform:none;text-align:left;font-size:36px;line-height:44px;font-stretch:100%;letter-spacing:.1px}
+  .found-lede{margin:0;max-width:420px;font-size:16px;line-height:24px;font-weight:500;letter-spacing:.1px;color:#B2B9C7}
   .found-list{position:relative;left:auto;right:auto;top:auto}
   .found-window{height:auto;overflow:visible;border:1px solid #23282F;border-radius:12px;overflow:hidden}
   .found-window::before,.found-fade,.found .wins-dots,.found-track>[aria-hidden="true"]{display:none}
   .found-track{transform:none!important;transition:none}
   .found-row{padding:0;border-width:0 0 1px;transition:background .2s ease}
-  .found-row:last-child{border-bottom:0}
-  .found-row a{padding:19px 24px}
+  .found-row:nth-child(7){border-bottom:0}   /* cloned rows follow it in the track */
+  .found-row a{padding:17px 15px 16px}   /* every row 60 tall, list 420 */
+  .found-row:first-child a{padding-top:16px}
   .found-row:hover{background:#16191D}
-  .found-label,.found-row.is-top .found-label{font-size:17px;line-height:26px;letter-spacing:.06px;text-decoration-color:transparent}
+  .found-label,.found-row.is-top .found-label{font-size:16px;line-height:26px;letter-spacing:.06px;text-decoration-color:transparent}
   .found-row:hover .found-label{text-decoration-color:currentColor}
   .found-row img.arr{transition:transform .2s ease}
   .found-row:hover img.arr{transform:translateX(4px)}
@@ -1789,7 +1790,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   <section class="found" id="found" data-node="267:51724" aria-label="The seven foundations">
     <img class="found-art" src="assets/found-campus-sketch.webp" alt="">
     <canvas class="found-lines" id="foundLines" aria-hidden="true"></canvas>
-    <div class="found-side"><p class="found-kick dt-only">The seven foundations</p><h2 class="found-title">We specifically work on these 7 foundations to give outcomes</h2><p class="found-lede dt-only">Seven ways students build a real track record long before placements. Pick one to see it in action.</p></div>
+    <div class="found-side"><p class="found-kick dt-only">The seven foundations</p><h2 class="found-title">We specifically work on these 7 foundations to <br class="dt-only">give outcomes</h2><p class="found-lede dt-only">Seven ways students build a real track record long before placements. Pick one to see it in action.</p></div>
     <div class="found-list">
       <div class="found-window" id="foundWindow">
         <ul class="found-track" id="foundTrack">
@@ -2710,10 +2711,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
           tips near the cursor or finger rise too. Headroom is capped so a tip never reaches the content beyond. ---- */
   function hairlines(cv, sec, COL, flip){
     if (!cv) return;
-    var ctx = cv.getContext('2d'), NL = 39, X0 = 2, PITCH = 12, W = 460, H = 150, LEN = 103, REST = H - LEN;
+    var ctx = cv.getContext('2d'), NL = 39, X0 = isDT ? 0 : 2, PITCH = 12, W = 460, H = 150, LEN = 103, REST = H - LEN;
     var L = [], vis = false, started = false, t0 = 0, raf = 0, ptr = {x: -999, on: false};
     function fit(){   /* 460 px (39 lines) on the phone; on desktop the canvas spans the section and the line count follows its width */
-      W = Math.round(cv.clientWidth) || 460; NL = Math.floor((W - 4) / PITCH) + 1;
+      W = Math.round(cv.clientWidth) || 460; NL = Math.floor((W - 2 * X0) / PITCH) + 1;
       while (L.length < NL) L.push({
         scatter: (Math.random() < .25 ? 1 : -1) * (4 + Math.random() * (Math.random() < .25 ? 8 : 30)),   /* first appearance relative to the resting tip; mostly above it */
         dotAt: Math.random() * 650, growAt: 700 + Math.random() * 650, growFor: 520 + Math.random() * 520, settleFor: 1500 + Math.random() * 500,
