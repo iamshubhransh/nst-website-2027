@@ -2671,8 +2671,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   --anatomy-hi:#2A2E35;--anatomy-mid:#22252B;--anatomy-lo:#1B1D22;--anatomy-faint:#15171A;--anatomy-lit:#2A2E35;--anatomy-dot:#2A2E35;--anatomy-weight:.8px;--anatomy-halo-opacity:0}
 .found-collage{position:absolute;inset:0;pointer-events:none;overflow:hidden;
   --e:max(120px,calc((100vw - 1200px) / 2));
-  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(var(--e) + 60px),rgba(0,0,0,.6) calc(var(--e) + 200px),rgba(0,0,0,.24) calc(var(--e) + 380px),rgba(0,0,0,.18) 50%,rgba(0,0,0,.24) calc(100% - var(--e) - 380px),rgba(0,0,0,.6) calc(100% - var(--e) - 200px),#000 calc(100% - var(--e) - 60px),#000 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 80%,transparent 100%);
-  -webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#000 0,#000 calc(var(--e) + 60px),rgba(0,0,0,.6) calc(var(--e) + 200px),rgba(0,0,0,.24) calc(var(--e) + 380px),rgba(0,0,0,.18) 50%,rgba(0,0,0,.24) calc(100% - var(--e) - 380px),rgba(0,0,0,.6) calc(100% - var(--e) - 200px),#000 calc(100% - var(--e) - 60px),#000 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 80%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,#000 0,#000 calc(var(--e) + 60px),rgba(0,0,0,.6) calc(var(--e) + 200px),rgba(0,0,0,.24) calc(var(--e) + 380px),rgba(0,0,0,.18) 50%,rgba(0,0,0,.24) calc(100% - var(--e) - 380px),rgba(0,0,0,.6) calc(100% - var(--e) - 200px),#000 calc(100% - var(--e) - 60px),#000 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 var(--vf0,80%),transparent var(--vf1,100%));
+  -webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,#000 0,#000 calc(var(--e) + 60px),rgba(0,0,0,.6) calc(var(--e) + 200px),rgba(0,0,0,.24) calc(var(--e) + 380px),rgba(0,0,0,.18) 50%,rgba(0,0,0,.24) calc(100% - var(--e) - 380px),rgba(0,0,0,.6) calc(100% - var(--e) - 200px),#000 calc(100% - var(--e) - 60px),#000 100%),linear-gradient(180deg,transparent 0,#000 14%,#000 var(--vf0,80%),transparent var(--vf1,100%));
   mask-composite:intersect}
 .found-town .tw-svg{position:absolute;left:-10px;top:-10px;width:calc(100% + 20px);height:calc(100% + 20px);animation:twDrift 46s ease-in-out infinite alternate}
 .fc-iso .tw-road{fill:#101115;stroke:none}
@@ -2680,6 +2680,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .fc-iso .tw-zebra{fill:#1B1D22;stroke:none}
 @keyframes twDrift{from{transform:translate(-5px,-3px)}to{transform:translate(5px,4px)}}
 @media (max-width:1023px){ .found-collage{bottom:auto;height:320px;--e:56px} }
+@media (min-width:1024px){ .found-collage{--vf0:calc(100% - 360px);--vf1:calc(100% - 170px)} }   /* gone before the hairlines at the foot (12 Oct) */
 @media (prefers-reduced-motion:reduce){ .found-town .tw-svg{animation:none} }
 </style>
 </head>
