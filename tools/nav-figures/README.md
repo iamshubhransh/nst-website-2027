@@ -15,3 +15,19 @@ They are deliberately quiet: each one supports the menu rather than leading it. 
 - **Preview one figure:** `node <figure>.mjs` writes a preview page of the pane.
 - **Check it:** run `node ~/.claude/skills/anatomy/scripts/lines.mjs <figure>.html` with `CHROME_PATH` set.
 - **Put it into the page:** `integrate.mjs` replaces the figures, styles and runtime in `index.html` between their markers. It can be re-run after a change.
+
+## More menu (`more/`)
+
+Seven figures in the same quiet style, each with its own pane colour:
+
+| File | Option | Colour | Figure |
+|---|---|---|---|
+| `about.mjs` | About us | slate | The team around a table, with a whiteboard chart climbing |
+| `dir.mjs` | Student directory | green | A board of student ID cards; a magnifier finds one |
+| `blog.mjs` | Blogs | purple | A laptop with posts scrolling |
+| `contact.mjs` | Contact us | teal | A phone whose chat fills in, and a map pin for campus visits |
+| `iitr.mjs` | IIT Roorkee × NST | rose | A pillared institute wired to an AI chip, with a pulse along the link |
+| `gold.mjs` | Go for Gold | gold | A winners' podium with a trophy |
+| `startx.mjs` | Newton StartX | blue | A rocket lifting off its pad |
+
+`more/integrate.mjs` was a one-off: it refuses to run twice.
