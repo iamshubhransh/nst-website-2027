@@ -1303,8 +1303,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .ask-send{width:32px;height:32px}
   .ask-pill{top:14px;right:16px}
   .cur-years{margin-top:56px;transform:scale(1.15);transform-origin:50% 0}
-  .cur-title{margin:32px auto 0;max-width:640px;font-size:32px;line-height:40px}
-  .ysl{width:100%;margin:40px auto 0}   /* the full column: all four years in view, evenly spaced; the mark glides between them */
+  .cur-title{margin:48px auto 0;max-width:640px;font-size:32px;line-height:40px}
+  .ysl{width:100%;margin:56px auto 0}   /* the full column: all four years in view, evenly spaced; the mark glides between them */
   .ysl-strip{position:absolute;left:0;right:0;top:0;bottom:auto;height:36px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:0;overflow:visible;scroll-snap-type:none;cursor:default}
   .ysl-y{width:auto;font-size:16px}
   .ysl-ruler{cursor:pointer;pointer-events:auto;touch-action:none}
@@ -1324,7 +1324,13 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .cur-chips{margin:24px 0 0;gap:10px;align-content:flex-start}
   .cur-chip{height:34px;padding:0 14px;font-size:14px}
   .cur-card-h{height:44px;padding:0 20px;font-size:12px;letter-spacing:1.4px}
-  .kcs{padding:0 20px;scroll-padding-left:20px}
+  .kcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0 20px;overflow:visible;scroll-snap-type:none}   /* 12 Oct: a 2-column grid, every concept in view; an odd last one spans both */
+  .kcs .kc{width:auto;height:auto;min-height:152px;padding:20px;gap:10px}
+  .kcs .kc-ico,.kcs .kc-ico svg{width:28px;height:28px}
+  .kcs .kc h4{min-height:0;font-size:16px;line-height:24px}
+  .kcs .kc p{font-size:14px;line-height:22px}
+  .kcs .kc:last-child:nth-child(odd){grid-column:1/-1}
+  .kcs+.pdots{display:none}
   .pjs{padding:0 20px;scroll-padding-left:20px}
   .cur-card .pdots{margin-left:20px}
 
@@ -1334,10 +1340,19 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .fac-top{height:314px;overflow:visible}
   .fac-ring{left:calc(50% - 1835px);top:96px;width:3670px;height:3670px}
   .fac-bub{width:64px;height:64px}
-  .fac-title{top:238px;font-size:32px;line-height:40px}
-  .fac-sub{top:286px;font-size:18px;line-height:28px}
+  .fac-title{top:238px;font-size:28px;line-height:40px}   /* 12 Oct: the faculty carry the section, not the title: title 28, cards larger */
+  .fac-sub{top:282px;font-size:16px;line-height:26px;color:#5B6271}
   .fac-strip{position:relative;width:var(--wrap);margin:70px auto 0;padding:0;scroll-padding-left:0;background:#fff}
-  .fac-card{width:calc(var(--wrap) / 4);height:246px;padding:0 24px}
+  .fac-card{width:calc(var(--wrap) / 4);height:318px;padding:0 24px}
+  .fac-photo,.fac-photo-ph{width:104px;height:104px;border-radius:16px}
+  .fac-photo-ph img{width:36px;height:45px}
+  .fac-row{margin-top:20px;height:auto;align-items:flex-start;gap:8px}
+  .fac-name{font-size:19px;line-height:26px;white-space:normal}
+  .fac-role{margin-top:2px;font-size:15px;line-height:22px;white-space:normal}
+  .fac-badge{width:52px;height:52px}
+  .fac-logo{height:26px;width:auto!important;max-width:92px;object-fit:contain;object-position:left center;margin-top:14px}
+  .fac-logo[alt="Goldman Sachs"]{height:34px}   /* its file carries whitespace */
+  .fac-logo[src*="microsoft"]{height:20px}
   .fac-card::after{left:0;width:100%;background:repeating-linear-gradient(90deg,#E4E7EC 0 1px,transparent 1px 14px)}
 
   .fac-dots{display:none}
@@ -1436,7 +1451,20 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
 @media (min-width:1024px){
   /* papers: the stamp sits in the top-right corner; give the venue line room under it */
-  .paper{padding-top:56px}
+  .paper{padding:60px 24px 24px;gap:14px}   /* 12 Oct: a clear hierarchy on desktop: venue 12, title 22, author 14/13, abstract 15, link 14 */
+  .paper-venue{font-size:12px;line-height:16px;letter-spacing:1.2px}
+  .paper-title{font-size:22px;line-height:30px;letter-spacing:-.2px}
+  .paper-auth{gap:10px;margin-top:2px}
+  .paper-auth img{width:32px;height:32px}
+  .paper-name{font-size:14px;line-height:20px}
+  .paper-aff{font-size:13px;line-height:18px;white-space:normal}
+  .paper-rule{margin:4px 0}
+  .paper-lab{font-size:12px;line-height:16px;letter-spacing:1.2px}
+  .paper-abs{font-size:15px;line-height:24px}
+  .paper-foot{margin-top:auto;padding-top:8px}
+  .paper-src{font-size:14px;line-height:20px}
+  .paper-n{font-size:12px;line-height:16px}
+  .stamp{left:auto;right:56px;top:20px;font-size:12px;line-height:14px}
   .nav-links a,.nav-ask{white-space:nowrap}
 }
 /* ---- 1024–1279: same layout, tighter. The text columns keep a readable width, the wins row and faculty strip shrink ---- */
@@ -2030,18 +2058,14 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .cd-cell{height:143px;padding-top:21.16px;border-radius:15.84px}
   .cd-cell b{height:80px;font-size:72px;line-height:79.2px}
   .cd-cell span{font-size:14.4px;line-height:18.72px}
-  .cd-pick{display:flex;flex-direction:column;gap:16.1px;padding:19.4px;border-radius:16px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-  .cd-pick-h{font-size:12.65px;line-height:17px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5)}
-  .cd-dates,.cd-times{display:flex;gap:8px}
-  .cd-pick button{margin:0;border:0;font-family:var(--font);font-weight:600;color:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s ease,color .2s ease,transform .16s ease}
-  .cd-pick button:active{transform:scale(.96)}
-  .cd-dates button{display:flex;flex-direction:column;align-items:center;gap:2px;width:73.6px;height:89px;padding:11.5px 0;border-radius:12px;background:rgba(255,255,255,.05)}
-  .cd-dates span{font-size:12.65px;line-height:17px;letter-spacing:.4px;color:rgba(255,255,255,.6)}
-  .cd-dates b{font-size:23px;line-height:28px;font-weight:600}
-  .cd-dates button.is-on{background:#0673F9}
-  .cd-times button{flex:1 1 0;min-width:0;height:46px;padding:0;border-radius:10px;background:rgba(255,255,255,.05);font-size:14.95px;line-height:20.7px;letter-spacing:.06px}
-  .cd-times button.is-on{background:#fff;color:#0B0C0E}
-  .cd-pick p{margin:0;font-size:13.8px;line-height:21px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.5)}
+  .cd-glance{display:flex;flex-direction:column;gap:16px;padding:20px;border-radius:16px;background:#16191D;box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}   /* 12 Oct: facts about the test (there is no slot to pick) */
+  .cd-glance-h{font-size:12.65px;line-height:17px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+  .cd-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .cd-fact{display:grid;grid-template-columns:40px minmax(0,1fr);column-gap:14px;align-items:center;padding:14px;border-radius:12px;background:rgba(255,255,255,.04);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+  .cd-fact i{grid-row:1/3;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;background:rgba(6,115,249,.16);color:#61A8FF}
+  .cd-fact svg{width:22px;height:22px}
+  .cd-fact b{font-size:16px;line-height:22px;font-weight:600;letter-spacing:.06px;color:#fff}
+  .cd-fact span{font-size:13px;line-height:19px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.55)}
 
   /* FAQs & brochure (605:109405): 842 tall; head, booklet and download on the left (384), chips and the accordion on the right (690, 8 lower) */
   .faq{display:grid;grid-template-columns:minmax(0,384fr) minmax(0,690fr);grid-template-rows:auto 1fr;column-gap:126px;align-items:start;padding:120px var(--side)}
@@ -2734,19 +2758,19 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         <p class="bk-sub">Five countries, from Alibaba to Harvard</p>
       </div>
     </header><p class="bk-lede dt-only">Five countries in three years, from Alibaba’s AI labs to a policy room at Harvard.</p><a class="bk-cta bk-cta-dark bk-cta-side dt-only" href="#">See all trips <img src="assets/icon-arrow-right-white.svg" alt=""></a></div><div class="bk-main">
-    <div class="glob-map bk-rise" id="globMap" data-node="328:8255" aria-label="Map: trips from Delhi to China, the US, Thailand, Singapore and Germany">
+    <div class="glob-map bk-rise" id="globMap" data-node="328:8255" aria-label="Map: trips from Delhi to Germany, the US, Thailand, Singapore and China">
       <canvas id="globDots" width="1110" height="471" aria-hidden="true"></canvas>
       <svg id="globArcs" viewBox="0 0 370 157" aria-hidden="true"></svg>
     </div>
     </div><div class="glob-body bk-rise">
       <div class="chips" id="globChips" role="tablist" aria-label="Country">
-        <button class="chip is-on" type="button" role="tab" aria-selected="true" data-trip="cn"><img src="assets/glob/flag-cn.png" alt="">China</button>
+        <button class="chip is-on" type="button" role="tab" aria-selected="true" data-trip="de"><img src="assets/glob/flag-de.png" alt="">Germany</button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-trip="us"><img src="assets/glob/flag-us.png" alt="">USA</button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-trip="th"><img src="assets/glob/flag-th.png" alt="">Thailand</button>
         <button class="chip" type="button" role="tab" aria-selected="false" data-trip="sg"><img src="assets/glob/flag-sg.png" alt="">Singapore</button>
-        <button class="chip" type="button" role="tab" aria-selected="false" data-trip="de"><img src="assets/glob/flag-de.png" alt="">Germany</button>
+        <button class="chip" type="button" role="tab" aria-selected="false" data-trip="cn"><img src="assets/glob/flag-cn.png" alt="">China</button>
       </div>
-      <div class="glob-text" id="globText"><h3 class="glob-title" id="globTitle">Exploring AGI in the world's most advanced tech ecosystem</h3><p class="glob-desc" id="globDesc">Alibaba AI Labs, a robotics floor and the Great Wall: a week inside the world's most advanced tech ecosystem, seeing AI systems at scale.</p></div>
+      <div class="glob-text" id="globText"><h3 class="glob-title" id="globTitle">Germany International Immersion Program 2026</h3><p class="glob-desc" id="globDesc">Exploring Germany's world-class innovation, startup, manufacturing, and sustainability ecosystem through industry visits, startup interactions, and global learning experiences.</p></div>
     </div>
     <div class="gstack bk-rise" id="globStack" aria-label="Photos from the trip"></div>
     <a class="bk-cta bk-cta-dark bk-rise" href="#">See all trips <img src="assets/icon-arrow-right-white.svg" alt=""></a>
@@ -2914,7 +2938,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     <div class="adm-card">
       <div class="adm-head">Your gateway to NST</div>
       <ol class="adm-rows">
-        <li class="adm-row"><span class="adm-n">01</span><div class="adm-t"><span class="adm-h">Register for NSAT</span><span class="adm-p dim">Pay for NSAT Exam &amp; pick a slot</span></div></li>
+        <li class="adm-row"><span class="adm-n">01</span><div class="adm-t"><span class="adm-h">Register for NSAT</span><span class="adm-p dim">Pay the NSAT fee and register</span></div></li>
         <li class="adm-row adm-row-live"><span class="adm-n">02</span><div class="adm-t"><span class="adm-h">Appear for NSAT</span><span class="adm-p">Subjects include Mathematics, English and General Aptitude</span><div class="adm-acts"><a class="rbtn rbtn-blue rbtn-sm" href="#ways">Apply Now <img src="assets/icon-arrow-right-22w.svg" alt=""></a><a class="rbtn rbtn-ink rbtn-sm" href="#">Prep kit</a></div><span class="adm-note"><img src="assets/icon-info-16.svg" alt="">3 mock tests will be unlocked after registration for best preparation</span></div></li>
         <li class="adm-row"><span class="adm-n">03</span><div class="adm-t"><span class="adm-h">Online Interview Round</span><span class="adm-p dim">You will be assessed on problem solving skills &amp; given the opportunity to showcase your projects &amp; achievements</span></div></li>
         <li class="adm-row"><span class="adm-n">04</span><div class="adm-t"><span class="adm-h">Counselling</span><span class="adm-p dim">Once you clear the interview, you’ll be invited to the University campus counselling session</span></div></li>
@@ -3070,9 +3094,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   <section class="cd" id="nsat" data-node="582:70706 / 605:109343" aria-label="Register for the next NSAT">
     <i class="cd-glow" aria-hidden="true"></i>
     <div class="cd-l">
-      <span class="cd-kick">Register for NSAT and pick a slot</span>
+      <span class="cd-kick">Register for NSAT</span>
       <h2 class="cd-title">Next NSAT: 24 Dec 2026.</h2>
-      <p class="cd-lede dt-only">Maths, English and general aptitude, online and proctored. Registration takes five minutes; pick your slot right after.</p>
+      <p class="cd-lede dt-only">Maths, English and general aptitude, online and proctored. Registration takes five minutes.</p>
     </div>
     <div class="cd-r">
     <div class="cd-clock" id="cdClock" role="timer" aria-label="Time left until the next NSAT">
@@ -3081,11 +3105,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <div class="cd-cell"><b data-u="m">32</b><span>min</span></div>
       <div class="cd-cell cd-sec"><b data-u="s">08</b><span>sec</span></div>
     </div>
-    <div class="cd-pick dt-only" id="cdPick">
-      <span class="cd-pick-h">Pick a slot</span>
-      <div class="cd-dates" role="group" aria-label="NSAT date"><button type="button" class="is-on" aria-pressed="true" data-d="2026-12-24"><span>Thu</span><b>24</b><span>Dec</span></button><button type="button" aria-pressed="false" data-d="2026-12-27"><span>Sun</span><b>27</b><span>Dec</span></button><button type="button" aria-pressed="false" data-d="2027-01-02"><span>Sat</span><b>2</b><span>Jan</span></button><button type="button" aria-pressed="false" data-d="2027-01-07"><span>Thu</span><b>7</b><span>Jan</span></button><button type="button" aria-pressed="false" data-d="2027-01-10"><span>Sun</span><b>10</b><span>Jan</span></button></div>
-      <div class="cd-times" role="group" aria-label="NSAT time"><button type="button" aria-pressed="false" data-t="10:00">10:00 am</button><button type="button" class="is-on" aria-pressed="true" data-t="14:00">2:00 pm</button><button type="button" aria-pressed="false" data-t="18:00">6:00 pm</button></div>
-      <p>Online, proctored, 2 hours. Two free retries if it doesn’t go well.</p>
+    <div class="cd-glance dt-only">
+      <span class="cd-glance-h">NSAT at a glance</span>
+      <div class="cd-facts"><div class="cd-fact"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"/><path d="M8.5 10h7M8.5 13.5h7M8.5 17h4"/></svg></i><b>Maths, English, aptitude</b><span>What NSAT tests</span></div><div class="cd-fact"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="7.5"/><path d="M12 9.5V13l2.5 2"/><path d="M9.5 3h5"/></svg></i><b>2 hours</b><span>Online and proctored</span></div><div class="cd-fact"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 0 1 13.7-5.6L20 8.5"/><path d="M20 4v4.5h-4.5"/><path d="M20 12a8 8 0 0 1-13.7 5.6L4 15.5"/><path d="M4 20v-4.5h4.5"/></svg></i><b>Three attempts</b><span>Two free retries if it doesn’t go well</span></div><div class="cd-fact"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7.5L12 4l8 3.5-8 3.5z"/><path d="M4 12l8 3.5 8-3.5"/><path d="M4 16.5L12 20l8-3.5"/></svg></i><b>Prep kit + 2 mock tests</b><span>Unlock the moment you register</span></div></div>
     </div>
     </div>
     <div class="cd-l2">
@@ -4015,7 +4037,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var seed = Array.prototype.slice.call(orbit.querySelectorAll('.fac-bub'));
     var logos = seed.map(function(b){ return {src: b.getAttribute('data-src'), w: b.getAttribute('data-w'), h: b.getAttribute('data-h')}; });
     seed.forEach(function(b){ b.remove(); });
-    var R = isDT ? 1835 : 543, CY = isDT ? 96 + 1835 : 590.86, SLOT = Math.asin((isDT ? 400 : 145) / R), HOLD = 1300, ADVANCE = 640, HB = isDT ? 32 : 21, LS = isDT ? 1.83 : 1;   /* desktop (516:39185): r 1835 like the placement arc, 64 px discs 400 px apart, logos x1.83 */
+    var R = isDT ? 1835 : 543, CY = isDT ? 96 + 1835 : 590.86, SLOT = Math.asin((isDT ? 400 : 145) / R), HOLD = 1300, ADVANCE = 640, HB = isDT ? 32 : 21, LS = isDT ? 1.35 : 1;   /* desktop (516:39185): r 1835 like the placement arc, 64 px discs 400 px apart; logos x1.35 (was 1.83; smaller in the disc, 12 Oct) */
     if (isDT){ var fr = document.querySelector('.fac-ring'); fr.setAttribute('viewBox', '0 0 3670 3670'); fr.innerHTML = '<circle cx="1835" cy="1835" r="1833.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="27.03 27.03"/>'; }
     function easeInOut(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     var discs = [], nextIdx = 0;
@@ -4348,8 +4370,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     }, {threshold: .4}).observe(chat);
   })();
 
-  /* countdown to the next NSAT: the slot picked in the desktop frame, 24 Dec 2026, 2:00 pm IST; ticks once a second while on screen.
-     Desktop adds the slot picker (605:109343): picking a date or a time retargets the clock to that slot. */
+  /* countdown to the next NSAT: 24 Dec 2026, 2:00 pm IST (time of day to confirm); ticks once a second while on screen */
   (function(){
     var sec = document.getElementById('nsat'); if (!sec) return;
     onSeen(sec, 'is-live');
@@ -4365,14 +4386,6 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       set('d', pad(Math.floor(s / 86400)), anim); set('h', pad(Math.floor(s % 86400 / 3600)), anim); set('m', pad(Math.floor(s % 3600 / 60)), anim); set('s', pad(s % 60), anim);
     }
     upd(false);
-    var pick = document.getElementById('cdPick'), clock = document.getElementById('cdClock');
-    if (pick && isDT) pick.addEventListener('click', function(e){
-      var b = e.target.closest('button'); if (!b || b.classList.contains('is-on')) return;
-      Array.prototype.forEach.call(b.parentNode.children, function(x){ x.classList.toggle('is-on', x === b); x.setAttribute('aria-pressed', x === b); });
-      var d = pick.querySelector('.cd-dates .is-on'), t = pick.querySelector('.cd-times .is-on');
-      T = Date.parse(d.dataset.d + 'T' + t.dataset.t + ':00+05:30'); last = {}; upd(true);
-      clock.setAttribute('aria-label', 'Time left until your slot: ' + d.textContent.replace(/(\D+)(\d+)(\D+)/, '$1 $2 $3') + ', ' + t.textContent);
-    });
     new IntersectionObserver(function(en){
       if (en[0].isIntersecting){ if (!iv){ upd(false); iv = setInterval(function(){ upd(true); }, 1000); } }
       else { clearInterval(iv); iv = 0; }
@@ -4684,7 +4697,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       var c = document.createElementNS(NS, 'circle'); c.setAttribute('cx', PINS[k][0]); c.setAttribute('cy', PINS[k][1]); c.setAttribute('r', k === 'delhi' ? 3 : 2.5); c.setAttribute('class', 'glob-pin' + (k === 'delhi' ? ' is-on' : '')); svg.appendChild(c); pins[k] = c;
     });
     var arcLen = {}; Object.keys(arcs).forEach(function(k){ var L = arcs[k].getTotalLength(); arcLen[k] = L; arcs[k].style.strokeDasharray = L; arcs[k].style.strokeDashoffset = L; });
-    var cur = 'cn';
+    var cur = 'de';   /* Germany first (12 Oct) */
     function light(trip){
       var pin = TRIPS[trip].pin;
       Object.keys(arcs).forEach(function(k){ arcs[k].classList.toggle('is-on', k === pin); });
@@ -4694,7 +4707,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       if (reduce){ drawDots(1); Object.keys(arcs).forEach(function(k){ arcs[k].style.strokeDashoffset = 0; }); light(cur); return; }
       var t0 = performance.now();
       (function tick(now){ var p = Math.min(1, (now - t0) / 1000); drawDots(p); if (p < 1) requestAnimationFrame(tick); })(t0);
-      var order = ['hangzhou', 'boston', 'bangkok', 'singapore', 'berlin'];
+      var order = ['berlin', 'boston', 'bangkok', 'singapore', 'hangzhou'];
       order.forEach(function(k, i){ setTimeout(function(){ arcs[k].style.transition = 'stroke-dashoffset .55s ease-out, stroke-opacity .4s ease, stroke-width .4s ease'; arcs[k].style.strokeDashoffset = 0; }, 500 + i * 320); });
       setTimeout(function(){ light(cur); }, 500);
     };
