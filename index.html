@@ -1861,18 +1861,28 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .news-strip span{font-size:13px;line-height:18px;font-weight:700;letter-spacing:-.1px;color:rgba(255,255,255,.85);white-space:nowrap}
 .news-strip i{flex:none;width:5px;height:5px;border-radius:50%;background:#F59700}
 @keyframes newsTick{to{transform:translateX(calc(-1 * var(--per, 50%)))}}   /* one copy of the list per loop; desktop sets --per in px after adding copies */
-.news-clip{display:flex;flex-direction:column;gap:14px;margin:52px 16px 0;padding:20px;background:#fff;border-radius:4px;box-shadow:0 10px 24px rgba(22,25,29,.08),0 1px 2px rgba(22,25,29,.05);transition:opacity .6s ease,transform .8s cubic-bezier(.22,1,.36,1)}
-.news:not(.is-in) .news-clip{opacity:0;transform:translateY(24px) rotate(-1.2deg)}
-.news-more{display:none}   /* the second and third clippings are desktop only */
-.news-mast{display:flex;flex-direction:column;gap:6px}
-.news-mast div{display:flex;align-items:center;justify-content:space-between;height:20px}
-.news-mast b{font-size:15px;line-height:20px;font-weight:700;letter-spacing:-.2px;color:#16191D}
-.news-mast span{font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
-.news-mast i{display:block;height:2px;background:#16191D}
-.news-mast i+i{height:1px}
-.news-clip h3{margin:0;font-size:22px;line-height:28px;font-weight:600;letter-spacing:-.1px;color:#16191D}
-.news-clip p{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.6)}
-.news-clip a{align-self:flex-start;font-size:14px;line-height:20px;font-weight:600;letter-spacing:.06px;color:#0673F9;text-decoration:none}
+/* press cards (vkPP… 8674:83899): 287 × 348, white 67 px head (logo + "Acknowledged by media" + outlet), the clipping
+   inset 15 from the left at 80 and cut by the card. A swipe strip with no dots; desktop also drags with the mouse */
+.news-row{display:flex;gap:12px;margin-top:52px;padding:0 16px;scroll-padding-left:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;outline:0}
+.news-row::-webkit-scrollbar{display:none}
+.np{position:relative;flex:none;width:287px;height:348px;border-radius:4px;overflow:hidden;background:#F6F7F9;scroll-snap-align:start;transition:opacity .6s ease calc(var(--i,0) * 70ms),transform .8s cubic-bezier(.22,1,.36,1) calc(var(--i,0) * 70ms)}
+.np::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #E1E5EA;pointer-events:none}
+.news:not(.is-in) .np{opacity:0;transform:translateY(24px)}
+.np-h{display:flex;align-items:center;gap:9px;height:67px;padding:0 15px;background:#fff}
+.np-h img{flex:none;display:block}
+.np-h div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.np-h span{font-size:12px;line-height:18px;font-weight:500;color:#8C95A6;white-space:nowrap}
+.np-h b{font-size:14px;line-height:22px;font-weight:600;color:#16191D;white-space:nowrap}
+.np-p{position:absolute;left:15px;top:80px;width:257px;height:268px;display:block;-webkit-user-drag:none;user-select:none}
+.np-tw{position:absolute;left:0;right:0;top:80px;padding:8.8px 15px 0 11.6px}
+.np-tw header{display:flex;align-items:flex-start;gap:3.5px;height:35px}
+.np-tw .av{flex:none;width:35px;height:35px;border-radius:50%;margin-right:0}
+.np-tw header div{display:flex;flex-direction:column;gap:1.4px;padding-top:2px}
+.np-tw header b{display:flex;align-items:center;gap:4px;font-size:12px;line-height:14.4px;font-weight:700;color:#16191D;white-space:nowrap}
+.np-tw header span{font-size:10.3px;line-height:12.4px;font-weight:500;color:#8C95A6}
+.np-tw .x{margin:1.8px 0 0 auto}
+.np-tw p{margin:7px 0 0 3.5px;font-size:13.6px;line-height:27.2px;font-weight:500;color:#5B6271}
+.np-tw p em{font-style:normal;font-weight:600;color:#0673F9}
 
 /* resources: tool tiles, each with a small working preview */
 .tools{position:relative;background:#fff;padding:0 0 42px}
@@ -2023,7 +2033,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .ft-grp a{font-size:14px;line-height:20px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.85);text-decoration:none;transition:color .2s ease}
 .ft-soc{display:flex;flex-wrap:wrap;gap:8px;margin-top:40px}
 .ft-soc a{display:inline-flex;align-items:center;height:34px;padding:0 15px;border-radius:100px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-size:13px;line-height:18px;font-weight:600;letter-spacing:.06px;color:rgba(255,255,255,.85);text-decoration:none;transition:background-color .2s ease}
-@media (hover:hover){ .ft-grp a:hover{color:#fff} .ft-soc a:hover{background:rgba(255,255,255,.08)} .fdr-link:hover,.news-clip a:hover,.faq-all:hover,.fq-a a:hover{text-decoration:underline} }
+@media (hover:hover){ .ft-grp a:hover{color:#fff} .ft-soc a:hover{background:rgba(255,255,255,.08)} .fdr-link:hover,.faq-all:hover,.fq-a a:hover{text-decoration:underline} }
 .ft-deg{margin:28px 0 0;font-size:13px;line-height:20px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.55)}
 .ft-deg a{color:inherit;text-decoration:none}
 .ft-copy{margin:10px 0 0;font-size:12px;line-height:16px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.35)}
@@ -2031,7 +2041,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 @media (prefers-reduced-motion:reduce){
   .fdr-sheet,.ft-mark{transform:none}
   .fdr-wave i,.fdr-play::after,.news-strip,.tools-app,.cd-glow,.sb-dots b,.cd-cell b.is-tick{animation:none}
-  .fdr:not(.is-in) .fdr-grid span,.news:not(.is-in) .news-clip,.tl:not(.is-in),.cp.is-wait .cp-row{opacity:1;transform:none}
+  .fdr:not(.is-in) .fdr-grid span,.news:not(.is-in) .np,.tl:not(.is-in),.cp.is-wait .cp-row{opacity:1;transform:none}
   .tl-hs:not(.is-in) .hs i::after{transform:scaleX(var(--p))}
 }
 @media (min-width:1024px){
@@ -2074,10 +2084,11 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .news-lines{left:0;width:100%}
   .news-tick{margin-top:60px}
   .news-strip{margin-left:0}
-  .news-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:start;width:var(--wrap);margin:92px auto 0}
-  .news-row .news-clip{margin:0}
-  .news-row .news-more{display:flex}
-  .news-row .news-clip:nth-child(2){transition-delay:.1s}.news-row .news-clip:nth-child(3){transition-delay:.2s}
+  /* the strip starts on the content column and bleeds to the viewport edges; cards 24 apart, edges fade over the margin */
+  .news-row{--fe:min(120px,var(--side));gap:24px;margin-top:92px;padding:0 var(--side);scroll-padding-left:var(--side);cursor:grab;
+    -webkit-mask:linear-gradient(90deg,transparent 0,#000 var(--fe),#000 calc(100% - var(--fe)),transparent);mask:linear-gradient(90deg,transparent 0,#000 var(--fe),#000 calc(100% - var(--fe)),transparent)}
+  .news-row.is-drag{cursor:grabbing;scroll-snap-type:none}
+  .news-row.is-drag .np{pointer-events:none}
 
   /* resources (605:108954): head at the top, icon 83 below, tiles 83 below; College Predictor 588 × 432 on the left,
      two 282 × 210 tiles over Headstart 588 × 198 on the right */
@@ -3425,25 +3436,14 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     <canvas class="news-lines" id="newsLines" aria-hidden="true"></canvas>
     <div class="sx-head"><span class="sx-kick">NST in news &amp; media</span><h2 class="sx-title">What others have written</h2></div>
     <div class="news-tick" aria-label="Publications that have covered NST"><div class="news-strip" id="newsStrip"><div><span>The Economic Times</span><i></i><span>Hindustan Times</span><i></i><span>YourStory</span><i></i><span>Inc42</span><i></i><span>The Hindu</span><i></i><span>Mint</span><i></i><span>India Today</span><i></i><span>Times of India</span><i></i></div><div aria-hidden="true"><span>The Economic Times</span><i></i><span>Hindustan Times</span><i></i><span>YourStory</span><i></i><span>Inc42</span><i></i><span>The Hindu</span><i></i><span>Mint</span><i></i><span>India Today</span><i></i><span>Times of India</span><i></i></div></div></div>
-    <div class="news-row">
-      <article class="news-clip" id="newsClip">
-        <div class="news-mast"><div><b>The Economic Times</b><span>Date to confirm</span></div><i></i><i></i></div>
-        <h3>First-year students beat senior teams at the ICPC regionals</h3>
-        <p>A team of NST first-years outranked senior teams from established engineering colleges at the ICPC Asia regionals.</p>
-        <a href="#">Read on The Economic Times →</a>
-      </article>
-      <article class="news-clip news-more" aria-hidden="true">
-        <div class="news-mast"><div><b>The Economic Times</b><span>Date to confirm</span></div><i></i><i></i></div>
-        <h3>First-year students beat senior teams at the ICPC regionals</h3>
-        <p>A team of NST first-years outranked senior teams from established engineering colleges at the ICPC Asia regionals.</p>
-        <a href="#" tabindex="-1">Read on The Economic Times →</a>
-      </article>
-      <article class="news-clip news-more" aria-hidden="true">
-        <div class="news-mast"><div><b>The Economic Times</b><span>Date to confirm</span></div><i></i><i></i></div>
-        <h3>First-year students beat senior teams at the ICPC regionals</h3>
-        <p>A team of NST first-years outranked senior teams from established engineering colleges at the ICPC Asia regionals.</p>
-        <a href="#" tabindex="-1">Read on The Economic Times →</a>
-      </article>
+    <div class="news-row" id="newsRow" tabindex="0" role="region" aria-label="Press coverage, scroll sideways for more">
+      <article class="np" id="newsClip" style="--i:0"><div class="np-h"><img src="assets/news/logo-theweek.png" width="62" height="18" alt="THE WEEK logo"><div><span>Acknowledged by media</span><b>THE WEEK</b></div></div><img class="np-p" src="assets/news/news-theweek.jpg" width="257" height="268" alt="THE WEEK article about Newton School" loading="lazy" draggable="false"></article>
+      <article class="np" style="--i:1"><div class="np-h"><img src="assets/news/logo-goa.png" width="26" height="35" alt="Govt. of GOA logo"><div><span>Partnered with</span><b>Govt. of GOA</b></div></div><div class="np-tw"><header><img class="av" src="assets/news/logo-avatar.png" width="35" height="35" alt=""><div><b>Dr. Promod Sawant<img src="assets/news/logo-verified.png" width="11" height="11" alt="Verified"></b><span>@DrPromodSawant</span></div><img class="x" src="assets/news/logo-x.png" width="14" height="12" alt="Post on X"></header><p>Launched the <em>#DigitalGoaYouthSummit</em> at Dr.Shyama Prasad Mukherjee Indoor Stadium, organised by Goa State Higher Education &amp;Department of Higher Education in collaboration with <em>@NewtonSchool</em></p></div></article>
+      <article class="np" style="--i:2"><div class="np-h"><img src="assets/news/logo-bhaskar.png" width="68" height="32" alt="Dainik Bhaskar logo"><div><span>Acknowledged by media</span><b>Dainik Bhaskar</b></div></div><img class="np-p" src="assets/news/news-bhaskar.jpg" width="257" height="268" alt="Dainik Bhaskar article about Newton School" loading="lazy" draggable="false"></article>
+      <article class="np" style="--i:3"><div class="np-h"><img src="assets/news/logo-apn.png" width="37" height="41" alt="APN NEWS logo"><div><span>Acknowledged by media</span><b>APN NEWS</b></div></div><img class="np-p" src="assets/news/news-apn.jpg" width="257" height="268" alt="APN NEWS article about Newton School" loading="lazy" draggable="false"></article>
+      <article class="np" style="--i:4"><div class="np-h"><img src="assets/news/logo-entrepreneur.png" width="71" height="17" alt="Entrepreneur India logo"><div><span>Acknowledged by media</span><b>Entrepreneur India</b></div></div><img class="np-p" src="assets/news/news-entrepreneur.jpg" width="257" height="268" alt="Entrepreneur India article about Newton School" loading="lazy" draggable="false"></article>
+      <article class="np" style="--i:5"><div class="np-h"><img src="assets/news/logo-ani.png" width="52" height="32" alt="Asian News International logo"><div><span>Acknowledged by media</span><b>Asian News International</b></div></div><img class="np-p" src="assets/news/news-ani.jpg" width="257" height="268" alt="Asian News International article about Newton School" loading="lazy" draggable="false"></article>
+      <article class="np" style="--i:6"><div class="np-h"><img src="assets/news/logo-et.png" width="47" height="36" alt="The Economic Times logo"><div><span>Acknowledged by media</span><b>The Economic Times</b></div></div><img class="np-p" src="assets/news/news-et.jpg" width="257" height="268" alt="The Economic Times article about Newton School" loading="lazy" draggable="false"></article>
     </div>
   </section>
 
@@ -4726,6 +4726,15 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     }
     fill(); if (document.fonts) document.fonts.ready.then(fill);
     window.addEventListener('resize', fill);
+  })();
+  (function(){ var r = document.getElementById('newsRow'); if (!r) return; var x0, l0, moved, id = null;
+    r.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' || e.button) return; id = e.pointerId; x0 = e.clientX; l0 = r.scrollLeft; moved = false; });
+    r.addEventListener('pointermove', function(e){ if (e.pointerId !== id) return; var dx = e.clientX - x0;
+      if (!moved && Math.abs(dx) > 4){ moved = true; r.classList.add('is-drag'); r.setPointerCapture(id); }
+      if (moved) r.scrollLeft = l0 - dx; });
+    function end(){ if (id === null) return; id = null; if (!moved) return; var w = r.querySelector('.np').offsetWidth + parseFloat(getComputedStyle(r).columnGap), from = r.scrollLeft;
+      r.classList.remove('is-drag'); r.scrollLeft = from; r.scrollTo({left: Math.round(from / w) * w, behavior: reduce ? 'auto' : 'smooth'}); }
+    r.addEventListener('pointerup', end); r.addEventListener('pointercancel', end);
   })();
   (function(){ var c = document.getElementById('newsClip'); if (!c) return; new IntersectionObserver(function(en, o){ if (en[0].isIntersecting){ document.getElementById('news').classList.add('is-in'); o.disconnect(); } }, {threshold: .3}).observe(c); })();
 
