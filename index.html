@@ -3239,7 +3239,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     <div class="fest-body" id="festBody">
       <span class="fest-kick" id="festKick">Neutron | Rishihood University</span>
       <h2 class="fest-title" id="festTitle">India's first techno-cultural fest</h2>
-      <button class="tour fest-video" type="button" data-reel="0" aria-label="Play the aftermovie"><img id="festStill" src="assets/fest/neutron-still.jpg" alt=""><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button>
+      <button class="tour fest-video" type="button" data-reel="0" aria-label="Play the aftermovie"><img id="festStill" src="assets/fest/neutron-thumb.jpg" srcset="assets/fest/neutron-thumb.jpg 1x, assets/fest/neutron-thumb@2x.jpg 2x" alt=""><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button>
       <div class="fest-sponsors" aria-label="Sponsors"><div class="fest-spstrip" id="festSp"><img src="assets/fest/sponsor-1.png" alt="" style="width:131.76px;height:17.35px"><img src="assets/fest/sponsor-2.png" alt="" style="width:106.67px;height:28.92px"><img src="assets/fest/sponsor-3.png" alt="" style="width:130.51px;height:29.9px"><img src="assets/fest/sponsor-4.png" alt="" style="width:157.49px;height:32.25px"></div></div>
       <div class="fest-grid"><span><img src="assets/fest/photo-1.jpg" alt=""></span><span><img src="assets/fest/photo-2.jpg" alt=""></span><span><img src="assets/fest/photo-3.jpg" alt=""></span><span><img src="assets/fest/photo-4.jpg" alt=""></span></div>
       <div class="fest-posters" id="festPosters" aria-label="Event posters" data-node="397:131905"><div class="fest-pstrip" id="festPstrip"><img src="assets/fest/poster-1.jpg" alt=""><img src="assets/fest/poster-2.jpg" alt=""><img src="assets/fest/poster-3.jpg" alt=""></div></div>
@@ -4399,16 +4399,16 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var tile = row.querySelector('.way-tile'), avs = Array.prototype.slice.call(row.querySelectorAll('.way-av'));
     var LEFT = ['assets/ways/left-1.png', 'assets/ways/left-2.png', 'assets/ways/left-3.png'], RIGHT = ['assets/ways/right-1.png', 'assets/ways/right-2.png', 'assets/ways/right-3.png'];
     if (reduce) return;
+    var MAXS = isDT ? 6 : 3;   /* desktop shows six faces each side of the tile */
     var HOLD = 1300, MOVE = 700, items = avs.map(function(el){ return {el: el, slot: +el.getAttribute('data-slot')}; }), nl = 1, nr = 1;   /* start the queues one step in so no face sits next to its twin */
     /* two off-screen buffers: one waiting at −4, one that will be born at the tile */
     function mk(slot, src){ var im = document.createElement('img'); im.className = 'way-av'; im.alt = ''; im.src = src; row.appendChild(im); var it = {el: im, slot: slot}; place(it, slot); return it; }
-    var MAXS = isDT ? 6 : 3;   /* desktop shows six faces each side of the tile */
     if (isDT){ for (var q = 4; q <= 6; q++){ items.push(mk(-q, LEFT[(q + 1) % 3])); items.push(mk(q, RIGHT[q % 3])); } }
     items.push(mk(-(MAXS + 1), LEFT[nl++ % 3]));
     function ease(t){ return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
     function place(it, s){
       var a = Math.abs(s), x, sc = 1, op = 1;
-      if (a >= 1) x = (s < 0 ? -1 : 1) * (77 + 66 * (a - 1));
+      if (a >= 1){ x = (s < 0 ? -1 : 1) * (77 + 66 * (a - 1)); if (a > MAXS) op = Math.max(0, 1 - (a - MAXS)); }   /* the outermost step fades: faces leave and arrive softly, never pop (12 Oct) */
       else { x = s * 77; sc = .25 + .75 * a; op = a; }
       it.el.style.transform = 'translateX(' + x.toFixed(2) + 'px) scale(' + sc.toFixed(3) + ')';
       it.el.style.opacity = op.toFixed(3);
@@ -4491,6 +4491,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       var front = sec.querySelector(i === 1 ? '.fest-tile-t' : '.fest-tile-n');
       if (sec.classList.contains('is-tekron') !== (i === 1) && !reduce){ front.classList.remove('is-lift'); void front.offsetWidth; front.classList.add('is-lift'); setTimeout(function(){ front.classList.remove('is-lift'); }, 480); }
       sec.classList.toggle('is-tekron', i === 1);
+      (function(){ var st = document.getElementById('festStill'), f = i === 1 ? 'tekron' : 'neutron'; if (st){ st.src = 'assets/fest/' + f + '-thumb.jpg'; st.srcset = 'assets/fest/' + f + '-thumb.jpg 1x, assets/fest/' + f + '-thumb@2x.jpg 2x'; } })();   /* each fest its own thumbnail (12 Oct) */
       Array.prototype.forEach.call(pg, function(b, k){ b.classList.toggle('on', k === i); });
       body.classList.add('is-out');
       setTimeout(function(){
