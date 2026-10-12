@@ -7,7 +7,7 @@ export const W = 320, H = 300;
 /* one quiet token set per option, tinted to its pane: paper = the pane, the one lit part = the option's colour */
 export const THEMES = {
   life:    { pane: "#FEF3E0", ink: "#C77A00", t: { paper: "#FEF3E0", top: "#FFFAF1", s: ["#EEDCBD", "#F2E3C8", "#F6E9D3", "#FAEFDD"], hi: "#5A4426", mid: "#A88A5C", lo: "#D2BA92", faint: "#E9D8B9", lit: "#C77A00", face: "#F59700", litTop: "#FFB547", litShade: "#E08A00", halo: "#7A5A20" } },
-  stories: { pane: "#F0EBFD", ink: "#7B55EE", t: { paper: "#F0EBFD", top: "#FBF9FF", s: ["#DCD3F3", "#E3DCF6", "#E9E3F9", "#EFEBFC"], hi: "#3A305C", mid: "#8A7DB3", lo: "#BBB1DB", faint: "#D8D0F0", lit: "#7B55EE", face: "#9B7BF5", litTop: "#B9A2FA", litShade: "#8A66F0", halo: "#4A3A88" } },
+  stories: { pane: "#E3F4F3", ink: "#0B8A86", t: { paper: "#E3F4F3", top: "#F6FCFB", s: ["#C4E3E1", "#CDE8E6", "#D6EDEB", "#DDF1EF"], hi: "#1C3C3B", mid: "#5F9693", lo: "#9DC6C3", faint: "#C3E0DE", lit: "#0B8A86", face: "#2BB3AE", litTop: "#7FD8D4", litShade: "#1E9E99", halo: "#17504E" } },
   global:  { pane: "#E5F1FF", ink: "#0673F9", t: { paper: "#E5F1FF", top: "#F7FBFF", s: ["#CCDDF2", "#D5E4F6", "#DDEAF9", "#E5EFFC"], hi: "#1E3A5C", mid: "#6A88AE", lo: "#A6BEDA", faint: "#C9DAEE", lit: "#0673F9", face: "#FFFFFF", litTop: "#FFFFFF", litShade: "#E6F0FD", halo: "#244C80" } },
 };
 export function tokens(key) {
