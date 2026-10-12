@@ -2087,16 +2087,14 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
      actions; four dropdowns hang 8 px under the pill, options on the left, an illustration on the right that follows the hovered
      option. The panel is solid white with no blur: a see-through panel picks up the hero underneath as a grey tint. While a
      menu is open the pill turns solid white too, so the two read as one surface. ===== */
-  .nav{transition:background-color .18s cubic-bezier(.33,1,.68,1)}
-  .nav.is-dn{background:#fff}
+  .nav{background:#fff;-webkit-backdrop-filter:none;backdrop-filter:none}   /* desktop: a solid white pill, no translucency or blur (Shubhransh, 12 Oct) */
   .dn{display:flex;align-items:center;gap:2px;flex:1 1 auto;min-width:0;height:40px;margin-left:14px}
   .dn-div{flex:none;width:1px;height:20px;margin-right:8px;background:#E1E5EA}
   .dn-i{display:inline-flex;align-items:center;gap:5px;height:40px;margin:0;padding:0 10px;border:0;border-radius:8px;background:transparent;font-family:var(--font);font-size:15px;line-height:20px;font-weight:500;letter-spacing:.06px;color:#16191D;text-decoration:none;white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .2s cubic-bezier(.33,1,.68,1),background-color .2s cubic-bezier(.33,1,.68,1)}
   .dn-i svg{flex:none;width:10px;height:10px;transition:transform .2s cubic-bezier(.33,1,.68,1)}
   .dn-i:hover{background:rgba(22,25,29,.04)}
   .dn-i:focus-visible{outline:2px solid #0673F9;outline-offset:-2px}
-  .nav.is-dn .dn-i{color:rgba(22,25,29,.55)}
-  .nav.is-dn .dn-i.is-on{color:#16191D;background:rgba(22,25,29,.05)}
+  .dn-i.is-on{background:rgba(22,25,29,.05)}   /* the open item is marked; the others keep full colour */
   .dn-i.is-on svg{transform:rotate(180deg)}
   .dn-contact{margin-right:2px}
 
