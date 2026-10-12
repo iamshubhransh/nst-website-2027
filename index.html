@@ -2082,6 +2082,63 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .ft-line{font-size:32px;line-height:40px}
   .ft-links{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:32px}
 }
+@media (min-width:1024px){
+  /* ===== desktop nav (proposal 614:4822, clerk.com as the reference for motion and sizing): items between the logo and the
+     actions; four dropdowns hang 8 px under the pill, options on the left, an illustration on the right that follows the hovered
+     option. The panel is solid white with no blur: a see-through panel picks up the hero underneath as a grey tint. While a
+     menu is open the pill turns solid white too, so the two read as one surface. ===== */
+  .nav{transition:background-color .18s cubic-bezier(.33,1,.68,1)}
+  .nav.is-dn{background:#fff}
+  .dn{display:flex;align-items:center;gap:2px;flex:1 1 auto;min-width:0;height:40px;margin-left:14px}
+  .dn-div{flex:none;width:1px;height:20px;margin-right:8px;background:#E1E5EA}
+  .dn-i{display:inline-flex;align-items:center;gap:5px;height:40px;margin:0;padding:0 10px;border:0;border-radius:8px;background:transparent;font-family:var(--font);font-size:15px;line-height:20px;font-weight:500;letter-spacing:.06px;color:#16191D;text-decoration:none;white-space:nowrap;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:color .2s cubic-bezier(.33,1,.68,1),background-color .2s cubic-bezier(.33,1,.68,1)}
+  .dn-i svg{flex:none;width:10px;height:10px;transition:transform .2s cubic-bezier(.33,1,.68,1)}
+  .dn-i:hover{background:rgba(22,25,29,.04)}
+  .dn-i:focus-visible{outline:2px solid #0673F9;outline-offset:-2px}
+  .nav.is-dn .dn-i{color:rgba(22,25,29,.55)}
+  .nav.is-dn .dn-i.is-on{color:#16191D;background:rgba(22,25,29,.05)}
+  .dn-i.is-on svg{transform:rotate(180deg)}
+  .dn-contact{margin-right:2px}
+
+  .dn-p{position:absolute;top:64px;left:0;z-index:2;display:flex;gap:8px;padding:8px;border-radius:16px;background:#fff;box-shadow:0 0 0 .5px rgba(19,19,22,.1),0 16px 36px -6px rgba(25,28,33,.2),0 8px 16px -3px rgba(0,0,0,.08);opacity:0;visibility:hidden;transform:scale(.97);transform-origin:var(--ox,0px) 0;transition:opacity .18s cubic-bezier(.33,1,.68,1),transform .18s cubic-bezier(.33,1,.68,1),visibility 0s linear .18s}
+  .dn-p.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .18s cubic-bezier(.33,1,.68,1),transform .18s cubic-bezier(.33,1,.68,1),visibility 0s}
+  .dn-p.is-instant{transition:none}
+  .dn-p::before{content:"";position:absolute;left:0;right:0;top:-10px;height:10px}   /* bridge over the gap, so crossing it keeps the menu open */
+  .dn-opts{flex:none;display:flex;flex-direction:column;width:344px}
+  .dn-lab{display:block;padding:10px 12px 6px;font-size:11px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+  .dn-hr{display:block;height:1px;margin:8px 12px;background:#E1E5EA}
+  .dn-o{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:10px;text-decoration:none;outline:none;transition:background-color .15s cubic-bezier(.33,1,.68,1)}
+  .dn-o.is-on{background:#F6F7F9}
+  .dn-o:focus-visible{box-shadow:inset 0 0 0 2px #0673F9}
+  .dn-ic{flex:none;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:9px;background:#fff;box-shadow:inset 0 0 0 1px #E1E5EA,0 1px 2px rgba(22,25,29,.06);color:#16191D;transition:color .15s cubic-bezier(.33,1,.68,1)}
+  .dn-o.is-on .dn-ic{color:var(--ink)}
+  .dn-ic svg{width:20px;height:20px}
+  .dn-tx{display:flex;flex-direction:column;gap:2px;min-width:0}
+  .dn-tx b{font-size:14px;line-height:20px;font-weight:600;letter-spacing:.06px;color:#16191D}
+  .dn-tx span{font-size:13px;line-height:18px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.55)}
+  .dn-foot{display:flex;align-items:center;justify-content:center;height:36px;margin:10px 12px 6px;border-radius:8px;background:#fff;box-shadow:inset 0 0 0 1px #E1E5EA;font-size:13px;line-height:18px;font-weight:600;letter-spacing:.06px;color:#16191D;text-decoration:none;transition:background-color .15s cubic-bezier(.33,1,.68,1)}
+  .dn-foot:hover{background:#F6F7F9}
+  .dn-ill{position:relative;flex:none;width:320px;border-radius:12px;background:var(--acc);overflow:hidden;cursor:pointer}
+  .dn-art{position:absolute;inset:0;opacity:0;transform:translateY(8px);transition:opacity .22s cubic-bezier(.33,1,.68,1),transform .22s cubic-bezier(.33,1,.68,1)}
+  .dn-art.is-on{opacity:1;transform:none}
+  .dn-art.is-out{opacity:0;transform:translateY(-8px)}
+  .dn-tag{position:absolute;left:16px;top:16px;padding:3px 8px;border-radius:100px;background:rgba(255,255,255,.7);font-size:11px;line-height:16px;font-weight:600;letter-spacing:.4px;color:var(--ink)}
+  .dn-big{position:absolute;left:calc(50% - 36px);top:calc(50% - 60px);width:72px;height:72px;color:var(--ink);opacity:.35}
+  .dn-big svg{display:block;width:72px;height:72px}
+  .dn-cap{position:absolute;left:16px;right:64px;bottom:16px;display:flex;flex-direction:column;gap:2px}
+  .dn-cap b{font-size:16px;line-height:22px;font-weight:600;letter-spacing:.06px;color:#16191D}
+  .dn-cap span{font-size:13px;line-height:18px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.6)}
+  .dn-go{position:absolute;right:16px;bottom:16px;display:flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:18px;background:#fff;font-size:16px;line-height:18px;font-weight:600;color:#16191D;transition:transform .2s cubic-bezier(.33,1,.68,1)}
+  .dn-ill:hover .dn-go{transform:translateX(2px)}
+}
+@media (min-width:1024px) and (max-width:1279px){
+  .dn-contact{display:none}
+  .dn{margin-left:10px}
+  .dn-i{padding:0 7px;font-size:14px}
+}
+@media (min-width:1024px) and (prefers-reduced-motion:reduce){
+  .nav,.dn-i,.dn-i svg,.dn-p,.dn-p.is-open,.dn-o,.dn-art{transition:none}
+}
 </style>
 </head>
 <body>
@@ -2092,11 +2149,55 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <img class="logo-mark" src="assets/nst-logo-mark.svg" alt="">
       <img class="logo-text" src="assets/nst-logo-text.svg" alt="">
     </a>
+    <!-- desktop nav (proposal on Playground, section 614:4822): six items, four dropdowns with options left and an illustration right -->
+    <nav class="dn dt-only" id="dn" aria-label="Main">
+      <i class="dn-div" aria-hidden="true"></i><a class="dn-i" href="#adm">Admissions</a><button class="dn-i dn-t" type="button" data-m="prog" aria-expanded="false" aria-controls="dnProg">Programs &amp; Fees<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="dn-i dn-t" type="button" data-m="life" aria-expanded="false" aria-controls="dnLife">Life with NST<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a class="dn-i" href="#co">Placements</a><button class="dn-i dn-t" type="button" data-m="tests" aria-expanded="false" aria-controls="dnTests">Entrance Tests<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="dn-i dn-t" type="button" data-m="more" aria-expanded="false" aria-controls="dnMore">More<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </nav>
     <nav class="nav-links dt-only" aria-label="Sections"><a href="#co">Placements</a><a href="#oss">Student life</a><a href="#cur">Curriculum</a><a href="#cities">Campuses</a><a href="#ways">Admissions</a><a href="#fest">Fests</a></nav>
     <div class="nav-actions">
       <button class="nav-ask dt-only" type="button" id="navAsk"><i aria-hidden="true"></i>Ask Newton</button>
+      <a class="dn-i dn-contact dt-only" href="#faq">Contact Us</a>
       <a class="btn btn-brand btn-sm" href="#ways">Apply Now</a>
       <button class="menu" type="button" aria-label="Open menu"><img src="assets/icon-menu.svg" alt=""></button>
+    </div>
+    <div class="dn-p dt-only" id="dnProg" data-m="prog" role="group" aria-label="Programs &amp; Fees" style="--acc:#E5F1FF;--ink:#0673F9">
+      <div class="dn-opts"><span class="dn-lab">Campuses · B.Tech in CS &amp; AI</span>
+        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>S-VYASA University</b><span>Bengaluru</span></span></a>
+        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>Rishihood University</b><span>Delhi NCR</span></span></a>
+        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>ADY Patil University</b><span>Pune</span></span></a>
+        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>St. Mary’s University</b><span>Hyderabad</span></span></a>
+        <a class="dn-foot" href="#cities">Compare all four campuses →</a>
+      </div>
+      <div class="dn-ill" aria-hidden="true"></div>
+    </div>
+    <div class="dn-p dt-only" id="dnLife" data-m="life" role="group" aria-label="Life with NST" style="--acc:#E6F4EE;--ink:#007A51">
+      <div class="dn-opts"><span class="dn-lab">Life with NST</span>
+        <a class="dn-o" href="#campus" data-k="users"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7"/><path d="M18 14.5a6.5 6.5 0 0 1 3.5 5.5"/></svg></span><span class="dn-tx"><b>Student life</b><span>Life of NST students</span></span></a>
+        <a class="dn-o" href="#oss" data-k="book"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3 5v13c4-.5 7 0 9 1.5 2-1.5 5-2 9-1.5V5c-4-.5-7 0-9 1.5z"/><path d="M12 6.5V19"/></svg></span><span class="dn-tx"><b>Student stories</b><span>Projects by NST students</span></span></a>
+        <a class="dn-o" href="#glob" data-k="globe"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 3.8 5.5 3.8 9s-1.3 6.5-3.8 9c-2.5-2.5-3.8-5.5-3.8-9S9.5 5.5 12 3z"/></svg></span><span class="dn-tx"><b>Global opportunities</b><span>China · Thailand · Singapore</span></span></a><i class="dn-hr" aria-hidden="true"></i><span class="dn-lab">Our fests</span>
+        <a class="dn-o" href="#fest" data-k="spark"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 4.7 4.7 1.8-4.7 1.8L12 16l-1.8-4.7-4.7-1.8 4.7-1.8z"/><path d="M19 15l.8 2.2 2.2.8-2.2.8L19 21l-.8-2.2-2.2-.8 2.2-.8z"/></svg></span><span class="dn-tx"><b>Tekron</b><span>Tech-cultural fest, Pune</span></span></a>
+        <a class="dn-o" href="#fest" data-k="zap"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span><span class="dn-tx"><b>Neutron</b><span>Tech-cultural fest, Delhi</span></span></a>
+      </div>
+      <div class="dn-ill" aria-hidden="true"></div>
+    </div>
+    <div class="dn-p dt-only" id="dnTests" data-m="tests" role="group" aria-label="Entrance Tests" style="--acc:#F0EBFD;--ink:#7B55EE">
+      <div class="dn-opts"><span class="dn-lab">Entrance tests</span>
+        <a class="dn-o" href="#nsat" data-k="pencil"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg></span><span class="dn-tx"><b>NSAT</b><span>Maths, English and aptitude, online</span></span></a>
+        <a class="dn-o" href="#ways" data-k="code"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 7l-5 5 5 5"/><path d="M16 7l5 5-5 5"/><path d="M14 4l-4 16"/></svg></span><span class="dn-tx"><b>Coding NSAT</b><span>For students who already code</span></span></a>
+      </div>
+      <div class="dn-ill" aria-hidden="true"></div>
+    </div>
+    <div class="dn-p dt-only" id="dnMore" data-m="more" role="group" aria-label="More" style="--acc:#FEF3E0;--ink:#C77A00">
+      <div class="dn-opts"><span class="dn-lab">About NST</span>
+        <a class="dn-o" href="#founders" data-k="info"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg></span><span class="dn-tx"><b>About us</b><span>The team and the story</span></span></a>
+        <a class="dn-o" href="#" data-k="card"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16a3 3 0 0 1 6 0"/><path d="M15 10h3M15 14h3"/></svg></span><span class="dn-tx"><b>Student directory</b><span>Find and reach NST students</span></span></a>
+        <a class="dn-o" href="#" data-k="news"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span><span class="dn-tx"><b>Blogs</b><span>Stories, guides and updates</span></span></a>
+        <a class="dn-o" href="#faq" data-k="chat"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z"/></svg></span><span class="dn-tx"><b>Contact us</b><span>FAQs, calls and campus visits</span></span></a><i class="dn-hr" aria-hidden="true"></i><span class="dn-lab">Collaborations</span>
+        <a class="dn-o" href="#" data-k="landmark"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10M10 21V10M14 21V10M19 21V10"/><path d="M2 10l10-6 10 6z"/></svg></span><span class="dn-tx"><b>IIT Roorkee × NST</b><span>Government-backed project</span></span></a>
+        <a class="dn-o" href="https://goforgold.in/" target="_blank" rel="noopener" data-k="trophy"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8 20h8"/></svg></span><span class="dn-tx"><b>Go for Gold</b><span>goforgold.in</span></span></a>
+        <a class="dn-o" href="#ent" data-k="rocket"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 15c-1.5 1.5-2 5-2 5s3.5-.5 5-2"/><path d="M9 15l-3-3c1.5-4 5-8 13-9-1 8-5 11.5-9 13z"/><circle cx="15" cy="9" r="1.5"/></svg></span><span class="dn-tx"><b>Newton StartX</b><span>Entrepreneurship at NST</span></span></a>
+      </div>
+      <div class="dn-ill" aria-hidden="true"></div>
     </div>
   </header>
 
@@ -3317,6 +3418,88 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     document.getElementById('menuX').addEventListener('click', close);
     sheet.addEventListener('click', function(e){ if (e.target.closest('a')) close(); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+  })();
+
+  /* ---- desktop nav (proposal 614:4822; motion after clerk.com). Hover an item with a chevron for 80 ms, or click it, and its
+          panel opens: a fade and a scale from .97, 180 ms. Moving along the bar swaps panels with no animation. The panel closes
+          150 ms after the pointer leaves the pill and the panel, on Esc (focus returns to the item), or when focus leaves the nav.
+          Inside, the hovered or focused option takes a grey fill and the illustration on the right changes: the old one slides up
+          8 px and fades while the new one rises from 8 px below, 220 ms. ↓ on an item enters its panel; ↑/↓ move between options. ---- */
+  if (isDT) (function(){
+    var nav = document.querySelector('.nav'), dn = document.getElementById('dn'); if (!nav || !dn) return;
+    var trig = {}, panels = {}, cur = null, openT = 0, closeT = 0, openedAt = 0;
+    Array.prototype.forEach.call(dn.querySelectorAll('.dn-t'), function(t){ trig[t.dataset.m] = t; });
+    Array.prototype.forEach.call(nav.querySelectorAll('.dn-p'), function(p){ panels[p.dataset.m] = p; });
+    function opts(p){ return Array.prototype.slice.call(p.querySelectorAll('.dn-o')); }
+    function place(p, t){
+      var nr = nav.getBoundingClientRect(), tr = t.getBoundingClientRect(), x = tr.left - nr.left - 4, max = nr.width - p.offsetWidth;
+      var shift = x > max; x = Math.min(x, max);
+      p.style.left = x + 'px'; p.style.setProperty('--ox', (shift ? tr.left - nr.left - x + tr.width / 2 : 0) + 'px');   /* grow from under the item */
+    }
+    function art(o){
+      var a = document.createElement('div'), b = o.querySelector('b').textContent, d = o.querySelector('.dn-tx span').textContent;
+      var big = o.querySelector('svg').cloneNode(true); big.setAttribute('stroke-width', '1.1');
+      a.className = 'dn-art';
+      a.innerHTML = '<span class="dn-tag">Illustration placeholder</span><span class="dn-big"></span><span class="dn-cap"><b></b><span></span></span><span class="dn-go">→</span>';
+      a.querySelector('.dn-big').appendChild(big); a.querySelector('.dn-cap b').textContent = b; a.querySelector('.dn-cap span').textContent = d;
+      return a;
+    }
+    function pick(p, o, instant){
+      if (!o || o.classList.contains('is-on') && !instant) return;
+      opts(p).forEach(function(x){ x.classList.toggle('is-on', x === o); });
+      var ill = p.querySelector('.dn-ill'), a = art(o);
+      Array.prototype.forEach.call(ill.children, function(old){
+        if (instant || reduce){ old.remove(); return; }
+        old.classList.remove('is-on'); old.classList.add('is-out'); setTimeout(function(){ old.remove(); }, 240);
+      });
+      ill.appendChild(a); ill._href = o;
+      if (instant || reduce) a.classList.add('is-on'); else requestAnimationFrame(function(){ requestAnimationFrame(function(){ a.classList.add('is-on'); }); });
+    }
+    function settle(p){ p.classList.add('is-instant'); requestAnimationFrame(function(){ requestAnimationFrame(function(){ p.classList.remove('is-instant'); }); }); }
+    function shut(m){ var p = panels[m], t = trig[m]; p.classList.remove('is-open'); t.classList.remove('is-on'); t.setAttribute('aria-expanded', 'false'); }
+    function open(m){
+      clearTimeout(closeT); clearTimeout(openT);
+      if (cur === m) return;
+      var swap = !!cur;
+      if (cur){ settle(panels[cur]); shut(cur); }
+      cur = m; openedAt = Date.now();
+      var p = panels[m], t = trig[m];
+      place(p, t); pick(p, opts(p)[0], true);
+      if (swap) settle(p);
+      p.classList.add('is-open'); t.classList.add('is-on'); t.setAttribute('aria-expanded', 'true'); nav.classList.add('is-dn');
+    }
+    function close(focus){
+      clearTimeout(openT); clearTimeout(closeT);
+      if (!cur) return;
+      var m = cur; shut(m); cur = null; nav.classList.remove('is-dn');
+      if (focus) trig[m].focus();
+    }
+    Object.keys(trig).forEach(function(m){
+      var t = trig[m], p = panels[m];
+      t.addEventListener('mouseenter', function(){ clearTimeout(closeT); if (cur) open(m); else { clearTimeout(openT); openT = setTimeout(function(){ open(m); }, 80); } });
+      t.addEventListener('mouseleave', function(){ clearTimeout(openT); });
+      t.addEventListener('click', function(){ if (cur === m){ if (Date.now() - openedAt > 400) close(); } else open(m); });
+      t.addEventListener('keydown', function(e){
+        if (e.key === 'ArrowDown'){ e.preventDefault(); open(m); var o = opts(p)[0]; pick(p, o); o.focus(); }
+      });
+      p.addEventListener('mouseover', function(e){ var o = e.target.closest('.dn-o'); if (o) pick(p, o); });
+      p.addEventListener('focusin', function(e){ var o = e.target.closest('.dn-o'); if (o) pick(p, o); });
+      p.addEventListener('keydown', function(e){
+        var list = opts(p), i = list.indexOf(document.activeElement);
+        if (e.key === 'ArrowDown' || e.key === 'ArrowUp'){ e.preventDefault(); var j = i < 0 ? 0 : (i + (e.key === 'ArrowDown' ? 1 : -1) + list.length) % list.length; list[j].focus(); }
+      });
+      p.addEventListener('click', function(e){ if (e.target.closest('a')) close(); });
+      p.querySelector('.dn-ill').addEventListener('click', function(){ var o = this._href; if (o) o.click(); });
+    });
+    /* plain items (Admissions, Placements, Contact Us) close an open menu after the same short pause */
+    Array.prototype.forEach.call(nav.querySelectorAll('.dn-i:not(.dn-t)'), function(a){ a.addEventListener('mouseenter', function(){ if (cur){ clearTimeout(closeT); closeT = setTimeout(close, 80); } }); });
+    nav.addEventListener('mouseleave', function(){ clearTimeout(openT); if (cur){ clearTimeout(closeT); closeT = setTimeout(close, 150); } });
+    nav.addEventListener('mouseenter', function(){ if (cur) clearTimeout(closeT); });
+    nav.addEventListener('keydown', function(e){ if (e.key === 'Escape' && cur){ e.stopPropagation(); close(true); } });
+    nav.addEventListener('focusout', function(e){ if (cur && !nav.contains(e.relatedTarget)) close(); });
+    document.addEventListener('pointerdown', function(e){ if (cur && !nav.contains(e.target)) close(); });
+    document.querySelector('.menu').addEventListener('click', function(){ close(); });
+    window.addEventListener('resize', function(){ if (cur) place(panels[cur], trig[cur]); });
   })();
 
   /* ---- internship cards: two cards on a snap strip; the one in focus is full size, the next waits at .907; dots follow; the small
