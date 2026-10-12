@@ -1736,7 +1736,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .cc{row-gap:24px}
   .cc .cc-rc{flex:0 0 300px}
   .cc .cc-row{display:grid!important;grid-template-columns:384px minmax(0,1fr);gap:24px!important}
-  .cc .cc-row .cc-two{gap:12px}
+  .cc .cc-row .cc-two{gap:24px}   /* equal 24 px gaps between all three cards (12 Oct) */
   /* ---- entrepreneurship (516:37221): head, 36, 24/32 stat, 48, CTA; rows inset 12, arrow at the text column's end ---- */
   .ent .ent-top{margin-top:36px}
   .ent .ent-stat{font-size:24px;line-height:32px}
@@ -2680,6 +2680,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .fc-iso .tw-zebra{fill:#1B1D22;stroke:none}
 @keyframes twDrift{from{transform:translate(-5px,-3px)}to{transform:translate(5px,4px)}}
 @media (max-width:1023px){ .found-collage{bottom:auto;height:320px;--e:56px} }
+@media (max-width:1023px){   /* phone: the arched-gate quad (town 855, 420) centred in the band at half scale, an oval fade all round (12 Oct) */
+  .found-collage{-webkit-mask-image:radial-gradient(ellipse 58% 62% at 50% 50%,#000 30%,rgba(0,0,0,.55) 62%,transparent 100%);mask-image:radial-gradient(ellipse 58% 62% at 50% 50%,#000 30%,rgba(0,0,0,.55) 62%,transparent 100%);-webkit-mask-composite:source-over;mask-composite:add}
+  .found-town .tw-svg{width:1200px;height:500px;left:calc(50% - 427.5px);top:-50px}
+}
 @media (min-width:1024px){ .found-collage{--vf0:calc(100% - 360px);--vf1:calc(100% - 170px)} }   /* gone before the hairlines at the foot (12 Oct) */
 @media (prefers-reduced-motion:reduce){ .found-town .tw-svg{animation:none} }
 </style>
