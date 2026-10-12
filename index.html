@@ -2619,6 +2619,42 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .found-iso .fd-warm{fill:#F59700;stroke:none;opacity:.05;animation:fdWarm 9s ease-in-out infinite;animation-delay:var(--d,0s)}
 @keyframes fdWarm{0%,100%{opacity:.03}50%{opacity:.16}}
 @media (prefers-reduced-motion:reduce){ .found-iso .fd-warm{animation:none;opacity:.08} }
+
+/* ---- Ask Newton on desktop (12 Oct): a sheet docked bottom-right instead of a full screen; the page stays live behind it.
+        The same welcome orb, chips and thread, scaled to a 420 px panel; the input bar sits inside the panel's foot. ---- */
+@media (min-width:1024px){
+  .ai{inset:auto;right:24px;bottom:24px;width:420px;height:min(680px,calc(100vh - 112px));border-radius:20px;background:#fff;
+    box-shadow:0 0 0 1px rgba(22,25,29,.08),0 24px 60px -12px rgba(22,25,29,.28),0 8px 20px -6px rgba(136,61,163,.14);
+    transform:translateY(16px) scale(.97);transform-origin:100% 100%;transition:opacity .28s ease,transform .38s cubic-bezier(.22,1,.36,1);touch-action:auto}
+  .ai.is-open{transform:none}
+  .ai::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,#C46BEA,#883DA3 55%,#6138D3);z-index:4}
+  .ai-mark{left:20px;top:18px;margin-left:0;width:20px;height:25px}
+  .ai-mark svg{width:20px;height:25px}
+  .ai-x{right:14px;top:13px;width:36px;height:36px;font-size:20px}
+  .ai-top{height:84px}.ai-bot{height:120px}
+  .ai-center{gap:22px;transform:translateY(calc(-50% - 18px))}
+  .ai.is-open .ai-center{transform:translateY(calc(-50% - 30px))}
+  .ai-orb,.ai-orb canvas{width:64px;height:64px}
+  .ai-h{font-size:22px;line-height:28px}
+  .ai-p{width:320px;font-size:14px;line-height:22px;color:rgba(22,25,29,.7)}
+  .ai-chips{max-width:none;padding:0 20px;gap:8px}
+  .ai-chip{padding:6px 12px;font-size:13px;line-height:20px;border-radius:9px}
+  .ai-note{left:24px;right:24px;bottom:82px;font-size:11px;z-index:3;color:rgba(22,25,29,.5)}
+  .ai-thread{padding:76px 18px 96px;gap:14px}
+  .ai-bubble{max-width:300px;padding:10px 14px;font-size:14px;line-height:21px}
+  .ai-status{font-size:13px}
+  .ai-msg{font-size:14.5px;line-height:23px}
+  .ai-step b{font-size:12px;line-height:18px}
+  .ai-step strong{font-size:14px;line-height:20px}
+  .ai-step span{font-size:13px;line-height:19px}
+  .ai-fu .ai-chip{font-size:12.5px;padding:5px 12px}
+  /* the input bar rides in the panel's foot */
+  .dock.is-ai{left:auto;right:24px;bottom:24px;width:420px;max-width:none;padding:12px;transform:translateY(16px);opacity:0;transition:transform .38s cubic-bezier(.22,1,.36,1),opacity .28s ease}
+  .dock.is-ai.is-on{transform:none;opacity:1}
+  .dock.is-ai .ai-input{height:46px;border-color:#E6E8EC;background:#F6F7F9}
+  .dock.is-ai .ai-input input{font-size:15px}
+  .dock.is-ai .ai-btn{width:46px;height:46px}
+}
 </style>
 </head>
 <body>
@@ -5225,7 +5261,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     /* ---- open / close ---- */
     function openAI(){
       if (open || voOpen) return; open = true;
-      lockY = window.scrollY; document.documentElement.classList.add('is-locked');
+      lockY = window.scrollY; if (!isDT) document.documentElement.classList.add('is-locked');   /* desktop: a corner sheet, the page stays scrollable */
       ai.classList.add('is-open'); ai.setAttribute('aria-hidden', 'false');
       dock.classList.add('is-ai'); dock.classList.add('is-on');
       if (!welcomeOrb) welcomeOrb = orbMake(document.getElementById('aiOrb'), 'searching', 64, 72, TINT);
@@ -5235,7 +5271,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       if (!open) return; open = false;
       ai.classList.remove('is-open'); ai.setAttribute('aria-hidden', 'true');
       dock.classList.remove('is-ai'); field.blur(); setKb(0);
-      document.documentElement.classList.remove('is-locked'); if (window.scrollY !== lockY) window.scrollTo(0, lockY);
+      if (!isDT){ document.documentElement.classList.remove('is-locked'); if (window.scrollY !== lockY) window.scrollTo(0, lockY); }
       orbsStop(); dockCheck();
     }
     var vv = window.visualViewport;
