@@ -2706,10 +2706,62 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 /* the town reads a little more (12 Oct): brighter on phones, a touch on desktop */
 .found-town .tw-svg{filter:brightness(1.85) contrast(1.08)}
 @media (min-width:1024px){ .found-town .tw-svg{filter:brightness(1.3)} }
+
+/* ---------- ?fest=dome (12 Oct trial): the dome is the aftermovie. Its artwork fills the arc edge to edge (clipped by the ellipse,
+   fading into the dome's black lower down), the play button sits on the formation's centre, and the fest's name and numbers
+   follow under it. The art breathes slowly while the section is on screen; switching fests crossfades the two. ---------- */
+.fest-art,.fest-vlab,.fest-cap{display:none}
+html.fest-v-dome .fest-dome{overflow:hidden}
+html.fest-v-dome .fest-art{display:block;position:absolute;left:50%;top:0;width:100vw;height:567px;transform:translateX(-50%);pointer-events:none}
+html.fest-v-dome .fest-art i{position:absolute;inset:0;background:url(assets/fest/neutron-dome-m.jpg) 50% 0/auto 100% no-repeat;transform-origin:50% 49.6%;transition:opacity .6s ease;animation:festKB 16s ease-in-out infinite alternate;animation-play-state:paused}
+html.fest-v-dome .fest-art .fest-art-t{background-image:url(assets/fest/tekron-dome-m.jpg);opacity:0}
+html.fest-v-dome .fest.is-tekron .fest-art-t{opacity:1}
+html.fest-v-dome .fest.is-tekron .fest-art-n{opacity:0}
+html.fest-v-dome .fest.is-live .fest-art i{animation-play-state:running}
+@keyframes festKB{to{transform:scale(1.07)}}
+html.fest-v-dome .fest{height:1526px}
+html.fest-v-dome .fest-dome{height:1232px}
+html.fest-v-dome .fest-video{height:300px;margin-top:28px;background:none;border-radius:0;overflow:visible}
+html.fest-v-dome .fest-video::before,html.fest-v-dome .fest-video>img,html.fest-v-dome .fest-video .tour-lab,html.fest-v-dome .fest-video .tour-time{display:none}
+html.fest-v-dome .fest-video .tour-play{width:56px;height:56px;left:calc(50% - 28px);top:calc(50% - 28px);box-shadow:0 0 0 8px rgba(255,255,255,.12),0 8px 30px rgba(0,0,0,.45)}
+html.fest-v-dome .fest-video .tour-play::after{content:"";position:absolute;inset:-8px;border-radius:inherit;border:1px solid rgba(255,255,255,.5);opacity:0}
+html.fest-v-dome .fest.is-live .fest-video .tour-play::after{animation:festRing 2.4s cubic-bezier(.22,1,.36,1) infinite}
+@keyframes festRing{0%{opacity:.8;transform:scale(1)}100%{opacity:0;transform:scale(1.7)}}
+html.fest-v-dome .fest-vlab{display:block;position:absolute;left:50%;top:calc(50% + 44px);transform:translateX(-50%);padding:6px 10px 6px 12px;border-radius:99px;background:rgba(11,12,14,.6);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);white-space:nowrap;font-size:10px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85)}
+html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center;gap:12px;margin:8px 16px 0}
+.fest-cap-name{display:flex;align-items:center;gap:10px}
+.fest-cap-name b{font-size:34px;line-height:38px;font-weight:800;font-stretch:125%;letter-spacing:-.8px}
+.fest-cap-m{position:relative;flex:none;width:32px;height:32px}
+.fest-cap-m i{position:absolute;inset:0;transition:opacity .3s ease}
+.fest-cap-n{background:url(assets/fest/neutron-mark.svg) center/contain no-repeat;filter:drop-shadow(0 0 10px rgba(160,120,255,.9))}
+.fest-cap-t{background:url(assets/fest/tekron-mark.png) 54.5% 0/136.6% 103.2% no-repeat;filter:drop-shadow(0 0 10px rgba(255,150,90,.9));opacity:0}
+.fest.is-tekron .fest-cap-t{opacity:1}
+.fest.is-tekron .fest-cap-n{opacity:0}
+.fest-cap-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.fest-cap-stats span{padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:12px;line-height:16px;font-weight:600;letter-spacing:.2px;color:#fff;white-space:nowrap}
+@media (min-width:1024px){
+  html.fest-v-dome .fest{height:auto}
+  html.fest-v-dome .fest-dome{height:auto}
+  html.fest-v-dome .fest-art{height:900px}
+  html.fest-v-dome .fest-art .fest-art-n{background-image:url(assets/fest/neutron-dome.jpg)}
+  html.fest-v-dome .fest-art .fest-art-t{background-image:url(assets/fest/tekron-dome.jpg)}
+  html.fest-v-dome .fest-video{height:520px;margin-top:54px;aspect-ratio:auto}
+  html.fest-v-dome .fest-video .tour-play{width:84px;height:84px;left:calc(50% - 42px);top:calc(50% - 42px)}
+  html.fest-v-dome .fest-video .tour-play img{width:28px;height:28px}
+  html.fest-v-dome .fest-vlab{top:calc(50% + 64px);padding:8px 14px 8px 16px;font-size:12px;line-height:14px;letter-spacing:2.4px}
+  html.fest-v-dome .fest-cap{gap:18px;margin:0}
+  .fest-cap-name{gap:16px}
+  .fest-cap-name b{font-size:64px;line-height:68px;letter-spacing:-1.6px}
+  .fest-cap-m{width:56px;height:56px}
+  .fest-cap-stats{gap:10px}
+  .fest-cap-stats span{padding:7px 14px;font-size:14px;line-height:18px}
+}
+@media (hover:hover){ html.fest-v-dome .fest-video:hover .tour-play{transform:scale(1.06)} }
+@media (prefers-reduced-motion:reduce){ html.fest-v-dome .fest-art i,html.fest-v-dome .fest.is-live .fest-video .tour-play::after{animation:none} }
 </style>
 </head>
 <body>
-<script>/* nav variants */ var nv = (location.search.match(/[?&]nav=(\w+)/) || [])[1]; document.documentElement.classList.add(nv === 'flat' ? 'nav-flat' : nv === 'pill' ? 'nav-pill' : 'nav-wide');   /* default: the full-width pill (12 Oct); ?nav=pill the capped pill, ?nav=flat the pinned bar */</script>
+<script>/* nav variants */ var nv = (location.search.match(/[?&]nav=(\w+)/) || [])[1]; document.documentElement.classList.add(nv === 'flat' ? 'nav-flat' : nv === 'pill' ? 'nav-pill' : 'nav-wide'); if (/[?&]fest=dome\b/.test(location.search)) document.documentElement.classList.add('fest-v-dome');   /* ?fest=dome: the dome itself is the aftermovie (12 Oct trial) */   /* default: the full-width pill (12 Oct); ?nav=pill the capped pill, ?nav=flat the pinned bar */</script>
 <div class="page" id="page">
 
   <header class="nav" data-node="76:7980">
@@ -3351,7 +3403,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 
   <!-- ===== fests (396:131320): a dark dome; Neutron by default, the arrows bring Tekron's tile to the front and swap the content ===== -->
   <section class="fest" id="fest" data-node="396:131320" aria-label="Fests">
-    <div class="fest-dome" aria-hidden="true"><i class="fest-beam fest-beam-soft"></i><i class="fest-beam"></i></div>
+    <div class="fest-dome" aria-hidden="true"><div class="fest-art"><i class="fest-art-n"></i><i class="fest-art-t"></i></div><i class="fest-beam fest-beam-soft"></i><i class="fest-beam"></i></div>
     <div class="fest-tab" aria-hidden="true"><i class="fest-tab-c fest-tab-cl"></i><i class="fest-tab-c fest-tab-cr"></i><span class="fest-pg" id="festPg"><b></b><b></b></span></div>
     <div class="fest-logos" id="festLogos" aria-hidden="true"><span class="fest-tile fest-tile-n"><img src="assets/fest/neutron-mark.svg" alt=""></span><span class="fest-tile fest-tile-t"><i></i></span></div>
     <button class="fest-arr fest-arr-l" type="button" id="festPrev" aria-label="Previous fest"><img src="assets/icon-arrow-left-20.svg" alt=""></button>
@@ -3359,7 +3411,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     <div class="fest-body" id="festBody">
       <span class="fest-kick" id="festKick">Neutron | Rishihood University</span>
       <h2 class="fest-title" id="festTitle">India's first techno-cultural fest</h2>
-      <button class="tour fest-video" type="button" data-reel="0" aria-label="Play the aftermovie"><img id="festStill" src="assets/fest/neutron-thumb.jpg" srcset="assets/fest/neutron-thumb.jpg 1x, assets/fest/neutron-thumb@2x.jpg 2x" alt=""><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button>
+      <button class="tour fest-video" type="button" data-reel="0" aria-label="Play the aftermovie"><img id="festStill" src="assets/fest/neutron-thumb.jpg" srcset="assets/fest/neutron-thumb.jpg 1x, assets/fest/neutron-thumb@2x.jpg 2x" alt=""><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span><span class="fest-vlab" id="festVlab">Official aftermovie · 2024</span></button>
+      <div class="fest-cap"><div class="fest-cap-name"><span class="fest-cap-m"><i class="fest-cap-n"></i><i class="fest-cap-t"></i></span><b id="festCapName">Neutron</b></div><div class="fest-cap-stats" id="festCapStats"><span>150+ drones in the sky</span><span>1,100+ footfall</span><span>₹10L+ prize pool</span></div></div>
       <div class="fest-sponsors" aria-label="Sponsors"><div class="fest-spstrip" id="festSp"><img src="assets/fest/sponsor-1.png" alt="" style="width:131.76px;height:17.35px"><img src="assets/fest/sponsor-2.png" alt="" style="width:106.67px;height:28.92px"><img src="assets/fest/sponsor-3.png" alt="" style="width:130.51px;height:29.9px"><img src="assets/fest/sponsor-4.png" alt="" style="width:157.49px;height:32.25px"></div></div>
       <div class="fest-grid"><span><img src="assets/fest/photo-1.jpg" alt=""></span><span><img src="assets/fest/photo-2.jpg" alt=""></span><span><img src="assets/fest/photo-3.jpg" alt=""></span><span><img src="assets/fest/photo-4.jpg" alt=""></span></div>
       <div class="fest-posters" id="festPosters" aria-label="Event posters" data-node="397:131905"><div class="fest-pstrip" id="festPstrip"><img src="assets/fest/poster-1.jpg" alt=""><img src="assets/fest/poster-2.jpg" alt=""><img src="assets/fest/poster-3.jpg" alt=""></div></div>
@@ -4590,8 +4643,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     drift(document.querySelector('.fest-sponsors'), document.getElementById('festSp'), 22, 20.08);
     drift(document.getElementById('festPosters'), document.getElementById('festPstrip'), 18, 12);
     var FESTS = [
-      {kick: 'Neutron | Rishihood University', title: "India's first techno-cultural fest", cta: 'Know more about Neutron'},
-      {kick: 'Tekron | ADY Patil University', title: 'The tech fest built by students', cta: 'Know more about Tekron'}
+      {kick: 'Neutron | Rishihood University', title: "India's first techno-cultural fest", cta: 'Know more about Neutron', name: 'Neutron', vlab: 'Official aftermovie · 2024', stats: ['150+ drones in the sky', '1,100+ footfall', '₹10L+ prize pool']},
+      {kick: 'Tekron | ADY Patil University', title: 'The tech fest built by students', cta: 'Know more about Tekron', name: 'Tekron', vlab: 'Aftermovie teaser · 2025', stats: ['15+ events', '1,450+ footfall', '₹6L+ prize pool']}
     ];
     var cur = 0, body = document.getElementById('festBody'), pg = document.getElementById('festPg').children, busy = false;
     pg[0].classList.add('on');
@@ -4607,6 +4660,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
         var f = FESTS[i];
         document.getElementById('festKick').textContent = f.kick; document.getElementById('festTitle').textContent = f.title;
         document.getElementById('festCta').firstChild.nodeValue = f.cta + ' ';
+        document.getElementById('festCapName').textContent = f.name; document.getElementById('festVlab').textContent = f.vlab;
+        document.getElementById('festCapStats').innerHTML = f.stats.map(function(t){ return '<span>' + t + '</span>'; }).join('');
         body.classList.remove('is-out'); busy = false;
       }, reduce ? 0 : 200);
     }

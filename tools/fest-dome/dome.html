@@ -1,0 +1,65 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mona+Sans:wdth,wght@100,500;100,600;125,700;125,800&display=swap">
+<style>
+*{box-sizing:border-box;margin:0}
+html,body{width:1920px;height:900px;overflow:hidden;background:#000;font-family:"Mona Sans",sans-serif}
+.t{position:relative;width:1920px;height:900px;overflow:hidden;background:var(--bg)}
+.tex{position:absolute;inset:0;background:var(--tex) center 30%/cover no-repeat;opacity:.4;mix-blend-mode:screen}
+.glow{position:absolute;border-radius:50%;filter:blur(110px)}
+canvas{position:absolute;inset:0}
+.shade{position:absolute;inset:0;background:radial-gradient(52% 62% at 50% 46%,rgba(11,12,14,0) 40%,rgba(11,12,14,.55) 72%,#0B0C0E 100%),linear-gradient(0deg,#0B0C0E 0%,rgba(11,12,14,0) 30%)}
+.copy{display:none;position:absolute;left:68px;bottom:124px;width:520px;color:#fff}
+.kick{display:inline-flex;align-items:center;gap:10px;font-size:13px;line-height:16px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:var(--k)}
+.kick i{width:8px;height:8px;border-radius:4px;background:var(--k);box-shadow:0 0 12px var(--k)}
+.name{display:flex;align-items:center;gap:18px;margin-top:18px}
+.name img{width:64px;height:64px;object-fit:contain;filter:drop-shadow(0 0 18px var(--gl))}
+.name b{font-size:84px;line-height:84px;font-weight:800;font-stretch:125%;letter-spacing:-2px}
+.sub{margin-top:18px;font-size:19px;line-height:28px;font-weight:500;color:rgba(255,255,255,.78)}
+.stats{display:flex;gap:10px;margin-top:22px}
+.stats span{padding:7px 14px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:14px;line-height:18px;font-weight:600;color:#fff;letter-spacing:.2px}
+.grain{position:absolute;inset:0;opacity:.07;mix-blend-mode:overlay}
+</style></head><body>
+<div class="t" id="t"><div class="tex"></div><div class="glow g1"></div><div class="glow g2"></div><canvas id="c" width="3840" height="1800" style="width:1920px;height:900px"></canvas><div class="shade"></div><canvas class="grain" id="gr" width="1920" height="900"></canvas>
+<div class="copy"><span class="kick"><i></i><span id="kick"></span></span><div class="name"><img id="mark"><b id="nm"></b></div><p class="sub" id="sub"></p><div class="stats" id="stats"></div></div></div>
+<script>
+const Q = new URLSearchParams(location.search), F = Q.get('f') || 'neutron';
+const D = {
+ neutron: { bg: 'radial-gradient(120% 90% at 76% 38%,#2A1468 0%,#130A33 38%,#06040F 75%)', tex: 'url(n-circuit.jpg)', k: '#CEBCFE', gl: 'rgba(160,120,255,.9)',
+   kick: 'Official aftermovie · 2024', name: 'Neutron', sub: 'India’s first techno-cultural fest · Rishihood, Delhi NCR', stats: ['150+ drones in the sky', '1,100+ footfall', '₹10L+ prize pool'], mark: 'neutron-mark.svg',
+   g1: ['#6138D3', 960, 200, 620], g2: ['#B42FE5', 1080, 470, 340] },
+ tekron: { bg: 'radial-gradient(120% 90% at 76% 40%,#4A1A06 0%,#220C04 40%,#090403 76%)', tex: 'url(t-circuit.jpg)', k: '#FFD2BA', gl: 'rgba(255,150,90,.9)',
+   kick: 'Aftermovie teaser · 2025', name: 'Tekron', sub: 'The tech fest built by students · ADYPU, Pune', stats: ['15+ events', '1,450+ footfall', '₹6L+ prize pool'], mark: 'tekron-mark.png',
+   g1: ['#C2410C', 960, 190, 620], g2: ['#FF7A45', 1080, 450, 320] } }[F];
+const t = document.getElementById('t'); t.style.setProperty('--bg', D.bg); t.style.setProperty('--tex', D.tex); t.style.setProperty('--k', D.k); t.style.setProperty('--gl', D.gl);
+for (const [cls, g] of [['g1', D.g1], ['g2', D.g2]]) { const e = document.querySelector('.' + cls); e.style.cssText += `left:${g[1] - g[3] / 2}px;top:${g[2]}px;width:${g[3]}px;height:${g[3] * .8}px;background:${g[0]};opacity:.5`; }
+document.getElementById('kick').textContent = D.kick; document.getElementById('nm').textContent = D.name; document.getElementById('sub').textContent = D.sub;
+document.getElementById('mark').src = D.mark; document.getElementById('stats').innerHTML = D.stats.map((s) => `<span>${s}</span>`).join('');
+const c = document.getElementById('c').getContext('2d'); c.scale(2, 2);
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+/* faint stars */
+for (let i = 0; i < 140; i++) { const x = rnd() * 1920, y = rnd() * 760, r = rnd() * .9 + .2; c.fillStyle = `rgba(255,255,255,${(rnd() * .35 + .05).toFixed(2)})`; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); }
+function dot(x, y, r, core, halo){ const g = c.createRadialGradient(x, y, 0, x, y, r * 4.5); g.addColorStop(0, halo.replace('A', '.85')); g.addColorStop(.25, halo.replace('A', '.35')); g.addColorStop(1, halo.replace('A', '0')); c.fillStyle = g; c.beginPath(); c.arc(x, y, r * 4.5, 0, 7); c.fill(); c.fillStyle = core; c.beginPath(); c.arc(x, y, r, 0, 7); c.fill(); }
+async function neutron(){
+  const txt = await (await fetch('neutron-mark.svg')).text();
+  const box = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); box.setAttribute('viewBox', '0 0 34 35'); box.style.cssText = 'position:absolute;left:-9999px;width:340px;height:350px'; box.innerHTML = txt.replace(/^[\s\S]*?<svg[^>]*>|<\/svg>\s*$/g, ''); document.body.appendChild(box);
+  const S = 12.4, OX = 960 - 17 * S, OY = 446 - 17.5 * S, pts = [];
+  box.querySelectorAll('path').forEach((p) => { const L = p.getTotalLength(), n = Math.max(2, Math.round(L * S / 9.5)); for (let i = 0; i < n; i++){ const q = p.getPointAtLength(L * i / n); pts.push([OX + q.x * S, OY + q.y * S]); } });
+  /* a few free drones still flying into place, below the formation */
+  for (let i = 0; i < 26; i++) pts.push([736 + rnd() * 470, 716 - rnd() * 90, 1]);
+  pts.forEach(([x, y, free]) => dot(x, y, free ? 1.4 : 2.1, free ? 'rgba(235,228,255,.7)' : '#F4F0FF', free ? 'rgba(150,120,255,A)'.replace('A', 'A') : 'rgba(150,110,255,A)'));
+}
+function tekron(){
+  const cx = 960, cy = 446; c.lineJoin = 'miter';
+  for (let i = 0; i < 9; i++){
+    const R = 250 - i * 25, a = -Math.PI / 2 + i * .21, pts = [0, 1, 2].map((k) => [cx + R * Math.cos(a + k * 2.0944), cy + R * .98 * Math.sin(a + k * 2.0944)]);
+    const path = () => { c.beginPath(); c.moveTo(...pts[0]); c.lineTo(...pts[1]); c.lineTo(...pts[2]); c.closePath(); };
+    const al = 1 - i * .07;
+    c.save(); c.shadowColor = 'rgba(255,120,60,.9)'; c.shadowBlur = 26; c.strokeStyle = `rgba(255,140,80,${(.55 * al).toFixed(2)})`; c.lineWidth = 6; path(); c.stroke(); c.restore();
+    c.strokeStyle = i % 3 === 0 ? `rgba(255,236,222,${(.95 * al).toFixed(2)})` : `rgba(255,190,150,${(.8 * al).toFixed(2)})`; c.lineWidth = i % 3 === 0 ? 2.4 : 1.6; path(); c.stroke();
+  }
+  dot(cx, cy, 3, '#FFF3EA', 'rgba(255,140,80,A)');
+}
+/* grain */
+const g = document.getElementById('gr').getContext('2d'), im = g.createImageData(1920, 900); for (let i = 0; i < im.data.length; i += 4){ const v = rnd() * 255; im.data[i] = im.data[i + 1] = im.data[i + 2] = v; im.data[i + 3] = 255; } g.putImageData(im, 0, 0);
+(F === 'neutron' ? neutron() : Promise.resolve(tekron())).then(() => { document.fonts.ready.then(() => { document.body.dataset.ready = 1; }); });
+</script></body></html>
