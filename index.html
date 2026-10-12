@@ -1863,9 +1863,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 @keyframes newsTick{to{transform:translateX(calc(-1 * var(--per, 50%)))}}   /* one copy of the list per loop; desktop sets --per in px after adding copies */
 /* press cards (vkPP… 8674:83899): 287 × 348, white 67 px head (logo + "Acknowledged by media" + outlet), the clipping
    inset 15 from the left at 80 and cut by the card. A swipe strip with no dots; desktop also drags with the mouse */
-.news-row{display:flex;gap:12px;margin-top:52px;padding:0 16px;scroll-padding-left:16px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-ms-overflow-style:none;outline:0}
-.news-row::-webkit-scrollbar{display:none}
-.np{position:relative;flex:none;width:287px;height:348px;border-radius:4px;overflow:hidden;background:#F6F7F9;scroll-snap-align:start;transition:opacity .6s ease calc(var(--i,0) * 70ms),transform .8s cubic-bezier(.22,1,.36,1) calc(var(--i,0) * 70ms)}
+.news-row{position:relative;height:348px;margin-top:52px;overflow:hidden;cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none}   /* a dot-less loop: drifts slowly, eases to a stop under the pointer, drag to browse (12 Oct) */
+.news-row.is-drag{cursor:grabbing}
+.news-cards{position:absolute;left:0;top:0;display:flex;gap:12px;padding-left:16px;will-change:transform}
+.np{position:relative;flex:none;width:287px;height:348px;border-radius:4px;overflow:hidden;background:#F6F7F9;transition:opacity .6s ease calc(var(--i,0) * 70ms),transform .8s cubic-bezier(.22,1,.36,1) calc(var(--i,0) * 70ms)}
 .np::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #E1E5EA;pointer-events:none}
 .news:not(.is-in) .np{opacity:0;transform:translateY(24px)}
 .np-h{display:flex;align-items:center;gap:9px;height:67px;padding:0 15px;background:#fff}
@@ -1950,10 +1951,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .tl-hs:not(.is-in) .hs i::after{transform:scaleX(0)}
 
 /* countdown: the page dips from white into night; a live clock */
-.cd{--bh:330px;position:relative;overflow:hidden;padding:350px 16px 41px;text-align:center;background:linear-gradient(in oklab 180deg,#FFFFFF 0,#FFFFFF 22%,#CCF3FF 42%,#7AE0FF 58%,#2D94B3 72%,#003748 86%,#0B0C0E 100%) 0 0/100% var(--bh) no-repeat,#0B0C0E}   /* the bell canvas paints over the stand-in (12 Oct) */
-/* the bell (XjEH… 623:110092): white → ice → cyan → teal → night, its contours a bell rather than an ellipse. A 1024-wide fit of
-   the frame gives d = Y/R + (|X| / (612 · (1 − 0.609·Y/R)))^3.236 with R = 378 (d 0 = night at the base, 1 = white); drawn on a
-   low-res canvas and scaled up. Scrolling raises and lowers the crest: R runs 0.62 → 1 of its size as the section comes up the screen. */
+.cd{--bh:330px;position:relative;overflow:hidden;padding:350px 16px 41px;text-align:center;background:linear-gradient(in oklab 180deg,#FFFFFF 0,#FFFFFF 22%,#E4F0FF 40%,#8DA4CC 56%,#345085 70%,#15223D 86%,#0B0C0E 100%) 0 0/100% var(--bh) no-repeat,#0B0C0E}   /* the bell canvas paints over the stand-in (12 Oct) */
+/* the dome (after XjEH… 623:110092, reworked 12 Oct): an elliptical arc like the fest dome, in the earlier white → pale blue → navy →
+   night curve, centred on the band's foot. Drawn on a low-res canvas and scaled up. Scrolling raises and lowers the crest: the
+   vertical radius runs 0.6 → 1 of 92% of the band as the section comes up the screen; the width stays ≥ 110% of the viewport, so the corners are navy before they meet night. */
 .cd-bell{position:absolute;left:0;top:0;width:100%;height:var(--bh);display:block;pointer-events:none}
 .cd-glow{position:absolute;display:block;left:calc(50% - 260px);top:340px;width:520px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(6,115,249,.35),rgba(6,115,249,0));pointer-events:none;animation:cdGlow 6s ease-in-out infinite;animation-play-state:paused}
 .cd.is-live .cd-glow{animation-play-state:running}
@@ -2089,10 +2090,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .news-tick{margin-top:60px}
   .news-strip{margin-left:0}
   /* the strip starts on the content column and bleeds to the viewport edges; cards 24 apart, edges fade over the margin */
-  .news-row{--fe:min(120px,var(--side));gap:24px;margin-top:92px;padding:0 var(--side);scroll-padding-left:var(--side);cursor:grab;
+  .news-cards{gap:24px;padding-left:var(--side)}
+  .news-row{--fe:min(120px,var(--side));margin-top:92px;
     -webkit-mask:linear-gradient(90deg,transparent 0,#000 var(--fe),#000 calc(100% - var(--fe)),transparent);mask:linear-gradient(90deg,transparent 0,#000 var(--fe),#000 calc(100% - var(--fe)),transparent)}
-  .news-row.is-drag{cursor:grabbing;scroll-snap-type:none}
-  .news-row.is-drag .np{pointer-events:none}
+
 
   /* resources (605:108954): head at the top, icon 83 below, tiles 83 below; College Predictor 588 × 432 on the left,
      two 282 × 210 tiles over Headstart 588 × 198 on the right */
@@ -2225,7 +2226,6 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .dn-i:focus-visible{outline:2px solid #0673F9;outline-offset:-2px}
   .dn-i.is-on{background:rgba(22,25,29,.05)}   /* the open item is marked; the others keep full colour */
   .dn-i.is-on svg{transform:rotate(180deg)}
-  .dn-contact{margin-right:2px}
 
   .dn-p{position:absolute;top:64px;left:0;z-index:2;display:flex;gap:8px;padding:8px;border-radius:16px;background:#fff;box-shadow:0 0 0 .5px rgba(19,19,22,.1),0 16px 36px -6px rgba(25,28,33,.2),0 8px 16px -3px rgba(0,0,0,.08);opacity:0;visibility:hidden;transform:scale(.97);transform-origin:var(--ox,0px) 0;transition:opacity .18s cubic-bezier(.33,1,.68,1),transform .18s cubic-bezier(.33,1,.68,1),visibility 0s linear .18s}
   .dn-p.is-open{opacity:1;visibility:visible;transform:none;transition:opacity .18s cubic-bezier(.33,1,.68,1),transform .18s cubic-bezier(.33,1,.68,1),visibility 0s}
@@ -2765,7 +2765,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 </style>
 </head>
 <body>
-<script>/* nav variants */ var nv = (location.search.match(/[?&]nav=(\w+)/) || [])[1]; document.documentElement.classList.add(nv === 'flat' ? 'nav-flat' : nv === 'pill' ? 'nav-pill' : 'nav-wide'); if (/[?&]fest=dome\b/.test(location.search)) document.documentElement.classList.add('fest-v-dome');   /* ?fest=dome: the dome itself is the aftermovie (12 Oct trial) */   /* default: the full-width pill (12 Oct); ?nav=pill the capped pill, ?nav=flat the pinned bar */</script>
+<script>/* nav variants */ var nv = (location.search.match(/[?&]nav=(\w+)/) || [])[1]; document.documentElement.classList.add(nv === 'flat' ? 'nav-flat' : nv === 'pill' ? 'nav-pill' : 'nav-wide'); if (!/[?&]fest=card\b/.test(location.search)) document.documentElement.classList.add('fest-v-dome');   /* default since 12 Oct: the dome itself is the aftermovie; ?fest=card brings back the video card */   /* default: the full-width pill (12 Oct); ?nav=pill the capped pill, ?nav=flat the pinned bar */</script>
 <div class="page" id="page">
 
   <header class="nav" data-node="76:7980">
@@ -2775,12 +2775,11 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     </a>
     <!-- desktop nav (proposal on Playground, section 614:4822): six items, four dropdowns with options left and an illustration right -->
     <nav class="dn dt-only" id="dn" aria-label="Main">
-      <i class="dn-div" aria-hidden="true"></i><a class="dn-i" href="#adm">Admissions</a><button class="dn-i dn-t" type="button" data-m="prog" aria-expanded="false" aria-controls="dnProg">Programs &amp; Fees<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="dn-i dn-t" type="button" data-m="life" aria-expanded="false" aria-controls="dnLife">Life with NST<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a class="dn-i" href="#co">Placements</a><button class="dn-i dn-t" type="button" data-m="tests" aria-expanded="false" aria-controls="dnTests">Entrance Tests<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="dn-i dn-t" type="button" data-m="more" aria-expanded="false" aria-controls="dnMore">More<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <i class="dn-div" aria-hidden="true"></i><a class="dn-i" href="#adm">Admissions</a><button class="dn-i dn-t" type="button" data-m="prog" aria-expanded="false" aria-controls="dnProg">Programs &amp; Fees<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="dn-i dn-t" type="button" data-m="life" aria-expanded="false" aria-controls="dnLife">Life with NST<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a class="dn-i" href="#co">Placements</a><button class="dn-i dn-t" type="button" data-m="tests" aria-expanded="false" aria-controls="dnTests">Entrance Tests<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button class="dn-i dn-t" type="button" data-m="more" aria-expanded="false" aria-controls="dnMore">More<svg viewBox="0 0 10 10" fill="none" aria-hidden="true"><path d="M2 3.5l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button><a class="dn-i dn-contact dt-only" href="#faq">Contact Us</a>
     </nav>
     <nav class="nav-links dt-only" aria-label="Sections"><a href="#co">Placements</a><a href="#oss">Student life</a><a href="#cur">Curriculum</a><a href="#cities">Campuses</a><a href="#ways">Admissions</a><a href="#fest">Fests</a></nav>
     <div class="nav-actions">
       <button class="nav-ask dt-only" type="button" id="navAsk" aria-label="Ask Newton"><canvas class="nav-orb" aria-hidden="true"></canvas><span>Ask Newton</span></button>
-      <a class="dn-i dn-contact dt-only" href="#faq">Contact Us</a>
       <a class="btn btn-brand btn-sm" href="#ways">Apply Now</a>
       <button class="menu" type="button" aria-label="Open menu"><img src="assets/icon-menu.svg" alt=""></button>
     </div>
@@ -3493,7 +3492,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     <canvas class="news-lines" id="newsLines" aria-hidden="true"></canvas>
     <div class="sx-head"><span class="sx-kick">NST in news &amp; media</span><h2 class="sx-title">What others have written</h2></div>
     <div class="news-tick" aria-label="Publications that have covered NST"><div class="news-strip" id="newsStrip"><div><span>The Economic Times</span><i></i><span>Hindustan Times</span><i></i><span>YourStory</span><i></i><span>Inc42</span><i></i><span>The Hindu</span><i></i><span>Mint</span><i></i><span>India Today</span><i></i><span>Times of India</span><i></i></div><div aria-hidden="true"><span>The Economic Times</span><i></i><span>Hindustan Times</span><i></i><span>YourStory</span><i></i><span>Inc42</span><i></i><span>The Hindu</span><i></i><span>Mint</span><i></i><span>India Today</span><i></i><span>Times of India</span><i></i></div></div></div>
-    <div class="news-row" id="newsRow" tabindex="0" role="region" aria-label="Press coverage, scroll sideways for more">
+    <div class="news-row" id="newsRow" role="region" aria-label="Press coverage"><div class="news-cards" id="newsCards">
       <article class="np" id="newsClip" style="--i:0"><div class="np-h"><img src="assets/news/logo-theweek.png" width="62" height="18" alt="THE WEEK logo"><div><span>Acknowledged by media</span><b>THE WEEK</b></div></div><img class="np-p" src="assets/news/news-theweek.jpg" width="257" height="268" alt="THE WEEK article about Newton School" loading="lazy" draggable="false"></article>
       <article class="np" style="--i:1"><div class="np-h"><img src="assets/news/logo-goa.png" width="26" height="35" alt="Govt. of GOA logo"><div><span>Partnered with</span><b>Govt. of GOA</b></div></div><div class="np-tw"><header><img class="av" src="assets/news/logo-avatar.png" width="35" height="35" alt=""><div><b>Dr. Promod Sawant<img src="assets/news/logo-verified.png" width="11" height="11" alt="Verified"></b><span>@DrPromodSawant</span></div><img class="x" src="assets/news/logo-x.png" width="14" height="12" alt="Post on X"></header><p>Launched the <em>#DigitalGoaYouthSummit</em> at Dr.Shyama Prasad Mukherjee Indoor Stadium, organised by Goa State Higher Education &amp;Department of Higher Education in collaboration with <em>@NewtonSchool</em></p></div></article>
       <article class="np" style="--i:2"><div class="np-h"><img src="assets/news/logo-bhaskar.png" width="68" height="32" alt="Dainik Bhaskar logo"><div><span>Acknowledged by media</span><b>Dainik Bhaskar</b></div></div><img class="np-p" src="assets/news/news-bhaskar.jpg" width="257" height="268" alt="Dainik Bhaskar article about Newton School" loading="lazy" draggable="false"></article>
@@ -3501,7 +3500,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       <article class="np" style="--i:4"><div class="np-h"><img src="assets/news/logo-entrepreneur.png" width="71" height="17" alt="Entrepreneur India logo"><div><span>Acknowledged by media</span><b>Entrepreneur India</b></div></div><img class="np-p" src="assets/news/news-entrepreneur.jpg" width="257" height="268" alt="Entrepreneur India article about Newton School" loading="lazy" draggable="false"></article>
       <article class="np" style="--i:5"><div class="np-h"><img src="assets/news/logo-ani.png" width="52" height="32" alt="Asian News International logo"><div><span>Acknowledged by media</span><b>Asian News International</b></div></div><img class="np-p" src="assets/news/news-ani.jpg" width="257" height="268" alt="Asian News International article about Newton School" loading="lazy" draggable="false"></article>
       <article class="np" style="--i:6"><div class="np-h"><img src="assets/news/logo-et.png" width="47" height="36" alt="The Economic Times logo"><div><span>Acknowledged by media</span><b>The Economic Times</b></div></div><img class="np-p" src="assets/news/news-et.jpg" width="257" height="268" alt="The Economic Times article about Newton School" loading="lazy" draggable="false"></article>
-    </div>
+    </div></div>
   </section>
 
   <!-- ===== NST resources (582:70461): four free tools as tiles, each with a small working preview ===== -->
@@ -4471,8 +4470,8 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 
   /* ---- a drifting strip: translates its children left at `speed` px/s inside `box`, wraps seamlessly (the children are cloned once),
           pauses under a finger, drags, resumes 1.5 s after release. Used by the fest sponsors and posters. ---- */
-  function drift(box, strip, speed, gap){
-    if (!box || !strip) return;
+  function drift(box, strip, speed, gap, opt){
+    if (!box || !strip) return; opt = opt || {};
     var seed = Array.prototype.slice.call(strip.children);
     var loopW = 0, copies = 0;
     function measure(){ loopW = 0; seed.forEach(function(c){ loopW += c.getBoundingClientRect().width + gap; }); }
@@ -4482,11 +4481,13 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       while (copies < need){ seed.forEach(function(c){ var k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); strip.appendChild(k); }); copies++; }
     }
     fill(); window.addEventListener('load', fill); window.addEventListener('resize', fill);
-    var x = 0, last = 0, raf = 0, drag = null, resumeAt = 0, visible = false;
+    var x = 0, last = 0, raf = 0, drag = null, resumeAt = 0, visible = false, hover = false, v = speed;
+    if (opt.ease){ box.addEventListener('pointerenter', function(e){ if (e.pointerType === 'mouse') hover = true; }); box.addEventListener('pointerleave', function(){ hover = false; }); }
     function apply(){ var xx = ((x % loopW) + loopW) % loopW; strip.style.transform = 'translate3d(' + (-xx).toFixed(2) + 'px,0,0)'; }
     function step(now){
       raf = 0;
-      if (!drag && now > resumeAt && !reduce){ var dt = Math.min(64, now - last); x += speed * dt / 1000; }
+      if (!drag && now > resumeAt && !reduce){ var dt = Math.min(64, now - last);
+        if (opt.ease){ v += ((hover ? 0 : speed) - v) * Math.min(1, dt / 260); x += v * dt / 1000; } else x += speed * dt / 1000; }
       last = now; apply();
       if (visible) raf = requestAnimationFrame(step);
     }
@@ -4787,15 +4788,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     fill(); if (document.fonts) document.fonts.ready.then(fill);
     window.addEventListener('resize', fill);
   })();
-  (function(){ var r = document.getElementById('newsRow'); if (!r) return; var x0, l0, moved, id = null;
-    r.addEventListener('pointerdown', function(e){ if (e.pointerType !== 'mouse' || e.button) return; id = e.pointerId; x0 = e.clientX; l0 = r.scrollLeft; moved = false; });
-    r.addEventListener('pointermove', function(e){ if (e.pointerId !== id) return; var dx = e.clientX - x0;
-      if (!moved && Math.abs(dx) > 4){ moved = true; r.classList.add('is-drag'); r.setPointerCapture(id); }
-      if (moved) r.scrollLeft = l0 - dx; });
-    function end(){ if (id === null) return; id = null; if (!moved) return; var w = r.querySelector('.np').offsetWidth + parseFloat(getComputedStyle(r).columnGap), from = r.scrollLeft;
-      r.classList.remove('is-drag'); r.scrollLeft = from; r.scrollTo({left: Math.round(from / w) * w, behavior: reduce ? 'auto' : 'smooth'}); }
-    r.addEventListener('pointerup', end); r.addEventListener('pointercancel', end);
-  })();
+  drift(document.getElementById('newsRow'), document.getElementById('newsCards'), 18, isDT ? 24 : 12, {ease: true});   /* hover eases the loop to a stop */
   (function(){ var c = document.getElementById('newsClip'); if (!c) return; new IntersectionObserver(function(en, o){ if (en[0].isIntersecting){ document.getElementById('news').classList.add('is-in'); o.disconnect(); } }, {threshold: .3}).observe(c); })();
 
   /* resources: tiles rise in; the college predictor types a rank and reveals its results; the rank predictor is a real slider;
@@ -6383,7 +6376,7 @@ window.__dnFigs = figs;
   (function(){
     var cv = document.getElementById('cdBell'); if (!cv) return;
     var sec = cv.parentNode, ctx = cv.getContext('2d'), reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var ST = [[0,'000C0F'],[.08,'001A22'],[.18,'003748'],[.27,'016786'],[.37,'2D94B3'],[.5,'60C7E6'],[.6,'7AE0FF'],[.68,'ABEBFF'],[.78,'CCF3FF'],[.88,'D9F6FF'],[.95,'E1F8FF'],[1,'FFFFFF']];
+    var ST = [[0.0,'0B0C0E'],[0.0417,'0B0C0F'],[0.0833,'0C0E12'],[0.125,'0D1017'],[0.1667,'0F1420'],[0.2083,'121A2D'],[0.25,'15223D'],[0.2917,'1A2B4E'],[0.3333,'20355E'],[0.375,'253D6C'],[0.4167,'2B4578'],[0.4583,'345085'],[0.5,'466296'],[0.5417,'657FAF'],[0.5833,'8DA4CC'],[0.625,'B4C8E7'],[0.6667,'D2E2FA'],[0.7083,'E4F0FF'],[0.75,'EFF8FF'],[0.7917,'F5FBFF'],[0.8333,'F9FCFF'],[0.875,'FCFDFF'],[0.9167,'FDFEFF'],[0.9583,'FFFFFF'],[1.0,'FFFFFF']];   /* the earlier white → pale blue → navy → night curve, read from the dome's edge (1) to its centre (0) */
     var LUT = new Uint8ClampedArray(256 * 3);
     for (var i = 0; i < 256; i++){ var d = i / 255, k = 1; while (k < ST.length - 1 && d > ST[k][0]) k++;
       var a = ST[k - 1], b = ST[k], t = (d - a[0]) / (b[0] - a[0]);
@@ -6392,12 +6385,12 @@ window.__dnFigs = figs;
     function size(){ cssW = sec.clientWidth; cssH = cv.clientHeight; W = Math.min(360, Math.round(cssW / 4)); H = Math.round(W * cssH / cssW);
       cv.width = W; cv.height = H; img = ctx.createImageData(W, H); u = Math.max(cssW, 640) / 1024; last = -1; }
     function draw(m){
-      var R = 378 * u * m, s0 = 612 * u, px = cssW / W, data = img.data, o = 0, blend = cssH * .3;
+      var R = cssH * .92 * m, RX = Math.max(cssW * 1.1, R * 1.25), px = cssW / W, data = img.data, o = 0, blend = cssH * .3;
       for (var y = 0; y < H; y++){
-        var Y = (H - 1 - y) * px, yr = Y / R, sg = s0 * Math.max(.05, 1 - .609 * yr), night = Y < blend ? 1 - Y / blend : 0;
+        var Y = (H - 1 - y) * px, yr = Y / R, night = Y < blend ? 1 - Y / blend : 0;
         night = night * night * (3 - 2 * night);
         for (var x = 0; x < W; x++){
-          var X = Math.abs((x + .5) * px - cssW / 2), d = yr + Math.pow(X / sg, 3.236); if (d > 1) d = 1;
+          var X = ((x + .5) * px - cssW / 2) / RX, d = Math.sqrt(X * X + yr * yr); if (d > 1) d = 1;
           var j = (d * 255 | 0) * 3;
           data[o] = LUT[j] + (11 - LUT[j]) * night; data[o + 1] = LUT[j + 1] + (12 - LUT[j + 1]) * night; data[o + 2] = LUT[j + 2] + (14 - LUT[j + 2]) * night; data[o + 3] = 255; o += 4;
         }
@@ -6408,7 +6401,7 @@ window.__dnFigs = figs;
       var r = sec.getBoundingClientRect(), vh = innerHeight;
       if (r.bottom < -50 || r.top > vh + 50) return;
       var p = reduce ? .6 : Math.min(1, Math.max(0, (vh - r.top) / (vh * .85))); p = p * p * (3 - 2 * p);
-      var m = Math.round((.62 + .38 * p) * 400) / 400;
+      var m = Math.round((.6 + .4 * p) * 400) / 400;
       if (m !== last){ last = m; draw(m); }
     }
     var raf = 0; function kick(){ if (!raf) raf = requestAnimationFrame(function(){ raf = 0; frame(); }); }
