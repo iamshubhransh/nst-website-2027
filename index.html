@@ -805,6 +805,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .tour-lab,.tour-time{position:absolute;bottom:14px;font-size:10px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.85)}
 .tour-lab{left:14px}
 .tour-time{right:14px}
+.tour-photo{cursor:default}   /* the college cards show a campus photo, not a video (12 Oct) */
+.tour-photo::before{background:linear-gradient(180deg,rgba(0,0,0,0) 60%,rgba(0,0,0,.18))}
+.tour-photo picture{position:absolute;inset:0}
+.tour-photo img{display:block;width:100%;height:100%;object-fit:cover}
 .city-cta{display:flex;align-items:center;justify-content:center;gap:6px;height:48px;margin-top:16px;border-radius:12px;background:#fff;box-shadow:var(--btn-shadow);text-decoration:none;font-size:15px;line-height:26px;font-weight:600;letter-spacing:.06px;color:#16191D;transition:transform .16s ease}
 .city-cta:active{transform:scale(.985)}
 .city-cta img{width:20px;height:20px}
@@ -2331,6 +2335,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .dn-iso[data-fig="global"] .gl-sea .iso-top{fill:#D2E4FA}
 
 .dn-ill{transition:background-color .3s cubic-bezier(.33,1,.68,1)}
+.dn-photo{position:absolute;left:0;top:0;width:100%;height:calc(100% - 72px);object-fit:cover;border-radius:12px 12px 0 0}   /* Programs & Fees: the college's campus */
 .dn-fig .dn-svg{position:absolute;left:0;top:8px;width:320px;height:300px}
 .dn-fig .dn-svg svg{display:block;width:100%;height:100%}
 /* Entrance Tests: NSAT blue, Coding NSAT purple; the pane gets room for a figure (two options alone made it 150 px tall) */
@@ -2449,10 +2454,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     </div>
     <div class="dn-p dt-only" id="dnProg" data-m="prog" role="group" aria-label="Programs &amp; Fees" style="--acc:#E5F1FF;--ink:#0673F9">
       <div class="dn-opts"><span class="dn-lab">Campuses · B.Tech in CS &amp; AI</span>
-        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>S-VYASA University</b><span>Bengaluru</span></span></a>
-        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>Rishihood University</b><span>Delhi NCR</span></span></a>
-        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>ADY Patil University</b><span>Pune</span></span></a>
-        <a class="dn-o" href="#cities" data-k="pin"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>St. Mary’s University</b><span>Hyderabad</span></span></a>
+        <a class="dn-o" href="#cities" data-k="pin" data-img="assets/campus/bengaluru-pane.jpg"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>S-VYASA University</b><span>Bengaluru</span></span></a>
+        <a class="dn-o" href="#cities" data-k="pin" data-img="assets/campus/delhi-pane.jpg"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>Rishihood University</b><span>Delhi NCR</span></span></a>
+        <a class="dn-o" href="#cities" data-k="pin" data-img="assets/campus/pune-pane.jpg"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>ADY Patil University</b><span>Pune</span></span></a>
+        <a class="dn-o" href="#cities" data-k="pin" data-img="assets/campus/hyderabad-pane.jpg"><span class="dn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span><span class="dn-tx"><b>St. Mary’s University</b><span>Hyderabad</span></span></a>
         <a class="dn-foot" href="#cities">Compare all four campuses →</a>
       </div>
       <div class="dn-ill" aria-hidden="true"></div>
@@ -2991,12 +2996,12 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       <p class="fac-sub">equipped to teaching the next generation</p>
     </div>
     <div class="fac-strip" id="facStrip" aria-label="Instructors">
-      <article class="fac-card"><img class="fac-photo" src="assets/fac/gaurav.png" alt=""><div class="fac-row"><div><span class="fac-name">Gaurav Gehlot</span><span class="fac-role">SDE 3 + Senior Instructor</span></div><img class="fac-badge" src="assets/fac/badge-5y.png" alt="5 years experience"></div><img class="fac-logo" src="assets/fac/logo-goldman.png" alt="Goldman Sachs" style="width:45.25px"></article>
-      <article class="fac-card"><img class="fac-photo" src="assets/fac/deepak.png" alt=""><div class="fac-row"><div><span class="fac-name">Deepak Kumar Gour</span><span class="fac-role">TPM &amp; Instructor</span></div><img class="fac-badge" src="assets/fac/badge-5y.png" alt="5 years experience"></div><img class="fac-logo" src="assets/fac/logo-google.png" alt="Google" style="width:56.85px"></article>
-      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Kunal Goyal</span><span class="fac-role">SDE + Associate Instructor</span></div><img class="fac-badge" src="assets/fac/badge-5y.png" alt="5 years experience"></div><img class="fac-logo" src="assets/fac/logo-google.png" alt="Google" style="width:56.85px"></article>
-      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/company-microsoft.svg" alt="Microsoft" style="width:28px"></article>
-      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/company-uber.svg" alt="Uber" style="width:28px"></article>
-      <article class="fac-card"><span class="fac-photo fac-photo-ph"><img src="assets/nst-logo-mark.svg" alt=""></span><div class="fac-row"><div><span class="fac-name">Faculty member</span><span class="fac-role">Profile coming soon</span></div></div><img class="fac-logo" src="assets/fac/logo-goldman.png" alt="Goldman Sachs" style="width:45.25px"></article>
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/team/gaurav.jpg" alt=""><div class="fac-row"><div><span class="fac-name">Gaurav Gehlot</span><span class="fac-role">SDE 3 + Senior Instructor</span></div><img class="fac-badge" src="assets/fac/team/badge-5.png" alt="5 years experience"></div><img class="fac-logo" src="assets/fac/team/logo-goldman.png" alt="Goldman Sachs"></article>
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/team/deepak.jpg" alt=""><div class="fac-row"><div><span class="fac-name">Deepak Kumar Gour</span><span class="fac-role">TPM &amp; Instructor</span></div><img class="fac-badge" src="assets/fac/team/badge-4.png" alt="4 years experience"></div><img class="fac-logo" src="assets/fac/team/logo-google.png" alt="Google"></article>
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/team/kunal.jpg" alt=""><div class="fac-row"><div><span class="fac-name">Kunal Goyal</span><span class="fac-role">SDE + Assoc. Instructor 2</span></div><img class="fac-badge" src="assets/fac/team/badge-4.png" alt="4 years experience"></div><img class="fac-logo" src="assets/fac/team/logo-codequotient.png" alt="CodeQuotient"></article>
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/team/krushn.jpg" alt=""><div class="fac-row"><div><span class="fac-name">Krushn Dayshmookh</span><span class="fac-role">SDE 2 + Instructor</span></div><img class="fac-badge" src="assets/fac/team/badge-9.png" alt="9 years experience"></div><img class="fac-logo" src="assets/fac/team/logo-siemens.png" alt="Siemens"></article>
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/team/ashwin.jpg" alt=""><div class="fac-row"><div><span class="fac-name">Ashwin K</span><span class="fac-role">TPM + Instructor</span></div><img class="fac-badge" src="assets/fac/team/badge-7.png" alt="7 years experience"></div><img class="fac-logo" src="assets/fac/team/logo-cred.png" alt="CRED"></article>
+      <article class="fac-card"><img class="fac-photo" src="assets/fac/team/raghav.jpg" alt=""><div class="fac-row"><div><span class="fac-name">Raghav Khandelwal</span><span class="fac-role">Technical Instructor</span></div><img class="fac-badge" src="assets/fac/team/badge-3.png" alt="3 years experience"></div><img class="fac-logo" src="assets/fac/team/logo-miniorange.png" alt="miniOrange"></article>
     </div>
     <div class="fac-arrows dt-only"><button class="fac-arr fac-arr-l" type="button" id="facPrev" aria-label="Previous instructors"><img src="assets/icon-arrow-right-ink.svg" alt=""></button><button class="fac-arr" type="button" id="facNext" aria-label="Next instructors"><img src="assets/icon-arrow-right-ink.svg" alt=""></button></div>
     <span class="pdots pdots-light fac-dots" id="facDots" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i><i></i><i></i></span>
@@ -3009,19 +3014,19 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     <p class="cities-list"><span>Delhi NCR</span><i>•</i><span>Pune</span><i>•</i><span>Hyderabad</span><i>•</i><span>Bengaluru</span></p>
     <article class="city city-blue" data-node="390:129292">
       <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">Rishihood University, Delhi NCR</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
-      <div class="city-bot"><button class="tour" type="button" data-reel="0" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore RU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+      <div class="city-bot"><span class="tour tour-photo"><picture><source media="(min-width:1024px)" srcset="assets/campus/delhi-wide.jpg"><img src="assets/campus/delhi-wide-m.jpg" alt="Rishihood University, Delhi NCR campus" loading="lazy" decoding="async"></picture></span><a class="city-cta" href="#">Explore RU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
     </article>
     <article class="city city-green" data-node="390:129369">
       <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">ADY Patil University, Pune</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
-      <div class="city-bot"><button class="tour" type="button" data-reel="1" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore ADYPU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+      <div class="city-bot"><span class="tour tour-photo"><picture><source media="(min-width:1024px)" srcset="assets/campus/pune-wide.jpg"><img src="assets/campus/pune-wide-m.jpg" alt="ADY Patil University, Pune campus" loading="lazy" decoding="async"></picture></span><a class="city-cta" href="#">Explore ADYPU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
     </article>
     <article class="city city-purple" data-node="396:129620">
       <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">S-VYASA University, Bengaluru</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
-      <div class="city-bot"><button class="tour" type="button" data-reel="2" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore S-VYASA <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+      <div class="city-bot"><span class="tour tour-photo"><picture><source media="(min-width:1024px)" srcset="assets/campus/bengaluru-wide.jpg"><img src="assets/campus/bengaluru-wide-m.jpg" alt="S-VYASA University, Bengaluru campus" loading="lazy" decoding="async"></picture></span><a class="city-cta" href="#">Explore S-VYASA <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
     </article>
     <article class="city city-orange" data-node="396:129646">
       <div class="city-top"><span class="city-mark"><svg viewBox="0 0 15 18" aria-hidden="true"><use href="#nst-mark-15"/></svg></span><span class="city-with">In collaboration with</span><h3 class="city-name">St. Mary University, Hyderabad</h3><p class="city-desc">Robotics lab, drone work, and a startup space where, in a student's words, "you can approach anyone".</p></div>
-      <div class="city-bot"><button class="tour" type="button" data-reel="0" aria-label="Play the 20-second tour"><span class="tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="tour-lab">20-second tour</span><span class="tour-time">0:20</span></button><a class="city-cta" href="#">Explore SMRU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
+      <div class="city-bot"><span class="tour tour-photo"><picture><source media="(min-width:1024px)" srcset="assets/campus/hyderabad-wide.jpg"><img src="assets/campus/hyderabad-wide-m.jpg" alt="St. Mary University, Hyderabad campus" loading="lazy" decoding="async"></picture></span><a class="city-cta" href="#">Explore SMRU <img src="assets/icon-arrow-right-ink.svg" alt=""></a></div>
     </article>
     <svg style="display:none" aria-hidden="true"><symbol id="nst-mark-15" viewBox="0 0 15 18"><path d="M9.90039 0V1.8H11.3269L8.14539 4.9815C7.33989 4.50225 6.40389 4.22325 5.40039 4.22325H0.900391V6.02325H5.40039C7.38489 6.02325 9.00039 7.63875 9.00039 9.62325V15.9233H10.8004V9.62325C10.8004 8.30025 10.3189 7.0875 9.52689 6.147L12.6004 3.0735V4.5H14.4004V0H9.90039Z" fill="#0673F9"/><path d="M12.6 10.917L12.582 11.1353C12.402 14.067 9.88875 16.3417 6.9255 16.1933C4.16025 16.0537 1.98225 13.7722 1.81125 11.0092L1.8 10.827V1.8H9V0H0V10.854L0.0225 11.2455C0.2565 15.0322 3.40875 18 7.2 18C10.782 18 13.815 15.354 14.3348 11.889C14.3865 11.5492 14.4 11.205 14.4 10.863V5.4H12.6V10.917Z" fill="#004599"/></symbol></svg>
   </section>
@@ -3726,6 +3731,13 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     function run(el, on){ var c = figs()[el.dataset.k]; if (c) c[on ? 'start' : 'stop'](); }
     function art(o){
       var fig = o.closest('.dn-p').querySelector('.dn-fig[data-k="' + o.dataset.k + '"]'); if (fig) return fig;
+      if (o.dataset.img){   /* a college: its campus photo, with the caption under it */
+        var ph = document.createElement('div'), b0 = o.querySelector('b').textContent, d0 = o.querySelector('.dn-tx span').textContent;
+        ph.className = 'dn-art dn-art-photo';
+        ph.innerHTML = '<img class="dn-photo" alt=""><span class="dn-cap"><b></b><span></span></span><span class="dn-go">→</span>';
+        ph.querySelector('img').src = o.dataset.img; ph.querySelector('.dn-cap b').textContent = b0; ph.querySelector('.dn-cap span').textContent = d0;
+        return ph;
+      }
       var a = document.createElement('div'), b = o.querySelector('b').textContent, d = o.querySelector('.dn-tx span').textContent;
       var big = o.querySelector('svg').cloneNode(true); big.setAttribute('stroke-width', '1.1');
       a.className = 'dn-art';
@@ -3958,27 +3970,28 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     var strip = document.getElementById('yslStrip'), ticks = document.getElementById('yslTicks'), pane = document.getElementById('curPane');
     var labels = Array.prototype.slice.call(strip.querySelectorAll('.ysl-y')), PITCH = 91, TICK = 13;   /* 91 = 7 ticks: each year lands on a tick under the centre mark */
     var ACCENT = ['#007A51', '#7B55EE', '#0673F9', '#F59700'];
+    /* the four years as NST publishes them (newtonschool.co NST homepage, pulled 12 Oct 2026); year titles and the bold phrases are ours */
     var YEARS = [
-      { kick: 'Build', title: 'Systems & AI Essentials',
-        desc: [['g', 'In Year 1,'], ' ', ['b', 'Systems and AI Essentials'], ' runs parallel to programming, enabling students to learn coding alongside AI from week one'],
-        chips: ['Problem Solving using Programming', 'Data Structures and Algorithms', 'Fundamentals of AI', 'Software Development Foundations', 'System and AI essentials', 'Maths-1', 'Maths-2'],
-        concepts: [['terminal', 'Data Structures and Algorithms', 'Unlock the building blocks of any form of programming'], ['blocks', 'Web Development', 'Learn to build modern, fully functional websites from scratch.'], ['fn', 'Core Maths 2', 'Explore the math behind computers and how 1s and 0s come to life.']],
-        projects: [['proj-oss', 'Open Source for an Open World'], ['proj-crm', 'GenAI Customer Relation Management']] },
-      { kick: 'Scale', title: 'Full-stack & Machine Learning',
-        desc: [['g', 'In Year 2,'], ' ', ['b', 'Full-stack engineering and Machine Learning'], ' run side by side, so students ship production apps while learning how models are trained and served'],
-        chips: ['Advanced Data Structures', 'Backend Engineering', 'Databases & SQL', 'Machine Learning', 'Operating Systems', 'Computer Networks', 'Maths-3'],
-        concepts: [['terminal', 'Backend Engineering', 'Design APIs, auth and queues that survive real traffic.'], ['blocks', 'Machine Learning', 'Train, evaluate and deploy your first models end to end.'], ['fn', 'Probability & Statistics', 'The maths that turns data into decisions and models.']],
-        projects: [['proj-crm', 'Recommendation Engine for Commerce'], ['proj-oss', 'Distributed Task Scheduler']] },
-      { kick: 'Specialise', title: 'AI, Data or Systems tracks',
-        desc: [['g', 'In Year 3,'], ' ', ['b', 'you pick a specialisation'], ' and go deep: AI and ML, data science or systems, with an industry internship running alongside coursework'],
-        chips: ['Deep Learning', 'Generative AI', 'Data Engineering', 'Distributed Systems', 'Cloud & DevOps', 'Industry Internship', 'Elective-1'],
-        concepts: [['blocks', 'Deep Learning', 'Build and train neural networks for vision, text and speech.'], ['terminal', 'Distributed Systems', 'Consensus, replication and the systems behind the cloud.'], ['fn', 'Optimisation', 'The maths behind training: gradients, convexity and search.']],
-        projects: [['proj-oss', 'LLM Agent for Campus Operations'], ['proj-crm', 'Real-time Analytics Pipeline']] },
-      { kick: 'Ship', title: 'Capstone & Placements',
-        desc: [['g', 'In Year 4,'], ' ', ['b', 'a capstone built with an industry partner'], ' and placement preparation take over, so students graduate with shipped work and offers in hand'],
-        chips: ['Capstone Project', 'System Design', 'Interview Preparation', 'MLOps', 'Product & Entrepreneurship', 'Research Methods', 'Elective-2'],
-        concepts: [['fn', 'System Design', 'Architect products for millions of users, interview-ready.'], ['terminal', 'MLOps', 'Take models from a notebook to monitored production.'], ['blocks', 'Capstone Studio', 'One real problem, one industry mentor, one shipped product.']],
-        projects: [['proj-crm', 'Industry Capstone with a Partner Company'], ['proj-oss', 'Placement-ready Portfolio Product']] }
+      { kick: "Build", title: "Systems & AI Essentials",
+        desc: [["g", "In Year 1,"], " ", ["b", "Systems and AI Essentials"], " runs parallel to programming, enabling students to learn coding alongside AI from week one"],
+        chips: ["Python Basics", "ReactJS", "Data Structures Algorithms (DSA)", "File Handling", "Responsive Web Design", "Arrays", "Dictionary", "Searching", "API", "UI/UX", "Javascript", "Maths for CS"],
+        concepts: [["terminal", "Data Structures and Algorithms", "Unlock the building blocks of any form of programming"], ["blocks", "Web Development", "Learn to build modern, fully functional websites from scratch."], ["fn", "Core Maths", "Explore the math behind computers and how 1s and 0s come to life."]],
+        projects: [["proj-oss", "Open Source for an Open World"], ["proj-crm", "GenAI CRM"]] },
+      { kick: "Achieve", title: "Scalable AI systems & Machine Learning",
+        desc: [["g", "By Year 2,"], " students ", ["b", "build scalable AI systems"], " while learning Machine Learning and real-world data pipelines"],
+        chips: ["Node Js", "Backend Engineering", "Dynamic Programming", "Databases", "Machine Learning", "Data Visualisation", "Spark", "Mathematics for AI", "Backtracking", "PostgreSQL", "MongoDB", "Hadoop"],
+        concepts: [["terminal", "Advanced Programming", "Learn how to build the brain of apps, store and secure data"], ["blocks", "Database Systems", "Learn how to organize and retrieve data to power your app or business."], ["blocks", "System Design and Soft Eng.", "Explore how complex distributed systems are architected, planned, and brought to life."], ["fn", "Intro to AI and Machine Learning", "Learn the fundamentals of training computers to learn from massive datasets and make predictions."]],
+        projects: [["proj-crm", "Build InShorts like new recommendation app"], ["proj-oss", "Optimise “Last-mile Delivery” route for delivery app"]] },
+      { kick: "Innovate", title: "AI models, systems & System Design",
+        desc: [["g", "By Year 3,"], " students ", ["b", "build AI models from scratch"], ", understand underlying systems, and learn Software Engineering and System Design aligned with industry standards"],
+        chips: ["Event-Driven Programming", "Deep Learning", "Networks - OSI Model", "Generative Pre-Trained (GPT) Models", "RISC Architecture"],
+        concepts: [["terminal", "Modern Computer Architecture", "Explore how computers work at the hardware level and how your code interacts with the system."], ["blocks", "Computer Networks", "Discover how computers communicate with each other, and what happens when a tower or router goes down."], ["fn", "Deep Learning", "Learn to build your own Artificial Neural Networks and build models for image & speech recognition from scratch."], ["fn", "Machine Learning", "Learn how machines make decisions from data. Build your own models and the ethics of AI"]],
+        projects: [["proj-oss", "Help CSK Recruit in the IPL Mega Auction"], ["proj-crm", "Build Collaborative apps like Google docs"]] },
+      { kick: "Succeed", title: "Internships, OS, Vision & NLP",
+        desc: [["g", "By Year 4,"], " students ", ["b", "demonstrate real-world impact through internships"], ", with strong ownership, design thinking, and a toolkit spanning OS fundamentals, computer vision, NLP, and effective use of AI tools"],
+        chips: ["Operating System", "Natural Language Processing", "Computer Vision", "Cyber Security", "NLTK / spaCy / n-Grams", "OpenCV", "Capstone Project"],
+        concepts: [["terminal", "Operating Systems", "Explore the software that connects hardware and users"], ["blocks", "Computer Vision", "Learn how images are understood by computers and labelled and learn to build such vision for computers on your own."], ["blocks", "Natural Language Processing", "Learn how to extract information out of text, gain intelligence and build products that interact with users in Human language."], ["fn", "Theory of Computing and Compiler Design", "Understand how code you write is translated to assembly that is understood by the hardware."]],
+        projects: [["proj-oss", "Train your own LLM from scratch"], ["proj-crm", "Deep Tech projects"]] }
     ];
     function esc(s){ return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
     function dots(n){ var h = '<span class="pdots pdots-light" aria-hidden="true">'; for (var i = 0; i < n; i++) h += '<i' + (i ? '' : ' class="on"') + '></i>'; return h + '</span>'; }
@@ -4206,7 +4219,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
       mates.forEach(function(c){ if (c){ c.classList.add('is-in'); io.unobserve(c); } }); }); }, {threshold: .15});
     Array.prototype.forEach.call(cards, function(c){ io.observe(c); });
   })();
-  Array.prototype.forEach.call(document.querySelectorAll('.tour'), function(b){ b.addEventListener('click', function(e){ e.preventDefault(); openVideo(); }); });
+  Array.prototype.forEach.call(document.querySelectorAll('button.tour'), function(b){ b.addEventListener('click', function(e){ e.preventDefault(); openVideo(); }); });
 
   /* ---- three ways in: the conveyor. Six visible avatars on slots −3…3 around the NST tile (slot 0). Every 1.3 s everyone moves one
           slot to the right over 700 ms: the avatar reaching the tile shrinks into it, a new one grows out of the far side wearing NST
