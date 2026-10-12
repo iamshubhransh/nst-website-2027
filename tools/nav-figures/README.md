@@ -31,3 +31,12 @@ Seven figures in the same quiet style, each with its own pane colour:
 | `startx.mjs` | Newton StartX | blue | A rocket lifting off its pad |
 
 `more/integrate.mjs` was a one-off: it refuses to run twice.
+
+## Entrance Tests (`tests/`)
+
+| File | Option | Colour | Figure |
+|---|---|---|---|
+| `nsat.mjs` | NSAT | blue | A laptop with a multiple-choice question; an option is picked and ticked, the progress bar fills, and a stopwatch ticks |
+| `cnsat.mjs` | Coding NSAT | purple | A monitor and keyboard; code types itself in and a "tests passed" bar lights |
+
+The Entrance Tests pane has a 340 px minimum height, with a "Register for NSAT →" link at the foot of its options. `tests/integrate.mjs` was a one-off.
