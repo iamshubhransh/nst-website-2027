@@ -2510,9 +2510,18 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 @keyframes mcArc{0%{opacity:0}25%{opacity:.55}100%{opacity:0}}
 @media (min-width:1360px){ .fdr-mic{display:block} }
 @media (prefers-reduced-motion:reduce){ .fdr-mic.is-talk .mc-arc{animation:none;opacity:.3} }
+
+/* ---- nav variant B (?nav=flat): a full-width white bar pinned to the top, contents on the 1200 column, a hairline below ---- */
+@media (min-width:1024px){
+  html.nav-flat .nav{position:sticky;top:0;max-width:none;width:100%;height:64px;margin:0 0 -64px;padding:0 max(20px,calc(var(--side) - 24px));border-radius:0;box-shadow:0 1px 0 #E9ECEF;transition:box-shadow .25s ease}
+  html.nav-flat .nav.is-scrolled{box-shadow:0 1px 0 #E1E5EA,0 6px 18px rgba(22,25,29,.06)}
+  html.nav-flat .dn-p{top:72px}
+  html.nav-flat .dn{margin-left:18px}
+}
 </style>
 </head>
 <body>
+<script>/* nav variant: ?nav=flat pins a full-width bar to the top instead of the floating pill (12 Oct, to compare) */ if (/[?&]nav=flat\b/.test(location.search)) document.documentElement.classList.add('nav-flat');</script>
 <div class="page" id="page">
 
   <header class="nav" data-node="76:7980">
@@ -3810,7 +3819,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     Array.prototype.forEach.call(nav.querySelectorAll('.dn-p'), function(p){ panels[p.dataset.m] = p; p.dataset.acc0 = p.style.getPropertyValue('--acc'); p.dataset.ink0 = p.style.getPropertyValue('--ink'); });
     function opts(p){ return Array.prototype.slice.call(p.querySelectorAll('.dn-o')); }
     function place(p, t){
-      var nr = nav.getBoundingClientRect(), tr = t.getBoundingClientRect(), x = tr.left - nr.left - 4, max = nr.width - p.offsetWidth;
+      var nr = nav.getBoundingClientRect(), tr = t.getBoundingClientRect(), x = tr.left - nr.left - 4, max = nr.width - p.offsetWidth - (parseFloat(getComputedStyle(nav).paddingRight) || 0);
       var shift = x > max; x = Math.min(x, max);
       p.style.left = x + 'px'; p.style.setProperty('--ox', (shift ? tr.left - nr.left - x + tr.width / 2 : 0) + 'px');   /* grow from under the item */
     }
@@ -6100,5 +6109,6 @@ window.__dnFigs = figs;
   new IntersectionObserver(function(e){ if (e[0].isIntersecting){ if (!iv) iv = setInterval(turn, 3200); } else { clearInterval(iv); iv = 0; } }).observe(sec);
 })();
 </script>
+<script>(function(){ if (!document.documentElement.classList.contains('nav-flat')) return; var n = document.querySelector('.nav'); function f(){ n.classList.toggle('is-scrolled', scrollY > 8); } f(); addEventListener('scroll', f, {passive: true}); })();</script>
 </body>
 </html>
