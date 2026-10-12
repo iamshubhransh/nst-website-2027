@@ -2586,10 +2586,15 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .cn-pass rect{fill:var(--anatomy-lit)}
 .cn-pass path{fill:none;stroke:#fff;stroke-width:.8;stroke-linecap:round;stroke-linejoin:round}
 .cn-pass .cn-pass-t{stroke-opacity:.85}
+
+/* ---- nav variant C (?nav=wide): the floating pill, stretched to the full window width with a 20 px gap each side ---- */
+@media (min-width:1024px){
+  html.nav-wide .nav{max-width:none;margin:12px 20px -68px;padding:8px 12px 8px 16px}
+}
 </style>
 </head>
 <body>
-<script>/* nav variant: ?nav=flat pins a full-width bar to the top instead of the floating pill (12 Oct, to compare) */ if (/[?&]nav=flat\b/.test(location.search)) document.documentElement.classList.add('nav-flat');</script>
+<script>/* nav variant: ?nav=flat pins a full-width bar to the top instead of the floating pill (12 Oct, to compare) */ if (/[?&]nav=flat\b/.test(location.search)) document.documentElement.classList.add('nav-flat'); if (/[?&]nav=wide\b/.test(location.search)) document.documentElement.classList.add('nav-wide');</script>
 <div class="page" id="page">
 
   <header class="nav" data-node="76:7980">
