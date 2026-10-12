@@ -1,10 +1,11 @@
 /* Go for Gold: NST's ICPC training — a winners' podium with the gold trophy on the top step, catching the light. */
 import { writeFileSync } from "node:fs";
 import { k, G, W, H, previewPage, planeMatrix, base } from "./common.mjs";
+import { tubePieces, tubeSvg } from "/Users/shubhanshbhaskar/.claude/skills/anatomy/kit/tube.mjs";
 const FLOOR = { x: -44, y: -30, w: 88, d: 60, r: 8 };
 const STEPS = [{ x: -27, h: 11 }, { x: -9, h: 18 }, { x: 9, h: 7 }];   /* 2nd, 1st, 3rd */
 const SD = 18, SY = -9, SWD = 18;
-const P = k.fitProjection([...k.boxCorners(FLOOR, -4, 0), [0, 0, 18 + 30]], W, H, { pad: 26, azimuth: 52 });
+const P = k.fitProjection([...k.boxCorners(FLOOR, -4, 0), [0, 0, 18 + 24]], W, H, { pad: 26, azimuth: 52 });
 const S = (p, s) => k.solidSvg(p, s), L = (d, s) => k.lineSvg(d, s);
 function podium() {
   const out = [];
@@ -17,26 +18,30 @@ function podium() {
   return out.join("");
 }
 function trophy() {
-  const F = G.frameAlong([0, 0, 18], [0, 0, 1]);
-  const SC = 1.3, cup = [[0, 4.6], [1.4, 4.6], [1.4, 3.4], [2.4, 2.8], [2.4, 1.1], [6.4, 1.1], [6.4, 1.6], [7.4, 3.2, 1], [9.4, 4.9, 1], [12, 6, 1], [15, 6.6, 1], [16.4, 6.8]].map(([s, r, f]) => f ? [s * SC, r * SC, 1] : [s * SC, r * SC]);
+  /* built bottom-up as separate turned parts, so the stem shows between foot and bowl (one waisted solid filled as a hull read as a bucket) */
+  const Z = 18, F = G.frameAlong([0, 0, Z], [0, 0, 1]);
+  const BOWL = [[8.6, 0], [8.6, 1.6], [9.8, 3.6, 1], [12.2, 5.9, 1], [15.4, 7.5, 1], [19, 8.4, 1], [21.4, 8.7]];
+  const rAt = (q) => { for (let i = 1; i < BOWL.length; i++){ const [s0, r0] = BOWL[i - 1], [s1, r1] = BOWL[i]; if (q >= s0 && q <= s1 && s1 > s0) return r0 + (r1 - r0) * (q - s0) / (s1 - s0); } return BOWL[BOWL.length - 1][1]; };
   const out = [];
-  /* two handles: arcs on the cup's sides, in the plane facing the viewer */
+  out.push(S(G.disc(0, 1.8, 6, F, P), { tone: "hi" }));
+  out.push(S(G.disc(1.8, 3, 3.8, F, P), { tone: "hi" }));
+  out.push(S(G.disc(3, 8.8, 1.3, F, P), { tone: "hi" }));
+  out.push(S(G.sphereOf([0, 0, Z + 5.6], 2, P), { tone: "hi" }));
+  /* two C-shaped handles, in the plane across the line of sight, their ends tucked under the bowl */
   const side = [-Math.sin(52 * Math.PI / 180), Math.cos(52 * Math.PI / 180), 0];
-  /* the cup's radius at height s along it, to seat each handle's two ends on the surface */
-  const rAt = (q) => { for (let i = 1; i < cup.length; i++){ const [s0, r0] = cup[i - 1], [s1, r1] = cup[i]; if (q >= s0 && q <= s1 && s1 > s0) return r0 + (r1 - r0) * (q - s0) / (s1 - s0); } return cup[cup.length - 1][1]; };
   for (const sgn of [-1, 1]) {
-    const e1 = 9.6, e2 = 15.6, d = [sgn * side[0], sgn * side[1]];
-    const pts = Array.from({ length: 17 }, (_, i) => { const u = i / 16, q = e1 + (e2 - e1) * u, r = rAt(q) - 1.2 + 4 * Math.sin(Math.PI * u); return [d[0] * r, d[1] * r, 18 + q]; });
-    out.push(L(k.pathOf(pts.map((p) => k.iso(p, P))), { tone: "lit" }).replace('class="iso-line"', 'class="iso-line" style="stroke-width:1.1"'));
+    const e1 = 12.4, e2 = 19.2, d = [sgn * side[0], sgn * side[1]];
+    const pts = Array.from({ length: 41 }, (_, i) => { const u = i / 40, q = e1 + (e2 - e1) * u, r = rAt(e1) + (rAt(e2) - rAt(e1)) * u - 0.9 + 5.2 * Math.pow(Math.sin(Math.PI * u), 0.6);   /* a smooth C off the chord between its two ends */ return [d[0] * r, d[1] * r, Z + q]; });
+    out.push(tubePieces(pts, 0.85, P, { maxLength: 60, spacing: 0.45, caps: false }).map((pc) => tubeSvg(pc, { tone: "hi" })).join(""));
   }
-  out.push(S(G.solidOf(cup, F, P), { tone: "hi" }));   /* drawn after the handles: their ends tuck under the cup */
-  out.push(L(G.arcOf(F, 16.4 * SC, 6.8 * SC, P, { least: -1 }), { tone: "lit" }));
+  out.push(S(G.solidOf(BOWL, F, P), { tone: "hi", inner: L(G.arcOf(F, 19, 8.4, P), { tone: "faint" }) }));
+  out.push(L(G.arcOf(F, 21.4, 8.7, P, { least: -1 }), { tone: "lit" }));
   return `<g class="gd-trophy">${out.join("")}</g>`;   /* the trophy carries its own gold ramp (.gd-trophy tokens) */
 }
 const SPARK = (x, y, s, i) => `<path class="gd-spark" data-i="${i}" transform="translate(${x} ${y}) scale(${s})" d="M0 -4L1 -1 4 0 1 1 0 4 -1 1 -4 0 -1 -1Z"/>`;
-const tp = k.iso([0, 0, 46], P), lp = k.iso([-16, 0, 38], P), rp = k.iso([16, 4, 32], P);
+const tp = k.iso([0, 0, 42], P), lp = k.iso([-16, 0, 38], P), rp = k.iso([16, 4, 32], P);
 const svg = k.figureSvg({ width: W, height: H, label: "A winners' podium with a gold trophy on the top step, catching the light.",
-  body: [base(FLOOR, 4, P), podium(), trophy(), SPARK(lp[0], lp[1], 0.9, 0), SPARK(rp[0], rp[1], 0.7, 1), SPARK(tp[0] + 14, tp[1] - 4, 0.6, 2)] });
+  body: [base(FLOOR, 4, P), podium(), trophy(), SPARK(lp[0], lp[1], 0.9, 0), SPARK(rp[0], rp[1], 0.7, 1), SPARK(tp[0] + 24, tp[1] - 8, 0.6, 2)] });
 export const CSS = `
 .gd-one{fill:var(--anatomy-mid);font-family:"Mona Sans",Arial,sans-serif;font-weight:700}
 .gd-trophy{--anatomy-paper:#F2A516;--anatomy-top:#FFD77A;--anatomy-shade-0:#C27400;--anatomy-shade-1:#D68608;--anatomy-shade-2:#E69812;--anatomy-shade-3:#F2AA24;--anatomy-hi:#8A5400;--anatomy-faint:#B86E00}

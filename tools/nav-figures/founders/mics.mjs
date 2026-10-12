@@ -25,17 +25,24 @@ function build(side) {   /* side "l" points the mic to screen right, "r" mirrors
   out.push(S(k.cylinder(BASE[0], BASE[1], 1.5, 3.8, POST_TOP - 3.8, P, 18), { tone: "mid", crease: "none", inner: L(k.sideArc(BASE[0], BASE[1], 1.5, 22, P, 12), { tone: "faint" }) }));
   out.push(S(G.sphereOf(ELB, 2.8, P), { tone: "mid" }));
   /* the boom: a rod from the elbow up to the yoke behind the capsule */
-  const YOKE = [CAP0[0] - AXIS[0] * 14, CAP0[1] - AXIS[1] * 14, CAP0[2] - AXIS[2] * 14 + 5];
+  const YOKE = [CAP0[0] - AXIS[0] * 14, CAP0[1] - AXIS[1] * 14, CAP0[2] - AXIS[2] * 14 - 9];   /* hangs under the capsule's back half */
   const boom = [YOKE[0] - ELB[0], YOKE[1] - ELB[1], YOKE[2] - ELB[2]], bl = Math.hypot(...boom);
   out.push(S(G.disc(2.6, bl - 2.4, 1.3, G.frameAlong(ELB, boom.map((c) => c / bl)), P), { tone: "mid" }));
   out.push(S(G.sphereOf(YOKE, 2.2, P), { tone: "mid" }));
   /* the shock mount: a ring around the capsule's middle, hung from the yoke */
   const FC = G.frameAlong([CAP0[0] - AXIS[0] * CAPLEN, CAP0[1] - AXIS[1] * CAPLEN, CAP0[2] - AXIS[2] * CAPLEN], AXIS);
-  const cap = G.solidOf([[0, 0], [0, CAPR - 0.6], [0.8, CAPR], [CAPLEN - 9, CAPR], [CAPLEN - 5, CAPR - 0.5, 1], [CAPLEN - 2, CAPR - 2, 1], [CAPLEN, 0, 1]], FC, P);
-  const grille = G.ribsOf(FC, CAPLEN - 15, CAPLEN - 9.4, CAPR, 28, P, { fade: [0.05, 0.45], seams: true });
+  const cap = G.solidOf([[0, 0], [0, CAPR - 0.6], [0.8, CAPR], [CAPLEN - 5, CAPR], [CAPLEN - 2.5, CAPR - 1.2, 1], [CAPLEN, 0, 1]], FC, P);
+  const grille = G.ribsOf(FC, CAPLEN - 9.4, CAPLEN - 5, CAPR, 28, P, { fade: [0.05, 0.45], seams: true });   /* the head, clear of the shock ring */
   out.push(S(G.ringBand(CAPLEN / 2 - 1.2, CAPLEN / 2 + 1.2, CAPR + 0.4, CAPR + 2.6, FC, P), { tone: "mid" }));
   out.push(`<g class="mc-cap">${S(cap, { tone: "hi", lit: true, inner: k.fadedSvg(grille, { tone: "lo" }) })}</g>`);
-  const mid = G.pointOf(FC, CAPLEN / 2, CAPR + 2.6, Math.PI / 2);
+  /* the ring's near half crosses in front of the capsule: a strip between its two visible front arcs */
+  const V = G.viewOf(P);
+  let am = 0, bd = -2; for (let j = 0; j < 360; j++){ const a = j / 360 * Math.PI * 2, dd = G.dot3(G.radialOf(FC, a), V); if (dd > bd){ bd = dd; am = a; } }
+  const front = (sv) => { const pts = []; for (let j = 0; j <= 40; j++){ const a = am - Math.PI / 2 + Math.PI * j / 40; pts.push(at(G.pointOf(FC, sv, CAPR + 2.6, a))); } return pts; };
+  const fa = front(CAPLEN / 2 - 1.2), fb = front(CAPLEN / 2 + 1.2);
+  out.push(`<path class="mc-band" d="${k.pathOf([...fa, ...fb.reverse()], true)}"/>`);
+  const down = (() => { let best = 0, bz = 1e9; for (let j = 0; j < 72; j++){ const a = j / 72 * Math.PI * 2, z = G.pointOf(FC, CAPLEN / 2, 1, a)[2]; if (z < bz){ bz = z; best = a; } } return best; })();
+  const mid = G.pointOf(FC, CAPLEN / 2, CAPR + 2.6, down);
   out.push(k.wireSvg(at(mid), at(YOKE), { tone: "lo", ends: "both", size: 0.8 }));
   /* sound arcs in front of the capsule, in the vertical plane through its axis */
   const arcs = [8, 13, 18].map((r, i) => {
@@ -54,6 +61,7 @@ export const CSS = `
 .fdr-mic svg{display:block;width:100%;height:100%}
 .fdr-mic-l{left:calc(50% - 333px - 56px - 300px)}
 .fdr-mic-r{right:calc(50% - 333px - 56px - 300px)}
+.mc-band{fill:var(--anatomy-shade-2);stroke:var(--anatomy-mid);stroke-width:.6;stroke-linejoin:round}
 .mc-arc{fill:none;stroke:#F59700;stroke-width:1;stroke-linecap:round;opacity:0}
 .fdr-mic .mc-cap .iso-edge{transition:stroke .6s ease}
 .fdr-mic:not(.is-talk) .mc-cap .iso-edge{stroke:var(--anatomy-hi)}

@@ -14,9 +14,9 @@ function phone() {
   const q = (pts, cls) => `<path class="${cls}" d="${k.pathOf(pts.map((p) => k.iso(p, P)), true)}"/>`;
   out.push(q([b[1], b[2], f[2], f[1]], "ct-side"), q([b[3], b[2], f[2], f[3]], "ct-side"), q(f, "ct-face"));
   const m = planeMatrix(at(0, PH), [1, 0, 0], [0, Math.sin(TILT), -Math.cos(TILT)], P);
-  const bub = (x, y, w, me, i) => `<g class="ct-b${me ? " is-me" : ""}" data-i="${i}"><rect x="${x}" y="${y}" width="${w}" height="6" rx="2.6"/></g>`;
+  const bub = (x, y, w, me, i) => `<g class="ct-b${me ? " is-me" : ""}" data-i="${i}"><rect x="${x}" y="${y}" width="${w}" height="5.4" rx="2.4"/></g>`;
   out.push(`<g transform="${m}"><rect class="ct-screen" x="2" y="2" width="${PW - 4}" height="${PH - 4}" rx="2.4"/><path class="ct-head" d="M2 9.4H${PW - 2}"/><circle class="ct-av" cx="6.6" cy="5.8" r="2"/><path class="ct-name" d="M10.4 5.8h8"/>` +
-    bub(4, 12.4, 15, false, 0) + bub(9, 20.4, 15, true, 1) + bub(4, 28.4, 18, false, 2) + bub(11, 36.4, 13, true, 3) +
+    bub(4, 11.4, 15, false, 0) + bub(9, 18.6, 15, true, 1) + bub(4, 25.8, 18, false, 2) + bub(11, 33, 13, true, 3) +   /* the last ends at 38.4, clear of the input at 43 */
     `<rect class="ct-input" x="4" y="${PH - 9}" width="${PW - 8}" height="5" rx="2.5"/></g>`);
   return out.join("");
 }
@@ -37,7 +37,7 @@ export const CSS = `
 .ct-b rect{fill:var(--anatomy-shade-1)}
 .ct-b.is-me rect{fill:var(--anatomy-lit)}
 .ct-b{transition:opacity .4s ease,transform .5s cubic-bezier(.22,1,.36,1)}
-.ct-b.is-off{opacity:0;transform:translateY(3px)}
+.ct-b.is-off{opacity:0;transform:translateY(-2px)}
 .ct-input{fill:none;stroke:var(--anatomy-lo);stroke-width:.4;vector-effect:non-scaling-stroke}
 .ct-shadow{fill:var(--anatomy-halo);opacity:.14;filter:blur(1.4px)}
 `;

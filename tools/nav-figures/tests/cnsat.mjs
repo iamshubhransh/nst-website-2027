@@ -19,14 +19,14 @@ function monitor() {
   const m = planeMatrix([PANEL.x, FACE + 0.02, PZ + PH], [1, 0, 0], [0, 0, -1], P);
   let lines = "";
   CODE.forEach(([ind, segs], i) => {
-    let x = 12 + ind; const y = 9.5 + i * 4;
+    let x = 12 + ind; const y = 9 + i * 3.6;
     const parts = segs.map(([len, kind]) => { const d = `<path class="cn-${kind}" d="M${x} ${y}h${len - 1}"/>`; x += len + 0.6; return d; }).join("");
-    lines += `<g class="cn-line" data-l="${i}"><text class="cn-num" x="8.6" y="${y + 0.9}">${i + 1}</text>${parts}</g>`;
+    lines += `<g class="cn-line" data-l="${i}"><text class="cn-num" x="8.6" y="${y + 1.8}">${i + 1}</text>${parts}</g>`;
   });
   out.push(`<g transform="${m}"><rect class="cn-screen" x="2.4" y="2.4" width="${PANEL.w - 4.8}" height="${PH - 4.8}" rx="1"/>` +
     `<rect class="cn-bar" x="2.4" y="2.4" width="${PANEL.w - 4.8}" height="3.6"/><circle class="cn-dot" cx="5.2" cy="4.2" r=".7"/><circle class="cn-dot" cx="7.4" cy="4.2" r=".7"/><circle class="cn-dot" cx="9.6" cy="4.2" r=".7"/>` +
-    `<path class="cn-gutter" d="M10.6 6v${PH - 8.4}"/>${lines}<rect class="cn-caret" x="12" y="7.6" width=".7" height="3.6"/>` +
-    `<g class="cn-pass"><rect x="12" y="${PH - 10}" width="30" height="5" rx="2.5"/><path d="M14.4 ${PH - 7.6}l1.1 1.1 2-2.2"/><path class="cn-pass-t" d="M19.6 ${PH - 7.5}h18"/></g>` +
+    `<path class="cn-gutter" d="M10.6 6v${PH - 8.4}"/>${lines}<rect class="cn-caret" x="12" y="7.2" width=".7" height="3.6"/>` +
+    `<g class="cn-pass"><rect x="12" y="${PH - 8.6}" width="30" height="4.6" rx="2.3"/><path d="M14.4 ${PH - 6.4}l1.1 1.1 2-2.2"/><path class="cn-pass-t" d="M19.6 ${PH - 6.3}h18"/></g>` +
     `<rect class="cn-bezel" x="2.4" y="2.4" width="${PANEL.w - 4.8}" height="${PH - 4.8}" rx="1"/></g>`);
   return out.join("");
 }
@@ -73,7 +73,7 @@ function mount(root){
     const c = t % CYCLE, n = Math.min(lines.length, Math.floor(c / PER) + 1), clear = c > CYCLE - 0.35;
     lines.forEach((l, i) => l.classList.toggle("is-on", i < n && !clear));
     const i = Math.min(lines.length - 1, n - 1);
-    caret.setAttribute("x", (ENDS[i] + 0.4).toFixed(2)); caret.setAttribute("y", (7.6 + i * 4).toFixed(2));
+    caret.setAttribute("x", (ENDS[i] + 0.4).toFixed(2)); caret.setAttribute("y", (7.2 + i * 3.6).toFixed(2));
     caret.style.opacity = c > TYPE ? 0 : (Math.floor(t * 2.4) % 2 ? .25 : 1);
     pass.classList.toggle("is-on", c > TYPE + 0.5 && !clear);
   }

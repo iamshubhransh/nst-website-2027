@@ -14,12 +14,17 @@ function card(c, i) {
   return `<g class="dr-card" data-i="${i}">${S(k.slabOf(plan, 0, 1.2, P, 3, 0.3), { tone: "mid" })}<g transform="${art}">` +
     `<circle class="dr-ph" cx="5.6" cy="7.5" r="3.6"/><path class="dr-ln" d="M11.6 5.4h7.2M11.6 8.2h5M11.6 11h6.2"/><path class="dr-band" d="M0.9 1.6h${CW - 1.8}"/></g></g>`;
 }
+/* the handle: a ferrule and a grip, a rod running radially out of the ring toward the viewer's right */
+function handle(r, z) {
+  const th = 22 * Math.PI / 180, d = [Math.cos(th), Math.sin(th), 0], F = G.frameAlong([0, 0, z + 0.6], d);
+  return S(G.disc(r + 0.6, r + 2.8, 1.5, F, P), { tone: "hi", lit: true }) + S(G.disc(r + 2.8, r + 12.5, 1.15, F, P), { tone: "hi", lit: true });
+}
 /* the magnifier: a lens ring with a handle, built at the origin and moved card to card */
 function lens() {
   const z = 16, r = 7.6;
   return `<g class="dr-lens"><path class="dr-glass" d="${k.planOutline({ x: -r, y: -r, w: 2 * r, d: 2 * r, r }, z, P, 16)}"/>` +
     S(k.extrude(k.circleRing(0, 0, r + 1, 40), z, 1.2, P), { tone: "hi", lit: true }).replace("<g", '<g style="fill-opacity:0"') +
-    k.lineSvg(k.ring(0, 0, r, z + 1.2, P, 40), { tone: "lit" }) + S(k.slabOf({ x: r * 0.7, y: r * 0.7, w: 9, d: 2.6, r: 1.2 }, z, 1.2, P, 2), { tone: "hi", lit: true }) + `</g>`;
+    k.lineSvg(k.ring(0, 0, r, z + 1.2, P, 40), { tone: "lit" }) + handle(r, z) + `</g>`;
 }
 const svg = k.figureSvg({ width: W, height: H, label: "A board of student ID cards; a magnifier glides from card to card and the card it finds lifts.",
   body: [base(FLOOR, 4, P), `<g class="dr-cards">${CARDS.map(card).join("")}</g>`, `<ellipse class="dr-shadow" rx="9" ry="4.6"/>`, lens()] });
@@ -39,6 +44,7 @@ function mount(root){
   const still = matchMedia("(prefers-reduced-motion: reduce)");
   const cards = [...root.querySelectorAll(".dr-card")], lens = root.querySelector(".dr-lens"), shadow = root.querySelector(".dr-shadow");
   const ORDER = [4, 2, 6, 1, 8, 3, 0, 7, 5];
+  const l0 = iso([0, 0, 0], P), l1 = iso([0, 0, 3], P), LIFT = "translate(" + (l1[0] - l0[0]).toFixed(2) + "px," + (l1[1] - l0[1]).toFixed(2) + "px)";   /* a CSS transform, so the lift eases */
   let live = false, frame = 0, t = 0, last = 0, on = -1, at = [CARDS[4].x + CW / 2, CARDS[4].y + CD / 2];
   function draw(){
     const step = 2.2, i = Math.floor(t / step) % ORDER.length, u = (t % step) / step, from = ORDER[(i + ORDER.length - 1) % ORDER.length], to = ORDER[i];
@@ -49,7 +55,7 @@ function mount(root){
     lens.setAttribute("transform", translateAlong(P, [at[0], at[1], hop]));
     const g = iso([at[0], at[1], 1.2], P); shadow.setAttribute("transform", "translate(" + g[0].toFixed(2) + " " + g[1].toFixed(2) + ")");
     const want = u > 0.45 ? to : -1;
-    if (want !== on){ on = want; cards.forEach((c, j) => { const up = j === on; c.classList.toggle("is-on", up); c.setAttribute("transform", up ? translateAlong(P, [0, 0, 3]) : ""); }); }
+    if (want !== on){ on = want; cards.forEach((c, j) => { const up = j === on; c.classList.toggle("is-on", up); c.style.transform = up ? LIFT : ""; }); }
   }
   function tick(now){ const dt = last ? Math.min((now - last) / 1000, 1 / 20) : 1 / 60; last = now; t += dt; draw(); frame = live ? requestAnimationFrame(tick) : 0; }
   t = 1.6; draw();

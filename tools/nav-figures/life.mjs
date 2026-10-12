@@ -7,9 +7,9 @@ const LAWN = { x: -54, y: -40, w: 108, d: 80, r: 10 };
 const BLD = { x: -46, y: -34, w: 46, d: 28, r: 1.5 }, BH = 36;
 const FRONT = BLD.y + BLD.d, SIDE = BLD.x + BLD.w;
 const COURT = { x: 4, y: 6, w: 42, d: 28, r: 1.2 };
-const POLE = [42, 20], RIM = [29.6, 20], RIM_Z = 27.4, BALL = [17, 22], BALL_R = 2.5;
+const POLE = [25, 7.4], BOARD_Y = 10.2, RIM = [25, 14.4], RIM_Z = 27.4, BALL = [25, 22], BALL_R = 2.5;   /* the hoop on the court's back line, its board facing the viewer (+y) */
 const TREE = [22, -24];
-const P = k.fitProjection([...k.boxCorners(LAWN, -4, 0), ...k.boxCorners(BLD, 0, BH + 2), [TREE[0], TREE[1], 30], [POLE[0], POLE[1], 35]], W, H, { pad: 44, azimuth: 52 });
+const P = k.fitProjection([...k.boxCorners(LAWN, -4, 0), ...k.boxCorners(BLD, 0, BH + 2), [TREE[0], TREE[1], 30], [POLE[0], POLE[1] + 3, 35]], W, H, { pad: 44, azimuth: 52 });
 const at = (p) => k.iso(p, P);
 const S = (paths, style) => k.solidSvg(paths, style);
 const L = (d, style) => k.lineSvg(d, style);
@@ -23,7 +23,7 @@ function ground() {
   out.push(S(k.slabOf({ x: -26, y: FRONT, w: 7, d: LAWN.y + LAWN.d - FRONT - 3, r: 0.8 }, 0, 0.4, P, 2), { tone: "lo", crease: "none" }));
   out.push(S(k.slabOf(COURT, 0, 0.5, P, 3), { tone: "lo", crease: "none" }));
   out.push(L(k.planOutline(k.insetPlan(COURT, 1.6), 0.5, P, 3), { tone: "mid" }));
-  out.push(L(k.planOutline({ x: 22, y: 14.4, w: 22.4, d: 11.2, r: 0.2 }, 0.5, P, 2), { tone: "mid" }));
+  out.push(L(k.planOutline({ x: 19.4, y: 7.6, w: 11.2, d: 15, r: 0.2 }, 0.5, P, 2), { tone: "mid" }));   /* the key, from the back line under the hoop */
   return out.join("");
 }
 /* windows: closed outlines on the two visible faces; each has a glow pane the live code switches */
@@ -52,21 +52,23 @@ function tree() {
   return S(k.cylinder(TREE[0], TREE[1], 1.5, 0, 12, P, 16), { tone: "mid", crease: "none" }) + S(G.sphereOf([TREE[0], TREE[1], 19], 8.4, P), { tone: "mid" }) + S(G.sphereOf([TREE[0] + 5, TREE[1] + 3, 15], 5, P), { tone: "mid" });
 }
 /* students: a pawn each, body and head; two by the door, one at the court */
-const PEOPLE = [[-29.5, 6], [-24.5, 9.5], [9, 24]];
+const PEOPLE = [[-29.5, 6], [-24.5, 9.5], [12, 25]];
 function people(list) {
   return list.map(([x, y]) => S(k.cylinder(x, y, 1.7, 0, 5.4, P, 16, 0.3), { tone: "mid" }) + S(G.sphereOf([x, y, 7.2], 1.5, P), { tone: "mid" })).join("");
 }
 function hoop() {
-  const out = [S(k.cylinder(POLE[0], POLE[1], 3, 0, 1, P, 18), { tone: "mid" }), S(k.cylinder(POLE[0], POLE[1], 1, 1, 33, P, 14), { tone: "mid", crease: "none" })];
-  out.push(S(k.slabOf({ x: 33.4, y: POLE[1] - 0.8, w: 8.6, d: 1.6, r: 0.4 }, 30, 1.6, P, 2), { tone: "mid" }));
-  out.push(S(k.slabOf({ x: 32.2, y: POLE[1] - 7, w: 1.2, d: 14, r: 0.3 }, 25.6, 9.4, P, 2, 0.3), { tone: "hi" }));
-  out.push(L(k.pathOf([[32.2, POLE[1] - 2.6, 27.6], [32.2, POLE[1] + 2.6, 27.6], [32.2, POLE[1] + 2.6, 31.4], [32.2, POLE[1] - 2.6, 31.4]].map(at), true), { tone: "mid" }));
+  const out = [S(k.cylinder(POLE[0], POLE[1], 3, 0, 1, P, 18), { tone: "mid" }), S(k.cylinder(POLE[0], POLE[1], 1, 1, 30.6, P, 14), { tone: "mid", crease: "none" })];
+  out.push(S(k.slabOf({ x: POLE[0] - 0.8, y: POLE[1] + 0.8, w: 1.6, d: BOARD_Y - POLE[1] - 0.8, r: 0.4 }, 30, 1.6, P, 2), { tone: "mid" }));   /* the arm, from the pole to the board */
+  out.push(S(k.slabOf({ x: POLE[0] - 7, y: BOARD_Y, w: 14, d: 1.2, r: 0.3 }, 25.6, 9.4, P, 2, 0.3), { tone: "hi" }));
+  const fy = BOARD_Y + 1.2;   /* the target square on the board's front face */
+  out.push(L(k.pathOf([[POLE[0] - 2.6, fy, 27.6], [POLE[0] + 2.6, fy, 27.6], [POLE[0] + 2.6, fy, 31.4], [POLE[0] - 2.6, fy, 31.4]].map(at), true), { tone: "mid" }));
+  out.push(S(k.slabOf({ x: RIM[0] - 0.6, y: fy, w: 1.2, d: RIM[1] - 2.6 - fy, r: 0.2 }, RIM_Z - 0.6, 0.6, P, 2), { tone: "mid" }));   /* the rim's bracket */
   out.push(L(k.ring(RIM[0], RIM[1], 2.6, RIM_Z, P, 28), { tone: "lit" }).replace('class="iso-line"', 'class="iso-line" style="stroke-width:.9"'));
   return out.join("");
 }
 const ballPaths = G.sphereOf([BALL[0], BALL[1], BALL_R], BALL_R, P);
 const svg = k.figureSvg({ width: W, height: H, label: "A corner of campus: a hostel block with lit windows, a tree, and a half court where a ball dribbles under the hoop.",
-  body: [ground(), `<ellipse class="cl-shadow" cx="${at([BALL[0], BALL[1], 0])[0]}" cy="${at([BALL[0], BALL[1], 0])[1]}" rx="4.2" ry="2.2"/>`, building(), tree(), people(PEOPLE.slice(0, 2)), people(PEOPLE.slice(2)), `<g class="cl-ball">${S(ballPaths, { tone: "hi", lit: true })}${L(G.arcOf(G.frameAlong([BALL[0], BALL[1], BALL_R], [0, 0, 1]), 0, BALL_R, P, { least: -1 }), { tone: "lo" })}</g>`, hoop()] });
+  body: [ground(), `<ellipse class="cl-shadow" cx="${at([BALL[0], BALL[1], 0])[0]}" cy="${at([BALL[0], BALL[1], 0])[1]}" rx="4.2" ry="2.2"/>`, building(), tree(), people(PEOPLE.slice(0, 2)), people(PEOPLE.slice(2)), hoop(), `<g class="cl-ball">${S(ballPaths, { tone: "hi", lit: true })}${L(G.arcOf(G.frameAlong([BALL[0], BALL[1], BALL_R], [0, 0, 1]), 0, BALL_R, P, { least: -1 }), { tone: "lo" })}</g>`] });
 
 export const CSS = `
 .cl-win{fill:var(--anatomy-litTop,#FFD48A);opacity:0;transition:opacity .9s ease}

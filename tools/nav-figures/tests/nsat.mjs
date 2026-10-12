@@ -30,14 +30,14 @@ function laptop() {
 }
 function stopwatch() {
   const [x, y] = SWATCH, out = [];
+  /* the crown and its stem on the far rim, drawn before the dial that hides its root */
+  out.push(S(k.slabOf({ x: x - 0.9, y: y - SR - 2.2, w: 1.8, d: 2.4, r: 0.4 }, 1.6, 1.8, P, 2), { tone: "mid" }));
+  out.push(S(k.cylinder(x, y - SR - 3, 1.6, 1.3, 2.4, P, 16), { tone: "mid" }));
   out.push(S(k.cylinder(x, y, SR + 0.8, 0, 1, P, 40), { tone: "lo" }));
   out.push(S(k.cylinder(x, y, SR, 1, SZ, P, 48, 0.5), { tone: "mid", inner: L(k.sideArc(x, y, SR, 1 + SZ / 2, P, 32), { tone: "faint" }) }));
   out.push(L(k.ring(x, y, SR - 1.2, 1 + SZ, P, 48), { tone: "lo" }));
   const t = k.radialTicks(x, y, SR - 1.2, 60, 5, 1 + SZ, [0.9, 1.9], P);
   out.push(L(t.minor, { tone: "faint" }), L(t.major, { tone: "lo" }));
-  /* the crown and its stem on the far rim */
-  out.push(S(k.slabOf({ x: x - 0.9, y: y - SR - 2.2, w: 1.8, d: 2.4, r: 0.4 }, 1.6, 1.8, P, 2), { tone: "mid" }));
-  out.push(S(k.cylinder(x, y - SR - 3, 1.6, 1.3, 2.4, P, 16), { tone: "mid" }));
   return out.join("");
 }
 const HUB = [SWATCH[0], SWATCH[1], 1 + SZ];

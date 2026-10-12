@@ -12,7 +12,13 @@ function gantry() {
   const gx = -26, gy = -14, out = [];
   out.push(S(k.slabOf({ x: gx - 3, y: gy - 3, w: 6, d: 6, r: 0.5 }, 0, 1.4, P, 2), { tone: "mid" }));
   out.push(S(k.slabOf({ x: gx - 1.6, y: gy - 1.6, w: 3.2, d: 3.2, r: 0.3 }, 1.4, 38, P, 2), { tone: "mid" }));
-  out.push(S(k.slabOf({ x: gx - 1, y: gy - 1, w: 22, d: 2, r: 0.3 }, 30, 1.6, P, 2), { tone: "mid" }));
+  /* the service arm: from the tower to the rocket's body, aimed at its axis, at body height */
+  const dx = PAD[0] - gx, dy = PAD[1] - gy, len = Math.hypot(dx, dy), d = [dx / len, dy / len, 0], u = [-d[1], d[0], 0];
+  const AF = G.frameOf([gx, gy, PZ + 3 + 16], d, u, [0, 0, 1]);
+  const s0 = (1.6 + 1 * Math.abs(d[1])) / Math.abs(d[0]);   /* where the arm's whole section has left the tower's +x face */
+  out.push(S(k.slabOf({ x: gx + 1.6, y: gy - 2.2, w: 0.8, d: 4.4, r: 0.2 }, PZ + 3 + 16 - 1.6, 3.2, P, 2), { tone: "mid" }));   /* the bracket on the tower face */
+  out.push(S(G.prismOf(AF, [[-1, -0.8], [1, -0.8], [1, 0.8], [-1, 0.8]], s0, len - 4.6 - 0.4, P), { tone: "mid" }));
+  out.push(S(G.prismOf(AF, [[-1.8, -1.4], [1.8, -1.4], [1.8, 1.4], [-1.8, 1.4]], len - 4.6 - 1.6, len - 4.6 - 0.2, P), { tone: "mid" }));   /* the clamp pad */
   return out.join("");
 }
 function rocket() {
