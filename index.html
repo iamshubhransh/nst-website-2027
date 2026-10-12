@@ -1570,8 +1570,16 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .nav{height:56px;margin:12px auto -68px;padding:8px 12px;gap:0}
   .nav-links{display:none!important}
   /* with the hamburger gone, Ask Newton lives in the bar: a quiet pill before Contact Us (12 Oct) */
-  .nav .nav-ask{display:inline-flex!important;height:38px;padding:0 14px 0 10px;gap:7px;font-size:14px;line-height:20px;font-weight:500;color:#16191D;margin-right:2px}
-  .nav .nav-ask i{width:14px;height:14px}
+  /* Ask Newton wears the chat's own orb (same engine, same purple), inside a hairline ring in the chat's gradient (12 Oct) */
+  .nav .nav-ask{display:inline-flex!important;align-items:center;height:40px;padding:0 15px 0 7px;gap:8px;margin-right:4px;border:1px solid transparent;border-radius:99px;
+    background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#C46BEA,#883DA3 55%,#6138D3) border-box;
+    font-size:14px;line-height:20px;font-weight:600;letter-spacing:.06px;color:#16191D;box-shadow:0 1px 2px rgba(136,61,163,.12);
+    transition:box-shadow .3s ease,transform .16s ease}
+  .nav .nav-ask span{background:linear-gradient(90deg,#16191D 55%,#883DA3);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav .nav-ask:hover{box-shadow:0 0 0 4px rgba(180,47,229,.08),0 8px 20px -8px rgba(136,61,163,.45);border-color:transparent}
+  .nav .nav-ask:active{transform:scale(.97)}
+  .nav-orb{display:block;width:28px;height:28px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 35%,#D88CF5,#883DA3 70%)}
+  .nav-orb.is-live{background:none}
   .menu{display:none}   /* desktop: the menu items are in the bar; no hamburger (12 Oct) */
   .nav .btn-sm{height:39px;padding:8px 24px}
   .sheet-panel{left:auto;right:calc(var(--side) - 36px);width:360px;top:80px}
@@ -1931,7 +1939,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .tl-hs:not(.is-in) .hs i::after{transform:scaleX(0)}
 
 /* countdown: the page dips from white into night; a live clock */
-.cd{position:relative;overflow:hidden;padding:180px 16px 41px;text-align:center;background:linear-gradient(180deg,#fff 0%,#CCE0FC 6%,#1F335C 13%,#0B0C0E 18%,#0B0C0E 100%)}
+.cd{position:relative;overflow:hidden;padding:180px 16px 41px;text-align:center;background:#0B0C0E linear-gradient(in oklab 180deg,#FFFFFF 0.00%,#FFFFFF 1.29%,#FDFEFF 2.58%,#FCFDFF 3.88%,#F9FCFF 5.17%,#F5FBFF 6.46%,#EFF8FF 7.75%,#E4F0FF 9.04%,#D2E2FA 10.33%,#B4C8E7 11.62%,#8DA4CC 12.92%,#657FAF 14.21%,#466296 15.50%,#345085 16.79%,#2B4578 18.08%,#253D6C 19.38%,#20355E 20.67%,#1A2B4E 21.96%,#15223D 23.25%,#121A2D 24.54%,#0F1420 25.83%,#0D1017 27.12%,#0C0E12 28.42%,#0B0C0F 29.71%,#0B0C0E 31.00%,#0B0C0E 100%)}   /* one eased curve white → pale blue → navy → night (12 Oct): no bands */
 .cd-glow{position:absolute;display:block;left:calc(50% - 260px);top:170px;width:520px;height:420px;border-radius:50%;background:radial-gradient(closest-side,rgba(6,115,249,.35),rgba(6,115,249,0));pointer-events:none;animation:cdGlow 6s ease-in-out infinite;animation-play-state:paused}
 .cd.is-live .cd-glow{animation-play-state:running}
 @keyframes cdGlow{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.8;transform:scale(1.06)}}
@@ -1959,7 +1967,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .faq-topics::after{content:"";flex:none;width:8px}
 .faq-topics button{flex:none;height:34px;margin:0;padding:0 15px;border:0;border-radius:100px;background:#fff;box-shadow:inset 0 0 0 1px #E1E5EA;font-family:var(--font);font-size:13px;line-height:18px;font-weight:600;letter-spacing:.06px;color:#16191D;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s ease,color .2s ease,box-shadow .2s ease,transform .16s ease}
 .faq-topics button:active{transform:scale(.95)}
-.faq-topics button:nth-child(1){width:47px}.faq-topics button:nth-child(2){width:106px}.faq-topics button:nth-child(3){width:78px}.faq-topics button:nth-child(4){width:62px}.faq-topics button:nth-child(5){width:108px}   /* the frame's chip widths */
+
 .faq-topics button.is-on{background:#16191D;color:#fff;box-shadow:inset 0 0 0 1px #16191D}
 .faq-list{margin:12px 16px 0;transition:opacity .2s ease}
 .faq-list.is-swap{opacity:0}
@@ -1980,6 +1988,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .fq-a p{margin:0;font-size:15px;line-height:24px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.6);opacity:0;transition:opacity .3s ease}
 .fq-a a{display:inline-block;margin-top:10px;font-size:15px;line-height:22px;font-weight:600;letter-spacing:.06px;color:#0673F9;text-decoration:none;opacity:0;transition:opacity .3s ease}
 .fq-a>div::after{content:"";display:block;height:10px}
+.fq-a p+p,.fq-a ul+p,.fq-a p+ul{margin-top:10px}
+.fq-a ul{margin:0;padding-left:20px;font-size:15px;line-height:24px;font-weight:500;letter-spacing:.1px;color:rgba(22,25,29,.6);opacity:0;transition:opacity .3s ease}
+.fq-a li+li{margin-top:6px}
+.fq.is-open .fq-a ul{opacity:1;transition-delay:.08s}
 .fq.is-open .fq-a p,.fq.is-open .fq-a a{opacity:1;transition-delay:.08s}
 .faq-all{display:block;margin:16px 16px 0;font-size:14px;line-height:20px;font-weight:600;letter-spacing:.1px;color:#0673F9;text-decoration:none}
 .bro{position:relative;height:160px;margin:40px 16px 0;border-radius:16px;background:#F6F7F9}
@@ -2104,7 +2116,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .hs{left:auto;right:24px;top:118px;width:340px}
 
   /* countdown (605:109343): 799 tall; the dip to night over 24 %; copy 440 on the left, clock and slot picker 690 on the right */
-  .cd{display:grid;grid-template-columns:minmax(0,440fr) minmax(0,690fr);grid-template-rows:auto 1fr;column-gap:70px;align-items:start;padding:260px var(--side) 120px;text-align:left;background:linear-gradient(180deg,#fff 0%,#CCE0FC 8%,#1F335C 17%,#0B0C0E 24%,#0B0C0E 100%)}
+  .cd{display:grid;grid-template-columns:minmax(0,440fr) minmax(0,690fr);grid-template-rows:auto 1fr;column-gap:70px;align-items:start;padding:260px var(--side) 120px;text-align:left;background:#0B0C0E linear-gradient(in oklab 180deg,#FFFFFF 0.00%,#FFFFFF 1.25%,#FDFEFF 2.50%,#FCFDFF 3.75%,#F9FCFF 5.00%,#F5FBFF 6.25%,#EFF8FF 7.50%,#E4F0FF 8.75%,#D2E2FA 10.00%,#B4C8E7 11.25%,#8DA4CC 12.50%,#657FAF 13.75%,#466296 15.00%,#345085 16.25%,#2B4578 17.50%,#253D6C 18.75%,#20355E 20.00%,#1A2B4E 21.25%,#15223D 22.50%,#121A2D 23.75%,#0F1420 25.00%,#0D1017 26.25%,#0C0E12 27.50%,#0B0C0F 28.75%,#0B0C0E 30.00%,#0B0C0E 100%)}
   .cd-glow{left:calc(50% - 250px);top:90px;width:1100px;height:700px}
   .cd-l{grid-column:1;grid-row:1}
   .cd-l2{grid-column:1;grid-row:2;margin-top:36px}
@@ -2135,8 +2147,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .faq-title{margin:8px 0 0;max-width:none;font-size:32px;line-height:40px}
   .faq-topics{margin:0;padding:0;overflow:visible}
   .faq-topics::after{display:none}
-  .faq-topics button{height:40px;padding:0 17px;font-size:15px;line-height:20px}
-  .faq-topics button:nth-child(1){width:53px}.faq-topics button:nth-child(2){width:122px}.faq-topics button:nth-child(3){width:89px}.faq-topics button:nth-child(4){width:71px}.faq-topics button:nth-child(5){width:124px}
+  .faq-topics button{height:40px;padding:0 14px;font-size:15px;line-height:20px}
+  .faq-topics{flex-wrap:wrap;row-gap:8px}   /* six topics from NST's FAQ page; chips size to their labels (12 Oct) */
+  .fq-a ul{font-size:16.5px;line-height:26.4px}
   .faq-list{margin:20px 0 0}
   .fq::after{height:8.8px}
   .fq-q{padding:19.8px 0 11px}
@@ -2230,9 +2243,11 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .dn-ill:hover .dn-go{transform:translateX(2px)}
 }
 @media (min-width:1024px) and (max-width:1279px){
+  .faq-topics{flex-wrap:nowrap;overflow-x:auto;gap:6px;-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}   /* too narrow for six chips: one row that scrolls */
+  .faq-topics button{height:36px;padding:0 11px;font-size:13.5px}
   .dn-contact{display:none}
-  .nav .nav-ask{width:38px;padding:0;justify-content:center;font-size:0;gap:0}   /* just the orb; the button keeps its name */
-  .nav .nav-ask i{width:16px;height:16px}
+  .nav .nav-ask{width:40px;padding:0;justify-content:center;gap:0}   /* just the orb; the button keeps its name */
+  .nav .nav-ask span{display:none}
   .dn{margin-left:10px}
   .dn-i{padding:0 7px;font-size:14px}
 }
@@ -2594,7 +2609,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 </style>
 </head>
 <body>
-<script>/* nav variant: ?nav=flat pins a full-width bar to the top instead of the floating pill (12 Oct, to compare) */ if (/[?&]nav=flat\b/.test(location.search)) document.documentElement.classList.add('nav-flat'); if (/[?&]nav=wide\b/.test(location.search)) document.documentElement.classList.add('nav-wide');</script>
+<script>/* nav variants */ var nv = (location.search.match(/[?&]nav=(\w+)/) || [])[1]; document.documentElement.classList.add(nv === 'flat' ? 'nav-flat' : nv === 'pill' ? 'nav-pill' : 'nav-wide');   /* default: the full-width pill (12 Oct); ?nav=pill the capped pill, ?nav=flat the pinned bar */</script>
 <div class="page" id="page">
 
   <header class="nav" data-node="76:7980">
@@ -2608,7 +2623,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     </nav>
     <nav class="nav-links dt-only" aria-label="Sections"><a href="#co">Placements</a><a href="#oss">Student life</a><a href="#cur">Curriculum</a><a href="#cities">Campuses</a><a href="#ways">Admissions</a><a href="#fest">Fests</a></nav>
     <div class="nav-actions">
-      <button class="nav-ask dt-only" type="button" id="navAsk" aria-label="Ask Newton"><i aria-hidden="true"></i>Ask Newton</button>
+      <button class="nav-ask dt-only" type="button" id="navAsk" aria-label="Ask Newton"><canvas class="nav-orb" aria-hidden="true"></canvas><span>Ask Newton</span></button>
       <a class="dn-i dn-contact dt-only" href="#faq">Contact Us</a>
       <a class="btn btn-brand btn-sm" href="#ways">Apply Now</a>
       <button class="menu" type="button" aria-label="Open menu"><img src="assets/icon-menu.svg" alt=""></button>
@@ -3411,10 +3426,10 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     </div>
     <div class="faq-r">
     <div class="faq-topics" id="faqTopics" role="tablist" aria-label="FAQ topics">
-      <button type="button" class="is-on" data-t="all" aria-pressed="true">All</button><button type="button" data-t="adm" aria-pressed="false">Admissions</button><button type="button" data-t="deg" aria-pressed="false">Degree</button><button type="button" data-t="fee" aria-pressed="false">Fees</button><button type="button" data-t="camp" aria-pressed="false">Campus life</button>
+      <button type="button" class="is-on" data-t="all" aria-pressed="true">All</button><button type="button" data-t="prog" aria-pressed="false">Programs</button><button type="button" data-t="adm" aria-pressed="false">Admissions</button><button type="button" data-t="fee" aria-pressed="false">Fees &amp; funding</button><button type="button" data-t="test" aria-pressed="false">Entrance test</button><button type="button" data-t="int" aria-pressed="false">Interviews</button>
     </div>
     <div class="faq-list" id="faqList"></div>
-    <a class="faq-all" href="#">All FAQs →</a>
+    <a class="faq-all" href="https://www.newtonschool.co/newton-school-of-technology-nst/faqs" target="_blank" rel="noopener">All FAQs →</a>
     </div>
     <div class="bro">
       <div class="bro-book" id="broBook" aria-hidden="true"><div class="bro-cover"><i class="bro-spine"></i><i class="bro-glow"></i><i class="bro-stripe"></i><span class="bro-org">NST · NEWTON SCHOOL</span><b class="bro-year">2027</b><span class="bro-deg">B.Tech in CS &amp; AI</span></div></div>
@@ -4704,21 +4719,39 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   (function(){
     var sec = document.getElementById('faq'); if (!sec) return;
     var list = document.getElementById('faqList'), chips = Array.prototype.slice.call(document.querySelectorAll('#faqTopics button'));
-    var Q = [
-      {t: 'deg', all: 1, q: 'Is the degree approved by UGC?', a: 'Yes. You earn a B.Tech from a UGC-approved partner university, and NST runs the programme on campus.', l: ['Verify it →', '#']},
-      {t: 'adm', all: 1, q: 'How do I get in?', a: 'Take NSAT, the online, proctored entrance test in Maths, English and aptitude. You get three attempts, a free prep kit and mock tests. Clear it, then interview and counselling.', l: ['See the admission process →', '#adm']},
-      {t: 'fee', all: 1, q: 'Can I change my mind after paying?', a: 'Yes, within the refund window in the fee policy. Your counsellor walks you through the dates before you block a seat.', l: null},
-      {t: 'camp', all: 1, q: 'Which campus should I choose?', a: 'Four campuses, one curriculum: Bengaluru (S-VYASA), Delhi NCR (Rishihood), Pune (ADYPU) and Hyderabad (St. Mary’s). Pick by city, hostel and fee; Delhi NCR adds a group discussion round.', l: ['Compare campuses →', '#cities']},
-      {t: 'adm', q: 'Can I skip NSAT with my JEE score?', a: 'Yes. With a strong JEE Main percentile you can go straight to the interview, and a JEE rank under 10,000 earns a 100% tuition waiver.', l: ['See the three ways in →', '#ways']},
-      {t: 'fee', q: 'Are there scholarships?', a: 'Yes: on your NSAT score, the JEE Excellence Scholarship for ranks under 10,000, Young Women Leader and Extraordinary Achievements.', l: null}
-    ];
+    /* the FAQs as NST publishes them (newtonschool.co NST FAQs, pulled 12 Oct 2026): five topics, 23 questions; "All" shows the six asked first.
+       An answer is a list of paragraphs; a nested list is a bullet list. */
+    var Q = [{"t": "prog", "q": "Are these programmes in respective universities approved by UGC?", "a": ["Yes. The degrees offered at the Newton School of Technology in partnership with Rishihood University, ADY Patil University, and S-VYASA University, all are UGC-approved. The program is conducted in collaboration with these UGC-recognized and NAAC-accredited universities. This ensures that students receive a fully recognized undergraduate degree along with Newton School of Technology’s industry-aligned curriculum and hands-on tech training."], "all": 1},
+      {"t": "prog", "q": "Is the program residential at NST?", "a": ["Yes, the NST program is fully residential, providing students with on-campus accommodation and a supportive learning environment."], "all": 5},
+      {"t": "prog", "q": "What is the duration of the program?", "a": ["The degree program is of 4 years duration. It follows Newton School of Technology’s unique phased learning model, covering core computer science foundations, specialization tracks, and real-world industry exposure."]},
+      {"t": "prog", "q": "How can I visit the campus?", "a": ["Once you have completed the seat blocking formalities, you will receive an official invitation to visit the campus. Our admissions team will coordinate the visit schedule and provide all necessary details for your campus tour."], "l": ["See the campuses →", "#cities"]},
+      {"t": "prog", "q": "Why is living on campus mandatory at Newton School of Technology?", "a": ["Living on campus at Newton School of Technology is mandatory to ensure that every student experiences a holistic and collaborative learning environment. The residential setup is designed to go beyond classroom education by fostering a strong sense of community, teamwork, and personal growth.", "By staying on campus, students benefit from enhanced peer learning. They can easily collaborate on projects, exchange ideas, and support each other’s academic journeys. The close-knit residential community also helps students build lasting friendships and networks that are valuable both personally and professionally.", "Additionally, being on campus provides convenient access to learning resources, labs, and extracurricular opportunities, allowing students to fully engage in all aspects of campus life. This immersive experience helps them develop essential life skills, leadership qualities, and a mindset ready for real-world challenges."]},
+      {"t": "prog", "q": "Is Newton School of Technology an accredited university or affiliated college?", "a": ["Newton School of Technology (NST) is a brand owned and operated by Incanus Technologies Pvt. Ltd., a private limited company. It is not a UGC-regulated Higher Education Institution (HEIs). NST provides industry-skilling and support services to the universities, while all degree awards are managed by the respective University."]},
+      {"t": "adm", "q": "How can I apply for admission to NST?", "a": ["Admissions are conducted through the NSAT (Newton Scholastic Aptitude Test) followed by an interview and counseling process."], "all": 2, "l": ["See the admission process →", "#adm"]},
+      {"t": "adm", "q": "What degree do students receive after completing the program?", "a": ["Students receive a UGC-approved undergraduate degree in collaboration with the respective University they have applied for, along with Newton School of Technology’s advanced tech training certification."]},
+      {"t": "adm", "q": "Is the curriculum same for all the campuses of Newton School of Technology?", "a": ["Yes, the curriculum is the same across all NST campuses. However, the Bengaluru campus offers additional specialization options in Artificial Intelligence, Robotics, and Tech Entrepreneurship. Apart from these, all other courses and learning experiences remain identical."]},
+      {"t": "adm", "q": "Are international students allowed to take admission at NST?", "a": ["Yes, international students are welcome to apply for admission at NST. For any assistance or guidance regarding the process, please reach out to our support team at support.nst@newtonschool.co."], "l": ["Email support →", "mailto:support.nst@newtonschool.co"]},
+      {"t": "fee", "q": "Is there any financial support available at NST?", "a": ["Yes, NST offers scholarships to support students:", ["Merit-Based Scholarship: Up to 100% scholarship on first-year tuition fees, based on NSAT entrance and personal interview scores.", "Young Women Leader Scholarship: Up to 10% scholarship on tuition fees across 4 years for female candidates with strong coding projects, extracurricular/sports achievements, or demonstrated leadership.", "Extraordinary Achievement Scholarship: Up to 10% scholarship on tuition fees across 4 years, for students with notable extracurriculars, sports achievements, national/international Olympiad wins, competitive exam success, or strong coding projects."], "This ensures deserving students receive financial assistance to pursue their tech education at NST."], "all": 4},
+      {"t": "fee", "q": "How can I apply for the scholarship?", "a": ["Scholarship opportunities are discussed during your counselling session. Based on your NSAT and personal interview results, you will be informed about your eligibility and the applicable scholarship percentage, as awards are determined by multiple factors including academic performance, achievements, and leadership potential."]},
+      {"t": "test", "q": "What is the eligibility criteria for the NSAT?", "a": ["You’re eligible if you passed Class 12 with PCM or PCMB and scored more than 50% in both PCM and overall boards (2024, 2025 and 2026 pass-out)."], "all": 3, "l": ["See the next NSAT →", "#nsat"]},
+      {"t": "test", "q": "Is there any community where students can communicate with their peers and ask queries or discuss?", "a": ["Yes, we have an official Telegram community where students can interact with peers, ask questions, participate in discussions, and get the latest updates."], "l": ["Join the Telegram community →", "https://t.me/NSTxTGCommunity"]},
+      {"t": "int", "q": "Can I reschedule my counselling session?", "a": ["Once your counselling session is booked, please try to attend it on time with your parents. If you have a genuine reason, you can email our support team at support.nst@newtonschool.co. After approval, you’ll be able to reschedule your session through the portal."], "l": ["Email support →", "mailto:support.nst@newtonschool.co"]},
+      {"t": "int", "q": "How do I schedule my counselling session?", "a": ["Upon qualifying the NSAT and interview, the option to view and schedule your counselling session will be made available through the applicant portal."]},
+      {"t": "int", "q": "What can I expect during the counselling session?", "a": ["The counselling session provides students with an overview of the NST campus and details about the programs, opportunities, and resources NST offers. It also includes a discussion about any scholarships awarded based on the NSAT and interview performance.", "Students are expected to:", ["Attend the session with one or both parents.", "Keep the following documents ready: 12th marksheet, JEE marksheet (if applicable), and a valid identity proof.", "Be present for any discussion regarding fees, which requires parents’ participation."]]},
+      {"t": "int", "q": "What if I am unable to attend the counselling on the scheduled date?", "a": ["Please email our support team at support.nst@newtonschool.co stating the reason for rescheduling. Your request will be reviewed, and upon approval, you can rebook your slot through the applicant portal."], "l": ["Email support →", "mailto:support.nst@newtonschool.co"]},
+      {"t": "int", "q": "Is counselling online or on campus?", "a": ["Students can select either online or offline slots based on availability."]},
+      {"t": "int", "q": "How should I prepare for the NST interview?", "a": ["Yes, a preparation kit is available for students. Additionally, prep videos are being prepared, and a mock interview will also be provided to help students get ready."]},
+      {"t": "int", "q": "Is the interview online or on campus?", "a": ["All interviews are conducted online."], "all": 6},
+      {"t": "int", "q": "When will I get the interview results?", "a": ["Please visit the applicant portal 24 hours after your interview to check your interview result status."]},
+      {"t": "int", "q": "Will they test my NSAT performance in the interview?", "a": ["Yes, one segment of the interview will include questions similar to those in NSAT to assess your understanding and problem-solving skills. For the rest of the topics, you can refer to the preparation kit and interview prep videos."]}];
     function esc(s){ return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
     function render(t){
       var items = Q.filter(function(x){ return t === 'all' ? x.all : x.t === t; });
+      if (t === 'all') items.sort(function(a, b){ return a.all - b.all; });
       list.innerHTML = items.map(function(x, i){
         var id = 'fq' + t + i;
         return '<div class="fq' + (i === 0 ? ' is-open' : '') + '"><button class="fq-q" type="button" aria-expanded="' + (i === 0) + '" aria-controls="' + id + '"><span>' + esc(x.q) + '</span><span class="fq-t" aria-hidden="true"><i>+</i><i>–</i></span></button>' +
-          '<div class="fq-a" id="' + id + '" role="region"><div><p>' + esc(x.a) + '</p>' + (x.l ? '<a href="' + x.l[1] + '">' + esc(x.l[0]) + '</a>' : '') + '</div></div></div>';
+          '<div class="fq-a" id="' + id + '" role="region"><div>' + x.a.map(function(b){ return typeof b === 'string' ? '<p>' + esc(b) + '</p>' : '<ul>' + b.map(function(li){ return '<li>' + esc(li) + '</li>'; }).join('') + '</ul>'; }).join('') + (x.l ? '<a href="' + x.l[1] + '"' + (/^https?:/.test(x.l[1]) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(x.l[0]) + '</a>' : '') + '</div></div></div>';
       }).join('');
     }
     render('all');
@@ -5116,6 +5149,22 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     function orbsStop(){ if (orbRaf) cancelAnimationFrame(orbRaf); orbRaf = 0; }
     document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') orbsStop(); else orbsStart(); });
     var welcomeOrb = null;
+    /* the nav's Ask Newton carries the same orb as the chat: searching at rest (as on the welcome screen), listening on hover; its own 30 fps loop while the chat is closed */
+    (function(){
+      var b = document.getElementById('navAsk'), cv = b && b.querySelector('.nav-orb'); if (!cv || !T || !isDT) return;
+      var o = orbMake(cv, 'searching', 64, 28, TINT); if (!o) return;   /* the welcome orb's own state, so it is the same Newton inside and out */
+      orbs = orbs.filter(function(x){ return x !== o; });
+      cv.classList.add('is-live');
+      var raf = 0, last = 0;
+      function loop(now){ raf = 0; if (open || document.hidden) return; if (now - last > 33){ last = now; o.draw(now / 1000 * o.r.speed); } raf = requestAnimationFrame(loop); }
+      function go(){ if (!raf && !reduce) raf = requestAnimationFrame(loop); }
+      b.addEventListener('mouseenter', function(){ o.set('listening'); });
+      b.addEventListener('mouseleave', function(){ o.set('searching'); });
+      b.addEventListener('focus', function(){ o.set('listening'); }); b.addEventListener('blur', function(){ o.set('searching'); });
+      document.addEventListener('visibilitychange', go);
+      new MutationObserver(go).observe(ai, {attributes: true, attributeFilter: ['class']});
+      go();
+    })();
     /* ---- placeholder answers (to be replaced by the real agent) ---- */
     var KB = {
       admit: { text: 'Five steps, all online except the last one. Most students finish the first three in about a week.', steps: [['Register', 'Phone and OTP, then a short form'], ['NSAT', 'Online, proctored, ₹1,200. Maths, English, aptitude. Three attempts'], ['Interview', 'An intro round and a technical one'], ['Counselling', 'Pick a campus and talk through fees and scholarships'], ['Block your seat', 'Then hostel, MacBook and the semester fee']], next: ['When is the next NSAT?', 'Am I eligible with 12th PCM?', 'Book a counselling call with NST'] },
