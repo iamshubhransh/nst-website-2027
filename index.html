@@ -889,8 +889,13 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .fest-tile-n img{width:42.36px;height:43.92px;display:block}
 .fest-tile-t{left:calc(50% - 4.04px);top:57.11px;transform:rotate(8deg);z-index:1;--tg:linear-gradient(135deg,#A83E00,#5C1F00);--tb:#FFD2BA;--glow:rgba(238,160,95,.5)}
 .fest-tile-t i{display:block;width:41px;height:42px;background:url(assets/fest/tekron-mark.png) 54.5% 0/136.6% 103.2% no-repeat}
-.fest.is-tekron .fest-tile-n{z-index:1;transform:rotate(-8deg) translate(-4px,2px) scale(.94);filter:brightness(.7)}
-.fest.is-tekron .fest-tile-t{z-index:2;transform:rotate(8deg) translate(-22px,-2px) scale(1.06)}
+/* switching fests only swaps which tile is in front: both keep their default places, so the overlap is the same either way (12 Oct) */
+.fest.is-tekron .fest-tile-n{z-index:1}
+.fest.is-tekron .fest-tile-t{z-index:2}
+.fest.is-tekron .fest-tile-t.is-lift{animation:festLiftT .45s cubic-bezier(.22,1,.36,1)}
+.fest:not(.is-tekron) .fest-tile-n.is-lift{animation:festLiftN .45s cubic-bezier(.22,1,.36,1)}
+@keyframes festLiftT{40%{transform:rotate(8deg) translateY(-3px) scale(1.05)}}
+@keyframes festLiftN{40%{transform:rotate(-8deg) translateY(-3px) scale(1.05)}}
 .fest-arr{position:absolute;top:66.04px;width:32px;height:32px;padding:0;border:0;border-radius:8px;background:#0B0C0E;box-shadow:inset 0 0 0 1.5px #30363D;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:3;-webkit-tap-highlight-color:transparent;transition:transform .16s ease,background .2s ease}
 .fest-arr:active{transform:scale(.94)}
 .fest-arr img{width:20px;height:20px;display:block}
@@ -1370,6 +1375,9 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .ways,.adm{display:contents}
   .ways-lines{position:absolute;left:0;top:0;width:100%}
   .ways-row{grid-column:1/-1;grid-row:1;margin-top:168px}
+  .ways-row::before,.ways-row::after{content:"";position:absolute;top:-8px;bottom:-8px;width:160px;z-index:3;pointer-events:none}   /* white fades: avatars arrive and leave softly */
+  .ways-row::before{left:0;background:linear-gradient(90deg,#fff 12%,rgba(255,255,255,0))}
+  .ways-row::after{right:0;background:linear-gradient(270deg,#fff 12%,rgba(255,255,255,0))}
   .ways-title{grid-column:1/-1;grid-row:2;margin:32px 0 0;font-size:32px;line-height:40px}
   .wa-h,.adm-title{margin:72px 0 20px;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D;text-align:center}   /* centred over their own card (9 Oct) */
   .wa-h{display:block;grid-column:1;grid-row:3}
@@ -1378,7 +1386,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .route{height:42px;font-size:15px}
   .route-card{grid-column:1;grid-row:5;margin-top:16px;padding:24px;gap:12px;align-self:start}
   .route-lab{font-size:11px;line-height:14px}
-  .route-h{font-size:28px;line-height:36px;min-height:72px}
+  .route-h{font-size:20px;line-height:28px;min-height:56px}   /* 20/28 at Shubhransh's request (12 Oct): 28 px was too big for the card */
   .route-p{font-size:16px;line-height:26px;min-height:52px}
   .route-acts .rbtn{height:52px}
   .adm .hatch{display:none}
@@ -1686,7 +1694,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .snr-hang.is-on .snr-av{--s:88px;font-size:32px;line-height:36px;box-shadow:0 0 0 2px #0673F9,0 6px 8px rgba(22,25,29,.04)}
   .snr-head{gap:8px;width:var(--wrap);margin:0 auto}
   .snr-kick{font-size:14px;line-height:28px}
-  .snr-title{font-size:32px;line-height:40px}
+  .snr-title{font-size:28px;line-height:40px}   /* 28 at Shubhransh's request (12 Oct) */
   .snr-list{flex-direction:row;justify-content:center;width:var(--wrap);margin:48px auto 0}
   .snr-card{flex:0 1 370px;min-width:0}
   .snr-q{min-height:108px}
@@ -4148,6 +4156,8 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
     pg[0].classList.add('on');
     function go(i){
       if (busy || i === cur) return; busy = true; cur = i;
+      var front = sec.querySelector(i === 1 ? '.fest-tile-t' : '.fest-tile-n');
+      if (sec.classList.contains('is-tekron') !== (i === 1) && !reduce){ front.classList.remove('is-lift'); void front.offsetWidth; front.classList.add('is-lift'); setTimeout(function(){ front.classList.remove('is-lift'); }, 480); }
       sec.classList.toggle('is-tekron', i === 1);
       Array.prototype.forEach.call(pg, function(b, k){ b.classList.toggle('on', k === i); });
       body.classList.add('is-out');
