@@ -356,6 +356,33 @@ button{font-family:var(--font)}
 .vid-card::after{content:"";position:absolute;inset:0;border-radius:12px;box-shadow:inset 0 0 0 2px var(--line);pointer-events:none}
 html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .vid{overscroll-behavior:none}
+/* desktop video controls (12 Oct): close, prev/next, and a bar under the playing reel */
+@media (min-width:1024px){
+  .vid-ctl{position:absolute;inset:0;pointer-events:none}
+  .vid-ctl button{pointer-events:auto;border:0;margin:0;padding:0;cursor:pointer;color:#fff;font-family:var(--font);-webkit-tap-highlight-color:transparent}
+  .vid-x{position:absolute;right:32px;top:28px;width:44px;height:44px;border-radius:22px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:background-color .2s ease}
+  .vid-x:hover,.vid-arr:hover{background:rgba(255,255,255,.22)}
+  .vid-x svg{width:20px;height:20px}
+  .vid-arr{position:absolute;top:calc(50% - 25px - 26px);width:52px;height:52px;border-radius:26px;background:rgba(255,255,255,.12);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;transition:background-color .2s ease,transform .16s ease}
+  .vid-arr:active{transform:scale(.94)}
+  .vid-arr svg{width:22px;height:22px}
+  .vid-prev{left:max(24px,calc(50% - var(--vw) * 1.5 - 120px))}
+  .vid-next{right:max(24px,calc(50% - var(--vw) * 1.5 - 120px))}
+  .vid-bar{position:absolute;left:50%;top:calc(50% + var(--vh) / 2 - 25px + 16px);width:var(--vw);transform:translateX(-50%);display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:12px;background:rgba(22,25,29,.72);box-shadow:inset 0 0 0 1px rgba(255,255,255,.1);pointer-events:auto;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .vid-b{flex:none;width:28px;height:28px;border-radius:8px;background:none!important;display:flex;align-items:center;justify-content:center}
+  .vid-b svg{width:18px;height:18px}
+  .vid-b:hover{background:rgba(255,255,255,.1)!important}
+  .vb-play,.vid.is-paused .vb-pause,.vb-off,.vid.is-muted .vb-on{display:none}
+  .vid.is-paused .vb-play,.vid.is-muted .vb-off{display:flex}
+  .vid-prog{position:relative;flex:1 1 auto;height:20px;cursor:pointer;outline:none}
+  .vid-prog::before{content:"";position:absolute;left:0;right:0;top:9px;height:3px;border-radius:2px;background:rgba(255,255,255,.22)}
+  .vid-prog i{position:absolute;left:0;top:9px;height:3px;width:0;border-radius:2px;background:#fff}
+  .vid-prog i::after{content:"";position:absolute;right:-5px;top:-3.5px;width:10px;height:10px;border-radius:5px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.4);transform:scale(0);transition:transform .15s ease}
+  .vid-prog:hover i::after,.vid-prog.is-drag i::after,.vid-prog:focus-visible i::after{transform:scale(1)}
+  .vid-time,.vid-count{flex:none;font-size:12px;line-height:16px;font-weight:600;letter-spacing:.4px;color:rgba(255,255,255,.8);font-variant-numeric:tabular-nums}
+  .vid-count{color:rgba(255,255,255,.55);padding-left:10px;box-shadow:inset 1px 0 0 rgba(255,255,255,.14)}
+}
+
 .dock.is-video .dock-inner{background:rgba(0,0,0,.36)}
 .dock .face-back{opacity:0;background:rgba(255,255,255,.9);transition:opacity .25s ease}
 .dock .face-back img{width:28px;height:28px}
@@ -3330,6 +3357,12 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 <div class="vid" id="vid" aria-hidden="true" data-node="182:37578">
   <div class="vid-back"></div>
   <div class="vid-stage" id="vidStage"></div>
+  <div class="vid-ctl dt-only">
+    <button class="vid-x" type="button" id="vidX" aria-label="Close the video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <button class="vid-arr vid-prev" type="button" id="vidPrev" aria-label="Previous video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <button class="vid-arr vid-next" type="button" id="vidNext" aria-label="Next video"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
+    <div class="vid-bar"><button class="vid-b" type="button" id="vidPlay" aria-label="Pause"><span class="vb-pause"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg></span><span class="vb-play"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg></span></button><div class="vid-prog" id="vidProg" role="slider" aria-label="Seek" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0"><i id="vidFill"></i></div><span class="vid-time" id="vidTime">0:00</span><button class="vid-b" type="button" id="vidMute" aria-label="Mute"><span class="vb-on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg></span><span class="vb-off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg></span></button><span class="vid-count" id="vidCount">1 / 3</span></div>
+  </div>
 </div>
 <div class="ai" id="ai" aria-hidden="true" data-node="385:86567" role="dialog" aria-label="Ask Newton">
   <button class="ai-mark" type="button" id="aiHome" aria-label="Start a new chat"><svg viewBox="0 0 26 32" aria-hidden="true"><path d="M17.5996 0V3.2H20.1356L14.4796 8.856C13.0476 8.004 11.3836 7.508 9.59961 7.508H1.59961V10.708H9.59961C13.1276 10.708 15.9996 13.58 15.9996 17.108V28.308H19.1996V17.108C19.1996 14.756 18.3436 12.6 16.9356 10.928L22.3996 5.464V8H25.5996V0H17.5996Z" fill="currentColor"/><path d="M22.4 19.408L22.368 19.796C22.048 25.008 17.58 29.052 12.312 28.788C7.396 28.54 3.524 24.484 3.22 19.572L3.2 19.248V3.2H16V0H0V19.296L0.04 19.992C0.456 26.724 6.06 32 12.8 32C19.168 32 24.56 27.296 25.484 21.136C25.576 20.532 25.6 19.92 25.6 19.312V9.6H22.4V19.408Z" fill="currentColor"/></svg></button>
@@ -4756,6 +4789,35 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   window.addEventListener('resize', function(){ if (voOpen){ voMeasure(); voCards.forEach(function(c){ voTransition(c, 0); }); voApply(0); } });
   document.addEventListener('keydown', function(e){ if (!voOpen) return; if (e.key === 'Escape') closeVideo(); else if (e.key === 'ArrowRight') voGo(1); else if (e.key === 'ArrowLeft') voGo(-1); });
   document.getElementById('playBtn').addEventListener('click', openVideo);
+  /* desktop controls: close, prev/next, play/pause, mute, seek, counter (the phone uses the dock and swipes) */
+  (function(){
+    var x = document.getElementById('vidX'); if (!x) return;
+    var play = document.getElementById('vidPlay'), mute = document.getElementById('vidMute'), prog = document.getElementById('vidProg'), fill = document.getElementById('vidFill'), time = document.getElementById('vidTime'), count = document.getElementById('vidCount'), raf = 0, seeking = false;
+    function cur(){ return voCards[voCur] && voCards[voCur].video; }
+    function fmt(t){ t = Math.max(0, Math.floor(t || 0)); return Math.floor(t / 60) + ':' + ('0' + t % 60).slice(-2); }
+    function sync(){
+      raf = 0; var v = cur(); if (!voOpen || !v) return;
+      var d = v.duration || 0, p = d ? v.currentTime / d : 0;
+      fill.style.width = (p * 100).toFixed(2) + '%'; prog.setAttribute('aria-valuenow', Math.round(p * 100));
+      time.textContent = fmt(v.currentTime) + (d ? ' / ' + fmt(d) : '');
+      count.textContent = (voCur + 1) + ' / ' + VIDEOS.length;
+      vo.classList.toggle('is-paused', v.paused); vo.classList.toggle('is-muted', v.muted);
+      play.setAttribute('aria-label', v.paused ? 'Play' : 'Pause'); mute.setAttribute('aria-label', v.muted ? 'Unmute' : 'Mute');
+      raf = requestAnimationFrame(sync);
+    }
+    new MutationObserver(function(){ if (voOpen && !raf) raf = requestAnimationFrame(sync); }).observe(vo, {attributes: true, attributeFilter: ['class']});
+    x.addEventListener('click', closeVideo);
+    document.getElementById('vidPrev').addEventListener('click', function(){ voGo(-1); });
+    document.getElementById('vidNext').addEventListener('click', function(){ voGo(1); });
+    play.addEventListener('click', function(){ var v = cur(); if (!v) return; if (v.paused) v.play().catch(function(){}); else v.pause(); });
+    mute.addEventListener('click', function(){ var v = cur(); if (!v) return; var m = !v.muted; voCards.forEach(function(c){ c.video.muted = m; }); });
+    function seekTo(e){ var r = prog.getBoundingClientRect(), v = cur(); if (!v || !v.duration) return; v.currentTime = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width)) * v.duration; }
+    prog.addEventListener('pointerdown', function(e){ seeking = true; prog.classList.add('is-drag'); try { prog.setPointerCapture(e.pointerId); } catch(_){} seekTo(e); });
+    prog.addEventListener('pointermove', function(e){ if (seeking) seekTo(e); });
+    ['pointerup', 'pointercancel'].forEach(function(n){ prog.addEventListener(n, function(){ seeking = false; prog.classList.remove('is-drag'); }); });
+    prog.addEventListener('keydown', function(e){ var v = cur(); if (!v || !v.duration) return; var d = e.key === 'ArrowRight' ? 5 : e.key === 'ArrowLeft' ? -5 : 0; if (d){ e.preventDefault(); e.stopPropagation(); v.currentTime = Math.max(0, Math.min(v.duration, v.currentTime + d)); } });
+    document.addEventListener('keydown', function(e){ if (voOpen && e.key === ' ' && document.activeElement !== prog){ e.preventDefault(); play.click(); } });
+  })();
 
   /* ==================== achievement buckets ==================== */
   var buckets = Array.prototype.slice.call(document.querySelectorAll('.bk'));
