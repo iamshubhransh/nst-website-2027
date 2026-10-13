@@ -2806,36 +2806,43 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-cta.btn{margin-top:20px;width:100%;height:50px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;box-shadow:var(--btn-shadow);gap:6px}
 .pl-cta img{width:22px;height:22px}
 .pl-proof .hatch{margin:0}
-/* ---- 01b the CTC (v3): an oversized range on a quiet dot field, receipts, and the companies behind it ---- */
-.pl-ctc3{position:relative;overflow:hidden;background:#fff;padding:56px 0 40px;display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid #EDEFF3}
-.pl-ctc3-field{position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(circle,#E1E5EA 1px,transparent 1.3px);background-size:12px 12px;background-position:center 6px;
-  -webkit-mask-image:radial-gradient(ellipse 72% 58% at 50% 42%,#000 0,rgba(0,0,0,.55) 45%,transparent 78%);mask-image:radial-gradient(ellipse 72% 58% at 50% 42%,#000 0,rgba(0,0,0,.55) 45%,transparent 78%)}
-.pl-ctc3-cells{position:absolute;inset:0}
-.pl-ctc3-cells i{position:absolute;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:1.5px;background:var(--k);opacity:0;transform:scale(.4);transition:opacity .7s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
-.pl-ctc3-cells i.on{opacity:.85;transform:none}
-.pl-ctc3-k,.pl-ctc3-fig,.pl-ctc3-sub,.pl-ctc3-rec,.pl-ctc3-logos{position:relative}
-.pl-ctc3-k{margin:0;font-size:12px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(22,25,29,.55)}
-.pl-ctc3-fig{display:flex;align-items:baseline;margin:18px 0 0;color:#16191D;font-stretch:125%;white-space:nowrap}
-.pl-ctc3-fig b,.pl-ctc3-fig .dash,.pl-ctc3-fig .u{font-size:76px;line-height:80px;font-weight:600;letter-spacing:-3px}
-.pl-ctc3-fig b{font-variant-numeric:normal}
-.pl-ctc3-fig .rs{align-self:flex-start;margin:10px 2px 0 0;font-size:34px;line-height:40px;font-weight:600;font-stretch:100%;color:rgba(22,25,29,.45);letter-spacing:0}
-.pl-ctc3-fig .dash{margin:0 2px;color:rgba(22,25,29,.25)}
-.pl-ctc3-fig .u{margin-left:4px;color:#0673F9}
-.pl-ctc3-sub{margin:6px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(22,25,29,.55)}
-.pl-ctc3-rec{display:grid;grid-template-columns:1fr 1fr;width:calc(100% - 32px);margin-top:32px;border-top:1px solid #EDEFF3;border-bottom:1px solid #EDEFF3}
-.pl-ctc3-rec div{display:flex;flex-direction:column;align-items:center;gap:2px;padding:16px 8px}
-.pl-ctc3-rec div+div{border-left:1px solid #EDEFF3}
-.pl-ctc3-rec b{display:inline-flex;align-items:center;gap:6px;font-size:20px;line-height:26px;font-weight:600;font-stretch:125%;color:#16191D}
-.pl-ctc3-rec div:first-child b{color:#007A51}
-.pl-ctc3-rec img{width:16px;height:16px}
-.pl-ctc3-rec span{font-size:12.5px;line-height:17px;font-weight:500;color:rgba(22,25,29,.55)}
-.pl-ctc3-logos{position:relative;align-self:stretch;height:36px;margin-top:24px;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent)}
-.pl-ctc3-strip{position:absolute;left:0;top:0;height:36px;display:flex;align-items:center;gap:36px;padding-left:36px;will-change:transform;animation:plMarq 34s linear infinite;animation-play-state:paused}
-.pl-ctc3-strip.is-live{animation-play-state:running}
-@keyframes plMarq{to{transform:translateX(-50%)}}   /* the logos are doubled; half the strip is one loop */
-.pl-ctc3-strip img{flex:none;display:block;width:auto;filter:grayscale(1);opacity:.75}
+/* ---- 01b the CTC (v4): the NST-blue stage ---- */
+.pl-ctc4{position:relative;overflow:hidden;padding:44px 16px 36px;color:#fff;
+  background:radial-gradient(120% 70% at 85% 0%,#3D95FF 0%,rgba(61,149,255,0) 55%),linear-gradient(170deg,#0673F9 0%,#0563E0 45%,#0446A8 100%)}
+.pl-ctc4-rings{position:absolute;right:-170px;top:-60px;width:520px;height:520px;opacity:.16;pointer-events:none}
+.pl-ctc4-rings svg{width:100%;height:100%;animation:plSpin 90s linear infinite;animation-play-state:paused}
+.pl-ctc4.is-live .pl-ctc4-rings svg{animation-play-state:running}
+@keyframes plSpin{to{transform:rotate(360deg)}}
+.pl-ctc4-pill{position:relative;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase}
+.pl-ctc4-pill i{width:6px;height:6px;border-radius:50%;background:#7CF0B0;box-shadow:0 0 0 3px rgba(124,240,176,.25)}
+.pl-ctc4-stack{position:relative;margin-top:22px}
+.pl-ctc4-stack p{margin:0;display:flex;align-items:flex-start;font-stretch:125%;white-space:nowrap}
+.pl-ctc4-stack b,.pl-ctc4-stack .u{font-size:92px;line-height:88px;font-weight:600;letter-spacing:-4px}
+.pl-ctc4-stack .rs{margin:12px 4px 0 0;font-size:40px;line-height:44px;font-weight:500;font-stretch:100%;letter-spacing:0;color:rgba(255,255,255,.7)}
+.pl-ctc4-stack .u{margin-left:6px;color:rgba(255,255,255,.55)}
+.pl-ctc4-stack .l2{justify-content:flex-end;margin-top:2px;transition:transform .9s cubic-bezier(.22,1,.36,1) .15s,opacity .6s ease .15s}
+.pl-ctc4-stack .l2 em{align-self:flex-end;margin:0 12px 14px 0;font-style:normal;font-stretch:100%;font-size:22px;line-height:26px;font-weight:500;color:rgba(255,255,255,.7)}
+.pl-ctc4:not(.is-in) .l2{opacity:0;transform:translateX(28px)}
+.pl-ctc4-sub{position:relative;margin:14px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(255,255,255,.78)}
+.pl-ctc4-avg{position:relative;display:flex;align-items:center;gap:12px;margin-top:28px;padding:14px 14px 14px 12px;border-radius:16px;background:#fff;color:#16191D;box-shadow:0 18px 36px -20px rgba(2,27,74,.6);transition:transform .8s cubic-bezier(.22,1,.36,1) .35s,opacity .6s ease .35s}
+.pl-ctc4:not(.is-in) .pl-ctc4-avg{opacity:0;transform:translateY(16px)}
+.pl-ctc4-ok{flex:none;width:44px;height:44px;border-radius:12px;background:#E7F6EE;display:flex;align-items:center;justify-content:center}
+.pl-ctc4-ok img{width:22px;height:22px}
+.pl-ctc4-avg div{flex:1;min-width:0;display:flex;flex-direction:column}
+.pl-ctc4-avg b{font-size:24px;line-height:28px;font-weight:600;font-stretch:125%;color:#007A51}
+.pl-ctc4-avg div span{margin-top:2px;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
+.pl-ctc4-avg>em{flex:none;align-self:flex-start;height:22px;padding:0 8px;border-radius:999px;background:#F6F7F9;font-style:normal;font-size:11px;line-height:22px;font-weight:600;color:rgba(22,25,29,.6)}
+.pl-ctc4-by{position:relative;margin:28px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.78)}
+.pl-ctc4-by b{font-weight:600;color:#fff}
+.pl-ctc4-rows{position:relative;margin:12px -16px 0;display:flex;flex-direction:column;gap:10px}
+.pl-ctc4-row{overflow:hidden}
+.pl-ctc4-track{display:flex;gap:10px;width:max-content;animation:plMarq 38s linear infinite;animation-play-state:paused}
+.pl-ctc4-row.r2 .pl-ctc4-track{animation-direction:reverse;animation-duration:44s}
+.pl-ctc4.is-live .pl-ctc4-track{animation-play-state:running}
+.pl-chip4{flex:none;height:48px;min-width:104px;padding:0 18px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -10px rgba(2,27,74,.5)}
+.pl-chip4{gap:8px;font-size:14px;line-height:18px;font-weight:600;color:#16191D}
+.pl-chip4 img{display:block;width:auto}
+@keyframes plMarq{to{transform:translateX(-50%)}}
 
 
 /* ---- 02a Google: a search that finds two interns ---- */
@@ -3203,7 +3210,8 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-barcode.is-wait i{transform:none}
   .pl-thread.is-wait .pl-msg,.pl-thread.is-wait .pl-typing{opacity:1;transform:none}
   .pl-goog.is-wait .pl-goog-count,.pl-goog.is-wait .pl-gcard{opacity:1;transform:none}
-  .pl-ctc3-cells i{transition:none}
+  .pl-ctc4-rings svg,.pl-ctc4-track{animation:none}
+  .pl-ctc4:not(.is-in) .l2,.pl-ctc4:not(.is-in) .pl-ctc4-avg{opacity:1;transform:none}
   .pl-cos.is-wait .pl-cmp{opacity:1;transform:none}
   .pl-report.is-wait .pl-rep-seal,.pl-report.is-wait .pl-rep-cover{opacity:1;transform:none}
 }
@@ -3289,27 +3297,29 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       <a class="btn btn-brand pl-cta" href="index.html#ways">Become a part of NST <img src="assets/icon-arrow-right.svg" alt=""></a>
     </div>
   </section>
-  <!-- 01b · the CTC (13 Oct, v3, after Mobbin: Glassdoor's pay range as the headline; Reducto/Apollo's oversized number on a quiet
-       dot field with the companies behind it). A 12 px dot grid (the hairlines' pitch) where a few cells light up; the range,
-       the campus average and the company count as plain receipts; a drifting row of the hiring companies -->
-  <section class="pl-ctc3" id="ctc" aria-label="CTC offered to freshers">
-    <div class="pl-ctc3-field" aria-hidden="true"><div class="pl-ctc3-cells" id="plCtcCells"></div></div>
-    <p class="pl-ctc3-k">CTC offered to freshers</p>
-    <p class="pl-ctc3-fig"><span class="rs">₹</span><b data-to="20">20</b><span class="dash">–</span><b data-to="50">50</b><span class="u">L</span></p>
-    <p class="pl-ctc3-sub">Lakhs per annum · 2025–26</p>
-    <div class="pl-ctc3-rec">
-      <div><b><img src="assets/icon-check-circle.svg" alt="">₹23 Lakhs</b><span>Average CTC on campus</span></div>
-      <div><b>150+</b><span>Companies making offers</span></div>
+  <!-- 01b · the CTC (13 Oct, v4): a full-bleed NST-blue stage (after Kajabi / Pitch / Shopify's colour bands and the homepage's own
+       win cards and orbit ring). A staggered stack — ₹20L left, "to ₹50L" right — on slowly turning dashed rings; the campus average
+       in a white card; two rows of hiring companies drifting in opposite directions -->
+  <section class="pl-ctc4" id="ctc" aria-label="CTC offered to freshers: 20 to 50 lakhs per annum">
+    <div class="pl-ctc4-rings" aria-hidden="true">
+      <svg viewBox="0 0 600 600"><circle cx="300" cy="300" r="298" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 8"/><circle cx="300" cy="300" r="210" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 7"/><circle cx="300" cy="300" r="122" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="3 6"/></svg>
     </div>
-    <div class="pl-ctc3-logos" id="plCtcRow" aria-label="Companies hiring from NST"><div class="pl-ctc3-strip" id="plCtcStrip">
-      <img src="assets/company-google.svg" alt="Google" style="height:18px">
-      <img src="assets/pl/wm-emergent.png" alt="Emergent" style="height:13px">
-      <img src="assets/pl/wm-licious.png" alt="Licious" style="height:22px">
-      <img src="assets/pl/wm-mstack.png" alt="MSTACK" style="height:13px">
-      <img src="assets/pl/wm-salaryse.png" alt="SalarySe" style="height:18px">
-      <img src="assets/pl/wm-gpunet.png" alt="GPU.NET" style="height:15px">
-      <img src="assets/pl/wm-fischerjordan.png" alt="Fischer Jordan" style="height:28px">
-    </div></div>
+    <span class="pl-ctc4-pill"><i></i>CTC offered to freshers</span>
+    <div class="pl-ctc4-stack" aria-hidden="true">
+      <p class="l1"><span class="rs">₹</span><b data-to="20">20</b><span class="u">L</span></p>
+      <p class="l2"><em>to</em><span class="rs">₹</span><b data-to="50">50</b><span class="u">L</span></p>
+    </div>
+    <p class="pl-ctc4-sub">per annum, offered to NST freshers in 2025–26</p>
+    <div class="pl-ctc4-avg">
+      <span class="pl-ctc4-ok"><img src="assets/icon-check-circle.svg" alt=""></span>
+      <div><b>₹23 Lakhs</b><span>Average CTC offered on campus</span></div>
+      <em>Audited</em>
+    </div>
+    <p class="pl-ctc4-by">Offered by <b>150+ companies</b></p>
+    <div class="pl-ctc4-rows" aria-hidden="true">
+      <div class="pl-ctc4-row"><div class="pl-ctc4-track"><span class="pl-chip4"><img src="assets/company-google.svg" alt="Google" style="height:18px"></span><span class="pl-chip4"><img src="assets/pl/wm-emergent.png" alt="Emergent" style="height:12px"></span><span class="pl-chip4"><img src="assets/pl/wm-licious.png" alt="Licious" style="height:22px"></span><span class="pl-chip4"><img src="assets/co-logo-swiggy.png" alt="" style="height:22px"><span style="color:#FC8019">Swiggy</span></span><span class="pl-chip4"><img src="assets/pl/wm-mstack.png" alt="MSTACK" style="height:12px"></span><span class="pl-chip4"><img src="assets/pl/wm-salaryse.png" alt="SalarySe" style="height:17px"></span><span class="pl-chip4"><img src="assets/company-google.svg" alt="Google" style="height:18px"></span><span class="pl-chip4"><img src="assets/pl/wm-emergent.png" alt="Emergent" style="height:12px"></span><span class="pl-chip4"><img src="assets/pl/wm-licious.png" alt="Licious" style="height:22px"></span><span class="pl-chip4"><img src="assets/co-logo-swiggy.png" alt="" style="height:22px"><span style="color:#FC8019">Swiggy</span></span><span class="pl-chip4"><img src="assets/pl/wm-mstack.png" alt="MSTACK" style="height:12px"></span><span class="pl-chip4"><img src="assets/pl/wm-salaryse.png" alt="SalarySe" style="height:17px"></span></div></div>
+      <div class="pl-ctc4-row r2"><div class="pl-ctc4-track"><span class="pl-chip4"><img src="assets/pl/wm-gpunet.png" alt="GPU.NET" style="height:14px"></span><span class="pl-chip4"><img src="assets/pl/wm-fischerjordan.png" alt="Fischer Jordan" style="height:26px"></span><span class="pl-chip4"><img src="assets/pl/co-zeko-ai.png" alt="" style="height:24px;border-radius:50%"><span>Zeko AI</span></span><span class="pl-chip4"><img src="assets/pl/co-nextyou.png" alt="" style="height:24px;border-radius:50%"><span>NextYou</span></span><span class="pl-chip4"><img src="assets/pl/co-drona-aviation.png" alt="" style="height:24px;border-radius:50%"><span>Drona</span></span><span class="pl-chip4"><img src="assets/pl/wm-salaryse.png" alt="SalarySe" style="height:17px"></span><span class="pl-chip4"><img src="assets/pl/wm-gpunet.png" alt="GPU.NET" style="height:14px"></span><span class="pl-chip4"><img src="assets/pl/wm-fischerjordan.png" alt="Fischer Jordan" style="height:26px"></span><span class="pl-chip4"><img src="assets/pl/co-zeko-ai.png" alt="" style="height:24px;border-radius:50%"><span>Zeko AI</span></span><span class="pl-chip4"><img src="assets/pl/co-nextyou.png" alt="" style="height:24px;border-radius:50%"><span>NextYou</span></span><span class="pl-chip4"><img src="assets/pl/co-drona-aviation.png" alt="" style="height:24px;border-radius:50%"><span>Drona</span></span><span class="pl-chip4"><img src="assets/pl/wm-salaryse.png" alt="SalarySe" style="height:17px"></span></div></div>
+    </div>
   </section>
 
   <section class="proof pl-proof" aria-label="Placement summary">
@@ -4255,28 +4265,16 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 1600); });
   })();
 
-  /* ---- 01b · the CTC: the range counts up once; on the dot field a few cells light up and fade in turn (offers arriving);
-          the company row drifts (dot-less marquee) ---- */
+  /* ---- 01b · the CTC stage: the two figures count up, "to ₹50L" slides in from the right, the average card rises;
+          the rings turn and the company rows drift while it is on screen ---- */
   (function(){
     var sec = document.getElementById('ctc'); if (!sec) return;
-    var st = document.getElementById('plCtcStrip'); st.innerHTML += st.innerHTML; [].slice.call(st.children, st.children.length / 2).forEach(function(im){ im.alt = ''; im.setAttribute('aria-hidden', 'true'); });
-    onView(document.getElementById('plCtcRow'), function(v){ st.classList.toggle('is-live', v && !reduce); });
-    var nums = [].slice.call(sec.querySelectorAll('.pl-ctc3-fig b'));
-    var box = document.getElementById('plCtcCells'), K = ['#0673F9', '#0673F9', '#16A34A', '#F59700', '#B42FE5', '#61A8FF'], cells = [];
-    function lay(){ box.innerHTML = ''; cells = []; var W = sec.clientWidth, H = sec.clientHeight, cx = W / 2;
-      for (var n = 0; n < 26; n++){ var gx = Math.round((cx + (Math.random() - .5) * W * .95) / 12) * 12 + (W / 2 % 12), gy = Math.round((Math.random() * H * .8) / 12) * 12 + 6;
-        if (Math.abs(gx - cx) < 200 && gy > 40 && gy < 260) continue;   /* keep the figure clear */
-        var c = document.createElement('i'); c.style.left = gx + 'px'; c.style.top = gy + 'px'; c.style.setProperty('--k', K[n % K.length]); box.appendChild(c); cells.push(c); } }
-    lay();
-    if (reduce){ cells.slice(0, 8).forEach(function(c){ c.classList.add('on'); }); return; }
+    onView(sec, function(v){ sec.classList.toggle('is-live', v && !reduce); });
+    var nums = [].slice.call(sec.querySelectorAll('.pl-ctc4-stack b'));
+    if (reduce){ sec.classList.add('is-in'); return; }
     nums.forEach(function(b){ b.textContent = '0'; });
-    once(sec, function(){ var t0 = performance.now();
-      (function f(now){ var p = Math.min(1, (now - t0) / 1200), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .35);
-    var iv = 0;
-    function tick(){ var on = cells.filter(function(c){ return c.classList.contains('on'); });
-      if (on.length > 7) on[Math.floor(Math.random() * on.length)].classList.remove('on');
-      var off = cells.filter(function(c){ return !c.classList.contains('on'); }); if (off.length) off[Math.floor(Math.random() * off.length)].classList.add('on'); }
-    onView(sec, function(v){ clearInterval(iv); if (v){ for (var k = 0; k < 6; k++) tick(); iv = setInterval(tick, 700); } });
+    once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
+      (function f(now){ var p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .3);
   })();
 
   /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */

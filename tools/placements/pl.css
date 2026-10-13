@@ -38,36 +38,43 @@
 .pl-cta.btn{margin-top:20px;width:100%;height:50px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;box-shadow:var(--btn-shadow);gap:6px}
 .pl-cta img{width:22px;height:22px}
 .pl-proof .hatch{margin:0}
-/* ---- 01b the CTC (v3): an oversized range on a quiet dot field, receipts, and the companies behind it ---- */
-.pl-ctc3{position:relative;overflow:hidden;background:#fff;padding:56px 0 40px;display:flex;flex-direction:column;align-items:center;text-align:center;border-top:1px solid #EDEFF3}
-.pl-ctc3-field{position:absolute;inset:0;pointer-events:none;
-  background-image:radial-gradient(circle,#E1E5EA 1px,transparent 1.3px);background-size:12px 12px;background-position:center 6px;
-  -webkit-mask-image:radial-gradient(ellipse 72% 58% at 50% 42%,#000 0,rgba(0,0,0,.55) 45%,transparent 78%);mask-image:radial-gradient(ellipse 72% 58% at 50% 42%,#000 0,rgba(0,0,0,.55) 45%,transparent 78%)}
-.pl-ctc3-cells{position:absolute;inset:0}
-.pl-ctc3-cells i{position:absolute;width:6px;height:6px;margin:-3px 0 0 -3px;border-radius:1.5px;background:var(--k);opacity:0;transform:scale(.4);transition:opacity .7s ease,transform .7s cubic-bezier(.34,1.56,.64,1)}
-.pl-ctc3-cells i.on{opacity:.85;transform:none}
-.pl-ctc3-k,.pl-ctc3-fig,.pl-ctc3-sub,.pl-ctc3-rec,.pl-ctc3-logos{position:relative}
-.pl-ctc3-k{margin:0;font-size:12px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(22,25,29,.55)}
-.pl-ctc3-fig{display:flex;align-items:baseline;margin:18px 0 0;color:#16191D;font-stretch:125%;white-space:nowrap}
-.pl-ctc3-fig b,.pl-ctc3-fig .dash,.pl-ctc3-fig .u{font-size:76px;line-height:80px;font-weight:600;letter-spacing:-3px}
-.pl-ctc3-fig b{font-variant-numeric:normal}
-.pl-ctc3-fig .rs{align-self:flex-start;margin:10px 2px 0 0;font-size:34px;line-height:40px;font-weight:600;font-stretch:100%;color:rgba(22,25,29,.45);letter-spacing:0}
-.pl-ctc3-fig .dash{margin:0 2px;color:rgba(22,25,29,.25)}
-.pl-ctc3-fig .u{margin-left:4px;color:#0673F9}
-.pl-ctc3-sub{margin:6px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(22,25,29,.55)}
-.pl-ctc3-rec{display:grid;grid-template-columns:1fr 1fr;width:calc(100% - 32px);margin-top:32px;border-top:1px solid #EDEFF3;border-bottom:1px solid #EDEFF3}
-.pl-ctc3-rec div{display:flex;flex-direction:column;align-items:center;gap:2px;padding:16px 8px}
-.pl-ctc3-rec div+div{border-left:1px solid #EDEFF3}
-.pl-ctc3-rec b{display:inline-flex;align-items:center;gap:6px;font-size:20px;line-height:26px;font-weight:600;font-stretch:125%;color:#16191D}
-.pl-ctc3-rec div:first-child b{color:#007A51}
-.pl-ctc3-rec img{width:16px;height:16px}
-.pl-ctc3-rec span{font-size:12.5px;line-height:17px;font-weight:500;color:rgba(22,25,29,.55)}
-.pl-ctc3-logos{position:relative;align-self:stretch;height:36px;margin-top:24px;overflow:hidden;
-  -webkit-mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(90deg,transparent,#000 56px,#000 calc(100% - 56px),transparent)}
-.pl-ctc3-strip{position:absolute;left:0;top:0;height:36px;display:flex;align-items:center;gap:36px;padding-left:36px;will-change:transform;animation:plMarq 34s linear infinite;animation-play-state:paused}
-.pl-ctc3-strip.is-live{animation-play-state:running}
-@keyframes plMarq{to{transform:translateX(-50%)}}   /* the logos are doubled; half the strip is one loop */
-.pl-ctc3-strip img{flex:none;display:block;width:auto;filter:grayscale(1);opacity:.75}
+/* ---- 01b the CTC (v4): the NST-blue stage ---- */
+.pl-ctc4{position:relative;overflow:hidden;padding:44px 16px 36px;color:#fff;
+  background:radial-gradient(120% 70% at 85% 0%,#3D95FF 0%,rgba(61,149,255,0) 55%),linear-gradient(170deg,#0673F9 0%,#0563E0 45%,#0446A8 100%)}
+.pl-ctc4-rings{position:absolute;right:-170px;top:-60px;width:520px;height:520px;opacity:.16;pointer-events:none}
+.pl-ctc4-rings svg{width:100%;height:100%;animation:plSpin 90s linear infinite;animation-play-state:paused}
+.pl-ctc4.is-live .pl-ctc4-rings svg{animation-play-state:running}
+@keyframes plSpin{to{transform:rotate(360deg)}}
+.pl-ctc4-pill{position:relative;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase}
+.pl-ctc4-pill i{width:6px;height:6px;border-radius:50%;background:#7CF0B0;box-shadow:0 0 0 3px rgba(124,240,176,.25)}
+.pl-ctc4-stack{position:relative;margin-top:22px}
+.pl-ctc4-stack p{margin:0;display:flex;align-items:flex-start;font-stretch:125%;white-space:nowrap}
+.pl-ctc4-stack b,.pl-ctc4-stack .u{font-size:92px;line-height:88px;font-weight:600;letter-spacing:-4px}
+.pl-ctc4-stack .rs{margin:12px 4px 0 0;font-size:40px;line-height:44px;font-weight:500;font-stretch:100%;letter-spacing:0;color:rgba(255,255,255,.7)}
+.pl-ctc4-stack .u{margin-left:6px;color:rgba(255,255,255,.55)}
+.pl-ctc4-stack .l2{justify-content:flex-end;margin-top:2px;transition:transform .9s cubic-bezier(.22,1,.36,1) .15s,opacity .6s ease .15s}
+.pl-ctc4-stack .l2 em{align-self:flex-end;margin:0 12px 14px 0;font-style:normal;font-stretch:100%;font-size:22px;line-height:26px;font-weight:500;color:rgba(255,255,255,.7)}
+.pl-ctc4:not(.is-in) .l2{opacity:0;transform:translateX(28px)}
+.pl-ctc4-sub{position:relative;margin:14px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(255,255,255,.78)}
+.pl-ctc4-avg{position:relative;display:flex;align-items:center;gap:12px;margin-top:28px;padding:14px 14px 14px 12px;border-radius:16px;background:#fff;color:#16191D;box-shadow:0 18px 36px -20px rgba(2,27,74,.6);transition:transform .8s cubic-bezier(.22,1,.36,1) .35s,opacity .6s ease .35s}
+.pl-ctc4:not(.is-in) .pl-ctc4-avg{opacity:0;transform:translateY(16px)}
+.pl-ctc4-ok{flex:none;width:44px;height:44px;border-radius:12px;background:#E7F6EE;display:flex;align-items:center;justify-content:center}
+.pl-ctc4-ok img{width:22px;height:22px}
+.pl-ctc4-avg div{flex:1;min-width:0;display:flex;flex-direction:column}
+.pl-ctc4-avg b{font-size:24px;line-height:28px;font-weight:600;font-stretch:125%;color:#007A51}
+.pl-ctc4-avg div span{margin-top:2px;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
+.pl-ctc4-avg>em{flex:none;align-self:flex-start;height:22px;padding:0 8px;border-radius:999px;background:#F6F7F9;font-style:normal;font-size:11px;line-height:22px;font-weight:600;color:rgba(22,25,29,.6)}
+.pl-ctc4-by{position:relative;margin:28px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.78)}
+.pl-ctc4-by b{font-weight:600;color:#fff}
+.pl-ctc4-rows{position:relative;margin:12px -16px 0;display:flex;flex-direction:column;gap:10px}
+.pl-ctc4-row{overflow:hidden}
+.pl-ctc4-track{display:flex;gap:10px;width:max-content;animation:plMarq 38s linear infinite;animation-play-state:paused}
+.pl-ctc4-row.r2 .pl-ctc4-track{animation-direction:reverse;animation-duration:44s}
+.pl-ctc4.is-live .pl-ctc4-track{animation-play-state:running}
+.pl-chip4{flex:none;height:48px;min-width:104px;padding:0 18px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -10px rgba(2,27,74,.5)}
+.pl-chip4{gap:8px;font-size:14px;line-height:18px;font-weight:600;color:#16191D}
+.pl-chip4 img{display:block;width:auto}
+@keyframes plMarq{to{transform:translateX(-50%)}}
 
 
 /* ---- 02a Google: a search that finds two interns ---- */
@@ -435,7 +442,8 @@
   .pl-barcode.is-wait i{transform:none}
   .pl-thread.is-wait .pl-msg,.pl-thread.is-wait .pl-typing{opacity:1;transform:none}
   .pl-goog.is-wait .pl-goog-count,.pl-goog.is-wait .pl-gcard{opacity:1;transform:none}
-  .pl-ctc3-cells i{transition:none}
+  .pl-ctc4-rings svg,.pl-ctc4-track{animation:none}
+  .pl-ctc4:not(.is-in) .l2,.pl-ctc4:not(.is-in) .pl-ctc4-avg{opacity:1;transform:none}
   .pl-cos.is-wait .pl-cmp{opacity:1;transform:none}
   .pl-report.is-wait .pl-rep-seal,.pl-report.is-wait .pl-rep-cover{opacity:1;transform:none}
 }
