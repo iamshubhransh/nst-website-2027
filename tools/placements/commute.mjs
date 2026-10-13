@@ -69,11 +69,11 @@ TOW.forEach((t, ti) => {
 const WINDOWS = win;
 
 /* ---- street furniture: trees and lamps along both sidewalks, benches in the park ---- */
-for (const x of [-560, -470, -150, -80, -10, 60, 470, 560]) put("tree", [x, -46, 2], 0.62);
-for (const x of [-600, -520, -380, -290, -170, -40, 90, 210, 330, 450, 570]) put("tree", [x, 52, 0], 0.74);
+for (const x of [-470, -80, 60, 560]) put("tree", [x, -46, 2], 0.62);   /* fewer trees (13 Oct): 35 → 16 */
+for (const x of [-520, -290, -40, 210, 450]) put("tree", [x, 52, 0], 0.74);
 for (const x of [-330, -60, 230, 520]) put("lamp", [x, 34, 2], 0.8);
 for (const x of [-220, 150, 400]) put("bench", [x, 70, 0], 0.7);
-for (const x of [-640, -520, -400, -250, -100, 40, 180, 320, 470, 600]) put("tree", [x, 128, 0], 0.9);
+for (const x of [-400, -100, 180, 470]) put("tree", [x, 128, 0], 0.9);
 
 /* ---- the middle of the street: a low campus wall with posts, a bus shelter by the crossing, a kiosk, more trees ---- */
 for (let x = -460; x < -200; x += 26) add([x + 1, -70, 0], S(k.slabOf({ x, y: -71, w: 2.4, d: 2.4, r: 0.3 }, 1.4, 12, P, 2), { tone: "lo" }));
@@ -84,7 +84,7 @@ add([92, -42, 0], S(k.slabOf({ x: 73, y: -45, w: 2, d: 2, r: 0.3 }, 2, 22, P, 2)
   S(k.slabOf(shel, 24, 2.2, P, 2, 0.4), { tone: "mid" }) + S(k.slabOf({ x: 114, y: -42, w: 2, d: 2, r: 0.3 }, 2, 26, P, 2), { tone: "lo" }) + S(k.slabOf({ x: 112, y: -43, w: 8, d: 1.4, r: 0.4 }, 22, 8, P, 2), { tone: "mid" }));
 add([-90, -110, 0], S(k.slabOf({ x: -120, y: -128, w: 56, d: 40, r: 1 }, 0, 26, P, 2, 0.5), { tone: "mid", inner: Ln(pd([[-112, -88 + 0.05, 6], [-96, -88 + 0.05, 6], [-96, -88 + 0.05, 18], [-112, -88 + 0.05, 18]]) + pd([[-88, -88 + 0.05, 10], [-72, -88 + 0.05, 10], [-72, -88 + 0.05, 18], [-88, -88 + 0.05, 18]]), { tone: "lo" }) }) +
   S(k.slabOf({ x: -124, y: -92, w: 64, d: 10, r: 0.6 }, 22, 2, P, 2, 0.3), { tone: "mid" }));
-for (const [x, y, sc] of [[-30, -120, 0.85], [10, -150, 0.8], [40, -110, 0.75], [-160, -150, 0.8], [-200, -112, 0.7], [-10, -180, 0.7]]) put("tree", [x, y, 0], sc);
+for (const [x, y, sc] of [[-30, -120, 0.85], [40, -150, 0.75], [-180, -130, 0.75]]) put("tree", [x, y, 0], sc);
 
 /* ---- the shuttle (the lit part): drawn at x = 0 in the near lane; the page slides it along +x ---- */
 const bus = { x: -28, y: 4, w: 56, d: 18, r: 3 };
