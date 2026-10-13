@@ -54,3 +54,23 @@ GitHub Pages serves the `main` branch root. Push to `main` and the site updates 
 A layer at the end of the stylesheet (`@media (min-width:1024px)`) re-lays the same DOM from Figma 511:3609: a 1200 px column, 40/48 section titles, header + device columns for the buckets, side-by-side campuses, a three-card wins carousel, wider rings and dome. Desktop-only nodes carry `.dt-only`; `.bk-side`, `.bk-main`, `.found-side` and `.wa` are `display:contents` on phones. Script branches read `isDT`. Below 1024 px the phone design is unchanged.
 
 Pixel-matched so far: hero (512:24656), quick summary band, placement / campus / wins (514:26056). The desktop hero plays `assets/dt/hero-film.mp4`, exported from the Figma video fill (59 s loop, gradient baked in); phones keep the still.
+
+## Placements page (`placements.html`, 13 Oct 2026)
+Mobile-first build of Shubhransh's frame 632:26742. The page is **generated**: edit `tools/placements/{body.html,pl.css,pl.js}` and run `python3 tools/placements/build.py`.
+
+- The build takes the shell from `index.html`: head, top bar, footer, dock, chat, menu sheet, video overlay, and the wins, proof-tile and CTC markup.
+- It keeps only the shared-script blocks this page uses, plus the helpers they call.
+- It switches off the desktop layer, since there is no desktop design yet, so wide screens get the 402 px phone column.
+
+Sections:
+1. Light intern wall.
+2. Live offers and the company arc.
+3. 300-dot campus record.
+4. Wins.
+5. Sector barcode.
+6. Split-flap board.
+7. Story playlist with inline YouTube.
+8. Recruiter thread.
+9. FAQs, then the homepage footer.
+
+Interaction test: `node tools/placements/e2e.mjs`, run with the local server on :8765.
