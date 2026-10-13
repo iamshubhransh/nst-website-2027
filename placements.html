@@ -3106,28 +3106,38 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-tile-logo img{width:26px;height:32px}
 .pl-kicker{margin:36px 0 0;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(22,25,29,.5);text-align:center}
 .pl-h2{margin:12px 0 0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D;text-align:center}
-.pl-thread{align-self:stretch;margin-top:36px;padding:1px 0;border-radius:12px;background:#0B0C0E;box-shadow:inset 0 0 0 1px #23282F;overflow:hidden;color:#fff}
-.pl-thread-bar{display:flex;justify-content:space-between;align-items:center;height:48px;padding:0 16px;background:#16191D}
-.pl-thread-bar span{font-size:14px;line-height:20px;font-weight:600}
-.pl-thread-bar span i{font-style:normal;margin-right:3px;font-size:16px;color:rgba(255,255,255,.4)}
-.pl-thread-bar em{font-style:normal;font-size:12px;line-height:18px;font-weight:500;color:rgba(255,255,255,.5)}
-.pl-msg{display:flex;gap:10px;padding:14px 16px 14px;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
-.pl-thread.is-wait .pl-msg{opacity:0;transform:translateY(10px)}
-.pl-av{flex:none;width:32px;height:32px;margin-top:2px;border-radius:8px;background:var(--c);display:flex;align-items:center;justify-content:center;font-size:14px;line-height:18px;font-weight:700;color:#fff;transition:background-color .3s ease}
-.pl-who{margin:0;height:18px;font-size:14px;line-height:18px;white-space:nowrap}
-.pl-who b{font-weight:600}
-.pl-who span{margin-left:4px;font-size:12px;font-weight:500;color:rgba(255,255,255,.45)}
-.pl-said{margin:4px 0 0;font-size:14px;line-height:21px;font-weight:500;color:rgba(255,255,255,.85)}
-.pl-typing{display:flex;align-items:center;gap:10px;height:56px;padding:0 16px}
-.pl-typing .pl-av{margin-top:0}
-.pl-dots{display:flex;align-items:center;gap:5px;height:24px;padding:0 10px;border-radius:12px;background:#16191D}
-.pl-dots i{width:6px;height:6px;border-radius:50%;background:#fff;opacity:.4;animation:plDot 1.2s ease-in-out infinite}
+/* the recruiters, as a WhatsApp group (13 Oct): green bar, wallpaper, white bubbles with tails, a typing bubble, the composer */
+.pl-thread{align-self:stretch;margin-top:36px;border-radius:16px;overflow:hidden;box-shadow:0 0 0 1px #E1E5EA,0 14px 34px -18px rgba(22,25,29,.3);background:#EFEAE2;color:#111B21}
+.pl-wa-bar{display:flex;align-items:center;gap:8px;height:60px;padding:0 14px 0 8px;background:#008069;color:#fff}
+.pl-wa-back{flex:none;width:22px;height:22px}
+.pl-wa-grp{flex:none;width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center}
+.pl-wa-grp img{width:17px;height:21px}
+.pl-wa-t{flex:1;min-width:0;display:flex;flex-direction:column}
+.pl-wa-t b{font-size:16px;line-height:20px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-wa-t em{font-style:normal;font-size:12.5px;line-height:16px;font-weight:500;color:rgba(255,255,255,.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s ease}
+.pl-wa-ic{flex:none;width:22px;height:22px;opacity:.95}
+.pl-wa-body{position:relative;padding:12px 10px 6px;display:flex;flex-direction:column;gap:6px;
+  background-image:radial-gradient(circle at 20% 30%,rgba(0,0,0,.035) 0 1.5px,transparent 2px),radial-gradient(circle at 70% 80%,rgba(0,0,0,.03) 0 1.2px,transparent 1.8px);background-size:28px 28px,22px 22px}
+.pl-wa-day{align-self:center;margin-bottom:4px;padding:4px 10px;border-radius:8px;background:#fff;box-shadow:0 1px .5px rgba(11,20,26,.13);font-size:11.5px;line-height:15px;font-weight:600;color:#54656F}
+.pl-msg{display:flex;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.pl-thread.is-wait .pl-msg,.pl-thread.is-wait .pl-typing{opacity:0;transform:translateY(10px)}
+.pl-bub{position:relative;max-width:88%;padding:6px 9px 7px;border-radius:0 10px 10px 10px;background:#fff;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.pl-bub::before{content:"";position:absolute;left:-7px;top:0;width:8px;height:12px;background:#fff;clip-path:polygon(0 0,100% 0,100% 100%)}
+.pl-who{margin:0;font-size:13px;line-height:18px;font-weight:600;color:var(--c)}
+.pl-who span{font-weight:500;color:#667781}
+.pl-said{margin:2px 0 0;font-size:14.5px;line-height:20px;font-weight:500;color:#111B21}
+.pl-bub time{display:block;margin:2px 0 -2px;text-align:right;font-size:11px;line-height:14px;font-weight:500;color:#667781}
+.pl-typing{display:flex;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.pl-bub-typing{padding-bottom:9px}
+.pl-dots{display:flex;align-items:center;gap:4px;height:14px;margin-top:4px}
+.pl-dots i{width:7px;height:7px;border-radius:50%;background:#8696A0;opacity:.5;animation:plDot 1.2s ease-in-out infinite}
 .pl-dots i:nth-child(2){animation-delay:.2s}.pl-dots i:nth-child(3){animation-delay:.4s}
-@keyframes plDot{30%{opacity:.9;transform:translateY(-2px)}}
-.pl-typing em{font-style:normal;font-size:12px;line-height:18px;font-weight:500;color:rgba(255,255,255,.45);transition:opacity .3s ease}
-.pl-compose{display:flex;align-items:center;justify-content:space-between;height:48px;margin:12px;padding:0 8px 0 14px;border-radius:10px;background:#16191D;box-shadow:inset 0 0 0 1px #30363D;text-decoration:none;color:rgba(255,255,255,.55);font-size:14px;line-height:20px;font-weight:500}
-.pl-compose i{width:32px;height:32px;border-radius:8px;background:#0673F9;display:flex;align-items:center;justify-content:center}
-.pl-compose i img{width:16px;height:16px}
+@keyframes plDot{30%{opacity:1;transform:translateY(-2px)}}
+.pl-compose{display:flex;align-items:center;gap:6px;padding:6px 6px 8px;text-decoration:none}
+.pl-wa-in{flex:1;min-width:0;display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:22px;background:#fff;box-shadow:0 1px .5px rgba(11,20,26,.13);font-size:14px;line-height:20px;font-weight:500;color:#667781;white-space:nowrap;overflow:hidden}
+.pl-wa-in svg{flex:none;width:22px;height:22px;color:#54656F}
+.pl-compose>i{flex:none;width:44px;height:44px;border-radius:50%;background:#00A884;display:flex;align-items:center;justify-content:center}
+.pl-compose>i svg{width:20px;height:20px}
 .pl-hatch-end{border-bottom:0}
 
 /* ---- 09 FAQs ---- */
@@ -3152,7 +3162,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 @media (prefers-reduced-motion:reduce){
   .pl-rays,.pl-caret,.pl-strip,.pl-live-pill i,.pl-live-dot,.pl-board-head em i,.pl-dots i,.pl-feat-k b{animation:none}
   .pl-barcode.is-wait i{transform:none}
-  .pl-thread.is-wait .pl-msg{opacity:1;transform:none}
+  .pl-thread.is-wait .pl-msg,.pl-thread.is-wait .pl-typing{opacity:1;transform:none}
   .pl-goog.is-wait .pl-goog-count,.pl-goog.is-wait .pl-gcard{opacity:1;transform:none}
   .pl-band,.pl-avg,.pl-needle,.pl-foil{transition:none}
   .pl-report.is-wait .pl-rep-seal,.pl-report.is-wait .pl-rep-cover{opacity:1;transform:none}
@@ -3477,13 +3487,21 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
     <span class="pl-tile-logo"><img src="assets/nst-logo-mark.svg" alt=""></span>
     <p class="pl-kicker">Feedback on NST students</p>
     <h2 class="pl-h2">Hear from our recruiters</h2>
-    <div class="pl-thread" id="plThread">
-      <div class="pl-thread-bar"><span><i>#</i>feedback-on-nst-interns</span><em>8 managers</em></div>
-      <div class="pl-msg"><span class="pl-av" style="--c:#0673F9">O</span><div><p class="pl-who"><b>Omkar Mahesh Dandekar</b> <span>Head of Engineering</span></p><p class="pl-said">We currently have seven interns from NST, and they are going above and beyond every day. Within six weeks, the kind of work produced blows my mind.</p></div></div>
-      <div class="pl-msg"><span class="pl-av" style="--c:#B42FE5">T</span><div><p class="pl-who"><b>Tanvi</b> <span>Co-founder</span></p><p class="pl-said">Whoever we’ve hired from NST has shown good product understanding. There is an instant bias to keep coming back to NST for our hiring needs.</p></div></div>
-      <div class="pl-msg"><span class="pl-av" style="--c:#16A34A">H</span><div><p class="pl-who"><b>Himanshu Shrivastava</b> <span>Manager</span></p><p class="pl-said">Gourav now operates at the level of a full engineer. We regularly trust him with high-stakes work.</p></div></div>
-      <div class="pl-typing"><span class="pl-av" id="plTypeAv" style="--c:#C77A00">M</span><span class="pl-dots"><i></i><i></i><i></i></span><em id="plTypeName">Manazir is typing</em></div>
-      <a class="pl-compose" href="#"><span>Hiring? Message our placement team</span><i><img src="assets/pl/icon-send.svg" alt=""></i></a>
+    <div class="pl-thread pl-wa" id="plThread">
+      <div class="pl-wa-bar">
+        <svg class="pl-wa-back" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="pl-wa-grp"><img src="assets/nst-logo-mark.svg" alt=""></span>
+        <span class="pl-wa-t"><b>Recruiters · NST interns</b><em id="plWaSub">Omkar, Tanvi, Himanshu and 5 others</em></span>
+        <svg class="pl-wa-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7.5A2.5 2.5 0 016.5 5h7A2.5 2.5 0 0116 7.5v9a2.5 2.5 0 01-2.5 2.5h-7A2.5 2.5 0 014 16.5zm13 3l3.4-2.3a1 1 0 011.6.8v6a1 1 0 01-1.6.8L17 13.5z" fill="currentColor"/></svg>
+      </div>
+      <div class="pl-wa-body">
+        <span class="pl-wa-day">Today</span>
+        <div class="pl-msg"><div class="pl-bub"><p class="pl-who" style="--c:#0673F9">Omkar Mahesh Dandekar <span>· Head of Engineering</span></p><p class="pl-said">We currently have seven interns from NST, and they are going above and beyond every day. Within six weeks, the kind of work produced blows my mind.</p><time>10:42</time></div></div>
+        <div class="pl-msg"><div class="pl-bub"><p class="pl-who" style="--c:#B42FE5">Tanvi <span>· Co-founder</span></p><p class="pl-said">Whoever we’ve hired from NST has shown good product understanding. There is an instant bias to keep coming back to NST for our hiring needs.</p><time>10:46</time></div></div>
+        <div class="pl-msg"><div class="pl-bub"><p class="pl-who" style="--c:#16A34A">Himanshu Shrivastava <span>· Manager</span></p><p class="pl-said">Gourav now operates at the level of a full engineer. We regularly trust him with high-stakes work.</p><time>10:51</time></div></div>
+        <div class="pl-typing"><div class="pl-bub pl-bub-typing"><p class="pl-who" id="plTypeName" style="--c:#C77A00">Manazir</p><span class="pl-dots"><i></i><i></i><i></i></span></div></div>
+      </div>
+      <a class="pl-compose" href="#"><span class="pl-wa-in"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><path d="M8.5 14.2c.9 1.2 2.1 1.8 3.5 1.8s2.6-.6 3.5-1.8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Hiring? Message our placement team</span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.5 19.5l16-7.5-16-7.5 1.8 6.2L15 12l-8.7 1.3z" fill="#fff"/></svg></i></a>
     </div>
   </section>
   <div class="hatch pl-hatch-end" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
@@ -4393,15 +4411,16 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
     document.querySelectorAll('.pl-chip').forEach(function(c){ c.addEventListener('click', function(){ var l = +c.dataset.l; if (l === list) return; list = l; cur = 0; document.querySelectorAll('.pl-chip').forEach(function(x){ var on = x === c; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); }); render(); }); });
   })();
 
-  /* ---- 08 · the thread: messages arrive one by one; the typing line rotates through the other managers ---- */
+  /* ---- 08 · the WhatsApp group: messages arrive one by one; the typing bubble and the header line rotate through the other managers ---- */
   (function(){
     var th = document.getElementById('plThread'); if (!th) return;
-    var msgs = th.querySelectorAll('.pl-msg');
-    if (!reduce){ th.classList.add('is-wait'); msgs.forEach(function(m, i){ m.style.transitionDelay = (i * 450) + 'ms'; }); once(th, function(){ th.classList.remove('is-wait'); }, .25); }
-    var T = [['M','Manazir','#C77A00'],['S','Simi','#0673F9'],['S','Sandeep','#B42FE5'],['S','Salwat','#16A34A'],['J','Joseph','#C2410C']], k = 0, iv = 0;
-    var av = document.getElementById('plTypeAv'), nm = document.getElementById('plTypeName');
-    function step(){ k = (k + 1) % T.length; nm.style.opacity = 0; setTimeout(function(){ av.textContent = T[k][0]; av.style.setProperty('--c', T[k][2]); nm.textContent = T[k][1] + ' is typing'; nm.style.opacity = 1; }, 300); }
-    onView(th, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(step, 3200); });
+    var items = th.querySelectorAll('.pl-msg, .pl-typing');
+    if (!reduce){ th.classList.add('is-wait'); items.forEach(function(m, i){ m.style.transitionDelay = (i * 450) + 'ms'; }); once(th, function(){ th.classList.remove('is-wait'); }, .25); }
+    var T = [['Manazir','#C77A00'],['Simi','#0673F9'],['Sandeep','#B42FE5'],['Salwat','#16A34A'],['Joseph','#C2410C']], k = 0, iv = 0;
+    var nm = document.getElementById('plTypeName'), sub = document.getElementById('plWaSub'), base = sub.textContent;
+    function show(){ nm.textContent = T[k][0]; nm.style.setProperty('--c', T[k][1]); sub.textContent = T[k][0] + ' is typing…'; }
+    function step(){ k = (k + 1) % T.length; sub.style.opacity = 0; setTimeout(function(){ show(); sub.style.opacity = 1; }, 250); }
+    onView(th, function(on){ clearInterval(iv); if (on && !reduce){ show(); iv = setInterval(step, 3200); } else sub.textContent = base; });
   })();
 
   /* ---- 09 · FAQ: one open at a time ---- */

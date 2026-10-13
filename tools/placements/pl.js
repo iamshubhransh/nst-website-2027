@@ -238,15 +238,16 @@
     document.querySelectorAll('.pl-chip').forEach(function(c){ c.addEventListener('click', function(){ var l = +c.dataset.l; if (l === list) return; list = l; cur = 0; document.querySelectorAll('.pl-chip').forEach(function(x){ var on = x === c; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); }); render(); }); });
   })();
 
-  /* ---- 08 · the thread: messages arrive one by one; the typing line rotates through the other managers ---- */
+  /* ---- 08 · the WhatsApp group: messages arrive one by one; the typing bubble and the header line rotate through the other managers ---- */
   (function(){
     var th = document.getElementById('plThread'); if (!th) return;
-    var msgs = th.querySelectorAll('.pl-msg');
-    if (!reduce){ th.classList.add('is-wait'); msgs.forEach(function(m, i){ m.style.transitionDelay = (i * 450) + 'ms'; }); once(th, function(){ th.classList.remove('is-wait'); }, .25); }
-    var T = [['M','Manazir','#C77A00'],['S','Simi','#0673F9'],['S','Sandeep','#B42FE5'],['S','Salwat','#16A34A'],['J','Joseph','#C2410C']], k = 0, iv = 0;
-    var av = document.getElementById('plTypeAv'), nm = document.getElementById('plTypeName');
-    function step(){ k = (k + 1) % T.length; nm.style.opacity = 0; setTimeout(function(){ av.textContent = T[k][0]; av.style.setProperty('--c', T[k][2]); nm.textContent = T[k][1] + ' is typing'; nm.style.opacity = 1; }, 300); }
-    onView(th, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(step, 3200); });
+    var items = th.querySelectorAll('.pl-msg, .pl-typing');
+    if (!reduce){ th.classList.add('is-wait'); items.forEach(function(m, i){ m.style.transitionDelay = (i * 450) + 'ms'; }); once(th, function(){ th.classList.remove('is-wait'); }, .25); }
+    var T = [['Manazir','#C77A00'],['Simi','#0673F9'],['Sandeep','#B42FE5'],['Salwat','#16A34A'],['Joseph','#C2410C']], k = 0, iv = 0;
+    var nm = document.getElementById('plTypeName'), sub = document.getElementById('plWaSub'), base = sub.textContent;
+    function show(){ nm.textContent = T[k][0]; nm.style.setProperty('--c', T[k][1]); sub.textContent = T[k][0] + ' is typing…'; }
+    function step(){ k = (k + 1) % T.length; sub.style.opacity = 0; setTimeout(function(){ show(); sub.style.opacity = 1; }, 250); }
+    onView(th, function(on){ clearInterval(iv); if (on && !reduce){ show(); iv = setInterval(step, 3200); } else sub.textContent = base; });
   })();
 
   /* ---- 09 · FAQ: one open at a time ---- */
