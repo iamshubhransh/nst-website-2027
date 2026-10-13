@@ -48,7 +48,7 @@
     onView(sec, function(v){ sec.classList.toggle('is-live', v && !reduce); });
     var nums = [].slice.call(sec.querySelectorAll('.pl-ctc4-fig b'));
     if (reduce){ sec.classList.add('is-in'); return; }
-    nums.forEach(function(b){ b.textContent = '0'; });
+    nums.forEach(function(b){ b.textContent = '0'; });   /* the slots have fixed widths, so the centred line holds still while counting */
     once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
       (function f(now){ var p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .3);
   })();

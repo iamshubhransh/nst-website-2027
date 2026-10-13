@@ -2807,38 +2807,39 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-cta img{width:22px;height:22px}
 .pl-proof .hatch{margin:0}
 /* ---- 01b the CTC (v4): the NST-blue stage ---- */
-.pl-ctc4{position:relative;overflow:hidden;padding:44px 16px 36px;color:#fff;
-  background:radial-gradient(120% 70% at 85% 0%,rgba(255,226,140,.75) 0%,rgba(255,226,140,0) 55%),linear-gradient(170deg,#D19A2A 0%,#B47C10 45%,#7A4E05 100%)}   /* gold: the achievement colour (13 Oct) */
-.pl-ctc4-rings{position:absolute;right:-170px;top:-60px;width:520px;height:520px;opacity:.22;pointer-events:none}
+.pl-ctc4{position:relative;overflow:hidden;padding:54px 0 55px;color:#fff;display:flex;flex-direction:column;   /* frame 670:33691, 402 × 510.5 */
+  background:radial-gradient(120% 70% at 85% 0%,rgba(255,226,140,.75) 0%,rgba(255,226,140,0) 55%),linear-gradient(170deg,#D19A2A 0%,#B47C10 45%,#7A4E05 100%)}
+.pl-ctc4-rings{position:absolute;left:calc(50% - 149px);top:-60px;width:520px;height:520px;opacity:.22;pointer-events:none}
 .pl-ctc4-rings svg{width:100%;height:100%;animation:plSpin 90s linear infinite;animation-play-state:paused}
 .pl-ctc4.is-live .pl-ctc4-rings svg{animation-play-state:running}
 @keyframes plSpin{to{transform:rotate(360deg)}}
-.pl-ctc4-pill{position:relative;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase}
-.pl-ctc4-pill i{width:6px;height:6px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 0 3px rgba(255,231,163,.3)}
-.pl-ctc4-fig{position:relative;display:flex;align-items:flex-start;margin:20px 0 0;font-stretch:125%;white-space:nowrap}   /* one line: ₹20–50L */
-.pl-ctc4-fig b,.pl-ctc4-fig .dash,.pl-ctc4-fig .u{font-size:80px;line-height:84px;font-weight:600;letter-spacing:-3px}
-.pl-ctc4-fig b{color:#fff;text-shadow:0 2px 0 rgba(122,78,5,.25)}
-.pl-ctc4-fig .rs{margin:10px 4px 0 0;font-size:36px;line-height:40px;font-weight:500;font-stretch:100%;letter-spacing:0;color:#FFE7A3}
-.pl-ctc4-fig .dash{margin:0 2px;color:rgba(255,231,163,.75)}
-.pl-ctc4-fig .u{margin-left:4px;color:#FFE7A3}
-.pl-ctc4-sub{position:relative;margin:8px 0 0;font-size:14px;white-space:nowrap;line-height:22px;font-weight:500;color:#fff}
-.pl-ctc4-avg{position:relative;display:flex;align-items:center;gap:12px;margin-top:28px;padding:14px 14px 14px 12px;border-radius:16px;background:#fff;color:#16191D;box-shadow:0 18px 36px -20px rgba(74,44,2,.7);transition:transform .8s cubic-bezier(.22,1,.36,1) .35s,opacity .6s ease .35s}
+.pl-ctc4-pill{position:relative;align-self:center;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:#fff}
+.pl-ctc4-pill i{width:6px;height:6px;border-radius:3px;background:#FFE7A3;box-shadow:0 0 0 3px rgba(255,231,163,.3)}
+.pl-ctc4-fig{position:relative;align-self:center;display:flex;align-items:center;height:48px;margin:28px 0 0;font-stretch:125%;white-space:nowrap}
+.pl-ctc4-fig b,.pl-ctc4-fig .dash,.pl-ctc4-fig .u{font-size:42px;line-height:48px;font-weight:600;letter-spacing:-3px}
+.pl-ctc4-fig b{display:inline-block;color:#fff;width:59px}
+.pl-ctc4-fig b+.dash+b{width:61px}   /* the frame's slot widths: ₹ 27, 20 59, – 28, 50 61, L 49 */
+.pl-ctc4-fig .rs{flex:none;width:27px;align-self:flex-start;margin:10px 0 0;font-size:24px;line-height:40px;font-weight:500;letter-spacing:0;color:#FFE7A3}
+.pl-ctc4-fig .dash{flex:none;width:28px;padding:0 2px;color:rgba(255,231,163,.75)}
+.pl-ctc4-fig .u{flex:none;width:49px;padding-left:4px;color:#FFE7A3}
+.pl-ctc4-sub{position:relative;align-self:center;margin:8px 16px 0;font-size:14px;line-height:22px;font-weight:500;color:#fff;text-align:center;white-space:nowrap}
+.pl-ctc4-avg{position:relative;display:flex;align-items:center;gap:12px;margin:27.5px 16px 0;padding:14px 14px 14px 12px;border-radius:16px;background:#fff;color:#16191D;box-shadow:0 18px 36px -20px rgba(74,44,2,.7);transition:transform .8s cubic-bezier(.22,1,.36,1) .35s,opacity .6s ease .35s}
 .pl-ctc4:not(.is-in) .pl-ctc4-avg{opacity:0;transform:translateY(16px)}
 .pl-ctc4-ok{flex:none;width:44px;height:44px;border-radius:12px;background:#E7F6EE;display:flex;align-items:center;justify-content:center}
 .pl-ctc4-ok img{width:22px;height:22px}
 .pl-ctc4-avg div{flex:1;min-width:0;display:flex;flex-direction:column}
-.pl-ctc4-avg b{font-size:24px;line-height:28px;font-weight:600;font-stretch:125%;color:#007A51}
-.pl-ctc4-avg div span{margin-top:2px;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
+.pl-ctc4-avg b{font-size:24px;line-height:28px;font-weight:600;color:#007A51}
+.pl-ctc4-avg div span{padding-top:2px;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
 .pl-ctc4-avg>em{flex:none;align-self:flex-start;height:22px;padding:0 8px;border-radius:999px;background:#F6F7F9;font-style:normal;font-size:11px;line-height:22px;font-weight:600;color:rgba(22,25,29,.6)}
-.pl-ctc4-by{position:relative;margin:28px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.92)}
+.pl-ctc4-by{position:relative;margin:28px 16px 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.92)}
 .pl-ctc4-by b{font-weight:600;color:#fff}
-.pl-ctc4-rows{position:relative;margin:12px -16px 0;display:flex;flex-direction:column;gap:10px}
+.pl-ctc4-rows{position:relative;margin-top:12px;display:flex;flex-direction:column;gap:10px}
 .pl-ctc4-row{overflow:hidden}
 .pl-ctc4-track{display:flex;gap:10px;width:max-content;animation:plMarq 38s linear infinite;animation-play-state:paused}
-.pl-ctc4-row.r2 .pl-ctc4-track{animation-direction:reverse;animation-duration:44s}
+.pl-ctc4-row:not(.r2) .pl-ctc4-track{margin-left:-138.6px}
+.pl-ctc4-row.r2 .pl-ctc4-track{margin-left:-692px;animation-direction:reverse;animation-duration:44s}
 .pl-ctc4.is-live .pl-ctc4-track{animation-play-state:running}
-.pl-chip4{flex:none;height:48px;min-width:104px;padding:0 18px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -10px rgba(74,44,2,.55)}
-.pl-chip4{gap:8px;font-size:14px;line-height:18px;font-weight:600;color:#16191D}
+.pl-chip4{flex:none;height:48px;min-width:104px;padding:0 18px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 16px -10px rgba(74,44,2,.55);font-size:14px;line-height:18px;font-weight:600;color:#16191D}
 .pl-chip4 img{display:block;width:auto}
 @keyframes plMarq{to{transform:translateX(-50%)}}
 
@@ -4267,7 +4268,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     onView(sec, function(v){ sec.classList.toggle('is-live', v && !reduce); });
     var nums = [].slice.call(sec.querySelectorAll('.pl-ctc4-fig b'));
     if (reduce){ sec.classList.add('is-in'); return; }
-    nums.forEach(function(b){ b.textContent = '0'; });
+    nums.forEach(function(b){ b.textContent = '0'; });   /* the slots have fixed widths, so the centred line holds still while counting */
     once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
       (function f(now){ var p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .3);
   })();
