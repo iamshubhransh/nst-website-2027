@@ -41,12 +41,12 @@
     onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 1600); });
   })();
 
-  /* ---- 01b · the CTC stage: the two figures count up, "to ₹50L" slides in from the right, the average card rises;
+  /* ---- 01b · the CTC stage: the range counts up, the average card rises;
           the rings turn and the company rows drift while it is on screen ---- */
   (function(){
     var sec = document.getElementById('ctc'); if (!sec) return;
     onView(sec, function(v){ sec.classList.toggle('is-live', v && !reduce); });
-    var nums = [].slice.call(sec.querySelectorAll('.pl-ctc4-stack b'));
+    var nums = [].slice.call(sec.querySelectorAll('.pl-ctc4-fig b'));
     if (reduce){ sec.classList.add('is-in'); return; }
     nums.forEach(function(b){ b.textContent = '0'; });
     once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
