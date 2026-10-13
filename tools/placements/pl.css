@@ -193,9 +193,10 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-earn span{font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.55)}
 .pl-earn b{font-size:18px;line-height:24px;font-weight:600;color:#0673F9;font-variant-numeric:tabular-nums;transition:color .3s ease}
 .pl-rec.is-delhi .pl-earn b{color:#16A34A}
-.pl-report{position:relative;margin-top:16px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px #EDEFF3,0 10px 30px -18px rgba(22,25,29,.18);overflow:hidden}   /* the audited report, given its own card */
-.pl-rep-top{position:relative;display:flex;gap:16px;align-items:center;padding:20px 16px 18px;background:linear-gradient(180deg,#FFF6EC,#fff)}
-.pl-rep-doc{position:relative;flex:none;width:104px;height:132px}
+.pl-report{position:relative;margin-top:16px;border-radius:16px;background:#fff;box-shadow:0 10px 30px -18px rgba(22,25,29,.18);overflow:hidden}
+.pl-report::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #EDEFF3;pointer-events:none}   /* the outline sits above the cream header */   /* the audited report, given its own card */
+.pl-rep-top{position:relative;display:flex;gap:28px;align-items:center;padding:24px 16px 24px 20px;background:linear-gradient(180deg,#FFF6EC,#fff)}
+.pl-rep-doc{position:relative;flex:none;width:100px;height:128px;margin-right:6px}   /* the back sheets fan ~12 px right; margin keeps them clear of the text */
 .pl-rep-sheet{position:absolute;inset:6px 0 0 6px;border-radius:6px;background:#fff;box-shadow:0 0 0 1px #E1E5EA}
 .pl-rep-sheet.s2{transform:rotate(7deg) translate(6px,0)}
 .pl-rep-sheet.s1{transform:rotate(3deg) translate(3px,0)}
@@ -206,14 +207,14 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-rep-lines{display:flex;flex-direction:column;gap:5px;margin-top:10px}
 .pl-rep-lines i{height:3px;border-radius:2px;background:#EDEFF3}
 .pl-rep-lines i:nth-child(2){width:80%}.pl-rep-lines i:nth-child(4){width:60%}
-.pl-rep-seal{position:absolute;right:-8px;bottom:-6px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 3px rgba(0,122,81,.5),0 4px 10px -4px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;transform:rotate(-14deg);transition:opacity .3s ease,transform .45s cubic-bezier(.34,1.6,.64,1)}
+.pl-rep-seal{position:absolute;right:-4px;bottom:-10px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 3px rgba(0,122,81,.5),0 4px 10px -4px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;transform:rotate(-14deg);transition:opacity .3s ease,transform .45s cubic-bezier(.34,1.6,.64,1)}
 .pl-rep-seal img{width:28px;height:30px;object-fit:contain}
 .pl-report.is-wait .pl-rep-seal{opacity:0;transform:rotate(-14deg) scale(1.8)}
 .pl-report.is-wait .pl-rep-cover{transform:rotate(-8deg) translateY(6px)}
 .pl-rep-t{min-width:0}
-.pl-rep-k{display:inline-flex;align-items:center;gap:6px;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#DE5A02}
+.pl-rep-k{display:flex;align-items:center;gap:6px;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#DE5A02}
 .pl-rep-k i{width:6px;height:6px;border-radius:50%;background:#DE5A02}
-.pl-rep-t h3{margin:8px 0 0;font-size:17px;line-height:23px;font-weight:600;color:#16191D}
+.pl-rep-t h3{margin:10px 0 0;font-size:17px;line-height:23px;font-weight:600;color:#16191D}
 .pl-rep-cert{display:flex;align-items:center;gap:12px;margin:0 16px;padding:14px 0;border-top:1px solid #EDEFF3;border-bottom:1px solid #EDEFF3}
 .pl-rep-logo{flex:none;width:44px;height:44px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px #EDEFF3;display:flex;align-items:center;justify-content:center}
 .pl-rep-logo img{width:30px;height:33px;object-fit:contain}
