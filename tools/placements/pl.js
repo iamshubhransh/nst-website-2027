@@ -41,16 +41,28 @@
     onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 1600); });
   })();
 
-  /* ---- 01b · the CTC: the figure counts up, the range draws across the ruler, the average marker drops in ---- */
+  /* ---- 01b · the CTC: the range counts up once; on the dot field a few cells light up and fade in turn (offers arriving);
+          the company row drifts (dot-less marquee) ---- */
   (function(){
     var sec = document.getElementById('ctc'); if (!sec) return;
-    var lg = document.getElementById('plCtcLogos');
-    ['assets/co-logo-emergent.png', A + 'co-licious.png', A + 'co-zeko-ai.png', A + 'co-nextyou.png', A + 'co-drona-aviation.png'].forEach(function(src){ var im = document.createElement('img'); im.src = src; im.alt = ''; lg.appendChild(im); });
-    var nums = [].slice.call(sec.querySelectorAll('.pl-ctc-fig b'));
-    if (reduce){ sec.classList.add('is-in'); return; }
+    var st = document.getElementById('plCtcStrip'); st.innerHTML += st.innerHTML; [].slice.call(st.children, st.children.length / 2).forEach(function(im){ im.alt = ''; im.setAttribute('aria-hidden', 'true'); });
+    onView(document.getElementById('plCtcRow'), function(v){ st.classList.toggle('is-live', v && !reduce); });
+    var nums = [].slice.call(sec.querySelectorAll('.pl-ctc3-fig b'));
+    var box = document.getElementById('plCtcCells'), K = ['#0673F9', '#0673F9', '#16A34A', '#F59700', '#B42FE5', '#61A8FF'], cells = [];
+    function lay(){ box.innerHTML = ''; cells = []; var W = sec.clientWidth, H = sec.clientHeight, cx = W / 2;
+      for (var n = 0; n < 26; n++){ var gx = Math.round((cx + (Math.random() - .5) * W * .95) / 12) * 12 + (W / 2 % 12), gy = Math.round((Math.random() * H * .8) / 12) * 12 + 6;
+        if (Math.abs(gx - cx) < 200 && gy > 40 && gy < 260) continue;   /* keep the figure clear */
+        var c = document.createElement('i'); c.style.left = gx + 'px'; c.style.top = gy + 'px'; c.style.setProperty('--k', K[n % K.length]); box.appendChild(c); cells.push(c); } }
+    lay();
+    if (reduce){ cells.slice(0, 8).forEach(function(c){ c.classList.add('on'); }); return; }
     nums.forEach(function(b){ b.textContent = '0'; });
-    once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
-      (function f(now){ var p = Math.min(1, (now - t0) / 1100), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .4);
+    once(sec, function(){ var t0 = performance.now();
+      (function f(now){ var p = Math.min(1, (now - t0) / 1200), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .35);
+    var iv = 0;
+    function tick(){ var on = cells.filter(function(c){ return c.classList.contains('on'); });
+      if (on.length > 7) on[Math.floor(Math.random() * on.length)].classList.remove('on');
+      var off = cells.filter(function(c){ return !c.classList.contains('on'); }); if (off.length) off[Math.floor(Math.random() * off.length)].classList.add('on'); }
+    onView(sec, function(v){ clearInterval(iv); if (v){ for (var k = 0; k < 6; k++) tick(); iv = setInterval(tick, 700); } });
   })();
 
   /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */
