@@ -2902,7 +2902,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-offer.is-enter{height:0;margin-bottom:0;opacity:0;transform:translateY(-8px)}
 .pl-offer-ph{position:relative;flex:none;width:40px;height:40px}
 .pl-offer-ph img{width:40px;height:40px;border-radius:50%;object-fit:cover}
-.pl-offer-ph .pl-co{position:absolute;left:28px;top:24px;width:20px;height:20px;border-radius:50%;box-shadow:0 0 0 2px #fff;background:#fff;object-fit:cover}
+.pl-offer-ph .pl-cmp{position:absolute;left:28px;top:24px;width:20px;height:20px;border-radius:50%;box-shadow:0 0 0 2px #fff;background:#fff;object-fit:cover}
 .pl-offer-t{position:relative;margin-left:12px;min-width:0}
 .pl-offer-t b{display:block;font-size:15px;line-height:20px;font-weight:600;color:#16191D;white-space:nowrap}
 .pl-offer-t span{display:block;margin-top:1px;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6);white-space:nowrap}
@@ -2924,7 +2924,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-tab.is-on{background:#0673F9;color:#fff}
 .pl-tab .pl-live-dot{position:absolute;right:25px;top:13px;box-shadow:none;animation:none}
 .pl-tab.is-on .pl-live-dot{background:#fff}
-.pl-rec{margin-top:20px;border-radius:12px;box-shadow:inset 0 0 0 1px #EDEFF3;overflow:hidden;background:#fff}
+.pl-rec{position:relative;margin-top:20px;border-radius:12px;overflow:hidden;background:#fff}
 .pl-rec-band{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 16px;background:var(--bg2)}
 .pl-rec+.pl-rec{margin-top:16px}
 .pl-rec-band{gap:8px}
@@ -2962,6 +2962,9 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-earn b{font-size:18px;line-height:24px;font-weight:600;color:#0673F9;font-variant-numeric:tabular-nums;transition:color .3s ease}
 .pl-rec.is-delhi .pl-earn b{color:#16A34A}
 .pl-report{position:relative;margin-top:16px;border-radius:16px;background:#fff;box-shadow:0 10px 30px -18px rgba(22,25,29,.18);overflow:hidden}
+/* card outlines drawn above their header bands (a band's fill would hide an inset shadow) */
+.pl-sec-card::after,.pl-rec::after,.pl-board::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px #EDEFF3;z-index:3}
+.pl-sec-card::after{box-shadow:inset 0 0 0 1px #23282F}
 .pl-report::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px #EDEFF3;pointer-events:none}   /* the outline sits above the cream header */   /* the audited report, given its own card */
 .pl-rep-top{position:relative;display:flex;gap:28px;align-items:center;padding:24px 16px 24px 20px;background:linear-gradient(180deg,#FFF6EC,#fff)}
 .pl-rep-doc{position:relative;flex:none;width:100px;height:128px;margin-right:6px}   /* the back sheets fan ~12 px right; margin keeps them clear of the text */
@@ -3013,7 +3016,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 
 /* ---- 05 sectors (dark) ---- */
 .pl-sectors{background:#16191D;padding:42px 16px 42px}
-.pl-sec-card{margin-top:20px;border-radius:12px;background:#0B0C0E;box-shadow:inset 0 0 0 1px #23282F;overflow:hidden;padding-bottom:20px}
+.pl-sec-card{position:relative;margin-top:20px;border-radius:12px;background:#0B0C0E;overflow:hidden;padding-bottom:20px}
 .pl-sec-band{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 16px;background:#16191D}
 .pl-sec-band b{font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#fff}
 .pl-sec-band span{font-size:12px;line-height:18px;font-weight:500;color:rgba(255,255,255,.5)}
@@ -3052,13 +3055,27 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-lg::after{content:"+1 intern";position:absolute;right:6px;top:-9px;height:18px;padding:0 6px;border-radius:999px;background:#0673F9;color:#fff;font-size:10px;line-height:18px;font-weight:700;letter-spacing:.2px;opacity:0;transform:translateY(4px) scale(.85);transition:opacity .3s ease,transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none}
 .pl-lg.is-hit{box-shadow:inset 0 0 0 1.5px #0673F9,0 8px 18px -10px rgba(6,115,249,.5);transform:translateY(-2px)}
 .pl-lg.is-hit::after{opacity:1;transform:none}
-.pl-board{margin-top:12px;border-radius:12px;background:#fff;box-shadow:inset 0 0 0 1px #EDEFF3;overflow:hidden}   /* light mode (13 Oct) */
+.pl-board{position:relative;margin-top:12px;border-radius:12px;background:#fff;overflow:hidden}   /* light mode (13 Oct) */
 .pl-board-head{display:flex;justify-content:space-between;align-items:center;height:45px;padding:0 16px;background:var(--bg2);border-bottom:1px solid #EDEFF3}
 .pl-board-head span{font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#16191D}
 .pl-board-head em{display:inline-flex;align-items:center;gap:6px;font-style:normal;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#16A34A}
 .pl-board-head em i{width:6px;height:6px;border-radius:50%;background:#16A34A;animation:plBlink 2s ease-in-out infinite}
 @keyframes plBlink{50%{opacity:.35}}
 .pl-board-rows{list-style:none;margin:0;padding:0}
+.pl-cos{list-style:none;margin:0;padding:0}   /* one row per company: logo, name, who is there, faces */
+.pl-cmp{position:relative;display:flex;align-items:center;gap:12px;min-height:68px;padding:12px 16px;transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.pl-cmp+.pl-cmp::before{content:"";position:absolute;left:16px;right:16px;top:0;height:1px;background:#EDEFF3}
+.pl-cos.is-wait .pl-cmp{opacity:0;transform:translateY(8px)}
+.pl-cmp-lg{flex:none;width:40px;height:40px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px #EDEFF3;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:16px;line-height:20px;font-weight:700;color:#fff}
+.pl-cmp-lg img{width:100%;height:100%;object-fit:cover}
+.pl-cmp-t{flex:1;min-width:0}
+.pl-cmp-t b{display:flex;align-items:center;gap:6px;font-size:15px;line-height:20px;font-weight:600;color:#16191D}
+.pl-cmp-t b em{font-style:normal;height:18px;padding:0 6px;border-radius:999px;background:#E5F1FF;font-size:11px;line-height:18px;font-weight:600;color:#0673F9}
+.pl-cmp-t span{display:block;margin-top:2px;font-size:12.5px;line-height:17px;font-weight:500;color:rgba(22,25,29,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pl-cmp-f{flex:none;display:flex}
+.pl-cmp-f img{width:28px;height:28px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px #fff}
+.pl-cmp-f img+img{margin-left:-9px}
+.pl-cmp-f i{width:28px;height:28px;margin-left:-9px;border-radius:50%;background:#F1F3F6;box-shadow:0 0 0 2px #fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:10.5px;line-height:12px;font-weight:700;color:#5B6271}
 .pl-brow{position:relative;display:flex;align-items:center;height:52px;padding:0 16px}
 .pl-brow+.pl-brow::before{content:"";position:absolute;left:16px;right:16px;top:-1px;height:1px;background:#EDEFF3}
 .pl-brow img{width:32px;height:32px;border-radius:50%;object-fit:cover;flex:none;transition:opacity .3s ease}
@@ -3194,6 +3211,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
   .pl-thread.is-wait .pl-msg,.pl-thread.is-wait .pl-typing{opacity:1;transform:none}
   .pl-goog.is-wait .pl-goog-count,.pl-goog.is-wait .pl-gcard{opacity:1;transform:none}
   .pl-band,.pl-avg,.pl-needle,.pl-foil{transition:none}
+  .pl-cos.is-wait .pl-cmp{opacity:1;transform:none}
   .pl-report.is-wait .pl-rep-seal,.pl-report.is-wait .pl-rep-cover{opacity:1;transform:none}
 }
 
@@ -3485,10 +3503,10 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
     </div>
   </section>
 
-  <!-- 06 · the board (632:30686): rows flip like a split-flap to the next intern -->
+  <!-- 06 · companies (13 Oct): a logo wall for breadth, then one row per company with the faces and names of our interns there -->
   <section class="pl-board-sec bk-light" id="companies" aria-label="Companies hiring from NST">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Companies <span>hiring from NST.</span></h2><p class="bk-sub">Who took our interns this season.</p></div></div>
-    <!-- the logo wall (13 Oct): who hires from NST; the tile of the company on the board's latest flip lights with "+1 intern" -->
+    <!-- the logo wall (13 Oct): who hires from NST -->
     <div class="pl-wall2" id="plLogoWall">
       <span class="pl-lg" data-co="GOOGLE"><img src="assets/company-google.svg" alt="Google" style="height:20px"></span>
       <span class="pl-lg" data-co="EMERGENT"><img src="assets/pl/wm-emergent.png" alt="Emergent" style="height:15px"></span>
@@ -3505,8 +3523,8 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
     </div>
 
     <div class="pl-board">
-      <div class="pl-board-head"><span>Now interning at</span><em><i></i>Live</em></div>
-      <ul class="pl-board-rows" id="plBoard"></ul>
+      <div class="pl-board-head"><span>Where our interns are</span><em><i></i>Live</em></div>
+      <ul class="pl-cos" id="plCos"></ul>
       <div class="pl-board-foot"><span class="pl-logos" id="plLogos"></span><p>and 140+ more companies</p></div>
     </div>
   </section>
@@ -4394,33 +4412,30 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
       once(bc, function(){ bc.classList.remove('is-wait'); setTimeout(function(){ ticks.forEach(function(t){ t.style.transitionDelay = ''; }); }, 1500); }, .5); }
   })();
 
-  /* ---- 06 · the board: every 2.4 s one row flips to the next intern, letters rolling like a split-flap ---- */
+  /* ---- 06 · companies: one row per company with the interns there (faces + names); rows rise in one by one ---- */
   (function(){
-    var ul = document.getElementById('plBoard'); if (!ul) return;
-    var P = [['Pratik Kumar Pan','SUPERK'],['Anishka Khurana','NEXTYOU'],['Himanshu Mishra','GENYX AI'],['Jatin Bisen','RIDECELL'],['Koyna Arya','ZUVEES'],['Arun Kumar','ACCOPS'],
-             ['Angelo Nelson','LICIOUS'],['Pushkar Gupta','ZEKO AI'],['Swarnim Balpande','EMERGENT'],['Sourya','EKO'],['Manik Tyagi','GOQII'],['Sahil Singh','BLUECOPA'],['Tanima Samanta','EMERGENT'],['Vinayak Mohakud','LICIOUS'],['Adarsh Priydarshi','NEXTYOU'],['Sumit Kumar Nayak','LICIOUS']];
-    function pad(s){ s = s.slice(0, 8); return new Array(9 - s.length).join(' ') + s; }
-    var rows = [];
-    for (var i = 0; i < 6; i++){
-      var li = document.createElement('li'); li.className = 'pl-brow';
-      li.innerHTML = '<img src="' + img(P[i][0]) + '" alt=""><b>' + esc(P[i][0]) + '</b><span class="pl-flaps">' + pad(P[i][1]).split('').map(function(ch){ return '<i>' + (ch === ' ' ? '' : ch) + '</i>'; }).join('') + '</span>';
-      ul.appendChild(li); rows.push(li);
-    }
+    var ul = document.getElementById('plCos'); if (!ul) return;
+    var C = [
+      {n: 'Emergent', tag: 'AI', lg: 'assets/co-logo-emergent.png', who: ['Swarnim Balpande', 'Tanima Samanta'], total: 11},
+      {n: 'Licious', lg: A + 'co-licious.png', who: ['Vinayak Mohakud', 'Sumit Kumar Nayak', 'Angelo Nelson']},
+      {n: 'AssessHub', lg: '', c: '#0E7C66', who: ['Vedansha Srivastava', 'Sayuri Janbandhu']},
+      {n: 'NextYou', lg: A + 'co-nextyou.png', who: ['Anishka Khurana', 'Adarsh Priydarshi']},
+      {n: 'Zeko AI', tag: 'AI', lg: A + 'co-zeko-ai.png', who: ['Pushkar Gupta']},
+      {n: 'Drona Aviation', lg: A + 'co-drona-aviation.png', who: ['Devendra Mishra']},
+      {n: 'Genyx AI', tag: 'AI', lg: '', c: '#6138D3', who: ['Himanshu Mishra']}
+    ];
+    C.forEach(function(c){
+      var first = c.who.map(function(w){ return w.split(' ')[0]; }), more = (c.total || c.who.length) - c.who.length;
+      var names = more > 0 ? first.join(', ') + ' and ' + more + ' more' : first.length > 1 ? first.slice(0, -1).join(', ') + ' and ' + first[first.length - 1] : first[0];
+      var li = document.createElement('li'); li.className = 'pl-cmp';
+      li.innerHTML = '<span class="pl-cmp-lg"' + (c.lg ? '' : ' style="background:' + c.c + '"') + '>' + (c.lg ? '<img src="' + c.lg + '" alt="">' : esc(c.n.charAt(0))) + '</span>' +
+        '<span class="pl-cmp-t"><b>' + esc(c.n) + (c.tag ? '<em>' + c.tag + '</em>' : '') + '</b><span>' + esc(names) + '</span></span>' +
+        '<span class="pl-cmp-f">' + c.who.slice(0, 3).map(function(w){ return '<img src="' + img(w) + '" alt="">'; }).join('') + (more > 0 ? '<i>+' + more + '</i>' : '') + '</span>';
+      ul.appendChild(li);
+    });
     var lg = document.getElementById('plLogos');
     ['licious', 'drona-aviation', 'zeko-ai', 'nextyou', 'aibridge', 'lear-labs'].forEach(function(n){ var im = document.createElement('img'); im.src = A + 'co-' + n + '.png'; im.alt = ''; lg.appendChild(im); });
-    var nextP = 6, r = 0, iv = 0, CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    function flip(){
-      var li = rows[r], p = P[nextP % P.length]; r = (r + 1) % rows.length; nextP++;
-      var flaps = li.querySelectorAll('.pl-flaps i'), word = pad(p[1]), im = li.querySelector('img'), nm = li.querySelector('b');
-      li.classList.add('is-flip'); im.style.opacity = 0; nm.style.opacity = 0;
-      var key = p[1].slice(0, 8), tile = document.querySelector('.pl-lg[data-co="' + key + '"]'); document.querySelectorAll('.pl-lg.is-hit').forEach(function(x){ x.classList.remove('is-hit'); }); if (tile) setTimeout(function(){ tile.classList.add('is-hit'); }, 500);
-      setTimeout(function(){ im.src = img(p[0]); nm.textContent = p[0]; im.style.opacity = 1; nm.style.opacity = 1; }, 300);
-      var n = 0, t = setInterval(function(){ n++;
-        flaps.forEach(function(f, k){ var target = word[k] === ' ' ? '' : word[k]; if (n >= 4 + k){ f.textContent = target; f.classList.remove('roll'); } else { f.textContent = CH[(Math.random() * 26) | 0]; f.classList.add('roll'); } });
-        if (n >= 12){ clearInterval(t); li.classList.remove('is-flip'); }
-      }, 55);
-    }
-    onView(ul, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(flip, 2400); });
+    if (!reduce){ ul.classList.add('is-wait'); [].forEach.call(ul.children, function(li, i){ li.style.transitionDelay = (i * 70) + 'ms'; }); once(ul, function(){ ul.classList.remove('is-wait'); }, .2); }
   })();
 
   /* ---- 07 · stories: a playlist; the player plays inline; tapping a story moves it into the player ---- */

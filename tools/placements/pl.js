@@ -170,33 +170,30 @@
       once(bc, function(){ bc.classList.remove('is-wait'); setTimeout(function(){ ticks.forEach(function(t){ t.style.transitionDelay = ''; }); }, 1500); }, .5); }
   })();
 
-  /* ---- 06 · the board: every 2.4 s one row flips to the next intern, letters rolling like a split-flap ---- */
+  /* ---- 06 · companies: one row per company with the interns there (faces + names); rows rise in one by one ---- */
   (function(){
-    var ul = document.getElementById('plBoard'); if (!ul) return;
-    var P = [['Pratik Kumar Pan','SUPERK'],['Anishka Khurana','NEXTYOU'],['Himanshu Mishra','GENYX AI'],['Jatin Bisen','RIDECELL'],['Koyna Arya','ZUVEES'],['Arun Kumar','ACCOPS'],
-             ['Angelo Nelson','LICIOUS'],['Pushkar Gupta','ZEKO AI'],['Swarnim Balpande','EMERGENT'],['Sourya','EKO'],['Manik Tyagi','GOQII'],['Sahil Singh','BLUECOPA'],['Tanima Samanta','EMERGENT'],['Vinayak Mohakud','LICIOUS'],['Adarsh Priydarshi','NEXTYOU'],['Sumit Kumar Nayak','LICIOUS']];
-    function pad(s){ s = s.slice(0, 8); return new Array(9 - s.length).join(' ') + s; }
-    var rows = [];
-    for (var i = 0; i < 6; i++){
-      var li = document.createElement('li'); li.className = 'pl-brow';
-      li.innerHTML = '<img src="' + img(P[i][0]) + '" alt=""><b>' + esc(P[i][0]) + '</b><span class="pl-flaps">' + pad(P[i][1]).split('').map(function(ch){ return '<i>' + (ch === ' ' ? '' : ch) + '</i>'; }).join('') + '</span>';
-      ul.appendChild(li); rows.push(li);
-    }
+    var ul = document.getElementById('plCos'); if (!ul) return;
+    var C = [
+      {n: 'Emergent', tag: 'AI', lg: 'assets/co-logo-emergent.png', who: ['Swarnim Balpande', 'Tanima Samanta'], total: 11},
+      {n: 'Licious', lg: A + 'co-licious.png', who: ['Vinayak Mohakud', 'Sumit Kumar Nayak', 'Angelo Nelson']},
+      {n: 'AssessHub', lg: '', c: '#0E7C66', who: ['Vedansha Srivastava', 'Sayuri Janbandhu']},
+      {n: 'NextYou', lg: A + 'co-nextyou.png', who: ['Anishka Khurana', 'Adarsh Priydarshi']},
+      {n: 'Zeko AI', tag: 'AI', lg: A + 'co-zeko-ai.png', who: ['Pushkar Gupta']},
+      {n: 'Drona Aviation', lg: A + 'co-drona-aviation.png', who: ['Devendra Mishra']},
+      {n: 'Genyx AI', tag: 'AI', lg: '', c: '#6138D3', who: ['Himanshu Mishra']}
+    ];
+    C.forEach(function(c){
+      var first = c.who.map(function(w){ return w.split(' ')[0]; }), more = (c.total || c.who.length) - c.who.length;
+      var names = more > 0 ? first.join(', ') + ' and ' + more + ' more' : first.length > 1 ? first.slice(0, -1).join(', ') + ' and ' + first[first.length - 1] : first[0];
+      var li = document.createElement('li'); li.className = 'pl-cmp';
+      li.innerHTML = '<span class="pl-cmp-lg"' + (c.lg ? '' : ' style="background:' + c.c + '"') + '>' + (c.lg ? '<img src="' + c.lg + '" alt="">' : esc(c.n.charAt(0))) + '</span>' +
+        '<span class="pl-cmp-t"><b>' + esc(c.n) + (c.tag ? '<em>' + c.tag + '</em>' : '') + '</b><span>' + esc(names) + '</span></span>' +
+        '<span class="pl-cmp-f">' + c.who.slice(0, 3).map(function(w){ return '<img src="' + img(w) + '" alt="">'; }).join('') + (more > 0 ? '<i>+' + more + '</i>' : '') + '</span>';
+      ul.appendChild(li);
+    });
     var lg = document.getElementById('plLogos');
     ['licious', 'drona-aviation', 'zeko-ai', 'nextyou', 'aibridge', 'lear-labs'].forEach(function(n){ var im = document.createElement('img'); im.src = A + 'co-' + n + '.png'; im.alt = ''; lg.appendChild(im); });
-    var nextP = 6, r = 0, iv = 0, CH = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    function flip(){
-      var li = rows[r], p = P[nextP % P.length]; r = (r + 1) % rows.length; nextP++;
-      var flaps = li.querySelectorAll('.pl-flaps i'), word = pad(p[1]), im = li.querySelector('img'), nm = li.querySelector('b');
-      li.classList.add('is-flip'); im.style.opacity = 0; nm.style.opacity = 0;
-      var key = p[1].slice(0, 8), tile = document.querySelector('.pl-lg[data-co="' + key + '"]'); document.querySelectorAll('.pl-lg.is-hit').forEach(function(x){ x.classList.remove('is-hit'); }); if (tile) setTimeout(function(){ tile.classList.add('is-hit'); }, 500);
-      setTimeout(function(){ im.src = img(p[0]); nm.textContent = p[0]; im.style.opacity = 1; nm.style.opacity = 1; }, 300);
-      var n = 0, t = setInterval(function(){ n++;
-        flaps.forEach(function(f, k){ var target = word[k] === ' ' ? '' : word[k]; if (n >= 4 + k){ f.textContent = target; f.classList.remove('roll'); } else { f.textContent = CH[(Math.random() * 26) | 0]; f.classList.add('roll'); } });
-        if (n >= 12){ clearInterval(t); li.classList.remove('is-flip'); }
-      }, 55);
-    }
-    onView(ul, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(flip, 2400); });
+    if (!reduce){ ul.classList.add('is-wait'); [].forEach.call(ul.children, function(li, i){ li.style.transitionDelay = (i * 70) + 'ms'; }); once(ul, function(){ ul.classList.remove('is-wait'); }, .2); }
   })();
 
   /* ---- 07 · stories: a playlist; the player plays inline; tapping a story moves it into the player ---- */
