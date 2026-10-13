@@ -40,23 +40,24 @@
 .pl-proof .hatch{margin:0}
 /* ---- 01b the CTC (v4): the NST-blue stage ---- */
 .pl-ctc4{position:relative;overflow:hidden;padding:44px 16px 36px;color:#fff;
-  background:radial-gradient(120% 70% at 85% 0%,#3D95FF 0%,rgba(61,149,255,0) 55%),linear-gradient(170deg,#0673F9 0%,#0563E0 45%,#0446A8 100%)}
-.pl-ctc4-rings{position:absolute;right:-170px;top:-60px;width:520px;height:520px;opacity:.16;pointer-events:none}
+  background:radial-gradient(120% 70% at 85% 0%,rgba(255,226,140,.75) 0%,rgba(255,226,140,0) 55%),linear-gradient(170deg,#D19A2A 0%,#B47C10 45%,#7A4E05 100%)}   /* gold: the achievement colour (13 Oct) */
+.pl-ctc4-rings{position:absolute;right:-170px;top:-60px;width:520px;height:520px;opacity:.22;pointer-events:none}
 .pl-ctc4-rings svg{width:100%;height:100%;animation:plSpin 90s linear infinite;animation-play-state:paused}
 .pl-ctc4.is-live .pl-ctc4-rings svg{animation-play-state:running}
 @keyframes plSpin{to{transform:rotate(360deg)}}
 .pl-ctc4-pill{position:relative;display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase}
-.pl-ctc4-pill i{width:6px;height:6px;border-radius:50%;background:#7CF0B0;box-shadow:0 0 0 3px rgba(124,240,176,.25)}
+.pl-ctc4-pill i{width:6px;height:6px;border-radius:50%;background:#FFE7A3;box-shadow:0 0 0 3px rgba(255,231,163,.3)}
 .pl-ctc4-stack{position:relative;margin-top:22px}
 .pl-ctc4-stack p{margin:0;display:flex;align-items:flex-start;font-stretch:125%;white-space:nowrap}
 .pl-ctc4-stack b,.pl-ctc4-stack .u{font-size:92px;line-height:88px;font-weight:600;letter-spacing:-4px}
-.pl-ctc4-stack .rs{margin:12px 4px 0 0;font-size:40px;line-height:44px;font-weight:500;font-stretch:100%;letter-spacing:0;color:rgba(255,255,255,.7)}
-.pl-ctc4-stack .u{margin-left:6px;color:rgba(255,255,255,.55)}
+.pl-ctc4-stack .rs{margin:12px 4px 0 0;font-size:40px;line-height:44px;font-weight:500;font-stretch:100%;letter-spacing:0;color:#FFE7A3}
+.pl-ctc4-stack .u{margin-left:6px;color:#FFE7A3}
+.pl-ctc4-stack b{color:#fff;text-shadow:0 2px 0 rgba(122,78,5,.25)}
 .pl-ctc4-stack .l2{justify-content:flex-end;margin-top:2px;transition:transform .9s cubic-bezier(.22,1,.36,1) .15s,opacity .6s ease .15s}
-.pl-ctc4-stack .l2 em{align-self:flex-end;margin:0 12px 14px 0;font-style:normal;font-stretch:100%;font-size:22px;line-height:26px;font-weight:500;color:rgba(255,255,255,.7)}
+.pl-ctc4-stack .l2 em{align-self:flex-end;margin:0 12px 14px 0;font-style:normal;font-stretch:100%;font-size:22px;line-height:26px;font-weight:500;color:rgba(255,255,255,.85)}
 .pl-ctc4:not(.is-in) .l2{opacity:0;transform:translateX(28px)}
-.pl-ctc4-sub{position:relative;margin:14px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(255,255,255,.78)}
-.pl-ctc4-avg{position:relative;display:flex;align-items:center;gap:12px;margin-top:28px;padding:14px 14px 14px 12px;border-radius:16px;background:#fff;color:#16191D;box-shadow:0 18px 36px -20px rgba(2,27,74,.6);transition:transform .8s cubic-bezier(.22,1,.36,1) .35s,opacity .6s ease .35s}
+.pl-ctc4-sub{position:relative;margin:14px 0 0;font-size:15px;line-height:22px;font-weight:500;color:#fff}
+.pl-ctc4-avg{position:relative;display:flex;align-items:center;gap:12px;margin-top:28px;padding:14px 14px 14px 12px;border-radius:16px;background:#fff;color:#16191D;box-shadow:0 18px 36px -20px rgba(74,44,2,.7);transition:transform .8s cubic-bezier(.22,1,.36,1) .35s,opacity .6s ease .35s}
 .pl-ctc4:not(.is-in) .pl-ctc4-avg{opacity:0;transform:translateY(16px)}
 .pl-ctc4-ok{flex:none;width:44px;height:44px;border-radius:12px;background:#E7F6EE;display:flex;align-items:center;justify-content:center}
 .pl-ctc4-ok img{width:22px;height:22px}
@@ -64,14 +65,14 @@
 .pl-ctc4-avg b{font-size:24px;line-height:28px;font-weight:600;font-stretch:125%;color:#007A51}
 .pl-ctc4-avg div span{margin-top:2px;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
 .pl-ctc4-avg>em{flex:none;align-self:flex-start;height:22px;padding:0 8px;border-radius:999px;background:#F6F7F9;font-style:normal;font-size:11px;line-height:22px;font-weight:600;color:rgba(22,25,29,.6)}
-.pl-ctc4-by{position:relative;margin:28px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.78)}
+.pl-ctc4-by{position:relative;margin:28px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.92)}
 .pl-ctc4-by b{font-weight:600;color:#fff}
 .pl-ctc4-rows{position:relative;margin:12px -16px 0;display:flex;flex-direction:column;gap:10px}
 .pl-ctc4-row{overflow:hidden}
 .pl-ctc4-track{display:flex;gap:10px;width:max-content;animation:plMarq 38s linear infinite;animation-play-state:paused}
 .pl-ctc4-row.r2 .pl-ctc4-track{animation-direction:reverse;animation-duration:44s}
 .pl-ctc4.is-live .pl-ctc4-track{animation-play-state:running}
-.pl-chip4{flex:none;height:48px;min-width:104px;padding:0 18px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -10px rgba(2,27,74,.5)}
+.pl-chip4{flex:none;height:48px;min-width:104px;padding:0 18px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px -10px rgba(74,44,2,.55)}
 .pl-chip4{gap:8px;font-size:14px;line-height:18px;font-weight:600;color:#16191D}
 .pl-chip4 img{display:block;width:auto}
 @keyframes plMarq{to{transform:translateX(-50%)}}
