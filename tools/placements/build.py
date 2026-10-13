@@ -82,7 +82,11 @@ for n, st in enumerate(starts):
             if f: kept.append('  /* helper kept from: ' + lines[st].strip().replace('/*', '').replace('*/', '').strip(' -')[:60] + ' */\n' + f)
 # everything after the chat heading belongs to the chat and the page's closing code
 chat_i = next(i for i, l in enumerate(lines) if l.startswith('  /* ==================== Newton'))
-kept = [b for b in kept if not b.startswith('  /* ==================== Newton')] + ['\n'.join(lines[chat_i:])]
+kept = [b for b in kept if not b.startswith('  /* ==================== Newton')]
+kept.append("  /* ---- placements: the homepage hairlines, rising into the sectors and hanging over the recruiters ---- */\n"
+            "  hairlines(document.getElementById('plLinesUp'), document.querySelector('.pl-wins'), '#E1E5EA', false);\n"
+            "  hairlines(document.getElementById('plLinesDown'), document.getElementById('recruiters'), '#E1E5EA', true);\n")
+kept.append('\n'.join(lines[chat_i:]))
 kept = list(dict.fromkeys(kept))
 tail_js = tail_js[:ms] + '<script>\n' + '\n'.join(kept) + tail_js[me:]
 

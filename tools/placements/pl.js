@@ -118,16 +118,24 @@
   /* ---- 05 · sectors: 287 ticks, one per intern; they draw in left to right; tapping a row lights that sector ---- */
   (function(){
     var bc = document.getElementById('plBarcode'), list = document.getElementById('plSecList'); if (!bc) return;
-    var S = [['AI and data', 90, '31.4'], ['Software, SaaS & tech services', 79, '27.5'], ['Others', 37, '12.9'], ['Education', 27, '9.4'], ['Commerce and retail', 17, '5.9'], ['Fintech', 13, '4.5'], ['Industrial and manufacturing', 13, '4.5'], ['Professional services', 11, '3.8']];
+    /* name, interns, share, colour, icon (24-grid, filled, even-odd cut-outs) */
+    var S = [['AI and data', 90, '31.4', '#61A8FF', 'M12 2l1.9 5.6L19.5 9.5l-5.6 1.9L12 17l-1.9-5.6L4.5 9.5l5.6-1.9z M19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9z M5 15l.6 1.5 1.4.5-1.4.5L5 19l-.6-1.5L3 17l1.4-.5z'],
+             ['Software, SaaS & tech services', 79, '27.5', '#A78BFA', 'M8.7 6.3a1 1 0 010 1.4L4.4 12l4.3 4.3a1 1 0 11-1.4 1.4l-5-5a1 1 0 010-1.4l5-5a1 1 0 011.4 0z M15.3 6.3a1 1 0 011.4 0l5 5a1 1 0 010 1.4l-5 5a1 1 0 11-1.4-1.4l4.3-4.3-4.3-4.3a1 1 0 010-1.4z M13.9 4.1a1 1 0 01.7 1.2l-3.5 14a1 1 0 11-1.9-.5l3.5-14a1 1 0 011.2-.7z'],
+             ['Others', 37, '12.9', '#94A3B8', 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2z M14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2z M4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2z M14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2z'],
+             ['Education', 27, '9.4', '#F5B544', 'M12 3L1 9l11 6 9-4.9V17h2V9z M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8L12 17z'],
+             ['Commerce and retail', 17, '5.9', '#F472B6', 'M7 7V6.5a5 5 0 0110 0V7h2.1a1 1 0 011 .9l1 12a2 2 0 01-2 2.1H4.9a2 2 0 01-2-2.1l1-12a1 1 0 011-.9zm2 0h6v-.5a3 3 0 00-6 0z M8 10.5a1 1 0 112 0 1 1 0 01-2 0z M14 10.5a1 1 0 112 0 1 1 0 01-2 0z'],
+             ['Fintech', 13, '4.5', '#34D399', 'M2 7a3 3 0 013-3h14a3 3 0 013 3v1H2z M2 10.5h20V17a3 3 0 01-3 3H5a3 3 0 01-3-3zm3.5 4.5v1.5h4V15z'],
+             ['Industrial and manufacturing', 13, '4.5', '#FB923C', 'M2 21V10.5l5.5 3V10.5l5.5 3V5h3v-2h3v2h3v16zm4-4v2h2v-2zm5 0v2h2v-2zm5 0v2h2v-2z'],
+             ['Professional services', 11, '3.8', '#2DD4BF', 'M9 3h6a2 2 0 012 2v2h3a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V9a2 2 0 012-2h3V5a2 2 0 012-2zm0 4h6V5H9z M2 12.2h20v1.6H2z']];
     var ticks = [];
-    S.forEach(function(s, si){ for (var i = 0; i < s[1]; i++){ var t = document.createElement('i'); t.dataset.s = si; if (i % 5 === 0) t.classList.add('tall'); bc.appendChild(t); ticks.push(t); } });
+    S.forEach(function(s, si){ for (var i = 0; i < s[1]; i++){ var t = document.createElement('i'); t.dataset.s = si; t.style.setProperty('--k', s[3]); if (i % 5 === 0) t.classList.add('tall'); bc.appendChild(t); ticks.push(t); } });
     function lay(){ var W = bc.clientWidth, pitch = (W - 7 * 4) / 287, x = 0, last = 0; ticks.forEach(function(t, i){ var s = +t.dataset.s; if (s !== last){ x += 4; last = s; } t.style.left = x.toFixed(2) + 'px'; t.style.width = Math.max(.6, pitch * .62).toFixed(2) + 'px'; x += pitch; }); }
     lay(); window.addEventListener('resize', lay);
-    S.forEach(function(s, i){ var li = document.createElement('li'); li.tabIndex = 0; li.setAttribute('role', 'button'); li.innerHTML = '<b>' + esc(s[0]) + '</b><span>' + s[1] + '</span><em>' + s[2] + '%</em>'; li.addEventListener('click', function(){ sel(i); }); li.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(i); } }); list.appendChild(li); });
+    S.forEach(function(s, i){ var li = document.createElement('li'); li.tabIndex = 0; li.setAttribute('role', 'button'); li.style.setProperty('--k', s[3]); li.innerHTML = '<i class="pl-sec-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="' + s[4] + '"/></svg></i><b>' + esc(s[0]) + '</b><span>' + s[1] + '</span><em>' + s[2] + '%</em>'; li.addEventListener('click', function(){ sel(i); }); li.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); sel(i); } }); list.appendChild(li); });
     function sel(i){
       [].forEach.call(list.children, function(li, k){ li.classList.toggle('is-on', k === i); });
       ticks.forEach(function(t){ t.classList.toggle('sel', +t.dataset.s === i); });
-      document.getElementById('plSecName').textContent = S[i][0];
+      document.getElementById('plSecName').textContent = S[i][0]; document.querySelector('.pl-sec-num').style.setProperty('--k', S[i][3]);
       document.getElementById('plSecPct').textContent = S[i][2];
       document.getElementById('plSecCount').textContent = S[i][1] + ' interns';
     }

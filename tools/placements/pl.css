@@ -104,7 +104,11 @@
 
 /* ---- 04 wins + hairlines ---- */
 .pl-wins{background:#fff}
-.pl-threads{height:103px;background:repeating-linear-gradient(90deg,#E1E5EA 0 1px,transparent 1px 12px);background-position:5px 0}
+/* the homepage hairlines (canvas, 39 lines 12 px apart with a dot on each tip; they grow in, swell and lean from the pointer) */
+.pl-threads{position:relative;height:103px}
+.pl-threads canvas{position:absolute;left:calc(50% - 230px);width:460px;height:150px;pointer-events:none}
+.pl-threads-up canvas{bottom:0}
+.pl-rec-sec .pl-threads canvas{top:0}
 .pl-threads-up{margin-top:42px}
 
 /* ---- 05 sectors (dark) ---- */
@@ -116,23 +120,24 @@
 .pl-sec-name{margin:16px 16px 0;font-size:14px;line-height:18px;font-weight:600;color:rgba(255,255,255,.7);transition:opacity .25s ease}
 .pl-sec-num{display:flex;align-items:baseline;margin:2px 16px 0;font-size:48px;line-height:52px;font-weight:600;letter-spacing:-1px;color:#fff}
 .pl-sec-num b{font-weight:600}
-.pl-sec-num span{color:rgba(255,255,255,.35)}
+.pl-sec-num span{color:var(--k,#61A8FF);opacity:.75;transition:color .3s ease}
 .pl-sec-num em{margin-left:12px;font-style:normal;font-stretch:100%;font-size:13px;line-height:18px;font-weight:500;letter-spacing:0;color:rgba(255,255,255,.5)}
 .pl-barcode{position:relative;height:72px;margin:16px 16px 0}
-.pl-barcode i{position:absolute;bottom:0;width:.62%;height:62px;background:rgba(255,255,255,.18);transform-origin:50% 100%;transition:background-color .4s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+.pl-barcode i{position:absolute;bottom:0;width:.62%;height:62px;background:var(--k,#fff);opacity:.26;transform-origin:50% 100%;transition:opacity .4s ease,transform .5s cubic-bezier(.22,1,.36,1)}   /* every sector in its colour; the chosen one lights */
 .pl-barcode i.tall{height:72px}
-.pl-barcode i.sel{background:#61A8FF}
+.pl-barcode i.sel{opacity:1}
 .pl-barcode.is-wait i{transform:scaleY(0)}
 .pl-sec-list{list-style:none;margin:24px 0 0;padding:0 8px}
-.pl-sec-list li{position:relative;display:flex;align-items:center;height:36px;margin-bottom:1px;padding:0 10px 0 22px;border-radius:8px;cursor:pointer;transition:background-color .25s ease;-webkit-tap-highlight-color:transparent}
-.pl-sec-list li::before{content:"";position:absolute;left:8px;top:10px;width:3px;height:16px;border-radius:2px;background:rgba(255,255,255,.25);transition:background-color .25s ease}
+.pl-sec-list li{position:relative;display:flex;align-items:center;height:36px;margin-bottom:1px;padding:0 10px 0 8px;border-radius:8px;cursor:pointer;transition:background-color .25s ease;-webkit-tap-highlight-color:transparent}
+.pl-sec-ic{flex:none;width:24px;height:24px;margin-right:10px;border-radius:7px;display:flex;align-items:center;justify-content:center;color:var(--k);background:color-mix(in srgb,var(--k) 16%,transparent);transition:background-color .25s ease,color .25s ease}
+.pl-sec-ic svg{width:14px;height:14px;fill:currentColor}
+.pl-sec-list li.is-on .pl-sec-ic{background:var(--k);color:#0B0C0E}
 .pl-sec-list li.is-on{background:#16191D}
-.pl-sec-list li.is-on::before{background:#61A8FF}
 .pl-sec-list b{flex:1;min-width:0;font-size:14px;line-height:18px;font-weight:500;color:rgba(255,255,255,.75);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl-sec-list li.is-on b{font-weight:600;color:#fff}
 .pl-sec-list span{width:40px;text-align:right;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.45)}
 .pl-sec-list em{width:56px;text-align:right;font-style:normal;font-size:14px;line-height:18px;font-weight:600;color:rgba(255,255,255,.85)}
-.pl-sec-list li.is-on em{color:#61A8FF}
+.pl-sec-list li.is-on em{color:var(--k)}
 
 /* ---- 06 the board ---- */
 .pl-board-sec{background:#fff;padding:42px 16px 42px}
