@@ -153,6 +153,9 @@
     if (!reduce) onView(box, function(on){ vis = on; if (on && !raf){ if (!t0) t0 = performance.now(); raf = requestAnimationFrame(frame); } });
   })();
 
+  /* ---- the report: the cover settles and the IIM-A seal stamps onto it when the card arrives ---- */
+  (function(){ var r = document.getElementById('report'); if (!r || reduce) return; r.classList.add('is-wait'); once(r, function(){ r.classList.remove('is-wait'); }, .45); })();
+
   /* ---- 05 · sectors: 287 ticks, one per intern; they draw in left to right; tapping a row lights that sector ---- */
   (function(){
     var bc = document.getElementById('plBarcode'), list = document.getElementById('plSecList'); if (!bc) return;

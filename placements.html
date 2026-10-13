@@ -2953,6 +2953,41 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-earn span{font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.55)}
 .pl-earn b{font-size:18px;line-height:24px;font-weight:600;color:#0673F9;font-variant-numeric:tabular-nums;transition:color .3s ease}
 .pl-rec.is-delhi .pl-earn b{color:#16A34A}
+.pl-report{position:relative;margin-top:16px;border-radius:16px;background:#fff;box-shadow:inset 0 0 0 1px #EDEFF3,0 10px 30px -18px rgba(22,25,29,.18);overflow:hidden}   /* the audited report, given its own card */
+.pl-rep-top{position:relative;display:flex;gap:16px;align-items:center;padding:20px 16px 18px;background:linear-gradient(180deg,#FFF6EC,#fff)}
+.pl-rep-doc{position:relative;flex:none;width:104px;height:132px}
+.pl-rep-sheet{position:absolute;inset:6px 0 0 6px;border-radius:6px;background:#fff;box-shadow:0 0 0 1px #E1E5EA}
+.pl-rep-sheet.s2{transform:rotate(7deg) translate(6px,0)}
+.pl-rep-sheet.s1{transform:rotate(3deg) translate(3px,0)}
+.pl-rep-cover{position:absolute;inset:0 6px 6px 0;padding:10px 10px 0;border-radius:6px;background:#fff;box-shadow:0 0 0 1px #E1E5EA,0 6px 14px -8px rgba(22,25,29,.3);display:flex;flex-direction:column;transform:rotate(-3deg);transition:transform .6s cubic-bezier(.34,1.4,.64,1)}
+.pl-rep-mark{width:14px;height:17px}
+.pl-rep-cover b{margin-top:8px;font-size:12px;line-height:13px;font-weight:700;font-stretch:125%;color:#16191D}
+.pl-rep-cover em{margin-top:2px;font-style:normal;font-size:10px;line-height:12px;font-weight:600;color:#DE5A02}
+.pl-rep-lines{display:flex;flex-direction:column;gap:5px;margin-top:10px}
+.pl-rep-lines i{height:3px;border-radius:2px;background:#EDEFF3}
+.pl-rep-lines i:nth-child(2){width:80%}.pl-rep-lines i:nth-child(4){width:60%}
+.pl-rep-seal{position:absolute;right:-8px;bottom:-6px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 0 0 2px #fff,0 0 0 3px rgba(0,122,81,.5),0 4px 10px -4px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;transform:rotate(-14deg);transition:opacity .3s ease,transform .45s cubic-bezier(.34,1.6,.64,1)}
+.pl-rep-seal img{width:28px;height:30px;object-fit:contain}
+.pl-report.is-wait .pl-rep-seal{opacity:0;transform:rotate(-14deg) scale(1.8)}
+.pl-report.is-wait .pl-rep-cover{transform:rotate(-8deg) translateY(6px)}
+.pl-rep-t{min-width:0}
+.pl-rep-k{display:inline-flex;align-items:center;gap:6px;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#DE5A02}
+.pl-rep-k i{width:6px;height:6px;border-radius:50%;background:#DE5A02}
+.pl-rep-t h3{margin:8px 0 0;font-size:17px;line-height:23px;font-weight:600;color:#16191D}
+.pl-rep-cert{display:flex;align-items:center;gap:12px;margin:0 16px;padding:14px 0;border-top:1px solid #EDEFF3;border-bottom:1px solid #EDEFF3}
+.pl-rep-logo{flex:none;width:44px;height:44px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px #EDEFF3;display:flex;align-items:center;justify-content:center}
+.pl-rep-logo img{width:30px;height:33px;object-fit:contain}
+.pl-rep-cert-k{margin:0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#007A51}
+.pl-rep-cert-v{margin:3px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.7)}
+.pl-rep-cert-v b{font-weight:600;color:#16191D}
+.pl-rep-in{list-style:none;margin:0;padding:14px 16px 4px;display:flex;flex-direction:column;gap:10px}
+.pl-rep-in li{display:flex;align-items:center;gap:8px;font-size:14px;line-height:20px;font-weight:500;color:#16191D}
+.pl-rep-in img{width:16px;height:16px;flex:none}
+.pl-rep-cta{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;margin:16px 16px 0;border-radius:12px;background:#0673F9;box-shadow:var(--btn-shadow);color:#fff;text-decoration:none;font-size:15px;line-height:22px;font-weight:600;letter-spacing:.06px}
+.pl-rep-cta img{width:20px;height:20px}
+.pl-rep-cta span{height:20px;padding:0 6px;border-radius:5px;background:rgba(255,255,255,.18);font-size:11px;line-height:20px;font-weight:700;letter-spacing:.5px}
+.pl-rep-cta:active{transform:scale(.98)}
+.pl-rep-link{display:block;padding:12px 0 16px;text-align:center;font-size:14px;line-height:20px;font-weight:600;color:#0673F9;text-decoration:none}
 .pl-audit{display:flex;align-items:center;gap:8px;padding:12px 16px 13px}
 .pl-audit img{width:16px;height:16px;flex:none}
 .pl-audit p{flex:1;max-width:230px;margin:0;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.7)}
@@ -3120,6 +3155,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
   .pl-thread.is-wait .pl-msg{opacity:1;transform:none}
   .pl-goog.is-wait .pl-goog-count,.pl-goog.is-wait .pl-gcard{opacity:1;transform:none}
   .pl-band,.pl-avg,.pl-needle,.pl-foil{transition:none}
+  .pl-report.is-wait .pl-rep-seal,.pl-report.is-wait .pl-rep-cover{opacity:1;transform:none}
 }
 
 </style>
@@ -3313,7 +3349,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 
   <!-- 03 · first batches (632:29332): campus switch; 300 dots fill row by row; earnings; the audit line -->
   <section class="pl-batch bk-light" id="internships" aria-label="Internships by campus">
-    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Internships <span>at NST.</span></h2><p class="bk-sub">Every dot is a student from our first batch.</p></div></div>
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Internships <span>at NST.</span></h2><p class="bk-sub">Where our first batches went for their 2nd year.</p></div></div>
     <div class="pl-tabs" role="tablist" aria-label="Campus">
       <button class="pl-tab is-on" type="button" role="tab" aria-selected="true" data-c="0">Pune · ADYPU</button>
       <button class="pl-tab" type="button" role="tab" aria-selected="false" data-c="1">Delhi · Rishihood <i class="pl-live-dot"></i></button>
@@ -3328,8 +3364,37 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
         <div><span id="plE1l">Highest earned</span><b id="plE1">₹1,90,000/mo</b></div>
         <div><span id="plE2l">Average earned</span><b id="plE2">₹23,364/mo</b></div>
       </div>
-      <div class="pl-audit"><img src="assets/icon-check-circle.svg" alt=""><p>Audited by B2K Analytics, IIM Ahmedabad’s placement auditors</p><a href="#">Report →</a></div>
     </div>
+
+    <!-- the report (13 Oct): its own card under the stats, so the audit carries weight. The cover is drawn in HTML; a seal stamps it -->
+    <article class="pl-report" id="report" aria-label="Internship Report 2025">
+      <div class="pl-rep-top">
+        <div class="pl-rep-doc" aria-hidden="true">
+          <i class="pl-rep-sheet s2"></i><i class="pl-rep-sheet s1"></i>
+          <div class="pl-rep-cover">
+            <img class="pl-rep-mark" src="assets/nst-logo-mark.svg" alt="">
+            <b>Internship<br>Report</b><em>2025</em>
+            <span class="pl-rep-lines"><i></i><i></i><i></i><i></i></span>
+          </div>
+          <span class="pl-rep-seal"><img src="assets/pl/iima-crest.png" alt=""></span>
+        </div>
+        <div class="pl-rep-t">
+          <span class="pl-rep-k"><i></i>Just released</span>
+          <h3>93.07% of students secured internships by their second year.</h3>
+        </div>
+      </div>
+      <div class="pl-rep-cert">
+        <span class="pl-rep-logo"><img src="assets/pl/iima-crest.png" alt="IIM Ahmedabad"></span>
+        <div><p class="pl-rep-cert-k">Independently audited</p><p class="pl-rep-cert-v">Certified by <b>B2K Analytics</b>, IIM Ahmedabad’s placement auditors</p></div>
+      </div>
+      <ul class="pl-rep-in">
+        <li><img src="assets/icon-check-circle.svg" alt="">Internship rate for each first batch</li>
+        <li><img src="assets/icon-check-circle.svg" alt="">Highest and average stipends</li>
+        <li><img src="assets/icon-check-circle.svg" alt="">Companies and sectors that hired</li>
+      </ul>
+      <a class="pl-rep-cta" href="#"><img src="assets/pl/icon-download.svg" alt="">Download the report <span>PDF</span></a>
+      <a class="pl-rep-link" href="#">View it online →</a>
+    </article>
   </section>
 
   <!-- 04 · wins (632:31244): the homepage's internship wins, then hairlines rising into the dark section -->
@@ -4242,6 +4307,9 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
     busAt(reduce ? CM.to : CM.from);
     if (!reduce) onView(box, function(on){ vis = on; if (on && !raf){ if (!t0) t0 = performance.now(); raf = requestAnimationFrame(frame); } });
   })();
+
+  /* ---- the report: the cover settles and the IIM-A seal stamps onto it when the card arrives ---- */
+  (function(){ var r = document.getElementById('report'); if (!r || reduce) return; r.classList.add('is-wait'); once(r, function(){ r.classList.remove('is-wait'); }, .45); })();
 
   /* ---- 05 · sectors: 287 ticks, one per intern; they draw in left to right; tapping a row lights that sector ---- */
   (function(){

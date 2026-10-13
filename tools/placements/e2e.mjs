@@ -60,5 +60,5 @@ await p.evaluate(()=>scrollTo(0,0)); await p.waitForTimeout(300);
 await p.locator('.nav .menu').tap(); await p.waitForTimeout(500);
 ok('menu sheet opens', await ev(()=>document.getElementById('menuSheet').classList.contains('is-open')||document.getElementById('menuSheet').getAttribute('aria-hidden')==='false'));
 ok('no horizontal overflow', await ev(()=>document.documentElement.scrollWidth<=innerWidth));
-ok('placeholder links do not jump', await ev(()=>{ scrollTo(0,3000); const y=scrollY; document.querySelector('.pl-audit a').click(); return Math.abs(scrollY-y)<2; }));
+ok('placeholder links do not jump', await ev(()=>{ scrollTo(0,3000); const y=scrollY; document.querySelector('.pl-rep-cta').click(); return Math.abs(scrollY-y)<2; }));
 console.log(res.join('\n')); console.log('ERRS',errs); await b.close();
