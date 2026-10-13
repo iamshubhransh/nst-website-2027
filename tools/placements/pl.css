@@ -206,7 +206,8 @@
 .pl-rep-t{min-width:0}
 .pl-rep-k{display:flex;align-items:center;gap:6px;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#DE5A02}
 .pl-rep-k i{width:6px;height:6px;border-radius:50%;background:#DE5A02}
-.pl-rep-t h3{margin:10px 0 0;font-size:17px;line-height:23px;font-weight:600;color:#16191D}
+.pl-rep-sub{margin:6px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
+.pl-rep-t h3{margin:10px 0 0;font-size:19px;line-height:24px;font-stretch:125%;letter-spacing:.1px;font-weight:600;color:#16191D}
 .pl-rep-cert{display:flex;align-items:center;gap:12px;margin:0 16px;padding:14px 0;border-top:1px solid #EDEFF3;border-bottom:1px solid #EDEFF3}
 .pl-rep-logo{flex:none;width:44px;height:44px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px #EDEFF3;display:flex;align-items:center;justify-content:center}
 .pl-rep-logo img{width:30px;height:33px;object-fit:contain}
