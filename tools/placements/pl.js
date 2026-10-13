@@ -189,6 +189,7 @@
       var li = rows[r], p = P[nextP % P.length]; r = (r + 1) % rows.length; nextP++;
       var flaps = li.querySelectorAll('.pl-flaps i'), word = pad(p[1]), im = li.querySelector('img'), nm = li.querySelector('b');
       li.classList.add('is-flip'); im.style.opacity = 0; nm.style.opacity = 0;
+      var key = p[1].slice(0, 8), tile = document.querySelector('.pl-lg[data-co="' + key + '"]'); document.querySelectorAll('.pl-lg.is-hit').forEach(function(x){ x.classList.remove('is-hit'); }); if (tile) setTimeout(function(){ tile.classList.add('is-hit'); }, 500);
       setTimeout(function(){ im.src = img(p[0]); nm.textContent = p[0]; im.style.opacity = 1; nm.style.opacity = 1; }, 300);
       var n = 0, t = setInterval(function(){ n++;
         flaps.forEach(function(f, k){ var target = word[k] === ' ' ? '' : word[k]; if (n >= 4 + k){ f.textContent = target; f.classList.remove('roll'); } else { f.textContent = CH[(Math.random() * 26) | 0]; f.classList.add('roll'); } });
@@ -223,16 +224,16 @@
     document.querySelectorAll('.pl-chip').forEach(function(c){ c.addEventListener('click', function(){ var l = +c.dataset.l; if (l === list) return; list = l; cur = 0; document.querySelectorAll('.pl-chip').forEach(function(x){ var on = x === c; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); }); render(); }); });
   })();
 
-  /* ---- 08 · the WhatsApp group: messages arrive one by one; the typing bubble and the header line rotate through the other managers ---- */
+  /* ---- 08 · the WhatsApp group: messages arrive one by one; the typing bubble's avatar and the header's green line rotate through the other managers ---- */
   (function(){
     var th = document.getElementById('plThread'); if (!th) return;
     var items = th.querySelectorAll('.pl-msg, .pl-typing');
     if (!reduce){ th.classList.add('is-wait'); items.forEach(function(m, i){ m.style.transitionDelay = (i * 450) + 'ms'; }); once(th, function(){ th.classList.remove('is-wait'); }, .25); }
-    var T = [['Manazir','#C77A00'],['Simi','#0673F9'],['Sandeep','#B42FE5'],['Salwat','#16A34A'],['Joseph','#C2410C']], k = 0, iv = 0;
-    var nm = document.getElementById('plTypeName'), sub = document.getElementById('plWaSub'), base = sub.textContent;
-    function show(){ nm.textContent = T[k][0]; nm.style.setProperty('--c', T[k][1]); sub.textContent = T[k][0] + ' is typing…'; }
+    var T = [['M','Manazir','#C77A00'],['S','Simi','#0673F9'],['S','Sandeep','#B42FE5'],['S','Salwat','#16A34A'],['J','Joseph','#C2410C']], k = 0, iv = 0;
+    var av = document.getElementById('plTypeAv'), sub = document.getElementById('plWaSub'), base = sub.textContent;
+    function show(){ av.textContent = T[k][0]; av.style.setProperty('--c', T[k][2]); sub.textContent = T[k][1] + ' is typing…'; sub.classList.add('is-typing'); }
     function step(){ k = (k + 1) % T.length; sub.style.opacity = 0; setTimeout(function(){ show(); sub.style.opacity = 1; }, 250); }
-    onView(th, function(on){ clearInterval(iv); if (on && !reduce){ show(); iv = setInterval(step, 3200); } else sub.textContent = base; });
+    onView(th, function(on){ clearInterval(iv); if (on && !reduce){ show(); iv = setInterval(step, 3200); } else { sub.textContent = base; sub.classList.remove('is-typing'); } });
   })();
 
   /* ---- 09 · FAQ: one open at a time ---- */
