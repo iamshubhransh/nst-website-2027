@@ -41,6 +41,15 @@
     onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 2800); });
   })();
 
+  /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */
+  (function(){
+    var sec = document.getElementById('google'), q = document.getElementById('plGoogQ'); if (!sec || reduce) return;
+    var full = q.textContent; q.textContent = ''; sec.classList.add('is-wait');
+    once(document.getElementById('plGoogBar'), function(){
+      var i = 0, t = setInterval(function(){ q.textContent = full.slice(0, ++i); if (i >= full.length){ clearInterval(t); setTimeout(function(){ sec.classList.remove('is-wait'); }, 380); } }, 55);
+    }, .6);
+  })();
+
   /* ---- 02 · latest offers: a new one arrives on top with a warm wash and the NEW tag; the rest step down ---- */
   var LOGO = {'NextYou': A + 'co-nextyou.png', 'Zeko AI': A + 'co-zeko-ai.png', 'Drona Aviation': A + 'co-drona-aviation.png', 'Licious': A + 'co-licious.png', 'Emergent': 'assets/co-logo-emergent.png'};
   (function(){
