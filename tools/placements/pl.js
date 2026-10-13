@@ -38,7 +38,7 @@
       if (!pick.length) return; lit.classList.remove('is-lit'); lit = pick[Math.floor(Math.random() * pick.length)]; lit.classList.add('is-lit');
     }
     var iv = 0;
-    onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 2800); });
+    onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 1600); });
   })();
 
   /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */

@@ -8,7 +8,7 @@ await p.goto('http://localhost:8765/placements.html',{waitUntil:'load'}); await 
 const t0=await ev(()=>getComputedStyle(document.querySelector('.pl-strip')).transform); await p.waitForTimeout(1200);
 const t1=await ev(()=>getComputedStyle(document.querySelector('.pl-strip')).transform);
 ok('wall drifts', t0!==t1, [t0,t1]);
-const lit0=await ev(()=>document.querySelector('.pl-tile.is-lit .pl-ph b').textContent); await p.waitForTimeout(3000);
+const lit0=await ev(()=>document.querySelector('.pl-tile.is-lit .pl-ph b').textContent); await p.waitForTimeout(1900);
 const lit1=await ev(()=>document.querySelector('.pl-tile.is-lit .pl-ph b').textContent);
 ok('a new tile lights', lit0!==lit1, [lit0,lit1]);
 ok('25 interns on the wall', await ev(()=>new Set([...document.querySelectorAll('.pl-tile b')].map(b=>b.textContent)).size>=20));

@@ -2784,16 +2784,21 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-col:nth-child(1) .pl-strip{margin-top:-40px}.pl-col:nth-child(2) .pl-strip{margin-top:-110px}.pl-col:nth-child(3) .pl-strip{margin-top:-20px}
 @keyframes plUp{to{transform:translateY(calc(-50% - 5px))}}
 .pl-tile{position:relative;flex:none;aspect-ratio:116/150}
-.pl-ph{position:absolute;inset:0;border-radius:12px;overflow:hidden;opacity:.42;transition:opacity .6s ease,box-shadow .6s ease}
+.pl-ph{position:absolute;inset:0;border-radius:12px;overflow:hidden;opacity:.42;transition:opacity .4s ease,box-shadow .4s ease}
 .pl-ph img{width:100%;height:100%;object-fit:cover}
 .pl-ph::after{content:"";position:absolute;left:0;right:0;bottom:0;height:46.67%;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.6))}
 .pl-ph b,.pl-ph span{position:absolute;left:10px;z-index:1;color:#fff;white-space:nowrap}
 .pl-ph b{bottom:22px;font-size:12px;line-height:16px;font-weight:600}
 .pl-ph span{bottom:8px;font-size:11px;line-height:14px;font-weight:500;opacity:.8}
-.pl-ph::before{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;box-shadow:inset 0 0 0 2px #0673F9;opacity:0;transition:opacity .6s ease}
+.pl-ph::before{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;box-shadow:inset 0 0 0 2px #0673F9;opacity:0;transition:opacity .4s ease}
 .pl-tile.is-lit .pl-ph{opacity:1;box-shadow:0 8px 24px -4px rgba(6,115,249,.25)}
 .pl-tile.is-lit .pl-ph::before{opacity:1}
 .pl-hero-copy{position:relative;z-index:3;display:flex;flex-direction:column;align-items:flex-start}
+.pl-crumbs{align-self:stretch;display:flex;align-items:center;justify-content:space-between;gap:12px}   /* the page's place under Home, the season on the right (13 Oct) */
+.pl-crumb{display:flex;align-items:center;gap:4px;font-size:13px;line-height:18px;font-weight:500}
+.pl-crumb a{color:rgba(22,25,29,.5);text-decoration:none}
+.pl-crumb svg{width:14px;height:14px;color:rgba(22,25,29,.35)}
+.pl-crumb span{font-weight:600;color:#16191D}
 .pl-kick{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 10px;border-radius:999px;background:#fff;box-shadow:inset 0 0 0 1px #E1E5EA;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#0673F9}
 .pl-kick i{width:6px;height:6px;border-radius:50%;background:#0673F9}
 .pl-title{margin:12px 0 0;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:-.3px;color:#16191D;max-width:370px}
@@ -2806,19 +2811,19 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-record .ctc-avg-value{font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px}
 
 /* ---- 02a Google: a search that finds two interns ---- */
-.pl-goog{position:relative;background:#fff;padding:56px 16px 8px}
+.pl-goog{position:relative;background:#fff;padding:56px 16px 8px;display:flex;flex-direction:column;align-items:center;text-align:center}   /* centred (13 Oct) */
 .pl-goog-brand{display:flex;align-items:center;gap:10px}
 .pl-goog-brand img{width:72px;height:24px}
 .pl-goog-brand i{width:1px;height:18px;background:#E1E5EA}
 .pl-goog-brand span{font-size:14px;line-height:20px;font-weight:500;color:#5B6271}
-.pl-goog-bar{display:flex;align-items:center;gap:10px;height:48px;margin-top:20px;padding:0 18px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px #E1E5EA,0 2px 8px rgba(22,25,29,.06);color:#8C95A6;font-size:16px;line-height:22px;font-weight:500}
-.pl-goog-bar svg{flex:none;width:18px;height:18px}
+.pl-goog-bar{display:flex;align-items:center;gap:8px;width:min(280px,100%);height:38px;margin-top:16px;padding:0 14px;border-radius:999px;background:#fff;box-shadow:0 0 0 1px #E1E5EA,0 1px 4px rgba(22,25,29,.05);color:#8C95A6;font-size:14px;line-height:20px;font-weight:500;text-align:left}
+.pl-goog-bar svg{flex:none;width:15px;height:15px}
 .pl-goog-bar span{color:#16191D;white-space:nowrap;overflow:hidden}
-.pl-caret{flex:none;width:1.5px;height:20px;margin-left:-8px;background:#0673F9;animation:plCaret 1s steps(1) infinite}
+.pl-caret{flex:none;width:1.5px;height:17px;margin-left:-6px;background:#0673F9;animation:plCaret 1s steps(1) infinite}
 @keyframes plCaret{50%{opacity:0}}
-.pl-goog-count{margin:10px 0 0 20px;font-size:12px;line-height:16px;font-weight:500;color:#8C95A6;transition:opacity .4s ease}
-.pl-goog-title{margin:24px 0 0;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:-.3px;color:#16191D}
-.pl-goog-res{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.pl-goog-count{margin:8px 0 0;font-size:12px;line-height:16px;font-weight:500;color:#8C95A6;transition:opacity .4s ease}
+.pl-goog-title{margin:20px 0 0;max-width:330px;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D}
+.pl-goog-res{align-self:stretch;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;text-align:left}
 .pl-gcard{padding:6px 6px 12px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #E1E5EA,0 6px 18px -10px rgba(22,25,29,.18);transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
 .pl-gph{position:relative;display:block;aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:linear-gradient(160deg,#E8F0FE,#F6F7F9)}
 .pl-gph::before{content:attr(data-i);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:600;font-stretch:125%;color:#4285F4;opacity:.55}
@@ -3137,7 +3142,10 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       <div class="pl-cols" id="plCols"></div>
     </div>
     <div class="pl-hero-copy">
-      <span class="pl-kick"><i></i>Placements · 2025–26</span>
+      <div class="pl-crumbs">
+        <nav class="pl-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span aria-current="page">Placements</span></nav>
+        <span class="pl-kick"><i></i>2025–26 season</span>
+      </div>
       <h1 class="pl-title">98.3% students landed paid internships in 2nd year</h1>
       <p class="pl-lede">Our first batches are already interning at 150+ companies, two years before their degree.</p>
       <a class="btn btn-brand pl-cta" href="index.html#ways">Become a part of NST <img src="assets/icon-arrow-right.svg" alt=""></a>
@@ -4038,7 +4046,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       if (!pick.length) return; lit.classList.remove('is-lit'); lit = pick[Math.floor(Math.random() * pick.length)]; lit.classList.add('is-lit');
     }
     var iv = 0;
-    onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 2800); });
+    onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 1600); });
   })();
 
   /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */
