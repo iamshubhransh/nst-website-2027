@@ -39,6 +39,7 @@ tail = src[src.index('<div class="vid" id="vid"'):]
 mod_i = tail.index('<script type="module">'); mod_j = tail.index('</script>', mod_i) + len('</script>')
 tail = tail[:mod_i] + tail[mod_j:]
 
+body = body.replace('<!--@commute-->', open(os.path.join(HERE, 'commute.svg'), encoding='utf-8').read())   # node tools/placements/commute.mjs regenerates it
 body = body.replace('<!--@wins-->', wins).replace('<!--@grid-->', grid).replace('<!--@ctc-->', ctc)
 
 # links that point at homepage sections must leave this page
@@ -92,6 +93,9 @@ tail_js = tail_js[:ms] + '<script>\n' + '\n'.join(kept) + tail_js[me:]
 
 page = (head + '<body>\n' + nav_variants + '\n<div class="page" id="page">\n\n  ' + header + '\n\n' + body + '\n\n  ' + footer + '\n</div>\n\n' + tail_html + tail_js)
 page = page.replace('min-width:1024px', 'min-width:100000px')   # no desktop layer yet (CSS and the JS isDT checks)
+import json
+cm = json.load(open(os.path.join(HERE, 'commute.json')))
+js = js.replace('__CM_WINDOWS__', str(cm['windows'])).replace('__CM_UNIT__', json.dumps(cm['unit'])).replace('__CM_FROM__', str(cm['from'])).replace('__CM_TO__', str(cm['to']))
 i = page.rindex('</body>')
 page = page[:i] + '<script>\n' + js + '\n</script>\n' + page[i:]
 open(os.path.join(ROOT, 'placements.html'), 'w', encoding='utf-8').write(page)

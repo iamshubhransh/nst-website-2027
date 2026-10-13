@@ -22,10 +22,11 @@ ok('five rows kept', await ev(()=>document.querySelectorAll('.pl-offer').length)
 const l0=await ev(()=>document.getElementById('plArcLabel').textContent); await p.waitForTimeout(2900);
 ok('arc steps to the next company', l0!==await ev(()=>document.getElementById('plArcLabel').textContent));
 // waffle
-await p.evaluate(()=>document.getElementById('plWaffle').scrollIntoView({block:'center'})); await p.waitForTimeout(2200);
-ok('Pune: 295 of 300 lit, 98.3', (await ev(()=>[document.querySelectorAll('#plWaffle i.on').length,document.getElementById('plRecNum').textContent])).join()==='295,98.3');
-await p.locator('.pl-tab[data-c="1"]').tap(); await p.waitForTimeout(1200);
-ok('Delhi: 279 lit, 93, stipend values', (await ev(()=>[document.querySelectorAll('#plWaffle i.on').length,document.getElementById('plRecNum').textContent,document.getElementById('plE1').textContent])).join()==='279,93,₹1,25,000/mo');
+await p.evaluate(()=>document.getElementById('plCommute').scrollIntoView({block:'center'})); await p.waitForTimeout(2600);
+ok('Pune: 96 of 98 windows lit, 98.3', (await ev(()=>[document.querySelectorAll('#plCommute .cm-win.on').length,document.getElementById('plRecNum').textContent])).join()==='96,98.3');
+const bx0=await ev(()=>document.getElementById('cmBus').getAttribute('transform')); await p.waitForTimeout(700); ok('the shuttle moves', bx0!==await ev(()=>document.getElementById('cmBus').getAttribute('transform')));
+await p.locator('.pl-tab[data-c="1"]').tap(); await p.waitForTimeout(2600);
+ok('Delhi: 91 windows lit, 93, stipend values, green street', (await ev(()=>[document.querySelectorAll('#plCommute .cm-win.on').length,document.getElementById('plRecNum').textContent,document.getElementById('plE1').textContent,document.getElementById('plCommute').dataset.c])).join()==='91,93,₹1,25,000/mo,1');
 // sectors
 await p.evaluate(()=>document.getElementById('plSecList').scrollIntoView({block:'center'})); await p.waitForTimeout(600);
 await p.locator('#plSecList li').nth(5).tap(); await p.waitForTimeout(300);

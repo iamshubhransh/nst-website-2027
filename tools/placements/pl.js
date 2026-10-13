@@ -94,34 +94,48 @@
     onView(arc, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(step, 2600); });
   })();
 
-  /* ---- 03 · first batches: 300 dots fill row by row with the count; the switch refills to the other campus ---- */
+  /* ---- 03 · first batches: the commute. Windows light one by one with the count (each lit window is a student with a paid
+          internship); the shuttle loops from the campus gate to the towers; the switch recolours the street and refills ---- */
   (function(){
-    var w = document.getElementById('plWaffle'); if (!w) return;
-    var D = [{band: '1st batch · ADYPU, Pune', size: '300+ students', pct: 98.3, lit: 295, e1l: 'Highest earned', e1: '₹1,90,000/mo', e2l: 'Average earned', e2: '₹23,364/mo'},
-             {band: '1st batch · Rishihood, Delhi NCR', size: 'Live tracking', pct: 93, lit: 279, e1l: 'Highest stipend', e1: '₹1,25,000/mo', e2l: 'Average stipend', e2: '₹23,000/mo'}];
-    var dots = []; for (var i = 0; i < 300; i++){ var d = document.createElement('i'); w.appendChild(d); dots.push(d); }
+    var box = document.getElementById('plCommute'); if (!box) return;
+    var CM = {windows: __CM_WINDOWS__, unit: __CM_UNIT__, from: __CM_FROM__, to: __CM_TO__};
+    var D = [{band: '1st batch · ADYPU, Pune', size: '300+ students', pct: 98.3, e1l: 'Highest earned', e1: '₹1,90,000/mo', e2l: 'Average earned', e2: '₹23,364/mo'},
+             {band: '1st batch · Rishihood, Delhi NCR', size: 'Live tracking', pct: 93, e1l: 'Highest stipend', e1: '₹1,25,000/mo', e2l: 'Average stipend', e2: '₹23,000/mo'}];
+    var wins = [].slice.call(box.querySelectorAll('.cm-win'));
+    var seed = 7, order = wins.map(function(w, i){ return i; }).sort(function(){ seed = (seed * 16807) % 2147483647; return (seed / 2147483647) - .5; });   /* a fixed scatter, so the lighting looks like people arriving */
     var num = document.getElementById('plRecNum'), shown = 0, shownPct = 0, cur = 0, tmr = 0;
     function fmt(v, t){ return t % 1 ? v.toFixed(1) : String(Math.round(v)); }
+    function paint(n){ order.forEach(function(wi, k){ wins[wi].classList.toggle('on', k < n); }); }
     function fill(c){
-      var t = D[c]; clearInterval(tmr);
+      var t = D[c], to = Math.round(CM.windows * t.pct / 100); clearInterval(tmr); box.dataset.c = c; box.closest('.pl-rec').classList.toggle('is-delhi', c === 1);
       ['Band', 'Size'].forEach(function(k){ document.getElementById('plRec' + k).textContent = t[k.toLowerCase()]; });
       ['E1l', 'E1', 'E2l', 'E2'].forEach(function(k){ document.getElementById('pl' + k).textContent = t[k.charAt(0).toLowerCase() + k.slice(1)]; });
-      if (reduce){ dots.forEach(function(d, i){ d.classList.toggle('on', i < t.lit); }); shown = t.lit; shownPct = t.pct; num.textContent = fmt(t.pct, t.pct); return; }
-      var from = shown, to = t.lit, fp = shownPct, tp = t.pct, k = 0, steps = from === 0 ? 60 : 24;
+      if (reduce){ paint(to); shown = to; num.textContent = fmt(t.pct, t.pct); return; }
+      var from = shown, fp = shownPct, tp = t.pct, k = 0, steps = from === 0 ? 70 : 26;
       tmr = setInterval(function(){
         k++; var p = Math.min(1, k / steps), e = 1 - Math.pow(1 - p, 3), v = Math.round(from + (to - from) * e);
-        dots.forEach(function(d, i){ var on = i < v; if (on !== d.classList.contains('on')){ d.classList.toggle('on', on); if (on){ d.classList.add('pop'); setTimeout(function(){ d.classList.remove('pop'); }, 260); } } });
-        shown = v; shownPct = fp + (tp - fp) * e; num.textContent = fmt(shownPct, tp);
+        paint(v); shown = v; shownPct = fp + (tp - fp) * e; num.textContent = fmt(shownPct, tp);
         if (p >= 1){ clearInterval(tmr); num.textContent = fmt(tp, tp); }
-      }, 22);
+      }, 24);
     }
     num.textContent = '0';
-    once(w, function(){ fill(0); }, .25);
+    once(box, function(){ fill(0); }, .35);
     document.querySelectorAll('.pl-tab').forEach(function(b){ b.addEventListener('click', function(){
       var c = +b.dataset.c; if (c === cur) return; cur = c;
       document.querySelectorAll('.pl-tab').forEach(function(x){ var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
-      fill(c);
+      shown = 0; shownPct = 0; paint(0); fill(c);
     }); });
+    /* the shuttle: gate → stop (eased), a pause, then round again off the left edge */
+    var bus = document.getElementById('cmBus'), svg = box.querySelector('svg'), raf = 0, vis = false, t0 = 0, LOOP = 7600;
+    function busAt(x){ var s = svg.getBoundingClientRect().width / 740 * (svg.viewBox.baseVal.height ? 1 : 1); bus.setAttribute('transform', 'translate(' + (CM.unit[0] * x).toFixed(1) + ' ' + (CM.unit[1] * x).toFixed(1) + ')'); }
+    function frame(now){
+      var u = ((now - t0) % LOOP) / LOOP, x;
+      if (u < .62){ var e = u / .62; e = e < .5 ? 2 * e * e : 1 - Math.pow(-2 * e + 2, 2) / 2; x = CM.from + (CM.to - CM.from) * e; }
+      else if (u < .84) x = CM.to; else { var e2 = (u - .84) / .16; x = CM.to + (520 - CM.to) * e2 * e2; }
+      busAt(x); raf = vis ? requestAnimationFrame(frame) : 0;
+    }
+    busAt(reduce ? CM.to : CM.from);
+    if (!reduce) onView(box, function(on){ vis = on; if (on && !raf){ if (!t0) t0 = performance.now(); raf = requestAnimationFrame(frame); } });
   })();
 
   /* ---- 05 · sectors: 287 ticks, one per intern; they draw in left to right; tapping a row lights that sector ---- */

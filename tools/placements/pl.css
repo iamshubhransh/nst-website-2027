@@ -108,19 +108,27 @@
 .pl-rec-num b{font-weight:600}
 .pl-rec-num span{color:rgba(22,25,29,.35)}
 .pl-rec-lab{margin:4px 16px 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
-.pl-waffle{display:grid;grid-template-columns:repeat(20,10px);grid-auto-rows:10px;gap:7px;justify-content:center;margin:20px 0 0}
-.pl-waffle i{width:10px;height:10px;border-radius:50%;background:#E1E5EA;transition:background-color .35s ease,transform .35s cubic-bezier(.22,1,.36,1)}
-.pl-waffle i.on{background:#0673F9}
-.pl-waffle i.pop{transform:scale(1.35)}
-.pl-legend{display:flex;gap:28px;margin:14px 16px 0;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.6)}
-.pl-legend span{display:inline-flex;align-items:center;gap:6px}
-.pl-legend i{width:8px;height:8px;border-radius:50%;background:#0673F9}
-.pl-legend i.off{background:#E1E5EA}
+/* the commute (anatomy figure, tools/placements/commute.mjs): full card width; the shuttle loops gate → towers; windows light with the count */
+.pl-commute{--cm:#0673F9;position:relative;height:210px;margin:16px 0 0;overflow:hidden;
+  --anatomy-paper:#fff;--anatomy-face:#fff;--anatomy-top:#fff;--anatomy-shade-0:#E3E7ED;--anatomy-shade-1:#EBEEF2;--anatomy-shade-2:#F1F3F6;--anatomy-shade-3:#F6F7F9;
+  --anatomy-lit-top:#fff;--anatomy-lit-shade:#F1F3F6;--anatomy-hi:#5B6271;--anatomy-mid:#A9B1BD;--anatomy-lo:#CBD2DB;--anatomy-faint:#E1E5EA;--anatomy-lit:var(--cm);--anatomy-halo-opacity:0;--anatomy-weight:.6px;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(180deg,transparent 0,#000 18px,#000 calc(100% - 18px),transparent)}
+.pl-commute[data-c="1"]{--cm:#16A34A}
+.pl-commute .cm-svg{position:absolute;left:0;top:0;width:100%;height:100%}
+.pl-commute .cm-road{fill:#EEF1F5}
+.pl-commute .cm-zebra{fill:#fff}
+.pl-commute .cm-clock{fill:#fff}
+.pl-commute .cm-dash{stroke-dasharray:none}
+.pl-commute .cm-win{fill:#E6EAF0;stroke:none;transition:fill .35s ease}
+.pl-commute .cm-win.on{fill:var(--cm)}
+.pl-commute .cm-bus{will-change:transform}
+.pl-commute-cap{margin:6px 16px 0;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.5)}
 .pl-earn{display:flex;margin-top:16px;border-top:1px solid #EDEFF3;border-bottom:1px solid #EDEFF3}
 .pl-earn div{flex:1 1 0;padding:15px 16px 8px;display:flex;flex-direction:column;gap:4px}
 .pl-earn div+div{border-left:1px solid #EDEFF3}
 .pl-earn span{font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.55)}
-.pl-earn b{font-size:18px;line-height:24px;font-weight:600;color:#0673F9;font-variant-numeric:tabular-nums}
+.pl-earn b{font-size:18px;line-height:24px;font-weight:600;color:#0673F9;font-variant-numeric:tabular-nums;transition:color .3s ease}
+.pl-rec.is-delhi .pl-earn b{color:#16A34A}
 .pl-audit{display:flex;align-items:center;gap:8px;padding:12px 16px 13px}
 .pl-audit img{width:16px;height:16px;flex:none}
 .pl-audit p{flex:1;max-width:230px;margin:0;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.7)}
