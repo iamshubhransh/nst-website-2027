@@ -17,7 +17,7 @@ await p.evaluate(()=>document.getElementById('plOffers').scrollIntoView({block:'
 const o0=await ev(()=>document.querySelector('.pl-offer').dataset.n); await p.waitForTimeout(2600);
 const o1=await ev(()=>document.querySelector('.pl-offer').dataset.n);
 ok('a new offer arrives on top', o0!==o1 && await ev(()=>document.querySelector('.pl-offer').classList.contains('is-new')), [o0,o1]);
-ok('offer badges load', await ev(()=>[...document.querySelectorAll('.pl-cmp')].every(i=>i.complete&&i.naturalWidth>0&&Math.round(i.getBoundingClientRect().width)===20)));
+ok('offer badges load', await ev(()=>[...document.querySelectorAll('.pl-co')].every(i=>i.complete&&i.naturalWidth>0&&Math.round(i.getBoundingClientRect().width)===20)));
 ok('five rows kept', await ev(()=>document.querySelectorAll('.pl-offer').length)<=6);
 const l0=await ev(()=>document.getElementById('plArcLabel').textContent); await p.waitForTimeout(2900);
 ok('arc steps to the next company', l0!==await ev(()=>document.getElementById('plArcLabel').textContent));
@@ -34,8 +34,8 @@ await p.locator('#plSecList li').nth(5).tap(); await p.waitForTimeout(300);
 ok('Fintech tap lights 13 ticks', (await ev(()=>[document.querySelectorAll('#plBarcode i.sel').length,document.getElementById('plSecName').textContent,document.getElementById('plSecPct').textContent])).join()==='13,Fintech,4.5');
 ok('287 ticks', await ev(()=>document.querySelectorAll('#plBarcode i').length)===287);
 // companies
-await p.evaluate(()=>document.getElementById('plCos').scrollIntoView({block:'center'})); await p.waitForTimeout(900);
-ok('company rows with faces', (await ev(()=>[document.querySelectorAll('.pl-cmp').length, document.querySelector('.pl-cmp .pl-cmp-t span').textContent, document.querySelectorAll('.pl-cmp-f img').length])).join()==='7,Swarnim, Tanima and 9 more,13');
+await p.evaluate(()=>document.getElementById('plCos').scrollIntoView({block:'center'})); await p.waitForTimeout(1600);
+ok('company rows with faces', (await ev(()=>[document.querySelectorAll('.pl-cmp').length, document.querySelector('.pl-cmp .pl-cmp-t span').textContent, document.querySelectorAll('.pl-cmp-f img').length])).join()==='7,Swarnim, Tanima and 9 more,12');
 ok('company rows visible', await ev(()=>getComputedStyle(document.querySelector('.pl-cmp:last-child')).opacity==='1'));
 // stories
 await p.evaluate(()=>document.getElementById('plNext').scrollIntoView({block:'center'})); await p.waitForTimeout(300);

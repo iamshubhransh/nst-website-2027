@@ -193,6 +193,10 @@
     });
     var lg = document.getElementById('plLogos');
     ['licious', 'drona-aviation', 'zeko-ai', 'nextyou', 'aibridge', 'lear-labs'].forEach(function(n){ var im = document.createElement('img'); im.src = A + 'co-' + n + '.png'; im.alt = ''; lg.appendChild(im); });
+    /* the logo wall: a company tile lights with "+1 intern" in turn while the wall is on screen */
+    var tiles = [].slice.call(document.querySelectorAll('.pl-lg[data-co]')), ti = -1, iv = 0;
+    function hit(){ tiles.forEach(function(t){ t.classList.remove('is-hit'); }); var n; do { n = Math.floor(Math.random() * tiles.length); } while (n === ti && tiles.length > 1); ti = n; tiles[n].classList.add('is-hit'); }
+    if (!reduce) onView(document.getElementById('plLogoWall'), function(on){ clearInterval(iv); if (on){ hit(); iv = setInterval(hit, 2000); } });
     if (!reduce){ ul.classList.add('is-wait'); [].forEach.call(ul.children, function(li, i){ li.style.transitionDelay = (i * 70) + 'ms'; }); once(ul, function(){ ul.classList.remove('is-wait'); }, .2); }
   })();
 
