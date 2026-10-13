@@ -41,6 +41,21 @@
     onView(hero, function(on){ hero.classList.toggle('is-live', on && !reduce); clearInterval(iv); if (on && !reduce) iv = setInterval(next, 1600); });
   })();
 
+  /* ---- 01b · the CTC: count the range up from zero, sheen once, grow the band, drop the average pin / swing the needle ---- */
+  (function(){
+    var sec = document.getElementById('ctc'); if (!sec) return;
+    var ticks = sec.querySelector('.pl-dial-ticks');
+    if (ticks){ var h = ''; for (var v = 0; v <= 60; v += 5){ var a = Math.PI * (1 - v / 60), maj = v % 10 === 0, r0 = maj ? 116 : 122, r1 = 128;
+      h += '<line class="' + (maj ? 'maj' : '') + '" x1="' + (170 + r0 * Math.cos(a)).toFixed(1) + '" y1="' + (170 - r0 * Math.sin(a)).toFixed(1) + '" x2="' + (170 + r1 * Math.cos(a)).toFixed(1) + '" y2="' + (170 - r1 * Math.sin(a)).toFixed(1) + '"/>'; }
+      ticks.innerHTML = h; }
+    var nums = [].slice.call(sec.querySelectorAll('.pl-ctc-big b'));
+    function count(){ if (reduce){ return; } nums.forEach(function(b){ b.textContent = '0'; }); var t0 = performance.now();
+      (function f(now){ var p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }
+    once(sec, function(){ sec.classList.add('is-in'); count(); var nd = sec.querySelector('.pl-needle'); if (nd) nd.style.transform = 'rotate(' + (-90 + 180 * 23 / 60) + 'deg)'; }, .35);
+    onView(sec, function(on){ sec.classList.toggle('is-live', on); });
+    if (reduce){ sec.classList.add('is-in'); var nd = sec.querySelector('.pl-needle'); if (nd) nd.style.transform = 'rotate(' + (-90 + 180 * 23 / 60) + 'deg)'; }
+  })();
+
   /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */
   (function(){
     var sec = document.getElementById('google'), q = document.getElementById('plGoogQ'); if (!sec || reduce) return;

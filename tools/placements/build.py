@@ -40,7 +40,7 @@ mod_i = tail.index('<script type="module">'); mod_j = tail.index('</script>', mo
 tail = tail[:mod_i] + tail[mod_j:]
 
 body = body.replace('<!--@commute-->', open(os.path.join(HERE, 'commute.svg'), encoding='utf-8').read())   # node tools/placements/commute.mjs regenerates it
-body = body.replace('<!--@wins-->', wins).replace('<!--@grid-->', grid).replace('<!--@ctc-->', ctc)
+body = body.replace('<!--@wins-->', wins).replace('<!--@grid-->', grid)
 
 # links that point at homepage sections must leave this page
 def homeify(block):

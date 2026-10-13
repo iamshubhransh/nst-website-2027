@@ -16,12 +16,52 @@
       <a class="btn btn-brand pl-cta" href="index.html#ways">Become a part of NST <img src="assets/icon-arrow-right.svg" alt=""></a>
     </div>
   </section>
+  <!-- 01b · the CTC (13 Oct): the page's headline metric gets its own stage, right under the hero. Three treatments to compare:
+       default "range" (dark: huge figure, a ₹0–60L ruler with the 20–50 band and the ₹23L average pin), ?ctc=dial (dark gauge),
+       ?ctc=spot (a light page with a blue spotlight tile) -->
+  <script>document.documentElement.dataset.ctc = (location.search.match(/[?&]ctc=(\w+)/) || [])[1] || 'range';</script>
+  <section class="pl-ctc" id="ctc" aria-label="CTC offered to freshers">
+    <div class="pl-ctc-range">
+      <span class="pl-ctc-pill">CTC offered to freshers</span>
+      <p class="pl-ctc-big"><span class="pl-foil">₹<b data-to="20">20</b>–<b data-to="50">50</b></span></p>
+      <p class="pl-ctc-unit">Lakhs per annum</p>
+      <div class="pl-ruler" aria-hidden="true">
+        <div class="pl-ruler-ticks"></div>
+        <i class="pl-band"></i>
+        <span class="pl-avg"><em>Avg ₹23L on campus</em><i></i></span>
+        <div class="pl-ruler-lab"><span>0</span><span>10</span><span>20</span><span>30</span><span>40</span><span>50</span><span>60L</span></div>
+      </div>
+      <p class="pl-ctc-note"><img src="assets/icon-check-circle.svg" alt="">Average CTC on campus: ₹23 Lakhs/annum</p>
+    </div>
+    <div class="pl-ctc-dial">
+      <span class="pl-ctc-pill">CTC offered to freshers</span>
+      <div class="pl-dial">
+        <svg viewBox="0 0 340 190" aria-hidden="true">
+          <defs><linearGradient id="plDialG" x1="0" x2="1"><stop offset="0" stop-color="#0673F9"/><stop offset="1" stop-color="#61A8FF"/></linearGradient></defs>
+          <path class="pl-dial-track" d="M30 170 A140 140 0 0 1 310 170"/>
+          <path class="pl-dial-band" d="M30 170 A140 140 0 0 1 310 170" pathLength="60" stroke-dasharray="0 20 30 100"/>
+          <g class="pl-dial-ticks"></g>
+          <g class="pl-needle"><path d="M170 58 L170 18"/><circle cx="170" cy="30" r="6"/></g>
+        </svg>
+        <div class="pl-dial-mid"><p class="pl-ctc-big pl-ctc-big-s"><span class="pl-foil">₹<b data-to="20">20</b>–<b data-to="50">50</b>L</span></p><p class="pl-ctc-unit">per annum</p></div>
+        <span class="pl-dial-0">₹0</span><span class="pl-dial-60">₹60L</span>
+      </div>
+      <p class="pl-ctc-note pl-ctc-note-c"><img src="assets/icon-check-circle.svg" alt="">The needle sits on the ₹23L campus average</p>
+    </div>
+    <div class="pl-ctc-spot">
+      <div class="pl-spot">
+        <i class="pl-rays" aria-hidden="true"></i>
+        <span class="pl-spot-k">CTC offered to freshers</span>
+        <p class="pl-ctc-big"><span>₹<b data-to="20">20</b>–<b data-to="50">50</b></span></p>
+        <p class="pl-ctc-unit">Lakhs per annum</p>
+        <span class="pl-spot-avg"><img src="assets/icon-check-circle.svg" alt="">₹23 Lakhs average on campus</span>
+      </div>
+    </div>
+  </section>
+
   <section class="proof pl-proof" aria-label="Placement summary">
     <div class="hatch hatch-flip" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
     <!--@grid-->
-    <div class="pl-record">
-    <!--@ctc-->
-    </div>
     <div class="hatch" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
   </section>
 
