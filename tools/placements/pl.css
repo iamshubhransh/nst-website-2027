@@ -139,7 +139,9 @@
 .pl-rec{position:relative;margin-top:20px;border-radius:12px;overflow:hidden;background:#fff}
 .pl-rec-band{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 16px;background:var(--bg2)}
 .pl-rec+.pl-rec{margin-top:16px}
-.pl-rec-band{gap:8px}
+.pl-rec-band{gap:10px;height:60px!important;background:#fff!important;border-bottom:1px solid #EDEFF3}
+.pl-uni{flex:none;height:auto;max-height:36px;object-fit:contain}
+.pl-rec-band .pl-uni+b{padding-left:10px;border-left:1px solid #E1E5EA;font-size:11px!important;letter-spacing:.8px!important;color:rgba(22,25,29,.6)!important;white-space:nowrap}
 .pl-rec-band span:empty{display:none}
 .pl-rec-tag{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:999px;background:#E5F1FF;font-style:normal;font-size:11px;line-height:14px;font-weight:600;color:#0673F9;white-space:nowrap}
 .pl-rec-tag+span{display:none}
@@ -207,7 +209,7 @@
 .pl-rep-in{list-style:none;margin:0;padding:14px 16px 4px;display:flex;flex-direction:column;gap:10px}
 .pl-rep-in li{display:flex;align-items:center;gap:8px;font-size:14px;line-height:20px;font-weight:500;color:#16191D}
 .pl-rep-in img{width:16px;height:16px;flex:none}
-.pl-rep-cta{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;margin:16px 16px 0;border-radius:12px;background:#0673F9;box-shadow:var(--btn-shadow);color:#fff;text-decoration:none;font-size:15px;line-height:22px;font-weight:600;letter-spacing:.06px}
+.pl-rep-cta{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;margin:16px 16px 16px;border-radius:12px;background:#0673F9;box-shadow:var(--btn-shadow);color:#fff;text-decoration:none;font-size:15px;line-height:22px;font-weight:600;letter-spacing:.06px}
 .pl-rep-cta img{width:20px;height:20px}
 .pl-rep-cta span{height:20px;padding:0 6px;border-radius:5px;background:rgba(255,255,255,.18);font-size:11px;line-height:20px;font-weight:700;letter-spacing:.5px}
 .pl-rep-cta:active{transform:scale(.98)}
@@ -363,7 +365,7 @@
 .pl-h2{margin:12px 0 0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D;text-align:center}
 /* the recruiters, as a WhatsApp group in today's style (13 Oct): white header with a green typing line, doodle wallpaper,
    small sender avatars, rounded bubbles with a soft tail, a pill composer with + and camera, a green send circle */
-.pl-thread{align-self:stretch;margin-top:36px;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px #E1E5EA,0 18px 40px -22px rgba(22,25,29,.35);background:#F5F1EB;color:#111B21}
+.pl-thread{align-self:stretch;margin-top:36px;border-radius:20px;overflow:hidden;box-shadow:0 0 0 1px #E1E5EA;background:#F5F1EB;color:#111B21}
 .pl-wa-bar{display:flex;align-items:center;gap:10px;height:62px;padding:0 14px 0 8px;background:#fff;border-bottom:1px solid #E9EDEF;color:#111B21}
 .pl-wa-back{flex:none;width:22px;height:22px;color:#111B21}
 .pl-wa-grp{flex:none;width:38px;height:38px;border-radius:50%;background:#E7F8EE;display:flex;align-items:center;justify-content:center}
@@ -394,7 +396,7 @@
 .pl-wa-in{flex:1;min-width:0;display:flex;align-items:center;gap:10px;height:46px;padding:0 14px 0 12px;border-radius:23px;background:#fff;box-shadow:0 1px 1.5px rgba(11,20,26,.1);color:#54656F}
 .pl-wa-in svg{flex:none;width:22px;height:22px}
 .pl-wa-ph{flex:1;min-width:0;font-size:14.5px;line-height:20px;font-weight:500;color:#8696A0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pl-compose>i{flex:none;width:46px;height:46px;border-radius:50%;background:#1DAB61;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px -2px rgba(29,171,97,.6)}
+.pl-compose>i{flex:none;width:46px;height:46px;border-radius:50%;background:#1DAB61;display:flex;align-items:center;justify-content:center}
 .pl-compose>i svg{width:20px;height:20px}
 .pl-hatch-end{border-bottom:0}
 
