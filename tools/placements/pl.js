@@ -58,7 +58,7 @@
       var last = ul.lastChild; last.style.opacity = '0';
       setTimeout(function(){ if (last.parentNode) last.remove(); }, 600);
     }
-    onView(ul, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(step, 3400); });
+    onView(ul, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(step, 2200); });
   })();
 
   /* ---- 02 · the arc: company discs step along the bottom of the ring; the centre one names itself ---- */

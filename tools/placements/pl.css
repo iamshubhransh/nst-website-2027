@@ -58,7 +58,7 @@
 .pl-offer-t{position:relative;margin-left:12px;min-width:0}
 .pl-offer-t b{display:block;font-size:15px;line-height:20px;font-weight:600;color:#16191D;white-space:nowrap}
 .pl-offer-t span{display:block;margin-top:1px;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6);white-space:nowrap}
-.pl-new{position:absolute;right:14px;top:21px;width:44px;height:22px;border-radius:999px;background:rgba(245,151,0,.14);font-size:10px;line-height:22px;font-weight:700;letter-spacing:1px;text-align:center;color:#B26A00;opacity:0;transform:scale(.8);transition:opacity .4s ease,transform .5s cubic-bezier(.22,1,.36,1)}
+.pl-new{position:absolute;font-style:normal;right:14px;top:21px;width:44px;height:22px;border-radius:999px;background:rgba(245,151,0,.14);font-size:10px;line-height:22px;font-weight:700;letter-spacing:1px;text-align:center;color:#B26A00;opacity:0;transform:scale(.8);transition:opacity .4s ease,transform .5s cubic-bezier(.22,1,.36,1)}
 .pl-offer.is-new .pl-new{opacity:1;transform:none}
 .pl-offers-fade{position:absolute;left:0;right:0;bottom:0;height:48px;background:linear-gradient(180deg,rgba(255,255,255,0),#fff);pointer-events:none}
 .pl-arc{position:absolute;left:0;right:0;top:532px;bottom:0;pointer-events:none}

@@ -14,7 +14,7 @@ ok('a new tile lights', lit0!==lit1, [lit0,lit1]);
 ok('25 interns on the wall', await ev(()=>new Set([...document.querySelectorAll('.pl-tile b')].map(b=>b.textContent)).size>=20));
 // offers
 await p.evaluate(()=>document.getElementById('plOffers').scrollIntoView({block:'center'})); await p.waitForTimeout(500);
-const o0=await ev(()=>document.querySelector('.pl-offer').dataset.n); await p.waitForTimeout(3800);
+const o0=await ev(()=>document.querySelector('.pl-offer').dataset.n); await p.waitForTimeout(2600);
 const o1=await ev(()=>document.querySelector('.pl-offer').dataset.n);
 ok('a new offer arrives on top', o0!==o1 && await ev(()=>document.querySelector('.pl-offer').classList.contains('is-new')), [o0,o1]);
 ok('offer badges load', await ev(()=>[...document.querySelectorAll('.pl-co')].every(i=>i.complete&&i.naturalWidth>0&&Math.round(i.getBoundingClientRect().width)===20)));
