@@ -60,7 +60,7 @@ Mobile-first build of Shubhransh's frame 632:26742. The page is **generated**: e
 
 - The build takes the shell from `index.html`: head, top bar, footer, dock, chat, menu sheet, video overlay, and the wins, proof-tile and CTC markup.
 - It keeps only the shared-script blocks this page uses, plus the helpers they call.
-- It switches off the desktop layer, since there is no desktop design yet, so wide screens get the 402 px phone column.
+- It keeps the homepage's desktop layer (≥ 1024 px); the placements desktop rules are the last block of `pl.css`.
 
 Sections:
 1. Light intern wall.
@@ -74,3 +74,21 @@ Sections:
 9. FAQs, then the homepage footer.
 
 Interaction test: `node tools/placements/e2e.mjs`, run with the local server on :8765.
+
+### Placements desktop (13 Oct 2026)
+Desktop (≥ 1024 px) follows the homepage system: the 1200 px column, section titles 28/40, kickers 14/28, sub-lines 18/28 and 120 px section padding.
+
+Layout, section by section:
+- Hero: copy left, a four-column intern wall right.
+- CTC: a centred gold stage with a 96 px figure.
+- Summary: four summary tiles in a row.
+- Google: search left, result cards right.
+- Live offers: a centred feed of 720.
+- Campuses: side by side, with the report as one wide card below.
+- Sectors: readout and barcode left, list right.
+- Companies: list left, logo wall right.
+- Stories: feature left, queue right.
+- Recruiters: a 720 WhatsApp chat.
+- FAQs: an 800 accordion.
+
+Tests: `node tools/placements/e2e-dt.mjs` checks layout, every interaction and five widths, with no errors or failed requests. The phone test is `e2e.mjs`.

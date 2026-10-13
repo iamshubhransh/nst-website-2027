@@ -3,8 +3,7 @@
 plus the placements body, CSS and JS in this folder. Run from anywhere:  python3 tools/placements/build.py
 
 Why a build: the top bar, footer, dock and chat are shared with the homepage. Regenerating keeps them identical
-whenever the homepage changes. The placements page is mobile-first and has no desktop design yet, so the homepage's
-desktop layer (min-width:1024px) is switched off here and wide screens get the 402 px phone column on the grey stage.
+whenever the homepage changes. The homepage's desktop layer (min-width:1024px) applies here too; the placements desktop rules live in pl.css.
 """
 import os, re
 
@@ -35,11 +34,12 @@ wins = cut(src, '<section class="wins"', '</section>')
 grid = cut(src, '<div class="grid" data-node="76:10567">', '\n    </div>\n\n    <div class="companies"', include_end=False) + '\n    </div>'
 ctc = cut(src, '<div class="ctc">', '\n    </div>\n  </section>', include_end=False) + '\n    </div>'
 tail = src[src.index('<div class="vid" id="vid"'):]
-# the desktop nav's figure module only runs at >= 1024 px, which this page never treats as desktop
-mod_i = tail.index('<script type="module">'); mod_j = tail.index('</script>', mod_i) + len('</script>')
-tail = tail[:mod_i] + tail[mod_j:]
 
 body = body.replace('<!--@commute-->', open(os.path.join(HERE, 'commute.svg'), encoding='utf-8').read())   # node tools/placements/commute.mjs regenerates it
+# photos that have not arrived yet: leave the <img> out (the card shows initials) rather than request a missing file
+for src in re.findall(r'<img src="(assets/pl/google-[a-z]+\.jpg)"[^>]*>', body):
+    if not os.path.exists(os.path.join(ROOT, src)):
+        body = re.sub(r'<img src="' + re.escape(src) + r'"[^>]*>', '', body)
 body = body.replace('<!--@wins-->', wins).replace('<!--@grid-->', grid)
 
 # links that point at homepage sections must leave this page
@@ -92,7 +92,6 @@ kept = list(dict.fromkeys(kept))
 tail_js = tail_js[:ms] + '<script>\n' + '\n'.join(kept) + tail_js[me:]
 
 page = (head + '<body>\n' + nav_variants + '\n<div class="page" id="page">\n\n  ' + header + '\n\n' + body + '\n\n  ' + footer + '\n</div>\n\n' + tail_html + tail_js)
-page = page.replace('min-width:1024px', 'min-width:100000px')   # no desktop layer yet (CSS and the JS isDT checks)
 import json
 cm = json.load(open(os.path.join(HERE, 'commute.json')))
 js = js.replace('__CM_WINDOWS__', str(cm['windows'])).replace('__CM_UNIT__', json.dumps(cm['unit'])).replace('__CM_FROM__', str(cm['from'])).replace('__CM_TO__', str(cm['to']))

@@ -17,6 +17,9 @@
       [['Sahil Singh','Bluecopa'],['Sumit Kumar Nayak','Licious'],['Angelo Nelson','Licious'],['Swarnim Balpande','Emergent'],['Devendra Mishra','Drona Aviation'],['Parth Singh','Sherlocks.AI'],['Adarsh Priydarshi','NextYou'],['Abhay Pratap Yadav','CustomsVerse']]
     ];
     var SPEED = [9, 12, 10.5];   /* px per second */
+    if (matchMedia('(min-width:1024px)').matches){   /* desktop: the same 24 interns in four columns */
+      var all = C[0].concat(C[1], C[2]); C = [[], [], [], []]; all.forEach(function(p, i){ C[i % 4].push(p); }); SPEED = [10, 13, 9, 11.5];
+    }
     C.forEach(function(list, c){
       var col = document.createElement('div'); col.className = 'pl-col';
       var strip = document.createElement('div'); strip.className = 'pl-strip';
@@ -30,11 +33,11 @@
     });
     function timing(){ cols.querySelectorAll('.pl-strip').forEach(function(s, c){ var t = s.firstChild; var h = t.getBoundingClientRect().height + 10; s.style.setProperty('--dur', (C[c].length * h / SPEED[c]).toFixed(1) + 's'); }); }
     timing(); window.addEventListener('resize', timing);
-    var tiles = [].slice.call(cols.querySelectorAll('.pl-tile')), lit = tiles[C[0].length * 2 + 2];   /* Tanima, as in the frame */
+    var tiles = [].slice.call(cols.querySelectorAll('.pl-tile')), lit = tiles.filter(function(t){ return t.querySelector('b').textContent === 'Tanima'; })[0] || tiles[0];   /* Tanima, as in the frame */
     lit.classList.add('is-lit');
     function next(){
       var wall = cols.getBoundingClientRect(), pick = [];
-      var litName = lit.querySelector('b').textContent; tiles.forEach(function(t){ if (t === lit || t.querySelector('b').textContent === litName) return; var r = t.getBoundingClientRect(), cy = r.top + r.height / 2 - wall.top; if (cy > 150 && cy < 360) pick.push(t); });
+      var litName = lit.querySelector('b').textContent; tiles.forEach(function(t){ if (t === lit || t.querySelector('b').textContent === litName) return; var r = t.getBoundingClientRect(), cy = r.top + r.height / 2 - wall.top; if (cy > wall.height * .3 && cy < wall.height * .72) pick.push(t); });
       if (!pick.length) return; lit.classList.remove('is-lit'); lit = pick[Math.floor(Math.random() * pick.length)]; lit.classList.add('is-lit');
     }
     var iv = 0;

@@ -1681,7 +1681,7 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .wins-foot{order:-1}
   .wins-view{width:var(--wrap);margin:0 auto;padding:0;clip-path:none;overflow:visible}
   .wins-view{overflow:hidden;margin:-24px auto;padding:24px 0}
-  .win,.win.is-focus{zoom:var(--z);width:calc(384px / var(--z));scale:1;box-shadow:none}
+  .win,.win.is-focus{zoom:var(--z);width:calc((var(--wrap) - 48px) / 3 / var(--z));scale:1;box-shadow:none}   /* a third of the column: 384 at ≥ 1296, narrower below so three always fit (13 Oct) */
   .win{--z:1.152}
   .win.is-focus{--z:1.28}
   .wins-track{gap:24px}
