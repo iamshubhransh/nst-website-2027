@@ -93,10 +93,15 @@
       <button class="pl-chip is-on" type="button" role="tab" aria-selected="true" data-l="0">Intern stories</button>
       <button class="pl-chip" type="button" role="tab" aria-selected="false" data-l="1">Built at NST</button>
     </div>
-    <div class="pl-player" id="plPlayer"></div>
-    <h3 class="pl-now" id="plNow"></h3>
-    <p class="pl-now-meta" id="plNowMeta"></p>
-    <p class="pl-next-k">Up next</p>
+    <div class="pl-feature">
+      <div class="pl-player" id="plPlayer"></div>
+      <div class="pl-feature-t">
+        <span class="pl-feat-k"><i aria-hidden="true"><b></b><b></b><b></b></i>Featured story</span>
+        <h3 class="pl-now" id="plNow"></h3>
+        <p class="pl-now-meta" id="plNowMeta"></p>
+      </div>
+    </div>
+    <div class="pl-next-k"><span class="pl-next-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 6a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 6a1 1 0 011-1h8a1 1 0 110 2H4a1 1 0 01-1-1zm0 6a1 1 0 011-1h8a1 1 0 110 2H4a1 1 0 01-1-1zm13-4.6v6.2a.6.6 0 00.9.5l4.7-3.1a.6.6 0 000-1l-4.7-3.1a.6.6 0 00-.9.5z"/></svg></span><b>Up next</b><em id="plNextN"></em></div>
     <ul class="pl-next" id="plNext"></ul>
     <a class="pl-dark-cta" href="#">See all stories <img src="assets/icon-arrow-right.svg" alt=""></a>
   </section>

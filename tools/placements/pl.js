@@ -189,7 +189,7 @@
       pl.classList.remove('is-playing');
       pl.innerHTML = '<img src="' + A + it.i + '.jpg" alt=""><button class="pl-play" type="button" aria-label="Play: ' + esc(it.t) + '"' + (it.y ? '' : ' disabled') + '><img src="assets/pl/icon-play-blue.svg" alt=""></button><span class="pl-prog"><i></i></span>';
       document.getElementById('plNow').textContent = it.t; document.getElementById('plNowMeta').textContent = it.m;
-      nx.innerHTML = '';
+      nx.innerHTML = ''; document.getElementById('plNextN').textContent = (L[list].length - 1) + ' stories';
       L[list].forEach(function(s, k){ if (k === cur) return; var li = document.createElement('li'); li.tabIndex = 0; li.innerHTML = '<span class="pl-th"><img src="' + A + s.i + '.jpg" alt="" loading="lazy"><i><img src="assets/pl/icon-play-ink.svg" alt=""></i></span><span class="pl-next-t"><b>' + esc(s.t) + '</b><span>' + esc(s.m) + '</span></span>'; li.addEventListener('click', function(){ cur = k; render(); pl.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); }); nx.appendChild(li); });
       var b = pl.querySelector('.pl-play'); if (it.y) b.addEventListener('click', function(){ pl.classList.add('is-playing'); pl.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + it.y + '?autoplay=1&rel=0&playsinline=1&modestbranding=1" title="' + esc(it.t) + '" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>'; });
     }
