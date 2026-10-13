@@ -4242,7 +4242,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     lit.classList.add('is-lit');
     function next(){
       var wall = cols.getBoundingClientRect(), pick = [];
-      tiles.forEach(function(t){ if (t === lit) return; var r = t.getBoundingClientRect(), cy = r.top + r.height / 2 - wall.top; if (cy > 150 && cy < 360) pick.push(t); });
+      var litName = lit.querySelector('b').textContent; tiles.forEach(function(t){ if (t === lit || t.querySelector('b').textContent === litName) return; var r = t.getBoundingClientRect(), cy = r.top + r.height / 2 - wall.top; if (cy > 150 && cy < 360) pick.push(t); });
       if (!pick.length) return; lit.classList.remove('is-lit'); lit = pick[Math.floor(Math.random() * pick.length)]; lit.classList.add('is-lit');
     }
     var iv = 0;
