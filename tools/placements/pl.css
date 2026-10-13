@@ -156,8 +156,16 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-tab.is-on{background:#0673F9;color:#fff}
 .pl-tab .pl-live-dot{position:absolute;right:25px;top:13px;box-shadow:none;animation:none}
 .pl-tab.is-on .pl-live-dot{background:#fff}
-.pl-rec{margin-top:16px;border-radius:12px;box-shadow:inset 0 0 0 1px #EDEFF3;overflow:hidden;background:#fff}
+.pl-rec{margin-top:20px;border-radius:12px;box-shadow:inset 0 0 0 1px #EDEFF3;overflow:hidden;background:#fff}
 .pl-rec-band{display:flex;justify-content:space-between;align-items:center;height:36px;padding:0 16px;background:var(--bg2)}
+.pl-rec+.pl-rec{margin-top:16px}
+.pl-rec-band{gap:8px}
+.pl-rec-band span:empty{display:none}
+.pl-rec-tag{margin-left:auto;display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 9px;border-radius:999px;background:#E5F1FF;font-style:normal;font-size:11px;line-height:14px;font-weight:600;color:#0673F9;white-space:nowrap}
+.pl-rec-tag+span{display:none}
+.pl-rec-live{background:#E7F6EE;color:#157A4A}
+.pl-rec-live .pl-live-dot{box-shadow:0 0 0 3px rgba(22,163,74,.25)}
+.pl-rec[data-c="1"] .pl-earn b{color:#16A34A}
 .pl-rec-band b{font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#16191D}
 .pl-rec-band span{font-size:12px;line-height:18px;font-weight:500;color:rgba(22,25,29,.5)}
 .pl-rec-num{margin:16px 16px 0;font-size:48px;line-height:52px;font-weight:600;letter-spacing:-1px;color:#16191D}
@@ -178,7 +186,7 @@ html[data-ctc="spot"] .pl-ctc::before{display:none}
 .pl-commute .cm-win{fill:#E6EAF0;stroke:none;transition:fill .35s ease}
 .pl-commute .cm-win.on{fill:var(--cm)}
 .pl-commute .cm-bus{will-change:transform}
-.pl-commute-cap{margin:6px 16px 0;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.5)}
+.pl-commute-cap{margin:12px 0 0;text-align:center;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.5)}
 .pl-earn{display:flex;margin-top:16px;border-top:1px solid #EDEFF3;border-bottom:1px solid #EDEFF3}
 .pl-earn div{flex:1 1 0;padding:15px 16px 8px;display:flex;flex-direction:column;gap:4px}
 .pl-earn div+div{border-left:1px solid #EDEFF3}

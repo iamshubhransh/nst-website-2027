@@ -93,24 +93,30 @@
     </div>
   </section>
 
-  <!-- 03 · first batches (632:29332): campus switch; 300 dots fill row by row; earnings; the audit line -->
+  <!-- 03 · first batches: both campuses stacked (13 Oct, no switch), each with the commute; its windows light with the count -->
   <section class="pl-batch bk-light" id="internships" aria-label="Internships by campus">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Internships <span>at NST.</span></h2><p class="bk-sub">Where our first batches went for their 2nd year.</p></div></div>
-    <div class="pl-tabs" role="tablist" aria-label="Campus">
-      <button class="pl-tab is-on" type="button" role="tab" aria-selected="true" data-c="0">Pune · ADYPU</button>
-      <button class="pl-tab" type="button" role="tab" aria-selected="false" data-c="1">Delhi · Rishihood <i class="pl-live-dot"></i></button>
-    </div>
-    <div class="pl-rec">
-      <div class="pl-rec-band"><b id="plRecBand">1st batch · ADYPU, Pune</b><span id="plRecSize">300+ students</span></div>
-      <p class="pl-rec-num"><b id="plRecNum">98.3</b><span>%</span></p>
+    <div class="pl-rec" data-c="0" data-pct="98.3">
+      <div class="pl-rec-band"><b>1st batch · ADYPU, Pune</b><em class="pl-rec-tag">2nd year running</em><span>300+ students</span></div>
+      <p class="pl-rec-num"><b class="pl-rec-v">0</b><span>%</span></p>
       <p class="pl-rec-lab">held a paid internship in their 2nd year</p>
-      <div class="pl-commute iso" id="plCommute" data-theme="light" aria-hidden="true"><!--@commute--></div>
-      <p class="pl-commute-cap">Each lit window is a student with a paid internship.</p>
+      <div class="pl-commute iso" data-theme="light" data-c="0" aria-hidden="true"><!--@commute--></div>
       <div class="pl-earn">
-        <div><span id="plE1l">Highest earned</span><b id="plE1">₹1,90,000/mo</b></div>
-        <div><span id="plE2l">Average earned</span><b id="plE2">₹23,364/mo</b></div>
+        <div><span>Highest earned</span><b>₹1,90,000/mo</b></div>
+        <div><span>Average earned</span><b>₹23,364/mo</b></div>
       </div>
     </div>
+    <div class="pl-rec" data-c="1" data-pct="93">
+      <div class="pl-rec-band"><b>1st batch · Rishihood, Delhi</b><em class="pl-rec-tag pl-rec-live"><i class="pl-live-dot"></i>Live tracking</em><span></span></div>
+      <p class="pl-rec-num"><b class="pl-rec-v">0</b><span>%</span></p>
+      <p class="pl-rec-lab">held a paid internship in their 2nd year</p>
+      <div class="pl-commute iso" data-theme="light" data-c="1" aria-hidden="true"></div>
+      <div class="pl-earn">
+        <div><span>Highest stipend</span><b>₹1,25,000/mo</b></div>
+        <div><span>Average stipend</span><b>₹23,000/mo</b></div>
+      </div>
+    </div>
+    <p class="pl-commute-cap">Each lit window is a student with a paid internship.</p>
 
     <!-- the report (13 Oct): its own card under the stats, so the audit carries weight. The cover is drawn in HTML; a seal stamps it -->
     <article class="pl-report" id="report" aria-label="Internship Report 2025">

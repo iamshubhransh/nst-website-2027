@@ -109,48 +109,33 @@
     onView(arc, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(step, 2600); });
   })();
 
-  /* ---- 03 · first batches: the commute. Windows light one by one with the count (each lit window is a student with a paid
-          internship); the shuttle loops from the campus gate to the towers; the switch recolours the street and refills ---- */
+  /* ---- 03 · first batches: both campuses stacked, each with its own commute (the second clones the first's svg). Windows light
+          one by one with the count as each card arrives (Pune 96 of 98 = 98.3%, Delhi 91 = 93%); each shuttle loops gate → towers ---- */
   (function(){
-    var box = document.getElementById('plCommute'); if (!box) return;
+    var cards = [].slice.call(document.querySelectorAll('.pl-rec')); if (!cards.length) return;
     var CM = {windows: __CM_WINDOWS__, unit: __CM_UNIT__, from: __CM_FROM__, to: __CM_TO__};
-    var D = [{band: '1st batch · ADYPU, Pune', size: '300+ students', pct: 98.3, e1l: 'Highest earned', e1: '₹1,90,000/mo', e2l: 'Average earned', e2: '₹23,364/mo'},
-             {band: '1st batch · Rishihood, Delhi NCR', size: 'Live tracking', pct: 93, e1l: 'Highest stipend', e1: '₹1,25,000/mo', e2l: 'Average stipend', e2: '₹23,000/mo'}];
-    var wins = [].slice.call(box.querySelectorAll('.cm-win'));
-    var seed = 7, order = wins.map(function(w, i){ return i; }).sort(function(){ seed = (seed * 16807) % 2147483647; return (seed / 2147483647) - .5; });   /* a fixed scatter, so the lighting looks like people arriving */
-    var num = document.getElementById('plRecNum'), shown = 0, shownPct = 0, cur = 0, tmr = 0;
-    function fmt(v, t){ return t % 1 ? v.toFixed(1) : String(Math.round(v)); }
-    function paint(n){ order.forEach(function(wi, k){ wins[wi].classList.toggle('on', k < n); }); }
-    function fill(c){
-      var t = D[c], to = Math.round(CM.windows * t.pct / 100); clearInterval(tmr); box.dataset.c = c; box.closest('.pl-rec').classList.toggle('is-delhi', c === 1);
-      ['Band', 'Size'].forEach(function(k){ document.getElementById('plRec' + k).textContent = t[k.toLowerCase()]; });
-      ['E1l', 'E1', 'E2l', 'E2'].forEach(function(k){ document.getElementById('pl' + k).textContent = t[k.charAt(0).toLowerCase() + k.slice(1)]; });
-      if (reduce){ paint(to); shown = to; num.textContent = fmt(t.pct, t.pct); return; }
-      var from = shown, fp = shownPct, tp = t.pct, k = 0, steps = from === 0 ? 70 : 26;
-      tmr = setInterval(function(){
-        k++; var p = Math.min(1, k / steps), e = 1 - Math.pow(1 - p, 3), v = Math.round(from + (to - from) * e);
-        paint(v); shown = v; shownPct = fp + (tp - fp) * e; num.textContent = fmt(shownPct, tp);
-        if (p >= 1){ clearInterval(tmr); num.textContent = fmt(tp, tp); }
-      }, 24);
-    }
-    num.textContent = '0';
-    once(box, function(){ fill(0); }, .35);
-    document.querySelectorAll('.pl-tab').forEach(function(b){ b.addEventListener('click', function(){
-      var c = +b.dataset.c; if (c === cur) return; cur = c;
-      document.querySelectorAll('.pl-tab').forEach(function(x){ var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
-      shown = 0; shownPct = 0; paint(0); fill(c);
-    }); });
-    /* the shuttle: gate → stop (eased), a pause, then round again off the left edge */
-    var bus = document.getElementById('cmBus'), svg = box.querySelector('svg'), raf = 0, vis = false, t0 = 0, LOOP = 7600;
-    function busAt(x){ var s = svg.getBoundingClientRect().width / 740 * (svg.viewBox.baseVal.height ? 1 : 1); bus.setAttribute('transform', 'translate(' + (CM.unit[0] * x).toFixed(1) + ' ' + (CM.unit[1] * x).toFixed(1) + ')'); }
-    function frame(now){
-      var u = ((now - t0) % LOOP) / LOOP, x;
-      if (u < .62){ var e = u / .62; e = e < .5 ? 2 * e * e : 1 - Math.pow(-2 * e + 2, 2) / 2; x = CM.from + (CM.to - CM.from) * e; }
-      else if (u < .84) x = CM.to; else { var e2 = (u - .84) / .16; x = CM.to + (520 - CM.to) * e2 * e2; }
-      busAt(x); raf = vis ? requestAnimationFrame(frame) : 0;
-    }
-    busAt(reduce ? CM.to : CM.from);
-    if (!reduce) onView(box, function(on){ vis = on; if (on && !raf){ if (!t0) t0 = performance.now(); raf = requestAnimationFrame(frame); } });
+    var src = cards[0].querySelector('.pl-commute svg');
+    cards.forEach(function(card, ci){
+      var box = card.querySelector('.pl-commute'); if (!box.querySelector('svg')) box.appendChild(src.cloneNode(true));
+      var svg = box.querySelector('svg'), bus = svg.querySelector('.cm-bus'); bus.removeAttribute('id');
+      var wins = [].slice.call(svg.querySelectorAll('.cm-win'));
+      var seed = 7 + ci * 13, order = wins.map(function(w, i){ return i; }).sort(function(){ seed = (seed * 16807) % 2147483647; return (seed / 2147483647) - .5; });
+      var pct = +card.dataset.pct, lit = Math.round(CM.windows * pct / 100), num = card.querySelector('.pl-rec-v');
+      function paint(n){ order.forEach(function(wi, k){ wins[wi].classList.toggle('on', k < n); }); }
+      function fmt(v){ return pct % 1 ? v.toFixed(1) : String(Math.round(v)); }
+      if (reduce){ paint(lit); num.textContent = fmt(pct); }
+      else once(box, function(){ var k = 0, steps = 70, t = setInterval(function(){ k++; var p = Math.min(1, k / steps), e = 1 - Math.pow(1 - p, 3); paint(Math.round(lit * e)); num.textContent = fmt(pct * e); if (p >= 1){ clearInterval(t); num.textContent = fmt(pct); } }, 24); }, .35);
+      var raf = 0, vis = false, t0 = 0, LOOP = 7600 + ci * 900;
+      function busAt(x){ bus.setAttribute('transform', 'translate(' + (CM.unit[0] * x).toFixed(1) + ' ' + (CM.unit[1] * x).toFixed(1) + ')'); }
+      function frame(now){
+        var u = ((now - t0) % LOOP) / LOOP, x;
+        if (u < .62){ var e = u / .62; e = e < .5 ? 2 * e * e : 1 - Math.pow(-2 * e + 2, 2) / 2; x = CM.from + (CM.to - CM.from) * e; }
+        else if (u < .84) x = CM.to; else { var e2 = (u - .84) / .16; x = CM.to + (520 - CM.to) * e2 * e2; }
+        busAt(x); raf = vis ? requestAnimationFrame(frame) : 0;
+      }
+      busAt(reduce ? CM.to : CM.from);
+      if (!reduce) onView(box, function(on){ vis = on; if (on && !raf){ if (!t0) t0 = performance.now(); raf = requestAnimationFrame(frame); } });
+    });
   })();
 
   /* ---- the report: the cover settles and the IIM-A seal stamps onto it when the card arrives ---- */

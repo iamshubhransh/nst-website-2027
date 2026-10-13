@@ -21,12 +21,13 @@ ok('offer badges load', await ev(()=>[...document.querySelectorAll('.pl-co')].ev
 ok('five rows kept', await ev(()=>document.querySelectorAll('.pl-offer').length)<=6);
 const l0=await ev(()=>document.getElementById('plArcLabel').textContent); await p.waitForTimeout(2900);
 ok('arc steps to the next company', l0!==await ev(()=>document.getElementById('plArcLabel').textContent));
-// waffle
-await p.evaluate(()=>document.getElementById('plCommute').scrollIntoView({block:'center'})); await p.waitForTimeout(2600);
-ok('Pune: 96 of 98 windows lit, 98.3', (await ev(()=>[document.querySelectorAll('#plCommute .cm-win.on').length,document.getElementById('plRecNum').textContent])).join()==='96,98.3');
-const bx0=await ev(()=>document.getElementById('cmBus').getAttribute('transform')); await p.waitForTimeout(700); ok('the shuttle moves', bx0!==await ev(()=>document.getElementById('cmBus').getAttribute('transform')));
-await p.locator('.pl-tab[data-c="1"]').tap(); await p.waitForTimeout(2600);
-ok('Delhi: 91 windows lit, 93, stipend values, green street', (await ev(()=>[document.querySelectorAll('#plCommute .cm-win.on').length,document.getElementById('plRecNum').textContent,document.getElementById('plE1').textContent,document.getElementById('plCommute').dataset.c])).join()==='91,93,₹1,25,000/mo,1');
+// campuses, stacked
+await p.evaluate(()=>document.querySelector('.pl-rec[data-c="0"] .pl-commute').scrollIntoView({block:'center'})); await p.waitForTimeout(2600);
+ok('Pune: 96 of 98 windows lit, 98.3', (await ev(()=>{const c=document.querySelector('.pl-rec[data-c="0"]'); return [c.querySelectorAll('.cm-win.on').length,c.querySelector('.pl-rec-v').textContent];})).join()==='96,98.3');
+const bx0=await ev(()=>document.querySelector('.pl-rec[data-c="0"] .cm-bus').getAttribute('transform')); await p.waitForTimeout(700); ok('the shuttle moves', bx0!==await ev(()=>document.querySelector('.pl-rec[data-c="0"] .cm-bus').getAttribute('transform')));
+await p.evaluate(()=>document.querySelector('.pl-rec[data-c="1"] .pl-commute').scrollIntoView({block:'center'})); await p.waitForTimeout(2600);
+ok('Delhi: 91 windows lit, 93, green', (await ev(()=>{const c=document.querySelector('.pl-rec[data-c="1"]'); return [c.querySelectorAll('.cm-win.on').length,c.querySelector('.pl-rec-v').textContent,getComputedStyle(c.querySelector('.cm-win.on')).fill];})).join()==='91,93,rgb(22, 163, 74)');
+ok('no campus switch', await ev(()=>!document.querySelector('.pl-tab')));
 // sectors
 await p.evaluate(()=>document.getElementById('plSecList').scrollIntoView({block:'center'})); await p.waitForTimeout(600);
 await p.locator('#plSecList li').nth(5).tap(); await p.waitForTimeout(300);
