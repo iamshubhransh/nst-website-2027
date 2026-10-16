@@ -571,10 +571,11 @@
   .pl-ctc5 .pl-ctc4-avg div span{font-size:14px;line-height:20px}
   .pl-ctc5 .pl-ctc4-avg>em{height:22px;padding:0 8px;font-size:11px;line-height:22px}
   /* one strip (16 Oct, his ask): the card sits in the middle of the logo row — the row is pulled up so its centre meets the
-     card's — and the logos fade out well before the card (48 px of clear air each side, his ask) and back in after it, as if passing behind it */
-  .pl-ctc5 .pl-ctc4-rows{position:relative;z-index:1;align-self:stretch;margin:-66px 0 0;
-    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 calc(50% - 320px),transparent calc(50% - 230px),transparent calc(50% + 230px),#000 calc(50% + 320px),#000 90%,transparent 100%);
-            mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 calc(50% - 320px),transparent calc(50% - 230px),transparent calc(50% + 230px),#000 calc(50% + 320px),#000 90%,transparent 100%)}
+     card's — and the logos fade out well before the card (~72 px of clear air each side and a 136 px fade, his ask) and back in after it, as if passing behind it */
+  .pl-ctc5 .pl-ctc4-rows{position:relative;z-index:1;align-self:stretch;margin:-66px 0 -16px;padding-bottom:16px;   /* the mask clips to the box: 16 px more below holds the chips' shadow (his report, 16 Oct) */
+   
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 calc(50% - 390px),transparent calc(50% - 254px),transparent calc(50% + 254px),#000 calc(50% + 390px),#000 90%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 calc(50% - 390px),transparent calc(50% - 254px),transparent calc(50% + 254px),#000 calc(50% + 390px),#000 90%,transparent 100%)}
   .pl-ctc5 .pl-ctc4-row.r2{display:none}
   .pl-ctc5-bg::before{background:radial-gradient(106.27% 309.6% at 50% 50%,rgba(245,151,0,0) 0,rgba(245,151,0,.11) 45%,rgba(245,151,0,.08) 55%,rgba(245,151,0,0) 80%)}   /* the homepage band's */
   .pl-ctc5-bg::after{display:none}
