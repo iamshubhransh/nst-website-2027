@@ -436,9 +436,6 @@
 .pl-wa-pin span{min-width:0;display:flex;flex-direction:column;font-size:13px;line-height:17px;font-weight:500;color:#111B21}
 .pl-wa-pin b{font-size:11.5px;line-height:15px;font-weight:600;color:#1DAB61}
 .pl-tagr{flex:none;height:18px;padding:0 7px;border-radius:999px;background:color-mix(in srgb,var(--c) 12%,#fff);font-style:normal;font-size:10.5px;line-height:18px;font-weight:600;letter-spacing:.2px;color:var(--c)}
-.pl-reply{display:flex;flex-direction:column;margin:6px 0 2px;padding:5px 9px 6px;border-radius:7px;background:color-mix(in srgb,var(--c) 7%,#F4F5F7);box-shadow:inset 3px 0 0 var(--c)}
-.pl-reply b{font-size:11.5px;line-height:15px;font-weight:600;color:var(--c)}
-.pl-reply span{font-size:12.5px;line-height:17px;font-weight:500;color:#54656F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl-wa-body{position:relative;padding:12px 10px 8px 8px;display:flex;flex-direction:column;gap:8px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ECE5DA' stroke-width='1' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M40 8l6 6m0-6l-6 6'/%3E%3Cpath d='M8 44c4-4 8 4 12 0'/%3E%3Crect x='40' y='38' width='10' height='8' rx='2'/%3E%3Cpath d='M30 28h4'/%3E%3C/g%3E%3C/svg%3E");background-size:64px 64px}
 .pl-wa-day{align-self:center;margin-bottom:2px;padding:4px 12px;border-radius:999px;background:#fff;box-shadow:0 1px 1px rgba(11,20,26,.08);font-size:11.5px;line-height:15px;font-weight:600;color:#54656F}
@@ -450,7 +447,7 @@
 .pl-who b{font-weight:600;color:var(--c);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .pl-who{flex-wrap:wrap;row-gap:0}
 .pl-who span{flex:0 0 100%;margin:0;font-size:12px;line-height:16px;font-weight:500;color:#8696A0}   /* role on its own line, so names stay whole */
-.pl-said{margin:2px 0 0;font-size:14.5px;line-height:20px;font-weight:500;color:#111B21}
+.pl-said{margin:6px 0 0;font-size:14.5px;line-height:20px;font-weight:500;color:#111B21}
 .pl-bub time{display:block;margin:1px 0 -1px;text-align:right;font-size:11px;line-height:14px;font-weight:500;color:#8696A0}
 .pl-bub-typing{padding:11px 14px}
 .pl-dots{display:flex;align-items:center;gap:4px;height:10px}
@@ -723,14 +720,11 @@
   .pl-wa-pin{padding:11px 20px}
   .pl-wa-pin span{font-size:14px;line-height:19px}
   .pl-tagr{height:20px;font-size:11.5px;line-height:20px}
-  .pl-reply{margin:8px 0 4px;padding:7px 12px 8px}
-  .pl-reply b{font-size:12.5px;line-height:16px}
-  .pl-reply span{font-size:13.5px;line-height:19px}
   .pl-wa-av{width:32px;height:32px;font-size:13px}
   .pl-bub{max-width:78%;padding:9px 13px 7px}
   .pl-who{font-size:14px;line-height:20px}
   .pl-who span{font-size:12.5px}
-  .pl-said{font-size:15.5px;line-height:23px}
+  .pl-said{margin-top:8px;font-size:15.5px;line-height:23px}
   .pl-compose{padding:10px 16px 16px}
   .pl-wa-in{height:50px}
 

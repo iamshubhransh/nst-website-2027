@@ -3254,9 +3254,6 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-wa-pin span{min-width:0;display:flex;flex-direction:column;font-size:13px;line-height:17px;font-weight:500;color:#111B21}
 .pl-wa-pin b{font-size:11.5px;line-height:15px;font-weight:600;color:#1DAB61}
 .pl-tagr{flex:none;height:18px;padding:0 7px;border-radius:999px;background:color-mix(in srgb,var(--c) 12%,#fff);font-style:normal;font-size:10.5px;line-height:18px;font-weight:600;letter-spacing:.2px;color:var(--c)}
-.pl-reply{display:flex;flex-direction:column;margin:6px 0 2px;padding:5px 9px 6px;border-radius:7px;background:color-mix(in srgb,var(--c) 7%,#F4F5F7);box-shadow:inset 3px 0 0 var(--c)}
-.pl-reply b{font-size:11.5px;line-height:15px;font-weight:600;color:var(--c)}
-.pl-reply span{font-size:12.5px;line-height:17px;font-weight:500;color:#54656F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl-wa-body{position:relative;padding:12px 10px 8px 8px;display:flex;flex-direction:column;gap:8px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ECE5DA' stroke-width='1' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M40 8l6 6m0-6l-6 6'/%3E%3Cpath d='M8 44c4-4 8 4 12 0'/%3E%3Crect x='40' y='38' width='10' height='8' rx='2'/%3E%3Cpath d='M30 28h4'/%3E%3C/g%3E%3C/svg%3E");background-size:64px 64px}
 .pl-wa-day{align-self:center;margin-bottom:2px;padding:4px 12px;border-radius:999px;background:#fff;box-shadow:0 1px 1px rgba(11,20,26,.08);font-size:11.5px;line-height:15px;font-weight:600;color:#54656F}
@@ -3268,7 +3265,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-who b{font-weight:600;color:var(--c);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 .pl-who{flex-wrap:wrap;row-gap:0}
 .pl-who span{flex:0 0 100%;margin:0;font-size:12px;line-height:16px;font-weight:500;color:#8696A0}   /* role on its own line, so names stay whole */
-.pl-said{margin:2px 0 0;font-size:14.5px;line-height:20px;font-weight:500;color:#111B21}
+.pl-said{margin:6px 0 0;font-size:14.5px;line-height:20px;font-weight:500;color:#111B21}
 .pl-bub time{display:block;margin:1px 0 -1px;text-align:right;font-size:11px;line-height:14px;font-weight:500;color:#8696A0}
 .pl-bub-typing{padding:11px 14px}
 .pl-dots{display:flex;align-items:center;gap:4px;height:10px}
@@ -3541,14 +3538,11 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-wa-pin{padding:11px 20px}
   .pl-wa-pin span{font-size:14px;line-height:19px}
   .pl-tagr{height:20px;font-size:11.5px;line-height:20px}
-  .pl-reply{margin:8px 0 4px;padding:7px 12px 8px}
-  .pl-reply b{font-size:12.5px;line-height:16px}
-  .pl-reply span{font-size:13.5px;line-height:19px}
   .pl-wa-av{width:32px;height:32px;font-size:13px}
   .pl-bub{max-width:78%;padding:9px 13px 7px}
   .pl-who{font-size:14px;line-height:20px}
   .pl-who span{font-size:12.5px}
-  .pl-said{font-size:15.5px;line-height:23px}
+  .pl-said{margin-top:8px;font-size:15.5px;line-height:23px}
   .pl-compose{padding:10px 16px 16px}
   .pl-wa-in{height:50px}
 
@@ -3918,9 +3912,9 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       <div class="pl-wa-pin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 3.5l5 5-2.2 1-3.6 3.6.4 4.4-1.6 1.6-3.8-3.8-4.9 4.9-1.1-1.1 4.9-4.9-3.8-3.8 1.6-1.6 4.4.4 3.6-3.6z" fill="currentColor"/></svg><span><b>Pinned</b>Feedback from managers who hired NST interns</span></div>
       <div class="pl-wa-body">
         <span class="pl-wa-day">Today</span>
-        <div class="pl-msg"><span class="pl-wa-av" style="--c:#0673F9">O</span><div class="pl-bub"><p class="pl-who" style="--c:#0673F9"><b>Omkar Dandekar</b><em class="pl-tagr">Recruiter</em><span>Head of Engineering</span></p><span class="pl-reply" style="--c:#0673F9"><b>Feedback on</b><span>7 NST interns on his team</span></span><p class="pl-said">“We currently have seven interns from NST, and they are going above and beyond every day. Within six weeks, the kind of work produced blows my mind.”</p><time>10:42</time></div></div>
-        <div class="pl-msg"><span class="pl-wa-av" style="--c:#B42FE5">T</span><div class="pl-bub"><p class="pl-who" style="--c:#B42FE5"><b>Tanvi</b><em class="pl-tagr">Recruiter</em><span>Co-founder</span></p><span class="pl-reply" style="--c:#B42FE5"><b>Feedback on</b><span>NST interns hired at her startup</span></span><p class="pl-said">“Whoever we’ve hired from NST has shown good product understanding. There is an instant bias to keep coming back to NST for our hiring needs.”</p><time>10:46</time></div></div>
-        <div class="pl-msg"><span class="pl-wa-av" style="--c:#16A34A">H</span><div class="pl-bub"><p class="pl-who" style="--c:#16A34A"><b>Himanshu Shrivastava</b><em class="pl-tagr">Recruiter</em><span>Manager</span></p><span class="pl-reply" style="--c:#16A34A"><b>Feedback on</b><span>Gourav · NST intern</span></span><p class="pl-said">“Gourav now operates at the level of a full engineer. We regularly trust him with high-stakes work.”</p><time>10:51</time></div></div>
+        <div class="pl-msg"><span class="pl-wa-av" style="--c:#0673F9">O</span><div class="pl-bub"><p class="pl-who" style="--c:#0673F9"><b>Omkar Dandekar</b><em class="pl-tagr">Recruiter</em><span>Head of Engineering</span></p><p class="pl-said">“We currently have seven interns from NST, and they are going above and beyond every day. Within six weeks, the kind of work produced blows my mind.”</p><time>10:42</time></div></div>
+        <div class="pl-msg"><span class="pl-wa-av" style="--c:#B42FE5">T</span><div class="pl-bub"><p class="pl-who" style="--c:#B42FE5"><b>Tanvi</b><em class="pl-tagr">Recruiter</em><span>Co-founder</span></p><p class="pl-said">“Whoever we’ve hired from NST has shown good product understanding. There is an instant bias to keep coming back to NST for our hiring needs.”</p><time>10:46</time></div></div>
+        <div class="pl-msg"><span class="pl-wa-av" style="--c:#16A34A">H</span><div class="pl-bub"><p class="pl-who" style="--c:#16A34A"><b>Himanshu Shrivastava</b><em class="pl-tagr">Recruiter</em><span>Manager</span></p><p class="pl-said">“Gourav now operates at the level of a full engineer. We regularly trust him with high-stakes work.”</p><time>10:51</time></div></div>
         <div class="pl-typing"><span class="pl-wa-av" id="plTypeAv" style="--c:#C77A00">M</span><div class="pl-bub pl-bub-typing"><span class="pl-dots"><i></i><i></i><i></i></span></div></div>
       </div>
       <a class="pl-compose" href="#"><span class="pl-wa-in"><svg class="pl-wa-plus" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span class="pl-wa-ph">Hiring? Message our team</span><svg class="pl-wa-cam" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8.5A2.5 2.5 0 016.5 6h1.7l1.3-2h5l1.3 2h1.7A2.5 2.5 0 0120 8.5v8a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 16.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><circle cx="12" cy="12.5" r="3.4" fill="none" stroke="currentColor" stroke-width="1.7"/></svg></span><i><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l14-7-4.6 14-2.6-5.6z" fill="#fff" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg></i></a>
