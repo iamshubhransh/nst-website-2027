@@ -3390,28 +3390,27 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-ctc4-track{gap:14px}
   .pl-chip4{height:60px;min-width:148px;padding:0 24px;border-radius:16px;font-size:16px;line-height:20px}
   .pl-chip4 img{zoom:1.2}
-  /* CTC v5 on desktop (16 Oct, his ask: "like the homepage"): the homepage's stat band — the range and its line side by side on
-     the left (64/76 like the homepage's 93%), the average card on the right of the column, the logo rows full width below; the
-     homepage's band gradient and its edge particles at the left and right borders, no Color-blend layer */
-  .pl-ctc5{display:grid;grid-template-columns:auto 300px minmax(0,1fr) auto;column-gap:24px;align-items:center;padding:0 var(--side) 56px}
-  .pl-ctc5-tab{grid-column:1/-1;justify-self:center}
+  /* CTC v5 on desktop (16 Oct): the homepage band's gradient and its edge particles at the left and right borders (no Color-blend
+     layer); the range (64/76), its line and the average card stacked and centred; one logo row */
+  .pl-ctc5{display:flex;flex-direction:column;align-items:center;padding:0 0 56px}   /* 16 Oct, his ask: range, line and card stacked in one centred column; one logo row */
   .pl-ctc5-tab span{height:36px;padding:11px 32px;border-radius:0 0 20px 20px;font-size:12px;line-height:14px;letter-spacing:2.4px}
   .pl-ctc5-tab i{width:20px;height:20px;background:radial-gradient(circle at var(--cx) 100%,transparent 19.5px,#F59700 20px)}
-  .pl-ctc5 .pl-ctc4-fig{grid-column:1;grid-row:2;justify-self:start;height:76px;margin:48px 0 0}
+  .pl-ctc5 .pl-ctc4-fig{height:76px;margin:44px 0 0}
   .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u{font-size:64px;line-height:76px;letter-spacing:-4px}
   .pl-ctc5 .pl-ctc4-fig .rs{margin-top:10px;font-size:32px;line-height:44px}
   .pl-ctc5 .pl-ctc4-fig .rs{width:auto;margin-right:8px}   /* desktop: slots hug the glyphs (his ask, 16 Oct: the phone's fixed slots left wide gaps at 64) */
   .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig b+.dash+b{width:auto}
   .pl-ctc5 .pl-ctc4-fig .dash{width:auto;padding:0 7px}   /* measured: ~8 px of air each side of the dash, like ₹ and L */
   .pl-ctc5 .pl-ctc4-fig .u{width:auto;padding-left:10px}
-  .pl-ctc5 .pl-ctc4-sub{grid-column:2;grid-row:2;align-self:center;margin:48px 0 0;text-align:left;white-space:normal;text-wrap:balance;font-size:18px;line-height:28px;color:#16191D}
-  .pl-ctc5 .pl-ctc4-avg{grid-column:4;grid-row:2;justify-self:end;align-self:center;width:auto;margin:48px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
+  .pl-ctc5 .pl-ctc4-sub{margin:8px 0 0;text-align:center;white-space:nowrap;font-size:18px;line-height:28px;color:#16191D}
+  .pl-ctc5 .pl-ctc4-avg{align-self:center;width:auto;margin:28px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
   .pl-ctc5 .pl-ctc4-ok{width:40px;height:40px;border-radius:11px}
   .pl-ctc5 .pl-ctc4-ok img{width:20px;height:20px}
   .pl-ctc5 .pl-ctc4-avg b{font-size:20px;line-height:26px}
   .pl-ctc5 .pl-ctc4-avg div span{font-size:14px;line-height:20px}
   .pl-ctc5 .pl-ctc4-avg>em{height:22px;padding:0 8px;font-size:11px;line-height:22px}
-  .pl-ctc5 .pl-ctc4-rows{grid-column:1/-1;grid-row:3;margin:48px calc(-1 * var(--side)) 0}
+  .pl-ctc5 .pl-ctc4-rows{align-self:stretch;margin:44px 0 0}
+  .pl-ctc5 .pl-ctc4-row.r2{display:none}
   .pl-ctc5-bg::before{background:radial-gradient(106.27% 309.6% at 50% 50%,rgba(245,151,0,0) 0,rgba(245,151,0,.11) 45%,rgba(245,151,0,.08) 55%,rgba(245,151,0,0) 80%)}   /* the homepage band's */
   .pl-ctc5-bg::after{display:none}
   .pl-ctc5 .pl-ctc4-avg div{flex:none;white-space:nowrap}
@@ -3641,11 +3640,9 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 @media (min-width:1024px) and (max-width:1279px){
   .pl-hero-copy{width:440px}
   .pl-title{max-width:440px;font-size:34px;line-height:42px}
-  .pl-ctc5{grid-template-columns:auto 200px minmax(0,1fr) auto;column-gap:20px}
   .pl-ctc5 .pl-ctc4-fig{height:60px}
   .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u{font-size:50px;line-height:60px;letter-spacing:-3px}
   .pl-ctc5 .pl-ctc4-fig .rs{margin-top:6px;font-size:26px;line-height:36px}
-  .pl-ctc5 .pl-ctc4-sub{font-size:16px;line-height:24px}
   .pl-proof .tile,.pl-proof .tile:nth-child(n+3),.pl-proof .tile:nth-child(odd){gap:10px;padding:20px 12px}   /* the strip's four cells fit 944 */
   .pl-proof .tile p b,.pl-proof .tile p span{display:block;font-size:13px;line-height:18px}   /* figure over label, like the phone tiles */
   .pl-lede{max-width:420px;font-size:17px;line-height:26px}
