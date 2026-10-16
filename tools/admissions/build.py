@@ -95,7 +95,7 @@ page = (head + '<body>\n' + nav_variants + '\n<div class="page" id="page">\n\n  
 page = page.replace('min-width:1024px', 'min-width:100000px')   # no desktop layer yet (CSS and the JS isDT checks)
 import json
 rt = json.load(open(os.path.join(HERE, 'route.json')))
-js = js.replace('__RT_STATIONS__', json.dumps(rt['stations'])).replace('__RT_UNIT__', json.dumps(rt['unit']))
+js = js.replace('__RT_STATIONS__', json.dumps(rt['stations'])).replace('__RT_UNIT__', json.dumps(rt['unit'])).replace('__RT_POSES__', str(rt['poses'])).replace('__RT_STRIDE__', str(rt['stride']))
 i = page.rindex('</body>')
 page = page[:i] + '<script>\n' + js + '\n</script>\n' + page[i:]
 open(os.path.join(ROOT, 'admissions.html'), 'w', encoding='utf-8').write(page)

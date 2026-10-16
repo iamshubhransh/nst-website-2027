@@ -7,32 +7,36 @@
      Built (and kept, under reduced motion) standing at NSAT. Runs only while the hero is on screen. */
   (function(){
     var g = document.getElementById('rtStu'), hero = document.querySelector('.adm-hero'); if (!g || !hero) return;
-    var ST = __RT_STATIONS__, U = __RT_UNIT__, GATE = ST[ST.length - 1] + 172, flags = hero.querySelectorAll('.rt-flag');
+    var ST = __RT_STATIONS__, U = __RT_UNIT__, POSES = __RT_POSES__, STRIDE = __RT_STRIDE__, GATE = ST[ST.length - 1] + 172, flags = hero.querySelectorAll('.rt-flag');
+    var poses = g.querySelectorAll('.rt-pose'), shown = 'idle';
     function at(x){ g.setAttribute('transform', 'translate(' + (U[0] * x).toFixed(1) + ' ' + (U[1] * x).toFixed(1) + ')'); }
+    function pose(p){ if (p === shown) return; shown = p; poses.forEach(function(q){ if (q.dataset.p === String(p)) q.removeAttribute('display'); else q.setAttribute('display', 'none'); }); }
     function light(k){ flags.forEach(function(f){ f.classList.toggle('on', +f.dataset.i === k); }); }
     if (reduce) return;
     g.style.transition = 'opacity .45s ease';
-    var i = 1, from = ST[1], to = ST[1], phase = 'hold', t0 = 0, raf = 0, live = false, HOLD = 1700, MOVE = 1400;
-    function ease(p){ return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
+    /* a steady walk between stations (the pose follows the distance walked: one full stride cycle every STRIDE units), a pause at each */
+    var SPEED = 46, HOLD = 1400;   /* units per second; ms */
+    var i = 1, x = ST[1], to = ST[1], phase = 'hold', t0 = 0, last = 0, raf = 0, live = false;
     function frame(now){
-      if (!t0) t0 = now;
-      var dt = now - t0;
-      if (phase === 'hold' && dt > HOLD){
-        phase = 'move'; t0 = now; from = to; light(-1);
+      if (!t0){ t0 = now; last = now; }
+      var dt = Math.min(now - last, 50) / 1000; last = now;
+      if (phase === 'hold' && now - t0 > HOLD){
+        phase = 'walk'; light(-1);
         to = i < ST.length - 1 ? ST[++i] : GATE;
-      } else if (phase === 'move'){
-        var p = Math.min(1, dt / MOVE); at(from + (to - from) * ease(p));
-        if (p >= 1){
-          t0 = now;
+      } else if (phase === 'walk'){
+        x = Math.min(to, x + SPEED * dt); at(x);
+        pose(Math.floor(((x - ST[0]) % STRIDE) / STRIDE * POSES));
+        if (x >= to){
+          pose('idle'); t0 = now;
           if (to === GATE){ phase = 'out'; g.style.opacity = '0'; }
           else { phase = 'hold'; light(i); }
         }
-      } else if (phase === 'out' && dt > 600){
-        i = 0; from = to = ST[0]; at(to); g.style.opacity = '1'; phase = 'hold'; t0 = now; light(0);
+      } else if (phase === 'out' && now - t0 > 600){
+        i = 0; x = to = ST[0]; at(x); g.style.opacity = '1'; phase = 'hold'; t0 = now; light(0);
       }
       raf = live ? requestAnimationFrame(frame) : 0;
     }
-    new IntersectionObserver(function(en){ live = en[0].isIntersecting; if (live && !raf){ t0 = 0; raf = requestAnimationFrame(frame); } }).observe(hero);
+    new IntersectionObserver(function(en){ live = en[0].isIntersecting; if (live && !raf){ t0 = 0; last = 0; raf = requestAnimationFrame(frame); } }).observe(hero);
   })();
 
   /* the hero strip drifts while the hero is on screen (the placements hero's is-live) */

@@ -74,21 +74,32 @@ for (const x of [-470, -300, -110, 80, 260, 430]) put("tree", [x, 60, 0], 0.8);
 for (const x of [-210, 140]) put("bench", [x, 40, 0], 0.7);
 
 /* ---- the student (the lit part): drawn at x = 0 on the walk; the page moves it station to station ---- */
-/* the student: a small person walking up the route (+x), so the backpack faces the viewer. Legs, a rounded torso in NST blue,
-   arms, a head with hair, a backpack; parts sorted back to front so they overlap the way they would. */
-const person = [];
-const part = (c, svg) => person.push({ d: k.depthOf(c, P), svg });
-const L = (y) => S(k.cylinder(0, y, 1.7, 0, 12, P, 14), { tone: "mid", crease: "none", className: "rt-legs" });
-part([0, -2.4, 6], L(-2.4)); part([0, 2.4, 6], L(2.4));
-part([0, 0, 11], S(k.slabOf({ x: -2.6, y: -4.6, w: 5.2, d: 9.2, r: 2.4 }, 11, 11, P, 6, 0.6), { tone: "hi", crease: "none", className: "rt-shirt" }));
-const A = (y) => S(k.cylinder(0.4, y, 1.3, 12.5, 8.5, P, 12), { tone: "hi", crease: "none", className: "rt-arm" });
-part([0.4, -5.6, 16], A(-5.6)); part([0.4, 5.6, 16], A(5.6));
-part([-4.4, 0, 17], S(k.slabOf({ x: -6.2, y: -3.4, w: 3.4, d: 6.8, r: 1.4 }, 13, 8.5, P, 6, 0.5), { tone: "mid", crease: "none", className: "rt-bag" }));
-part([0, 0, 24], S(k.cylinder(0, 0, 1.3, 21.6, 2.2, P, 10), { tone: "mid", crease: "none", className: "rt-skin" }) +
-  S(G.sphereOf([0, 0, 26.6], 3.5, P, { steps: 18 }), { tone: "hi", className: "rt-skin" }) +
-  S(G.sphereOf([-0.7, 0, 27.7], 3.2, P, { steps: 18 }), { tone: "mid", className: "rt-hair" }));
-person.sort((a, b) => a.d - b.d);
-const STU = person.map((q) => q.svg).join("");
+/* the student: a small person walking up the route (+x), so the backpack faces the viewer. Legs and arms are limbs hinged at the
+   hip and shoulder; eight walk poses (legs scissor, arms swing the other way, the body dips at full stride) and a standing pose.
+   The page shows one pose at a time, picked from the distance walked, so the feet never slide. Parts are sorted back to front. */
+const LIMB = (o, ang, len, r, cls, tone) => {   /* a cylinder from o, swung ang radians forward (+x) from hanging straight down */
+  const F = G.frameAlong(o, [Math.sin(ang), 0, -Math.cos(ang)]);
+  return S(G.solidOf([[0, r], [len, r]], F, P), { tone, crease: "none", className: cls });
+};
+function personSvg(phase){
+  const sw = phase === null ? 0 : Math.sin(phase), leg = 0.5 * sw, arm = -0.42 * sw, bob = phase === null ? 0 : -0.8 * Math.abs(sw);
+  const parts = [];
+  const part = (c, svg) => parts.push({ d: k.depthOf(c, P), svg });
+  part([0, -2.4, 6], LIMB([0, -2.4, 12 + bob], leg, 12 + bob, 1.7, "rt-legs", "mid"));
+  part([0, 2.4, 6], LIMB([0, 2.4, 12 + bob], -leg, 12 + bob, 1.7, "rt-legs", "mid"));
+  part([0, 0, 11], S(k.slabOf({ x: -2.6, y: -4.6, w: 5.2, d: 9.2, r: 2.4 }, 11 + bob, 11, P, 6, 0.6), { tone: "hi", crease: "none", className: "rt-shirt" }));
+  part([0.4, -5.6, 16], LIMB([0.4, -5.6, 20.5 + bob], arm, 8.5, 1.3, "rt-arm", "hi"));
+  part([0.4, 5.6, 16], LIMB([0.4, 5.6, 20.5 + bob], -arm, 8.5, 1.3, "rt-arm", "hi"));
+  part([-4.4, 0, 17], S(k.slabOf({ x: -6.2, y: -3.4, w: 3.4, d: 6.8, r: 1.4 }, 13 + bob, 8.5, P, 6, 0.5), { tone: "mid", crease: "none", className: "rt-bag" }));
+  part([0, 0, 24], S(k.cylinder(0, 0, 1.3, 21.6 + bob, 2.2, P, 10), { tone: "mid", crease: "none", className: "rt-skin" }) +
+    S(G.sphereOf([0, 0, 26.6 + bob], 3.5, P, { steps: 18 }), { tone: "hi", className: "rt-skin" }) +
+    S(G.sphereOf([-0.7, 0, 27.7 + bob], 3.2, P, { steps: 18 }), { tone: "mid", className: "rt-hair" }));
+  parts.sort((a, b) => a.d - b.d);
+  return parts.map((q) => q.svg).join("");
+}
+const POSES = 8;
+const STU = `<g class="rt-pose" data-p="idle">${personSvg(null)}</g>` +
+  Array.from({ length: POSES }, (_, n) => `<g class="rt-pose" data-p="${n}" display="none">${personSvg(n / POSES * Math.PI * 2)}</g>`).join("");
 const stuDepth = k.depthOf([0, 0, 0], P);
 
 items.sort((a, b) => a.d - b.d);
@@ -100,6 +111,6 @@ const sx = SX[FOCUS], sp = [u0[0] + (u1[0] - u0[0]) * sx, u0[1] + (u1[1] - u0[1]
 const svg = compact(`<svg class="rt-svg iso-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g class="rt-ground">${ground.join("")}</g>${back}<g id="rtStu" class="rt-stu" transform="translate(${(sp[0] - u0[0]).toFixed(1)} ${(sp[1] - u0[1]).toFixed(1)})">${STU}</g>${front}</svg>`)
   .replace(`class="rt-flag" data-i="${FOCUS}"`, `class="rt-flag on" data-i="${FOCUS}"`);
 writeFileSync(new URL("./route.svg", import.meta.url), svg);
-writeFileSync(new URL("./route.json", import.meta.url), JSON.stringify({ stations: SX, unit: [+(u1[0] - u0[0]).toFixed(4), +(u1[1] - u0[1]).toFixed(4)], W, H }));
+writeFileSync(new URL("./route.json", import.meta.url), JSON.stringify({ poses: POSES, stride: 26, stations: SX, unit: [+(u1[0] - u0[0]).toFixed(4), +(u1[1] - u0[1]).toFixed(4)], W, H }));
 writeFileSync(new URL("./route-preview.html", import.meta.url), `<!doctype html><meta charset="utf-8"><style>${k.ISO_CSS}body{margin:0;background:#fff}.wrap{width:402px;height:420px;overflow:hidden}.rt-svg{width:100%;height:100%}.rt-walk{fill:#EEF1F5}.rt-flag{fill:#E1E5EA}.rt-flag.on{fill:#0673F9}.rt-shirt path,.rt-arm path{fill:#0673F9!important;stroke:#0450B0!important}.rt-legs path{fill:#1E2A44!important;stroke:#10182A!important}.rt-bag path{fill:#F59700!important;stroke:#B26A00!important}.rt-skin path{fill:#E8B98F!important;stroke:#B98457!important}.rt-hair path{fill:#2A2118!important;stroke:#16110C!important}</style><div class="iso" data-theme="light"><div class="wrap">${svg}</div></div>`);
 console.log("items", items.length, "bytes", svg.length);

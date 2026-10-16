@@ -13,7 +13,13 @@ await p.goto('http://localhost:8765/admissions.html', { waitUntil: 'load' }); aw
 ok('hero copy: crumbs, title, CTA', await ev(() => document.querySelector('.pl-crumb span').textContent === 'Admissions' && /six steps/.test(document.querySelector('.pl-title').textContent) && !!document.querySelector('.adm-hero .pl-cta')));
 ok('route figure drawn, NSAT flag lit at first', await ev(() => !!document.querySelector('.adm-wall .rt-svg') && document.querySelectorAll('.rt-flag').length === 5 && document.querySelector('.rt-flag.on').dataset.i === '1'));
 const t0 = await ev(() => document.getElementById('rtStu').getAttribute('transform'));
-await p.waitForTimeout(3400);
+ok('standing pose while it waits at a station', await ev(() => document.querySelectorAll('#rtStu .rt-pose:not([display])').length === 1 && document.querySelector('#rtStu .rt-pose:not([display])').dataset.p === 'idle'));
+await p.waitForTimeout(2600);
+const mid = await ev(() => [...document.querySelectorAll('#rtStu .rt-pose:not([display])')].map(q => q.dataset.p));
+ok('mid-walk it shows one stride pose (it walks, not glides)', mid.length === 1 && mid[0] !== 'idle', mid);
+const seen = new Set(); for (let k = 0; k < 10; k++){ seen.add(await ev(() => document.querySelector('#rtStu .rt-pose:not([display])').dataset.p)); await p.waitForTimeout(60); }
+ok('the stride poses cycle', seen.size >= 3, [...seen]);
+await p.waitForFunction(() => (document.querySelector('.rt-flag.on') || {}).dataset?.i === '2', null, { timeout: 8000, polling: 50 }).catch(() => {});
 const t1 = await ev(() => document.getElementById('rtStu').getAttribute('transform'));
 const lit = await ev(() => (document.querySelector('.rt-flag.on') || {}).dataset?.i);
 ok('the student walks to the next station and its flag lights', t0 !== t1 && lit === '2', [t0, t1, lit]);
