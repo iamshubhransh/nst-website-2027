@@ -263,7 +263,7 @@
       ticks.forEach(function(t){ t.classList.toggle('sel', +t.dataset.s === i); });
       document.getElementById('plSecName').textContent = S[i][0]; document.querySelector('.pl-sec-num').style.setProperty('--k', S[i][3]);
       document.getElementById('plSecPct').textContent = S[i][2];
-      document.getElementById('plSecCount').textContent = S[i][1] + ' interns';
+      document.getElementById('plSecCount').textContent = S[i][1];
     }
     sel(0);
     if (!reduce){ bc.classList.add('is-wait'); ticks.forEach(function(t, i){ t.style.transitionDelay = (i * 3) + 'ms'; });

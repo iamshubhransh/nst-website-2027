@@ -293,7 +293,10 @@
 .pl-sec-num{display:flex;align-items:baseline;margin:2px 16px 0;font-size:48px;line-height:52px;font-weight:600;letter-spacing:-1px;color:#fff}
 .pl-sec-num b{font-weight:600}
 .pl-sec-num span{color:var(--k,#61A8FF);opacity:.75;transition:color .3s ease}
-.pl-sec-num em{margin-left:12px;font-style:normal;font-stretch:100%;font-size:13px;line-height:18px;font-weight:500;letter-spacing:0;color:rgba(255,255,255,.5)}
+/* the intern count (16 Oct): a quiet chip in the sector's colour — the number in white, three tick lines echoing the barcode */
+.pl-sec-num em{display:inline-flex;align-items:center;gap:6px;align-self:center;margin:6px 0 0 14px;height:26px;padding:0 10px 0 8px;border-radius:999px;font-style:normal;font-stretch:100%;font-size:13px;line-height:18px;font-weight:500;letter-spacing:0;color:rgba(255,255,255,.6);background:color-mix(in srgb,var(--k,#61A8FF) 14%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--k,#61A8FF) 32%,transparent);transition:background-color .3s ease,box-shadow .3s ease}
+.pl-sec-num em b{font-weight:600;color:#fff}
+.pl-sec-num em i{width:9px;height:11px;background:linear-gradient(90deg,var(--k,#61A8FF) 0 2px,transparent 2px 3.5px,var(--k,#61A8FF) 3.5px 5.5px,transparent 5.5px 7px,var(--k,#61A8FF) 7px 9px)}
 .pl-barcode{position:relative;height:72px;margin:16px 16px 0}
 .pl-barcode i{position:absolute;bottom:0;width:.62%;height:62px;background:var(--k,#fff);opacity:.26;transform-origin:50% 100%;transition:opacity .4s ease,transform .5s cubic-bezier(.22,1,.36,1)}   /* every sector in its colour; the chosen one lights */
 .pl-barcode i.tall{height:72px}
@@ -657,7 +660,8 @@
   .pl-sec-band span{font-size:13px}
   .pl-sec-name{grid-column:1;margin:32px 32px 0;font-size:16px;line-height:22px}
   .pl-sec-num{grid-column:1;margin:4px 32px 0;font-size:72px;line-height:80px;letter-spacing:-2px}
-  .pl-sec-num em{font-size:15px;line-height:22px}
+  .pl-sec-num em{height:32px;margin:10px 0 0 18px;padding:0 14px 0 12px;gap:8px;font-size:15px;line-height:22px}
+  .pl-sec-num em i{width:11px;height:14px}
   .pl-barcode{grid-column:1;align-self:end;height:150px;margin:32px 32px 32px}
   .pl-barcode i{height:130px}
   .pl-barcode i.tall{height:150px}
