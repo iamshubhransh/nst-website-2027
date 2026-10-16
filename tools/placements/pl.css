@@ -592,10 +592,11 @@
   .pl-gx-res{display:flex;flex-direction:column;align-items:flex-start;margin-top:38px;font-family:Arial,Helvetica,sans-serif;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
   .pl-gx-src{display:flex;align-items:center;gap:12px;height:32px}
   .pl-gx-src i{flex:none;width:28px;height:28px;border-radius:14px;background:#F3F5F6;box-shadow:inset 0 0 0 1.08px #D2D2D2;display:flex;align-items:center;justify-content:center}
-  .pl-gx-src svg{width:17px;height:17px}
+  .pl-gx-src i{background:#fff}
+  .pl-gx-src img{width:13.8px;height:17.25px}   /* the NST mark, 4:5 */
   .pl-gx-src span{display:flex;flex-direction:column}
   .pl-gx-src b{font-weight:400;font-size:11.86px;line-height:16.95px;color:#1F1F1F}
-  .pl-gx-src em{font-style:normal;font-size:10.17px;line-height:15.25px;color:#4D5156;white-space:pre}
+  .pl-gx-src em{font-style:normal;font-size:10.17px;line-height:15.25px;color:#4D5156;white-space:nowrap}
   .pl-goog-title{margin:7.6px 0 0;max-width:none;font-family:inherit;font-stretch:100%;font-size:18.64px;line-height:23.73px;font-weight:400;letter-spacing:0;color:#1A0DAB}
   .pl-gx-snip{width:552px;max-width:100%;margin:4.4px 0 0;font-size:11.86px;line-height:18.64px;color:#6C6C6C}
   .pl-gx-snip b{color:#767676}
