@@ -2816,6 +2816,27 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 }
 @media (hover:hover){ html.fest-v-dome .fest-video:hover .tour-play{transform:scale(1.06)} }
 @media (prefers-reduced-motion:reduce){ html.fest-v-dome .fest-art i,html.fest-v-dome .fest.is-live .fest-video .tour-play::after{animation:none} }
+
+/* ---------- section bar (16 Oct 2026, desktop only; after the old site's secondary bar): a slim bar slides in under the nav pill
+   once the hero has scrolled away and lists this page's sections. A white pill sits under the section in view and glides to the
+   next as you scroll; a click glides the page there (the anchor handler leaves room for the bar). Each page writes its own list. ---------- */
+@media (min-width:1024px){
+  .snav{position:fixed;left:12px;right:12px;top:76px;z-index:39;height:44px;border-radius:12px;background:rgba(246,247,249,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 0 0 1px rgba(22,25,29,.06),0 10px 18px -12px rgba(22,25,29,.18);opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .25s ease,transform .35s cubic-bezier(.22,1,.36,1),visibility 0s linear .35s}
+  .snav.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .25s ease,transform .35s cubic-bezier(.22,1,.36,1)}
+  .snav-in{display:flex;align-items:center;height:100%;padding:0 6px 0 16px;gap:12px}
+  .snav-k{flex:none;padding-right:14px;border-right:1px solid #E1E5EA;font-size:11px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+  .snav-l{position:relative;display:flex;align-items:center;gap:2px;min-width:0;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
+  .snav-l.is-fit{-webkit-mask-image:none;mask-image:none}
+  .snav-l::-webkit-scrollbar{display:none}
+  .snav-l a{position:relative;z-index:1;flex:none;display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:8px;font-size:14px;line-height:20px;font-weight:500;color:#5B6271;text-decoration:none;white-space:nowrap;transition:color .2s ease}
+  .snav-l a:hover{color:var(--ink)}
+  .snav-l a.is-on{color:var(--ink);font-weight:600}
+  .snav-l a:focus-visible{outline:2px solid #0673F9;outline-offset:-2px}
+  .snav-pill{position:absolute;left:0;top:6px;height:32px;width:0;border-radius:8px;background:#fff;box-shadow:0 0 0 1px rgba(22,25,29,.06),0 1px 3px rgba(22,25,29,.08);opacity:0;transition:transform .35s cubic-bezier(.22,1,.36,1),width .35s cubic-bezier(.22,1,.36,1),opacity .2s ease}
+  .snav-pill.is-on{opacity:1}
+}
+@media (min-width:1024px) and (max-width:1279px){ .snav-k{display:none} .snav-in{padding-left:6px} }
+@media (min-width:1024px) and (prefers-reduced-motion:reduce){ .snav,.snav.is-on,.snav-pill{transition:none} }
 /* ================= placements page (Shubhransh's frame 632:26742) · mobile, 402 px design width, fluid ================= */
 .pl-x{display:none}
 /* section headers: the frame sets the sub line without tracking (the homepage buckets use .1px) */
@@ -3649,6 +3670,8 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     </div>
   </header>
 
+  <!-- section bar (desktop, 16 Oct): this page's sections; the bar's styles and script come from the homepage -->
+  <nav class="snav dt-only" id="snav" aria-label="On this page"><div class="snav-in"><span class="snav-k">On this page</span><div class="snav-l"><i class="snav-pill" aria-hidden="true"></i><a href="#ctc">CTC</a><a href="#google">At Google</a><a href="#offers">Latest offers</a><a href="#internships">Internships</a><a href="#sectors">Sectors</a><a href="#companies">Companies</a><a href="#stories">Stories</a><a href="#recruiters">Recruiters</a><a href="#faq">FAQs</a></div></div></nav>
   <!-- ===== placements (Shubhransh's frame 632:26742, 13 Oct 2026) ===== -->
 
   <!-- 01 · hero (632:26743): a light wall of interns drifting up, one lit at a time; title, line, CTA; then the homepage's
@@ -4042,7 +4065,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     var target = document.getElementById(href.slice(1)); if (!target) { e.preventDefault(); return; }
     e.preventDefault();
     var box = target; while (box && !box.getClientRects().length) box = box.firstElementChild;   /* desktop wraps some sections in display:contents */
-    var y = href === '#top' ? 0 : (box || target).getBoundingClientRect().top + window.scrollY - (isDT ? 96 : 84);
+    var y = href === '#top' ? 0 : (box || target).getBoundingClientRect().top + window.scrollY - (isDT ? (document.getElementById('snav') ? 148 : 96) : 84);
     window.scrollTo({top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth'});
   });
   ['navAsk', 'sheetAsk'].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener('click', function(e){ e.preventDefault(); document.getElementById('aiBtn').click(); }); });
@@ -4111,6 +4134,38 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     }, true);
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && mn.classList.contains('is-open')){ close(); btn.focus(); } });
     addEventListener('resize', function(){ if (innerWidth >= 1024) close(); });
+  })();
+
+  /* ---- section bar (desktop): shows once the first listed section reaches the bar, marks the section in view with the sliding
+          pill, keeps the marked item scrolled into view when the list is wider than the bar ---- */
+  if (isDT) (function(){
+    var bar = document.getElementById('snav'); if (!bar) return;
+    var list = bar.querySelector('.snav-l'), pill = bar.querySelector('.snav-pill');
+    var links = Array.prototype.slice.call(list.querySelectorAll('a')).filter(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+    var targets = links.map(function(a){ return document.getElementById(a.getAttribute('href').slice(1)); });
+    var cur = -1, ticking = false, LINE = 160;
+    function box(t){ var b = t; while (b && !b.getClientRects().length) b = b.firstElementChild; return (b || t).getBoundingClientRect(); }
+    function mark(i){
+      if (i === cur) return; cur = i;
+      links.forEach(function(a, k){ a.classList.toggle('is-on', k === i); if (k === i) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current'); });
+      if (i < 0){ pill.classList.remove('is-on'); return; }
+      var a = links[i];
+      pill.style.width = a.offsetWidth + 'px'; pill.style.transform = 'translateX(' + a.offsetLeft + 'px)'; pill.classList.add('is-on');
+      var l = a.offsetLeft, r = l + a.offsetWidth;
+      if (l < list.scrollLeft + 8 || r > list.scrollLeft + list.clientWidth - 40) list.scrollTo({left: Math.max(0, l - 40), behavior: reduce ? 'auto' : 'smooth'});
+    }
+    function update(){
+      ticking = false;
+      var first = box(targets[0]).top, i = -1;
+      bar.classList.toggle('is-on', first <= LINE + 40);
+      for (var k = 0; k < targets.length; k++){ if (box(targets[k]).top <= LINE) i = k; }
+      mark(i);
+    }
+    function fit(){ list.classList.toggle('is-fit', list.scrollWidth <= list.clientWidth + 1); }
+    addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(update); } }, {passive: true});
+    addEventListener('resize', function(){ fit(); var i = cur; cur = -2; mark(i); update(); });
+    list.addEventListener('scroll', function(){ list.classList.toggle('is-fit', list.scrollLeft + list.clientWidth >= list.scrollWidth - 2 && list.scrollLeft < 2 && list.scrollWidth <= list.clientWidth + 1); }, {passive: true});
+    fit(); update();
   })();
 
   /* ---- desktop nav (proposal 614:4822; motion after clerk.com). Hover an item with a chevron for 80 ms, or click it, and its

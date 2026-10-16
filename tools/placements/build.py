@@ -54,7 +54,7 @@ tail_html = homeify(tail_html)
 
 # ---- the homepage's main script runs every homepage section in one function; keep only the blocks this page uses,
 #      plus the helper functions those blocks call (defined inside homepage-only blocks)
-KEEP = ('sticky bottom bar', 'anchors:', 'menu sheet', 'desktop nav', 'internship cards', 'video overlay', '==================== Newton, the AI chat')
+KEEP = ('sticky bottom bar', 'anchors:', 'menu sheet', 'section bar', 'desktop nav', 'internship cards', 'video overlay', '==================== Newton, the AI chat')
 HELPERS = ('onSeen', 'drift', 'hairlines', 'easeOutCubic')
 ms = tail_js.index('<script>\n(function(){\n  var reduce'); me = tail_js.index('</script>', ms)
 main = tail_js[ms + len('<script>\n'):me]
