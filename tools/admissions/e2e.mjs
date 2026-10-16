@@ -10,7 +10,7 @@ const ev = (f, a) => p.evaluate(f, a);
 await p.goto('http://localhost:8765/admissions.html', { waitUntil: 'load' }); await p.waitForTimeout(800);
 
 // hero: the shared placements hero, the route figure, the walk
-ok('hero copy: crumbs, title, CTA', await ev(() => document.querySelector('.pl-crumb span').textContent === 'Admissions' && /six steps/.test(document.querySelector('.pl-title').textContent) && !!document.querySelector('.adm-hero .pl-cta')));
+ok('hero copy: crumbs, title, CTA', await ev(() => document.querySelector('.pl-crumb span').textContent === 'Admissions' && /six steps/.test(document.querySelector('.pl-title').textContent) && document.querySelectorAll('.adm-hero .pl-cta').length === 1));
 ok('route figure drawn; as served, the NSAT flag is lit', await ev(async () => { const html = await (await fetch(location.href)).text(); return !!document.querySelector('.adm-wall .rt-svg') && document.querySelectorAll('.rt-flag').length === 5 && /class="rt-flag on" data-i="1"/.test(html); }));
 /* the walk, checked by events rather than sleeps: standing (a flag lit) → walking (a stride pose) → arrival (the next flag) */
 const shown = () => ev(() => [...document.querySelectorAll('#rtStu .rt-pose:not([display])')].map(q => q.dataset.p));
@@ -29,7 +29,8 @@ await p.waitForFunction((w) => (document.querySelector('.rt-flag.on') || {}).dat
 const t1 = await ev(() => document.getElementById('rtStu').getAttribute('transform'));
 const lit = await ev(() => (document.querySelector('.rt-flag.on') || {}).dataset?.i);
 ok('the student walks to the next station and its flag lights', t0 !== t1 && lit === want, [t0, t1, lit, want]);
-ok('hero strip: next NSAT, online and proctored, scholarships, campuses — looped seamlessly', await ev(() => { const t = [...document.querySelectorAll('.adm-facts .pl-hl b')].map(b => b.textContent); return t.length === 8 && ['Next NSAT · 7 Jan 2027', 'Online, proctored', 'Scholarships up to 100%', '4 campuses'].every(x => t.filter(y => y === x).length === 2) && !t.some(x => /Registration|registered/.test(x)); }));
+ok('hero strip: online and proctored, scholarships, campuses (looped)', await ev(() => { const t = [...document.querySelectorAll('.adm-facts .pl-hl b')].map(b => b.textContent); return t.length === 6 && ['Online, proctored', 'Scholarships up to 100%', '4 campuses'].every(x => t.filter(y => y === x).length === 2); }));
+ok('the next-NSAT ticket: date, deadline, CTA in the stub, registered count', await ev(() => { const t = document.querySelector('.adm-ticket'); return !!t && t.querySelector('.adm-tk-date').textContent === '7 January 2027' && /6 January/.test(t.querySelector('.adm-tk-dl').textContent) && !!t.querySelector('.adm-tk-bot .pl-cta') && /31,352/.test(t.querySelector('.adm-tk-proof').textContent) && t.querySelectorAll('.adm-tk-proof img').length === 3; }));
 
 ok('the student is a person: legs, shirt, arms, backpack, head, hair', await ev(() => ['rt-legs','rt-shirt','rt-arm','rt-bag','rt-skin','rt-hair'].every(c => document.querySelector('#rtStu .' + c))));
 ok('every section subtext sits on one line', await ev(() => [...document.querySelectorAll('.bk-sub')].every(s => Math.round(s.getBoundingClientRect().height) <= Math.ceil(parseFloat(getComputedStyle(s).lineHeight)))));

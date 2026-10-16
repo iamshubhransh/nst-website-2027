@@ -19,6 +19,23 @@
 .adm-fi{flex:none;width:24px;height:24px;border-radius:7px;background:#E5F1FF;color:#0673F9;display:flex;align-items:center;justify-content:center}
 .adm-fi svg{width:14px;height:14px}
 
+/* the next-NSAT ticket: a white card with a dashed perforation and two notches; the date leads, the CTA sits in the stub */
+.adm-ticket{position:relative;align-self:stretch;margin-top:16px;border:1px solid #E1E5EA;border-radius:16px;background:#fff;overflow:hidden;box-shadow:0 14px 28px -20px rgba(22,25,29,.3)}
+.adm-tk-top{padding:18px 18px 16px}
+.adm-tk-k{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:#E7F6EE;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:#007A51}
+.adm-tk-k i{width:6px;height:6px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 3px rgba(22,163,74,.25)}
+.adm-tk-date{margin:12px 0 0;font-size:26px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:-.4px;color:#16191D}
+.adm-tk-dl{display:flex;align-items:center;gap:6px;margin:6px 0 0;font-size:14px;line-height:20px;font-weight:600;color:#C2410C}
+.adm-tk-dl svg{flex:none;width:16px;height:16px}
+.adm-tk-cut{position:relative;height:1px;margin:0 16px;border-top:1px dashed #D5DAE1}
+.adm-tk-cut i{position:absolute;top:-10px;width:20px;height:20px;border:1px solid #E1E5EA;border-radius:50%;background:#fff}
+.adm-tk-cut i:first-child{left:-27px}
+.adm-tk-cut i:last-child{right:-27px}
+.adm-tk-bot{padding:16px 18px 16px}
+.adm-ticket .pl-cta.btn{margin-top:0}
+.adm-tk-proof{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
+.adm-tk-proof b{font-weight:600;color:#16191D}
+
 /* ---- 01b summary tiles: the homepage tiles with a single icon disc ---- */
 .adm-av{display:flex;align-items:center;justify-content:center;background:var(--cb);color:var(--c)}
 .adm-av svg{width:14px;height:14px}
