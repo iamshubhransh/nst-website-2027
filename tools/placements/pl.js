@@ -57,7 +57,10 @@
       if (k > 1) tr.style.animationDuration = parseFloat(getComputedStyle(tr).animationDuration) * k + 's';
     });
     if (reduce){ sec.classList.add('is-in'); return; }
-    nums.forEach(function(b){ b.textContent = '0'; });   /* the slots have fixed widths, so the centred line holds still while counting */
+    /* the phone's slots have fixed widths; on desktop they hug the glyphs, so lock each number's final width before it counts */
+    function lock(){ nums.forEach(function(b){ var t = b.textContent; b.style.minWidth = ''; b.textContent = b.dataset.to; b.style.minWidth = matchMedia('(min-width:1024px)').matches ? b.getBoundingClientRect().width + 'px' : ''; b.textContent = t; }); }
+    lock(); addEventListener('resize', lock); if (document.fonts) document.fonts.ready.then(lock);   /* measure in Mona Sans, not the fallback */
+    nums.forEach(function(b){ b.textContent = '0'; });
     once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
       (function f(now){ var p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .3);
   })();

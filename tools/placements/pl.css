@@ -560,6 +560,10 @@
   .pl-ctc5 .pl-ctc4-fig{grid-column:1;grid-row:2;justify-self:start;height:76px;margin:48px 0 0}
   .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u{font-size:64px;line-height:76px;letter-spacing:-4px}
   .pl-ctc5 .pl-ctc4-fig .rs{margin-top:10px;font-size:32px;line-height:44px}
+  .pl-ctc5 .pl-ctc4-fig .rs{width:auto;margin-right:8px}   /* desktop: slots hug the glyphs (his ask, 16 Oct: the phone's fixed slots left wide gaps at 64) */
+  .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig b+.dash+b{width:auto}
+  .pl-ctc5 .pl-ctc4-fig .dash{width:auto;padding:0 7px}   /* measured: ~8 px of air each side of the dash, like ₹ and L */
+  .pl-ctc5 .pl-ctc4-fig .u{width:auto;padding-left:10px}
   .pl-ctc5 .pl-ctc4-sub{grid-column:2;grid-row:2;align-self:center;margin:48px 0 0;text-align:left;white-space:normal;text-wrap:balance;font-size:18px;line-height:28px;color:#16191D}
   .pl-ctc5 .pl-ctc4-avg{grid-column:4;grid-row:2;justify-self:end;align-self:center;width:auto;margin:48px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
   .pl-ctc5 .pl-ctc4-ok{width:40px;height:40px;border-radius:11px}
