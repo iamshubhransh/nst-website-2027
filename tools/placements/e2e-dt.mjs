@@ -48,8 +48,8 @@ ok('nav Placements links here', await ev(() => [...document.querySelectorAll('.d
 // ---- CTC
 await to('#ctc'); await p.waitForTimeout(1600);
 ok('CTC counts to ₹20–50L', (await ev(() => [...document.querySelectorAll('.pl-ctc4-fig b')].map(b => b.textContent).join('-'))) === '20-50');
-ok('CTC: range, line and card stacked and centred; one logo row', await ev(() => { const f = document.querySelector('.pl-ctc4-fig').getBoundingClientRect(), s = document.querySelector('.pl-ctc4-sub').getBoundingClientRect(), a = document.querySelector('.pl-ctc4-avg').getBoundingClientRect(), mid = r => (r.left + r.right) / 2, c = innerWidth / 2;
-  return Math.abs(mid(f) - c) < 24 && Math.abs(mid(s) - c) < 2 && Math.abs(mid(a) - c) < 2 && s.top >= f.bottom && a.top > s.bottom && [...document.querySelectorAll('.pl-ctc4-row')].filter(r => r.getClientRects().length).length === 1 && getComputedStyle(document.querySelector('.pl-ctc4-fig b')).fontSize === (innerWidth >= 1280 ? '64px' : '50px'); }));
+ok('CTC: range, line and card stacked and centred; one logo row through the card', await ev(() => { const f = document.querySelector('.pl-ctc4-fig').getBoundingClientRect(), s = document.querySelector('.pl-ctc4-sub').getBoundingClientRect(), a = document.querySelector('.pl-ctc4-avg').getBoundingClientRect(), mid = r => (r.left + r.right) / 2, c = innerWidth / 2;
+  return Math.abs(mid(f) - c) < 24 && Math.abs(mid(s) - c) < 2 && Math.abs(mid(a) - c) < 2 && s.top >= f.bottom && a.top > s.bottom && [...document.querySelectorAll('.pl-ctc4-row')].filter(r => r.getClientRects().length).length === 1 && (r1 => Math.abs((r1.top + r1.bottom) / 2 - (a.top + a.bottom) / 2) < 2)(document.querySelector('.pl-ctc4-row .pl-chip4').getBoundingClientRect()) && getComputedStyle(document.querySelector('.pl-ctc4-fig b')).fontSize === (innerWidth >= 1280 ? '64px' : '50px'); }));
 const c0 = await ev(() => getComputedStyle(document.querySelector('.pl-ctc4-track')).transform); await p.waitForTimeout(700);
 ok('company chips drift', c0 !== await ev(() => getComputedStyle(document.querySelector('.pl-ctc4-track')).transform));
 

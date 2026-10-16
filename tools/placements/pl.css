@@ -564,13 +564,17 @@
   .pl-ctc5 .pl-ctc4-fig .dash{width:auto;padding:0 7px}   /* measured: ~8 px of air each side of the dash, like ₹ and L */
   .pl-ctc5 .pl-ctc4-fig .u{width:auto;padding-left:10px}
   .pl-ctc5 .pl-ctc4-sub{margin:8px 0 0;text-align:center;white-space:nowrap;font-size:18px;line-height:28px;color:#16191D}
-  .pl-ctc5 .pl-ctc4-avg{align-self:center;width:auto;margin:28px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
+  .pl-ctc5 .pl-ctc4-avg{position:relative;z-index:3;align-self:center;width:auto;height:72px;margin:28px 0 0;background:#fff;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
   .pl-ctc5 .pl-ctc4-ok{width:40px;height:40px;border-radius:11px}
   .pl-ctc5 .pl-ctc4-ok img{width:20px;height:20px}
   .pl-ctc5 .pl-ctc4-avg b{font-size:20px;line-height:26px}
   .pl-ctc5 .pl-ctc4-avg div span{font-size:14px;line-height:20px}
   .pl-ctc5 .pl-ctc4-avg>em{height:22px;padding:0 8px;font-size:11px;line-height:22px}
-  .pl-ctc5 .pl-ctc4-rows{align-self:stretch;margin:44px 0 0}
+  /* one strip (16 Oct, his ask): the card sits in the middle of the logo row — the row is pulled up so its centre meets the
+     card's — and the logos fade out just before the card and back in after it, as if passing behind it */
+  .pl-ctc5 .pl-ctc4-rows{position:relative;z-index:1;align-self:stretch;margin:-66px 0 0;
+    -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 calc(50% - 260px),transparent calc(50% - 196px),transparent calc(50% + 196px),#000 calc(50% + 260px),#000 90%,transparent 100%);
+            mask-image:linear-gradient(90deg,transparent 0,#000 10%,#000 calc(50% - 260px),transparent calc(50% - 196px),transparent calc(50% + 196px),#000 calc(50% + 260px),#000 90%,transparent 100%)}
   .pl-ctc5 .pl-ctc4-row.r2{display:none}
   .pl-ctc5-bg::before{background:radial-gradient(106.27% 309.6% at 50% 50%,rgba(245,151,0,0) 0,rgba(245,151,0,.11) 45%,rgba(245,151,0,.08) 55%,rgba(245,151,0,0) 80%)}   /* the homepage band's */
   .pl-ctc5-bg::after{display:none}
