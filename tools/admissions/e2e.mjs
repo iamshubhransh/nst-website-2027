@@ -29,7 +29,7 @@ await p.waitForFunction((w) => (document.querySelector('.rt-flag.on') || {}).dat
 const t1 = await ev(() => document.getElementById('rtStu').getAttribute('transform'));
 const lit = await ev(() => (document.querySelector('.rt-flag.on') || {}).dataset?.i);
 ok('the student walks to the next station and its flag lights', t0 !== t1 && lit === want, [t0, t1, lit, want]);
-ok('hero strip: online and proctored, scholarships, campuses (looped)', await ev(() => { const t = [...document.querySelectorAll('.adm-facts .pl-hl b')].map(b => b.textContent); return t.length === 6 && ['Online, proctored', 'Scholarships up to 100%', '4 campuses'].every(x => t.filter(y => y === x).length === 2); }));
+ok('no strip in the hero; its facts sit in the four tiles', await ev(() => !document.querySelector('.adm-facts') && [...document.querySelectorAll('.adm-grid .tile p')].map(p => p.textContent.trim()).join('|') === 'Online, proctored test|Up to 100% scholarships|4 campuses|95% of fees as a loan'));
 ok('the next-NSAT ticket: date, deadline, CTA in the stub, registered count', await ev(() => { const t = document.querySelector('.adm-ticket'); return !!t && t.querySelector('.adm-tk-date').textContent === '7 January 2027' && /6 January/.test(t.querySelector('.adm-tk-dl').textContent) && !!t.querySelector('.adm-tk-bot .pl-cta') && /31,352/.test(t.querySelector('.adm-tk-proof').textContent) && t.querySelectorAll('.adm-tk-proof img').length === 3; }));
 
 ok('the student is a person: legs, shirt, arms, backpack, head, hair', await ev(() => ['rt-legs','rt-shirt','rt-arm','rt-bag','rt-skin','rt-hair'].every(c => document.querySelector('#rtStu .' + c))));
