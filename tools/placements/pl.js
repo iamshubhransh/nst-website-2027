@@ -176,20 +176,34 @@
     var arc = document.getElementById('plArc'), label = document.getElementById('plArcLabel'); if (!arc) return;
     var CO = [['Company','assets/co-logo-cube.png','#0673F9',34],['Swiggy','assets/co-logo-swiggy.png','#DE5A02',24],['Emergent','assets/co-logo-emergent.png','#16191D',38],['Licious',A + 'co-licious.png','#D7262D',0],['Zeko AI',A + 'co-zeko-ai.png','#5B3BE0',0],['NextYou',A + 'co-nextyou.png','#7A3CF0',0],['Drona Aviation',A + 'co-drona-aviation.png','#16191D',0]];
     var Y = {'-2': 63, '-1': 121, '0': 135, '1': 121, '2': 63}, STEP = 135;
+    /* desktop (16 Oct): the homepage's desktop geometry, upside down — a flat ring (r 1835) whose lowest point is 170 px into the
+       300 px arc box, discs 280 px apart along it (five showing from 1280 px, three below), so the outer discs stay inside the 1200 column, the name under the centre disc */
+    var DR = 1835, DSLOT = Math.asin(280 / DR), DCROWN = 170, mq = matchMedia('(min-width:1024px)');
+    var ring = arc.querySelector('.pl-arc-ring'), ring0 = ring.outerHTML;
+    function setRing(){
+      if (mq.matches){ ring.setAttribute('viewBox', '0 0 3670 3670'); ring.innerHTML = '<circle cx="1835" cy="1835" r="1833.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="27.03 27.03"/>'; }
+      else { var t = document.createElement('div'); t.innerHTML = ring0; ring.setAttribute('viewBox', '0 0 1086 1086'); ring.innerHTML = t.firstChild.innerHTML; }
+    }
+    function pos(k, cx){
+      if (!mq.matches) return [cx + k * STEP, Y[k]];
+      var a = k * DSLOT; return [cx + DR * Math.sin(a), DCROWN - DR * (1 - Math.cos(a))];
+    }
     var discs = CO.map(function(c){ var d = document.createElement('div'); d.className = 'pl-arc-logo'; d.innerHTML = '<img ' + (c[3] ? 'style="width:' + c[3] + 'px"' : 'class="round"') + ' src="' + c[1] + '" alt="">'; arc.appendChild(d); return d; });
     var head = 1;   /* index of the company in the centre slot */
     function place(anim){
       var cx = arc.clientWidth / 2;
       discs.forEach(function(d, i){
         var k = ((i - head) % CO.length + CO.length) % CO.length; if (k > CO.length / 2) k -= CO.length;
-        var vis = Math.abs(k) <= 1, kk = Math.max(-2, Math.min(2, k));
-        if (!anim || Math.abs(k) > 2) d.style.transition = 'none'; else d.style.transition = '';
-        d.style.transform = 'translate(' + (cx + kk * STEP) + 'px,' + Y[kk] + 'px)';
+        var lim = mq.matches && innerWidth >= 1280 ? 2 : 1, vis = Math.abs(k) <= lim, kk = Math.max(-lim - 1, Math.min(lim + 1, k)), xy = pos(Math.max(-2, Math.min(2, kk)), cx);
+        if (!mq.matches) xy = pos(Math.max(-2, Math.min(2, k)), cx);
+        else if (Math.abs(kk) > lim){ var e = pos(kk > 0 ? lim : -lim, cx); xy = [e[0] + (kk > 0 ? 160 : -160), e[1] - 40]; }   /* off the ends: just past the last slot, faded */   /* off the ends: just past the last slot, faded */
+        if (!anim || Math.abs(k) > lim + 1) d.style.transition = 'none'; else d.style.transition = '';
+        d.style.transform = 'translate(' + xy[0] + 'px,' + xy[1] + 'px)';
         d.style.opacity = vis ? 1 : 0;
       });
       label.textContent = CO[head][0]; label.style.color = CO[head][2];
     }
-    place(false); window.addEventListener('resize', function(){ place(false); });
+    setRing(); place(false); window.addEventListener('resize', function(){ setRing(); place(false); });
     var iv = 0;
     function step(){ head = (head + 1) % CO.length; label.classList.add('is-out'); setTimeout(function(){ place(true); label.classList.remove('is-out'); }, 250); }
     onView(arc, function(on){ clearInterval(iv); if (on && !reduce) iv = setInterval(step, 2600); });
