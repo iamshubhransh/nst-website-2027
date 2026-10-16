@@ -144,6 +144,7 @@
 .pl-live-pill i,.pl-live-dot{width:6px;height:6px;border-radius:50%;background:#16A34A;box-shadow:0 0 0 3px rgba(22,163,74,.35);animation:plPulse 2s ease-in-out infinite}
 @keyframes plPulse{50%{box-shadow:0 0 0 5px rgba(22,163,74,.12)}}
 .pl-live-title{margin:12px 0 0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#005ED1;text-align:center}
+.pl-live-in,.pl-live-head{display:contents}
 .pl-offers{position:relative;z-index:2;width:100%;margin-top:24px;height:360px;border-radius:12px;background:var(--bg2);overflow:hidden}
 .pl-offers-head{display:flex;justify-content:space-between;align-items:flex-start;height:26px;padding:14px 14px 0}
 .pl-offers-head span{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:rgba(22,25,29,.5)}
@@ -630,11 +631,20 @@
   .pl-gcard p{margin:4px 8px 0;font-size:14px;line-height:20px}
 
   /* ---- 02 the season, live: centred head, a wider feed, the company arc along the foot ---- */
+  /* 02 on desktop (16 Oct): one 1200 panel like the Google card — the head left (400), the feed right; the arc stays below */
   .pl-live{height:auto;padding:120px var(--side) 332px}
+  .pl-live-in{position:relative;z-index:2;display:grid;grid-template-columns:400px minmax(0,1fr);column-gap:64px;align-items:center;width:100%;max-width:var(--wrap);padding:40px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+  .pl-live-head{display:flex;flex-direction:column;align-items:flex-start;text-align:left}
   .pl-live-pill{height:28px;padding:0 12px;font-size:12px;line-height:16px;letter-spacing:1.6px}
-  .pl-live-title{margin-top:16px;font-size:28px;line-height:40px}
-  .pl-live-title br{display:none}
-  .pl-offers{width:720px;height:440px;margin-top:48px;border-radius:16px}
+  .pl-live-title{margin-top:20px;font-size:28px;line-height:40px;text-align:left}
+  .pl-live-sub{margin:12px 0 0;font-size:16px;line-height:24px;font-weight:500;color:#5B6271}
+  .pl-live-stats{display:flex;gap:40px;margin-top:32px;padding-top:24px;border-top:1px solid #EDEFF3;align-self:stretch}
+  .pl-live-stats p{display:flex;flex-direction:column;gap:2px;margin:0}
+  .pl-live-stats b{font-size:32px;line-height:40px;font-weight:600;font-stretch:125%;letter-spacing:-.5px;color:#16191D}
+  .pl-live-stats span{font-size:14px;line-height:20px;font-weight:500;color:#5B6271}
+  .pl-live-link{margin-top:28px;font-size:15px;line-height:22px;font-weight:600;color:#0673F9;text-decoration:none}
+  .pl-live-link:hover{text-decoration:underline}
+  .pl-offers{width:100%;height:440px;margin:0;border-radius:16px}
   .pl-offers-head{height:34px;padding:18px 20px 0}
   .pl-offers-head span{font-size:12px;line-height:14px}
   .pl-offers-head em{font-size:13px}
@@ -807,6 +817,7 @@
   .pl-goog-res .pl-gph{aspect-ratio:4/5;height:auto}
   .pl-gx-left{padding-right:24px}
   .pl-sec-card{grid-template-columns:minmax(0,1fr) 380px}
+  .pl-live-in{grid-template-columns:320px minmax(0,1fr);column-gap:40px;padding:32px}
   .pl-stories{column-gap:28px}
   .pl-th{width:132px;height:74px}
 }

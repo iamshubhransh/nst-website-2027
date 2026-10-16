@@ -87,12 +87,21 @@
 
   <!-- 02 · the season, live (632:28823): newest offers arrive on top of the card; companies step along the arc below -->
   <section class="pl-live" id="offers" aria-label="Internships this season">
-    <span class="pl-live-pill"><i></i>Live · 2026–27 season</span>
-    <h2 class="pl-live-title">Internships secured <br>by our Students</h2>
-    <div class="pl-offers">
-      <div class="pl-offers-head"><span>Latest offers</span><em>Updated weekly</em></div>
-      <ul class="pl-offer-list" id="plOffers"></ul>
-      <i class="pl-offers-fade" aria-hidden="true"></i>
+    <!-- desktop (16 Oct, his ask): a 1200 panel — the head on the left (pill, title, a line, two figures from this page, a link to
+         the companies), the live feed on the right; on the phone the wrappers are display:contents and the extras hidden -->
+    <div class="pl-live-in">
+      <div class="pl-live-head">
+        <span class="pl-live-pill"><i></i>Live · 2026–27 season</span>
+        <h2 class="pl-live-title">Internships secured <br>by our Students</h2>
+        <p class="pl-live-sub dt-only">New offers appear here as our interns sign them.</p>
+        <div class="pl-live-stats dt-only"><p><b>287</b><span>interns in 15 sectors</span></p><p><b>150+</b><span>companies hiring</span></p></div>
+        <a class="pl-live-link dt-only" href="#companies">See every company →</a>
+      </div>
+      <div class="pl-offers">
+        <div class="pl-offers-head"><span>Latest offers</span><em>Updated weekly</em></div>
+        <ul class="pl-offer-list" id="plOffers"></ul>
+        <i class="pl-offers-fade" aria-hidden="true"></i>
+      </div>
     </div>
     <div class="pl-arc" id="plArc" aria-hidden="true">
       <svg class="pl-arc-ring" viewBox="0 0 1086 1086"><circle cx="543" cy="543" r="541.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="8 8"/></svg>
