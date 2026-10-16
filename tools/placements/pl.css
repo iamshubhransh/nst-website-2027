@@ -35,7 +35,17 @@
 .pl-kick i{width:6px;height:6px;border-radius:50%;background:#0673F9}
 .pl-title{margin:12px 0 0;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:-.3px;color:#16191D;max-width:370px}
 .pl-lede{margin:8px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(22,25,29,.6);max-width:360px}
-.pl-cta.btn{margin-top:20px;width:100%;height:50px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;box-shadow:var(--btn-shadow);gap:6px}
+.pl-hero-logos{position:relative;align-self:stretch;height:40px;margin:20px -16px 0;overflow:hidden;
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent);mask-image:linear-gradient(90deg,transparent,#000 40px,#000 calc(100% - 40px),transparent)}
+.pl-hero-track{position:absolute;left:0;top:0;height:40px;display:flex;align-items:center;gap:28px;width:max-content;animation:plMarq 40s linear infinite;animation-play-state:paused}
+.pl-hero.is-live .pl-hero-track{animation-play-state:running}
+.pl-hl-dup{display:flex;align-items:center;gap:28px;padding-right:28px}
+.pl-hero-track>.pl-hl:first-child{margin-left:28px}
+.pl-hl{flex:none;display:flex;align-items:center;gap:6px}
+.pl-hl img{display:block;width:auto}
+.pl-hl img.r{border-radius:50%}
+.pl-hl b{font-size:13px;line-height:16px;font-weight:600;color:#16191D;white-space:nowrap}
+.pl-cta.btn{margin-top:16px;width:100%;height:50px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;box-shadow:var(--btn-shadow);gap:6px}
 .pl-cta img{width:22px;height:22px}
 .pl-proof .hatch{margin:0}
 /* ---- 01b the CTC (v4): the NST-blue stage ---- */
@@ -392,6 +402,15 @@
 .pl-wa-t em{font-style:normal;font-size:12.5px;line-height:16px;font-weight:500;color:#667781;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s ease,color .25s ease}
 .pl-wa-t em.is-typing{color:#1DAB61}
 .pl-wa-ic{flex:none;width:22px;height:22px;color:#111B21;margin-left:6px}
+/* testimonial cues (16 Oct): a pinned banner says what the chat is; each message carries a Recruiter tag and a reply preview of who it is about */
+.pl-wa-pin{display:flex;align-items:center;gap:10px;padding:9px 14px;background:#fff;border-bottom:1px solid #E9EDEF}
+.pl-wa-pin svg{flex:none;width:16px;height:16px;color:#54656F;transform:rotate(45deg)}
+.pl-wa-pin span{min-width:0;display:flex;flex-direction:column;font-size:13px;line-height:17px;font-weight:500;color:#111B21}
+.pl-wa-pin b{font-size:11.5px;line-height:15px;font-weight:600;color:#1DAB61}
+.pl-tagr{flex:none;height:18px;padding:0 7px;border-radius:999px;background:color-mix(in srgb,var(--c) 12%,#fff);font-style:normal;font-size:10.5px;line-height:18px;font-weight:600;letter-spacing:.2px;color:var(--c)}
+.pl-reply{display:flex;flex-direction:column;margin:6px 0 2px;padding:5px 9px 6px;border-radius:7px;background:color-mix(in srgb,var(--c) 7%,#F4F5F7);box-shadow:inset 3px 0 0 var(--c)}
+.pl-reply b{font-size:11.5px;line-height:15px;font-weight:600;color:var(--c)}
+.pl-reply span{font-size:12.5px;line-height:17px;font-weight:500;color:#54656F;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pl-wa-body{position:relative;padding:12px 10px 8px 8px;display:flex;flex-direction:column;gap:8px;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Cg fill='none' stroke='%23ECE5DA' stroke-width='1' stroke-linecap='round'%3E%3Ccircle cx='12' cy='12' r='4'/%3E%3Cpath d='M40 8l6 6m0-6l-6 6'/%3E%3Cpath d='M8 44c4-4 8 4 12 0'/%3E%3Crect x='40' y='38' width='10' height='8' rx='2'/%3E%3Cpath d='M30 28h4'/%3E%3C/g%3E%3C/svg%3E");background-size:64px 64px}
 .pl-wa-day{align-self:center;margin-bottom:2px;padding:4px 12px;border-radius:999px;background:#fff;box-shadow:0 1px 1px rgba(11,20,26,.08);font-size:11.5px;line-height:15px;font-weight:600;color:#54656F}
@@ -399,9 +418,10 @@
 .pl-thread.is-wait .pl-msg,.pl-thread.is-wait .pl-typing{opacity:0;transform:translateY(10px)}
 .pl-wa-av{flex:none;width:28px;height:28px;border-radius:50%;background:var(--c);display:flex;align-items:center;justify-content:center;font-size:12px;line-height:14px;font-weight:700;color:#fff;transition:background-color .3s ease}
 .pl-bub{position:relative;min-width:0;max-width:84%;padding:7px 10px 6px;border-radius:16px 16px 16px 4px;background:#fff;box-shadow:0 1px 1.5px rgba(11,20,26,.1)}
-.pl-who{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0;font-size:13px;line-height:18px}
+.pl-who{display:flex;align-items:center;justify-content:flex-start;gap:6px;margin:0;font-size:13px;line-height:18px}
 .pl-who b{font-weight:600;color:var(--c);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
-.pl-who span{flex:none;font-size:11.5px;font-weight:500;color:#8696A0}
+.pl-who{flex-wrap:wrap;row-gap:0}
+.pl-who span{flex:0 0 100%;margin:0;font-size:12px;line-height:16px;font-weight:500;color:#8696A0}   /* role on its own line, so names stay whole */
 .pl-said{margin:2px 0 0;font-size:14.5px;line-height:20px;font-weight:500;color:#111B21}
 .pl-bub time{display:block;margin:1px 0 -1px;text-align:right;font-size:11px;line-height:14px;font-weight:500;color:#8696A0}
 .pl-bub-typing{padding:11px 14px}
@@ -472,7 +492,13 @@
   .pl-kick{height:28px;padding:0 12px;font-size:12px;line-height:16px;letter-spacing:1.6px}
   .pl-title{margin-top:24px;max-width:600px;font-size:48px;line-height:56px;letter-spacing:-.6px;text-wrap:balance}
   .pl-lede{margin-top:16px;max-width:460px;font-size:18px;line-height:28px}
-  .pl-cta.btn{width:264px;height:56px;margin-top:32px;font-size:17px}
+  .pl-hero-logos{margin:28px 0 0;height:44px}
+  .pl-hero-track{height:44px;gap:36px}
+  .pl-hl-dup{gap:36px;padding-right:36px}
+  .pl-hero-track>.pl-hl:first-child{margin-left:36px}
+  .pl-hl img{zoom:1.1}
+  .pl-hl b{font-size:14px}
+  .pl-cta.btn{width:264px;height:56px;margin-top:28px;font-size:17px}
 
   /* ---- 01b the CTC stage: same composition, scaled; the rings sit right of centre ---- */
   .pl-ctc4{padding:104px 0 96px}
@@ -655,6 +681,12 @@
   .pl-wa-t b{font-size:17px;line-height:22px}
   .pl-wa-t em{font-size:13.5px;line-height:18px}
   .pl-wa-body{padding:20px 20px 12px 16px;gap:10px}
+  .pl-wa-pin{padding:11px 20px}
+  .pl-wa-pin span{font-size:14px;line-height:19px}
+  .pl-tagr{height:20px;font-size:11.5px;line-height:20px}
+  .pl-reply{margin:8px 0 4px;padding:7px 12px 8px}
+  .pl-reply b{font-size:12.5px;line-height:16px}
+  .pl-reply span{font-size:13.5px;line-height:19px}
   .pl-wa-av{width:32px;height:32px;font-size:13px}
   .pl-bub{max-width:78%;padding:9px 13px 7px}
   .pl-who{font-size:14px;line-height:20px}
