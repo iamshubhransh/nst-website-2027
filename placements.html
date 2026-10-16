@@ -3176,8 +3176,9 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-rec-sec{position:relative;background:#fff;padding:0 16px 41px;display:flex;flex-direction:column;align-items:center;border-bottom:1px solid #E1E5EA}
 .pl-rec-sec .pl-threads{align-self:stretch;height:104px;margin:0 -16px;border-top:1px solid #E1E5EA}
 .pl-voices{position:relative;display:flex;margin-top:36px;padding-right:14px}   /* recruiters: three managers and a chat badge */
-.pl-voices i{width:44px;height:44px;margin-left:-12px;border-radius:50%;background:var(--c);box-shadow:0 0 0 3px #fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:17px;line-height:20px;font-weight:700;color:#fff}
+.pl-voices i{width:44px;height:44px;margin-left:-8px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px #fff;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:17px;line-height:20px;font-weight:700;color:#fff}
 .pl-voices i:first-child{margin-left:0}
+.pl-voices i img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 .pl-voices i:nth-child(2){z-index:1;transform:translateY(-6px) scale(1.12)}
 .pl-voices b{position:absolute;right:-2px;bottom:-4px;z-index:2;width:28px;height:28px;border-radius:50%;background:#00A884;box-shadow:0 0 0 3px #fff;display:flex;align-items:center;justify-content:center}
 .pl-voices b svg{width:16px;height:16px}
@@ -3477,7 +3478,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-rec-sec{padding:0 var(--side) 120px}
   .pl-rec-sec .pl-threads{margin:0 calc(var(--side) * -1)}
   .pl-voices{margin-top:48px}
-  .pl-voices i{width:56px;height:56px;margin-left:-14px;font-size:21px}
+  .pl-voices i{width:56px;height:56px;margin-left:-10px;font-size:21px}
   .pl-voices i:first-child{margin-left:0}
   .pl-voices b{width:32px;height:32px}
   .pl-rec-sec .pl-kicker{margin-top:32px}
@@ -3852,7 +3853,8 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   <!-- 08 · recruiters (632:32196): hairlines hang from the top; a channel where managers' messages arrive -->
   <section class="pl-rec-sec" id="recruiters" aria-label="Hear from our recruiters">
     <div class="pl-threads" aria-hidden="true"><canvas id="plLinesDown"></canvas></div>
-    <span class="pl-voices" aria-hidden="true"><i style="--c:#B42FE5">T</i><i style="--c:#0673F9">O</i><i style="--c:#16A34A">H</i><b><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" fill="#fff"/><path d="M8.5 11.2h.01M12 11.2h.01M15.5 11.2h.01" stroke="#00A884" stroke-width="2.4" stroke-linecap="round"/></svg></b></span>
+    <!-- three companies that hired NST interns (16 Oct: logos instead of the managers' initials, so the stack reads as recruiters) -->
+    <span class="pl-voices" aria-hidden="true"><i><img src="assets/co-logo-emergent.png" alt=""></i><i><img src="assets/pl/co-licious.png" alt=""></i><i><img src="assets/pl/co-nextyou.png" alt=""></i><b><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 00-7.8 13.5L3 21l4.6-1.2A9 9 0 1012 3z" fill="#fff"/><path d="M8.5 11.2h.01M12 11.2h.01M15.5 11.2h.01" stroke="#00A884" stroke-width="2.4" stroke-linecap="round"/></svg></b></span>
     <p class="pl-kicker">Feedback on NST students</p>
     <h2 class="pl-h2">Hear from our recruiters</h2>
     <div class="pl-thread pl-wa" id="plThread">
