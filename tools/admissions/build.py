@@ -41,7 +41,7 @@ mod_i = tail.index('<script type="module">'); mod_j = tail.index('</script>', mo
 tail = tail[:mod_i] + tail[mod_j:]
 
 body = body.replace('<!--@route-->', open(os.path.join(HERE, 'route.svg'), encoding='utf-8').read())   # node tools/admissions/route.mjs regenerates it
-for name in ('monitor', 'papers', 'board', 'table', 'letter', 'arch'):
+for name in ('monitor', 'papers', 'board', 'table', 'letter', 'arch', 'idcard'):
     body = body.replace('<!--@ic:' + name + '-->', open(os.path.join(HERE, 'ic-' + name + '.svg'), encoding='utf-8').read())
 body = body.replace('<!--@wins-->', wins).replace('<!--@grid-->', grid)
 

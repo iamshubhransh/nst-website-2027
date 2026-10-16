@@ -6,7 +6,7 @@ import * as k from "/Users/shubhanshbhaskar/.claude/skills/anatomy/kit/iso-kit.m
 import { O } from "../nav-figures/found3/objects.mjs";
 
 const N = 96;
-for (const name of ["monitor", "papers", "board", "table", "letter", "arch"]) {
+for (const name of ["monitor", "papers", "board", "table", "letter", "arch", "idcard"]) {
   const P = k.fitProjection(O[name].box, N, N, { pad: 8, azimuth: 148, elevation: 30 });
   const svg = `<svg class="iso-svg adm-ic-svg" viewBox="0 0 ${N} ${N}" aria-hidden="true">${O[name].draw(P)}</svg>`
     .replace(/ d="([^"]*)"/g, (m, d) => ' d="' + d.replace(/-?\d+\.\d{2,}/g, (n) => (+n).toFixed(1)) + '"');

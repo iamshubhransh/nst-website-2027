@@ -46,6 +46,7 @@ ok('tapping a card opens it and switches the chip', await ev(() => document.quer
 await ev(() => document.querySelector('.adm-rc[data-r="0"]').focus()); await p.keyboard.press('Enter'); await p.waitForTimeout(300);
 ok('a card is reachable by keyboard (Enter selects it)', await ev(() => document.querySelector('.adm-rc[data-r="0"]').classList.contains('is-on') && document.querySelector('.adm-pick button[data-r="0"]').classList.contains('is-on')));
 
+ok('route cards: each has its object; shortlisting lists four criteria and its closing date', await ev(() => document.querySelectorAll('.adm-rc .adm-rc-ic .adm-ic-svg').length === 3 && document.querySelectorAll('.adm-crit span').length === 4 && /6 Jan 2027/.test(document.querySelector('.adm-rc[data-r="2"]').textContent)));
 // NSAT paper, timeline, scholarships, loans
 ok('NSAT: four parts with answer bubbles, two dates, three kits', await ev(() => document.querySelectorAll('.adm-parts li').length === 4 && document.querySelectorAll('.adm-bub i').length === 16 && document.querySelectorAll('.adm-dates p').length === 2 && document.querySelectorAll('.adm-kit').length === 3));
 ok('six steps, each with its object; NSAT marked', await ev(() => document.querySelectorAll('.adm-tl li').length === 6 && document.querySelectorAll('.adm-tl .adm-ic-svg').length === 6 && document.querySelector('.adm-tl li.is-on h3').textContent === 'Take NSAT'));

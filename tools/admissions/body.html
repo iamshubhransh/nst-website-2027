@@ -45,9 +45,44 @@
       <button type="button" role="tab" class="is-on" aria-selected="true" data-r="0">I’m starting fresh</button><button type="button" role="tab" aria-selected="false" data-r="1">I already code</button><button type="button" role="tab" aria-selected="false" data-r="2">I have a JEE score</button>
     </div>
     <div class="adm-rcards">
-      <article class="adm-rc is-on" data-r="0"><div class="adm-rc-top"><em class="adm-tag">Most students</em><span class="adm-rc-n">01</span></div><h3>NSAT</h3><p>An online test of maths, English and aptitude, followed by an interview.</p><ul><li>Online, proctored</li><li>Next test: 7 Jan 2027</li></ul><a href="#">Register for NSAT →</a></article>
-      <article class="adm-rc" data-r="1"><div class="adm-rc-top"><em class="adm-tag">If you code</em><span class="adm-rc-n">02</span></div><h3>Coding NSAT</h3><p>The NSAT for students who already code, followed by the same interview.</p><ul><li>Online, proctored</li><li>Same interview after</li></ul><a href="#">About Coding NSAT →</a></article>
-      <article class="adm-rc" data-r="2"><div class="adm-rc-top"><em class="adm-tag">Skip the test</em><span class="adm-rc-n">03</span></div><h3>Profile-based shortlisting</h3><p>A strong JEE scorecard, academic record, coding rating or technical achievement can take you straight to the interview.</p><ul><li>No NSAT</li><li>Closes 6 Jan 2027</li></ul><a href="#">Check if you qualify →</a></article>
+      <article class="adm-rc is-on" data-r="0" style="--rc:#0673F9;--rcb:#E5F1FF">
+        <div class="adm-rc-top"><i class="adm-rc-ic iso" data-theme="light"><!--@ic:papers--></i><div class="adm-rc-tt"><em class="adm-tag">Most students</em><h3>NSAT</h3></div><span class="adm-rc-n">01</span></div>
+        <p>An online test of maths, English and aptitude, followed by an interview.</p>
+        <div class="adm-rc-more">
+          <ol class="adm-flow" aria-label="The NSAT route"><li class="on"><b>NSAT</b><span>Online test</span></li><li><b>Interview</b><span>Online</span></li><li><b>Counselling</b><span>On campus</span></li></ol>
+          <ul><li>Online, proctored</li><li>Next test: 7 Jan 2027</li></ul>
+          <a href="#">Register for NSAT →</a>
+        </div>
+      </article>
+      <article class="adm-rc" data-r="1" style="--rc:#7B55EE;--rcb:#F0EBFD">
+        <div class="adm-rc-top"><i class="adm-rc-ic iso" data-theme="light"><!--@ic:monitor--></i><div class="adm-rc-tt"><em class="adm-tag">If you code</em><h3>Coding NSAT</h3></div><span class="adm-rc-n">02</span></div>
+        <p>The NSAT for students who already code, followed by the same interview.</p>
+        <div class="adm-rc-more">
+          <div class="adm-code" aria-hidden="true"><div class="adm-code-bar"><i></i><i></i><i></i><span>solve.py</span></div><pre><span class="k">def</span> <span class="f">two_sum</span>(nums, target):
+    seen = {}
+    <span class="k">for</span> i, n <span class="k">in</span> <span class="f">enumerate</span>(nums):
+        <span class="k">if</span> target - n <span class="k">in</span> seen:
+            <span class="k">return</span> seen[target - n], i
+        seen[n] = i</pre></div>
+          <ul><li>Online, proctored</li><li>Same interview after</li></ul>
+          <a href="#">About Coding NSAT →</a>
+        </div>
+      </article>
+      <article class="adm-rc" data-r="2" style="--rc:#007A51;--rcb:#E7F6EE">
+        <div class="adm-rc-top"><i class="adm-rc-ic iso" data-theme="light"><!--@ic:idcard--></i><div class="adm-rc-tt"><em class="adm-tag">Skip the test</em><h3>Profile-based shortlisting</h3></div><span class="adm-rc-n">03</span></div>
+        <p>A strong academic or coding profile can take you straight to the interview, without NSAT.</p>
+        <div class="adm-rc-more">
+          <p class="adm-rc-k">You’re evaluated on one or more of</p>
+          <div class="adm-crit">
+            <span><i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 3.5h10v9H3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M5.5 6.5h5M5.5 9.5h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></i>JEE scorecard</span><span><i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M1.8 6.2L8 3l6.2 3.2L8 9.4z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M4.4 7.6v3.2c1 .9 2.2 1.4 3.6 1.4s2.6-.5 3.6-1.4V7.6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></i>Academic excellence</span>
+            <span><i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 4.5L2 8l3.5 3.5M10.5 4.5L14 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Coding profiles &amp; CP ratings</span><span><i><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 2.8h6v3.4a3 3 0 01-6 0zM5 4H3v1a2 2 0 002 2M11 4h2v1a2 2 0 01-2 2M8 9.2v2.4M5.5 13.2h5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Technical achievements</span>
+          </div>
+          <ol class="adm-flow" aria-label="The shortlisting route"><li><b>Register</b><span>Apply online</span></li><li class="on"><b>Your profile</b><span>We review it</span></li><li><b>Interview</b><span>Directly</span></li></ol>
+          <p class="adm-why">Excellence shows in consistent performance, not just one entrance test. Our admissions team reaches out to shortlisted students.</p>
+          <ul><li class="adm-closes">Closes 6 Jan 2027</li><li>No NSAT</li></ul>
+          <a href="#">Apply and share your profile →</a>
+        </div>
+      </article>
     </div>
   </section>
 

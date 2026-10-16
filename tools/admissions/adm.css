@@ -47,22 +47,47 @@
 .adm-pick button{flex:none;height:36px;padding:0 14px;border:0;border-radius:999px;background:#F6F7F9;font-family:var(--font);font-size:13px;line-height:18px;font-weight:600;color:#5B6271;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s ease,color .2s ease}
 .adm-pick button.is-on{background:#16191D;color:#fff}
 .adm-rcards{display:flex;flex-direction:column;gap:12px}
-.adm-rc{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff;transition:border-color .3s ease,box-shadow .3s ease,background-color .3s ease}   /* real borders: they survive the Figma capture, inset shadows don't */
-.adm-rc.is-on{padding:16.5px;border:1.5px solid #0673F9;background:#F5F9FF}
-.adm-rc-top{display:flex;align-items:center;justify-content:space-between}
-.adm-tag{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;background:#F6F7F9;font-style:normal;font-size:11px;line-height:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#5B6271}
-.adm-rc.is-on .adm-tag{background:#E5F1FF;color:#0673F9}
-.adm-rc-n{font-size:13px;line-height:16px;font-weight:600;font-stretch:125%;color:rgba(22,25,29,.3)}
-.adm-rc h3{margin:12px 0 0;font-size:20px;line-height:26px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#16191D}
-.adm-rc p{margin:6px 0 0;font-size:14px;line-height:22px;font-weight:500;color:rgba(22,25,29,.6)}
-.adm-rc ul{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:0;list-style:none}
-.adm-rc li{height:26px;padding:0 10px;border-radius:999px;background:#F6F7F9;font-size:12px;line-height:26px;font-weight:500;color:#5B6271}
-.adm-rc.is-on li{background:#fff;border:1px solid #DCE9FB;line-height:24px}
-.adm-rc:not(.is-on) ul,.adm-rc:not(.is-on) a{display:none}
-.adm-rc{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.adm-rc{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .3s ease,background-color .3s ease}   /* real borders: they survive the Figma capture */
+.adm-rc.is-on{padding:16.5px;border:1.5px solid var(--rc);background:#fff;cursor:default}
 .adm-rc:not(.is-on):active{background:#F6F7F9}
-.adm-rc:focus-visible{outline:2px solid #0673F9;outline-offset:2px}   /* the cards that don't fit you stay short; picking one opens it */
-.adm-rc a{display:inline-block;margin-top:16px;font-size:14px;line-height:20px;font-weight:600;color:#0673F9;text-decoration:none}
+.adm-rc:focus-visible{outline:2px solid #0673F9;outline-offset:2px}
+.adm-rc-top{display:flex;align-items:center;gap:12px}
+.adm-rc-ic{flex:none;width:52px;height:52px;border-radius:14px;background:var(--rcb);display:flex;align-items:center;justify-content:center}
+.adm-rc-ic .adm-ic-svg{width:46px;height:46px}
+.adm-rc-tt{flex:1;min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.adm-tag{display:inline-flex;align-items:center;height:20px;padding:0 8px;border-radius:999px;background:#F6F7F9;font-style:normal;font-size:10.5px;line-height:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#5B6271}
+.adm-rc.is-on .adm-tag{background:var(--rcb);color:var(--rc)}
+.adm-rc-n{align-self:flex-start;font-size:13px;line-height:16px;font-weight:600;font-stretch:125%;color:rgba(22,25,29,.3)}
+.adm-rc h3{margin:0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#16191D}
+.adm-rc>p{margin:12px 0 0;font-size:14px;line-height:22px;font-weight:500;color:rgba(22,25,29,.6)}
+.adm-rc:not(.is-on) .adm-rc-more{display:none}   /* the cards that don't fit you stay short; picking one opens it */
+.adm-rc ul{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:0;list-style:none}
+.adm-rc li{height:26px;padding:0 10px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-size:12px;line-height:24px;font-weight:500;color:#5B6271}
+.adm-rc li.adm-closes{border-color:#FCD9C4;background:#FFF4EC;color:#C2410C;font-weight:600}
+.adm-rc a{display:inline-block;margin-top:16px;font-size:14px;line-height:20px;font-weight:600;color:var(--rc);text-decoration:none}
+/* the route in three nodes */
+.adm-flow{display:flex;margin:16px 0 0;padding:0;list-style:none}
+.adm-rc .adm-flow li{position:relative;flex:1;height:auto;padding:0;border:0;background:none;display:flex;flex-direction:column;align-items:center;text-align:center;line-height:normal}
+.adm-flow li::before{content:"";width:12px;height:12px;border-radius:50%;border:2px solid #D5DAE1;background:#fff;box-sizing:border-box;position:relative;z-index:1}
+.adm-flow li.on::before{border-color:var(--rc);background:var(--rc);box-shadow:0 0 0 4px var(--rcb)}
+.adm-flow li+li::after{content:"";position:absolute;top:5px;right:50%;width:100%;border-top:2px dashed #D5DAE1}
+.adm-flow b{margin-top:8px;font-size:13px;line-height:18px;font-weight:600;color:#16191D}
+.adm-flow span{font-size:11.5px;line-height:16px;font-weight:500;color:rgba(22,25,29,.5)}
+/* Coding NSAT: a code window */
+.adm-code{margin:16px 0 0;border-radius:12px;background:#0B0C0E;overflow:hidden;border:1px solid #23282F}
+.adm-code-bar{display:flex;align-items:center;gap:5px;height:28px;padding:0 10px;border-bottom:1px solid #23282F}
+.adm-code-bar i{width:8px;height:8px;border-radius:50%;background:#30363D}
+.adm-code-bar i:first-child{background:#F87171}.adm-code-bar i:nth-child(2){background:#FBBF24}.adm-code-bar i:nth-child(3){background:#4ADE80}
+.adm-code-bar span{margin-left:6px;font-size:11px;line-height:14px;font-weight:500;color:rgba(255,255,255,.45)}
+.adm-code pre{margin:0;padding:10px 12px 12px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11.5px;line-height:18px;color:#E5E7EB;white-space:pre;overflow:hidden}
+.adm-code .k{color:#C4B5FD}.adm-code .f{color:#61A8FF}
+/* shortlisting: the four criteria, the why */
+.adm-rc-k{margin:16px 0 0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+.adm-crit{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.adm-crit span{display:flex;align-items:center;gap:8px;padding:10px;border-radius:12px;background:#F6F7F9;font-size:13px;line-height:17px;font-weight:600;color:#16191D}
+.adm-crit i{flex:none;width:28px;height:28px;border-radius:8px;background:var(--rcb);color:var(--rc);display:flex;align-items:center;justify-content:center}
+.adm-crit i svg{width:16px;height:16px}
+.adm-why{margin:14px 0 0;padding:10px 12px;border-radius:10px;background:#F6F7F9;font-size:13px;line-height:19px;font-weight:500;color:rgba(22,25,29,.65)}
 
 /* ---- 03 NSAT (dark): the paper ---- */
 .adm-paper{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
