@@ -15,7 +15,7 @@ await p.goto(URL, {waitUntil: 'load'}); await p.waitForTimeout(800);
 const lay = await ev(() => {
   const W = innerWidth, wrap = Math.min(1200, W - 96), side = (W - wrap) / 2, r = s => document.querySelector(s).getBoundingClientRect();
   return {over: document.documentElement.scrollWidth - W, side,
-    heroCopy: r('.pl-hero-copy').left, google: r('.pl-goog-brand').left, batchHead: r('#internships .bk-head').left,
+    heroCopy: r('.pl-hero-copy').left, google: r('.pl-goog-in').left, googR: r('.pl-goog-in').right, batchHead: r('#internships .bk-head').left,
     recL: r('.pl-rec[data-c="0"]').left, recR: r('.pl-rec[data-c="1"]').right, secCard: [r('.pl-sec-card').left, r('.pl-sec-card').right],
     board: r('.pl-board').left, wall: r('.pl-wall2').right, feature: r('.pl-feature').left, ctaR: r('.pl-dark-cta').right,
     tilesRow: new Set([...document.querySelectorAll('.pl-proof .tile')].map(t => Math.round(t.getBoundingClientRect().top))).size,
@@ -23,7 +23,7 @@ const lay = await ev(() => {
 });
 const S = Math.round(lay.side), E = 1440 - S;
 ok('no horizontal overflow', lay.over <= 0, lay.over);
-ok('hero copy, Google, section heads start on the column', [lay.heroCopy, lay.google, lay.batchHead, lay.recL, lay.board, lay.feature].every(x => Math.abs(x - S) <= 1), lay);
+ok('hero copy, Google panel, section heads start on the column', [lay.heroCopy, lay.google, lay.batchHead, lay.recL, lay.board, lay.feature].every(x => Math.abs(x - S) <= 1) && Math.abs(lay.googR - lay.recR) <= 1, lay);
 ok('right edges end on the column', [lay.recR, lay.secCard[1], lay.wall, lay.ctaR].every(x => Math.abs(x - E) <= 1), lay);
 ok('four summary tiles in one row', lay.tilesRow === 1, lay.tilesRow);
 ok('two campus cards side by side', lay.campusTop === 1, lay.campusTop);
