@@ -27,7 +27,8 @@ ok('hero copy, Google panel, section heads start on the column', [lay.heroCopy, 
 ok('right edges end on the column', [lay.recR, lay.secCard[1], lay.wall, lay.ctaR].every(x => Math.abs(x - E) <= 1), lay);
 ok('four summary tiles in one row', lay.tilesRow === 1, lay.tilesRow);
 ok('two campus cards side by side', lay.campusTop === 1, lay.campusTop);
-ok('type: section titles 28/40 like the homepage, hero 48', await ev(() => ['#internships .bk-title', '.pl-live-title', '.pl-goog-title', '#recruiters .pl-h2', '#faq .pl-h2'].every(q => { const t = getComputedStyle(document.querySelector(q)); return t.fontSize === '28px' && t.lineHeight === '40px'; }) && getComputedStyle(document.querySelector('.pl-title')).fontSize === '48px'));
+ok('type: section titles 28/40 like the homepage, hero 48', await ev(() => ['#internships .bk-title', '.pl-live-title', '#recruiters .pl-h2', '#faq .pl-h2'].every(q => { const t = getComputedStyle(document.querySelector(q)); return t.fontSize === '28px' && t.lineHeight === '40px'; }) && getComputedStyle(document.querySelector('.pl-title')).fontSize === '48px'));
+ok('Google: the headline is a search-result title (frame 709:50611)', await ev(() => { const t = getComputedStyle(document.querySelector('.pl-goog-title')); return t.fontSize === '18.64px' && t.color === 'rgb(26, 13, 171)' && /Arial/.test(t.fontFamily); }));
 
 // ---- hero wall: four columns, drifting, a tile lights in turn
 ok('hero wall: four columns', await ev(() => document.querySelectorAll('.pl-col').length) === 4);
