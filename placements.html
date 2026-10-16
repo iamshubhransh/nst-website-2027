@@ -2954,7 +2954,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 
 /* ---- 02a Google: a search that finds two interns ---- */
 .pl-goog{position:relative;background:#fff;padding:56px 16px 8px;display:flex;flex-direction:column;align-items:center;text-align:center}   /* centred (13 Oct) */
-.pl-goog-in{display:contents}
+.pl-goog-in,.pl-gx-body,.pl-gx-left,.pl-gx-res{display:contents}
 .pl-goog-brand{display:flex;align-items:center;gap:10px}
 .pl-goog-brand img{width:72px;height:24px}
 .pl-goog-brand i{width:1px;height:18px;background:#E1E5EA}
@@ -3412,21 +3412,36 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-kicker{font-size:14px;line-height:28px;letter-spacing:2px}   /* the homepage's desktop .sx-kick / .sx-title: 14/28 and 28/40 */
   .pl-h2{margin-top:8px;font-size:28px;line-height:40px}
 
-  /* ---- 02a Google (16 Oct): the whole result inside one 1200 panel — the grey shell the offers feed uses, 56 padding — the search
-          and the line on the left, centred against the two result cards on the right ---- */
+  /* ---- 02a Google (16 Oct, his frame 709:50611): a 1200 white card, 1 px #E1E5EA, radius 16 — a 72 px header strip, then a
+          grey body (24 padding): the search, count and a Google result on the left (630), the chip at its foot; the cards (520) right ---- */
   .pl-goog{display:block;padding:120px var(--side)}
-  .pl-goog-in{display:grid;grid-template-columns:minmax(0,1fr) 520px;grid-template-rows:1fr auto auto auto auto 1fr;column-gap:72px;align-items:start;justify-items:start;width:100%;max-width:var(--wrap);margin:0 auto;padding:56px;border-radius:24px;background:var(--bg2);box-shadow:inset 0 0 0 1px #EEF0F3;text-align:left}
-  .pl-goog-brand,.pl-goog-bar,.pl-goog-count,.pl-goog-title{grid-column:1}
-  .pl-goog-brand{grid-row:2}.pl-goog-bar{grid-row:3}.pl-goog-count{grid-row:4}.pl-goog-title{grid-row:5}
-  .pl-goog-brand img{width:84px;height:28px}
-  .pl-goog-brand i{height:20px}
-  .pl-goog-brand span{font-size:16px;line-height:24px}
-  .pl-goog-bar{width:100%;max-width:460px;height:52px;margin-top:28px;padding:0 20px;gap:12px;font-size:16px;line-height:24px;box-shadow:0 0 0 1px #E1E5EA,0 2px 8px rgba(22,25,29,.06)}
+  .pl-goog-in{display:flex;flex-direction:column;width:100%;max-width:var(--wrap);margin:0 auto;border:1px solid #E1E5EA;border-radius:16px;background:#fff;overflow:hidden;text-align:left}
+  .pl-gx-head{display:flex;align-items:center;gap:10px;height:72px;padding:0 20px;border-bottom:1px solid #EDEFF3}
+  .pl-gx-head img{width:96px;height:32px;margin-top:6px}
+  .pl-gx-head span{display:flex;flex-direction:column;gap:1px;margin-left:4px;padding-left:12px;border-left:1px solid #EDEFF3}
+  .pl-gx-head b{font-size:16px;line-height:22px;font-weight:600;color:#16191D}
+  .pl-gx-head em{font-style:normal;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
+  .pl-gx-body{display:flex;align-items:stretch;padding:24px;background:#F6F7F9}
+  .pl-gx-left{display:flex;flex:1 0 0;min-width:0;flex-direction:column;align-items:flex-start}
+  .pl-goog-brand{display:none}
+  .pl-goog-bar{width:460px;max-width:100%;height:52px;margin:0;padding:0 20px;gap:12px;border-radius:12px;font-size:16px;line-height:24px;font-weight:500;box-shadow:0 0 0 1px #E1E5EA,0 2px 8px rgba(22,25,29,.06)}
   .pl-goog-bar svg{width:18px;height:18px}
   .pl-caret{height:22px}
   .pl-goog-count{margin:12px 0 0 20px;font-size:13px;line-height:18px}
-  .pl-goog-title{margin-top:28px;max-width:440px;font-size:28px;line-height:40px;text-wrap:balance}
-  .pl-goog-res{grid-column:2;grid-row:1/-1;align-self:center;justify-self:stretch;margin:0;gap:20px}
+  .pl-gx-res{display:flex;flex-direction:column;align-items:flex-start;margin-top:38px;font-family:Arial,Helvetica,sans-serif;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+  .pl-gx-src{display:flex;align-items:center;gap:12px;height:32px}
+  .pl-gx-src i{flex:none;width:28px;height:28px;border-radius:14px;background:#F3F5F6;box-shadow:inset 0 0 0 1.08px #D2D2D2;display:flex;align-items:center;justify-content:center}
+  .pl-gx-src svg{width:17px;height:17px}
+  .pl-gx-src span{display:flex;flex-direction:column}
+  .pl-gx-src b{font-weight:400;font-size:11.86px;line-height:16.95px;color:#1F1F1F}
+  .pl-gx-src em{font-style:normal;font-size:10.17px;line-height:15.25px;color:#4D5156;white-space:pre}
+  .pl-goog-title{margin:7.6px 0 0;max-width:none;font-family:inherit;font-stretch:100%;font-size:18.64px;line-height:23.73px;font-weight:400;letter-spacing:0;color:#1A0DAB}
+  .pl-gx-snip{width:552px;max-width:100%;margin:4.4px 0 0;font-size:11.86px;line-height:18.64px;color:#6C6C6C}
+  .pl-gx-snip b{color:#767676}
+  .pl-gx-chip{display:inline-flex;align-items:center;height:26px;margin-top:auto;padding:0 11px;border-radius:999px;background:#E5F1FF;font-size:14px;line-height:14px;font-weight:600;color:#0673F9}
+  .pl-goog.is-wait .pl-gx-res{opacity:0;transform:translateY(8px)}
+  .pl-goog-res{flex:none;width:520px;margin:0;gap:24px}
+  .pl-goog-res .pl-gph{aspect-ratio:auto;height:292.5px}   /* the frame's photo height */
   .pl-gcard{padding:8px 8px 16px;border-radius:18px}
   .pl-gph{border-radius:12px}
   .pl-gcard h3{margin:14px 8px 0;font-size:18px;line-height:24px}
@@ -3599,8 +3614,9 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-wall{width:calc(var(--side) + 470px)}
   .pl-cols{left:24px;column-gap:12px}
   .pl-strip{gap:12px}
-  .pl-goog-in{grid-template-columns:minmax(0,1fr) 440px;column-gap:48px;padding:40px}
-  .pl-goog-title{font-size:24px;line-height:34px}
+  .pl-goog-res{width:440px;gap:16px}
+  .pl-goog-res .pl-gph{aspect-ratio:4/5;height:auto}
+  .pl-gx-left{padding-right:24px}
   .pl-sec-card{grid-template-columns:minmax(0,1fr) 380px}
   .pl-stories{column-gap:28px}
   .pl-th{width:132px;height:74px}
@@ -3761,15 +3777,29 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
        result cards rise in. Photos (16 Oct, frame 700:9871): assets/pl/google-jigyasu.jpg and google-karan.jpg, his crops exported at 3x
        on the slot's blue gradient (488 × 609); initials show if one is missing -->
   <section class="pl-goog" id="google" aria-label="NST students interning at Google">
-    <div class="pl-goog-in">   <!-- desktop: the 1200 panel (16 Oct); on the phone it is display:contents -->
-    <div class="pl-goog-brand"><img src="assets/company-google.svg" alt="Google"><i></i><span>Summer Internship</span></div>
-    <div class="pl-goog-bar" id="plGoogBar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span id="plGoogQ">NST students at Google</span><i class="pl-caret"></i></div>
-    <p class="pl-goog-count" id="plGoogCount">About 2 results (0.21 seconds)</p>
-    <h2 class="pl-goog-title">Two NST students are interning at Google this summer.</h2>
-    <div class="pl-goog-res">
-      <article class="pl-gcard"><span class="pl-gph" data-i="JK"><img src="assets/pl/google-jigyasu.jpg" alt="" onerror="this.remove()"></span><h3>Jigyasu Kalyan</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
-      <article class="pl-gcard"><span class="pl-gph" data-i="KC"><img src="assets/pl/google-karan.jpg" alt="" onerror="this.remove()"></span><h3>Karan Chillar</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
-    </div>
+    <!-- desktop (16 Oct, his frame 709:50611, 1200 × 524.5): a white card — a header strip (Google · Summer Internships 2026 ·
+         Jigyasu & Karan) over a grey body: the search, its count and a Google result (LinkedIn source, blue headline, snippet) on
+         the left with the "2nd Year Running" chip at the foot, the two interns on the right. On the phone the wrappers are
+         display:contents and the desktop-only parts are hidden, so the phone section is unchanged -->
+    <div class="pl-goog-in">
+      <div class="pl-gx-head dt-only"><img src="assets/company-google.svg" alt="Google"><span><b>Summer Internships 2026</b><em>Jigyasu &amp; Karan</em></span></div>
+      <div class="pl-gx-body">
+        <div class="pl-gx-left">
+          <div class="pl-goog-brand"><img src="assets/company-google.svg" alt="Google"><i></i><span>Summer Internship</span></div>
+          <div class="pl-goog-bar" id="plGoogBar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span id="plGoogQ">NST students at Google</span><i class="pl-caret"></i></div>
+          <p class="pl-goog-count" id="plGoogCount">About 2 results (0.21 seconds)</p>
+          <div class="pl-gx-res">
+            <div class="pl-gx-src dt-only"><i><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="1.5" y="1.5" width="21" height="21" rx="3" fill="#0A66C2"/><path d="M6.4 9.6h2.9v8.6H6.4zM7.85 5.4a1.65 1.65 0 110 3.3 1.65 1.65 0 010-3.3zM11.1 9.6h2.75v1.2h.04c.38-.7 1.32-1.45 2.72-1.45 2.9 0 3.44 1.9 3.44 4.4v4.45h-2.87v-3.95c0-.94-.02-2.15-1.31-2.15-1.31 0-1.51 1.02-1.51 2.08v4.02H11.1z" fill="#fff"/></svg></i><span><b>LinkedIn · Newton School of Technology</b><em>90+ reactions&nbsp;&nbsp;·&nbsp;&nbsp;5 months ago</em></span></div>
+            <h2 class="pl-goog-title">Two NST students are interning at Google this summer.</h2>
+            <p class="pl-gx-snip dt-only">7 <b>students</b> from Newton School of Technology have been selected for <b>Google</b> Summer of Code 2026. What stands out this year is not just the ...</p>
+          </div>
+          <span class="pl-gx-chip dt-only">2nd Year Running</span>
+        </div>
+        <div class="pl-goog-res">
+          <article class="pl-gcard"><span class="pl-gph" data-i="JK"><img src="assets/pl/google-jigyasu.jpg" alt="" onerror="this.remove()"></span><h3>Jigyasu Kalyan</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
+          <article class="pl-gcard"><span class="pl-gph" data-i="KC"><img src="assets/pl/google-karan.jpg" alt="" onerror="this.remove()"></span><h3>Karan Chillar</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
+        </div>
+      </div>
     </div>
   </section>
 
