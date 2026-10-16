@@ -19,6 +19,9 @@ const lit = await ev(() => (document.querySelector('.rt-flag.on') || {}).dataset
 ok('the student walks to the next station and its flag lights', t0 !== t1 && lit === '2', [t0, t1, lit]);
 ok('hero strip loops seamlessly (two runs of the facts)', await ev(() => document.querySelectorAll('.adm-facts .pl-hl').length === 12));
 
+ok('the student is a person: legs, shirt, arms, backpack, head, hair', await ev(() => ['rt-legs','rt-shirt','rt-arm','rt-bag','rt-skin','rt-hair'].every(c => document.querySelector('#rtStu .' + c))));
+ok('every section subtext sits on one line', await ev(() => [...document.querySelectorAll('.bk-sub')].every(s => Math.round(s.getBoundingClientRect().height) <= Math.ceil(parseFloat(getComputedStyle(s).lineHeight)))));
+
 // routes chooser
 await ev(() => document.getElementById('routes').scrollIntoView({ block: 'center' })); await p.waitForTimeout(300);
 const openH0 = await ev(() => document.querySelector('.adm-rc[data-r="2"]').getBoundingClientRect().height);

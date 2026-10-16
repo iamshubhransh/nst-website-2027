@@ -74,8 +74,21 @@ for (const x of [-470, -300, -110, 80, 260, 430]) put("tree", [x, 60, 0], 0.8);
 for (const x of [-210, 140]) put("bench", [x, 40, 0], 0.7);
 
 /* ---- the student (the lit part): drawn at x = 0 on the walk; the page moves it station to station ---- */
-const STU = S(k.cylinder(0, 0, 6.4, 0, 2, P, 18), { tone: "mid" }) + S(k.cylinder(0, 0, 5, 2, 22, P, 18), { tone: "hi", lit: true }) +
-  S(G.sphereOf([0, 0, 29.5], 5.8, P, { steps: 18 }), { tone: "hi", lit: true });
+/* the student: a small person walking up the route (+x), so the backpack faces the viewer. Legs, a rounded torso in NST blue,
+   arms, a head with hair, a backpack; parts sorted back to front so they overlap the way they would. */
+const person = [];
+const part = (c, svg) => person.push({ d: k.depthOf(c, P), svg });
+const L = (y) => S(k.cylinder(0, y, 1.7, 0, 12, P, 14), { tone: "mid", crease: "none", className: "rt-legs" });
+part([0, -2.4, 6], L(-2.4)); part([0, 2.4, 6], L(2.4));
+part([0, 0, 11], S(k.slabOf({ x: -2.6, y: -4.6, w: 5.2, d: 9.2, r: 2.4 }, 11, 11, P, 6, 0.6), { tone: "hi", crease: "none", className: "rt-shirt" }));
+const A = (y) => S(k.cylinder(0.4, y, 1.3, 12.5, 8.5, P, 12), { tone: "hi", crease: "none", className: "rt-arm" });
+part([0.4, -5.6, 16], A(-5.6)); part([0.4, 5.6, 16], A(5.6));
+part([-4.4, 0, 17], S(k.slabOf({ x: -6.2, y: -3.4, w: 3.4, d: 6.8, r: 1.4 }, 13, 8.5, P, 6, 0.5), { tone: "mid", crease: "none", className: "rt-bag" }));
+part([0, 0, 24], S(k.cylinder(0, 0, 1.3, 21.6, 2.2, P, 10), { tone: "mid", crease: "none", className: "rt-skin" }) +
+  S(G.sphereOf([0, 0, 26.6], 3.5, P, { steps: 18 }), { tone: "hi", className: "rt-skin" }) +
+  S(G.sphereOf([-0.7, 0, 27.7], 3.2, P, { steps: 18 }), { tone: "mid", className: "rt-hair" }));
+person.sort((a, b) => a.d - b.d);
+const STU = person.map((q) => q.svg).join("");
 const stuDepth = k.depthOf([0, 0, 0], P);
 
 items.sort((a, b) => a.d - b.d);
@@ -88,5 +101,5 @@ const svg = compact(`<svg class="rt-svg iso-svg" viewBox="0 0 ${W} ${H}" preserv
   .replace(`class="rt-flag" data-i="${FOCUS}"`, `class="rt-flag on" data-i="${FOCUS}"`);
 writeFileSync(new URL("./route.svg", import.meta.url), svg);
 writeFileSync(new URL("./route.json", import.meta.url), JSON.stringify({ stations: SX, unit: [+(u1[0] - u0[0]).toFixed(4), +(u1[1] - u0[1]).toFixed(4)], W, H }));
-writeFileSync(new URL("./route-preview.html", import.meta.url), `<!doctype html><meta charset="utf-8"><style>${k.ISO_CSS}body{margin:0;background:#fff}.wrap{width:402px;height:420px;overflow:hidden}.rt-svg{width:100%;height:100%}.rt-walk{fill:#EEF1F5}.rt-flag{fill:#E1E5EA}.rt-flag.on{fill:#0673F9}.rt-stu path{fill:#0673F9!important;stroke:#0450B0!important}</style><div class="iso" data-theme="light"><div class="wrap">${svg}</div></div>`);
+writeFileSync(new URL("./route-preview.html", import.meta.url), `<!doctype html><meta charset="utf-8"><style>${k.ISO_CSS}body{margin:0;background:#fff}.wrap{width:402px;height:420px;overflow:hidden}.rt-svg{width:100%;height:100%}.rt-walk{fill:#EEF1F5}.rt-flag{fill:#E1E5EA}.rt-flag.on{fill:#0673F9}.rt-shirt path,.rt-arm path{fill:#0673F9!important;stroke:#0450B0!important}.rt-legs path{fill:#1E2A44!important;stroke:#10182A!important}.rt-bag path{fill:#F59700!important;stroke:#B26A00!important}.rt-skin path{fill:#E8B98F!important;stroke:#B98457!important}.rt-hair path{fill:#2A2118!important;stroke:#16110C!important}</style><div class="iso" data-theme="light"><div class="wrap">${svg}</div></div>`);
 console.log("items", items.length, "bytes", svg.length);

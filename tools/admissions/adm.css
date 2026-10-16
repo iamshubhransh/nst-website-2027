@@ -10,7 +10,11 @@
 .adm-wall .rt-walk{fill:#EEF1F5}
 .adm-wall .rt-flag{fill:#E1E5EA}
 .adm-wall .rt-flag.on{fill:#0673F9}
-.adm-wall .rt-stu path{fill:#0673F9;stroke:#0450B0}
+.adm-wall .rt-shirt path,.adm-wall .rt-arm path{fill:#0673F9;stroke:#0450B0}   /* the student: blue top, navy trousers, an orange backpack */
+.adm-wall .rt-legs path{fill:#1E2A44;stroke:#10182A}
+.adm-wall .rt-bag path{fill:#F59700;stroke:#B26A00}
+.adm-wall .rt-skin path{fill:#E8B98F;stroke:#B98457}
+.adm-wall .rt-hair path{fill:#2A2118;stroke:#16110C}
 .adm-facts .pl-hl{gap:8px}
 .adm-fi{flex:none;width:24px;height:24px;border-radius:7px;background:#E5F1FF;color:#0673F9;display:flex;align-items:center;justify-content:center}
 .adm-fi svg{width:14px;height:14px}
