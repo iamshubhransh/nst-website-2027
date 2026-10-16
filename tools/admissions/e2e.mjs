@@ -11,19 +11,25 @@ await p.goto('http://localhost:8765/admissions.html', { waitUntil: 'load' }); aw
 
 // hero: the shared placements hero, the route figure, the walk
 ok('hero copy: crumbs, title, CTA', await ev(() => document.querySelector('.pl-crumb span').textContent === 'Admissions' && /six steps/.test(document.querySelector('.pl-title').textContent) && !!document.querySelector('.adm-hero .pl-cta')));
-ok('route figure drawn, NSAT flag lit at first', await ev(() => !!document.querySelector('.adm-wall .rt-svg') && document.querySelectorAll('.rt-flag').length === 5 && document.querySelector('.rt-flag.on').dataset.i === '1'));
+ok('route figure drawn; as served, the NSAT flag is lit', await ev(async () => { const html = await (await fetch(location.href)).text(); return !!document.querySelector('.adm-wall .rt-svg') && document.querySelectorAll('.rt-flag').length === 5 && /class="rt-flag on" data-i="1"/.test(html); }));
+/* the walk, checked by events rather than sleeps: standing (a flag lit) → walking (a stride pose) → arrival (the next flag) */
+const shown = () => ev(() => [...document.querySelectorAll('#rtStu .rt-pose:not([display])')].map(q => q.dataset.p));
+await p.waitForFunction(() => !!document.querySelector('.rt-flag.on'), null, { timeout: 9000, polling: 30 });
+const s0 = +(await ev(() => document.querySelector('.rt-flag.on').dataset.i));
+const standing = await shown();
+ok('standing pose while it waits at a station', standing.length === 1 && standing[0] === 'idle', standing);
 const t0 = await ev(() => document.getElementById('rtStu').getAttribute('transform'));
-ok('standing pose while it waits at a station', await ev(() => document.querySelectorAll('#rtStu .rt-pose:not([display])').length === 1 && document.querySelector('#rtStu .rt-pose:not([display])').dataset.p === 'idle'));
-await p.waitForTimeout(2600);
-const mid = await ev(() => [...document.querySelectorAll('#rtStu .rt-pose:not([display])')].map(q => q.dataset.p));
+await p.waitForFunction(() => { const q = document.querySelector('#rtStu .rt-pose:not([display])'); return q && q.dataset.p !== 'idle'; }, null, { timeout: 6000, polling: 30 });
+const mid = await shown();
 ok('mid-walk it shows one stride pose (it walks, not glides)', mid.length === 1 && mid[0] !== 'idle', mid);
-const seen = new Set(); for (let k = 0; k < 10; k++){ seen.add(await ev(() => document.querySelector('#rtStu .rt-pose:not([display])').dataset.p)); await p.waitForTimeout(60); }
+const seen = new Set(); for (let k = 0; k < 10; k++){ seen.add((await shown())[0]); await p.waitForTimeout(60); }
 ok('the stride poses cycle', seen.size >= 3, [...seen]);
-await p.waitForFunction(() => (document.querySelector('.rt-flag.on') || {}).dataset?.i === '2', null, { timeout: 8000, polling: 50 }).catch(() => {});
+const want = String(s0 + 1 <= 4 ? s0 + 1 : 0);
+await p.waitForFunction((w) => (document.querySelector('.rt-flag.on') || {}).dataset?.i === w, want, { timeout: 9000, polling: 30 }).catch(() => {});
 const t1 = await ev(() => document.getElementById('rtStu').getAttribute('transform'));
 const lit = await ev(() => (document.querySelector('.rt-flag.on') || {}).dataset?.i);
-ok('the student walks to the next station and its flag lights', t0 !== t1 && lit === '2', [t0, t1, lit]);
-ok('hero strip loops seamlessly (two runs of the facts)', await ev(() => document.querySelectorAll('.adm-facts .pl-hl').length === 12));
+ok('the student walks to the next station and its flag lights', t0 !== t1 && lit === want, [t0, t1, lit, want]);
+ok('hero shows only the next NSAT date', await ev(() => !document.querySelector('.adm-facts') && document.querySelector('.adm-next').textContent.trim() === 'Next NSAT · 7 Jan 2027'));
 
 ok('the student is a person: legs, shirt, arms, backpack, head, hair', await ev(() => ['rt-legs','rt-shirt','rt-arm','rt-bag','rt-skin','rt-hair'].every(c => document.querySelector('#rtStu .' + c))));
 ok('every section subtext sits on one line', await ev(() => [...document.querySelectorAll('.bk-sub')].every(s => Math.round(s.getBoundingClientRect().height) <= Math.ceil(parseFloat(getComputedStyle(s).lineHeight)))));
