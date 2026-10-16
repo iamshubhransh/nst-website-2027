@@ -3389,17 +3389,27 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-ctc4-track{gap:14px}
   .pl-chip4{height:60px;min-width:148px;padding:0 24px;border-radius:16px;font-size:16px;line-height:20px}
   .pl-chip4 img{zoom:1.2}
-  .pl-ctc5{padding:0 0 96px}
+  /* CTC v5 on desktop (16 Oct, his ask: "like the homepage"): the homepage's stat band — the range and its line side by side on
+     the left (64/76 like the homepage's 93%), the average card on the right of the column, the logo rows full width below; the
+     homepage's band gradient and its edge particles at the left and right borders, no Color-blend layer */
+  .pl-ctc5{display:grid;grid-template-columns:auto 300px minmax(0,1fr) auto;column-gap:24px;align-items:center;padding:0 var(--side) 56px}
+  .pl-ctc5-tab{grid-column:1/-1;justify-self:center}
   .pl-ctc5-tab span{height:36px;padding:11px 32px;border-radius:0 0 20px 20px;font-size:12px;line-height:14px;letter-spacing:2.4px}
   .pl-ctc5-tab i{width:20px;height:20px;background:radial-gradient(circle at var(--cx) 100%,transparent 19.5px,#F59700 20px)}
-  .pl-ctc5 .pl-ctc4-fig{margin-top:48px}
-  .pl-ctc5 .pl-ctc4-avg{width:auto;margin:40px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
+  .pl-ctc5 .pl-ctc4-fig{grid-column:1;grid-row:2;justify-self:start;height:76px;margin:48px 0 0}
+  .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u{font-size:64px;line-height:76px;letter-spacing:-4px}
+  .pl-ctc5 .pl-ctc4-fig .rs{margin-top:10px;font-size:32px;line-height:44px}
+  .pl-ctc5 .pl-ctc4-sub{grid-column:2;grid-row:2;align-self:center;margin:48px 0 0;text-align:left;white-space:normal;text-wrap:balance;font-size:18px;line-height:28px;color:#16191D}
+  .pl-ctc5 .pl-ctc4-avg{grid-column:4;grid-row:2;justify-self:end;align-self:center;width:auto;margin:48px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
   .pl-ctc5 .pl-ctc4-ok{width:40px;height:40px;border-radius:11px}
   .pl-ctc5 .pl-ctc4-ok img{width:20px;height:20px}
   .pl-ctc5 .pl-ctc4-avg b{font-size:20px;line-height:26px}
   .pl-ctc5 .pl-ctc4-avg div span{font-size:14px;line-height:20px}
   .pl-ctc5 .pl-ctc4-avg>em{height:22px;padding:0 8px;font-size:11px;line-height:22px}
-  .pl-ctc5 .pl-ctc4-rows{margin-top:48px}
+  .pl-ctc5 .pl-ctc4-rows{grid-column:1/-1;grid-row:3;margin:48px calc(-1 * var(--side)) 0}
+  .pl-ctc5-bg::before{background:radial-gradient(106.27% 309.6% at 50% 50%,rgba(245,151,0,0) 0,rgba(245,151,0,.11) 45%,rgba(245,151,0,.08) 55%,rgba(245,151,0,0) 80%)}   /* the homepage band's */
+  .pl-ctc5-bg::after{display:none}
+  .pl-ctc5 .pl-ctc4-avg div{flex:none;white-space:nowrap}
 
   /* ---- summary tiles: the homepage's four proof tiles in one row between the hatched bands ---- */
   .pl-proof{padding-top:26px;background:var(--bg2)}
@@ -3434,16 +3444,16 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-goog-bar svg{width:18px;height:18px}
   .pl-caret{height:22px}
   .pl-goog-count{margin:12px 0 0 20px;font-size:13px;line-height:18px}
-  .pl-gx-res{display:flex;flex-direction:column;align-items:flex-start;margin-top:38px;font-family:Arial,Helvetica,sans-serif;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
-  .pl-gx-src{display:flex;align-items:center;gap:12px;height:32px}
-  .pl-gx-src i{flex:none;width:28px;height:28px;border-radius:14px;background:#F3F5F6;box-shadow:inset 0 0 0 1.08px #D2D2D2;display:flex;align-items:center;justify-content:center}
+  .pl-gx-res{display:flex;flex-direction:column;align-items:flex-start;align-self:stretch;min-width:0;margin-top:36px;font-family:Arial,Helvetica,sans-serif;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+  .pl-gx-src{display:flex;align-items:center;gap:14px;height:38px}   /* the result at about 1.2× the frame (his ask, 16 Oct) */
+  .pl-gx-src i{flex:none;width:34px;height:34px;border-radius:17px;background:#F3F5F6;box-shadow:inset 0 0 0 1.08px #D2D2D2;display:flex;align-items:center;justify-content:center}
   .pl-gx-src i{background:#fff}
-  .pl-gx-src img{width:13.8px;height:17.25px}   /* the NST mark, 4:5 */
+  .pl-gx-src img{width:16.8px;height:21px}   /* the NST mark, 4:5 */
   .pl-gx-src span{display:flex;flex-direction:column}
-  .pl-gx-src b{font-weight:400;font-size:11.86px;line-height:16.95px;color:#1F1F1F}
-  .pl-gx-src em{font-style:normal;font-size:10.17px;line-height:15.25px;color:#4D5156;white-space:nowrap}
-  .pl-goog-title{margin:7.6px 0 0;max-width:none;font-family:inherit;font-stretch:100%;font-size:18.64px;line-height:23.73px;font-weight:400;letter-spacing:0;color:#1A0DAB}
-  .pl-gx-snip{width:552px;max-width:100%;margin:4.4px 0 0;font-size:11.86px;line-height:18.64px;color:#6C6C6C}
+  .pl-gx-src b{font-weight:400;font-size:14px;line-height:20px;color:#1F1F1F}
+  .pl-gx-src em{font-style:normal;font-size:12px;line-height:18px;color:#4D5156;white-space:nowrap}
+  .pl-goog-title{margin:9px 0 0;max-width:100%;font-family:inherit;font-stretch:100%;font-size:22px;line-height:28px;font-weight:400;letter-spacing:0;color:#1A0DAB}
+  .pl-gx-snip{width:600px;max-width:100%;margin:6px 0 0;font-size:14px;line-height:22px;color:#6C6C6C}
   .pl-gx-snip b{color:#767676}
   .pl-gx-chip{display:inline-flex;align-items:center;height:26px;margin-top:auto;padding:0 11px;border-radius:999px;background:#E5F1FF;font-size:14px;line-height:14px;font-weight:600;color:#0673F9}
   .pl-goog.is-wait .pl-gx-res{opacity:0;transform:translateY(8px)}
@@ -3617,6 +3627,11 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 @media (min-width:1024px) and (max-width:1279px){
   .pl-hero-copy{width:440px}
   .pl-title{max-width:440px;font-size:34px;line-height:42px}
+  .pl-ctc5{grid-template-columns:auto 200px minmax(0,1fr) auto;column-gap:20px}
+  .pl-ctc5 .pl-ctc4-fig{height:60px}
+  .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u{font-size:50px;line-height:60px;letter-spacing:-3px}
+  .pl-ctc5 .pl-ctc4-fig .rs{margin-top:6px;font-size:26px;line-height:36px}
+  .pl-ctc5 .pl-ctc4-sub{font-size:16px;line-height:24px}
   .pl-proof .tile,.pl-proof .tile:nth-child(n+3),.pl-proof .tile:nth-child(odd){gap:10px;padding:20px 12px}   /* the strip's four cells fit 944 */
   .pl-proof .tile p b,.pl-proof .tile p span{display:block;font-size:13px;line-height:18px}   /* figure over label, like the phone tiles */
   .pl-lede{max-width:420px;font-size:17px;line-height:26px}
@@ -5785,7 +5800,19 @@ window.__dnFigs = figs;
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       parts = [];
-      var near = dt ? 30 : 18, far = dt ? 90 : 52, cap = dt ? 240 : 150, n = Math.min(1800, Math.round(W * (dt ? 1.1 : 1.6)));
+      if (dt){   /* desktop (16 Oct): the homepage's own band particles — two fields dense against the left and right borders */
+        for (var s = 0; s < 2; s++){
+          var nn = Math.round(H * 2.1);
+          for (var mm = 0; mm < nn; mm++){
+            var dd = Math.min(300, -Math.log(1 - Math.random() * .995) * (Math.random() < .7 ? 34 : 105)), bg = Math.random() < .14;
+            var vx = s ? W - dd : dd, vy = rand(-4, H + 4);
+            parts.push({kind: 'edge', v: true, hx: vx, hy: vy, x: vx, y: vy, vx: 0, vy: 0, dx: rand(-5, 5) * (1 + dd / 120), dy: rand(-7, 7), amp: rand(2, 6), f: rand(.2, .6), ph: rand(0, 6.28), r: bg ? rand(1.4, 2.3) : rand(.55, 1.3), al: Math.max(.25, 1 - dd / 330) * rand(.55, 1), tint: Math.random()});
+          }
+        }
+        for (var qq = 0; qq < 40; qq++) parts.push({kind: 'stray', x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, dx: rand(-6, 6), dy: rand(-4, 4), amp: rand(2, 5), f: rand(.2, .6), ph: rand(0, 6.28), r: rand(.5, 1.1), al: rand(.2, .45), tint: Math.random()});
+        draw(); return;
+      }
+      var near = 18, far = 52, cap = 150, n = Math.min(1800, Math.round(W * 1.6));
       for (var e = 0; e < 2; e++){
         for (var m = 0; m < n; m++){
           var d = Math.min(cap, -Math.log(1 - Math.random() * .995) * (Math.random() < .7 ? near : far)), big = Math.random() < .14;
@@ -5813,7 +5840,12 @@ window.__dnFigs = figs;
       var RR = 78, K = .045, D = .84, tx, ty;
       for (var i = 0; i < parts.length; i++){
         var p = parts[i];
-        if (p.kind === 'edge'){
+        if (p.kind === 'edge' && p.v){   /* the homepage's: homes creep up or down the border */
+          p.hy += p.dy * dt * .35; if (p.hy < -6) p.hy = H + 6; else if (p.hy > H + 6) p.hy = -6;
+          tx = p.hx + Math.sin(t * p.f + p.ph) * (p.amp + Math.abs(p.dx) * 2.2);
+          ty = p.hy + Math.cos(t * p.f * .8 + p.ph * 1.3) * p.amp * 1.6;
+          if (Math.abs(ty - p.y) > H / 2){ p.y = ty; p.vy = 0; }
+        } else if (p.kind === 'edge'){
           p.hx += p.dx * dt * .35; if (p.hx < -6) p.hx = W + 6; else if (p.hx > W + 6) p.hx = -6;
           tx = p.hx + Math.sin(t * p.f + p.ph) * p.amp * 1.6;
           ty = p.hy + Math.cos(t * p.f * .8 + p.ph * 1.3) * (p.amp + Math.abs(p.dy) * 2.2);

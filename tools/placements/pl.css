@@ -550,17 +550,27 @@
   .pl-ctc4-track{gap:14px}
   .pl-chip4{height:60px;min-width:148px;padding:0 24px;border-radius:16px;font-size:16px;line-height:20px}
   .pl-chip4 img{zoom:1.2}
-  .pl-ctc5{padding:0 0 96px}
+  /* CTC v5 on desktop (16 Oct, his ask: "like the homepage"): the homepage's stat band — the range and its line side by side on
+     the left (64/76 like the homepage's 93%), the average card on the right of the column, the logo rows full width below; the
+     homepage's band gradient and its edge particles at the left and right borders, no Color-blend layer */
+  .pl-ctc5{display:grid;grid-template-columns:auto 300px minmax(0,1fr) auto;column-gap:24px;align-items:center;padding:0 var(--side) 56px}
+  .pl-ctc5-tab{grid-column:1/-1;justify-self:center}
   .pl-ctc5-tab span{height:36px;padding:11px 32px;border-radius:0 0 20px 20px;font-size:12px;line-height:14px;letter-spacing:2.4px}
   .pl-ctc5-tab i{width:20px;height:20px;background:radial-gradient(circle at var(--cx) 100%,transparent 19.5px,#F59700 20px)}
-  .pl-ctc5 .pl-ctc4-fig{margin-top:48px}
-  .pl-ctc5 .pl-ctc4-avg{width:auto;margin:40px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
+  .pl-ctc5 .pl-ctc4-fig{grid-column:1;grid-row:2;justify-self:start;height:76px;margin:48px 0 0}
+  .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u{font-size:64px;line-height:76px;letter-spacing:-4px}
+  .pl-ctc5 .pl-ctc4-fig .rs{margin-top:10px;font-size:32px;line-height:44px}
+  .pl-ctc5 .pl-ctc4-sub{grid-column:2;grid-row:2;align-self:center;margin:48px 0 0;text-align:left;white-space:normal;text-wrap:balance;font-size:18px;line-height:28px;color:#16191D}
+  .pl-ctc5 .pl-ctc4-avg{grid-column:4;grid-row:2;justify-self:end;align-self:center;width:auto;margin:48px 0 0;padding:12px 16px 12px 12px;gap:12px;border-radius:16px}
   .pl-ctc5 .pl-ctc4-ok{width:40px;height:40px;border-radius:11px}
   .pl-ctc5 .pl-ctc4-ok img{width:20px;height:20px}
   .pl-ctc5 .pl-ctc4-avg b{font-size:20px;line-height:26px}
   .pl-ctc5 .pl-ctc4-avg div span{font-size:14px;line-height:20px}
   .pl-ctc5 .pl-ctc4-avg>em{height:22px;padding:0 8px;font-size:11px;line-height:22px}
-  .pl-ctc5 .pl-ctc4-rows{margin-top:48px}
+  .pl-ctc5 .pl-ctc4-rows{grid-column:1/-1;grid-row:3;margin:48px calc(-1 * var(--side)) 0}
+  .pl-ctc5-bg::before{background:radial-gradient(106.27% 309.6% at 50% 50%,rgba(245,151,0,0) 0,rgba(245,151,0,.11) 45%,rgba(245,151,0,.08) 55%,rgba(245,151,0,0) 80%)}   /* the homepage band's */
+  .pl-ctc5-bg::after{display:none}
+  .pl-ctc5 .pl-ctc4-avg div{flex:none;white-space:nowrap}
 
   /* ---- summary tiles: the homepage's four proof tiles in one row between the hatched bands ---- */
   .pl-proof{padding-top:26px;background:var(--bg2)}
@@ -595,16 +605,16 @@
   .pl-goog-bar svg{width:18px;height:18px}
   .pl-caret{height:22px}
   .pl-goog-count{margin:12px 0 0 20px;font-size:13px;line-height:18px}
-  .pl-gx-res{display:flex;flex-direction:column;align-items:flex-start;margin-top:38px;font-family:Arial,Helvetica,sans-serif;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
-  .pl-gx-src{display:flex;align-items:center;gap:12px;height:32px}
-  .pl-gx-src i{flex:none;width:28px;height:28px;border-radius:14px;background:#F3F5F6;box-shadow:inset 0 0 0 1.08px #D2D2D2;display:flex;align-items:center;justify-content:center}
+  .pl-gx-res{display:flex;flex-direction:column;align-items:flex-start;align-self:stretch;min-width:0;margin-top:36px;font-family:Arial,Helvetica,sans-serif;transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+  .pl-gx-src{display:flex;align-items:center;gap:14px;height:38px}   /* the result at about 1.2× the frame (his ask, 16 Oct) */
+  .pl-gx-src i{flex:none;width:34px;height:34px;border-radius:17px;background:#F3F5F6;box-shadow:inset 0 0 0 1.08px #D2D2D2;display:flex;align-items:center;justify-content:center}
   .pl-gx-src i{background:#fff}
-  .pl-gx-src img{width:13.8px;height:17.25px}   /* the NST mark, 4:5 */
+  .pl-gx-src img{width:16.8px;height:21px}   /* the NST mark, 4:5 */
   .pl-gx-src span{display:flex;flex-direction:column}
-  .pl-gx-src b{font-weight:400;font-size:11.86px;line-height:16.95px;color:#1F1F1F}
-  .pl-gx-src em{font-style:normal;font-size:10.17px;line-height:15.25px;color:#4D5156;white-space:nowrap}
-  .pl-goog-title{margin:7.6px 0 0;max-width:none;font-family:inherit;font-stretch:100%;font-size:18.64px;line-height:23.73px;font-weight:400;letter-spacing:0;color:#1A0DAB}
-  .pl-gx-snip{width:552px;max-width:100%;margin:4.4px 0 0;font-size:11.86px;line-height:18.64px;color:#6C6C6C}
+  .pl-gx-src b{font-weight:400;font-size:14px;line-height:20px;color:#1F1F1F}
+  .pl-gx-src em{font-style:normal;font-size:12px;line-height:18px;color:#4D5156;white-space:nowrap}
+  .pl-goog-title{margin:9px 0 0;max-width:100%;font-family:inherit;font-stretch:100%;font-size:22px;line-height:28px;font-weight:400;letter-spacing:0;color:#1A0DAB}
+  .pl-gx-snip{width:600px;max-width:100%;margin:6px 0 0;font-size:14px;line-height:22px;color:#6C6C6C}
   .pl-gx-snip b{color:#767676}
   .pl-gx-chip{display:inline-flex;align-items:center;height:26px;margin-top:auto;padding:0 11px;border-radius:999px;background:#E5F1FF;font-size:14px;line-height:14px;font-weight:600;color:#0673F9}
   .pl-goog.is-wait .pl-gx-res{opacity:0;transform:translateY(8px)}
@@ -778,6 +788,11 @@
 @media (min-width:1024px) and (max-width:1279px){
   .pl-hero-copy{width:440px}
   .pl-title{max-width:440px;font-size:34px;line-height:42px}
+  .pl-ctc5{grid-template-columns:auto 200px minmax(0,1fr) auto;column-gap:20px}
+  .pl-ctc5 .pl-ctc4-fig{height:60px}
+  .pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u{font-size:50px;line-height:60px;letter-spacing:-3px}
+  .pl-ctc5 .pl-ctc4-fig .rs{margin-top:6px;font-size:26px;line-height:36px}
+  .pl-ctc5 .pl-ctc4-sub{font-size:16px;line-height:24px}
   .pl-proof .tile,.pl-proof .tile:nth-child(n+3),.pl-proof .tile:nth-child(odd){gap:10px;padding:20px 12px}   /* the strip's four cells fit 944 */
   .pl-proof .tile p b,.pl-proof .tile p span{display:block;font-size:13px;line-height:18px}   /* figure over label, like the phone tiles */
   .pl-lede{max-width:420px;font-size:17px;line-height:26px}

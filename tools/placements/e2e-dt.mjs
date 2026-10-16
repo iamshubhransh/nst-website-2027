@@ -28,7 +28,7 @@ ok('right edges end on the column', [lay.recR, lay.secCard[1], lay.wall, lay.cta
 ok('four summary tiles in one row', lay.tilesRow === 1, lay.tilesRow);
 ok('two campus cards side by side', lay.campusTop === 1, lay.campusTop);
 ok('type: section titles 28/40 like the homepage, hero 40', await ev(() => ['#internships .bk-title', '.pl-live-title', '#recruiters .pl-h2', '#faq .pl-h2'].every(q => { const t = getComputedStyle(document.querySelector(q)); return t.fontSize === '28px' && t.lineHeight === '40px'; }) && getComputedStyle(document.querySelector('.pl-title')).fontSize === (innerWidth >= 1280 ? '40px' : '34px')));
-ok('Google: the headline is a search-result title (frame 709:50611)', await ev(() => { const t = getComputedStyle(document.querySelector('.pl-goog-title')); return t.fontSize === '18.64px' && t.color === 'rgb(26, 13, 171)' && /Arial/.test(t.fontFamily); }));
+ok('Google: the headline is a search-result title (frame 709:50611)', await ev(() => { const t = getComputedStyle(document.querySelector('.pl-goog-title')); return t.fontSize === '22px' && t.color === 'rgb(26, 13, 171)' && /Arial/.test(t.fontFamily); }));
 
 // ---- hero wall: four columns, drifting, a tile lights in turn
 ok('hero wall: four columns', await ev(() => document.querySelectorAll('.pl-col').length) === 4);
@@ -48,7 +48,8 @@ ok('nav Placements links here', await ev(() => [...document.querySelectorAll('.d
 // ---- CTC
 await to('#ctc'); await p.waitForTimeout(1600);
 ok('CTC counts to ₹20–50L', (await ev(() => [...document.querySelectorAll('.pl-ctc4-fig b')].map(b => b.textContent).join('-'))) === '20-50');
-ok('CTC figure centred and 96 px', await ev(() => { const f = document.querySelector('.pl-ctc4-fig').getBoundingClientRect(); return Math.abs(f.left + f.width / 2 - innerWidth / 2) < 40 && getComputedStyle(document.querySelector('.pl-ctc4-fig b')).fontSize === '96px'; }));
+ok('CTC like the homepage band: figure on the column (64 px), line beside it, card on the right edge, one row', await ev(() => { const side = (innerWidth - Math.min(1200, innerWidth - 80)) / 2, f = document.querySelector('.pl-ctc4-fig').getBoundingClientRect(), s = document.querySelector('.pl-ctc4-sub').getBoundingClientRect(), a = document.querySelector('.pl-ctc4-avg').getBoundingClientRect();
+  return Math.abs(f.left - side) <= 1 && Math.abs(a.right - (innerWidth - side)) <= 1 && s.left > f.right && a.left > s.right && Math.abs((f.top + f.bottom) / 2 - (a.top + a.bottom) / 2) < 12 && getComputedStyle(document.querySelector('.pl-ctc4-fig b')).fontSize === (innerWidth >= 1280 ? '64px' : '50px'); }));
 const c0 = await ev(() => getComputedStyle(document.querySelector('.pl-ctc4-track')).transform); await p.waitForTimeout(700);
 ok('company chips drift', c0 !== await ev(() => getComputedStyle(document.querySelector('.pl-ctc4-track')).transform));
 

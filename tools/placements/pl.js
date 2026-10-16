@@ -78,7 +78,19 @@
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       parts = [];
-      var near = dt ? 30 : 18, far = dt ? 90 : 52, cap = dt ? 240 : 150, n = Math.min(1800, Math.round(W * (dt ? 1.1 : 1.6)));
+      if (dt){   /* desktop (16 Oct): the homepage's own band particles — two fields dense against the left and right borders */
+        for (var s = 0; s < 2; s++){
+          var nn = Math.round(H * 2.1);
+          for (var mm = 0; mm < nn; mm++){
+            var dd = Math.min(300, -Math.log(1 - Math.random() * .995) * (Math.random() < .7 ? 34 : 105)), bg = Math.random() < .14;
+            var vx = s ? W - dd : dd, vy = rand(-4, H + 4);
+            parts.push({kind: 'edge', v: true, hx: vx, hy: vy, x: vx, y: vy, vx: 0, vy: 0, dx: rand(-5, 5) * (1 + dd / 120), dy: rand(-7, 7), amp: rand(2, 6), f: rand(.2, .6), ph: rand(0, 6.28), r: bg ? rand(1.4, 2.3) : rand(.55, 1.3), al: Math.max(.25, 1 - dd / 330) * rand(.55, 1), tint: Math.random()});
+          }
+        }
+        for (var qq = 0; qq < 40; qq++) parts.push({kind: 'stray', x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, dx: rand(-6, 6), dy: rand(-4, 4), amp: rand(2, 5), f: rand(.2, .6), ph: rand(0, 6.28), r: rand(.5, 1.1), al: rand(.2, .45), tint: Math.random()});
+        draw(); return;
+      }
+      var near = 18, far = 52, cap = 150, n = Math.min(1800, Math.round(W * 1.6));
       for (var e = 0; e < 2; e++){
         for (var m = 0; m < n; m++){
           var d = Math.min(cap, -Math.log(1 - Math.random() * .995) * (Math.random() < .7 ? near : far)), big = Math.random() < .14;
@@ -106,7 +118,12 @@
       var RR = 78, K = .045, D = .84, tx, ty;
       for (var i = 0; i < parts.length; i++){
         var p = parts[i];
-        if (p.kind === 'edge'){
+        if (p.kind === 'edge' && p.v){   /* the homepage's: homes creep up or down the border */
+          p.hy += p.dy * dt * .35; if (p.hy < -6) p.hy = H + 6; else if (p.hy > H + 6) p.hy = -6;
+          tx = p.hx + Math.sin(t * p.f + p.ph) * (p.amp + Math.abs(p.dx) * 2.2);
+          ty = p.hy + Math.cos(t * p.f * .8 + p.ph * 1.3) * p.amp * 1.6;
+          if (Math.abs(ty - p.y) > H / 2){ p.y = ty; p.vy = 0; }
+        } else if (p.kind === 'edge'){
           p.hx += p.dx * dt * .35; if (p.hx < -6) p.hx = W + 6; else if (p.hx > W + 6) p.hx = -6;
           tx = p.hx + Math.sin(t * p.f + p.ph) * p.amp * 1.6;
           ty = p.hy + Math.cos(t * p.f * .8 + p.ph * 1.3) * (p.amp + Math.abs(p.dy) * 2.2);
