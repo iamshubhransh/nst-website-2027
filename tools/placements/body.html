@@ -20,13 +20,19 @@
   <!-- 01b · the CTC (13 Oct, v4): a full-bleed NST-blue stage (after Kajabi / Pitch / Shopify's colour bands and the homepage's own
        win cards and orbit ring). A staggered stack — ₹20L left, "to ₹50L" right — on slowly turning dashed rings; the campus average
        in a white card; two rows of hiring companies drifting in opposite directions -->
-  <section class="pl-ctc4" id="ctc" aria-label="CTC offered to freshers: 20 to 50 lakhs per annum">
+  <!-- 01b · v5 (16 Oct, frame 700:9706): the same band on white — an orange tab hanging from the top edge, the range in orange,
+       chips with a gold outline, and the homepage's interactive particles gathered along the top and bottom edges.
+       ?ctc=4 brings back the gold v4 for comparison -->
+  <section class="pl-ctc4 pl-ctc5" id="ctc" aria-label="CTC offered to freshers: 20 to 50 lakhs per annum">
+    <script>if (/[?&]ctc=4\b/.test(location.search)) document.getElementById('ctc').classList.remove('pl-ctc5');</script>
+    <div class="pl-ctc5-bg" aria-hidden="true"><canvas id="plCtcDots"></canvas></div>
+    <div class="pl-ctc5-tab"><i class="l"></i><span>CTC offered to freshers</span><i class="r"></i></div>
     <div class="pl-ctc4-rings" aria-hidden="true">
       <svg viewBox="0 0 600 600"><circle cx="300" cy="300" r="298" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 8"/><circle cx="300" cy="300" r="210" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 7"/><circle cx="300" cy="300" r="122" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="3 6"/></svg>
     </div>
     <span class="pl-ctc4-pill"><i></i>CTC offered to freshers</span>
     <p class="pl-ctc4-fig" aria-hidden="true"><span class="rs">₹</span><b data-to="20">20</b><span class="dash">–</span><b data-to="50">50</b><span class="u">L</span></p>
-    <p class="pl-ctc4-sub">Lakhs per annum, offered to NST freshers · 2025–26</p>
+    <p class="pl-ctc4-sub">Lakhs per annum, offered to NST freshers<span class="pl-ctc4-yr"> · 2025–26</span></p>
     <div class="pl-ctc4-avg">
       <span class="pl-ctc4-ok"><img src="assets/icon-check-circle.svg" alt=""></span>
       <div><b>₹23 Lakhs</b><span>Average CTC offered on campus</span></div>
@@ -46,7 +52,8 @@
   </section>
 
   <!-- 02a · Google (13 Oct 2026): a search bar types "NST students at Google", the result count appears, then the two interns'
-       result cards rise in. Photos: assets/pl/google-jigyasu.jpg and google-karan.jpg (initials show until they exist) -->
+       result cards rise in. Photos (16 Oct, frame 700:9871): assets/pl/google-jigyasu.jpg and google-karan.jpg, his crops exported at 3x
+       on the slot's blue gradient (488 × 609); initials show if one is missing -->
   <section class="pl-goog" id="google" aria-label="NST students interning at Google">
     <div class="pl-goog-brand"><img src="assets/company-google.svg" alt="Google"><i></i><span>Summer Internship</span></div>
     <div class="pl-goog-bar" id="plGoogBar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span id="plGoogQ">NST students at Google</span><i class="pl-caret"></i></div>

@@ -80,7 +80,8 @@ Desktop (≥ 1024 px) follows the homepage system: the 1200 px column, section t
 
 Layout, section by section:
 - Hero: copy left, a four-column intern wall right.
-- CTC: a centred gold stage with a 96 px figure.
+- CTC (v5, 16 Oct, frame 700:9706): white band, orange tab from the top edge, orange range, gold-outlined chips, the homepage particles along the top and bottom edges; `?ctc=4` shows the earlier gold stage.
+- CTC v4 (gold stage, 96 px figure on desktop):
 - Summary: four summary tiles in a row.
 - Google: search left, result cards right.
 - Live offers: a centred feed of 720.

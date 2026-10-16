@@ -2844,7 +2844,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-ctc4-by{position:relative;margin:28px 16px 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.92)}
 .pl-ctc4-by b{font-weight:600;color:#fff}
 .pl-ctc4-rows{position:relative;margin-top:12px;display:flex;flex-direction:column;gap:10px}
-.pl-ctc4-row{overflow:hidden}
+.pl-ctc4-row{overflow:hidden;padding-bottom:14px;margin-bottom:-14px}   /* room for the chips' shadow, which reaches 12px below */
 .pl-ctc4-track{display:flex;gap:10px;width:max-content;animation:plMarq 38s linear infinite;animation-play-state:paused}
 .pl-ctc4-row:not(.r2) .pl-ctc4-track{margin-left:-138.6px}
 .pl-ctc4-row.r2 .pl-ctc4-track{margin-left:-692px;animation-direction:reverse;animation-duration:44s}
@@ -2852,6 +2852,25 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .pl-chip4{flex:none;height:48px;min-width:104px;padding:0 18px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 6px 16px -10px rgba(74,44,2,.55);font-size:14px;line-height:18px;font-weight:600;color:#16191D}
 .pl-chip4 img{display:block;width:auto}
 @keyframes plMarq{to{transform:translateX(-50%)}}
+/* ---- 01b v5 (frame 700:9706): white, an orange tab from the top edge, particles along the top and bottom.
+        Figma's background: particles + a pink/purple ring glow, both recoloured by a #A6720A layer in Color blend */
+.pl-ctc5{isolation:isolate;padding:0 0 42px;color:#16191D;background:#fff}
+.pl-ctc5 .pl-ctc4-rings,.pl-ctc5 .pl-ctc4-pill,.pl-ctc5 .pl-ctc4-by,.pl-ctc5 .pl-ctc4-yr,.pl-ctc4:not(.pl-ctc5) .pl-ctc5-bg,.pl-ctc4:not(.pl-ctc5) .pl-ctc5-tab{display:none}
+.pl-ctc5-bg{position:absolute;inset:0;z-index:-1;pointer-events:none;background:#fff}   /* its own stacking context: the white is the backdrop the Color layer blends with */
+.pl-ctc5-bg::before{content:"";position:absolute;inset:0;background:radial-gradient(376px circle at 50% 50%,rgba(249,109,149,0) 0,rgba(249,109,149,.075) 45%,rgba(153,61,240,.05) 55%,rgba(153,61,240,0) 80%)}
+.pl-ctc5-bg canvas{position:absolute;inset:0;width:100%;height:100%}
+.pl-ctc5-bg::after{content:"";position:absolute;inset:0;background:#A6720A;mix-blend-mode:color}
+.pl-ctc5-tab{position:relative;align-self:center;display:flex}
+.pl-ctc5-tab span{height:28px;padding:8px 24px;border-radius:0 0 16px 16px;background:#F59700;color:#fff;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;white-space:nowrap}
+.pl-ctc5-tab i{flex:none;width:16px;height:16px;background:radial-gradient(circle at var(--cx) 100%,transparent 15.5px,#F59700 16px)}
+.pl-ctc5-tab .l{--cx:0}
+.pl-ctc5-tab .r{--cx:100%}
+.pl-ctc5 .pl-ctc4-fig{margin-top:24px}
+.pl-ctc5 .pl-ctc4-fig b,.pl-ctc5 .pl-ctc4-fig .dash,.pl-ctc5 .pl-ctc4-fig .u,.pl-ctc5 .pl-ctc4-fig .rs{color:#F59700}
+.pl-ctc5 .pl-ctc4-sub{color:#D17300}
+.pl-ctc5 .pl-ctc4-avg{margin-top:24px;box-shadow:0 12px 12px -20px rgba(74,44,2,.04)}
+.pl-ctc5 .pl-ctc4-rows{margin-top:24px}
+.pl-ctc5 .pl-chip4{box-shadow:inset 0 0 0 1px #FFD580,0 6px 16px -10px rgba(74,44,2,.55)}
 
 
 /* ---- 02a Google: a search that finds two interns ---- */
@@ -3287,6 +3306,11 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-ctc4-track{gap:14px}
   .pl-chip4{height:60px;min-width:148px;padding:0 24px;border-radius:16px;font-size:16px;line-height:20px}
   .pl-chip4 img{zoom:1.2}
+  .pl-ctc5{padding:0 0 96px}
+  .pl-ctc5-tab span{height:36px;padding:11px 32px;border-radius:0 0 20px 20px;font-size:12px;line-height:14px;letter-spacing:2.4px}
+  .pl-ctc5-tab i{width:20px;height:20px;background:radial-gradient(circle at var(--cx) 100%,transparent 19.5px,#F59700 20px)}
+  .pl-ctc5 .pl-ctc4-fig{margin-top:48px}
+  .pl-ctc5 .pl-ctc4-rows{margin-top:48px}
 
   /* ---- summary tiles: the homepage's four proof tiles in one row between the hatched bands ---- */
   .pl-proof{padding-top:26px;background:var(--bg2)}
@@ -3574,13 +3598,19 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   <!-- 01b · the CTC (13 Oct, v4): a full-bleed NST-blue stage (after Kajabi / Pitch / Shopify's colour bands and the homepage's own
        win cards and orbit ring). A staggered stack — ₹20L left, "to ₹50L" right — on slowly turning dashed rings; the campus average
        in a white card; two rows of hiring companies drifting in opposite directions -->
-  <section class="pl-ctc4" id="ctc" aria-label="CTC offered to freshers: 20 to 50 lakhs per annum">
+  <!-- 01b · v5 (16 Oct, frame 700:9706): the same band on white — an orange tab hanging from the top edge, the range in orange,
+       chips with a gold outline, and the homepage's interactive particles gathered along the top and bottom edges.
+       ?ctc=4 brings back the gold v4 for comparison -->
+  <section class="pl-ctc4 pl-ctc5" id="ctc" aria-label="CTC offered to freshers: 20 to 50 lakhs per annum">
+    <script>if (/[?&]ctc=4\b/.test(location.search)) document.getElementById('ctc').classList.remove('pl-ctc5');</script>
+    <div class="pl-ctc5-bg" aria-hidden="true"><canvas id="plCtcDots"></canvas></div>
+    <div class="pl-ctc5-tab"><i class="l"></i><span>CTC offered to freshers</span><i class="r"></i></div>
     <div class="pl-ctc4-rings" aria-hidden="true">
       <svg viewBox="0 0 600 600"><circle cx="300" cy="300" r="298" fill="none" stroke="#fff" stroke-width="1.5" stroke-dasharray="6 8"/><circle cx="300" cy="300" r="210" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="4 7"/><circle cx="300" cy="300" r="122" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="3 6"/></svg>
     </div>
     <span class="pl-ctc4-pill"><i></i>CTC offered to freshers</span>
     <p class="pl-ctc4-fig" aria-hidden="true"><span class="rs">₹</span><b data-to="20">20</b><span class="dash">–</span><b data-to="50">50</b><span class="u">L</span></p>
-    <p class="pl-ctc4-sub">Lakhs per annum, offered to NST freshers · 2025–26</p>
+    <p class="pl-ctc4-sub">Lakhs per annum, offered to NST freshers<span class="pl-ctc4-yr"> · 2025–26</span></p>
     <div class="pl-ctc4-avg">
       <span class="pl-ctc4-ok"><img src="assets/icon-check-circle.svg" alt=""></span>
       <div><b>₹23 Lakhs</b><span>Average CTC offered on campus</span></div>
@@ -3631,15 +3661,16 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   </section>
 
   <!-- 02a · Google (13 Oct 2026): a search bar types "NST students at Google", the result count appears, then the two interns'
-       result cards rise in. Photos: assets/pl/google-jigyasu.jpg and google-karan.jpg (initials show until they exist) -->
+       result cards rise in. Photos (16 Oct, frame 700:9871): assets/pl/google-jigyasu.jpg and google-karan.jpg, his crops exported at 3x
+       on the slot's blue gradient (488 × 609); initials show if one is missing -->
   <section class="pl-goog" id="google" aria-label="NST students interning at Google">
     <div class="pl-goog-brand"><img src="assets/company-google.svg" alt="Google"><i></i><span>Summer Internship</span></div>
     <div class="pl-goog-bar" id="plGoogBar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5L20 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span id="plGoogQ">NST students at Google</span><i class="pl-caret"></i></div>
     <p class="pl-goog-count" id="plGoogCount">About 2 results (0.21 seconds)</p>
     <h2 class="pl-goog-title">Two NST students are interning at Google this summer.</h2>
     <div class="pl-goog-res">
-      <article class="pl-gcard"><span class="pl-gph" data-i="JK"></span><h3>Jigyasu Kalyan</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
-      <article class="pl-gcard"><span class="pl-gph" data-i="KC"></span><h3>Karan Chillar</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
+      <article class="pl-gcard"><span class="pl-gph" data-i="JK"><img src="assets/pl/google-jigyasu.jpg" alt="" onerror="this.remove()"></span><h3>Jigyasu Kalyan</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
+      <article class="pl-gcard"><span class="pl-gph" data-i="KC"><img src="assets/pl/google-karan.jpg" alt="" onerror="this.remove()"></span><h3>Karan Chillar</h3><p>Summer Intern · Google</p><p>NST · Batch of 2023</p></article>
     </div>
   </section>
 
@@ -5495,10 +5526,95 @@ window.__dnFigs = figs;
     var sec = document.getElementById('ctc'); if (!sec) return;
     onView(sec, function(v){ sec.classList.toggle('is-live', v && !reduce); });
     var nums = [].slice.call(sec.querySelectorAll('.pl-ctc4-fig b'));
+    /* each track holds its chip set twice and drifts by half; on a wide screen, repeat the whole run until half a track still covers the row */
+    [].forEach.call(sec.querySelectorAll('.pl-ctc4-track'), function(tr){
+      var k = 1, kids = [].slice.call(tr.children);
+      while (tr.scrollWidth / 2 + parseFloat(getComputedStyle(tr).marginLeft) < tr.parentNode.clientWidth + 40 && k < 8){ kids.forEach(function(c){ tr.appendChild(c.cloneNode(true)); }); k *= 2; }
+      if (k > 1) tr.style.animationDuration = parseFloat(getComputedStyle(tr).animationDuration) * k + 's';
+    });
     if (reduce){ sec.classList.add('is-in'); return; }
     nums.forEach(function(b){ b.textContent = '0'; });   /* the slots have fixed widths, so the centred line holds still while counting */
     once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
       (function f(now){ var p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .3);
+  })();
+
+  /* ---- 01b v5 · the homepage's interactive particles, turned on their side: two edge fields dense against the top and the
+          bottom border and thinning towards the middle; every dot loops round its home, the homes creep along the edge,
+          and a pointer pushes them away before they spring back (the homepage's #particles, kind 'edge') ---- */
+  (function(){
+    var sec = document.getElementById('ctc'), cv = document.getElementById('plCtcDots');
+    if (!sec || !cv || !sec.classList.contains('pl-ctc5')) return;
+    var ctx = cv.getContext('2d'), W = 0, H = 0, parts = [], t = 0, raf = 0, visible = false, last = 0;
+    var ptr = {x: -9999, y: -9999, on: false, vx: 0, vy: 0};
+    function rand(a, b){ return a + Math.random() * (b - a); }
+    function build(){
+      var r = sec.getBoundingClientRect(), dt = r.width >= 1024;
+      W = r.width; H = r.height;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      parts = [];
+      var near = dt ? 30 : 18, far = dt ? 90 : 52, cap = dt ? 240 : 150, n = Math.min(1800, Math.round(W * (dt ? 1.1 : 1.6)));
+      for (var e = 0; e < 2; e++){
+        for (var m = 0; m < n; m++){
+          var d = Math.min(cap, -Math.log(1 - Math.random() * .995) * (Math.random() < .7 ? near : far)), big = Math.random() < .14;
+          var hx = rand(-4, W + 4), hy = e ? H - d : d;
+          parts.push({kind: 'edge', hx: hx, hy: hy, x: hx, y: hy, vx: 0, vy: 0, dx: rand(-7, 7), dy: rand(-5, 5) * (1 + d / 120), amp: rand(2, 6), f: rand(.2, .6), ph: rand(0, 6.28), r: big ? rand(1.4, 2.3) : rand(.55, 1.3), al: Math.max(.25, 1 - d / (cap * 1.1)) * rand(.55, 1), tint: Math.random()});
+        }
+      }
+      for (var q = 0; q < Math.round(W * .05); q++) parts.push({kind: 'stray', x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, dx: rand(-6, 6), dy: rand(-4, 4), amp: rand(2, 5), f: rand(.2, .6), ph: rand(0, 6.28), r: rand(.5, 1.1), al: rand(.2, .45), tint: Math.random()});
+      draw();
+    }
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < parts.length; i++){
+        var p = parts[i];
+        if (p.x < -4 || p.x > W + 4 || p.y < -4 || p.y > H + 4) continue;
+        ctx.globalAlpha = p.al * (reduce ? 1 : (.82 + .18 * Math.sin(t * p.f * 1.7 + p.ph)));
+        ctx.fillStyle = p.tint < .74 ? '#F09000' : (p.tint < .9 ? '#E9A62A' : '#C97A08');
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2831853); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function step(now){
+      var dt = last ? Math.min((now - last) / 1000, .05) : 1 / 60;
+      last = now; t += dt;
+      var RR = 78, K = .045, D = .84, tx, ty;
+      for (var i = 0; i < parts.length; i++){
+        var p = parts[i];
+        if (p.kind === 'edge'){
+          p.hx += p.dx * dt * .35; if (p.hx < -6) p.hx = W + 6; else if (p.hx > W + 6) p.hx = -6;
+          tx = p.hx + Math.sin(t * p.f + p.ph) * p.amp * 1.6;
+          ty = p.hy + Math.cos(t * p.f * .8 + p.ph * 1.3) * (p.amp + Math.abs(p.dy) * 2.2);
+          if (Math.abs(tx - p.x) > W / 2){ p.x = tx; p.vx = 0; }   /* wrapped: jump, don't streak */
+        } else {
+          p.x += p.dx * dt; p.y += p.dy * dt;
+          if (p.x < -6) p.x = W + 6; else if (p.x > W + 6) p.x = -6;
+          if (p.y < -6) p.y = H + 6; else if (p.y > H + 6) p.y = -6;
+          tx = p.x + Math.sin(t * p.f + p.ph) * p.amp * .3;
+          ty = p.y + Math.cos(t * p.f + p.ph) * p.amp * .3;
+        }
+        var ax = (tx - p.x) * K, ay = (ty - p.y) * K;
+        if (ptr.on){
+          var ddx = p.x - ptr.x, ddy = p.y - ptr.y, d2 = ddx * ddx + ddy * ddy;
+          if (d2 < RR * RR){ var d = Math.sqrt(d2) || .001, f = 1 - d / RR, s = f * f * 5.5; ax += ddx / d * s + ptr.vx * f * .12; ay += ddy / d * s + ptr.vy * f * .12; }
+        }
+        p.vx = (p.vx + ax) * D; p.vy = (p.vy + ay) * D;
+        p.x += p.vx; p.y += p.vy;
+      }
+      ptr.vx *= .8; ptr.vy *= .8;
+      draw();
+      raf = visible ? requestAnimationFrame(step) : 0;
+      if (!visible) last = 0;
+    }
+    function setPtr(e){ var r = cv.getBoundingClientRect(), nx = e.clientX - r.left, ny = e.clientY - r.top; if (ptr.on){ ptr.vx = nx - ptr.x; ptr.vy = ny - ptr.y; } ptr.x = nx; ptr.y = ny; ptr.on = true; }
+    function endPtr(){ ptr.on = false; ptr.vx = 0; ptr.vy = 0; }
+    sec.addEventListener('pointermove', setPtr); sec.addEventListener('pointerdown', setPtr);
+    sec.addEventListener('pointerleave', endPtr); sec.addEventListener('pointercancel', endPtr);
+    build();
+    new ResizeObserver(function(){ var r = sec.getBoundingClientRect(); if (Math.abs(r.width - W) > 1 || Math.abs(r.height - H) > 1) build(); }).observe(sec);   /* fonts and the chips settle the height */
+    if (reduce) return;
+    onView(sec, function(v){ visible = v; if (v && !raf) raf = requestAnimationFrame(step); });
   })();
 
   /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */

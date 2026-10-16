@@ -50,10 +50,95 @@
     var sec = document.getElementById('ctc'); if (!sec) return;
     onView(sec, function(v){ sec.classList.toggle('is-live', v && !reduce); });
     var nums = [].slice.call(sec.querySelectorAll('.pl-ctc4-fig b'));
+    /* each track holds its chip set twice and drifts by half; on a wide screen, repeat the whole run until half a track still covers the row */
+    [].forEach.call(sec.querySelectorAll('.pl-ctc4-track'), function(tr){
+      var k = 1, kids = [].slice.call(tr.children);
+      while (tr.scrollWidth / 2 + parseFloat(getComputedStyle(tr).marginLeft) < tr.parentNode.clientWidth + 40 && k < 8){ kids.forEach(function(c){ tr.appendChild(c.cloneNode(true)); }); k *= 2; }
+      if (k > 1) tr.style.animationDuration = parseFloat(getComputedStyle(tr).animationDuration) * k + 's';
+    });
     if (reduce){ sec.classList.add('is-in'); return; }
     nums.forEach(function(b){ b.textContent = '0'; });   /* the slots have fixed widths, so the centred line holds still while counting */
     once(sec, function(){ sec.classList.add('is-in'); var t0 = performance.now();
       (function f(now){ var p = Math.min(1, (now - t0) / 1300), e = 1 - Math.pow(1 - p, 3); nums.forEach(function(b){ b.textContent = Math.round(+b.dataset.to * e); }); if (p < 1) requestAnimationFrame(f); })(t0); }, .3);
+  })();
+
+  /* ---- 01b v5 · the homepage's interactive particles, turned on their side: two edge fields dense against the top and the
+          bottom border and thinning towards the middle; every dot loops round its home, the homes creep along the edge,
+          and a pointer pushes them away before they spring back (the homepage's #particles, kind 'edge') ---- */
+  (function(){
+    var sec = document.getElementById('ctc'), cv = document.getElementById('plCtcDots');
+    if (!sec || !cv || !sec.classList.contains('pl-ctc5')) return;
+    var ctx = cv.getContext('2d'), W = 0, H = 0, parts = [], t = 0, raf = 0, visible = false, last = 0;
+    var ptr = {x: -9999, y: -9999, on: false, vx: 0, vy: 0};
+    function rand(a, b){ return a + Math.random() * (b - a); }
+    function build(){
+      var r = sec.getBoundingClientRect(), dt = r.width >= 1024;
+      W = r.width; H = r.height;
+      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      parts = [];
+      var near = dt ? 30 : 18, far = dt ? 90 : 52, cap = dt ? 240 : 150, n = Math.min(1800, Math.round(W * (dt ? 1.1 : 1.6)));
+      for (var e = 0; e < 2; e++){
+        for (var m = 0; m < n; m++){
+          var d = Math.min(cap, -Math.log(1 - Math.random() * .995) * (Math.random() < .7 ? near : far)), big = Math.random() < .14;
+          var hx = rand(-4, W + 4), hy = e ? H - d : d;
+          parts.push({kind: 'edge', hx: hx, hy: hy, x: hx, y: hy, vx: 0, vy: 0, dx: rand(-7, 7), dy: rand(-5, 5) * (1 + d / 120), amp: rand(2, 6), f: rand(.2, .6), ph: rand(0, 6.28), r: big ? rand(1.4, 2.3) : rand(.55, 1.3), al: Math.max(.25, 1 - d / (cap * 1.1)) * rand(.55, 1), tint: Math.random()});
+        }
+      }
+      for (var q = 0; q < Math.round(W * .05); q++) parts.push({kind: 'stray', x: rand(0, W), y: rand(0, H), vx: 0, vy: 0, dx: rand(-6, 6), dy: rand(-4, 4), amp: rand(2, 5), f: rand(.2, .6), ph: rand(0, 6.28), r: rand(.5, 1.1), al: rand(.2, .45), tint: Math.random()});
+      draw();
+    }
+    function draw(){
+      ctx.clearRect(0, 0, W, H);
+      for (var i = 0; i < parts.length; i++){
+        var p = parts[i];
+        if (p.x < -4 || p.x > W + 4 || p.y < -4 || p.y > H + 4) continue;
+        ctx.globalAlpha = p.al * (reduce ? 1 : (.82 + .18 * Math.sin(t * p.f * 1.7 + p.ph)));
+        ctx.fillStyle = p.tint < .74 ? '#F09000' : (p.tint < .9 ? '#E9A62A' : '#C97A08');
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.2831853); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+    function step(now){
+      var dt = last ? Math.min((now - last) / 1000, .05) : 1 / 60;
+      last = now; t += dt;
+      var RR = 78, K = .045, D = .84, tx, ty;
+      for (var i = 0; i < parts.length; i++){
+        var p = parts[i];
+        if (p.kind === 'edge'){
+          p.hx += p.dx * dt * .35; if (p.hx < -6) p.hx = W + 6; else if (p.hx > W + 6) p.hx = -6;
+          tx = p.hx + Math.sin(t * p.f + p.ph) * p.amp * 1.6;
+          ty = p.hy + Math.cos(t * p.f * .8 + p.ph * 1.3) * (p.amp + Math.abs(p.dy) * 2.2);
+          if (Math.abs(tx - p.x) > W / 2){ p.x = tx; p.vx = 0; }   /* wrapped: jump, don't streak */
+        } else {
+          p.x += p.dx * dt; p.y += p.dy * dt;
+          if (p.x < -6) p.x = W + 6; else if (p.x > W + 6) p.x = -6;
+          if (p.y < -6) p.y = H + 6; else if (p.y > H + 6) p.y = -6;
+          tx = p.x + Math.sin(t * p.f + p.ph) * p.amp * .3;
+          ty = p.y + Math.cos(t * p.f + p.ph) * p.amp * .3;
+        }
+        var ax = (tx - p.x) * K, ay = (ty - p.y) * K;
+        if (ptr.on){
+          var ddx = p.x - ptr.x, ddy = p.y - ptr.y, d2 = ddx * ddx + ddy * ddy;
+          if (d2 < RR * RR){ var d = Math.sqrt(d2) || .001, f = 1 - d / RR, s = f * f * 5.5; ax += ddx / d * s + ptr.vx * f * .12; ay += ddy / d * s + ptr.vy * f * .12; }
+        }
+        p.vx = (p.vx + ax) * D; p.vy = (p.vy + ay) * D;
+        p.x += p.vx; p.y += p.vy;
+      }
+      ptr.vx *= .8; ptr.vy *= .8;
+      draw();
+      raf = visible ? requestAnimationFrame(step) : 0;
+      if (!visible) last = 0;
+    }
+    function setPtr(e){ var r = cv.getBoundingClientRect(), nx = e.clientX - r.left, ny = e.clientY - r.top; if (ptr.on){ ptr.vx = nx - ptr.x; ptr.vy = ny - ptr.y; } ptr.x = nx; ptr.y = ny; ptr.on = true; }
+    function endPtr(){ ptr.on = false; ptr.vx = 0; ptr.vy = 0; }
+    sec.addEventListener('pointermove', setPtr); sec.addEventListener('pointerdown', setPtr);
+    sec.addEventListener('pointerleave', endPtr); sec.addEventListener('pointercancel', endPtr);
+    build();
+    new ResizeObserver(function(){ var r = sec.getBoundingClientRect(); if (Math.abs(r.width - W) > 1 || Math.abs(r.height - H) > 1) build(); }).observe(sec);   /* fonts and the chips settle the height */
+    if (reduce) return;
+    onView(sec, function(v){ visible = v; if (v && !raf) raf = requestAnimationFrame(step); });
   })();
 
   /* ---- 02a · Google: the query types itself once the bar is in view; then the count, then the two result cards ---- */
