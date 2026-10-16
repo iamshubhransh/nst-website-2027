@@ -58,7 +58,10 @@
 .adm-rc ul{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:0;list-style:none}
 .adm-rc li{height:26px;padding:0 10px;border-radius:999px;background:#F6F7F9;font-size:12px;line-height:26px;font-weight:500;color:#5B6271}
 .adm-rc.is-on li{background:#fff;border:1px solid #DCE9FB;line-height:24px}
-.adm-rc:not(.is-on) ul,.adm-rc:not(.is-on) a{display:none}   /* the cards that don't fit you stay short; picking one opens it */
+.adm-rc:not(.is-on) ul,.adm-rc:not(.is-on) a{display:none}
+.adm-rc{cursor:pointer;-webkit-tap-highlight-color:transparent}
+.adm-rc:not(.is-on):active{background:#F6F7F9}
+.adm-rc:focus-visible{outline:2px solid #0673F9;outline-offset:2px}   /* the cards that don't fit you stay short; picking one opens it */
 .adm-rc a{display:inline-block;margin-top:16px;font-size:14px;line-height:20px;font-weight:600;color:#0673F9;text-decoration:none}
 
 /* ---- 03 NSAT (dark): the paper ---- */

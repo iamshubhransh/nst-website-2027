@@ -64,13 +64,23 @@
   var hero = document.querySelector('.adm-hero');
   if (hero) new IntersectionObserver(function(en){ hero.classList.toggle('is-live', en[0].isIntersecting); }).observe(hero);
 
-  /* 02 · the route chooser lights the card that fits */
-  var pick = document.querySelector('.adm-pick');
-  if (pick) pick.addEventListener('click', function(e){
-    var b = e.target.closest('button'); if (!b) return;
-    pick.querySelectorAll('button').forEach(function(x){ var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
-    document.querySelectorAll('.adm-rc').forEach(function(c){ c.classList.toggle('is-on', c.dataset.r === b.dataset.r); });
-  });
+  /* 02 · the route chooser: a chip or a card picks the route; the picked card opens and its chip lights (and scrolls into view) */
+  (function(){
+    var pick = document.querySelector('.adm-pick'), cards = document.querySelectorAll('.adm-rc'); if (!pick || !cards.length) return;
+    function select(r){
+      pick.querySelectorAll('button').forEach(function(x){
+        var on = x.dataset.r === r; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on);
+        if (on) pick.scrollTo({left: Math.max(0, x.offsetLeft - 16), behavior: reduce ? 'auto' : 'smooth'});
+      });
+      cards.forEach(function(c){ var on = c.dataset.r === r; c.classList.toggle('is-on', on); c.setAttribute('aria-expanded', on); });
+    }
+    pick.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) select(b.dataset.r); });
+    cards.forEach(function(c){
+      c.setAttribute('tabindex', '0'); c.setAttribute('role', 'button'); c.setAttribute('aria-expanded', c.classList.contains('is-on'));
+      c.addEventListener('click', function(e){ if (e.target.closest('a')) return; select(c.dataset.r); });
+      c.addEventListener('keydown', function(e){ if ((e.key === 'Enter' || e.key === ' ') && e.target === c){ e.preventDefault(); select(c.dataset.r); } });
+    });
+  })();
 
   /* 07 · loans: tap a logo to see that lender's terms; switch secured / unsecured. [rate, max loan, tenure, processing] per type */
   var LOANS = {
