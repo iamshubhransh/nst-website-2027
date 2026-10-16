@@ -57,7 +57,9 @@ await ev(()=>scrollTo(0,2000)); await p.waitForTimeout(300); ok('dock shows afte
 await ev(()=>scrollTo(0,200)); await p.waitForTimeout(300); ok('dock hidden over the hero', !(await ev(()=>document.getElementById('dock').classList.contains('is-on'))));
 await p.evaluate(()=>scrollTo(0,0)); await p.waitForTimeout(300);
 await p.locator('.nav .menu').tap(); await p.waitForTimeout(500);
-ok('menu sheet opens', await ev(()=>document.getElementById('menuSheet').classList.contains('is-open')||document.getElementById('menuSheet').getAttribute('aria-hidden')==='false'));
+ok('menu opens, Placements marked as here', await ev(()=>document.getElementById('mnav').classList.contains('is-open') && !!document.querySelector('.mnav-row[aria-current="page"] .mnav-here')));
+await p.locator('.nav .menu').tap(); await p.waitForTimeout(400);
+ok('menu closes', await ev(()=>!document.getElementById('mnav').classList.contains('is-open') && !document.documentElement.classList.contains('is-mnav')));
 ok('no horizontal overflow', await ev(()=>document.documentElement.scrollWidth<=innerWidth));
 ok('placeholder links do not jump', await ev(()=>{ scrollTo(0,3000); const y=scrollY; document.querySelector('.pl-rep-cta').click(); return Math.abs(scrollY-y)<2; }));
 console.log(res.join('\n')); console.log('ERRS',errs); await b.close();

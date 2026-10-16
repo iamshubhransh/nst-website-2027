@@ -993,16 +993,68 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
 .snr-call svg{width:18px;height:18px}
 @media (prefers-reduced-motion:reduce){.snr .snr-thr,.snr .snr-av{transform:none;opacity:1;translate:none;transition:none}.snr-card{opacity:1;transform:none;transition:none}.snr-on i{animation:none}}
 
-/* ---------- menu sheet: the top bar's menu button opens a section list (no frame for this yet; kept to the page's own language) ---------- */
-.sheet{position:fixed;inset:0;z-index:46;opacity:0;pointer-events:none;transition:opacity .25s ease}
-.sheet.is-open{opacity:1;pointer-events:auto}
-.sheet-back{position:absolute;inset:0;background:rgba(11,12,14,.45)}
-.sheet-panel{position:absolute;left:12px;right:12px;top:calc(80px + env(safe-area-inset-top,0px));max-height:calc(100% - 180px);overflow-y:auto;overscroll-behavior:contain;border-radius:12px;background:#fff;box-shadow:0 12px 32px rgba(0,0,0,.18);padding:0 4px 6px;transform:translateY(-10px);transition:transform .3s cubic-bezier(.22,1,.36,1)}
-.sheet.is-open .sheet-panel{transform:none}
-.sheet-head{display:flex;align-items:center;justify-content:space-between;height:48px;padding:0 12px 0 16px;font-size:11px;line-height:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(22,25,29,.5)}
-.sheet-x{width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:#fff;font-size:22px;line-height:1;color:var(--ink);cursor:pointer;-webkit-tap-highlight-color:transparent}
-.sheet-panel a{display:flex;align-items:center;height:44px;padding:0 12px;border-top:1px solid var(--line2);text-decoration:none;font-size:14px;line-height:22px;font-weight:600;letter-spacing:.016px;color:var(--ink);-webkit-tap-highlight-color:transparent}
-.sheet-panel a:active{background:var(--bg2)}
+/* ---------- mobile menu (16 Oct 2026; his frames 702:5108 default, 702:27069 open). The hamburger turns into a close X and the whole
+   screen turns white under the floating bar. The items are the desktop nav's, cloned at runtime from #dn and its .dn-p panels
+   (one source for both): big rows; Programs, Life, Tests and More open in place as accordions (one at a time) with the desktop's
+   coloured icon tiles, the campuses as photo thumbnails. Ask Newton and Talk to a senior sit at the foot. ---------- */
+.menu svg{width:24px;height:24px;overflow:visible}
+.menu path{transform-origin:12px 12px;transition:transform .32s cubic-bezier(.22,1,.36,1),opacity .18s ease}
+.is-mnav .menu .m1{transform:translateY(4.5px) rotate(45deg) scaleX(1.39)}
+.is-mnav .menu .m2{opacity:0;transform:scaleX(.2)}
+.is-mnav .menu .m3{transform:translateY(-4.5px) rotate(-45deg) scaleX(1.39)}
+.nav{transition:background-color .25s ease,box-shadow .25s ease}
+.is-mnav .nav{background:#fff;box-shadow:0 0 0 rgba(0,0,0,0)}
+html.is-mnav{overflow:hidden}
+.is-mnav .dock{opacity:0;pointer-events:none}
+.mnav{position:fixed;inset:0;z-index:39;background:#fff;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;visibility:hidden;opacity:0;transition:opacity .22s ease,visibility 0s linear .22s}
+.mnav.is-open{visibility:visible;opacity:1;transition:opacity .22s ease}
+.mnav::before{content:"";position:fixed;left:0;right:0;top:0;z-index:1;height:calc(84px + env(safe-area-inset-top,0px));background:linear-gradient(#fff 80%,rgba(255,255,255,0));pointer-events:none}   /* the list scrolls under the floating bar, never beside it */
+.mnav-in{min-height:100%;display:flex;flex-direction:column;padding:calc(84px + env(safe-area-inset-top,0px)) 0 calc(20px + env(safe-area-inset-bottom,0px))}
+.mnav-list{display:flex;flex-direction:column;padding:0 12px}
+.mnav-item{border-bottom:1px solid #EEF0F3}
+.mnav-item:last-child{border-bottom:0}
+.mnav-row{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;height:64px;margin:0;padding:0 12px;border:0;background:none;font-family:var(--font);font-size:20px;line-height:28px;font-weight:600;font-stretch:125%;letter-spacing:-.4px;color:var(--ink);text-align:left;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.mnav-row>span{display:flex;align-items:center;gap:8px;min-width:0}
+.mnav-here{font-style:normal;height:20px;padding:0 7px;border-radius:999px;background:#E5F1FF;font-size:10px;line-height:20px;font-weight:600;font-stretch:100%;letter-spacing:.2px;color:#0673F9}
+.mnav-cv{flex:none;width:32px;height:32px;border-radius:50%;background:#F6F7F9;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:background-color .25s ease,color .25s ease}
+.mnav-cv svg{width:16px;height:16px;transition:transform .32s cubic-bezier(.22,1,.36,1)}
+.mnav-row:active .mnav-cv{background:#EEF0F3}
+.mnav-item.is-x .mnav-cv{background:var(--ink2,#0673F9);color:#fff}
+.mnav-item.is-x .mnav-cv svg{transform:rotate(180deg)}
+.mnav-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .36s cubic-bezier(.22,1,.36,1)}
+.mnav-item.is-x .mnav-body{grid-template-rows:1fr}
+.mnav-body>div{min-height:0;overflow:hidden}
+.mnav-sub{margin:0 0 14px;padding:6px;border-radius:16px;background:var(--acc,#F6F7F9);opacity:0;transform:translateY(-6px);transition:opacity .2s ease,transform .3s cubic-bezier(.22,1,.36,1)}
+.mnav-item.is-x .mnav-sub{opacity:1;transform:none;transition-delay:.06s}
+.mnav-sub .dn-lab{display:block;padding:10px 10px 6px;font-size:11px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(22,25,29,.5)}
+.mnav-sub .dn-o{display:flex;align-items:center;gap:12px;padding:8px;border-radius:12px;text-decoration:none;color:var(--ink);-webkit-tap-highlight-color:transparent}
+.mnav-sub .dn-o:active{background:rgba(255,255,255,.7)}
+.mnav-sub .dn-ic{--dt:var(--icb,#fff);flex:none;width:40px;height:40px;border-radius:10px;background:var(--icb,#fff);color:var(--ic,#16191D);display:flex;align-items:center;justify-content:center;overflow:hidden;box-shadow:0 0 0 2px #fff}
+.mnav-sub .dn-ic svg{width:20px;height:20px}
+.mnav-sub .dn-ic img{width:100%;height:100%;object-fit:cover}
+.mnav-sub .dn-tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.mnav-sub .dn-tx b{font-size:15px;line-height:20px;font-weight:600;color:#16191D}
+.mnav-sub .dn-tx span{font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
+.mnav-sub .dn-foot{display:flex;align-items:center;justify-content:center;height:44px;margin:8px 4px 4px;border-radius:10px;background:#fff;box-shadow:inset 0 0 0 1px rgba(22,25,29,.08);font-size:14px;line-height:20px;font-weight:600;color:var(--ink2,#0673F9);text-decoration:none}
+.mnav-foot{margin-top:auto;padding:24px 24px 0}
+.mnav-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mnav-card{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:14px;border-radius:16px;background:#F6F7F9;text-decoration:none;color:var(--ink);-webkit-tap-highlight-color:transparent;transition:transform .16s ease}
+.mnav-card:active{transform:scale(.97)}
+.mnav-card i{width:36px;height:36px;margin-bottom:10px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#FEF3E0;color:#C77A00}
+.mnav-card i svg,.mnav-card i img{width:20px;height:20px}
+.mnav-card.is-ai{background:#F6EEFC}
+.mnav-card.is-ai i{border-radius:50%;background:linear-gradient(160deg,#883DA3,#B42FE5)}
+.mnav-card b{font-size:15px;line-height:20px;font-weight:600}
+.mnav-card span{font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.55)}
+.mnav-soc{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:20px;padding-top:16px;border-top:1px solid #EEF0F3}
+.mnav-soc a{font-size:13px;line-height:18px;font-weight:600;color:rgba(22,25,29,.6);text-decoration:none}
+.mnav.is-open .mnav-item,.mnav.is-open .mnav-foot{animation:mnIn .46s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0) * 35ms + 40ms)}
+@keyframes mnIn{from{opacity:0;transform:translateY(12px)}}
+@media (prefers-reduced-motion:reduce){
+  .menu path,.mnav,.mnav-body,.mnav-sub,.mnav-cv svg{transition:none}
+  .mnav.is-open .mnav-item,.mnav.is-open .mnav-foot{animation:none}
+}
+@media (min-width:1024px){ .mnav{display:none} }
 .wins-dots span,.found-row a{cursor:pointer}
 
 /* ---------- Newton, the AI chat (385:86140 button, 385:86567 first screen). The dock gains a purple orb button; tapping it opens a
@@ -1583,8 +1635,6 @@ html.is-locked,html.is-locked body{overflow:hidden;overscroll-behavior:none}
   .nav-orb.is-live{background:none}
   .menu{display:none}   /* desktop: the menu items are in the bar; no hamburger (12 Oct) */
   .nav .btn-sm{height:39px;padding:8px 24px}
-  .sheet-panel{left:auto;right:calc(var(--side) - 36px);width:360px;top:80px}
-  .sheet-ask{color:#883DA3!important}
 
   .hero{height:912px;background:#0B0C0E}
   .hero-media{inset:auto;left:0;right:0;top:0;height:1021px}
@@ -2785,7 +2835,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     <div class="nav-actions">
       <button class="nav-ask dt-only" type="button" id="navAsk" aria-label="Ask Newton"><canvas class="nav-orb" aria-hidden="true"></canvas><span>Ask Newton</span></button>
       <a class="btn btn-brand btn-sm" href="#ways">Apply Now</a>
-      <button class="menu" type="button" aria-label="Open menu"><img src="assets/icon-menu.svg" alt=""></button>
+      <button class="menu" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><svg viewBox="0 0 24 24" fill="none" stroke="#16191D" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path class="m1" d="M5.76 7.5h12.5"/><path class="m2" d="M5.76 12h12.5"/><path class="m3" d="M5.76 16.5h12.5"/></svg></button>
     </div>
     <div class="dn-p dt-only" id="dnProg" data-m="prog" role="group" aria-label="Programs &amp; Fees" style="--acc:#E5F1FF;--ink:#0673F9">
       <div class="dn-opts"><span class="dn-lab">Campuses · B.Tech in CS &amp; AI</span>
@@ -3640,12 +3690,17 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     <button class="ai-btn" type="button" id="aiBtn" aria-label="Ask Newton"><img class="ai-spark" src="assets/ai/icon-sparkle.svg" alt=""><img class="ai-send" src="assets/ai/icon-send.svg" alt=""></button>
   </div>
 </div>
-<div class="sheet" id="menuSheet" aria-hidden="true">
-  <div class="sheet-back" id="menuBack"></div>
-  <nav class="sheet-panel" aria-label="Jump to a section">
-    <div class="sheet-head"><span>Jump to</span><button class="sheet-x" type="button" id="menuX" aria-label="Close the menu">×</button></div>
-    <a href="#" id="sheetAsk" class="sheet-ask">Ask Newton</a><a href="#top">Top</a><a href="#co">Placement record</a><a href="#campus">Campus internships</a><a href="#found">Seven foundations</a><a href="#oss">Open source</a><a href="#cc">Competitive coding</a><a href="#ent">Entrepreneurship</a><a href="#glob">Global exposure</a><a href="#res">Research</a><a href="#cur">Curriculum</a><a href="#fac">Faculty</a><a href="#cities">Campuses</a><a href="#ways">Ways to get in</a><a href="#adm">Admission process</a><a href="#fest">Fests</a><a href="#seniors">Talk to a senior</a><a href="#founders">From the founders</a><a href="#news">In the news</a><a href="#tools">Free tools</a><a href="#nsat">Next NSAT</a><a href="#faq">FAQs &amp; brochure</a>
-  </nav>
+<div class="mnav" id="mnav" aria-hidden="true">
+  <div class="mnav-in">
+    <nav class="mnav-list" id="mnavList" aria-label="Main"></nav>
+    <div class="mnav-foot">
+      <div class="mnav-acts">
+        <a class="mnav-card is-ai" href="#" id="sheetAsk"><i><img src="assets/ai/icon-sparkle.svg" alt=""></i><b>Ask Newton</b><span>Ask anything about NST</span></a>
+        <a class="mnav-card" href="#seniors"><i><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="7.6" r="3.6"/><path d="M2 20.2c0-3.9 3.1-6.7 7-6.7s7 2.8 7 6.7c0 .6-.4.9-1 .9H3c-.6 0-1-.3-1-.9z"/><circle cx="17" cy="8.4" r="2.8" opacity=".55"/><path d="M17.4 13.2c2.8.2 4.6 2.4 4.6 5.3 0 .5-.3.8-.8.8h-3.4c.1-2.4-.4-4.4-1.6-6.1z" opacity=".55"/></svg></i><b>Talk to a senior</b><span>Chat with a student</span></a>
+      </div>
+      <div class="mnav-soc"><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">LinkedIn</a><a href="#">X</a></div>
+    </div>
+  </div>
 </div>
 
 <script src="assets/vendor/thinking-orbs-engine.js"></script>
@@ -4033,16 +4088,71 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     window.scrollTo({top: Math.max(0, y), behavior: reduce ? 'auto' : 'smooth'});
   });
   ['navAsk', 'sheetAsk'].forEach(function(id){ var b = document.getElementById(id); if (b) b.addEventListener('click', function(e){ e.preventDefault(); document.getElementById('aiBtn').click(); }); });
-  /* ---- menu sheet ---- */
+  /* ---- menu sheet (the mobile menu, 16 Oct): built from the desktop nav so both always list the same pages ---- */
   (function(){
-    var sheet = document.getElementById('menuSheet'), btn = document.querySelector('.menu'); if (!sheet || !btn) return;
-    function open(){ sheet.classList.add('is-open'); sheet.setAttribute('aria-hidden', 'false'); }
-    function close(){ sheet.classList.remove('is-open'); sheet.setAttribute('aria-hidden', 'true'); }
-    btn.addEventListener('click', function(){ sheet.classList.contains('is-open') ? close() : open(); });
-    document.getElementById('menuBack').addEventListener('click', close);
-    document.getElementById('menuX').addEventListener('click', close);
-    sheet.addEventListener('click', function(e){ if (e.target.closest('a')) close(); });
-    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+    var mn = document.getElementById('mnav'), list = document.getElementById('mnavList'), btn = document.querySelector('.menu'), dn = document.getElementById('dn');
+    if (!mn || !list || !btn || !dn) return;
+    var root = document.documentElement, here = location.pathname.split('/').pop() || 'index.html';
+    var CHEV = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6l4 4 4-4"/></svg>';
+    var ARROW = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 8h9M8.5 4l4 4-4 4"/></svg>';
+    var n = 0;
+    Array.prototype.forEach.call(dn.querySelectorAll('.dn-i'), function(it){
+      if (it.classList.contains('dn-contact')) return;   /* Contact us is inside More */
+      var li = document.createElement('div'); li.className = 'mnav-item'; li.style.setProperty('--i', n++);
+      var label = it.firstChild.textContent.trim();
+      if (it.tagName === 'A'){
+        var href = it.getAttribute('href'), cur = href === here;
+        li.innerHTML = '<a class="mnav-row" href="' + href + '"' + (cur ? ' aria-current="page"' : '') + '><span>' + label + (cur ? '<em class="mnav-here">You’re here</em>' : '') + '</span><i class="mnav-cv">' + ARROW + '</i></a>';
+      } else {
+        var pane = document.getElementById(it.getAttribute('aria-controls')); if (!pane) return;
+        var id = 'mnav-' + it.dataset.m, sub = document.createElement('div');
+        sub.className = 'mnav-sub'; sub.style.cssText = '--acc:' + (pane.dataset.acc0 || pane.style.getPropertyValue('--acc')) + ';--ink2:' + pane.style.getPropertyValue('--ink');
+        Array.prototype.forEach.call(pane.querySelector('.dn-opts').children, function(c){
+          if (c.classList.contains('dn-lab') && c.textContent.trim().toLowerCase() === label.toLowerCase()) return;   /* a label that only repeats the row */
+          var k = c.cloneNode(true); k.removeAttribute('id');
+          if (k.dataset && k.dataset.img){ var ic = k.querySelector('.dn-ic'); if (ic) ic.innerHTML = '<img src="' + k.dataset.img + '" alt="" loading="lazy">'; }   /* campuses: their photos, not pins */
+          sub.appendChild(k);
+        });
+        li.style.setProperty('--ink2', pane.style.getPropertyValue('--ink'));
+        li.innerHTML = '<button class="mnav-row" type="button" aria-expanded="false" aria-controls="' + id + '"><span>' + label + '</span><i class="mnav-cv">' + CHEV + '</i></button><div class="mnav-body" id="' + id + '"><div></div></div>';
+        li.querySelector('.mnav-body>div').appendChild(sub);
+      }
+      list.appendChild(li);
+    });
+    mn.querySelector('.mnav-foot').style.setProperty('--i', n);
+    function setOpen(item, on){
+      item.classList.toggle('is-x', on);
+      var b = item.querySelector('button.mnav-row'); if (b) b.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    list.addEventListener('click', function(e){
+      var b = e.target.closest('button.mnav-row'); if (!b) return;
+      var item = b.parentNode, on = !item.classList.contains('is-x');
+      Array.prototype.forEach.call(list.querySelectorAll('.mnav-item.is-x'), function(o){ if (o !== item) setOpen(o, false); });
+      setOpen(item, on);
+      if (on) setTimeout(function(){   /* once it has opened, bring the whole group into view if it runs off the bottom */
+        var r = item.getBoundingClientRect();
+        if (r.bottom > innerHeight - 12) mn.scrollTo({top: mn.scrollTop + Math.min(r.top - 84, r.bottom - innerHeight + 24), behavior: reduce ? 'auto' : 'smooth'});
+      }, 380);
+    });
+    function open(){
+      root.classList.add('is-mnav'); mn.classList.add('is-open'); mn.setAttribute('aria-hidden', 'false');
+      btn.setAttribute('aria-expanded', 'true'); btn.setAttribute('aria-label', 'Close menu'); mn.scrollTop = 0;
+    }
+    function close(){
+      if (!mn.classList.contains('is-open')) return;
+      root.classList.remove('is-mnav'); mn.classList.remove('is-open'); mn.setAttribute('aria-hidden', 'true');
+      btn.setAttribute('aria-expanded', 'false'); btn.setAttribute('aria-label', 'Open menu');
+      setTimeout(function(){ if (!mn.classList.contains('is-open')) Array.prototype.forEach.call(list.querySelectorAll('.mnav-item.is-x'), function(o){ setOpen(o, false); }); }, 240);
+    }
+    btn.addEventListener('click', function(){ mn.classList.contains('is-open') ? close() : open(); });
+    /* a real link closes the menu first (capture), so the page is scrollable again when the anchor handler glides to it;
+       placeholders (href="#") leave it open, and Ask Newton closes it before the chat opens */
+    mn.addEventListener('click', function(e){
+      var a = e.target.closest('a'); if (!a) return;
+      if (a.id === 'sheetAsk' || a.getAttribute('href') !== '#') close();
+    }, true);
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && mn.classList.contains('is-open')){ close(); btn.focus(); } });
+    addEventListener('resize', function(){ if (innerWidth >= 1024) close(); });
   })();
 
   /* ---- desktop nav (proposal 614:4822; motion after clerk.com). Hover an item with a chevron for 80 ms, or click it, and its
