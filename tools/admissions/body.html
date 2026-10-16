@@ -74,22 +74,22 @@
     </div>
   </section>
 
-  <!-- 03 · NSAT in one look (dark): the paper, its four parts, the dates, the three prep kits -->
+  <!-- 03 · NSAT (dark; 16 Oct v3, his ask: what the test asks and how to prepare, connected). Pick a subject, try a sample question;
+       the card ends in the Prep Kit, then the guidelines and the interview kit. Questions are illustrative, labelled as samples -->
   <section class="bk bk-dark adm-nsat" id="nsat" aria-label="NSAT">
-    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">NSAT, <span>in one look.</span></h2><p class="bk-sub">How ready you are for a B.Tech in CS &amp; AI.</p></div></div>
-    <!-- what the paper covers (16 Oct v2, his ask): four subject tiles, each a glyph you can read at a glance; the dates live in the hero ticket -->
-    <div class="adm-paper">
-      <div class="adm-paper-head"><b>On the paper</b><em><i></i>Online · proctored</em></div>
-      <div class="adm-subj">
-        <div style="--c:#61A8FF;--cb:rgba(97,168,255,.12)"><span class="adm-gl">+&thinsp;&minus;</span><b>Basic maths</b></div>
-        <div style="--c:#B79CFF;--cb:rgba(183,156,255,.12)"><span class="adm-gl"><i>f</i>(x)</span><b>Advanced maths</b></div>
-        <div style="--c:#4ADE80;--cb:rgba(74,222,128,.11)"><span class="adm-gl">Aa</span><b>English</b></div>
-        <div style="--c:#FBBF24;--cb:rgba(251,191,36,.12)"><span class="adm-gl adm-gl-ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9.5h5.2a3.3 3.3 0 116.6 0H24v5.2a3.3 3.3 0 110 6.6V26.5h-5.2a3.3 3.3 0 10-6.6 0H7v-5.2a3.3 3.3 0 100-6.6z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></span><b>General aptitude</b></div>
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">NSAT, <span>in one look.</span></h2><p class="bk-sub">What it asks, and how to prepare.</p></div></div>
+    <div class="adm-q">
+      <div class="adm-qtabs" role="tablist" aria-label="Subjects">
+        <button type="button" role="tab" class="is-on" aria-selected="true" data-s="0" style="--c:#61A8FF">Basic maths</button><button type="button" role="tab" aria-selected="false" data-s="1" style="--c:#B79CFF">Advanced maths</button><button type="button" role="tab" aria-selected="false" data-s="2" style="--c:#4ADE80">English</button><button type="button" role="tab" aria-selected="false" data-s="3" style="--c:#FBBF24">Aptitude</button>
+      </div>
+      <div class="adm-qcard" id="admQ" aria-live="polite">
+        <p class="adm-qk"><span id="admQk">Sample question · Basic maths</span><em>Tap an answer</em></p>
+        <p class="adm-qtext" id="admQt">A shirt costs ₹800 after a 20% discount. What was its original price?</p>
+        <div class="adm-qopts" id="admQo"></div>
+        <a class="adm-qprep" href="#"><span><b>NSAT Prep Kit</b><em>More questions like this, by subject</em></span><svg class="adm-go" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
-    <p class="adm-sub-k">Prepare with</p>
     <div class="adm-kits">
-      <a class="adm-kit" href="#"><i class="adm-kit-ic" style="--c:#61A8FF;--cb:rgba(97,168,255,.16)"><svg viewBox="0 0 20 20"><path d="M3 4.5c2.6-.8 4.8-.5 7 1v11c-2.2-1.5-4.4-1.8-7-1zM17 4.5c-2.6-.8-4.8-.5-7 1v11c2.2-1.5 4.4-1.8 7-1z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg></i><span><b>NSAT Prep Kit</b><em>Curated study material</em></span><svg class="adm-go" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="adm-kit" href="#"><i class="adm-kit-ic" style="--c:#4ADE80;--cb:rgba(74,222,128,.14)"><svg viewBox="0 0 20 20"><rect x="4" y="2.5" width="12" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 7h6M7 10h6M7 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></i><span><b>NSAT Guidelines</b><em>The format and how it is marked</em></span><svg class="adm-go" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <a class="adm-kit is-locked" href="#"><i class="adm-kit-ic" style="--c:#C4B5FD;--cb:rgba(196,181,253,.16)"><svg viewBox="0 0 20 20"><rect x="4" y="8.5" width="12" height="9" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M7 8.5V6a3 3 0 016 0v2.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i><span><b>Interview Prep Kit</b><em>Unlocks when you clear NSAT</em></span><svg class="adm-go" viewBox="0 0 16 16"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
@@ -122,12 +122,13 @@
   <!-- 06 · scholarships (light): JEE Excellence leads; then merit, Young Women Leader, Extraordinary Achievement -->
   <section class="bk bk-light adm-sch" id="scholarships" aria-label="Scholarships">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Scholarships, <span>up to 100%.</span></h2><p class="bk-sub">On your NSAT, interview and achievements.</p></div></div>
+    <!-- 16 Oct v2 (his ask: the solid blue made the text hard to read): a white card in the route cards' selected style -->
     <article class="adm-jes">
       <em class="adm-jes-k">JEE Excellence Scholarship</em>
       <p class="adm-jes-big"><b>100%</b><span>fee waiver for all four years</span></p>
-      <p class="adm-jes-for">For a JEE Main or Advanced All India Rank under <b>10,000</b> (2026).</p>
+      <p class="adm-jes-for">For a JEE Main or Advanced All India Rank under 10,000 (2026).</p>
       <ul class="adm-jes-cov"><li>Tuition</li><li>Upskilling, admin &amp; tech fees</li><li>Hostel &amp; mess</li></ul>
-      <p class="adm-jes-note">The MacBook, the block fee and the refundable deposit are paid separately.</p>
+      <p class="adm-jes-note">Paid separately: the MacBook, the block fee and the refundable deposit.</p>
     </article>
     <div class="adm-schs">
       <article class="adm-s"><p class="adm-s-v"><span>Up to</span><b>100%</b></p><div><h3>Merit scholarship</h3><p>Of first-year tuition, on your NSAT and interview scores.</p></div></article>

@@ -82,6 +82,36 @@
     });
   })();
 
+  /* 03 · NSAT: pick a subject, answer its sample question (illustrative, not from a real paper) */
+  var QS = [
+    {s: 'Basic maths', c: '#61A8FF', q: 'A shirt costs ₹800 after a 20% discount. What was its original price?', o: ['₹960', '₹1,000', '₹1,040', '₹1,200'], a: 1},
+    {s: 'Advanced maths', c: '#B79CFF', q: 'For which values of x is x² − 4x + 3 = 0?', o: ['1 and 3', '−1 and −3', '2 and 3', '1 and 4'], a: 0},
+    {s: 'English', c: '#4ADE80', q: 'Which word is closest in meaning to “meticulous”?', o: ['Careless', 'Careful', 'Quick', 'Loud'], a: 1},
+    {s: 'Aptitude', c: '#FBBF24', q: 'What comes next: 2, 6, 12, 20, 30, …?', o: ['36', '40', '42', '44'], a: 2}
+  ];
+  (function(){
+    var tabs = document.querySelector('.adm-qtabs'), card = document.getElementById('admQ'), opts = document.getElementById('admQo'); if (!tabs || !card || !opts) return;
+    function show(k){
+      var Q = QS[k];
+      card.style.setProperty('--qc', Q.c);
+      document.getElementById('admQk').textContent = 'Sample question · ' + Q.s;
+      document.getElementById('admQt').textContent = Q.q;
+      opts.classList.remove('is-done');
+      opts.innerHTML = Q.o.map(function(t, i){ return '<button type="button" data-i="' + i + '"><i>' + 'ABCD'[i] + '</i>' + t + '</button>'; }).join('');
+      tabs.querySelectorAll('button').forEach(function(b){ var on = +b.dataset.s === k; b.classList.toggle('is-on', on); b.setAttribute('aria-selected', on); });
+      card.dataset.k = k;
+    }
+    tabs.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) show(+b.dataset.s); });
+    opts.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b || opts.classList.contains('is-done')) return;
+      var Q = QS[+card.dataset.k], i = +b.dataset.i;
+      opts.classList.add('is-done');
+      opts.children[Q.a].classList.add('is-right');
+      if (i !== Q.a) b.classList.add('is-wrong');
+    });
+    show(0);
+  })();
+
   /* 07 · loans: tap a logo to see that lender's terms; switch secured / unsecured. [rate, max loan, tenure, processing] per type */
   var LOANS = {
     pnb: {n: 'PNB', via: 'Through Edufin', t: [['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST'], ['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST']]},

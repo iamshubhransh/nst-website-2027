@@ -90,30 +90,30 @@
 .adm-rc-cta a{margin-top:0}
 .adm-closes{flex:none;height:24px;padding:0 9px;border-radius:999px;background:#FFF4EC;font-style:normal;font-size:12px;line-height:24px;font-weight:600;color:#C2410C}
 
-/* ---- 03 NSAT (dark): the paper ---- */
-.adm-paper{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
-.adm-paper-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.adm-paper-head b{font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.6)}
-.adm-paper-head em{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:#16191D;font-style:normal;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.7)}
-.adm-paper-head em i{width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,.25)}
-.adm-parts{margin:14px 0 0;padding:0;list-style:none}
-.adm-parts li{display:flex;align-items:center;gap:14px;height:52px;border-top:1px solid #23282F}
-.adm-parts li>span:first-child{width:22px;font-size:13px;line-height:16px;font-weight:600;font-stretch:125%;color:#61A8FF}
-.adm-parts b{flex:1;font-size:16px;line-height:22px;font-weight:600;color:#fff}
-.adm-bub{flex:none;display:flex;gap:6px}   /* answer bubbles: it is a test paper */
-.adm-bub i{width:10px;height:10px;border:1.2px solid #3A414A;border-radius:50%}
-.adm-bub i.on{border-color:#61A8FF;background:#61A8FF}
-.adm-subj{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
-.adm-subj div{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:112px;padding:14px;border-radius:14px;background:var(--cb);border:1px solid rgba(255,255,255,.05)}
-.adm-gl{font-size:30px;line-height:34px;font-weight:600;font-stretch:125%;letter-spacing:-.5px;color:var(--c);white-space:nowrap}
-.adm-gl i{font-style:italic;font-stretch:100%;font-family:Georgia,'Times New Roman',serif;font-weight:600}
-.adm-gl-ic svg{display:block;width:34px;height:34px}
-.adm-subj b{font-size:15px;line-height:20px;font-weight:600;color:#fff}
-.adm-dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
-.adm-dates p{margin:0;padding:12px 14px;border-radius:12px;background:#16191D}
-.adm-dates span{display:block;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.5)}
-.adm-dates b{display:block;margin-top:2px;font-size:16px;line-height:22px;font-weight:600;font-stretch:125%;color:#fff}
-.adm-sub-k{margin:0 0 -12px;font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+/* ---- 03 NSAT (dark): subject tabs, a sample question you can answer, the prep kit it leads to ---- */
+.adm-q{display:flex;flex-direction:column;gap:12px}
+.adm-qtabs{display:flex;gap:6px;margin:0 -16px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.adm-qtabs::-webkit-scrollbar{display:none}
+.adm-qtabs button{flex:none;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border:1px solid #30363D;border-radius:999px;background:transparent;font-family:var(--font);font-size:13px;line-height:16px;font-weight:600;color:rgba(255,255,255,.65);cursor:pointer;-webkit-tap-highlight-color:transparent}
+.adm-qtabs button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.adm-qtabs button.is-on{border-color:var(--c);background:rgba(255,255,255,.06);color:#fff}
+.adm-qcard{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
+.adm-qk{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--qc,#61A8FF)}
+.adm-qk em{font-style:normal;letter-spacing:0;text-transform:none;font-weight:500;color:rgba(255,255,255,.4)}
+.adm-qtext{margin:12px 0 0;font-size:16px;line-height:24px;font-weight:600;color:#fff}
+.adm-qopts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.adm-qopts button{display:flex;align-items:center;gap:10px;min-height:46px;padding:8px 10px;border:1px solid #30363D;border-radius:12px;background:#16191D;font-family:var(--font);font-size:14px;line-height:18px;font-weight:600;color:#fff;text-align:left;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease,background-color .2s ease}
+.adm-qopts button i{flex:none;width:22px;height:22px;border-radius:6px;background:#23282F;font-style:normal;font-size:11px;line-height:22px;font-weight:700;text-align:center;color:rgba(255,255,255,.6)}
+.adm-qopts button.is-right{border-color:#22C55E;background:rgba(34,197,94,.12)}
+.adm-qopts button.is-right i{background:#22C55E;color:#0B0C0E}
+.adm-qopts button.is-wrong{border-color:#F87171;background:rgba(248,113,113,.1)}
+.adm-qopts button.is-wrong i{background:#F87171;color:#0B0C0E}
+.adm-qopts.is-done button:not(.is-right):not(.is-wrong){opacity:.45}
+.adm-qprep{display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 12px 12px 14px;border-radius:12px;background:#0673F9;text-decoration:none}
+.adm-qprep span{display:flex;flex-direction:column;min-width:0}
+.adm-qprep b{font-size:15px;line-height:20px;font-weight:600;color:#fff}
+.adm-qprep em{font-style:normal;font-size:12.5px;line-height:17px;font-weight:500;color:rgba(255,255,255,.75)}
+.adm-qprep .adm-go{color:#fff}
 .adm-kits{display:flex;flex-direction:column;gap:8px}
 .adm-kit{display:flex;align-items:center;gap:14px;padding:13px;border:1px solid #23282F;border-radius:14px;background:#0B0C0E;text-decoration:none}
 .adm-kit-ic{flex:none;width:40px;height:40px;border-radius:11px;background:var(--cb);color:var(--c);display:flex;align-items:center;justify-content:center}
@@ -148,20 +148,19 @@
 .adm-early-list em{font-style:normal;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.55)}
 
 /* ---- 06 scholarships: JEE Excellence as the blue lead card, then three rows ---- */
-.adm-jes{position:relative;overflow:hidden;padding:22px 20px 20px;border-radius:18px;color:#fff;background:linear-gradient(160deg,#0673F9 0%,#0450B0 58%,#03357A 100%)}
-.adm-jes::before,.adm-jes::after{content:"";position:absolute;border-radius:50%;pointer-events:none;border:1px dashed rgba(255,255,255,.18)}
-.adm-jes::before{right:-90px;top:-90px;width:240px;height:240px}
-.adm-jes::after{right:-40px;top:-40px;width:140px;height:140px}
-.adm-jes-k{position:relative;display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.16);font-style:normal;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase}
-.adm-jes-big{position:relative;display:flex;align-items:flex-end;gap:12px;margin:14px 0 0}
-.adm-jes-big b{font-size:56px;line-height:60px;font-weight:600;font-stretch:125%;letter-spacing:-2px}
-.adm-jes-big span{max-width:150px;padding-bottom:8px;font-size:15px;line-height:20px;font-weight:500;color:rgba(255,255,255,.85)}
-.adm-jes-for{position:relative;margin:10px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(255,255,255,.9)}
-.adm-jes-for b{font-weight:700;color:#fff}
-.adm-jes-cov{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0;padding:0;list-style:none}
-.adm-jes-cov li{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 8px;border-radius:999px;background:rgba(255,255,255,.14);font-size:12.5px;line-height:16px;font-weight:600}
-.adm-jes-cov li::before{content:"";width:14px;height:14px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.2' fill='none' stroke='%230673F9' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
-.adm-jes-note{position:relative;margin:14px 0 0;font-size:12px;line-height:18px;font-weight:500;color:rgba(255,255,255,.65)}
+.adm-jes{padding:18px;border:1.5px solid #0673F9;border-radius:18px;background:#fff}
+.adm-jes-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.adm-jes-k{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;background:#E5F1FF;font-style:normal;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.1px;text-transform:uppercase;color:#0673F9}
+.adm-jes-rank{font-size:12px;line-height:16px;font-weight:600;color:rgba(22,25,29,.5)}
+.adm-jes-big{display:flex;align-items:flex-end;gap:12px;margin:14px 0 0}
+.adm-jes-big b{font-size:52px;line-height:56px;font-weight:600;font-stretch:125%;letter-spacing:-2px;color:#0673F9}
+.adm-jes-big span{max-width:150px;padding-bottom:7px;font-size:15px;line-height:20px;font-weight:600;color:#16191D}
+.adm-jes-for{margin:8px 0 0;font-size:14px;line-height:21px;font-weight:500;color:rgba(22,25,29,.6)}
+.adm-jes-cov{margin:14px 0 0;padding:4px 14px;border-radius:12px;background:#F6F7F9;list-style:none}
+.adm-jes-cov li{display:flex;align-items:center;gap:10px;height:40px;font-size:14px;line-height:20px;font-weight:600;color:#16191D}
+.adm-jes-cov li+li{border-top:1px solid #E7EAEE}
+.adm-jes-cov li::before{content:"";flex:none;width:18px;height:18px;border-radius:50%;background:#0673F9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.2' fill='none' stroke='%23fff' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.adm-jes-note{margin:12px 0 0;font-size:12px;line-height:18px;font-weight:500;color:rgba(22,25,29,.5)}
 .adm-schs{display:flex;flex-direction:column;gap:10px}
 .adm-s{display:flex;align-items:flex-start;gap:16px;padding:15px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
 .adm-s:nth-child(1){--c:#0673F9}.adm-s:nth-child(2){--c:#C2185B}.adm-s:nth-child(3){--c:#C77A00}

@@ -48,9 +48,14 @@ ok('a card is reachable by keyboard (Enter selects it)', await ev(() => document
 
 ok('route cards: minimal — object, one-line text; shortlisting shows four criteria and its closing date', await ev(() => document.querySelectorAll('.adm-rc .adm-rc-ic svg').length === 3 && document.querySelectorAll('.adm-crit span').length === 4 && /Closes 6 Jan/.test(document.querySelector('.adm-rc[data-r="2"]').textContent) && [...document.querySelectorAll('.adm-rc > p')].every(p => p.getBoundingClientRect().height <= 23)));
 // NSAT paper, timeline, scholarships, loans
-ok('NSAT: four subject tiles in a 2 × 2 grid, three kits', await ev(() => { const t = [...document.querySelectorAll('.adm-subj > div')]; return t.length === 4 && t[0].getBoundingClientRect().top === t[1].getBoundingClientRect().top && t[2].getBoundingClientRect().top > t[0].getBoundingClientRect().bottom && document.querySelectorAll('.adm-kit').length === 3; }));
+await ev(() => document.getElementById('nsat').scrollIntoView({ block: 'center' })); await p.waitForTimeout(200);
+ok('NSAT: four subject tabs, a sample question with four options, the prep kit under it', await ev(() => document.querySelectorAll('.adm-qtabs button').length === 4 && document.querySelectorAll('#admQo button').length === 4 && !!document.querySelector('#admQ .adm-qprep') && document.querySelectorAll('.adm-kit').length === 2));
+await p.locator('#admQo button').nth(0).tap(); await p.waitForTimeout(200);
+ok('NSAT: a wrong answer shows wrong and the right one', await ev(() => document.querySelectorAll('#admQo .is-wrong').length === 1 && document.querySelector('#admQo button.is-right').dataset.i === '1'));
+await p.locator('.adm-qtabs button[data-s="3"]').tap(); await p.waitForTimeout(200);
+ok('NSAT: switching subject brings a fresh question', await ev(() => /Aptitude/.test(document.getElementById('admQk').textContent) && /2, 6, 12/.test(document.getElementById('admQt').textContent) && !document.querySelector('#admQo .is-right')));
 ok('six steps, each with its icon; NSAT marked', await ev(() => document.querySelectorAll('.adm-tl li').length === 6 && document.querySelectorAll('.adm-tl .adm-tl-ic svg').length === 6 && document.querySelector('.adm-tl li.is-on h3').textContent === 'Take NSAT'));
-ok('scholarships: JEE Excellence lead + three', await ev(() => !!document.querySelector('.adm-jes') && document.querySelectorAll('.adm-s').length === 3));
+ok('scholarships: JEE Excellence lead (white card, dark text) + three', await ev(() => { const j = document.querySelector('.adm-jes'); return !!j && getComputedStyle(j).backgroundColor === 'rgb(255, 255, 255)' && document.querySelectorAll('.adm-jes-cov li').length === 3 && document.querySelectorAll('.adm-s').length === 3; }));
 ok('loans: eight lender logos load', await ev(() => { const im = [...document.querySelectorAll('.adm-lt img')]; return im.length === 8 && im.every(i => i.complete && i.naturalWidth > 0); }));
 await ev(() => document.getElementById('loans').scrollIntoView({ block: 'center' })); await p.waitForTimeout(200);
 ok('loans: PNB shown first', await ev(() => document.getElementById('admLName').textContent === 'PNB' && document.getElementById('admLRate').textContent === '7.35% to 9.00%'));
@@ -74,7 +79,7 @@ ok('FAQ: one open at a time', await ev(() => document.querySelectorAll('#plAcc .
 // page-wide
 ok('images all load', await ev(() => [...document.images].filter(i => i.loading !== 'lazy').every(i => i.complete && i.naturalWidth > 0)), await ev(() => [...document.images].filter(i => !(i.complete && i.naturalWidth > 0)).map(i => i.src)));
 ok('no horizontal overflow', await ev(() => document.documentElement.scrollWidth <= innerWidth));
-ok('placeholder links do not jump', await ev(() => { scrollTo(0, 3000); const y = scrollY; document.querySelector('.adm-kit').click(); return Math.abs(scrollY - y) < 2; }));
+ok('placeholder links do not jump', await ev(() => { scrollTo(0, 3000); const y = scrollY; document.querySelector('.adm-qprep').click(); return Math.abs(scrollY - y) < 2; }));
 await ev(() => scrollTo(0, 2400)); await p.waitForTimeout(400);
 ok('dock shows after the hero', await ev(() => document.getElementById('dock').classList.contains('is-on')));
 await ev(() => scrollTo(0, 0)); await p.waitForTimeout(400);
