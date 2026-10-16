@@ -1,0 +1,144 @@
+/* ================= admissions · mobile draft (16 Oct 2026), 402 px design width. Builds on pl.css (hero, FAQ) and the homepage's
+   bucket sections (.bk, .bk-head), summary tiles and hatches, so the page shares one design language with home and placements ======= */
+
+/* ---- 01 hero: the placements hero; its wall is the route figure (the copy starts 10 px lower so the first station stays clear) ---- */
+.adm-hero{padding-top:440px}
+.adm-wall{height:470px}
+.adm-wall .rt-svg{position:absolute;left:0;top:0;width:100%;height:420px}
+.adm-wall::before{height:96px}
+.adm-wall::after{top:352px;height:118px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 55%,#fff 80%)}
+.adm-wall .rt-walk{fill:#EEF1F5}
+.adm-wall .rt-flag{fill:#E1E5EA}
+.adm-wall .rt-flag.on{fill:#0673F9}
+.adm-wall .rt-stu path{fill:#0673F9;stroke:#0450B0}
+.adm-facts .pl-hl{gap:8px}
+.adm-fi{flex:none;width:24px;height:24px;border-radius:7px;background:#E5F1FF;color:#0673F9;display:flex;align-items:center;justify-content:center}
+.adm-fi svg{width:14px;height:14px}
+
+/* ---- 01b summary tiles: the homepage tiles with a single icon disc ---- */
+.adm-av{display:flex;align-items:center;justify-content:center;background:var(--cb);color:var(--c)}
+.adm-av svg{width:14px;height:14px}
+
+/* ---- 02 routes ---- */
+.adm-pick{display:flex;gap:6px;margin:0 -16px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.adm-pick::-webkit-scrollbar{display:none}
+.adm-pick button{flex:none;height:36px;padding:0 14px;border:0;border-radius:999px;background:#F6F7F9;font-family:var(--font);font-size:13px;line-height:18px;font-weight:600;color:#5B6271;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .2s ease,color .2s ease}
+.adm-pick button.is-on{background:#16191D;color:#fff}
+.adm-rcards{display:flex;flex-direction:column;gap:12px}
+.adm-rc{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff;transition:border-color .3s ease,box-shadow .3s ease,background-color .3s ease}   /* real borders: they survive the Figma capture, inset shadows don't */
+.adm-rc.is-on{padding:16.5px;border:1.5px solid #0673F9;background:#F5F9FF;box-shadow:0 12px 24px -16px rgba(6,115,249,.45)}
+.adm-rc-top{display:flex;align-items:center;justify-content:space-between}
+.adm-tag{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:999px;background:#F6F7F9;font-style:normal;font-size:11px;line-height:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#5B6271}
+.adm-rc.is-on .adm-tag{background:#E5F1FF;color:#0673F9}
+.adm-rc-n{font-size:13px;line-height:16px;font-weight:600;font-stretch:125%;color:rgba(22,25,29,.3)}
+.adm-rc h3{margin:12px 0 0;font-size:20px;line-height:26px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#16191D}
+.adm-rc p{margin:6px 0 0;font-size:14px;line-height:22px;font-weight:500;color:rgba(22,25,29,.6)}
+.adm-rc ul{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 0;padding:0;list-style:none}
+.adm-rc li{height:26px;padding:0 10px;border-radius:999px;background:#F6F7F9;font-size:12px;line-height:26px;font-weight:500;color:#5B6271}
+.adm-rc.is-on li{background:#fff;border:1px solid #DCE9FB;line-height:24px}
+.adm-rc:not(.is-on) ul,.adm-rc:not(.is-on) a{display:none}   /* the cards that don't fit you stay short; picking one opens it */
+.adm-rc a{display:inline-block;margin-top:16px;font-size:14px;line-height:20px;font-weight:600;color:#0673F9;text-decoration:none}
+
+/* ---- 03 NSAT (dark): the paper ---- */
+.adm-paper{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
+.adm-paper-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.adm-paper-head b{font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.9)}
+.adm-paper-head em{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:#16191D;font-style:normal;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.7)}
+.adm-paper-head em i{width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,.25)}
+.adm-parts{margin:14px 0 0;padding:0;list-style:none}
+.adm-parts li{display:flex;align-items:center;gap:14px;height:52px;border-top:1px solid #23282F}
+.adm-parts li>span:first-child{width:22px;font-size:13px;line-height:16px;font-weight:600;font-stretch:125%;color:#61A8FF}
+.adm-parts b{flex:1;font-size:16px;line-height:22px;font-weight:600;color:#fff}
+.adm-bub{flex:none;display:flex;gap:6px}   /* answer bubbles: it is a test paper */
+.adm-bub i{width:10px;height:10px;border:1.2px solid #3A414A;border-radius:50%}
+.adm-bub i.on{border-color:#61A8FF;background:#61A8FF}
+.adm-dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.adm-dates p{margin:0;padding:12px 14px;border-radius:12px;background:#16191D}
+.adm-dates span{display:block;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.5)}
+.adm-dates b{display:block;margin-top:2px;font-size:16px;line-height:22px;font-weight:600;font-stretch:125%;color:#fff}
+.adm-sub-k{margin:0 0 -12px;font-size:12px;line-height:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.adm-kits{display:flex;flex-direction:column;gap:8px}
+.adm-kit{display:flex;align-items:center;gap:14px;padding:13px;border:1px solid #23282F;border-radius:14px;background:#0B0C0E;text-decoration:none}
+.adm-kit-ic{flex:none;width:40px;height:40px;border-radius:11px;background:var(--cb);color:var(--c);display:flex;align-items:center;justify-content:center}
+.adm-kit-ic svg{width:20px;height:20px}
+.adm-kit span{display:flex;flex-direction:column;min-width:0}
+.adm-kit b{font-size:15px;line-height:20px;font-weight:600;color:#fff}
+.adm-kit em{font-style:normal;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.5)}
+.adm-go{flex:none;width:16px;height:16px;margin-left:auto;color:rgba(255,255,255,.35)}
+
+/* ---- 04 the six steps: a dashed spine; each step's tile carries its object from the hero figure ---- */
+.adm-tl{margin:0;padding:0;list-style:none}
+.adm-tl li{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);column-gap:16px;padding-bottom:24px}
+.adm-tl li:last-child{padding-bottom:0}
+.adm-tl-line{position:absolute;left:31px;top:70px;bottom:6px;width:0;border-left:2px dashed #E1E5EA}
+.adm-tl-ic{display:flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:16px;background:#F6F7F9}
+.adm-tl-ic .adm-ic-svg{width:56px;height:56px}
+.adm-tl li.is-on .adm-tl-ic{background:#E5F1FF;border:1.5px solid #0673F9}
+.adm-tl li>div{padding-top:4px}
+.adm-tl-n{font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#0673F9}
+.adm-tl h3{margin:4px 0 0;font-size:17px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.1px;color:#16191D}
+.adm-tl p{margin:4px 0 0;font-size:14px;line-height:22px;font-weight:500;color:rgba(22,25,29,.6)}
+.adm-note{display:block;margin-top:10px;padding:8px 10px;border-radius:10px;background:#FEF3E0;font-style:normal;font-size:13px;line-height:18px;font-weight:500;color:#8A5300}
+.adm-cta.btn{margin-top:4px}
+
+/* ---- 05 apply early (dark) ---- */
+.adm-early-list{display:flex;flex-direction:column;gap:10px}
+.adm-early-list p{margin:0;display:flex;align-items:center;gap:14px;padding:13px;border:1px solid #23282F;border-radius:14px;background:#0B0C0E}
+.adm-early-list i{flex:none;width:40px;height:40px;border-radius:11px;background:var(--cb);color:var(--c);display:flex;align-items:center;justify-content:center}
+.adm-early-list i svg{width:18px;height:18px}
+.adm-early-list span{display:flex;flex-direction:column}
+.adm-early-list b{font-size:15px;line-height:20px;font-weight:600;color:#fff}
+.adm-early-list em{font-style:normal;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.55)}
+
+/* ---- 06 scholarships: JEE Excellence as the blue lead card, then three rows ---- */
+.adm-jes{position:relative;overflow:hidden;padding:22px 20px 20px;border-radius:18px;color:#fff;background:linear-gradient(160deg,#0673F9 0%,#0450B0 58%,#03357A 100%);box-shadow:0 18px 32px -20px rgba(6,80,176,.8)}
+.adm-jes::before,.adm-jes::after{content:"";position:absolute;border-radius:50%;pointer-events:none;border:1px dashed rgba(255,255,255,.18)}
+.adm-jes::before{right:-90px;top:-90px;width:240px;height:240px}
+.adm-jes::after{right:-40px;top:-40px;width:140px;height:140px}
+.adm-jes-k{position:relative;display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.16);font-style:normal;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase}
+.adm-jes-big{position:relative;display:flex;align-items:flex-end;gap:12px;margin:14px 0 0}
+.adm-jes-big b{font-size:56px;line-height:60px;font-weight:600;font-stretch:125%;letter-spacing:-2px}
+.adm-jes-big span{max-width:150px;padding-bottom:8px;font-size:15px;line-height:20px;font-weight:500;color:rgba(255,255,255,.85)}
+.adm-jes-for{position:relative;margin:10px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(255,255,255,.9)}
+.adm-jes-for b{font-weight:700;color:#fff}
+.adm-jes-cov{position:relative;display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 0;padding:0;list-style:none}
+.adm-jes-cov li{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px 0 8px;border-radius:999px;background:rgba(255,255,255,.14);font-size:12.5px;line-height:16px;font-weight:600}
+.adm-jes-cov li::before{content:"";width:14px;height:14px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpath d='M4 7.2l2 2 4-4.2' fill='none' stroke='%230673F9' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.adm-jes-note{position:relative;margin:14px 0 0;font-size:12px;line-height:18px;font-weight:500;color:rgba(255,255,255,.65)}
+.adm-schs{display:flex;flex-direction:column;gap:10px}
+.adm-s{display:flex;align-items:flex-start;gap:16px;padding:15px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.adm-s:nth-child(1){--c:#0673F9}.adm-s:nth-child(2){--c:#C2185B}.adm-s:nth-child(3){--c:#C77A00}
+.adm-s-v{flex:none;width:76px;margin:0;display:flex;flex-direction:column}
+.adm-s-v span{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+.adm-s-v b{font-size:26px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:-.6px;color:var(--c)}
+.adm-s h3{margin:0;font-size:16px;line-height:22px;font-weight:600;color:#16191D}
+.adm-s p{margin:4px 0 0;font-size:13.5px;line-height:20px;font-weight:500;color:rgba(22,25,29,.6)}
+
+/* ---- 07 loans (grey band) ---- */
+.adm-loans{--bk-bg:#F6F7F9}
+.adm-loan{padding:17px;border:1px solid #EDEFF3;border-radius:16px;background:#fff}
+.adm-loan-stats{display:grid;grid-template-columns:.8fr 1.35fr .8fr;gap:8px}
+.adm-loan-stats p{margin:0;display:flex;flex-direction:column}
+.adm-loan-stats b{font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.3px;color:#16191D;white-space:nowrap}
+.adm-loan-stats span{font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.55)}
+.adm-lenders{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:16px;border-top:1px solid #EDEFF3}
+.adm-lenders span{height:30px;padding:0 12px;border-radius:8px;background:#F6F7F9;font-size:13px;line-height:30px;font-weight:600;color:#16191D}
+.adm-lenders .more{background:none;padding:0 4px;color:rgba(22,25,29,.45)}
+.adm-loan-note{margin:14px 0 0;font-size:12.5px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
+
+/* ---- 08 campuses (dark): swipe; dots follow the swipe ---- */
+.adm-camps{display:flex;gap:12px;margin:0 -16px;padding:0 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;scrollbar-width:none}
+.adm-camps::-webkit-scrollbar{display:none}
+.adm-cc{flex:none;width:280px;scroll-snap-align:start;border:1px solid #23282F;border-radius:16px;overflow:hidden;background:#0B0C0E}
+.adm-cc img{display:block;width:100%;height:170px;object-fit:cover}
+.adm-cc div{padding:14px 16px 16px}
+.adm-cc b{display:block;font-size:16px;line-height:22px;font-weight:600;color:#fff}
+.adm-cc span{display:block;margin-top:2px;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.55)}
+.adm-dots{display:flex;justify-content:center;gap:6px;margin-top:-6px}
+.adm-dots i{width:6px;height:6px;border-radius:3px;background:#30363D;transition:width .3s ease,background-color .3s ease}
+.adm-dots i.on{width:18px;background:#61A8FF}
+
+/* the FAQ card and its separators as real borders (the placements look, but capturable) */
+.adm-faq .pl-acc{border:1px solid #EDEFF3;box-shadow:none}
+.adm-faq .pl-q+.pl-q{box-shadow:none;border-top:1px solid #EDEFF3}
+.adm-tl-ic{box-sizing:border-box}

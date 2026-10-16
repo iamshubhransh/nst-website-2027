@@ -49,7 +49,7 @@ for (const page of ['index.html', 'placements.html']) {
   } else {
     await p.locator('.nav .menu').tap(); await p.waitForTimeout(500);
     ok(T('Placements row marked as here'), await ev(() => !!document.querySelector('.mnav-row[aria-current="page"] .mnav-here')));
-    ok(T('section links go to the homepage'), await ev(() => [...document.querySelectorAll('#mnavList a')].filter(a => a.getAttribute('href') !== '#').every(a => /^(index\.html|placements\.html|https?:)/.test(a.getAttribute('href')))));
+    ok(T('section links go to the homepage'), await ev(() => [...document.querySelectorAll('#mnavList a')].filter(a => a.getAttribute('href') !== '#').every(a => /^(index\.html|placements\.html|admissions\.html|https?:)/.test(a.getAttribute('href')))));
     await p.locator('.nav .menu').tap(); await p.waitForTimeout(300);
   }
   ok(T('no page errors'), errs.length === 0, errs);
