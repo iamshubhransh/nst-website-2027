@@ -3758,7 +3758,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 /* ---- 03 NSAT (dark): the paper ---- */
 .adm-paper{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
 .adm-paper-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.adm-paper-head b{font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.9)}
+.adm-paper-head b{font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .adm-paper-head em{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:#16191D;font-style:normal;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.7)}
 .adm-paper-head em i{width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,.25)}
 .adm-parts{margin:14px 0 0;padding:0;list-style:none}
@@ -3768,6 +3768,12 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .adm-bub{flex:none;display:flex;gap:6px}   /* answer bubbles: it is a test paper */
 .adm-bub i{width:10px;height:10px;border:1.2px solid #3A414A;border-radius:50%}
 .adm-bub i.on{border-color:#61A8FF;background:#61A8FF}
+.adm-subj{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.adm-subj div{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:112px;padding:14px;border-radius:14px;background:var(--cb);border:1px solid rgba(255,255,255,.05)}
+.adm-gl{font-size:30px;line-height:34px;font-weight:600;font-stretch:125%;letter-spacing:-.5px;color:var(--c);white-space:nowrap}
+.adm-gl i{font-style:italic;font-stretch:100%;font-family:Georgia,'Times New Roman',serif;font-weight:600}
+.adm-gl-ic svg{display:block;width:34px;height:34px}
+.adm-subj b{font-size:15px;line-height:20px;font-weight:600;color:#fff}
 .adm-dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .adm-dates p{margin:0;padding:12px 14px;border-radius:12px;background:#16191D}
 .adm-dates span{display:block;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.5)}
@@ -4044,15 +4050,15 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   <!-- 03 · NSAT in one look (dark): the paper, its four parts, the dates, the three prep kits -->
   <section class="bk bk-dark adm-nsat" id="nsat" aria-label="NSAT">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">NSAT, <span>in one look.</span></h2><p class="bk-sub">How ready you are for a B.Tech in CS &amp; AI.</p></div></div>
+    <!-- what the paper covers (16 Oct v2, his ask): four subject tiles, each a glyph you can read at a glance; the dates live in the hero ticket -->
     <div class="adm-paper">
-      <div class="adm-paper-head"><b>NSAT 2027</b><em><i></i>Online · proctored</em></div>
-      <ol class="adm-parts">
-        <li><span>01</span><b>Basic maths</b><span class="adm-bub" aria-hidden="true"><i></i><i class="on"></i><i></i><i></i></span></li>
-        <li><span>02</span><b>Advanced maths</b><span class="adm-bub" aria-hidden="true"><i></i><i></i><i></i><i class="on"></i></span></li>
-        <li><span>03</span><b>English</b><span class="adm-bub" aria-hidden="true"><i class="on"></i><i></i><i></i><i></i></span></li>
-        <li><span>04</span><b>General aptitude</b><span class="adm-bub" aria-hidden="true"><i></i><i></i><i class="on"></i><i></i></span></li>
-      </ol>
-      <div class="adm-dates"><p><span>Test date</span><b>7 Jan 2027</b></p><p><span>Registration closes</span><b>6 Jan 2027</b></p></div>
+      <div class="adm-paper-head"><b>On the paper</b><em><i></i>Online · proctored</em></div>
+      <div class="adm-subj">
+        <div style="--c:#61A8FF;--cb:rgba(97,168,255,.12)"><span class="adm-gl">+&thinsp;&minus;</span><b>Basic maths</b></div>
+        <div style="--c:#B79CFF;--cb:rgba(183,156,255,.12)"><span class="adm-gl"><i>f</i>(x)</span><b>Advanced maths</b></div>
+        <div style="--c:#4ADE80;--cb:rgba(74,222,128,.11)"><span class="adm-gl">Aa</span><b>English</b></div>
+        <div style="--c:#FBBF24;--cb:rgba(251,191,36,.12)"><span class="adm-gl adm-gl-ic"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9.5h5.2a3.3 3.3 0 116.6 0H24v5.2a3.3 3.3 0 110 6.6V26.5h-5.2a3.3 3.3 0 10-6.6 0H7v-5.2a3.3 3.3 0 100-6.6z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/></svg></span><b>General aptitude</b></div>
+      </div>
     </div>
     <p class="adm-sub-k">Prepare with</p>
     <div class="adm-kits">

@@ -93,7 +93,7 @@
 /* ---- 03 NSAT (dark): the paper ---- */
 .adm-paper{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
 .adm-paper-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
-.adm-paper-head b{font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.9)}
+.adm-paper-head b{font-size:12px;line-height:16px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.6)}
 .adm-paper-head em{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:999px;background:#16191D;font-style:normal;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.7)}
 .adm-paper-head em i{width:6px;height:6px;border-radius:50%;background:#22C55E;box-shadow:0 0 0 3px rgba(34,197,94,.25)}
 .adm-parts{margin:14px 0 0;padding:0;list-style:none}
@@ -103,6 +103,12 @@
 .adm-bub{flex:none;display:flex;gap:6px}   /* answer bubbles: it is a test paper */
 .adm-bub i{width:10px;height:10px;border:1.2px solid #3A414A;border-radius:50%}
 .adm-bub i.on{border-color:#61A8FF;background:#61A8FF}
+.adm-subj{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.adm-subj div{display:flex;flex-direction:column;justify-content:space-between;gap:18px;min-height:112px;padding:14px;border-radius:14px;background:var(--cb);border:1px solid rgba(255,255,255,.05)}
+.adm-gl{font-size:30px;line-height:34px;font-weight:600;font-stretch:125%;letter-spacing:-.5px;color:var(--c);white-space:nowrap}
+.adm-gl i{font-style:italic;font-stretch:100%;font-family:Georgia,'Times New Roman',serif;font-weight:600}
+.adm-gl-ic svg{display:block;width:34px;height:34px}
+.adm-subj b{font-size:15px;line-height:20px;font-weight:600;color:#fff}
 .adm-dates{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
 .adm-dates p{margin:0;padding:12px 14px;border-radius:12px;background:#16191D}
 .adm-dates span{display:block;font-size:12px;line-height:16px;font-weight:500;color:rgba(255,255,255,.5)}
