@@ -3666,12 +3666,14 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 /* ================= admissions · mobile draft (16 Oct 2026), 402 px design width. Builds on pl.css (hero, FAQ) and the homepage's
    bucket sections (.bk, .bk-head), summary tiles and hatches, so the page shares one design language with home and placements ======= */
 
-/* ---- 01 hero: the placements hero; its wall is the route figure (the copy starts 10 px lower so the first station stays clear) ---- */
-.adm-hero{padding-top:440px}
-.adm-wall{height:470px}
-.adm-wall .rt-svg{position:absolute;left:0;top:0;width:100%;height:420px}
+/* ---- 01 hero: the placements hero; its wall is the route figure. The CTA must make the first fold on a real phone (browser
+        toolbars showing, so the small viewport, svh): the figure takes whatever height is left above the copy — up to its 420 —
+        and shrinks, whole, on short screens. adm.js measures the copy and sets --fig exactly; this is the no-JS estimate. ---- */
+.adm-hero{--fig:clamp(150px,calc(100vh - 400px),420px);--fig:clamp(150px,calc(100svh - 400px),420px);padding-top:calc(var(--fig) + 10px)}
+.adm-wall{height:calc(var(--fig) + 40px)}
+.adm-wall .rt-svg{position:absolute;left:0;top:36px;width:100%;height:calc(var(--fig) - 36px)}
 .adm-wall::before{height:96px}
-.adm-wall::after{top:352px;height:118px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 55%,#fff 80%)}
+.adm-wall::after{top:calc(var(--fig) - 60px);height:100px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 55%,#fff 80%)}
 .adm-wall .rt-walk{fill:#EEF1F5}
 .adm-wall .rt-flag{fill:#E1E5EA}
 .adm-wall .rt-flag.on{fill:#0673F9}
@@ -3681,6 +3683,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .adm-wall .rt-skin path{fill:#E8B98F;stroke:#B98457}
 .adm-wall .rt-hair path{fill:#2A2118;stroke:#16110C}
 .adm-facts .pl-hl{gap:8px}
+.adm-facts.pl-hero-logos{margin-top:16px}
 .adm-fi{flex:none;width:24px;height:24px;border-radius:7px;background:#E5F1FF;color:#0673F9;display:flex;align-items:center;justify-content:center}
 .adm-fi svg{width:14px;height:14px}
 
@@ -3903,14 +3906,6 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       </div>
       <h1 class="pl-title">From NSAT to your campus, in six steps</h1>
       <p class="pl-lede">One online test, one interview and a counselling session. Apply early for the best scholarships.</p>
-      <!-- key facts: the same dot-less strip the placements hero uses for its logos (16 Oct: online and proctored, scholarships,
-           campuses; the next NSAT date has its own ticket below) -->
-      <div class="pl-hero-logos adm-facts" aria-label="Key facts"><div class="pl-hero-track">
-        <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="7.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 13h13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></i><b>Online, proctored</b></span>
-        <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M3.5 12.5l9-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="4.5" cy="4.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="11.5" cy="11.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></i><b>Scholarships up to 100%</b></span>
-        <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M8 14.5s4.6-4.3 4.6-7.8a4.6 4.6 0 10-9.2 0C3.4 10.2 8 14.5 8 14.5z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.7" r="1.6" fill="currentColor"/></svg></i><b>4 campuses</b></span>
-        <span class="pl-hl-dup" aria-hidden="true"><span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="7.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 13h13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></i><b>Online, proctored</b></span> <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M3.5 12.5l9-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="4.5" cy="4.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="11.5" cy="11.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></i><b>Scholarships up to 100%</b></span> <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M8 14.5s4.6-4.3 4.6-7.8a4.6 4.6 0 10-9.2 0C3.4 10.2 8 14.5 8 14.5z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.7" r="1.6" fill="currentColor"/></svg></i><b>4 campuses</b></span></span>
-      </div></div>
       <!-- the next NSAT as a ticket (16 Oct, his ask, after the old site's exam card): the date leads, the deadline under it, a
            perforation, then the CTA and how many have registered -->
       <div class="adm-ticket">
@@ -3925,6 +3920,14 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
           <p class="adm-tk-proof"><span class="stack"><span class="av av-photo"><img src="assets/avatar-1.png" alt="" style="left:-4.81px;top:.08px;width:35.41px;height:34.67px"></span><span class="av av-photo"><img src="assets/avatar-2.png" alt="" style="left:-6.09px;top:3.5px;width:31.53px;height:24.08px"></span><span class="av av-photo"><img src="assets/avatar-3.png" alt="" style="left:-3.52px;top:2.66px;width:31.54px;height:25.75px"></span></span><span><b>31,352</b> students have registered</span></p>
         </div>
       </div>
+      <!-- key facts: the same dot-less strip the placements hero uses for its logos (16 Oct: online and proctored, scholarships,
+           campuses), under the ticket so the date and the CTA make the first fold -->
+      <div class="pl-hero-logos adm-facts" aria-label="Key facts"><div class="pl-hero-track">
+        <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="7.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 13h13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></i><b>Online, proctored</b></span>
+        <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M3.5 12.5l9-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="4.5" cy="4.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="11.5" cy="11.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></i><b>Scholarships up to 100%</b></span>
+        <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M8 14.5s4.6-4.3 4.6-7.8a4.6 4.6 0 10-9.2 0C3.4 10.2 8 14.5 8 14.5z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.7" r="1.6" fill="currentColor"/></svg></i><b>4 campuses</b></span>
+        <span class="pl-hl-dup" aria-hidden="true"><span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="7.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M1.5 13h13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></i><b>Online, proctored</b></span> <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M3.5 12.5l9-9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="4.5" cy="4.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="11.5" cy="11.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></i><b>Scholarships up to 100%</b></span> <span class="pl-hl"><i class="adm-fi"><svg viewBox="0 0 16 16"><path d="M8 14.5s4.6-4.3 4.6-7.8a4.6 4.6 0 10-9.2 0C3.4 10.2 8 14.5 8 14.5z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.7" r="1.6" fill="currentColor"/></svg></i><b>4 campuses</b></span></span>
+      </div></div>
     </div>
   </section>
 
@@ -4774,6 +4777,25 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       raf = live ? requestAnimationFrame(frame) : 0;
     }
     new IntersectionObserver(function(en){ live = en[0].isIntersecting; if (live && !raf){ t0 = 0; last = 0; raf = requestAnimationFrame(frame); } }).observe(hero);
+  })();
+
+  /* 01 · the first fold: the CTA must be on screen when the page opens, with the browser's toolbars showing (the small viewport,
+     100svh). Measure the copy from the crumbs to the CTA's bottom edge (it wraps differently per width) and give the figure the
+     rest, up to its 420, never under 150, keeping 24 px clear below the CTA. Re-fit when the width changes (not on toolbar
+     show/hide: svh does not move). */
+  (function(){
+    var hero = document.querySelector('.adm-hero'), copy = hero && hero.querySelector('.pl-hero-copy'), cta = hero && hero.querySelector('.pl-cta');
+    if (!hero || !copy || !cta) return;
+    var probe = document.createElement('div'); probe.style.cssText = 'position:fixed;left:0;top:0;width:0;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
+    document.body.appendChild(probe);
+    var w = 0;
+    function fit(force){
+      if (!force && innerWidth === w) return; w = innerWidth;
+      var vh = probe.offsetHeight || innerHeight, need = cta.getBoundingClientRect().bottom - copy.getBoundingClientRect().top;
+      hero.style.setProperty('--fig', Math.max(150, Math.min(420, Math.round(vh - need - 10 - 24))) + 'px');
+    }
+    fit(true); addEventListener('resize', function(){ fit(false); });
+    if (document.fonts) document.fonts.ready.then(function(){ fit(true); });
   })();
 
   /* the hero strip drifts while the hero is on screen (the placements hero's is-live) */

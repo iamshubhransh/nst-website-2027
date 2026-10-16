@@ -70,6 +70,15 @@ await p.locator('.nav .menu').tap(); await p.waitForTimeout(500);
 ok('menu opens with Admissions marked as here', await ev(() => document.getElementById('mnav').classList.contains('is-open') && !!document.querySelector('.mnav-row[href="admissions.html"] .mnav-here')));
 await p.locator('.nav .menu').tap(); await p.waitForTimeout(300);
 
+// the first fold: the CTA is on screen with the browser's toolbars showing (visible heights of common phones)
+for (const [w, h] of [[375, 548], [360, 560], [390, 664], [412, 780]]) {
+  const f = await b.newPage({ viewport: { width: w, height: h }, isMobile: true, hasTouch: true });
+  await f.goto('http://localhost:8765/admissions.html'); await f.waitForTimeout(500);
+  const m = await f.evaluate(() => ({ cta: Math.round(document.querySelector('.adm-hero .pl-cta').getBoundingClientRect().bottom), vh: innerHeight }));
+  ok(`first fold ${w}×${h}: the CTA is visible`, m.cta <= m.vh - 8, m);
+  await f.close();
+}
+
 // wide screens: the phone column (no desktop design yet)
 const d = await b.newPage({ viewport: { width: 1440, height: 900 } });
 d.on('pageerror', e => errs.push('dt: ' + e.message));
