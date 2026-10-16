@@ -29,7 +29,7 @@ await p.waitForFunction((w) => (document.querySelector('.rt-flag.on') || {}).dat
 const t1 = await ev(() => document.getElementById('rtStu').getAttribute('transform'));
 const lit = await ev(() => (document.querySelector('.rt-flag.on') || {}).dataset?.i);
 ok('the student walks to the next station and its flag lights', t0 !== t1 && lit === want, [t0, t1, lit, want]);
-ok('hero shows only the next NSAT date', await ev(() => !document.querySelector('.adm-facts') && document.querySelector('.adm-next').textContent.trim() === 'Next NSAT · 7 Jan 2027'));
+ok('hero strip: next NSAT, online and proctored, scholarships, campuses — looped seamlessly', await ev(() => { const t = [...document.querySelectorAll('.adm-facts .pl-hl b')].map(b => b.textContent); return t.length === 8 && ['Next NSAT · 7 Jan 2027', 'Online, proctored', 'Scholarships up to 100%', '4 campuses'].every(x => t.filter(y => y === x).length === 2) && !t.some(x => /Registration|registered/.test(x)); }));
 
 ok('the student is a person: legs, shirt, arms, backpack, head, hair', await ev(() => ['rt-legs','rt-shirt','rt-arm','rt-bag','rt-skin','rt-hair'].every(c => document.querySelector('#rtStu .' + c))));
 ok('every section subtext sits on one line', await ev(() => [...document.querySelectorAll('.bk-sub')].every(s => Math.round(s.getBoundingClientRect().height) <= Math.ceil(parseFloat(getComputedStyle(s).lineHeight)))));

@@ -15,8 +15,7 @@
 .adm-wall .rt-bag path{fill:#F59700;stroke:#B26A00}
 .adm-wall .rt-skin path{fill:#E8B98F;stroke:#B98457}
 .adm-wall .rt-hair path{fill:#2A2118;stroke:#16110C}
-.adm-next{display:flex;align-items:center;gap:8px;height:40px;margin:20px 0 0}
-.adm-next b{font-size:13px;line-height:16px;font-weight:600;color:#16191D}
+.adm-facts .pl-hl{gap:8px}
 .adm-fi{flex:none;width:24px;height:24px;border-radius:7px;background:#E5F1FF;color:#0673F9;display:flex;align-items:center;justify-content:center}
 .adm-fi svg{width:14px;height:14px}
 
