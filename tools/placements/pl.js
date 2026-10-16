@@ -176,9 +176,9 @@
     var arc = document.getElementById('plArc'), label = document.getElementById('plArcLabel'); if (!arc) return;
     var CO = [['Company','assets/co-logo-cube.png','#0673F9',34],['Swiggy','assets/co-logo-swiggy.png','#DE5A02',24],['Emergent','assets/co-logo-emergent.png','#16191D',38],['Licious',A + 'co-licious.png','#D7262D',0],['Zeko AI',A + 'co-zeko-ai.png','#5B3BE0',0],['NextYou',A + 'co-nextyou.png','#7A3CF0',0],['Drona Aviation',A + 'co-drona-aviation.png','#16191D',0]];
     var Y = {'-2': 63, '-1': 121, '0': 135, '1': 121, '2': 63}, STEP = 135;
-    /* desktop (16 Oct): the homepage's desktop geometry, upside down — a flat ring (r 1835) whose lowest point is 170 px into the
-       300 px arc box, discs 280 px apart along it (five showing from 1280 px, three below), so the outer discs stay inside the 1200 column, the name under the centre disc */
-    var DR = 1835, DSLOT = Math.asin(280 / DR), DCROWN = 170, mq = matchMedia('(min-width:1024px)');
+    /* desktop (16 Oct): the homepage's desktop geometry, upside down — a flat ring (r 1835) whose lowest point is 470 px into the
+       600 px arc box (its top half behind the feed), discs 280 px apart along it (five showing from 1280 px, three below), so the outer discs stay inside the 1200 column, the name under the centre disc */
+    var DR = 1835, DSLOT = Math.asin(280 / DR), DCROWN = 470, mq = matchMedia('(min-width:1024px)');
     var ring = arc.querySelector('.pl-arc-ring'), ring0 = ring.outerHTML;
     function setRing(){
       if (mq.matches){ ring.setAttribute('viewBox', '0 0 3670 3670'); ring.innerHTML = '<circle cx="1835" cy="1835" r="1833.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="27.03 27.03"/>'; }

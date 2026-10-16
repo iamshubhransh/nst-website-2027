@@ -3449,11 +3449,10 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .pl-offer-t b{font-size:17px;line-height:22px}
   .pl-offer-t span{font-size:14px;line-height:20px}
   .pl-new{right:18px;top:25px;width:48px;height:24px;font-size:11px;line-height:24px}
-  /* the arc (16 Oct): its own 300 px band under the feed, on the homepage's flat desktop ring; the band's top edge fades so the
-     ring never ends in a hard cut; the name sits under the centre disc */
-  .pl-arc{top:auto;bottom:0;height:300px;overflow:hidden;-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 72px);mask-image:linear-gradient(180deg,transparent 0,#000 72px)}
-  .pl-arc-ring{left:calc(50% - 1835px);top:calc(170px - 3670px);width:3670px;height:3670px}
-  .pl-arc-label{top:226px;font-size:14px;line-height:16px;letter-spacing:2px}
+  /* the arc (16 Oct): a 300 px band under the feed on the homepage's flat desktop ring; the name sits under the centre disc */
+  .pl-arc{top:auto;bottom:0;height:600px;overflow:hidden}   /* 16 Oct: no fade — the box reaches 300 px up behind the feed (which sits above it), so the ring runs on beside the card and off the screen edges */
+  .pl-arc-ring{left:calc(50% - 1835px);top:calc(470px - 3670px);width:3670px;height:3670px}
+  .pl-arc-label{top:526px;font-size:14px;line-height:16px;letter-spacing:2px}
 
   /* ---- 03 first batches: the two campuses side by side, the report as one wide card below ---- */
   .pl-batch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:24px;align-items:start;padding:120px var(--side)}
@@ -5845,9 +5844,9 @@ window.__dnFigs = figs;
     var arc = document.getElementById('plArc'), label = document.getElementById('plArcLabel'); if (!arc) return;
     var CO = [['Company','assets/co-logo-cube.png','#0673F9',34],['Swiggy','assets/co-logo-swiggy.png','#DE5A02',24],['Emergent','assets/co-logo-emergent.png','#16191D',38],['Licious',A + 'co-licious.png','#D7262D',0],['Zeko AI',A + 'co-zeko-ai.png','#5B3BE0',0],['NextYou',A + 'co-nextyou.png','#7A3CF0',0],['Drona Aviation',A + 'co-drona-aviation.png','#16191D',0]];
     var Y = {'-2': 63, '-1': 121, '0': 135, '1': 121, '2': 63}, STEP = 135;
-    /* desktop (16 Oct): the homepage's desktop geometry, upside down — a flat ring (r 1835) whose lowest point is 170 px into the
-       300 px arc box, discs 280 px apart along it (five showing from 1280 px, three below), so the outer discs stay inside the 1200 column, the name under the centre disc */
-    var DR = 1835, DSLOT = Math.asin(280 / DR), DCROWN = 170, mq = matchMedia('(min-width:1024px)');
+    /* desktop (16 Oct): the homepage's desktop geometry, upside down — a flat ring (r 1835) whose lowest point is 470 px into the
+       600 px arc box (its top half behind the feed), discs 280 px apart along it (five showing from 1280 px, three below), so the outer discs stay inside the 1200 column, the name under the centre disc */
+    var DR = 1835, DSLOT = Math.asin(280 / DR), DCROWN = 470, mq = matchMedia('(min-width:1024px)');
     var ring = arc.querySelector('.pl-arc-ring'), ring0 = ring.outerHTML;
     function setRing(){
       if (mq.matches){ ring.setAttribute('viewBox', '0 0 3670 3670'); ring.innerHTML = '<circle cx="1835" cy="1835" r="1833.75" fill="none" stroke="#E1E5EA" stroke-width="2.5" stroke-dasharray="27.03 27.03"/>'; }
