@@ -48,6 +48,7 @@
 .pl-cta.btn{margin-top:16px;width:100%;height:50px;border-radius:12px;font-size:16px;line-height:22.4px;font-weight:600;letter-spacing:-.32px;box-shadow:var(--btn-shadow);gap:6px}
 .pl-cta img{width:22px;height:22px}
 .pl-proof .hatch{margin:0}
+.pl-hatch-ctc{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}   /* between the hero and the CTC: a rule on both sides */
 /* ---- 01b the CTC (v4): the NST-blue stage ---- */
 .pl-ctc4{position:relative;overflow:hidden;padding:54px 0 55px;color:#fff;display:flex;flex-direction:column;   /* frame 670:33691, 402 × 510.5 */
   background:radial-gradient(120% 70% at 85% 0%,rgba(255,226,140,.75) 0%,rgba(255,226,140,0) 55%),linear-gradient(170deg,#D19A2A 0%,#B47C10 45%,#7A4E05 100%)}
@@ -126,7 +127,7 @@
 .pl-goog-count{margin:8px 0 0;font-size:12px;line-height:16px;font-weight:500;color:#8C95A6;transition:opacity .4s ease}
 .pl-goog-title{margin:20px 0 0;max-width:330px;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#16191D}
 .pl-goog-res{align-self:stretch;display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px;text-align:left}
-.pl-gcard{padding:6px 6px 12px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #E1E5EA,0 6px 18px -10px rgba(22,25,29,.18);transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.pl-gcard{padding:6px 6px 12px;border-radius:14px;background:#fff;box-shadow:0 0 0 1px #E1E5EA,0 6px 18px -10px rgba(22,25,29,.18);transition:opacity .35s ease,transform .45s cubic-bezier(.22,1,.36,1)}
 .pl-gph{position:relative;display:block;aspect-ratio:4/5;border-radius:10px;overflow:hidden;background:linear-gradient(160deg,#E8F0FE,#F6F7F9)}
 .pl-gph::before{content:attr(data-i);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:600;font-stretch:125%;color:#4285F4;opacity:.55}
 .pl-gph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -134,7 +135,7 @@
 .pl-gcard p{margin:2px 6px 0;font-size:12px;line-height:16px;font-weight:500;color:#5B6271}
 .pl-goog.is-wait .pl-goog-count{opacity:0}
 .pl-goog.is-wait .pl-gcard{opacity:0;transform:translateY(14px)}
-.pl-goog .pl-gcard:nth-child(2){transition-delay:.12s}
+.pl-goog .pl-gcard:nth-child(2){transition-delay:.06s}
 
 /* ---- 02 the season, live: 723 tall ---- */
 .pl-live{position:relative;height:723px;overflow:hidden;background:#fff;padding:64px 16px 0;display:flex;flex-direction:column;align-items:center}

@@ -145,9 +145,10 @@
   (function(){
     var sec = document.getElementById('google'), q = document.getElementById('plGoogQ'); if (!sec || reduce) return;
     var full = q.textContent; q.textContent = ''; sec.classList.add('is-wait');
+    /* quick (16 Oct): starts as soon as the bar is a third in view, ~28 ms a letter (0.6 s for the query), cards 120 ms later */
     once(document.getElementById('plGoogBar'), function(){
-      var i = 0, t = setInterval(function(){ q.textContent = full.slice(0, ++i); if (i >= full.length){ clearInterval(t); setTimeout(function(){ sec.classList.remove('is-wait'); }, 380); } }, 55);
-    }, .6);
+      var i = 0, t = setInterval(function(){ q.textContent = full.slice(0, ++i); if (i >= full.length){ clearInterval(t); setTimeout(function(){ sec.classList.remove('is-wait'); }, 120); } }, 28);
+    }, .3);
   })();
 
   /* ---- 02 · latest offers: a new one arrives on top with a warm wash and the NEW tag; the rest step down ---- */
