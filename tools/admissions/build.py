@@ -13,7 +13,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 HERE = os.path.dirname(os.path.abspath(__file__))
 src = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
 body = open(os.path.join(HERE, 'body.html'), encoding='utf-8').read()
-css = open(os.path.join(ROOT, 'tools', 'placements', 'pl.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'adm.css'), encoding='utf-8').read()
+css = open(os.path.join(ROOT, 'tools', 'placements', 'pl.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'adm.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'route.css'), encoding='utf-8').read()
 js = open(os.path.join(HERE, 'adm.js'), encoding='utf-8').read()
 
 def cut(s, start, end, include_end=True, frm=0):

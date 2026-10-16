@@ -29,23 +29,58 @@ const ground = [], items = [];
 const add = (c, svg) => items.push({ d: k.depthOf(c, P), svg });
 function put(id, c, s = 1){ const [sx, sy] = at(c); const P0 = { ...P, origin: [0, 0], scale: P.scale * s }; add(c, `<g transform="translate(${sx.toFixed(1)} ${sy.toFixed(1)})">${O[id].draw(P0)}</g>`); }
 
-/* ---- ground: lawn, the walk with pavers, a kerb either side ---- */
-ground.push(S(k.slabOf({ x: -1600, y: -1400, w: 3200, d: 2800, r: 0 }, -2, 1, P, 2), { tone: "faint", crease: "none", flat: true, className: "rt-lawn" }));
+/* ---- colour (16 Oct, his ask: "add some colours"): each material is a class that resets the kit's paper / shade / top variables,
+        so solids keep their shading in colour. The palette CSS is written to route.css (build.py appends it) ---- */
+const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
+const toHex = (c) => "#" + c.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, "0")).join("");
+const mix = (h, w, t) => toHex(hex(h).map((v, i) => v + (hex(w)[i] - v) * t));
+const MAT = { brick: "#E7AE86", cream: "#F2DDB8", sky: "#9EC4F2", glass: "#B9D4F5", roof: "#6F9BE8", stone: "#E3DED4", leaf: "#86C27A", leaf2: "#69AE66",
+  leaf3: "#A5D48C", trunk: "#B98A5E", bus: "#F4A62A", field: "#A6D78F", track: "#E79A7B", bloom: "#F28FB4", bloom2: "#FFD166", plinth0: "#CFE3FB",
+  plinth1: "#D7F0DF", plinth2: "#E6DCFB", plinth3: "#FDE3C2", plinth4: "#FBD5E1", grass: "#EEF6EA", kerb: "#DDE3EA" };
+let PAL = "";
+for (const [n, b] of Object.entries(MAT)) PAL += `.m-${n}{--anatomy-paper:${mix(b, "#ffffff", .35)};--anatomy-face:${mix(b, "#ffffff", .35)};--anatomy-shade-0:${mix(b, "#000000", .14)};--anatomy-shade-1:${mix(b, "#000000", .06)};--anatomy-shade-2:${b};--anatomy-shade-3:${mix(b, "#ffffff", .2)};--anatomy-top:${mix(b, "#ffffff", .5)};--anatomy-lo:${mix(b, "#000000", .32)};--anatomy-mid:${mix(b, "#000000", .32)};--anatomy-faint:${mix(b, "#000000", .18)}}\n`;
+const STEPC = ["#0673F9", "#16A34A", "#7B55EE", "#F59700", "#E0457B"];
+PAL += STEPC.map((c, i) => `.rt-flag[data-i="${i}"]{fill:${c};opacity:.38;transition:opacity .3s ease}`).join("\n") + "\n.rt-flag.on{opacity:1}\n";
+PAL += ".rt-pennant{fill:#0673F9;stroke:none}.rt-walk{fill:#E8EDF4}.rt-track-line{stroke:#fff;stroke-width:1.6;fill:none}.rt-win{fill:#CFE3FB;stroke:none}.rt-win-warm{fill:#FFE7B8;stroke:none}\n";
+const paint = (m, svg) => `<g class="m-${m}">${svg}</g>`;
+
+/* trees in three greens with brown trunks */
+let treeN = 0;
+function tree(x, y, sc = 1){
+  const v = ["leaf", "leaf2", "leaf3"][treeN++ % 3];
+  const Pq = P;
+  const r = (n) => n * sc;
+  add([x, y, 0], paint("trunk", S(k.cylinder(x, y, r(2.4), 0, r(24), Pq, 14), { tone: "mid", crease: "none" })) +
+    paint(v, S(G.sphereOf([x, y, r(38)], r(15), Pq, { steps: 16 }), { tone: "mid" }) + S(G.sphereOf([x + r(8), y + r(6), r(30)], r(9), Pq, { steps: 16 }), { tone: "mid" })));
+}
+const windows = (plan, zs, step, w, h, cls = "rt-win") => { const f = plan.y + plan.d + 0.05; let d = ""; for (const z of zs) for (let x = plan.x + 9; x < plan.x + plan.w - 10; x += step) d += pd([[x, f, z], [x + w, f, z], [x + w, f, z + h], [x, f, z + h]]); return `<path class="${cls}" d="${d}"/>`; };
+const sideWindows = (plan, zs, step, h, cls = "rt-win") => { const f = plan.x + plan.w + 0.05; let d = ""; for (const z of zs) for (let y = plan.y + 9; y < plan.y + plan.d - 10; y += step) d += pd([[f, y, z], [f, y + step * .55, z], [f, y + step * .55, z + h], [f, y, z + h]]); return `<path class="${cls}" d="${d}"/>`; };
+
+/* ---- ground: tinted grass, the walk with pavers, a kerb either side ---- */
+ground.push(paint("grass", S(k.slabOf({ x: -1600, y: -1400, w: 3200, d: 2800, r: 0 }, -2, 1, P, 2), { tone: "faint", crease: "none", flat: true, className: "rt-lawn" })));
 ground.push(`<path class="rt-walk" d="${pd([[-1600, -22, 0], [1600, -22, 0], [1600, 22, 0], [-1600, 22, 0]])}"/>`);
 let pav = ""; for (let x = -1590; x < 1600; x += 22) pav += ln([[x, -22, 0.1], [x, 22, 0.1]]);
 ground.push(Ln(pav, { tone: "faint", className: "rt-pav", free: true }));
-ground.push(S(k.slabOf({ x: -1600, y: -26, w: 3200, d: 4, r: 0 }, 0, 2, P, 2), { tone: "lo", crease: "none" }));
-ground.push(S(k.slabOf({ x: -1600, y: 22, w: 3200, d: 4, r: 0 }, 0, 2, P, 2), { tone: "lo", crease: "none" }));
+ground.push(paint("kerb", S(k.slabOf({ x: -1600, y: -26, w: 3200, d: 4, r: 0 }, 0, 2, P, 2), { tone: "lo", crease: "none" })));
+ground.push(paint("kerb", S(k.slabOf({ x: -1600, y: 22, w: 3200, d: 4, r: 0 }, 0, 2, P, 2), { tone: "lo", crease: "none" })));
 
-/* ---- the stations: a plinth beside the walk, a short spur onto it, the object, a flag ---- */
+/* ---- the sports ground in front of the walk: a green pitch, a running track, two goals ---- */
+const FLD = { x: -430, y: 70, w: 300, d: 150, r: 26 };
+ground.push(paint("track", S(k.slabOf(FLD, 0, 1.2, P, 8), { tone: "lo", crease: "none" })));
+ground.push(paint("field", S(k.slabOf(k.insetPlan(FLD, 14), 1.2, 0.6, P, 8), { tone: "lo", crease: "none" })));
+ground.push(`<path class="rt-track-line" d="${pd([[FLD.x + 7, FLD.y + 7, 1.25], [FLD.x + FLD.w - 7, FLD.y + 7, 1.25], [FLD.x + FLD.w - 7, FLD.y + FLD.d - 7, 1.25], [FLD.x + 7, FLD.y + FLD.d - 7, 1.25]])}"/>` +
+  `<path class="rt-track-line" d="${ln([[FLD.x + FLD.w / 2, FLD.y + 14, 1.9], [FLD.x + FLD.w / 2, FLD.y + FLD.d - 14, 1.9]])}"/>`);
+for (const gx of [FLD.x + 22, FLD.x + FLD.w - 22]) add([gx, FLD.y + FLD.d / 2, 0], S(k.slabOf({ x: gx - 1, y: FLD.y + FLD.d / 2 - 14, w: 2, d: 2, r: 0.3 }, 1.8, 12, P, 2), { tone: "mid" }) +
+  S(k.slabOf({ x: gx - 1, y: FLD.y + FLD.d / 2 + 12, w: 2, d: 2, r: 0.3 }, 1.8, 12, P, 2), { tone: "mid" }) + S(k.slabOf({ x: gx - 1, y: FLD.y + FLD.d / 2 - 14, w: 2, d: 28, r: 0.3 }, 13.8, 2, P, 2), { tone: "mid" }));
+
+/* ---- the stations: a tinted plinth beside the walk, a short spur onto it, the object, a coloured flag ---- */
 const OBJ = [["monitor", 0.9], ["papers", 1.0], ["board", 0.85], ["table", 0.85], ["letter", 0.95]];
 const flags = [];
 SX.forEach((x, i) => {
   const pl = { x: x - 40, y: -96, w: 80, d: 54, r: 3 };
   ground.push(`<path class="rt-walk" d="${pd([[x - 12, -42, 0], [x + 12, -42, 0], [x + 12, -26, 0], [x - 12, -26, 0]])}"/>`);
-  add([x, -69, 0], S(k.slabOf(pl, 0, 5, P, 2, 0.6), { tone: "lo" }) + S(k.slabOf(k.insetPlan(pl, 4), 5, 1.4, P, 2, 0.4), { tone: "mid", crease: "none" }));
+  add([x, -69, 0], paint("plinth" + i, S(k.slabOf(pl, 0, 5, P, 2, 0.6), { tone: "lo" }) + S(k.slabOf(k.insetPlan(pl, 4), 5, 1.4, P, 2, 0.4), { tone: "mid", crease: "none" })));
   put(OBJ[i][0], [x, -70, 6.4], OBJ[i][1]);
-  /* the flag: a pole at the plinth's front-right corner and a pennant (data-i lets the page light the one in focus) */
   const fx = x + 20, fy = -34;   /* at the foot of the spur, between the walk and the plinth */
   const pole = S(k.cylinder(fx, fy, 0.9, 6.4, 44, P, 10), { tone: "mid", crease: "none" });
   const pen = `<path class="rt-flag" data-i="${i}" d="${pd([[fx, fy, 50], [fx, fy, 40.5], [fx - 16, fy, 45.25]])}"/>`;
@@ -53,25 +88,51 @@ SX.forEach((x, i) => {
   flags.push(at([fx, fy, 45]));
 });
 
-/* ---- the campus at the end of the walk: a teaching block, the arch on the forecourt, columns, a hostel wing ---- */
+/* ---- behind the stations, the rest of the campus: a library rotunda with a dome, an auditorium, a glass lab tower, a block ---- */
+const LIB = [-330, -215];
+add([LIB[0], LIB[1], 0], paint("stone", S(k.cylinder(LIB[0], LIB[1], 40, 0, 6, P, 40, 0.5), { tone: "lo" })) +
+  paint("sky", S(k.cylinder(LIB[0], LIB[1], 34, 6, 40, P, 40, 0.5), { tone: "mid" })) +
+  paint("stone", S(k.cylinder(LIB[0], LIB[1], 36, 46, 4, P, 40, 0.4), { tone: "mid" })) +
+  paint("roof", S(G.sphereOf([LIB[0], LIB[1], 50], 24, P, { steps: 28 }), { tone: "mid" })));
+for (let a = 0; a < 8; a++){ const t = Math.PI * (0.05 + a * 0.12); add([LIB[0] + 38 * Math.cos(t), LIB[1] + 38 * Math.sin(t), 0], paint("stone", S(k.cylinder(LIB[0] + 38 * Math.cos(t), LIB[1] + 38 * Math.sin(t), 2.4, 6, 40, P, 12), { tone: "mid", crease: "none" }))); }
+const AUD = { x: -230, y: -280, w: 110, d: 74, r: 2 };
+add([AUD.x + AUD.w / 2, AUD.y + AUD.d / 2, 0], paint("cream", S(k.slabOf(AUD, 0, 40, P, 2, 0.6), { tone: "mid", inner: windows(AUD, [12, 26], 14, 7, 8, "rt-win-warm") })) +
+  paint("roof", S(k.slabOf(k.insetPlan(AUD, -3), 40, 5, P, 2, 0.6), { tone: "mid" })));
+const LAB = { x: -70, y: -270, w: 64, d: 60, r: 1 };
+add([LAB.x + LAB.w / 2, LAB.y + LAB.d / 2, 0], paint("glass", S(k.slabOf(LAB, 0, 112, P, 2, 0.6), { tone: "mid", inner: windows(LAB, [12, 26, 40, 54, 68, 82, 96], 13, 8, 9) })) +
+  paint("roof", S(k.slabOf(k.insetPlan(LAB, -2), 112, 4, P, 2, 0.5), { tone: "mid" })) + S(k.cylinder(LAB.x + 44, LAB.y + 20, 1, 116, 22, P, 10), { tone: "mid", crease: "none" }));
+const BLK2 = { x: 40, y: -290, w: 120, d: 70, r: 1 };
+add([BLK2.x + BLK2.w / 2, BLK2.y + BLK2.d / 2, 0], paint("brick", S(k.slabOf(BLK2, 0, 60, P, 2, 0.6), { tone: "mid", inner: windows(BLK2, [14, 30, 46], 15, 8, 9) })) +
+  paint("brick", S(k.slabOf(k.insetPlan(BLK2, -1.2), 60, 3, P, 2, 0.4), { tone: "mid" })));
+
+/* ---- the campus at the end of the walk: a terracotta teaching block, a cream hostel, the arch, columns, a clock tower, pennants ---- */
 const CX = X0 + 5 * STEP + 40;
-ground.push(S(k.slabOf({ x: CX - 120, y: -150, w: 260, d: 120, r: 2 }, 0, 1.4, P, 2), { tone: "lo", crease: "none" }));
+ground.push(paint("stone", S(k.slabOf({ x: CX - 120, y: -150, w: 260, d: 120, r: 2 }, 0, 1.4, P, 2), { tone: "lo", crease: "none" })));
 const block = { x: CX - 70, y: -250, w: 170, d: 90, r: 1 };
-const bf = block.y + block.d;
-let rows = ""; for (const z of [18, 34, 50, 66]) for (let x = block.x + 10; x < block.x + block.w - 12; x += 16) rows += pd([[x, bf + 0.05, z], [x + 9, bf + 0.05, z], [x + 9, bf + 0.05, z + 8], [x, bf + 0.05, z + 8]]);
-add([block.x + block.w / 2, block.y + block.d / 2, 0], S(k.slabOf(block, 0, 82, P, 2, 0.6), { tone: "mid", inner: Ln(rows, { tone: "lo" }) + Ln(k.sideSeam(block, 10, P, 2), { tone: "faint" }) }) +
-  S(k.slabOf(k.insetPlan(block, -1.2), 82, 3, P, 2, 0.4), { tone: "mid" }));
+add([block.x + block.w / 2, block.y + block.d / 2, 0], paint("brick", S(k.slabOf(block, 0, 82, P, 2, 0.6), { tone: "mid", inner: windows(block, [18, 34, 50, 66], 16, 9, 8) + Ln(k.sideSeam(block, 10, P, 2), { tone: "faint" }) }) +
+  S(k.slabOf(k.insetPlan(block, -1.2), 82, 3, P, 2, 0.4), { tone: "mid" })));
 const hostel = { x: CX - 190, y: -280, w: 100, d: 70, r: 1 };
-const hf = hostel.y + hostel.d;
-let hw = ""; for (const z of [14, 28, 42]) for (let x = hostel.x + 8; x < hostel.x + hostel.w - 10; x += 14) hw += pd([[x, hf + 0.05, z], [x + 7, hf + 0.05, z], [x + 7, hf + 0.05, z + 7], [x, hf + 0.05, z + 7]]);
-add([hostel.x + hostel.w / 2, hostel.y + hostel.d / 2, 0], S(k.slabOf(hostel, 0, 54, P, 2, 0.6), { tone: "mid", inner: Ln(hw, { tone: "lo" }) }) + S(k.slabOf(k.insetPlan(hostel, -1), 54, 3, P, 2, 0.4), { tone: "mid" }));
+add([hostel.x + hostel.w / 2, hostel.y + hostel.d / 2, 0], paint("cream", S(k.slabOf(hostel, 0, 54, P, 2, 0.6), { tone: "mid", inner: windows(hostel, [14, 28, 42], 14, 7, 7, "rt-win-warm") }) + S(k.slabOf(k.insetPlan(hostel, -1), 54, 3, P, 2, 0.4), { tone: "mid" })));
+const TWR = { x: CX + 120, y: -200, w: 30, d: 30, r: 0.8 };
+add([TWR.x + 15, TWR.y + 15, 0], paint("brick", S(k.slabOf(TWR, 0, 120, P, 2, 0.6), { tone: "mid", inner: windows(TWR, [16, 40, 64], 14, 6, 12) }) + S(k.slabOf(k.insetPlan(TWR, -2), 120, 4, P, 2, 0.4), { tone: "mid" })) +
+  paint("roof", S(k.slabOf(k.insetPlan(TWR, 5), 124, 12, P, 2, 0.4), { tone: "mid" })));
 put("arch", [CX - 8, -60, 1.4], 1.0);
 put("column", [CX - 64, -58, 1.4], 0.75); put("column", [CX + 48, -58, 1.4], 0.75);
+for (const px of [CX - 100, CX + 84]) add([px, -48, 0], S(k.cylinder(px, -48, 1, 1.4, 64, P, 10), { tone: "mid", crease: "none" }) + `<path class="rt-pennant" d="${pd([[px, -48, 65], [px, -48, 52], [px + 18, -48, 58.5]])}"/>`);
 
-/* ---- trees and benches along the walk ---- */
-for (const x of [-420, -265, -135, -5, 125, 255]) put("tree", [x, -150, 0], 0.7);
-for (const x of [-470, -300, -110, 80, 260, 430]) put("tree", [x, 60, 0], 0.8);
-for (const x of [-210, 140]) put("bench", [x, 40, 0], 0.7);
+/* ---- the shuttle parked by the walk, flower beds, trees and benches ---- */
+const BUS = { x: 10, y: 52, w: 64, d: 22, r: 4 };
+add([BUS.x + 32, BUS.y + 11, 0], S(k.cylinder(BUS.x + 12, BUS.y + BUS.d, 4, 0, 2, P, 12), { tone: "mid" }) + S(k.cylinder(BUS.x + 52, BUS.y + BUS.d, 4, 0, 2, P, 12), { tone: "mid" }) +
+  paint("bus", S(k.slabOf(BUS, 3, 22, P, 3, 0.8), { tone: "mid", inner: windows(BUS, [12], 11, 8, 6) })) + paint("bus", S(k.slabOf(k.insetPlan(BUS, 2), 25, 1.6, P, 3, 0.4), { tone: "mid" })));
+for (const [bx, m] of [[-110, "bloom"], [120, "bloom2"], [200, "bloom"]]) {
+  const bed = { x: bx - 22, y: 34, w: 44, d: 12, r: 3 };
+  let fl = ""; for (let f = 0; f < 5; f++) fl += S(G.sphereOf([bx - 16 + f * 8, 40, 5], 3, P, { steps: 10 }), { tone: "mid" });
+  add([bx, 40, 0], paint("trunk", S(k.slabOf(bed, 0, 3, P, 3, 0.4), { tone: "mid" })) + paint("leaf", S(k.slabOf(k.insetPlan(bed, 1.5), 3, 1, P, 3, 0.3), { tone: "mid", crease: "none" })) + paint(m, fl));
+}
+for (const x of [-420, -265, -135, -5, 125, 255]) tree(x, -150, 0.7);
+for (const x of [-480, -100, 100, 270, 430]) tree(x, 60, 0.8);
+for (const [x, y, s2] of [[-460, -290, .85], [-150, -310, .75], [10, -320, .8], [190, -330, .7], [-80, 240, .9], [-480, 240, .8], [160, 150, .85], [330, 180, .8], [460, 70, .7]]) tree(x, y, s2);
+for (const x of [-210, 330]) put("bench", [x, 40, 0], 0.7);
 
 /* ---- the student (the lit part): drawn at x = 0 on the walk; the page moves it station to station ---- */
 /* the student: a small person walking up the route (+x), so the backpack faces the viewer. Legs and arms are limbs hinged at the
@@ -108,9 +169,10 @@ const u0 = at([0, 0, 0]), u1 = at([1, 0, 0]);
 const compact = (svg) => svg.replace(/ d="([^"]*)"/g, (m, d) => ' d="' + d.replace(/-?\d+\.\d{2,}/g, (n) => (+n).toFixed(1)) + '"');
 const FOCUS = +(process.argv[2] ?? 1);   /* the station the static render shows: 1 = NSAT */
 const sx = SX[FOCUS], sp = [u0[0] + (u1[0] - u0[0]) * sx, u0[1] + (u1[1] - u0[1]) * sx];
-const svg = compact(`<svg class="rt-svg iso-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet" aria-hidden="true"><g class="rt-ground">${ground.join("")}</g>${back}<g id="rtStu" class="rt-stu" transform="translate(${(sp[0] - u0[0]).toFixed(1)} ${(sp[1] - u0[1]).toFixed(1)})">${STU}</g>${front}</svg>`)
+const svg = compact(`<svg class="rt-svg iso-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="rt-ground">${ground.join("")}</g>${back}<g id="rtStu" class="rt-stu" transform="translate(${(sp[0] - u0[0]).toFixed(1)} ${(sp[1] - u0[1]).toFixed(1)})">${STU}</g>${front}</svg>`)
   .replace(`class="rt-flag" data-i="${FOCUS}"`, `class="rt-flag on" data-i="${FOCUS}"`);
 writeFileSync(new URL("./route.svg", import.meta.url), svg);
 writeFileSync(new URL("./route.json", import.meta.url), JSON.stringify({ poses: POSES, stride: 26, stations: SX, unit: [+(u1[0] - u0[0]).toFixed(4), +(u1[1] - u0[1]).toFixed(4)], W, H }));
-writeFileSync(new URL("./route-preview.html", import.meta.url), `<!doctype html><meta charset="utf-8"><style>${k.ISO_CSS}body{margin:0;background:#fff}.wrap{width:402px;height:420px;overflow:hidden}.rt-svg{width:100%;height:100%}.rt-walk{fill:#EEF1F5}.rt-flag{fill:#E1E5EA}.rt-flag.on{fill:#0673F9}.rt-shirt path,.rt-arm path{fill:#0673F9!important;stroke:#0450B0!important}.rt-legs path{fill:#1E2A44!important;stroke:#10182A!important}.rt-bag path{fill:#F59700!important;stroke:#B26A00!important}.rt-skin path{fill:#E8B98F!important;stroke:#B98457!important}.rt-hair path{fill:#2A2118!important;stroke:#16110C!important}</style><div class="iso" data-theme="light"><div class="wrap">${svg}</div></div>`);
+writeFileSync(new URL("./route.css", import.meta.url), PAL);
+writeFileSync(new URL("./route-preview.html", import.meta.url), `<!doctype html><meta charset="utf-8"><style>${k.ISO_CSS}body{margin:0;background:#fff}.wrap{width:402px;height:420px;overflow:hidden}.rt-svg{width:100%;height:100%}${PAL}.rt-shirt path,.rt-arm path{fill:#0673F9!important;stroke:#0450B0!important}.rt-legs path{fill:#1E2A44!important;stroke:#10182A!important}.rt-bag path{fill:#F59700!important;stroke:#B26A00!important}.rt-skin path{fill:#E8B98F!important;stroke:#B98457!important}.rt-hair path{fill:#2A2118!important;stroke:#16110C!important}</style><div class="iso" data-theme="light"><div class="wrap">${svg}</div></div>`);
 console.log("items", items.length, "bytes", svg.length);
