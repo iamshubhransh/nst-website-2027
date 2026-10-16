@@ -72,6 +72,37 @@
     document.querySelectorAll('.adm-rc').forEach(function(c){ c.classList.toggle('is-on', c.dataset.r === b.dataset.r); });
   });
 
+  /* 07 · loans: tap a logo to see that lender's terms; switch secured / unsecured. [rate, max loan, tenure, processing] per type */
+  var LOANS = {
+    pnb: {n: 'PNB', via: 'Through Edufin', t: [['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST'], ['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST']]},
+    bob: {n: 'Bank of Baroda', via: 'Through Edufin', t: [['8.00% to 10.50%', 'Cost of education', '15 years', '1% + GST'], ['8.00% to 10.50%', 'Cost of education', '15 years', '1% + GST']]},
+    axis: {n: 'Axis Bank', t: [['10.50%', '95% of the total cost', 'Up to 15 years', '1% + GST'], ['11.25%', '95% of the total cost', 'Up to 15 years', '1% + GST']]},
+    icici: {n: 'ICICI Bank', t: [['9.00%', 'Up to ₹3 crore', 'Up to 15 years', '0.75% or ₹19,999, lower (excl. GST)'], ['9.75%', 'Up to ₹1 crore', 'Up to 15 years', '0.75% or ₹19,999, lower (excl. GST)']]},
+    tata: {n: 'Tata Capital', t: [['From 9.50%', 'Up to ₹2 crore', 'Up to 15 years', '1% + GST'], ['From 9.50%', 'Up to ₹2 crore', 'Up to 15 years', '1% + GST']]},
+    gyandhan: {n: 'GyanDhan', t: [['9.10% to 9.60%', 'Cost of education', '15 years', 'None'], ['11.50% to 12.50%', 'Based on programme', 'Up to 12 years', '1% + GST']]},
+    propelld: {n: 'Propelld', t: [['11.00%', '90% of fees + college hostel', 'Up to 10 years', '1% + GST'], ['11.25%', '90% of fees + college hostel', 'Up to 10 years', '1% + GST']]},
+    kuhoo: {n: 'Kuhoo', t: [['10% to 15.5%', 'Up to 100% of fees and living costs', 'Up to 12 years', '1% + GST'], ['10% to 15.5%', 'Up to 100% of fees and living costs', 'Up to 12 years', '1% + GST']]}
+  };
+  (function(){
+    var card = document.getElementById('admLoan'), grid = document.querySelector('.adm-lgrid'); if (!card || !grid) return;
+    var cur = 'pnb', type = 0, segs = card.querySelectorAll('.adm-lseg button');
+    function $(id){ return document.getElementById(id); }
+    function render(){
+      var L = LOANS[cur], v = L.t[type];
+      $('admLName').textContent = L.n; $('admLVia').textContent = L.via || '';
+      $('admLRate').textContent = v[0]; $('admLMax').textContent = v[1]; $('admLTen').textContent = v[2]; $('admLFee').textContent = v[3];
+      segs.forEach(function(b){ b.classList.toggle('is-on', +b.dataset.t === type); });
+      card.classList.remove('is-swap'); void card.offsetWidth; card.classList.add('is-swap');
+    }
+    grid.addEventListener('click', function(e){
+      var t = e.target.closest('.adm-lt'); if (!t) return;
+      cur = t.dataset.l;
+      grid.querySelectorAll('.adm-lt').forEach(function(x){ var on = x === t; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
+      render();
+    });
+    segs.forEach(function(b){ b.addEventListener('click', function(){ type = +b.dataset.t; render(); }); });
+  })();
+
   /* 08 · campus dots follow the swipe */
   var camps = document.querySelector('.adm-camps'), dots = document.querySelectorAll('.adm-dots i');
   if (camps && dots.length) camps.addEventListener('scroll', function(){

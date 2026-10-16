@@ -45,7 +45,13 @@ ok('chooser lights and opens the matching card', await ev(() => document.querySe
 ok('NSAT: four parts with answer bubbles, two dates, three kits', await ev(() => document.querySelectorAll('.adm-parts li').length === 4 && document.querySelectorAll('.adm-bub i').length === 16 && document.querySelectorAll('.adm-dates p').length === 2 && document.querySelectorAll('.adm-kit').length === 3));
 ok('six steps, each with its object; NSAT marked', await ev(() => document.querySelectorAll('.adm-tl li').length === 6 && document.querySelectorAll('.adm-tl .adm-ic-svg').length === 6 && document.querySelector('.adm-tl li.is-on h3').textContent === 'Take NSAT'));
 ok('scholarships: JEE Excellence lead + three', await ev(() => !!document.querySelector('.adm-jes') && document.querySelectorAll('.adm-s').length === 3));
-ok('loans: three figures, five lenders', await ev(() => document.querySelectorAll('.adm-loan-stats p').length === 3 && document.querySelectorAll('.adm-lenders span:not(.more)').length === 5));
+ok('loans: eight lender logos load', await ev(() => { const im = [...document.querySelectorAll('.adm-lt img')]; return im.length === 8 && im.every(i => i.complete && i.naturalWidth > 0); }));
+await ev(() => document.getElementById('loans').scrollIntoView({ block: 'center' })); await p.waitForTimeout(200);
+ok('loans: PNB shown first', await ev(() => document.getElementById('admLName').textContent === 'PNB' && document.getElementById('admLRate').textContent === '7.35% to 9.00%'));
+await p.locator('.adm-lt[data-l="icici"]').tap(); await p.waitForTimeout(200);
+ok('loans: tapping a logo shows that lender', await ev(() => document.getElementById('admLName').textContent === 'ICICI Bank' && document.getElementById('admLRate').textContent === '9.00%' && document.querySelectorAll('.adm-lt.is-on').length === 1));
+await p.locator('.adm-lseg button[data-t="1"]').tap(); await p.waitForTimeout(200);
+ok('loans: secured / unsecured switch', await ev(() => document.getElementById('admLRate').textContent === '9.75%' && document.getElementById('admLMax').textContent === 'Up to ₹1 crore'));
 
 // campuses swipe → dots
 await ev(() => document.getElementById('campuses').scrollIntoView({ block: 'center' })); await p.waitForTimeout(300);

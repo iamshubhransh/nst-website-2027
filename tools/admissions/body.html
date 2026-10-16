@@ -113,14 +113,22 @@
     </div>
   </section>
 
-  <!-- 07 · loans (grey): what partner lenders offer; NST only facilitates -->
-  <section class="bk bk-light adm-loans" aria-label="Education loans">
-    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Pay over time. <span>Loans up to 95%.</span></h2><p class="bk-sub">Partner lenders fund most of the fees.</p></div></div>
-    <div class="adm-loan">
-      <div class="adm-loan-stats"><p><b>95%</b><span>of fees covered</span></p><p><b>7.35–11.5%</b><span>interest a year</span></p><p><b>15 yrs</b><span>longest tenure</span></p></div>
-      <div class="adm-lenders"><span>PNB</span><span>Bank of Baroda</span><span>Axis Bank</span><span>ICICI Bank</span><span>Tata Capital</span><span class="more">+ more</span></div>
-      <p class="adm-loan-note">NST helps you apply. Each lender sets its own rate and approves the loan; processing is usually around 1% plus GST.</p>
+  <!-- 07 · loans (grey; 16 Oct v2, his ask: logos, and the terms lender by lender as on the current site). The logo grid is the picker;
+       the card shows the picked lender's terms, secured or unsecured. Figures from newtonschool.co/…/admission (16 Oct 2026) -->
+  <section class="bk bk-light adm-loans" id="loans" aria-label="Education loans">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Pay over time. <span>8 lenders.</span></h2><p class="bk-sub">Compare their terms; we help you apply.</p></div></div>
+    <div class="adm-lgrid" role="tablist" aria-label="Lending partners"><button type="button" role="tab" class="adm-lt is-on" aria-selected="true" data-l="pnb"><img src="assets/adm/lender-pnb.png" alt="PNB" style="height:22px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="bob"><img src="assets/adm/lender-bank-of-baroda.png" alt="Bank of Baroda" style="height:22px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="axis"><img src="assets/adm/lender-axis.png" alt="Axis Bank" style="height:20px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="icici"><img src="assets/adm/lender-icici.png" alt="ICICI Bank" style="height:18px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="tata"><img src="assets/adm/lender-tata-capital.png" alt="Tata Capital" style="height:24px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="gyandhan"><img src="assets/adm/lender-gyandhan.png" alt="GyanDhan" style="height:30px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="propelld"><img src="assets/adm/lender-propelld.png" alt="Propelld" style="height:15px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="kuhoo"><img src="assets/adm/lender-kuhoo.png" alt="Kuhoo" style="height:26px"></button></div>
+    <div class="adm-lcard" id="admLoan" aria-live="polite">
+      <div class="adm-lc-head"><div><b id="admLName">PNB</b><span id="admLVia">Through Edufin</span></div>
+        <div class="adm-lseg" role="group" aria-label="Loan type"><button type="button" class="is-on" data-t="0">Secured</button><button type="button" data-t="1">Unsecured</button></div></div>
+      <dl class="adm-lrows">
+        <div class="adm-lr adm-lr-big"><dt>Interest</dt><dd id="admLRate">7.35% to 9.00%</dd></div>
+        <div class="adm-lr"><dt>Maximum loan</dt><dd id="admLMax">Cost of education</dd></div>
+        <div class="adm-lr"><dt>Tenure</dt><dd id="admLTen">15 years</dd></div>
+        <div class="adm-lr"><dt>Processing</dt><dd id="admLFee">1% + GST</dd></div>
+      </dl>
     </div>
+    <p class="adm-loan-note">NST only helps you apply; it does not lend or guarantee loans. Rates are indicative and each lender decides on approval.</p>
   </section>
 
   <!-- 08 · campuses (dark): four partner universities, one programme; swipe -->

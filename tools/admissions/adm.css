@@ -136,17 +136,30 @@
 .adm-s h3{margin:0;font-size:16px;line-height:22px;font-weight:600;color:#16191D}
 .adm-s p{margin:4px 0 0;font-size:13.5px;line-height:20px;font-weight:500;color:rgba(22,25,29,.6)}
 
-/* ---- 07 loans (grey band) ---- */
+/* ---- 07 loans (grey band): a logo grid that picks the lender, a card with its terms ---- */
 .adm-loans{--bk-bg:#F6F7F9}
-.adm-loan{padding:17px;border:1px solid #EDEFF3;border-radius:16px;background:#fff}
-.adm-loan-stats{display:grid;grid-template-columns:.8fr 1.35fr .8fr;gap:8px}
-.adm-loan-stats p{margin:0;display:flex;flex-direction:column}
-.adm-loan-stats b{font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.3px;color:#16191D;white-space:nowrap}
-.adm-loan-stats span{font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.55)}
-.adm-lenders{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;padding-top:16px;border-top:1px solid #EDEFF3}
-.adm-lenders span{height:30px;padding:0 12px;border-radius:8px;background:#F6F7F9;font-size:13px;line-height:30px;font-weight:600;color:#16191D}
-.adm-lenders .more{background:none;padding:0 4px;color:rgba(22,25,29,.45)}
-.adm-loan-note{margin:14px 0 0;font-size:12.5px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
+.adm-lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.adm-lt{display:flex;align-items:center;justify-content:center;height:56px;padding:0 6px;border:1px solid #E1E5EA;border-radius:12px;background:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease,box-shadow .2s ease}
+.adm-lt img{display:block;width:auto;max-width:100%;object-fit:contain}
+.adm-lt.is-on{border:1.5px solid #0673F9;box-shadow:0 8px 16px -12px rgba(6,115,249,.6)}
+.adm-lcard{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.adm-lc-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.adm-lc-head>div:first-child{display:flex;flex-direction:column;min-width:0}
+.adm-lc-head b{font-size:17px;line-height:22px;font-weight:600;font-stretch:125%;color:#16191D}
+.adm-lc-head span{font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.5)}
+.adm-lc-head span:empty{display:none}
+.adm-lseg{flex:none;display:flex;padding:3px;border-radius:10px;background:#F1F3F6}
+.adm-lseg button{height:30px;padding:0 10px;border:0;border-radius:8px;background:none;font-family:var(--font);font-size:12.5px;line-height:16px;font-weight:600;color:#5B6271;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.adm-lseg button.is-on{background:#fff;color:#16191D;box-shadow:0 1px 3px rgba(22,25,29,.12)}
+.adm-lseg button:disabled{opacity:.35;cursor:default}
+.adm-lrows{margin:14px 0 0}
+.adm-lr{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid #EDEFF3}
+.adm-lr dt{flex:none;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
+.adm-lr dd{margin:0;text-align:right;font-size:14px;line-height:20px;font-weight:600;color:#16191D}
+.adm-lr-big dd{font-size:20px;line-height:26px;font-stretch:125%;letter-spacing:-.3px;color:#007A51}
+.adm-loan-note{margin:-8px 0 0;font-size:12px;line-height:18px;font-weight:500;color:rgba(22,25,29,.5)}
+.adm-lcard.is-swap .adm-lr dd,.adm-lcard.is-swap .adm-lc-head b{animation:admIn .32s cubic-bezier(.22,1,.36,1)}
+@keyframes admIn{from{opacity:0;transform:translateY(4px)}}
 
 /* ---- 08 campuses (dark): swipe; dots follow the swipe ---- */
 .adm-camps{display:flex;gap:12px;margin:0 -16px;padding:0 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;scrollbar-width:none}
