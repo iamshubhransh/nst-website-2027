@@ -39,12 +39,12 @@
     new IntersectionObserver(function(en){ live = en[0].isIntersecting; if (live && !raf){ t0 = 0; last = 0; raf = requestAnimationFrame(frame); } }).observe(hero);
   })();
 
-  /* 01 · the first fold: the CTA must be on screen when the page opens, with the browser's toolbars showing (the small viewport,
-     100svh). Measure the copy from the crumbs to the CTA's bottom edge (it wraps differently per width) and give the figure the
-     rest, up to its 420, never under 150, keeping 24 px clear below the CTA. Re-fit when the width changes (not on toolbar
+  /* 01 · the first fold: the whole next-NSAT ticket (date, deadline, CTA, registered count) must be on screen when the page opens, with the browser's toolbars showing (the small viewport,
+     100svh). Measure the copy from the crumbs to the ticket's bottom edge (it wraps differently per width) and give the figure the
+     rest, up to its 420, never under 88, keeping 16 px clear below the ticket. Re-fit when the width changes (not on toolbar
      show/hide: svh does not move). */
   (function(){
-    var hero = document.querySelector('.adm-hero'), copy = hero && hero.querySelector('.pl-hero-copy'), cta = hero && hero.querySelector('.pl-cta');
+    var hero = document.querySelector('.adm-hero'), copy = hero && hero.querySelector('.pl-hero-copy'), cta = hero && hero.querySelector('.adm-ticket');
     if (!hero || !copy || !cta) return;
     var probe = document.createElement('div'); probe.style.cssText = 'position:fixed;left:0;top:0;width:0;height:100vh;height:100svh;visibility:hidden;pointer-events:none';
     document.body.appendChild(probe);
@@ -52,7 +52,9 @@
     function fit(force){
       if (!force && innerWidth === w) return; w = innerWidth;
       var vh = probe.offsetHeight || innerHeight, need = cta.getBoundingClientRect().bottom - copy.getBoundingClientRect().top;
-      hero.style.setProperty('--fig', Math.max(150, Math.min(420, Math.round(vh - need - 10 - 24))) + 'px');
+      var fig = Math.min(420, Math.round(vh - need - 10 - 16)), none = fig < 140;   /* under 140 the figure is a sliver behind the nav: drop it */
+      hero.classList.toggle('adm-nofig', none);
+      hero.style.setProperty('--fig', (none ? 88 : fig) + 'px');   /* 88: the copy still clears the nav */
     }
     fit(true); addEventListener('resize', function(){ fit(false); });
     if (document.fonts) document.fonts.ready.then(function(){ fit(true); });

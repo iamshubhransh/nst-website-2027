@@ -74,8 +74,8 @@ await p.locator('.nav .menu').tap(); await p.waitForTimeout(300);
 for (const [w, h] of [[375, 548], [360, 560], [390, 664], [412, 780]]) {
   const f = await b.newPage({ viewport: { width: w, height: h }, isMobile: true, hasTouch: true });
   await f.goto('http://localhost:8765/admissions.html'); await f.waitForTimeout(500);
-  const m = await f.evaluate(() => ({ cta: Math.round(document.querySelector('.adm-hero .pl-cta').getBoundingClientRect().bottom), vh: innerHeight }));
-  ok(`first fold ${w}×${h}: the CTA is visible`, m.cta <= m.vh - 8, m);
+  const m = await f.evaluate(() => { const t = document.querySelector('.adm-ticket').getBoundingClientRect(), n = document.querySelector('.nav').getBoundingClientRect(), c = document.querySelector('.pl-crumbs').getBoundingClientRect(); return { ticket: Math.round(t.bottom), vh: innerHeight, crumbsClearNav: c.top >= n.bottom }; });
+  ok(`first fold ${w}×${h}: the whole ticket is visible, copy clear of the nav`, m.ticket <= m.vh - 8 && m.crumbsClearNav, m);
   await f.close();
 }
 

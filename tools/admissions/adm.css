@@ -4,10 +4,11 @@
 /* ---- 01 hero: the placements hero; its wall is the route figure. The CTA must make the first fold on a real phone (browser
         toolbars showing, so the small viewport, svh): the figure takes whatever height is left above the copy — up to its 420 —
         and shrinks, whole, on short screens. adm.js measures the copy and sets --fig exactly; this is the no-JS estimate. ---- */
-.adm-hero{--fig:clamp(150px,calc(100vh - 400px),420px);--fig:clamp(150px,calc(100svh - 400px),420px);padding-top:calc(var(--fig) + 10px)}
+.adm-hero{--fig:clamp(88px,calc(100vh - 460px),420px);--fig:clamp(88px,calc(100svh - 460px),420px);padding-top:calc(var(--fig) + 10px)}
 .adm-wall{height:calc(var(--fig) + 40px)}
 .adm-wall .rt-svg{position:absolute;left:0;top:36px;width:100%;height:calc(var(--fig) - 36px)}
 .adm-wall::before{height:96px}
+.adm-nofig .adm-wall{display:none}
 .adm-wall::after{top:calc(var(--fig) - 60px);height:100px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 55%,#fff 80%)}
 .adm-wall .rt-walk{fill:#EEF1F5}
 .adm-wall .rt-flag{fill:#E1E5EA}
