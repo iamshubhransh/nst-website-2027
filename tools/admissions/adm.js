@@ -150,6 +150,10 @@
     dots.forEach(function(d, k){ d.classList.toggle('on', k === i); });
   }, {passive: true});
 
+  /* the ticket's notches are real holes on the perforation; the mask needs the perforation's height */
+  function cuts(){ document.querySelectorAll('.adm-ticket').forEach(function(t){ var c = t.querySelector('.adm-tk-cut'); if (!c) return; t.style.setProperty('--cut', (c.offsetTop + .5) + 'px'); t.classList.add('has-cut'); if (t.parentNode.classList.contains('adm-tkw')) t.parentNode.style.setProperty('--cutw', (t.offsetTop + c.offsetTop) + 'px'); }); }
+  cuts(); addEventListener('resize', cuts); if (document.fonts) document.fonts.ready.then(cuts);
+
   /* 09 · FAQ: one open at a time */
   var acc = document.getElementById('plAcc');
   if (acc) acc.querySelectorAll('.pl-q button').forEach(function(b){ b.addEventListener('click', function(){

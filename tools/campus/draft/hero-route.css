@@ -1,0 +1,16 @@
+/* ---- 01 hero: the placements hero; the wall is the first admissions route figure (470 tall, 420 of drawing), uncoloured ---- */
+.cmp-hero{padding-bottom:16px}
+.cmp-hero .pl-crumbs{min-height:22px}   /* his frame keeps the crumbs row 22 tall (the season pill, hidden) */
+.cmp-wall{height:470px}
+.cmp-wall .rt-svg{position:absolute;left:0;top:0;width:100%;height:420px}
+.cmp-wall::before{height:96px}
+.cmp-wall::after{top:352px;height:118px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 55%,#fff 80%)}
+.cmp-wall .rt-walk{fill:#EEF1F5}
+.cmp-wall .rt-flag{fill:#E1E5EA;transition:fill .3s ease}
+.cmp-wall .rt-flag.on{fill:#0673F9}
+.cmp-wall .rt-stu path{fill:#0673F9;stroke:#0450B0}
+.cmp-trust{align-self:stretch;display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0;font-size:12.5px;line-height:16px;font-weight:600;color:rgba(22,25,29,.6)}
+.cmp-trust span{display:inline-flex;align-items:center;gap:6px}
+.cmp-trust svg{width:16px;height:16px;color:#0673F9}
+.cmp-trust i{width:1px;height:14px;background:#E1E5EA}
+

@@ -3698,6 +3698,17 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .adm-tk-cut i:first-child{left:-27px}
 .adm-tk-cut i:last-child{right:-27px}
 .adm-tk-bot{padding:16px 18px 16px}
+.adm-tkw{position:relative;align-self:stretch}
+.adm-tkw>.adm-ticket{position:relative;z-index:1}
+/* the shadow is cast by the part below the perforation only, so the notches stay clear (a holed card can't carry a box-shadow) */
+.adm-tkw::before{content:"";position:absolute;left:10px;right:10px;bottom:0;top:calc(var(--cutw, 60%) + 26px);border-radius:16px;box-shadow:0 16px 26px -14px rgba(22,25,29,.32)}
+.adm-tkw .adm-ticket{box-shadow:none}
+.adm-ticket.has-cut{--ch:radial-gradient(circle at .5px calc(var(--cut) + 1px),transparent 9.5px,#000 10px),radial-gradient(circle at calc(100% - .5px) calc(var(--cut) + 1px),transparent 9.5px,#000 10px);
+  -webkit-mask:var(--ch);-webkit-mask-composite:source-in;mask:var(--ch);mask-composite:intersect}
+.adm-ticket.has-cut::before,.adm-ticket.has-cut::after{content:"";position:absolute;z-index:1;top:calc(var(--cut) - 10.5px);width:21px;height:21px;box-sizing:border-box;border:1px solid #E1E5EA;border-radius:50%;pointer-events:none}
+.adm-ticket.has-cut::before{left:-11px}
+.adm-ticket.has-cut::after{right:-11px}
+.adm-ticket.has-cut .adm-tk-cut i{display:none}
 .adm-ticket .pl-cta.btn{margin-top:0}
 .adm-tk-proof{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
 .adm-tk-proof b{font-weight:600;color:#16191D}
@@ -3908,6 +3919,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .rt-pennant{fill:#0673F9;stroke:none}.rt-walk{fill:#E8EDF4}.rt-track-line{stroke:#fff;stroke-width:1.6;fill:none}.rt-win{fill:#CFE3FB;stroke:none}.rt-win-warm{fill:#FFE7B8;stroke:none}
 
 </style>
+<script src="https://inflight.co/widget.js" data-org="cdpu8ckm" async></script>
 </head>
 <body>
 <script>/* nav variants */ var nv = (location.search.match(/[?&]nav=(\w+)/) || [])[1]; document.documentElement.classList.add(nv === 'flat' ? 'nav-flat' : nv === 'pill' ? 'nav-pill' : 'nav-wide'); if (!/[?&]fest=card\b/.test(location.search)) document.documentElement.classList.add('fest-v-dome');   /* default since 12 Oct: the dome itself is the aftermovie; ?fest=card brings back the video card */   /* default: the full-width pill (12 Oct); ?nav=pill the capped pill, ?nav=flat the pinned bar */</script>
@@ -3983,7 +3995,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
       <p class="pl-lede">One online test, one interview and a counselling session. Apply early for the best scholarships.</p>
       <!-- the next NSAT as a ticket (16 Oct, his ask, after the old site's exam card): the date leads, the deadline under it, a
            perforation, then the CTA and how many have registered -->
-      <div class="adm-ticket">
+      <div class="adm-tkw"><div class="adm-ticket">
         <div class="adm-tk-top">
           <span class="adm-tk-k"><i></i>Next NSAT</span>
           <p class="adm-tk-date">7 January 2027</p>
@@ -3994,7 +4006,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
           <a class="btn btn-brand pl-cta" href="#">Register for NSAT <img src="assets/icon-arrow-right.svg" alt=""></a>
           <p class="adm-tk-proof"><span class="stack"><span class="av av-photo"><img src="assets/avatar-1.png" alt="" style="left:-4.81px;top:.08px;width:35.41px;height:34.67px"></span><span class="av av-photo"><img src="assets/avatar-2.png" alt="" style="left:-6.09px;top:3.5px;width:31.53px;height:24.08px"></span><span class="av av-photo"><img src="assets/avatar-3.png" alt="" style="left:-3.52px;top:2.66px;width:31.54px;height:25.75px"></span></span><span><b>31,352</b> students have registered</span></p>
         </div>
-      </div>
+      </div></div>
     </div>
   </section>
 
@@ -4987,6 +4999,10 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
     var i = Math.round(camps.scrollLeft / (camps.firstElementChild.offsetWidth + 12));
     dots.forEach(function(d, k){ d.classList.toggle('on', k === i); });
   }, {passive: true});
+
+  /* the ticket's notches are real holes on the perforation; the mask needs the perforation's height */
+  function cuts(){ document.querySelectorAll('.adm-ticket').forEach(function(t){ var c = t.querySelector('.adm-tk-cut'); if (!c) return; t.style.setProperty('--cut', (c.offsetTop + .5) + 'px'); t.classList.add('has-cut'); if (t.parentNode.classList.contains('adm-tkw')) t.parentNode.style.setProperty('--cutw', (t.offsetTop + c.offsetTop) + 'px'); }); }
+  cuts(); addEventListener('resize', cuts); if (document.fonts) document.fonts.ready.then(cuts);
 
   /* 09 · FAQ: one open at a time */
   var acc = document.getElementById('plAcc');

@@ -1,17 +1,18 @@
   <!-- ===== campus page · Rishihood University, Delhi NCR (phone). Built from his frames 744:61112 (20 Oct 2026: hero, summary tiles, Facilities & Amenities) and
        745:67391 (20 Oct: only at Rishihood, scholarships, curriculum, fees, loans, laptop, visit, FAQs). The earlier draft is in draft/. ===== -->
 
-  <!-- 01 · hero: the placements hero; its wall is the first admissions route figure (uncoloured, the pillar student walking the stations) -->
-  <section class="pl-hero cmp-hero" id="top" aria-label="Rishihood University campus">
-    <div class="pl-wall cmp-wall iso" data-theme="light" aria-hidden="true"><!--@route--></div>
-    <div class="pl-hero-copy">
-      <div class="pl-crumbs">
-        <nav class="pl-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="#">Campuses</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span aria-current="page">Delhi NCR</span></nav>
-      </div>
-      <h1 class="pl-title">B.Tech in CS &amp; AI at Rishihood University</h1>
-      <p class="pl-lede">A residential campus in Sonipat, Delhi NCR. Rishihood awards the degree; NST teaches it.</p>
-      <a class="btn btn-brand pl-cta" href="#">Apply to Rishihood <img src="assets/icon-arrow-right.svg" alt=""></a>
-      <p class="cmp-trust"><span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.6l5 1.9v3.8c0 3.3-2.1 5.9-5 7.1-2.9-1.2-5-3.8-5-7.1V3.5z" fill="currentColor"/><path d="M5.6 8.1l1.7 1.7 3.2-3.4" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>UGC-approved degree</span><i aria-hidden="true"></i><span><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="6.4" r="4.6" fill="currentColor"/><path d="M5.4 10.4L4.6 14.6l3.4-1.6 3.4 1.6-.8-4.2" fill="currentColor"/><path d="M6 6.5l1.4 1.4 2.6-2.8" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>NSDC certified</span></p>
+  <!-- 01 · hero (20 Oct, his ask: the facilities screen as the hero). The campus fills the first screen (a silent 15.6 s loop cut from the
+       tour, 608 × 1080); the play button opens the full 1:21 tour; the name, three facts and the one action sit at the foot.
+       The earlier hero (the admissions route figure, his frame 744:61112) is kept in draft/hero-route.html -->
+  <section class="cmp-hv" id="top" aria-label="Rishihood University campus">
+    <div class="cmp-hv-media" aria-hidden="true"><video class="cmp-hv-v" id="cmpLoop" muted loop playsinline preload="auto" poster="assets/campus/ru/tour-hero.jpg" src="assets/campus/ru/tour-hero.mp4"></video><i class="cmp-hv-shade"></i></div>
+    <div class="cmp-hv-mid"><button class="cmp-tour" type="button" id="cmpTour" aria-label="Play the campus tour, 1 minute 21 seconds"><span class="cmp-tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="cmp-tour-lab">Campus tour · 1:21</span></button></div>
+    <div class="cmp-hv-copy">
+      <nav class="pl-crumb cmp-hv-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="#">Campuses</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span aria-current="page">Delhi NCR</span></nav>
+      <h1 class="cmp-hv-h"><span class="cmp-hv-k">B.Tech in CS &amp; AI<span class="cmp-sr"> at</span></span> <span class="cmp-hv-name"><img src="assets/pl/uni-rishihood-mark.png" alt=""><b>Rishihood</b></span> <span class="cmp-hv-u">University · Sonipat, Delhi NCR</span></h1>
+      <div class="cmp-fac-stats cmp-hv-stats"><span>25-acre campus</span><span>Fully residential</span><span>UGC-approved degree</span></div>
+      <a class="btn btn-brand pl-cta cmp-hv-cta" href="#">Apply to Rishihood <img src="assets/icon-arrow-right.svg" alt=""></a>
+      <p class="cmp-hv-note">Rishihood awards the degree; NST teaches it. NSDC certified.</p>
     </div>
   </section>
 
@@ -27,24 +28,19 @@
     <div class="hatch" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
   </section>
 
-  <!-- 02 · facilities & amenities (dark; his frame, after the homepage fest section): the tab, the title, the dome. Under the arc the
-       campus plays full-bleed (a silent 16 s loop cut from the tour); the play button opens the full 1:21 tour with sound. Then the
-       current page's six keywords as chips over a strip of photos, one per keyword (stills from the tour), four more places in a grid,
-       and a visit CTA. Media: assets/campus/ru (tour.mp4 720p, tour-loop.mp4 576×800, fac-*.jpg) -->
+  <!-- 02 · facilities & amenities (dark; his frame, after the homepage fest section): the tab, the title, the dome. The campus video
+       moved up to the hero (20 Oct), so under the arc come the current page's six keywords as chips over a strip of photos, one per
+       keyword (stills from the tour), four more places in a grid, and a visit CTA. Media: assets/campus/ru -->
   <section class="cmp-fac" id="facilities" aria-label="Facilities and amenities">
     <div class="cmp-dome" aria-hidden="true">
-      <div class="cmp-art"><video class="cmp-art-v" id="cmpLoop" muted loop playsinline preload="metadata" poster="assets/campus/ru/tour-loop.jpg" src="assets/campus/ru/tour-loop.mp4"></video><i class="cmp-art-fade"></i></div>
       <i class="fest-beam fest-beam-soft"></i><i class="fest-beam"></i>
     </div>
     <i class="cmp-dome-fill" aria-hidden="true"></i>
     <div class="fest-tab" aria-hidden="true"><i class="fest-tab-c fest-tab-cl"></i><i class="fest-tab-c fest-tab-cr"></i><span class="fest-pg"><b class="on"></b><b></b></span></div>
     <div class="cmp-fac-head"><h2>Facilities &amp; Amenities</h2><p>State-of-the-art facilities at Rishihood University</p></div>
     <div class="cmp-fac-body">
-      <button class="cmp-tour" type="button" id="cmpTour" aria-label="Play the campus tour, 1 minute 21 seconds"><span class="cmp-tour-play"><img src="assets/icon-play-22.svg" alt=""></span><span class="cmp-tour-lab">Campus tour · 1:21</span></button>
-      <div class="cmp-fac-cap">
-        <div class="cmp-fac-name"><img src="assets/pl/uni-rishihood-mark.png" alt=""><b>Rishihood</b></div>
-        <div class="cmp-fac-stats"><span>25-acre campus</span><span>Sonipat, Delhi NCR</span><span>Fully residential</span></div>
-      </div>
+
+      
       <div class="cmp-kw" id="cmpKw" role="tablist" aria-label="Facilities"><button type="button" role="tab" class="cmp-kw-c is-on" aria-selected="true" data-k="0"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3" width="15" height="10.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="7.4" r="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.6 13.5c.5-1.9 1.8-3 3.4-3s2.9 1.1 3.4 3M7 17h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Cutting-edge classrooms</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="1"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="9.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 12.5v2.2M6.5 17.5l1.6-2.8h3.8l1.6 2.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vibrant auditorium</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="2"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 10h6M2.5 8.2v3.6M17.5 8.2v3.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="4.2" y="5.5" width="2.8" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="5.5" width="2.8" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Fully-equipped gyms</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="3"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 12.5V4.8a1.8 1.8 0 013.6 0M12.6 12.5V4.8a1.8 1.8 0 013.6 0M7 7.5h5.6M7 10.2h5.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2.5 15.6c1.3 0 1.3-.9 2.5-.9s1.3.9 2.5.9 1.3-.9 2.5-.9 1.3.9 2.5.9 1.3-.9 2.5-.9 1.3.9 2.5.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Swimming pool</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="4"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5h14a7 7 0 01-14 0zM7.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4M10.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4M13.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Nutritious food at the mess</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 15.5V4.5M2.5 12h15v3.5M17.5 12V9.6a2 2 0 00-2-2H9.4V12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.9" cy="9.3" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Cozy hostels</span></button></div>
       <div class="cmp-spaces" id="cmpSpaces"><figure class="cmp-sp" data-k="0"><img src="assets/campus/ru/fac-classrooms.jpg" alt="Cutting-edge classrooms at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">01</span>Cutting-edge classrooms</figcaption></figure><figure class="cmp-sp" data-k="1"><img src="assets/campus/ru/fac-auditorium.jpg" alt="Vibrant auditorium at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">02</span>Vibrant auditorium</figcaption></figure><figure class="cmp-sp" data-k="2"><img src="assets/campus/ru/fac-gym.jpg" alt="Fully-equipped gyms at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">03</span>Fully-equipped gyms</figcaption></figure><figure class="cmp-sp" data-k="3"><img src="assets/campus/ru/fac-pool.jpg" alt="Swimming pool at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">04</span>Swimming pool</figcaption></figure><figure class="cmp-sp" data-k="4"><img src="assets/campus/ru/fac-mess.jpg" alt="Nutritious food at the mess at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">05</span>Nutritious food at the mess</figcaption></figure><figure class="cmp-sp" data-k="5"><img src="assets/campus/ru/fac-hostels.jpg" alt="Cozy hostels at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">06</span>Cozy hostels</figcaption></figure></div>
       <div class="cmp-fgrid"><figure class="cmp-ft"><img src="assets/campus/ru/fac-library.jpg" alt="Library at Rishihood University" loading="lazy"><figcaption>Library</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-lounge.jpg" alt="Learners’ lounge at Rishihood University" loading="lazy"><figcaption>Learners’ lounge</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-badminton.jpg" alt="Badminton court at Rishihood University" loading="lazy"><figcaption>Badminton court</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-nets.jpg" alt="Cricket nets at Rishihood University" loading="lazy"><figcaption>Cricket nets</figcaption></figure></div>
@@ -105,11 +101,11 @@
     <article class="cmp-ycard" id="cmpYear" aria-live="polite"></article>
   </section>
 
-  <!-- 06 · fees (grey): what you pay, semester by semester. Tap a bar for its breakdown. Figures from the current page's table -->
+  <!-- 06 · fees (grey): what you pay, semester by semester (no programme total, his ask). Tap a bar: its total heads the card, its parts below. Figures from the current page's table -->
   <section class="bk bk-light cmp-fees" id="fees" aria-label="Fees">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Fees, <span>semester by semester.</span></h2><p class="bk-sub">Before scholarships, hostel included.</p></div></div>
     <div class="cmp-fcard">
-      <div class="cmp-ftop"><p class="cmp-ftot"><b>₹26.9 lakh</b><span>for four years</span></p><em class="cmp-ftag">Current fees</em></div>
+      <div class="cmp-ftop"><p class="cmp-ftot" id="cmpFTot" aria-live="polite"><span>Semester 1</span><b>₹4,10,000</b></p><em class="cmp-ftag">Current fees</em></div>
       <div class="cmp-bars" id="cmpBars" role="tablist" aria-label="Semesters"></div>
       <div class="cmp-fkey" aria-hidden="true"><span style="--c:#0673F9">Tuition</span><span style="--c:#16A34A">Hostel &amp; mess</span><span style="--c:#7B55EE">Admin &amp; tech</span><span style="--c:#E08600">Deposit</span></div>
       <div class="cmp-fsem" id="cmpSem" aria-live="polite"></div>
@@ -138,16 +134,8 @@
   <!-- 08 · the laptop (dark): a MacBook is required. Two ways to have one: buy it through NST, or bring your own that meets the bar -->
   <section class="bk bk-dark cmp-mac" id="laptop" aria-label="Laptop">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Your laptop. <span>A MacBook.</span></h2><p class="bk-sub">Buy it through NST or bring your own.</p></div></div>
+    <div class="cmp-mstage" aria-hidden="true"><img class="cmp-mimg is-on" data-m="0" src="assets/campus/mac-pro-front.jpg" alt=""><img class="cmp-mimg" data-m="1" src="assets/campus/mac-pro-open.jpg" alt="" loading="lazy"><span class="cmp-mcap">MacBook Pro · M5</span></div>
     <div class="cmp-mcard">
-      <div class="cmp-mfig" aria-hidden="true">
-        <svg viewBox="0 0 220 120"><rect x="44" y="10" width="132" height="86" rx="7" fill="#23282F" stroke="#3A414B"/><rect x="51" y="17" width="118" height="72" rx="2" fill="#0B0C0E"/>
-          <rect x="60" y="28" width="30" height="5" rx="2.5" fill="#C4B5FD"/><rect x="95" y="28" width="44" height="5" rx="2.5" fill="#61A8FF"/>
-          <rect x="68" y="40" width="22" height="5" rx="2.5" fill="#4ADE80"/><rect x="95" y="40" width="52" height="5" rx="2.5" fill="#30363D"/>
-          <rect x="68" y="52" width="40" height="5" rx="2.5" fill="#FBBF24"/><rect x="113" y="52" width="26" height="5" rx="2.5" fill="#30363D"/>
-          <rect x="60" y="64" width="18" height="5" rx="2.5" fill="#C4B5FD"/><rect x="83" y="64" width="34" height="5" rx="2.5" fill="#61A8FF"/>
-          <rect x="60" y="76" width="6" height="7" rx="1" fill="#fff"/>
-          <path d="M22 98h176l-8 10a6 6 0 01-4.7 2.3H34.7A6 6 0 0130 108z" fill="#3A414B"/><rect x="94" y="98" width="32" height="4" rx="2" fill="#23282F"/></svg>
-      </div>
       <div class="adm-lseg cmp-mseg" role="tablist" aria-label="How you get it"><button type="button" role="tab" class="is-on" aria-selected="true" data-m="0">Through NST</button><button type="button" role="tab" aria-selected="false" data-m="1">Bring your own</button></div>
       <div class="cmp-mp is-on" data-m="0">
         <p class="cmp-mh">MacBook Pro or Air, M5</p>
@@ -167,7 +155,7 @@
   <!-- 09 · visit (light): the admissions ticket, as a visit pass -->
   <section class="bk bk-light cmp-visit" id="visit" aria-label="Visit the campus">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">See it yourself. <span>On a Sunday.</span></h2><p class="bk-sub">A free 45-minute tour with a student.</p></div></div>
-    <div class="adm-ticket cmp-pass">
+    <div class="adm-tkw"><div class="adm-ticket cmp-pass">
       <div class="adm-tk-top">
         <span class="adm-tk-k cmp-pass-k"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Campus visit</span>
         <p class="adm-tk-date">Every Sunday</p>
@@ -178,7 +166,7 @@
         <a class="btn btn-brand pl-cta" href="#">Book a visit <img src="assets/icon-arrow-right.svg" alt=""></a>
         <p class="adm-tk-proof"><span class="stack"><span class="av av-photo"><img src="assets/avatar-1.png" alt="" style="left:-4.81px;top:.08px;width:35.41px;height:34.67px"></span><span class="av av-photo"><img src="assets/avatar-2.png" alt="" style="left:-6.09px;top:3.5px;width:31.53px;height:24.08px"></span><span class="av av-photo"><img src="assets/avatar-3.png" alt="" style="left:-3.52px;top:2.66px;width:31.54px;height:25.75px"></span></span><span>Shown around by a current student</span></p>
       </div>
-    </div>
+    </div></div>
   </section>
 
   <!-- 10 · FAQs: the placements FAQ component, this campus's questions -->

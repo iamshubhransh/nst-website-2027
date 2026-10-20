@@ -37,7 +37,6 @@ tail = src[src.index('<div class="vid" id="vid"'):]
 mod_i = tail.index('<script type="module">'); mod_j = tail.index('</script>', mod_i) + len('</script>')
 tail = tail[:mod_i] + tail[mod_j:]
 
-body = body.replace('<!--@route-->', open(os.path.join(HERE, 'route.svg'), encoding='utf-8').read())   # the first admissions route figure (git 3111be5)
 
 # links that point at homepage sections must leave this page
 def homeify(block):
@@ -87,9 +86,10 @@ tail_js = tail_js[:ms] + '<script>\n' + '\n'.join(kept) + tail_js[me:]
 
 page = (head + '<body>\n' + nav_variants + '\n<div class="page" id="page">\n\n  ' + header + '\n\n' + body + '\n\n  ' + footer + '\n</div>\n\n' + tail_html + tail_js)
 page = page.replace('min-width:1024px', 'min-width:100000px')   # no desktop layer yet (CSS and the JS isDT checks)
+# the dock waits for the hero to scroll off; this page's hero is the video hero
+assert page.count("document.querySelector('.pl-hero');") == 1
+page = page.replace("document.querySelector('.pl-hero');", "document.querySelector('.pl-hero') || document.querySelector('.cmp-hv');")
 import json
-rt = json.load(open(os.path.join(HERE, 'route.json')))
-js = js.replace('__RT_STATIONS__', json.dumps(rt['stations'])).replace('__RT_UNIT__', json.dumps(rt['unit']))
 i = page.rindex('</body>')
 page = page[:i] + '<script>\n' + js + '\n</script>\n' + page[i:]
 open(os.path.join(ROOT, 'campus-rishihood.html'), 'w', encoding='utf-8').write(page)

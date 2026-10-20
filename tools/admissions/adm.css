@@ -33,6 +33,17 @@
 .adm-tk-cut i:first-child{left:-27px}
 .adm-tk-cut i:last-child{right:-27px}
 .adm-tk-bot{padding:16px 18px 16px}
+.adm-tkw{position:relative;align-self:stretch}
+.adm-tkw>.adm-ticket{position:relative;z-index:1}
+/* the shadow is cast by the part below the perforation only, so the notches stay clear (a holed card can't carry a box-shadow) */
+.adm-tkw::before{content:"";position:absolute;left:10px;right:10px;bottom:0;top:calc(var(--cutw, 60%) + 26px);border-radius:16px;box-shadow:0 16px 26px -14px rgba(22,25,29,.32)}
+.adm-tkw .adm-ticket{box-shadow:none}
+.adm-ticket.has-cut{--ch:radial-gradient(circle at .5px calc(var(--cut) + 1px),transparent 9.5px,#000 10px),radial-gradient(circle at calc(100% - .5px) calc(var(--cut) + 1px),transparent 9.5px,#000 10px);
+  -webkit-mask:var(--ch);-webkit-mask-composite:source-in;mask:var(--ch);mask-composite:intersect}
+.adm-ticket.has-cut::before,.adm-ticket.has-cut::after{content:"";position:absolute;z-index:1;top:calc(var(--cut) - 10.5px);width:21px;height:21px;box-sizing:border-box;border:1px solid #E1E5EA;border-radius:50%;pointer-events:none}
+.adm-ticket.has-cut::before{left:-11px}
+.adm-ticket.has-cut::after{right:-11px}
+.adm-ticket.has-cut .adm-tk-cut i{display:none}
 .adm-ticket .pl-cta.btn{margin-top:0}
 .adm-tk-proof{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px 0 0;font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.6)}
 .adm-tk-proof b{font-weight:600;color:#16191D}

@@ -4,7 +4,7 @@ const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
 const errs = [], bad = [];
 p.on('pageerror', e => errs.push(e.message));
-p.on('response', r => { if (r.status() >= 400 && r.url().includes('localhost')) bad.push(r.status() + ' ' + r.url()); });
+p.on('response', r => { if (r.status() >= 400 && r.url().startsWith('http://localhost')) bad.push(r.status() + ' ' + r.url()); });   /* the Inflight widget's own API 404s on localhost */
 const res = []; const ok = (n, c, x) => res.push((c ? 'PASS ' : 'FAIL ') + n + (c ? '' : '  → ' + JSON.stringify(x)));
 const ev = (f, a) => p.evaluate(f, a);
 await p.goto('http://localhost:8765/admissions.html', { waitUntil: 'load' }); await p.waitForTimeout(800);
@@ -32,6 +32,7 @@ ok('the student walks to the next station and its flag lights', t0 !== t1 && lit
 ok('no strip in the hero; its facts sit in the four tiles', await ev(() => !document.querySelector('.adm-facts') && [...document.querySelectorAll('.adm-grid .tile p')].map(p => p.textContent.trim()).join('|') === 'Online, proctored test|Up to 100% scholarships|4 campuses|95% of fees as a loan'));
 ok('the next-NSAT ticket: date, deadline, CTA in the stub, registered count', await ev(() => { const t = document.querySelector('.adm-ticket'); return !!t && t.querySelector('.adm-tk-date').textContent === '7 January 2027' && /6 January/.test(t.querySelector('.adm-tk-dl').textContent) && !!t.querySelector('.adm-tk-bot .pl-cta') && /31,352/.test(t.querySelector('.adm-tk-proof').textContent) && t.querySelectorAll('.adm-tk-proof img').length === 3; }));
 
+ok('the ticket has real notches: masked on its perforation, a ring per hole, the shadow below the cut', await ev(() => { const t = document.querySelector('.adm-ticket'), cs = getComputedStyle(t), c = t.querySelector('.adm-tk-cut'); return t.classList.contains('has-cut') && /radial-gradient/.test(cs.webkitMaskImage || cs.maskImage) && Math.abs(parseFloat(t.style.getPropertyValue('--cut')) - (c.offsetTop + .5)) < .01 && t.parentNode.classList.contains('adm-tkw') && getComputedStyle(t.querySelector('.adm-tk-cut i')).display === 'none'; }));
 ok('the student is a person: legs, shirt, arms, backpack, head, hair', await ev(() => ['rt-legs','rt-shirt','rt-arm','rt-bag','rt-skin','rt-hair'].every(c => document.querySelector('#rtStu .' + c))));
 ok('every section subtext sits on one line', await ev(() => [...document.querySelectorAll('.bk-sub')].every(s => Math.round(s.getBoundingClientRect().height) <= Math.ceil(parseFloat(getComputedStyle(s).lineHeight)))));
 

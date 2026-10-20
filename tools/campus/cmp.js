@@ -4,42 +4,16 @@
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   function onView(el, fn, margin){ new IntersectionObserver(function(en){ fn(en[0].isIntersecting); }, {rootMargin: margin || '0px'}).observe(el); }
 
-  /* ---- 01 · the route: the student walks the stations in order (register → NSAT → interview → counselling → block), each station's
-          flag lights while they stand at it; after the last they walk on through the campus gate, fade, and start again at register.
-          Built (and kept, under reduced motion) standing at NSAT, as in his frame. Runs only while the hero is on screen. ---- */
-  (function(){
-    var g = document.getElementById('rtStu'), hero = document.querySelector('.cmp-hero'); if (!g || !hero) return;
-    var ST = __RT_STATIONS__, U = __RT_UNIT__, GATE = ST[ST.length - 1] + 172, flags = hero.querySelectorAll('.rt-flag');
-    function at(x){ g.setAttribute('transform', 'translate(' + (U[0] * x).toFixed(1) + ' ' + (U[1] * x).toFixed(1) + ')'); }
-    function light(k){ flags.forEach(function(f){ f.classList.toggle('on', +f.dataset.i === k); }); }
-    if (reduce) return;
-    g.style.transition = 'opacity .45s ease';
-    var i = 1, from = ST[1], to = ST[1], phase = 'hold', t0 = 0, raf = 0, live = false, HOLD = 1700, MOVE = 1400;
-    function ease(p){ return p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2; }
-    function frame(now){
-      if (!t0) t0 = now;
-      var dt = now - t0;
-      if (phase === 'hold' && dt > HOLD){
-        phase = 'move'; t0 = now; from = to; light(-1);
-        to = i < ST.length - 1 ? ST[++i] : GATE;
-      } else if (phase === 'move'){
-        var p = Math.min(1, dt / MOVE); at(from + (to - from) * ease(p));
-        if (p >= 1){ t0 = now; if (to === GATE){ phase = 'out'; g.style.opacity = '0'; } else { phase = 'hold'; light(i); } }
-      } else if (phase === 'out' && dt > 600){
-        i = 0; from = to = ST[0]; at(to); g.style.opacity = '1'; phase = 'hold'; t0 = now; light(0);
-      }
-      raf = live ? requestAnimationFrame(frame) : 0;
-    }
-    onView(hero, function(on){ live = on; if (live && !raf){ t0 = 0; raf = requestAnimationFrame(frame); } });
-  })();
+  /* ---- 01 · hero: while it is on screen the campus loop plays (never under reduced motion) and the play button's ring pulses;
+          02 · facilities: the dome's beam runs while the section is on screen ---- */
+  var hv = document.getElementById('top'), loop = document.getElementById('cmpLoop'), fac = document.getElementById('facilities');
+  function playLoop(){ if (!loop || reduce) return; var pr = loop.play(); if (pr && pr.catch) pr.catch(function(){}); }
+  if (hv) onView(hv, function(on){ hv.classList.toggle('is-live', on && !reduce); if (on) playLoop(); else if (loop) loop.pause(); });
+  if (fac) onView(fac, function(on){ fac.classList.toggle('is-live', on && !reduce); });
 
-  /* ---- 02 · facilities: while the section is on screen the dome's beam runs and the silent loop plays (never under reduced motion) ---- */
-  var fac = document.getElementById('facilities'), loop = document.getElementById('cmpLoop');
-  if (fac) onView(fac, function(on){
-    fac.classList.toggle('is-live', on && !reduce);
-    if (!loop || reduce) return;
-    if (on){ var pr = loop.play(); if (pr && pr.catch) pr.catch(function(){}); } else loop.pause();
-  });
+  /* ---- the ticket (the visit pass): its notches are real holes on the perforation; the mask needs the perforation's height ---- */
+  function cuts(){ document.querySelectorAll('.adm-ticket').forEach(function(t){ var c = t.querySelector('.adm-tk-cut'); if (!c) return; t.style.setProperty('--cut', (c.offsetTop + .5) + 'px'); t.classList.add('has-cut'); if (t.parentNode.classList.contains('adm-tkw')) t.parentNode.style.setProperty('--cutw', (t.offsetTop + c.offsetTop) + 'px'); }); }
+  cuts(); addEventListener('resize', cuts); if (document.fonts) document.fonts.ready.then(cuts);
 
   /* ---- keywords ↔ photos: a chip scrolls the strip to its photo; swiping the strip lights the chip of the photo at its left edge ---- */
   (function(){
@@ -80,7 +54,6 @@
   var PARTS = [['Tuition', '#0673F9'], ['Hostel & mess', '#16A34A'], ['Admin & tech', '#7B55EE'], ['Refundable deposit', '#E08600']];
 
   function inr(n){ var s = String(n), last = s.slice(-3), rest = s.slice(0, -3); return '₹' + (rest ? rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' : '') + last; }
-  function lakh(n){ return '₹' + (n / 100000).toFixed(1).replace(/\.0$/, '') + 'L'; }
 
   /* the curriculum as the campus page publishes it (Rishihood and Pune carry the same four years word for word, 19 Oct 2026). Titles
      match the homepage's curriculum section; skills are the first six of "What you'll learn"; projects shortened, three per year */
@@ -151,32 +124,34 @@
     segs.forEach(function(b){ b.addEventListener('click', function(){ type = +b.dataset.t; render(); }); });
   })();
 
-  /* ---- 08 · laptop: through NST, or bring your own ---- */
+  /* ---- 08 · laptop: through NST, or bring your own; the MacBook on the stage changes with it ---- */
   (function(){
     var seg = document.querySelector('.cmp-mseg'); if (!seg) return;
     seg.addEventListener('click', function(e){
       var b = e.target.closest('button'); if (!b) return;
       seg.querySelectorAll('button').forEach(function(x){ var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
       document.querySelectorAll('.cmp-mp').forEach(function(p){ p.classList.toggle('is-on', p.dataset.m === b.dataset.m); });
+      document.querySelectorAll('.cmp-mimg').forEach(function(im){ im.classList.toggle('is-on', im.dataset.m === b.dataset.m); });
     });
   })();
 
   /* ---- 06 · fees: one bar per semester, stacked by component; the picked semester's breakdown below ---- */
   (function(){
-    var bars = document.getElementById('cmpBars'), sem = document.getElementById('cmpSem'); if (!bars || !sem) return;
+    var bars = document.getElementById('cmpBars'), sem = document.getElementById('cmpSem'), head = document.getElementById('cmpFTot'); if (!bars || !sem) return;
     var F = CAMPUS.fees, max = Math.max.apply(null, F.map(function(r){ return r.reduce(function(a, b){ return a + b; }, 0); })), H = 132;
     bars.innerHTML = F.map(function(r, i){
       var tot = r.reduce(function(a, b){ return a + b; }, 0);
       return '<button type="button" role="tab" class="cmp-bar" data-i="' + i + '" aria-label="Semester ' + (i + 1) + ', ' + inr(tot) + '" style="--h:' + Math.round(tot / max * H) + 'px">' +
         r.map(function(v, k){ return v ? '<i style="--c:' + PARTS[k][1] + ';--s:' + Math.max(3, Math.round(v / max * H) - 2) + 'px"></i>' : ''; }).join('') +
-        '<b>' + lakh(tot) + '</b><em>S' + (i + 1) + '</em></button>';
+        '<em>S' + (i + 1) + '</em></button>';
     }).join('');
     function pick(i){
       bars.querySelectorAll('.cmp-bar').forEach(function(b){ var on = +b.dataset.i === i; b.classList.toggle('is-on', on); b.setAttribute('aria-selected', on); });
       var r = F[i], tot = r.reduce(function(a, b){ return a + b; }, 0);
       sem.innerHTML = (CAMPUS.feeNotes[i] ? '<p class="cmp-fsem-n">' + CAMPUS.feeNotes[i] + '</p>' : '') +
         r.map(function(v, k){ return v ? '<p class="cmp-fr" style="--c:' + PARTS[k][1] + '"><span>' + PARTS[k][0] + '</span><b>' + inr(v) + '</b></p>' : ''; }).join('') +
-        '<p class="cmp-fr is-tot"><span>Semester ' + (i + 1) + '</span><b>' + inr(tot) + '</b></p>';
+        '';
+      if (head) head.innerHTML = '<span>Semester ' + (i + 1) + '</span><b>' + inr(tot) + '</b>';   /* the picked semester heads the card; no programme total */
     }
     bars.addEventListener('click', function(e){ var b = e.target.closest('.cmp-bar'); if (b) pick(+b.dataset.i); });
     pick(0);
@@ -217,7 +192,7 @@
     function hide(){
       if (!open) return; open = false;
       v.pause(); tv.classList.remove('is-open'); tv.setAttribute('aria-hidden', 'true'); document.documentElement.classList.remove('cmp-tv-on');
-      if (loop && fac && fac.classList.contains('is-live')){ var pr = loop.play(); if (pr && pr.catch) pr.catch(function(){}); }
+      if (hv && hv.classList.contains('is-live')) playLoop();
       if (back && back.focus) back.focus();
     }
     btn.addEventListener('click', show);
