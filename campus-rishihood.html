@@ -3849,9 +3849,9 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 /* ---- 07 loans (grey band): a logo grid that picks the lender, a card with its terms ---- */
 .adm-loans{--bk-bg:#F6F7F9}
 .adm-lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.adm-lt{display:flex;align-items:center;justify-content:center;height:56px;padding:0 6px;border:1px solid #E1E5EA;border-radius:12px;background:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease,box-shadow .2s ease}
+.adm-lt{display:flex;align-items:center;justify-content:center;height:56px;padding:0 6px;border:1px solid #E1E5EA;border-radius:12px;background:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease}
 .adm-lt img{display:block;width:auto;max-width:100%;object-fit:contain}
-.adm-lt.is-on{border:1.5px solid #0673F9;box-shadow:0 8px 16px -12px rgba(6,115,249,.6)}
+.adm-lt.is-on{border:1.5px solid #0673F9}   /* no shadow (his ask, 20 Oct) */
 .adm-lcard{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
 .adm-lc-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .adm-lc-head>div:first-child{display:flex;flex-direction:column;min-width:0}
@@ -4008,16 +4008,16 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .cmp-ftot span{font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
 .cmp-ftot b{margin-top:2px}
 .cmp-ftag{flex:none;height:22px;padding:0 9px;border-radius:999px;background:#F1F3F6;font-style:normal;font-size:11px;line-height:22px;font-weight:600;color:#5B6271}
-.cmp-bars{display:flex;align-items:flex-end;gap:6px;height:150px;margin:18px 0 0;padding-bottom:22px;position:relative;border-bottom:1px solid #EDEFF3}
-.cmp-bar{flex:1 1 0;min-width:0;position:relative;display:flex;flex-direction:column-reverse;gap:2px;height:var(--h);padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:.32;transition:opacity .25s ease}
+.cmp-bars{display:flex;align-items:flex-end;gap:8px;height:170px;margin:24px 0 0;padding-bottom:36px;position:relative;border-bottom:1px solid #EDEFF3}
+.cmp-bar{flex:1 1 0;min-width:0;position:relative;display:flex;flex-direction:column-reverse;gap:3px;height:var(--h);padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:.32;transition:opacity .25s ease}
 .cmp-bar.is-on{opacity:1}
 .cmp-bar i{display:block;flex:none;height:var(--s);border-radius:3px;background:var(--c)}
-.cmp-bar em{position:absolute;left:0;right:0;bottom:-21px;font-style:normal;font-size:11px;line-height:14px;font-weight:600;text-align:center;color:rgba(22,25,29,.45)}
+.cmp-bar em{position:absolute;left:0;right:0;bottom:-27px;font-style:normal;font-size:11px;line-height:14px;font-weight:600;text-align:center;color:rgba(22,25,29,.45)}
 .cmp-bar.is-on em{color:#16191D}
-.cmp-fkey{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 0}
+.cmp-fkey{display:flex;flex-wrap:wrap;gap:10px 18px;margin:20px 0 0}
 .cmp-fkey span{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.6)}
 .cmp-fkey span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}
-.cmp-fsem{margin:16px 0 0;padding:4px 14px;border-radius:12px;background:#F6F7F9}
+.cmp-fsem{margin:22px 0 0;padding:4px 14px;border-radius:12px;background:#F6F7F9}
 .cmp-fr{margin:0;display:flex;align-items:center;justify-content:space-between;gap:12px;height:40px;font-size:14px;line-height:20px;font-weight:500;color:rgba(22,25,29,.65)}
 .cmp-fr+.cmp-fr{border-top:1px solid #E7EAEE}
 .cmp-fr span{display:inline-flex;align-items:center;gap:8px}
@@ -4093,6 +4093,33 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
 
 @media (prefers-reduced-motion:reduce){ .cmp-fs.is-on{animation:none} .cmp-fseg .is-on i::after{animation:none;transform:none} .cmp-fs{transition:none} .cmp-fac.is-live .fest-beam{animation:none} .cmp-hv.is-live .cmp-tour-play::after{animation:none} .cmp-mimg{transition:none} }
+
+/* ---- 20 Oct (his asks) ---- */
+/* Only at Rishihood in light mode: the grey band, light tabs (the year tabs' look), a white card, darker accents that read on white */
+.cmp-only{--bk-bg:#F6F7F9}
+.cmp-only .cmp-otabs button{border:1px solid #E1E5EA;background:#fff;color:#5B6271}
+.cmp-only .cmp-otabs button.is-on{border:1.5px solid var(--c);padding:0 12.5px;background:var(--cb);color:#16191D}
+.cmp-only .cmp-oc{border-color:#E1E5EA;background:#fff;--oc:#C77A00}
+.cmp-only .cmp-oc[data-o="1"]{--oc:#7B55EE}
+.cmp-only .cmp-fan{background:#F1F3F6;border-bottom-color:#E7EAEE}
+.cmp-only .cmp-fan img{border-color:rgba(22,25,29,.08);box-shadow:0 16px 28px -14px rgba(22,25,29,.4)}
+.cmp-only .cmp-oc-vid{border-bottom-color:#E7EAEE}
+.cmp-only .cmp-oc h3{color:#16191D}
+.cmp-only .cmp-oc-b>p{color:rgba(22,25,29,.6)}
+.cmp-only .cmp-ost{border-color:#E1E5EA}
+.cmp-only .cmp-ost div+div{border-left-color:#E1E5EA}
+.cmp-only .cmp-ost dd{color:rgba(22,25,29,.55)}
+/* the fee chart breathes: wider gaps between bars, room under them for the labels, the legend set apart (his ask, 20 Oct) */
+/* the visit pass without its shadow */
+.cmp-visit .adm-tkw::before{display:none}
+/* the MacBook's lid opens with the scroll: the front shot is split at its hinge (72.3% down); the base stays, the lid turns about the
+   hinge in 3D (--lid: 0 open, -88deg shut). Past upright its back shows: the dark aluminium of a closed MacBook */
+.cmp-mlap{perspective:1100px;perspective-origin:50% 20%}
+.cmp-mbase{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(72.2% 0 0 0)}
+.cmp-mlid{position:absolute;inset:0;transform-origin:50% 72.3%;transform:rotateX(var(--lid,0deg));transform-style:preserve-3d;will-change:transform}
+.cmp-mlid-f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 27.7% 0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.cmp-mlid-b{position:absolute;left:8%;right:8%;top:21.6%;height:50.7%;border-radius:16px 16px 4px 4px;transform:rotateX(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  background:linear-gradient(180deg,#3A3D43 0%,#25272B 55%,#1C1D20 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
 
 </style>
 <script src="https://inflight.co/widget.js" data-org="cdpu8ckm" async></script>
@@ -4213,10 +4240,10 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
   </section>
 
   <!-- 03 · only at this campus (dark): what no other NST campus has. Two tabs, one card each: the Venture Studio and Neutron -->
-  <section class="bk bk-dark cmp-only" id="only" aria-label="Only at Rishihood">
+  <section class="bk bk-light cmp-only" id="only" aria-label="Only at Rishihood">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Only at Rishihood. <span>Two extras.</span></h2><p class="bk-sub">A startup studio and the Neutron fest.</p></div></div>
     <div class="adm-qtabs cmp-otabs" role="tablist" aria-label="Only at Rishihood">
-      <button type="button" role="tab" class="is-on" aria-selected="true" data-o="0" style="--c:#FBBF24">Venture Studio</button><button type="button" role="tab" aria-selected="false" data-o="1" style="--c:#B79CFF">Neutron fest</button>
+      <button type="button" role="tab" class="is-on" aria-selected="true" data-o="0" style="--c:#C77A00;--cb:#FEF3E0">Venture Studio</button><button type="button" role="tab" aria-selected="false" data-o="1" style="--c:#7B55EE;--cb:#F0EBFD">Neutron fest</button>
     </div>
     <article class="cmp-oc is-on" data-o="0">
       <div class="cmp-fan" aria-hidden="true"><img src="assets/campus/ru/su-bocadoh.jpg" alt=""><img src="assets/campus/ru/su-inculcate.jpg" alt=""><img src="assets/campus/ru/su-trupahadi.jpg" alt=""></div>
@@ -4297,7 +4324,7 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
   <!-- 08 · the laptop (dark): a MacBook is required. Two ways to have one: buy it through NST, or bring your own that meets the bar -->
   <section class="bk bk-dark cmp-mac" id="laptop" aria-label="Laptop">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Your laptop. <span>A MacBook.</span></h2><p class="bk-sub">Buy it through NST or bring your own.</p></div></div>
-    <div class="cmp-mstage" aria-hidden="true"><img class="cmp-mimg is-on" data-m="0" src="assets/campus/mac-pro-front.jpg" alt=""><img class="cmp-mimg" data-m="1" src="assets/campus/mac-pro-open.jpg" alt="" loading="lazy"><span class="cmp-mcap">MacBook Pro · M5</span></div>
+    <div class="cmp-mstage" aria-hidden="true"><div class="cmp-mimg cmp-mlap is-on" data-m="0" id="cmpLap"><img class="cmp-mbase" src="assets/campus/mac-pro-front.jpg" alt=""><div class="cmp-mlid" id="cmpLid"><img class="cmp-mlid-f" src="assets/campus/mac-pro-front.jpg" alt=""><i class="cmp-mlid-b"></i></div></div><img class="cmp-mimg" data-m="1" src="assets/campus/mac-pro-open.jpg" alt="" loading="lazy"><span class="cmp-mcap">MacBook Pro · M5</span></div>
     <div class="cmp-mcard">
       <div class="adm-lseg cmp-mseg" role="tablist" aria-label="How you get it"><button type="button" role="tab" class="is-on" aria-selected="true" data-m="0">Through NST</button><button type="button" role="tab" aria-selected="false" data-m="1">Bring your own</button></div>
       <div class="cmp-mp is-on" data-m="0">
@@ -5187,7 +5214,7 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
     bars.innerHTML = F.map(function(r, i){
       var tot = r.reduce(function(a, b){ return a + b; }, 0);
       return '<button type="button" role="tab" class="cmp-bar" data-i="' + i + '" aria-label="Semester ' + (i + 1) + ', ' + inr(tot) + '" style="--h:' + Math.round(tot / max * H) + 'px">' +
-        r.map(function(v, k){ return v ? '<i style="--c:' + PARTS[k][1] + ';--s:' + Math.max(3, Math.round(v / max * H) - 2) + 'px"></i>' : ''; }).join('') +
+        r.map(function(v, k){ return v ? '<i style="--c:' + PARTS[k][1] + ';--s:' + Math.max(3, Math.round(v / max * H) - 3) + 'px"></i>' : ''; }).join('') +
         '<em>S' + (i + 1) + '</em></button>';
     }).join('');
     function pick(i){
@@ -5220,6 +5247,20 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
     acc.querySelectorAll('.pl-q').forEach(function(x){ x.classList.remove('is-open'); x.querySelector('button').setAttribute('aria-expanded', 'false'); });
     if (open){ q.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); }
   }); });
+
+  /* ---- 08 · the MacBook's lid follows the scroll: open while the stage is near the middle of the screen, folding shut as it moves
+          away above or below. Eased toward the target each frame; only runs while the stage is near the screen; open under reduced motion ---- */
+  (function(){
+    var lap = document.getElementById('cmpLap'), lid = document.getElementById('cmpLid'); if (!lap || !lid) return;
+    if (reduce){ lid.style.setProperty('--lid', '0deg'); return; }
+    var SHUT = -88, a = SHUT, raf = 0, near = false;
+    function target(){ var r = lap.getBoundingClientRect(), vh = innerHeight, d = Math.abs((r.top + r.height / 2) - vh * .5) / (vh * .5); var open = Math.max(0, Math.min(1, 1 - (d - .12) / .62)); return SHUT * (1 - open * open * (3 - 2 * open)); }
+    function frame(){ var t = target(); a += (t - a) * .14; if (Math.abs(t - a) < .05) a = t; lid.style.setProperty('--lid', a.toFixed(2) + 'deg'); raf = (near && Math.abs(t - a) > .01) ? requestAnimationFrame(frame) : 0; }
+    function kick(){ if (near && !raf) raf = requestAnimationFrame(frame); }
+    lid.style.setProperty('--lid', SHUT + 'deg');
+    new IntersectionObserver(function(en){ near = en[0].isIntersecting; kick(); }, {rootMargin: '200px 0px'}).observe(lap);
+    addEventListener('scroll', kick, {passive: true}); addEventListener('resize', kick);
+  })();
 
   /* ---- the tour player: the play button opens it with sound; the X, Esc or a tap outside the video closes it and returns focus ---- */
   (function(){

@@ -184,9 +184,9 @@
 /* ---- 07 loans (grey band): a logo grid that picks the lender, a card with its terms ---- */
 .adm-loans{--bk-bg:#F6F7F9}
 .adm-lgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.adm-lt{display:flex;align-items:center;justify-content:center;height:56px;padding:0 6px;border:1px solid #E1E5EA;border-radius:12px;background:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease,box-shadow .2s ease}
+.adm-lt{display:flex;align-items:center;justify-content:center;height:56px;padding:0 6px;border:1px solid #E1E5EA;border-radius:12px;background:#fff;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:border-color .2s ease}
 .adm-lt img{display:block;width:auto;max-width:100%;object-fit:contain}
-.adm-lt.is-on{border:1.5px solid #0673F9;box-shadow:0 8px 16px -12px rgba(6,115,249,.6)}
+.adm-lt.is-on{border:1.5px solid #0673F9}   /* no shadow (his ask, 20 Oct) */
 .adm-lcard{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
 .adm-lc-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .adm-lc-head>div:first-child{display:flex;flex-direction:column;min-width:0}

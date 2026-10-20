@@ -61,6 +61,7 @@ ok('the X closes it', await ev(() => !document.getElementById('cmpTv').classList
 // the rest of the page (his frame 745:67391): order, then each section's interaction
 ok('sections in his order', await ev(() => [...document.querySelectorAll('#page > section, #page main > section')].map(s => s.id).filter(Boolean).join(' ') === 'top facilities only scholarships curriculum fees loans laptop visit faq'), await ev(() => [...document.querySelectorAll('section[id]')].map(s => s.id)));
 ok('every section subtext on one line', await ev(() => [...document.querySelectorAll('.bk-sub')].every(s => Math.round(s.getBoundingClientRect().height) <= Math.ceil(parseFloat(getComputedStyle(s).lineHeight)))));
+ok('only at Rishihood is light: the grey band, a white card, dark type', await ev(() => getComputedStyle(document.getElementById('only')).backgroundColor === 'rgb(246, 247, 249)' && getComputedStyle(document.querySelector('.cmp-oc.is-on')).backgroundColor === 'rgb(255, 255, 255)' && getComputedStyle(document.querySelector('.cmp-oc.is-on h3')).color === 'rgb(22, 25, 29)'));
 await p.locator('.cmp-otabs [data-o="1"]').tap(); await p.waitForTimeout(200);
 ok('only at Rishihood: the tabs swap Venture Studio for Neutron', await ev(() => document.querySelector('.cmp-oc[data-o="1"]').classList.contains('is-on') && getComputedStyle(document.querySelector('.cmp-oc[data-o="0"]')).display === 'none' && /Neutron/.test(document.querySelector('.cmp-oc.is-on h3').textContent)));
 await p.locator('.cmp-otabs [data-o="0"]').tap(); await p.waitForTimeout(200);
@@ -79,7 +80,14 @@ await p.locator('.adm-lseg button[data-t="1"]').tap(); await p.waitForTimeout(20
 ok('loans: Unsecured switches the rate', await ev(() => document.getElementById('admLRate').textContent === '11.25%'));
 await ev(() => document.getElementById('laptop').scrollIntoView({ block: 'center' })); await p.locator('.cmp-mseg [data-m="1"]').tap(); await p.waitForTimeout(700)   /* past the crossfade */;
 ok('laptop: Bring your own shows the two specs', await ev(() => { const p = document.querySelector('.cmp-mp.is-on'); return p.dataset.m === '1' && /M1 to M5 · 16 GB · 512 GB/.test(p.textContent) && /M4 or M5 only/.test(p.textContent); }));
+// the lid follows the scroll: shut while the MacBook is far from the middle of the screen, open at the middle
+{ const lidAt = async (off) => { await ev(o => { const r = document.getElementById('cmpLap').getBoundingClientRect(); scrollTo(0, scrollY + r.top + r.height / 2 - innerHeight / 2 + o); }, off); await p.waitForTimeout(1300); return ev(() => parseFloat(getComputedStyle(document.getElementById('cmpLid')).getPropertyValue('--lid'))); };
+  await p.locator('.cmp-mseg [data-m="0"]').tap(); await p.waitForTimeout(700);
+  const far = await lidAt(380), mid = await lidAt(0), half = await lidAt(190), below = await lidAt(-380);
+  ok('laptop: the lid opens with the scroll (shut far off, open at the middle, between in between, shut again past it)', far <= -87 && Math.abs(mid) < .5 && half < -10 && half > -80 && below <= -87, { far, mid, half, below });
+  await p.locator('.cmp-mseg [data-m="1"]').tap(); await p.waitForTimeout(700); }
 ok('laptop: the real MacBook Pro on the stage, swapped by the switch', await ev(() => { const on = document.querySelector('.cmp-mimg.is-on'); return on.dataset.m === '1' && /mac-pro-open\.jpg$/.test(on.src) && getComputedStyle(document.querySelector('.cmp-mimg[data-m="0"]')).opacity === '0' && Math.round(document.querySelector('.cmp-mstage').getBoundingClientRect().width) === innerWidth; }));
+ok('visit pass: no drop shadow', await ev(() => getComputedStyle(document.querySelector('.cmp-visit .adm-tkw'), '::before').display === 'none' && getComputedStyle(document.querySelector('.cmp-pass')).boxShadow === 'none'));
 ok('visit pass: Every Sunday, Sonipat, one CTA', await ev(() => document.querySelector('.cmp-pass .adm-tk-date').textContent === 'Every Sunday' && /Sonipat/.test(document.querySelector('.cmp-pass-where').textContent) && document.querySelectorAll('.cmp-pass .pl-cta').length === 1));
 ok('visit pass: real notches (the pass is masked on its perforation, a ring draws each hole, the shadow sits below the cut)', await ev(() => { const t = document.querySelector('.cmp-pass'), cs = getComputedStyle(t), m = cs.webkitMaskImage || cs.maskImage, cut = parseFloat(t.style.getPropertyValue('--cut')), c = t.querySelector('.adm-tk-cut'); return t.classList.contains('has-cut') && /radial-gradient/.test(m) && Math.abs(cut - (c.offsetTop + .5)) < .01 && getComputedStyle(t, '::before').borderTopWidth === '1px' && getComputedStyle(t.querySelector('.adm-tk-cut i')).display === 'none' && parseFloat(getComputedStyle(t.parentNode, '::before').top) > cut; }));
 await ev(() => document.getElementById('faq').scrollIntoView({ block: 'center' })); await p.locator('#plAcc .pl-q:nth-child(3) button').tap(); await p.waitForTimeout(450);
@@ -130,6 +138,9 @@ const rp = await rb.newPage({ viewport: { width: 393, height: 852 }, reducedMoti
 await rp.goto(URL); await rp.waitForTimeout(300);
 await rp.waitForTimeout(800); await rp.evaluate(() => document.getElementById('facilities').scrollIntoView()); await rp.waitForTimeout(500);
 await rp.waitForTimeout(5600);
+await rp.evaluate(() => document.getElementById('cmpLap').scrollIntoView({ block: 'end' })); await rp.waitForTimeout(400);
+ok('reduced motion: the MacBook stays open', await rp.evaluate(() => getComputedStyle(document.getElementById('cmpLid')).getPropertyValue('--lid').trim() === '0deg'));
+await rp.evaluate(() => document.getElementById('facilities').scrollIntoView()); await rp.waitForTimeout(300);
 ok('reduced motion: no beam, no loop (the poster stands in), no pulsing ring, the carousel stays on its first photo', await rp.evaluate(() => !document.getElementById('facilities').classList.contains('is-live') && !document.getElementById('top').classList.contains('is-live') && document.getElementById('cmpLoop').paused && document.getElementById('cmpFN').textContent === '01 / 06'));
 await rb.close();
 

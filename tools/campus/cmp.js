@@ -148,7 +148,7 @@
     bars.innerHTML = F.map(function(r, i){
       var tot = r.reduce(function(a, b){ return a + b; }, 0);
       return '<button type="button" role="tab" class="cmp-bar" data-i="' + i + '" aria-label="Semester ' + (i + 1) + ', ' + inr(tot) + '" style="--h:' + Math.round(tot / max * H) + 'px">' +
-        r.map(function(v, k){ return v ? '<i style="--c:' + PARTS[k][1] + ';--s:' + Math.max(3, Math.round(v / max * H) - 2) + 'px"></i>' : ''; }).join('') +
+        r.map(function(v, k){ return v ? '<i style="--c:' + PARTS[k][1] + ';--s:' + Math.max(3, Math.round(v / max * H) - 3) + 'px"></i>' : ''; }).join('') +
         '<em>S' + (i + 1) + '</em></button>';
     }).join('');
     function pick(i){
@@ -181,6 +181,20 @@
     acc.querySelectorAll('.pl-q').forEach(function(x){ x.classList.remove('is-open'); x.querySelector('button').setAttribute('aria-expanded', 'false'); });
     if (open){ q.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); }
   }); });
+
+  /* ---- 08 · the MacBook's lid follows the scroll: open while the stage is near the middle of the screen, folding shut as it moves
+          away above or below. Eased toward the target each frame; only runs while the stage is near the screen; open under reduced motion ---- */
+  (function(){
+    var lap = document.getElementById('cmpLap'), lid = document.getElementById('cmpLid'); if (!lap || !lid) return;
+    if (reduce){ lid.style.setProperty('--lid', '0deg'); return; }
+    var SHUT = -88, a = SHUT, raf = 0, near = false;
+    function target(){ var r = lap.getBoundingClientRect(), vh = innerHeight, d = Math.abs((r.top + r.height / 2) - vh * .5) / (vh * .5); var open = Math.max(0, Math.min(1, 1 - (d - .12) / .62)); return SHUT * (1 - open * open * (3 - 2 * open)); }
+    function frame(){ var t = target(); a += (t - a) * .14; if (Math.abs(t - a) < .05) a = t; lid.style.setProperty('--lid', a.toFixed(2) + 'deg'); raf = (near && Math.abs(t - a) > .01) ? requestAnimationFrame(frame) : 0; }
+    function kick(){ if (near && !raf) raf = requestAnimationFrame(frame); }
+    lid.style.setProperty('--lid', SHUT + 'deg');
+    new IntersectionObserver(function(en){ near = en[0].isIntersecting; kick(); }, {rootMargin: '200px 0px'}).observe(lap);
+    addEventListener('scroll', kick, {passive: true}); addEventListener('resize', kick);
+  })();
 
   /* ---- the tour player: the play button opens it with sound; the X, Esc or a tap outside the video closes it and returns focus ---- */
   (function(){
