@@ -62,19 +62,20 @@
   function inr(n){ var s = String(n), last = s.slice(-3), rest = s.slice(0, -3); return '₹' + (rest ? rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' : '') + last; }
 
   /* the curriculum as the campus page publishes it (Rishihood and Pune carry the same four years word for word, 19 Oct 2026). Titles
-     match the homepage's curriculum section; skills are the first six of "What you'll learn"; projects shortened, three per year */
+     match the homepage's curriculum section; six skills of "What you'll learn", ordered so no chip sits alone on the last row at 360–430 px;
+     projects shortened, three per year */
   var YEARS = [
     {n: 'Year 1', k: 'Build', c: '#007A51', cb: '#E7F6EE', t: 'Systems & AI Essentials', out: 'By the end: DSA and AI fundamentals.',
-     skills: ['Python Basics', 'ReactJS', 'UI/UX', 'Data Structures & Algorithms', 'Maths for CS', 'Responsive Web Design'], more: 6,
+     skills: ['Data Structures & Algorithms', 'UI/UX', 'Python Basics', 'ReactJS', 'Maths for CS', 'Responsive Web Design'], more: 6,
      proj: [['y1-oss', 'Open Source for an Open World'], ['y1-crm', 'GenAI CRM'], ['y1-algo', 'Algorithm vs AI Challenge']]},
     {n: 'Year 2', k: 'Achieve', c: '#7B55EE', cb: '#F0EBFD', t: 'Scalable AI systems & Machine Learning', out: 'By the end: ML models on real-world data pipelines.',
-     skills: ['Node Js', 'Backend Engineering', 'Machine Learning', 'Databases', 'Dynamic Programming', 'Spark'], more: 6,
+     skills: ['Node Js', 'Backend Engineering', 'Machine Learning', 'Dynamic Programming', 'Databases', 'Spark'], more: 6,
      proj: [['y2-lastmile', 'Last-mile delivery routing'], ['y2-snapchat', 'A Snapchat-like app'], ['y2-ebay', 'eBay-style live bidding']]},
     {n: 'Year 3', k: 'Innovate', c: '#0673F9', cb: '#E5F1FF', t: 'AI models, systems & System Design', out: 'By the end: AI systems and scalable architectures.',
-     skills: ['Deep Learning', 'GPT models', 'Event-Driven Programming', 'Networks (OSI)', 'RISC Architecture'], more: 0,
+     skills: ['Event-Driven Programming', 'RISC Architecture', 'Deep Learning', 'GPT models', 'Networks (OSI)'], more: 0,
      proj: [['y3-csk', 'An IPL auction for CSK'], ['y3-docs', 'A Google Docs-style editor'], ['y3-stream', 'Live streaming at scale']]},
     {n: 'Year 4', k: 'Succeed', c: '#C77A00', cb: '#FEF3E0', t: 'Internships, OS, Vision & NLP', out: 'By the end: real-world impact and AI fluency.',
-     skills: ['Operating Systems', 'Computer Vision', 'NLP', 'Cyber Security', 'OpenCV', 'Capstone Project'], more: 0,
+     skills: ['Operating Systems', 'NLP', 'Computer Vision', 'Cyber Security', 'OpenCV', 'Capstone Project'], more: 0,
      proj: [['y4-llm', 'Train your own LLM'], ['y4-deeptech', 'Deep-tech projects'], ['y4-toptech', 'Prep for top tech firms']],
      note: 'An internship, research or a project: one is mandatory.'}
   ];

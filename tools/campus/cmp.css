@@ -30,7 +30,6 @@
 .cmp-dome-fill{position:absolute;left:0;right:0;top:793px;bottom:0;background:#0B0C0E}
 .cmp-fac.is-live .fest-beam{opacity:1;animation:festBeam 3.6s linear infinite}
 .cmp-fac.is-live .fest-beam-soft{opacity:.28}
-.cmp-fac .fest-tab{z-index:2}
 .cmp-fac-head{position:absolute;left:0;right:0;top:53px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 16px;text-align:center}
 .cmp-fac-head h2{margin:0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#fff}
 .cmp-fac-head p{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.5);white-space:nowrap}
@@ -46,12 +45,6 @@
 .cmp-fac-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .cmp-fac-stats span{padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:12px;line-height:16px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
 .cmp-fac-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-/* the current page's six keywords: chips that pick the photo above (and light with it) */
-.cmp-kw{display:flex;gap:8px;margin-top:24px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
-.cmp-kw::-webkit-scrollbar{display:none}
-.cmp-kw-c{flex:none;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-family:var(--font);font-size:14px;line-height:20px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .25s ease,color .25s ease,box-shadow .25s ease}
-.cmp-kw-c svg{flex:none;width:20px;height:20px}
-.cmp-kw-c.is-on{background:#fff;box-shadow:none;color:#16191D}
 /* the photos, wholly immersive (20 Oct, his ask): they fill the dome's top as the video did (440 tall since 20 Oct: the tour's
    frames are landscape, so a squarer view shows them sharper and wider), crossfading with a slow push-in; the
    number, the name and six progress segments sit at their foot; the segment of the photo on screen fills as it plays (5 s) and
@@ -76,7 +69,7 @@
 @keyframes cmpSeg{from{transform:scaleX(0)}to{transform:none}}
 .cmp-fac.is-paused .cmp-fseg .is-on i::after,.cmp-fac.is-paused .cmp-fs.is-on{animation-play-state:paused}
 /* four more places, two by two */
-.cmp-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:48px 16px 0}
+.cmp-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:40px 16px 0}
 .cmp-ft{position:relative;margin:0;height:128px;border-radius:12px;overflow:hidden;background:#16191D}
 .cmp-ft img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .cmp-ft::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);pointer-events:none}
@@ -149,20 +142,20 @@
 .cmp-ytabs button{flex:1 1 0;min-width:0;display:inline-flex;align-items:center;justify-content:center;gap:7px;height:34px;padding:0 6px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-family:var(--font);font-size:13px;line-height:16px;font-weight:600;color:#5B6271;cursor:pointer;-webkit-tap-highlight-color:transparent}
 .cmp-ytabs button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
 .cmp-ytabs button.is-on{border:1.5px solid var(--c);padding:0 5.5px;background:var(--cb);color:#16191D}
-.cmp-ycard{--c:#007A51;--cb:#E7F6EE;padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.cmp-ycard{--c:#007A51;--cb:#E7F6EE;padding:20px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
 .cmp-yk{margin:0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c)}
-.cmp-ycard h3{margin:6px 0 0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#16191D}
-.cmp-yout{display:flex;align-items:flex-start;gap:8px;margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--cb);font-size:13.5px;line-height:19px;font-weight:600;color:#16191D}
+.cmp-ycard h3{margin:8px 0 0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#16191D}
+.cmp-yout{display:flex;align-items:flex-start;gap:10px;margin:16px 0 0;padding:12px 14px;border-radius:12px;background:var(--cb);font-size:13.5px;line-height:19px;font-weight:600;color:#16191D}
 .cmp-yout svg{flex:none;width:16px;height:16px;margin-top:1.5px;color:var(--c)}
-.cmp-ylab{margin:16px 0 0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
-.cmp-ychips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.cmp-ychips span{height:28px;padding:0 10px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-size:12.5px;line-height:26px;font-weight:500;color:#3D4350;white-space:nowrap}
+.cmp-ylab{margin:20px 0 0;padding-top:20px;border-top:1px solid #EDEFF3;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+.cmp-ychips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.cmp-ychips span{height:32px;padding:0 12px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-size:13px;line-height:30px;font-weight:500;color:#3D4350;white-space:nowrap}
 .cmp-ychips span.is-more{border-color:#F1F3F6;background:#F1F3F6;font-weight:600;color:#5B6271}
-.cmp-yproj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
-.cmp-yproj figure{margin:0}
-.cmp-yproj img{display:block;width:100%;height:60px;object-fit:cover;border-radius:10px}
-.cmp-yproj figcaption{margin-top:6px;font-size:12px;line-height:16px;font-weight:600;color:#16191D}
-.cmp-ynote{display:block;font-style:normal;margin-top:12px;padding:8px 10px;border-radius:10px;background:#FEF3E0;font-size:12.5px;line-height:18px;font-weight:500;color:#8A5300}
+.cmp-yproj{display:flex;flex-direction:column;gap:12px;margin-top:14px}   /* one project a row: a thumbnail and its name side by side (his ask: proper spacing) */
+.cmp-yproj figure{margin:0;display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;column-gap:14px}
+.cmp-yproj img{display:block;width:96px;height:56px;object-fit:cover;border-radius:10px}
+.cmp-yproj figcaption{margin:0;font-size:14px;line-height:20px;font-weight:600;color:#16191D}
+.cmp-ynote{display:block;font-style:normal;margin-top:16px;padding:10px 12px;border-radius:10px;background:#FEF3E0;font-size:12.5px;line-height:18px;font-weight:500;color:#8A5300}
 .cmp-ycard.is-swap .cmp-ycard-in{animation:admIn .32s cubic-bezier(.22,1,.36,1)}
 .cmp-cur .cmp-link{margin-top:-8px}
 
@@ -217,18 +210,17 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
 .cmp-mlid-f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 27.7% 0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .cmp-mlid-b{position:absolute;left:8%;right:8%;top:21.6%;height:50.7%;border-radius:16px 16px 4px 4px;transform:rotateX(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;
   background:linear-gradient(180deg,#3A3D43 0%,#25272B 55%,#1C1D20 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
-/* Facilities in light mode (his ask, 20 Oct): grey band above the arc, a white dome under it, ink type; the photos keep their own
+/* Facilities in light mode (his ask, 20 Oct): white above the arc, a white dome under it, ink type; the photos keep their own
    dark foot for the caption; light chips (the page's pill look, dark when on); a dark CTA; the ruler in a light grey */
-.cmp-fac{background:#F6F7F9;box-shadow:none;color:#16191D}
+.cmp-fac{background:#fff;box-shadow:none;color:#16191D}   /* white, no tab (his ask, 20 Oct) */
 .cmp-dome{background:#fff;box-shadow:inset 0 0 0 1.5px #E1E5EA}
 .cmp-dome-fill{background:#fff}
-.cmp-fac .fest-tab{background:#fff}
-.cmp-fac .fest-tab-c{background:radial-gradient(circle at var(--cx) 100%,transparent 15.5px,#fff 16px)}
 .cmp-fac-head h2{color:#16191D}
 .cmp-fac-head p{color:rgba(22,25,29,.5)}
-.cmp-kw-c{background:#fff;box-shadow:inset 0 0 0 1px #E1E5EA;color:#5B6271}
-.cmp-kw-c.is-on{background:#16191D;box-shadow:none;color:#fff}
 .cmp-ft{background:#E9ECF0}
 .cmp-ft::after{box-shadow:inset 0 0 0 1px rgba(22,25,29,.08)}
 .cmp-fac-cta.fest-cta{background:#16191D;color:#fff;box-shadow:none}
 .cmp-ruler{opacity:.28}
+/* the notes under the fee and loan cards: an info icon, and inset from the cards' rounded corners (his ask, 20 Oct) */
+.cmp-info{display:flex;align-items:flex-start;gap:8px;padding:0 12px}
+.cmp-info img{flex:none;width:16px;height:16px;margin-top:1px;opacity:.5}
