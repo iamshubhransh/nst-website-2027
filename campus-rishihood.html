@@ -3937,7 +3937,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .cmp-fac-stats span{padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:12px;line-height:16px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
 .cmp-fac-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 /* the current page's six keywords: chips that pick the photo above (and light with it) */
-.cmp-kw{display:flex;gap:8px;margin-top:28px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
+.cmp-kw{display:flex;gap:8px;margin-top:24px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
 .cmp-kw::-webkit-scrollbar{display:none}
 .cmp-kw-c{flex:none;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-family:var(--font);font-size:14px;line-height:20px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .25s ease,color .25s ease,box-shadow .25s ease}
 .cmp-kw-c svg{flex:none;width:20px;height:20px}
@@ -3945,12 +3945,12 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 /* the photos, wholly immersive (20 Oct, his ask): they fill the dome's top as the video did, crossfading with a slow push-in; the
    number, the name and six progress segments sit at their foot; the segment of the photo on screen fills as it plays (5 s) and
    its end moves the carousel on. Paused while off screen or touched (.is-paused), still under reduced motion */
-.cmp-fart{position:absolute;left:50%;top:0;width:100cqw;height:604px;transform:translateX(-50%);pointer-events:none;background:#0B0C0E}
+.cmp-fart{position:absolute;left:50%;top:0;width:100cqw;height:600px;transform:translateX(-50%);pointer-events:none;background:#0B0C0E}
 .cmp-fs{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transform:scale(1.02);transition:opacity .8s ease}
 .cmp-fs.is-on{opacity:1;animation:cmpKB 6.5s linear forwards}
 @keyframes cmpKB{from{transform:scale(1.02)}to{transform:scale(1.09)}}
-.cmp-fart-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,14,.3) 0%,rgba(11,12,14,0) 18%,rgba(11,12,14,0) 50%,rgba(11,12,14,.8) 82%,#0B0C0E 98%)}
-.cmp-fstage{position:relative;height:580px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 16px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.cmp-fart-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,14,.28) 0%,rgba(11,12,14,0) 16%,rgba(11,12,14,0) 52%,rgba(11,12,14,.62) 80%,rgba(11,12,14,.82) 100%)}
+.cmp-fstage{position:relative;height:600px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 16px 14px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
 .cmp-fstage.is-drag{cursor:grabbing}
 .cmp-fcap{margin:0;display:flex;flex-direction:column;gap:6px}
 .cmp-fcap-n{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.6px;color:rgba(255,255,255,.6)}
@@ -4095,20 +4095,6 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){ .cmp-fs.is-on{animation:none} .cmp-fseg .is-on i::after{animation:none;transform:none} .cmp-fs{transition:none} .cmp-fac.is-live .fest-beam{animation:none} .cmp-hv.is-live .cmp-tour-play::after{animation:none} .cmp-mimg{transition:none} }
 
 /* ---- 20 Oct (his asks) ---- */
-/* Only at Rishihood in light mode: the grey band, light tabs (the year tabs' look), a white card, darker accents that read on white */
-.cmp-only{--bk-bg:#F6F7F9}
-.cmp-only .cmp-otabs button{border:1px solid #E1E5EA;background:#fff;color:#5B6271}
-.cmp-only .cmp-otabs button.is-on{border:1.5px solid var(--c);padding:0 12.5px;background:var(--cb);color:#16191D}
-.cmp-only .cmp-oc{border-color:#E1E5EA;background:#fff;--oc:#C77A00}
-.cmp-only .cmp-oc[data-o="1"]{--oc:#7B55EE}
-.cmp-only .cmp-fan{background:#F1F3F6;border-bottom-color:#E7EAEE}
-.cmp-only .cmp-fan img{border-color:rgba(22,25,29,.08);box-shadow:0 16px 28px -14px rgba(22,25,29,.4)}
-.cmp-only .cmp-oc-vid{border-bottom-color:#E7EAEE}
-.cmp-only .cmp-oc h3{color:#16191D}
-.cmp-only .cmp-oc-b>p{color:rgba(22,25,29,.6)}
-.cmp-only .cmp-ost{border-color:#E1E5EA}
-.cmp-only .cmp-ost div+div{border-left-color:#E1E5EA}
-.cmp-only .cmp-ost dd{color:rgba(22,25,29,.55)}
 /* the fee chart breathes: wider gaps between bars, room under them for the labels, the legend set apart (his ask, 20 Oct) */
 /* the visit pass without its shadow */
 .cmp-visit .adm-tkw::before{display:none}
@@ -4120,6 +4106,21 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
 .cmp-mlid-f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 27.7% 0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .cmp-mlid-b{position:absolute;left:8%;right:8%;top:21.6%;height:50.7%;border-radius:16px 16px 4px 4px;transform:rotateX(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;
   background:linear-gradient(180deg,#3A3D43 0%,#25272B 55%,#1C1D20 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+/* Facilities in light mode (his ask, 20 Oct): grey band above the arc, a white dome under it, ink type; the photos keep their own
+   dark foot for the caption; light chips (the page's pill look, dark when on); a dark CTA; the ruler in a light grey */
+.cmp-fac{background:#F6F7F9;box-shadow:none;color:#16191D}
+.cmp-dome{background:#fff;box-shadow:inset 0 0 0 1.5px #E1E5EA}
+.cmp-dome-fill{background:#fff}
+.cmp-fac .fest-tab{background:#fff}
+.cmp-fac .fest-tab-c{background:radial-gradient(circle at var(--cx) 100%,transparent 15.5px,#fff 16px)}
+.cmp-fac-head h2{color:#16191D}
+.cmp-fac-head p{color:rgba(22,25,29,.5)}
+.cmp-kw-c{background:#fff;box-shadow:inset 0 0 0 1px #E1E5EA;color:#5B6271}
+.cmp-kw-c.is-on{background:#16191D;box-shadow:none;color:#fff}
+.cmp-ft{background:#E9ECF0}
+.cmp-ft::after{box-shadow:inset 0 0 0 1px rgba(22,25,29,.08)}
+.cmp-fac-cta.fest-cta{background:#16191D;color:#fff;box-shadow:none}
+.cmp-ruler{opacity:.28}
 
 </style>
 <script src="https://inflight.co/widget.js" data-org="cdpu8ckm" async></script>
@@ -4216,7 +4217,7 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
     <div class="hatch" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
   </section>
 
-  <!-- 02 · facilities & amenities (dark; his frame, after the homepage fest section): the tab, the title, the dome. The campus video
+  <!-- 02 · facilities & amenities (light since 20 Oct, his ask; his frame, after the homepage fest section): the tab, the title, the dome. The campus video
        moved up to the hero (20 Oct), so under the arc come the current page's six keywords as chips over a strip of photos, one per
        keyword (stills from the tour), four more places in a grid, and a visit CTA. Media: assets/campus/ru -->
   <!-- 20 Oct (his ask): the photos fill the arc as the video did, one after another; six segments show where you are and fill as
@@ -4234,16 +4235,16 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
       <div class="cmp-kw" id="cmpKw" role="tablist" aria-label="Facilities"><button type="button" role="tab" class="cmp-kw-c is-on" aria-selected="true" data-k="0"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3" width="15" height="10.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="7.4" r="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.6 13.5c.5-1.9 1.8-3 3.4-3s2.9 1.1 3.4 3M7 17h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Cutting-edge classrooms</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="1"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="9.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 12.5v2.2M6.5 17.5l1.6-2.8h3.8l1.6 2.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vibrant auditorium</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="2"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 10h6M2.5 8.2v3.6M17.5 8.2v3.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="4.2" y="5.5" width="2.8" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="5.5" width="2.8" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Fully-equipped gyms</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="3"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 12.5V4.8a1.8 1.8 0 013.6 0M12.6 12.5V4.8a1.8 1.8 0 013.6 0M7 7.5h5.6M7 10.2h5.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2.5 15.6c1.3 0 1.3-.9 2.5-.9s1.3.9 2.5.9 1.3-.9 2.5-.9 1.3.9 2.5.9 1.3-.9 2.5-.9 1.3.9 2.5.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Swimming pool</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="4"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5h14a7 7 0 01-14 0zM7.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4M10.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4M13.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Nutritious food at the mess</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 15.5V4.5M2.5 12h15v3.5M17.5 12V9.6a2 2 0 00-2-2H9.4V12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.9" cy="9.3" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Cozy hostels</span></button></div>
       
       <div class="cmp-fgrid"><figure class="cmp-ft"><img src="assets/campus/ru/fac-library.jpg" alt="Library at Rishihood University" loading="lazy"><figcaption>Library</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-lounge.jpg" alt="Learners’ lounge at Rishihood University" loading="lazy"><figcaption>Learners’ lounge</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-badminton.jpg" alt="Badminton court at Rishihood University" loading="lazy"><figcaption>Badminton court</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-nets.jpg" alt="Cricket nets at Rishihood University" loading="lazy"><figcaption>Cricket nets</figcaption></figure></div>
-      <a class="fest-cta cmp-fac-cta" href="#">Book a campus visit <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
+      <a class="fest-cta cmp-fac-cta" href="#">Book a campus visit <img src="assets/icon-arrow-right-white.svg" alt=""></a>
     </div>
     <img class="cmp-ruler" src="assets/campus/fac-ruler.svg" alt="" aria-hidden="true">
   </section>
 
   <!-- 03 · only at this campus (dark): what no other NST campus has. Two tabs, one card each: the Venture Studio and Neutron -->
-  <section class="bk bk-light cmp-only" id="only" aria-label="Only at Rishihood">
+  <section class="bk bk-dark cmp-only" id="only" aria-label="Only at Rishihood">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Only at Rishihood. <span>Two extras.</span></h2><p class="bk-sub">A startup studio and the Neutron fest.</p></div></div>
     <div class="adm-qtabs cmp-otabs" role="tablist" aria-label="Only at Rishihood">
-      <button type="button" role="tab" class="is-on" aria-selected="true" data-o="0" style="--c:#C77A00;--cb:#FEF3E0">Venture Studio</button><button type="button" role="tab" aria-selected="false" data-o="1" style="--c:#7B55EE;--cb:#F0EBFD">Neutron fest</button>
+      <button type="button" role="tab" class="is-on" aria-selected="true" data-o="0" style="--c:#FBBF24">Venture Studio</button><button type="button" role="tab" aria-selected="false" data-o="1" style="--c:#B79CFF">Neutron fest</button>
     </div>
     <article class="cmp-oc is-on" data-o="0">
       <div class="cmp-fan" aria-hidden="true"><img src="assets/campus/ru/su-bocadoh.jpg" alt=""><img src="assets/campus/ru/su-inculcate.jpg" alt=""><img src="assets/campus/ru/su-trupahadi.jpg" alt=""></div>

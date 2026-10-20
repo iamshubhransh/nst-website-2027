@@ -47,7 +47,7 @@
 .cmp-fac-stats span{padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:12px;line-height:16px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
 .cmp-fac-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 /* the current page's six keywords: chips that pick the photo above (and light with it) */
-.cmp-kw{display:flex;gap:8px;margin-top:28px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
+.cmp-kw{display:flex;gap:8px;margin-top:24px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
 .cmp-kw::-webkit-scrollbar{display:none}
 .cmp-kw-c{flex:none;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-family:var(--font);font-size:14px;line-height:20px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .25s ease,color .25s ease,box-shadow .25s ease}
 .cmp-kw-c svg{flex:none;width:20px;height:20px}
@@ -55,12 +55,12 @@
 /* the photos, wholly immersive (20 Oct, his ask): they fill the dome's top as the video did, crossfading with a slow push-in; the
    number, the name and six progress segments sit at their foot; the segment of the photo on screen fills as it plays (5 s) and
    its end moves the carousel on. Paused while off screen or touched (.is-paused), still under reduced motion */
-.cmp-fart{position:absolute;left:50%;top:0;width:100cqw;height:604px;transform:translateX(-50%);pointer-events:none;background:#0B0C0E}
+.cmp-fart{position:absolute;left:50%;top:0;width:100cqw;height:600px;transform:translateX(-50%);pointer-events:none;background:#0B0C0E}
 .cmp-fs{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transform:scale(1.02);transition:opacity .8s ease}
 .cmp-fs.is-on{opacity:1;animation:cmpKB 6.5s linear forwards}
 @keyframes cmpKB{from{transform:scale(1.02)}to{transform:scale(1.09)}}
-.cmp-fart-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,14,.3) 0%,rgba(11,12,14,0) 18%,rgba(11,12,14,0) 50%,rgba(11,12,14,.8) 82%,#0B0C0E 98%)}
-.cmp-fstage{position:relative;height:580px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 16px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.cmp-fart-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,14,.28) 0%,rgba(11,12,14,0) 16%,rgba(11,12,14,0) 52%,rgba(11,12,14,.62) 80%,rgba(11,12,14,.82) 100%)}
+.cmp-fstage{position:relative;height:600px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 16px 14px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
 .cmp-fstage.is-drag{cursor:grabbing}
 .cmp-fcap{margin:0;display:flex;flex-direction:column;gap:6px}
 .cmp-fcap-n{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.6px;color:rgba(255,255,255,.6)}
@@ -205,20 +205,6 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
 @media (prefers-reduced-motion:reduce){ .cmp-fs.is-on{animation:none} .cmp-fseg .is-on i::after{animation:none;transform:none} .cmp-fs{transition:none} .cmp-fac.is-live .fest-beam{animation:none} .cmp-hv.is-live .cmp-tour-play::after{animation:none} .cmp-mimg{transition:none} }
 
 /* ---- 20 Oct (his asks) ---- */
-/* Only at Rishihood in light mode: the grey band, light tabs (the year tabs' look), a white card, darker accents that read on white */
-.cmp-only{--bk-bg:#F6F7F9}
-.cmp-only .cmp-otabs button{border:1px solid #E1E5EA;background:#fff;color:#5B6271}
-.cmp-only .cmp-otabs button.is-on{border:1.5px solid var(--c);padding:0 12.5px;background:var(--cb);color:#16191D}
-.cmp-only .cmp-oc{border-color:#E1E5EA;background:#fff;--oc:#C77A00}
-.cmp-only .cmp-oc[data-o="1"]{--oc:#7B55EE}
-.cmp-only .cmp-fan{background:#F1F3F6;border-bottom-color:#E7EAEE}
-.cmp-only .cmp-fan img{border-color:rgba(22,25,29,.08);box-shadow:0 16px 28px -14px rgba(22,25,29,.4)}
-.cmp-only .cmp-oc-vid{border-bottom-color:#E7EAEE}
-.cmp-only .cmp-oc h3{color:#16191D}
-.cmp-only .cmp-oc-b>p{color:rgba(22,25,29,.6)}
-.cmp-only .cmp-ost{border-color:#E1E5EA}
-.cmp-only .cmp-ost div+div{border-left-color:#E1E5EA}
-.cmp-only .cmp-ost dd{color:rgba(22,25,29,.55)}
 /* the fee chart breathes: wider gaps between bars, room under them for the labels, the legend set apart (his ask, 20 Oct) */
 /* the visit pass without its shadow */
 .cmp-visit .adm-tkw::before{display:none}
@@ -230,3 +216,18 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
 .cmp-mlid-f{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;clip-path:inset(0 0 27.7% 0);backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .cmp-mlid-b{position:absolute;left:8%;right:8%;top:21.6%;height:50.7%;border-radius:16px 16px 4px 4px;transform:rotateX(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;
   background:linear-gradient(180deg,#3A3D43 0%,#25272B 55%,#1C1D20 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+/* Facilities in light mode (his ask, 20 Oct): grey band above the arc, a white dome under it, ink type; the photos keep their own
+   dark foot for the caption; light chips (the page's pill look, dark when on); a dark CTA; the ruler in a light grey */
+.cmp-fac{background:#F6F7F9;box-shadow:none;color:#16191D}
+.cmp-dome{background:#fff;box-shadow:inset 0 0 0 1.5px #E1E5EA}
+.cmp-dome-fill{background:#fff}
+.cmp-fac .fest-tab{background:#fff}
+.cmp-fac .fest-tab-c{background:radial-gradient(circle at var(--cx) 100%,transparent 15.5px,#fff 16px)}
+.cmp-fac-head h2{color:#16191D}
+.cmp-fac-head p{color:rgba(22,25,29,.5)}
+.cmp-kw-c{background:#fff;box-shadow:inset 0 0 0 1px #E1E5EA;color:#5B6271}
+.cmp-kw-c.is-on{background:#16191D;box-shadow:none;color:#fff}
+.cmp-ft{background:#E9ECF0}
+.cmp-ft::after{box-shadow:inset 0 0 0 1px rgba(22,25,29,.08)}
+.cmp-fac-cta.fest-cta{background:#16191D;color:#fff;box-shadow:none}
+.cmp-ruler{opacity:.28}
