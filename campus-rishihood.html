@@ -3953,6 +3953,115 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 /* his ruler at the foot: 39 ticks, dots up */
 .cmp-ruler{position:absolute;left:calc(50% - 228px);bottom:0;width:456px;height:103px;transform:scaleY(-1);pointer-events:none}
 
+
+/* ===== the rest of the page: his frame 745:67391 (20 Oct 2026). Ported from the 12-section draft (draft/cmp.css) ===== */
+/* ---- 04 only at this campus (dark): two tabs, one card. Venture Studio: three student startups fanned out; Neutron: the aftermovie ---- */
+.cmp-otabs{margin-bottom:-8px}
+.cmp-oc{border:1px solid #23282F;border-radius:16px;background:#0B0C0E;overflow:hidden}
+.cmp-oc:not(.is-on){display:none}
+.cmp-fan{position:relative;height:196px;background:#16191D;border-bottom:1px solid #23282F;overflow:hidden}
+.cmp-fan img{position:absolute;top:24px;left:50%;width:104px;height:150px;margin-left:-52px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 26px -12px rgba(0,0,0,.7)}
+.cmp-fan img:nth-child(1){transform:translateX(-92px) rotate(-8deg) translateY(10px)}
+.cmp-fan img:nth-child(3){transform:translateX(92px) rotate(8deg) translateY(10px)}
+.cmp-fan img:nth-child(2){z-index:2;top:18px}
+.cmp-oc-vid{position:relative;height:196px;border-bottom:1px solid #23282F}
+.cmp-oc-vid img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+.cmp-oc-vid .cmp-play{top:50%}
+.cmp-oc-b{padding:16px 17px 18px}
+.cmp-oc h3{margin:0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#fff}
+.cmp-oc-b>p{margin:6px 0 0;font-size:14px;line-height:21px;font-weight:500;color:rgba(255,255,255,.6)}
+.cmp-ost{display:flex;margin:14px 0 0;border:1px solid #23282F;border-radius:12px}
+.cmp-ost div{flex:1 1 0;min-width:0;padding:10px 10px 11px}
+.cmp-ost div+div{border-left:1px solid #23282F}
+.cmp-ost dt{font-size:17px;line-height:22px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:var(--oc,#FBBF24)}
+.cmp-oc[data-o="1"]{--oc:#C4B5FD}
+.cmp-ost dd{margin:2px 0 0;font-size:11.5px;white-space:nowrap;line-height:16px;font-weight:500;color:rgba(255,255,255,.55)}
+.cmp-oc-b>a{display:inline-block;margin-top:16px;font-size:14px;line-height:20px;font-weight:600;color:var(--oc,#FBBF24);text-decoration:none}
+
+/* ---- 06 fees (grey band): the four-year total, a bar per semester stacked by component, the picked semester's breakdown ---- */
+.cmp-fees{--bk-bg:#F6F7F9}
+.cmp-fcard{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.cmp-ftop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.cmp-ftot{margin:0;display:flex;flex-direction:column}
+.cmp-ftot b{font-size:28px;line-height:34px;font-weight:600;font-stretch:125%;letter-spacing:-.6px;color:#16191D}
+.cmp-ftot span{font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
+.cmp-ftag{flex:none;height:22px;padding:0 9px;border-radius:999px;background:#F1F3F6;font-style:normal;font-size:11px;line-height:22px;font-weight:600;color:#5B6271}
+.cmp-bars{display:flex;align-items:flex-end;gap:6px;height:168px;margin:18px 0 0;padding-bottom:22px;position:relative;border-bottom:1px solid #EDEFF3}
+.cmp-bar{flex:1 1 0;min-width:0;position:relative;display:flex;flex-direction:column-reverse;gap:2px;height:var(--h);padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:.32;transition:opacity .25s ease}
+.cmp-bar.is-on{opacity:1}
+.cmp-bar i{display:block;flex:none;height:var(--s);border-radius:3px;background:var(--c)}
+.cmp-bar em{position:absolute;left:0;right:0;bottom:-21px;font-style:normal;font-size:11px;line-height:14px;font-weight:600;text-align:center;color:rgba(22,25,29,.45)}
+.cmp-bar.is-on em{color:#16191D}
+.cmp-bar b{position:absolute;left:-6px;right:-6px;top:-18px;font-size:10.5px;line-height:14px;font-weight:600;text-align:center;color:#16191D;white-space:nowrap;opacity:0}
+.cmp-bar.is-on b{opacity:1}
+.cmp-fkey{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 0}
+.cmp-fkey span{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.6)}
+.cmp-fkey span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}
+.cmp-fsem{margin:16px 0 0;padding:4px 14px;border-radius:12px;background:#F6F7F9}
+.cmp-fr{display:flex;align-items:center;justify-content:space-between;gap:12px;height:40px;font-size:14px;line-height:20px;font-weight:500;color:rgba(22,25,29,.65)}
+.cmp-fr+.cmp-fr{border-top:1px solid #E7EAEE}
+.cmp-fr span{display:inline-flex;align-items:center;gap:8px}
+.cmp-fr span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}
+.cmp-fr b{font-weight:600;color:#16191D}   /* proportional figures, as in his frame */
+.cmp-fr.is-tot{color:#16191D;font-weight:600}
+.cmp-fr.is-tot span::before{display:none}
+.cmp-fr.is-tot b{font-size:16px}
+.cmp-fsem-n{margin:10px 0 2px;font-size:12px;line-height:17px;font-weight:500;color:rgba(22,25,29,.5)}
+.cmp-fnote{margin:-8px 0 0;font-size:12px;line-height:18px;font-weight:500;color:rgba(22,25,29,.5)}
+
+/* ---- 10 visit (light): the admissions ticket as a visit pass ---- */
+.cmp-pass{margin-top:0}
+.cmp-pass-k{background:#E5F1FF;color:#0673F9}
+.cmp-pass-k svg{width:13px;height:13px}
+.cmp-pass-where{color:rgba(22,25,29,.6)}
+
+/* ---- 03 curriculum (light): year tabs, one card per year ---- */
+.cmp-ytabs{display:flex;gap:6px;margin:0 -16px -8px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.cmp-ytabs::-webkit-scrollbar{display:none}
+.cmp-ytabs button{flex:none;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-family:var(--font);font-size:13px;line-height:16px;font-weight:600;color:#5B6271;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cmp-ytabs button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.cmp-ytabs button.is-on{border:1.5px solid var(--c);padding:0 12.5px;background:var(--cb);color:#16191D}
+.cmp-ycard{--c:#007A51;--cb:#E7F6EE;padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.cmp-yk{margin:0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c)}
+.cmp-ycard h3{margin:6px 0 0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#16191D}
+.cmp-yout{display:flex;align-items:flex-start;gap:8px;margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--cb);font-size:13.5px;line-height:19px;font-weight:600;color:#16191D}
+.cmp-yout svg{flex:none;width:16px;height:16px;margin-top:1.5px;color:var(--c)}
+.cmp-ylab{margin:16px 0 0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+.cmp-ychips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cmp-ychips span{height:28px;padding:0 10px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-size:12.5px;line-height:26px;font-weight:500;color:#3D4350;white-space:nowrap}
+.cmp-ychips span.is-more{border-color:#F1F3F6;background:#F1F3F6;font-weight:600;color:#5B6271}
+.cmp-yproj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.cmp-yproj figure{margin:0}
+.cmp-yproj img{display:block;width:100%;height:60px;object-fit:cover;border-radius:10px}
+.cmp-yproj figcaption{margin-top:6px;font-size:12px;line-height:16px;font-weight:600;color:#16191D}
+.cmp-ynote{display:block;font-style:normal;margin-top:12px;padding:8px 10px;border-radius:10px;background:#FEF3E0;font-size:12.5px;line-height:18px;font-weight:500;color:#8A5300}
+.cmp-ycard.is-swap .cmp-ycard-in{animation:admIn .32s cubic-bezier(.22,1,.36,1)}
+.cmp-cur .cmp-link{margin-top:-8px}
+
+/* ---- 09 laptop (dark): a flat MacBook, then a switch between buying through NST and bringing your own ---- */
+.cmp-mcard{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
+.cmp-mfig{display:flex;justify-content:center;height:118px;margin:-4px 0 14px;border-radius:12px;background:#16191D;border:1px solid #23282F;padding-top:4px}
+.cmp-mfig svg{width:200px;height:110px}
+.cmp-mseg.adm-lseg{display:flex;background:#16191D;border:1px solid #23282F}
+.cmp-mseg.adm-lseg button{flex:1 1 0;height:32px;color:rgba(255,255,255,.6)}
+.cmp-mseg.adm-lseg button.is-on{background:#30363D;color:#fff;box-shadow:none}
+.cmp-mp{margin-top:16px}
+.cmp-mp:not(.is-on){display:none}
+.cmp-mh{margin:0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#fff}
+.cmp-ms{margin:6px 0 0;font-size:13.5px;line-height:20px;font-weight:500;color:rgba(255,255,255,.55)}
+.cmp-mrows{margin:14px 0 0}
+.cmp-mrows div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid #23282F}
+.cmp-mrows dt{flex:none;display:flex;align-items:center;gap:8px;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.55)}
+.cmp-mrows dd{margin:0;text-align:right;font-size:14px;line-height:20px;font-weight:600;color:#fff}
+.cmp-mspec{margin:0}
+.cmp-mspec div{flex-direction:column;align-items:flex-start;gap:4px}
+.cmp-mspec div:first-child{border-top:0;padding-top:0}
+.cmp-mspec dt{font-size:15px;line-height:20px;font-weight:600;color:#fff}
+.cmp-mspec dd{text-align:left;font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
+.cmp-mrows em{height:20px;padding:0 7px;border-radius:999px;background:rgba(74,222,128,.14);font-style:normal;font-size:10.5px;line-height:20px;font-weight:600;letter-spacing:.4px;color:#4ADE80}
+.cmp-mp .cmp-ms+.cmp-mrows{margin-top:12px}
+.cmp-mspec+.cmp-ms{margin-top:12px;padding-top:12px;border-top:1px solid #23282F;font-size:12.5px;line-height:18px}
+
 /* ---- the tour player: black, the tour at full width, its own controls; Esc, the X or a tap outside closes it ---- */
 .cmp-tv{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(11,12,14,.96);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s}
 .cmp-tv.is-open{opacity:1;visibility:visible;transition:opacity .25s ease}
@@ -4028,8 +4137,8 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
     </div>
   </header>
 
-  <!-- ===== campus page · Rishihood University, Delhi NCR (phone). Built from his frame 744:61112 (20 Oct 2026): the hero, the summary
-       tiles and the Facilities & Amenities section; the rest of the page follows as he designs it (the earlier draft is in draft/). ===== -->
+  <!-- ===== campus page · Rishihood University, Delhi NCR (phone). Built from his frames 744:61112 (20 Oct 2026: hero, summary tiles, Facilities & Amenities) and
+       745:67391 (20 Oct: only at Rishihood, scholarships, curriculum, fees, loans, laptop, visit, FAQs). The earlier draft is in draft/. ===== -->
 
   <!-- 01 · hero: the placements hero; its wall is the first admissions route figure (uncoloured, the pillar student walking the stations) -->
   <section class="pl-hero cmp-hero" id="top" aria-label="Rishihood University campus">
@@ -4081,6 +4190,148 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
       <a class="fest-cta cmp-fac-cta" href="#">Book a campus visit <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
     </div>
     <img class="cmp-ruler" src="assets/campus/fac-ruler.svg" alt="" aria-hidden="true">
+  </section>
+
+  <!-- 03 · only at this campus (dark): what no other NST campus has. Two tabs, one card each: the Venture Studio and Neutron -->
+  <section class="bk bk-dark cmp-only" id="only" aria-label="Only at Rishihood">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Only at Rishihood. <span>Two extras.</span></h2><p class="bk-sub">A startup studio and the Neutron fest.</p></div></div>
+    <div class="adm-qtabs cmp-otabs" role="tablist" aria-label="Only at Rishihood">
+      <button type="button" role="tab" class="is-on" aria-selected="true" data-o="0" style="--c:#FBBF24">Venture Studio</button><button type="button" role="tab" aria-selected="false" data-o="1" style="--c:#B79CFF">Neutron fest</button>
+    </div>
+    <article class="cmp-oc is-on" data-o="0">
+      <div class="cmp-fan" aria-hidden="true"><img src="assets/campus/ru/su-bocadoh.jpg" alt=""><img src="assets/campus/ru/su-inculcate.jpg" alt=""><img src="assets/campus/ru/su-trupahadi.jpg" alt=""></div>
+      <div class="cmp-oc-b">
+        <h3>Venture Studio</h3>
+        <p>Rishihood’s startup incubator. Build, launch and raise while you study.</p>
+        <dl class="cmp-ost"><div><dt>₹50 Cr</dt><dd>Makers Fund</dd></div><div><dt>8+</dt><dd>startups</dd></div><div><dt>12+</dt><dd>mentors</dd></div></dl>
+        <a href="#">Meet the startups →</a>
+      </div>
+    </article>
+    <article class="cmp-oc" data-o="1">
+      <div class="cmp-oc-vid"><img src="assets/fest/neutron-still.jpg" alt=""><i class="cmp-play"><svg viewBox="0 0 16 16"><path d="M5.5 3.6v8.8a.6.6 0 00.9.5l6.9-4.4a.6.6 0 000-1L6.4 3.1a.6.6 0 00-.9.5z" fill="currentColor"/></svg></i></div>
+      <div class="cmp-oc-b">
+        <h3>Neutron</h3>
+        <p>India’s first techno-cultural fest, held on this campus every year.</p>
+        <dl class="cmp-ost"><div><dt>150+</dt><dd>drones</dd></div><div><dt>1,100+</dt><dd>footfall</dd></div><div><dt>₹10L+</dt><dd>prize pool</dd></div></dl>
+        <a href="#">Watch the aftermovie →</a>
+      </div>
+    </article>
+  </section>
+
+  <!-- 04 · scholarships (light): the admissions section, unchanged. The four schemes on the Rishihood page match it -->
+  <section class="bk bk-light adm-sch" id="scholarships" aria-label="Scholarships">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Scholarships, <span>up to 100%.</span></h2><p class="bk-sub">On your NSAT, interview and achievements.</p></div></div>
+    <!-- 16 Oct v2 (his ask: the solid blue made the text hard to read): a white card in the route cards' selected style -->
+    <article class="adm-jes">
+      <em class="adm-jes-k">JEE Excellence Scholarship</em>
+      <p class="adm-jes-big"><b>100%</b><span>fee waiver for all four years</span></p>
+      <p class="adm-jes-for">For a JEE Main or Advanced All India Rank under 10,000 (2026).</p>
+      <ul class="adm-jes-cov"><li>Tuition</li><li>Upskilling, admin &amp; tech fees</li><li>Hostel &amp; mess</li></ul>
+      <p class="adm-jes-note">Paid separately: the MacBook, the block fee and the refundable deposit.</p>
+    </article>
+    <div class="adm-schs">
+      <article class="adm-s"><p class="adm-s-v"><span>Up to</span><b>100%</b></p><div><h3>Merit scholarship</h3><p>Of first-year tuition, on your NSAT and interview scores.</p></div></article>
+      <article class="adm-s"><p class="adm-s-v"><span>Up to</span><b>10%</b></p><div><h3>Young Women Leader</h3><p>Of tuition for four years, for women with technical work, state-level achievements or leadership.</p></div></article>
+      <article class="adm-s"><p class="adm-s-v"><span>Up to</span><b>10%</b></p><div><h3>Extraordinary Achievement</h3><p>Of tuition for four years, for Olympiads, tech internships, strong coding ratings or production-grade projects.</p></div></article>
+    </div>
+  </section>
+
+  <!-- 05 · curriculum (light): the NST curriculum as taught on this campus. Year tabs, one card per year: the theme, the outcome,
+       six skills, three projects. Data per campus in cmp.js (CAMPUS.years); Pune's page carries the same four years word for word -->
+  <section class="bk bk-light cmp-cur" id="curriculum" aria-label="Curriculum">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">What you’ll learn. <span>Year by year.</span></h2><p class="bk-sub">The NST curriculum, taught on this campus.</p></div></div>
+    <div class="cmp-ytabs" id="cmpYTabs" role="tablist" aria-label="Years"></div>
+    <article class="cmp-ycard" id="cmpYear" aria-live="polite"></article>
+  </section>
+
+  <!-- 06 · fees (grey): what you pay, semester by semester. Tap a bar for its breakdown. Figures from the current page's table -->
+  <section class="bk bk-light cmp-fees" id="fees" aria-label="Fees">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Fees, <span>semester by semester.</span></h2><p class="bk-sub">Before scholarships, hostel included.</p></div></div>
+    <div class="cmp-fcard">
+      <div class="cmp-ftop"><p class="cmp-ftot"><b>₹26.9 lakh</b><span>for four years</span></p><em class="cmp-ftag">Current fees</em></div>
+      <div class="cmp-bars" id="cmpBars" role="tablist" aria-label="Semesters"></div>
+      <div class="cmp-fkey" aria-hidden="true"><span style="--c:#0673F9">Tuition</span><span style="--c:#16A34A">Hostel &amp; mess</span><span style="--c:#7B55EE">Admin &amp; tech</span><span style="--c:#E08600">Deposit</span></div>
+      <div class="cmp-fsem" id="cmpSem" aria-live="polite"></div>
+    </div>
+    <p class="cmp-fnote">The MacBook and university exam fees are extra. Scholarships come off tuition.</p>
+  </section>
+
+  <!-- 07 · loans (grey): the admissions section, unchanged. The Rishihood page lists the same eight lenders (but shows PNB’s terms for all of them). The logo grid is the picker;
+       the card shows the picked lender's terms, secured or unsecured. Figures from newtonschool.co/…/admission (16 Oct 2026) -->
+  <section class="bk bk-light adm-loans" id="loans" aria-label="Education loans">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Pay over time. <span>8 lenders.</span></h2><p class="bk-sub">Compare their terms; we help you apply.</p></div></div>
+    <div class="adm-lgrid" role="tablist" aria-label="Lending partners"><button type="button" role="tab" class="adm-lt is-on" aria-selected="true" data-l="pnb"><img src="assets/adm/lender-pnb.png" alt="PNB" style="height:22px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="bob"><img src="assets/adm/lender-bank-of-baroda.png" alt="Bank of Baroda" style="height:22px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="axis"><img src="assets/adm/lender-axis.png" alt="Axis Bank" style="height:20px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="icici"><img src="assets/adm/lender-icici.png" alt="ICICI Bank" style="height:18px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="tata"><img src="assets/adm/lender-tata-capital.png" alt="Tata Capital" style="height:24px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="gyandhan"><img src="assets/adm/lender-gyandhan.png" alt="GyanDhan" style="height:30px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="propelld"><img src="assets/adm/lender-propelld.png" alt="Propelld" style="height:15px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="kuhoo"><img src="assets/adm/lender-kuhoo.png" alt="Kuhoo" style="height:26px"></button></div>
+    <div class="adm-lcard" id="admLoan" aria-live="polite">
+      <div class="adm-lc-head"><div><b id="admLName">PNB</b><span id="admLVia">Through Edufin</span></div>
+        <div class="adm-lseg" role="group" aria-label="Loan type"><button type="button" class="is-on" data-t="0">Secured</button><button type="button" data-t="1">Unsecured</button></div></div>
+      <dl class="adm-lrows">
+        <div class="adm-lr adm-lr-big"><dt>Interest</dt><dd id="admLRate">7.35% to 9.00%</dd></div>
+        <div class="adm-lr"><dt>Maximum loan</dt><dd id="admLMax">Cost of education</dd></div>
+        <div class="adm-lr"><dt>Tenure</dt><dd id="admLTen">15 years</dd></div>
+        <div class="adm-lr"><dt>Processing</dt><dd id="admLFee">1% + GST</dd></div>
+      </dl>
+    </div>
+    <p class="adm-loan-note">NST only helps you apply; it does not lend or guarantee loans. Rates are indicative and each lender decides on approval.</p>
+  </section>
+
+  <!-- 08 · the laptop (dark): a MacBook is required. Two ways to have one: buy it through NST, or bring your own that meets the bar -->
+  <section class="bk bk-dark cmp-mac" id="laptop" aria-label="Laptop">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Your laptop. <span>A MacBook.</span></h2><p class="bk-sub">Buy it through NST or bring your own.</p></div></div>
+    <div class="cmp-mcard">
+      <div class="cmp-mfig" aria-hidden="true">
+        <svg viewBox="0 0 220 120"><rect x="44" y="10" width="132" height="86" rx="7" fill="#23282F" stroke="#3A414B"/><rect x="51" y="17" width="118" height="72" rx="2" fill="#0B0C0E"/>
+          <rect x="60" y="28" width="30" height="5" rx="2.5" fill="#C4B5FD"/><rect x="95" y="28" width="44" height="5" rx="2.5" fill="#61A8FF"/>
+          <rect x="68" y="40" width="22" height="5" rx="2.5" fill="#4ADE80"/><rect x="95" y="40" width="52" height="5" rx="2.5" fill="#30363D"/>
+          <rect x="68" y="52" width="40" height="5" rx="2.5" fill="#FBBF24"/><rect x="113" y="52" width="26" height="5" rx="2.5" fill="#30363D"/>
+          <rect x="60" y="64" width="18" height="5" rx="2.5" fill="#C4B5FD"/><rect x="83" y="64" width="34" height="5" rx="2.5" fill="#61A8FF"/>
+          <rect x="60" y="76" width="6" height="7" rx="1" fill="#fff"/>
+          <path d="M22 98h176l-8 10a6 6 0 01-4.7 2.3H34.7A6 6 0 0130 108z" fill="#3A414B"/><rect x="94" y="98" width="32" height="4" rx="2" fill="#23282F"/></svg>
+      </div>
+      <div class="adm-lseg cmp-mseg" role="tablist" aria-label="How you get it"><button type="button" role="tab" class="is-on" aria-selected="true" data-m="0">Through NST</button><button type="button" role="tab" aria-selected="false" data-m="1">Bring your own</button></div>
+      <div class="cmp-mp is-on" data-m="0">
+        <p class="cmp-mh">MacBook Pro or Air, M5</p>
+        <p class="cmp-ms">At a subsidised price on MRP, subject to availability.</p>
+        <dl class="cmp-mrows"><div><dt>When you pay</dt><dd>With your semester 1 fees</dd></div><div><dt>Our advice</dt><dd>Choose the Pro</dd></div></dl>
+      </div>
+      <div class="cmp-mp" data-m="1">
+        <dl class="cmp-mrows cmp-mspec">
+          <div><dt>MacBook Pro<em>Recommended</em></dt><dd>M1 to M5 · 16 GB · 512 GB</dd></div>
+          <div><dt>MacBook Air</dt><dd>M4 or M5 only · 16 GB · 512 GB</dd></div>
+        </dl>
+        <p class="cmp-ms">We check it at onboarding. It needs a Pro chip, or enough GPU and Neural Engine.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 · visit (light): the admissions ticket, as a visit pass -->
+  <section class="bk bk-light cmp-visit" id="visit" aria-label="Visit the campus">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">See it yourself. <span>On a Sunday.</span></h2><p class="bk-sub">A free 45-minute tour with a student.</p></div></div>
+    <div class="adm-ticket cmp-pass">
+      <div class="adm-tk-top">
+        <span class="adm-tk-k cmp-pass-k"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Campus visit</span>
+        <p class="adm-tk-date">Every Sunday</p>
+        <p class="adm-tk-dl cmp-pass-where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.6-4.3 4.6-7.8a4.6 4.6 0 10-9.2 0C3.4 10.2 8 14.5 8 14.5z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.7" r="1.6" fill="currentColor"/></svg>Rishihood University, Sonipat</p>
+      </div>
+      <div class="adm-tk-cut" aria-hidden="true"><i></i><i></i></div>
+      <div class="adm-tk-bot">
+        <a class="btn btn-brand pl-cta" href="#">Book a visit <img src="assets/icon-arrow-right.svg" alt=""></a>
+        <p class="adm-tk-proof"><span class="stack"><span class="av av-photo"><img src="assets/avatar-1.png" alt="" style="left:-4.81px;top:.08px;width:35.41px;height:34.67px"></span><span class="av av-photo"><img src="assets/avatar-2.png" alt="" style="left:-6.09px;top:3.5px;width:31.53px;height:24.08px"></span><span class="av av-photo"><img src="assets/avatar-3.png" alt="" style="left:-3.52px;top:2.66px;width:31.54px;height:25.75px"></span></span><span>Shown around by a current student</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 · FAQs: the placements FAQ component, this campus's questions -->
+  <section class="pl-faq adm-faq" id="faq" aria-label="Questions about this campus">
+    <p class="pl-kicker">FAQs</p>
+    <h2 class="pl-h2">Rishihood questions, answered.</h2>
+    <div class="pl-acc" id="plAcc">
+      <div class="pl-q is-open"><button type="button" aria-expanded="true"><span>Is the degree approved by UGC?</span><i></i></button><div class="pl-a"><div><p>Yes. Rishihood University is UGC-recognised and NAAC-accredited, and it awards your B.Tech. NST designs and teaches the curriculum.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Do I have to live on campus?</span><i></i></button><div class="pl-a"><div><p>Yes. Hostel and mess are part of the fee for semesters 1 to 6. Semesters 7 and 8 are internship semesters, so you are charged only if you stay.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Is there a group discussion?</span><i></i></button><div class="pl-a"><div><p>Yes, only at Rishihood. It comes after your online interview and before counselling.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Can a loan cover the fees?</span><i></i></button><div class="pl-a"><div><p>Mostly. Partner banks and lenders fund up to 95% of the programme fees. NST helps you apply; the lender sets the rate and approves the loan.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Whose alumnus will I be?</span><i></i></button><div class="pl-a"><div><p>Both. You graduate as an alumnus of Newton School of Technology and of Rishihood University.</p></div></div></div>
+    </div>
+    <a class="pl-all" href="#">All FAQs →</a>
   </section>
 
   <!-- the tour player: the full tour, landscape, with its sound -->
@@ -4774,7 +5025,8 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
   })();
 </script>
 <script>
-/* campus page · Rishihood University (phone). His frame 744:61112: hero, summary tiles, Facilities & Amenities */
+/* campus page · Rishihood University (phone). His frames 744:61112 (hero, summary tiles, Facilities & Amenities) and 745:67391
+   (only at Rishihood, scholarships, curriculum, fees, loans, laptop, visit, FAQs). Per-campus facts live in CAMPUS, YEARS and LOANS */
 (function(){
   var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   function onView(el, fn, margin){ new IntersectionObserver(function(en){ fn(en[0].isIntersecting); }, {rootMargin: margin || '0px'}).observe(el); }
@@ -4845,6 +5097,136 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
       });
     }, {passive: true});
   })();
+
+  /* Rishihood's fee table, from the current page (19 Oct 2026): per semester, [tuition, hostel & mess, admin & tech, refundable deposit] */
+  var CAMPUS = {
+    fees: [[190000, 120000, 50000, 50000], [190000, 120000, 50000, 0], [240000, 120000, 0, 0], [240000, 120000, 0, 0],
+           [240000, 120000, 0, 0], [240000, 120000, 0, 0], [240000, 0, 0, 0], [240000, 0, 0, 0]],
+    feeNotes: {0: 'Includes the ₹50,000 seat block fee, paid early to hold your seat.', 6: 'Internship semester: no hostel or mess fee.', 7: 'Internship semester: no hostel or mess fee.'}
+  };
+  var PARTS = [['Tuition', '#0673F9'], ['Hostel & mess', '#16A34A'], ['Admin & tech', '#7B55EE'], ['Refundable deposit', '#E08600']];
+
+  function inr(n){ var s = String(n), last = s.slice(-3), rest = s.slice(0, -3); return '₹' + (rest ? rest.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' : '') + last; }
+  function lakh(n){ return '₹' + (n / 100000).toFixed(1).replace(/\.0$/, '') + 'L'; }
+
+  /* the curriculum as the campus page publishes it (Rishihood and Pune carry the same four years word for word, 19 Oct 2026). Titles
+     match the homepage's curriculum section; skills are the first six of "What you'll learn"; projects shortened, three per year */
+  var YEARS = [
+    {n: 'Year 1', k: 'Build', c: '#007A51', cb: '#E7F6EE', t: 'Systems & AI Essentials', out: 'By the end: DSA and AI fundamentals.',
+     skills: ['Python Basics', 'ReactJS', 'UI/UX', 'Data Structures & Algorithms', 'Maths for CS', 'Responsive Web Design'], more: 6,
+     proj: [['y1-oss', 'Open Source for an Open World'], ['y1-crm', 'GenAI CRM'], ['y1-algo', 'Algorithm vs AI Challenge']]},
+    {n: 'Year 2', k: 'Achieve', c: '#7B55EE', cb: '#F0EBFD', t: 'Scalable AI systems & Machine Learning', out: 'By the end: ML models on real-world data pipelines.',
+     skills: ['Node Js', 'Backend Engineering', 'Machine Learning', 'Databases', 'Dynamic Programming', 'Spark'], more: 6,
+     proj: [['y2-lastmile', 'Last-mile delivery routing'], ['y2-snapchat', 'A Snapchat-like app'], ['y2-ebay', 'eBay-style live bidding']]},
+    {n: 'Year 3', k: 'Innovate', c: '#0673F9', cb: '#E5F1FF', t: 'AI models, systems & System Design', out: 'By the end: AI systems and scalable architectures.',
+     skills: ['Deep Learning', 'GPT models', 'Event-Driven Programming', 'Networks (OSI)', 'RISC Architecture'], more: 0,
+     proj: [['y3-csk', 'An IPL auction for CSK'], ['y3-docs', 'A Google Docs-style editor'], ['y3-stream', 'Live streaming at scale']]},
+    {n: 'Year 4', k: 'Succeed', c: '#C77A00', cb: '#FEF3E0', t: 'Internships, OS, Vision & NLP', out: 'By the end: real-world impact and AI fluency.',
+     skills: ['Operating Systems', 'Computer Vision', 'NLP', 'Cyber Security', 'OpenCV', 'Capstone Project'], more: 0,
+     proj: [['y4-llm', 'Train your own LLM'], ['y4-deeptech', 'Deep-tech projects'], ['y4-toptech', 'Prep for top tech firms']],
+     note: 'An internship, research or a project: one is mandatory.'}
+  ];
+
+  /* ---- 05 · curriculum: tabs pick a year; the card re-renders in that year's colour ---- */
+  (function(){
+    var tabs = document.getElementById('cmpYTabs'), card = document.getElementById('cmpYear'); if (!tabs || !card) return;
+    tabs.innerHTML = YEARS.map(function(y, i){ return '<button type="button" role="tab" data-y="' + i + '" style="--c:' + y.c + ';--cb:' + y.cb + '">' + y.n + '</button>'; }).join('');
+    var tick = '<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.6" fill="currentColor"/><path d="M5.2 8.2l1.9 1.9 3.8-4" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    function show(i){
+      var y = YEARS[i];
+      tabs.querySelectorAll('button').forEach(function(b){ var on = +b.dataset.y === i; b.classList.toggle('is-on', on); b.setAttribute('aria-selected', on); });
+      card.style.setProperty('--c', y.c); card.style.setProperty('--cb', y.cb);
+      card.innerHTML = '<div class="cmp-ycard-in"><p class="cmp-yk">' + y.n + ' · ' + y.k + '</p><h3>' + y.t + '</h3>' +
+        '<p class="cmp-yout">' + tick + y.out + '</p>' +
+        '<p class="cmp-ylab">What you’ll learn</p><div class="cmp-ychips">' + y.skills.map(function(s){ return '<span>' + s + '</span>'; }).join('') + (y.more ? '<span class="is-more">+' + y.more + ' more</span>' : '') + '</div>' +
+        '<p class="cmp-ylab">Projects</p><div class="cmp-yproj">' + y.proj.map(function(p){ return '<figure><img src="assets/cur/proj/' + p[0] + '.jpg" alt=""><figcaption>' + p[1] + '</figcaption></figure>'; }).join('') + '</div>' +
+        (y.note ? '<em class="cmp-ynote">' + y.note + '</em>' : '') + '</div>';
+      card.classList.remove('is-swap'); void card.offsetWidth; card.classList.add('is-swap');
+    }
+    tabs.addEventListener('click', function(e){ var b = e.target.closest('button'); if (b) show(+b.dataset.y); });
+    show(0);
+  })();
+
+  /* ---- 07 · loans: the admissions picker and its lender-by-lender terms (from the admissions page) ---- */
+  var LOANS = {
+    pnb: {n: 'PNB', via: 'Through Edufin', t: [['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST'], ['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST']]},
+    bob: {n: 'Bank of Baroda', via: 'Through Edufin', t: [['8.00% to 10.50%', 'Cost of education', '15 years', '1% + GST'], ['8.00% to 10.50%', 'Cost of education', '15 years', '1% + GST']]},
+    axis: {n: 'Axis Bank', t: [['10.50%', '95% of the total cost', 'Up to 15 years', '1% + GST'], ['11.25%', '95% of the total cost', 'Up to 15 years', '1% + GST']]},
+    icici: {n: 'ICICI Bank', t: [['9.00%', 'Up to ₹3 crore', 'Up to 15 years', '0.75% or ₹19,999, lower (excl. GST)'], ['9.75%', 'Up to ₹1 crore', 'Up to 15 years', '0.75% or ₹19,999, lower (excl. GST)']]},
+    tata: {n: 'Tata Capital', t: [['From 9.50%', 'Up to ₹2 crore', 'Up to 15 years', '1% + GST'], ['From 9.50%', 'Up to ₹2 crore', 'Up to 15 years', '1% + GST']]},
+    gyandhan: {n: 'GyanDhan', t: [['9.10% to 9.60%', 'Cost of education', '15 years', 'None'], ['11.50% to 12.50%', 'Based on programme', 'Up to 12 years', '1% + GST']]},
+    propelld: {n: 'Propelld', t: [['11.00%', '90% of fees + college hostel', 'Up to 10 years', '1% + GST'], ['11.25%', '90% of fees + college hostel', 'Up to 10 years', '1% + GST']]},
+    kuhoo: {n: 'Kuhoo', t: [['10% to 15.5%', 'Up to 100% of fees and living costs', 'Up to 12 years', '1% + GST'], ['10% to 15.5%', 'Up to 100% of fees and living costs', 'Up to 12 years', '1% + GST']]}
+  };
+  (function(){
+    var card = document.getElementById('admLoan'), grid = document.querySelector('.adm-lgrid'); if (!card || !grid) return;
+    var cur = 'pnb', type = 0, segs = card.querySelectorAll('.adm-lseg button');
+    function $(id){ return document.getElementById(id); }
+    function render(){
+      var L = LOANS[cur], v = L.t[type];
+      $('admLName').textContent = L.n; $('admLVia').textContent = L.via || '';
+      $('admLRate').textContent = v[0]; $('admLMax').textContent = v[1]; $('admLTen').textContent = v[2]; $('admLFee').textContent = v[3];
+      segs.forEach(function(b){ b.classList.toggle('is-on', +b.dataset.t === type); });
+      card.classList.remove('is-swap'); void card.offsetWidth; card.classList.add('is-swap');
+    }
+    grid.addEventListener('click', function(e){
+      var t = e.target.closest('.adm-lt'); if (!t) return;
+      cur = t.dataset.l;
+      grid.querySelectorAll('.adm-lt').forEach(function(x){ var on = x === t; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
+      render();
+    });
+    segs.forEach(function(b){ b.addEventListener('click', function(){ type = +b.dataset.t; render(); }); });
+  })();
+
+  /* ---- 08 · laptop: through NST, or bring your own ---- */
+  (function(){
+    var seg = document.querySelector('.cmp-mseg'); if (!seg) return;
+    seg.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      seg.querySelectorAll('button').forEach(function(x){ var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
+      document.querySelectorAll('.cmp-mp').forEach(function(p){ p.classList.toggle('is-on', p.dataset.m === b.dataset.m); });
+    });
+  })();
+
+  /* ---- 06 · fees: one bar per semester, stacked by component; the picked semester's breakdown below ---- */
+  (function(){
+    var bars = document.getElementById('cmpBars'), sem = document.getElementById('cmpSem'); if (!bars || !sem) return;
+    var F = CAMPUS.fees, max = Math.max.apply(null, F.map(function(r){ return r.reduce(function(a, b){ return a + b; }, 0); })), H = 132;
+    bars.innerHTML = F.map(function(r, i){
+      var tot = r.reduce(function(a, b){ return a + b; }, 0);
+      return '<button type="button" role="tab" class="cmp-bar" data-i="' + i + '" aria-label="Semester ' + (i + 1) + ', ' + inr(tot) + '" style="--h:' + Math.round(tot / max * H) + 'px">' +
+        r.map(function(v, k){ return v ? '<i style="--c:' + PARTS[k][1] + ';--s:' + Math.max(3, Math.round(v / max * H) - 2) + 'px"></i>' : ''; }).join('') +
+        '<b>' + lakh(tot) + '</b><em>S' + (i + 1) + '</em></button>';
+    }).join('');
+    function pick(i){
+      bars.querySelectorAll('.cmp-bar').forEach(function(b){ var on = +b.dataset.i === i; b.classList.toggle('is-on', on); b.setAttribute('aria-selected', on); });
+      var r = F[i], tot = r.reduce(function(a, b){ return a + b; }, 0);
+      sem.innerHTML = (CAMPUS.feeNotes[i] ? '<p class="cmp-fsem-n">' + CAMPUS.feeNotes[i] + '</p>' : '') +
+        r.map(function(v, k){ return v ? '<p class="cmp-fr" style="--c:' + PARTS[k][1] + '"><span>' + PARTS[k][0] + '</span><b>' + inr(v) + '</b></p>' : ''; }).join('') +
+        '<p class="cmp-fr is-tot"><span>Semester ' + (i + 1) + '</span><b>' + inr(tot) + '</b></p>';
+    }
+    bars.addEventListener('click', function(e){ var b = e.target.closest('.cmp-bar'); if (b) pick(+b.dataset.i); });
+    pick(0);
+  })();
+
+  /* ---- 03 · only at Rishihood: tabs pick the card ---- */
+  (function(){
+    var tabs = document.querySelector('.cmp-otabs'); if (!tabs) return;
+    var cards = document.querySelectorAll('.cmp-oc');
+    tabs.addEventListener('click', function(e){
+      var b = e.target.closest('button'); if (!b) return;
+      tabs.querySelectorAll('button').forEach(function(x){ var on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-selected', on); });
+      cards.forEach(function(c){ c.classList.toggle('is-on', c.dataset.o === b.dataset.o); });
+    });
+  })();
+
+  /* ---- 10 · FAQ: one open at a time ---- */
+  var acc = document.getElementById('plAcc');
+  if (acc) acc.querySelectorAll('.pl-q button').forEach(function(b){ b.addEventListener('click', function(){
+    var q = b.parentNode, open = !q.classList.contains('is-open');
+    acc.querySelectorAll('.pl-q').forEach(function(x){ x.classList.remove('is-open'); x.querySelector('button').setAttribute('aria-expanded', 'false'); });
+    if (open){ q.classList.add('is-open'); b.setAttribute('aria-expanded', 'true'); }
+  }); });
 
   /* ---- the tour player: the play button opens it with sound; the X, Esc or a tap outside the video closes it and returns focus ---- */
   (function(){

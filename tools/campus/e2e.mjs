@@ -59,6 +59,29 @@ ok('Esc closes it, focus back on the play button, page where it was', await ev(y
 await p.locator('#cmpTour').tap(); await p.waitForTimeout(400); await p.locator('#cmpTvX').tap(); await p.waitForTimeout(400);
 ok('the X closes it', await ev(() => !document.getElementById('cmpTv').classList.contains('is-open')));
 
+// the rest of the page (his frame 745:67391): order, then each section's interaction
+ok('sections in his order', await ev(() => [...document.querySelectorAll('#page > section, #page main > section')].map(s => s.id).filter(Boolean).join(' ') === 'top facilities only scholarships curriculum fees loans laptop visit faq'), await ev(() => [...document.querySelectorAll('section[id]')].map(s => s.id)));
+ok('every section subtext on one line', await ev(() => [...document.querySelectorAll('.bk-sub')].every(s => Math.round(s.getBoundingClientRect().height) <= Math.ceil(parseFloat(getComputedStyle(s).lineHeight)))));
+await p.locator('.cmp-otabs [data-o="1"]').tap(); await p.waitForTimeout(200);
+ok('only at Rishihood: the tabs swap Venture Studio for Neutron', await ev(() => document.querySelector('.cmp-oc[data-o="1"]').classList.contains('is-on') && getComputedStyle(document.querySelector('.cmp-oc[data-o="0"]')).display === 'none' && /Neutron/.test(document.querySelector('.cmp-oc.is-on h3').textContent)));
+await p.locator('.cmp-otabs [data-o="0"]').tap(); await p.waitForTimeout(200);
+ok('scholarships: JEE Excellence 100% and the three schemes', await ev(() => /100%/.test(document.querySelector('.adm-jes-big b').textContent) && document.querySelectorAll('#scholarships .adm-s').length === 3));
+ok('curriculum: four year tabs, Year 1 open with six skills and three projects', await ev(() => document.querySelectorAll('#cmpYTabs button').length === 4 && /Year 1 · Build/.test(document.querySelector('.cmp-yk').textContent) && document.querySelectorAll('.cmp-ychips span:not(.is-more)').length === 6 && document.querySelectorAll('.cmp-yproj figure').length === 3));
+await ev(() => document.getElementById('curriculum').scrollIntoView({ block: 'center' })); await p.locator('#cmpYTabs [data-y="3"]').tap(); await p.waitForTimeout(400);
+ok('curriculum: Year 4 shows its outcome, projects and the mandatory note', await ev(() => /Year 4 · Succeed/.test(document.querySelector('.cmp-yk').textContent) && /mandatory/.test(document.querySelector('.cmp-ynote').textContent) && [...document.querySelectorAll('.cmp-yproj img')].every(i => /y4-/.test(i.src))));
+ok('fees: ₹26.9 lakh, eight bars, semester 1 open (₹4,10,000)', await ev(() => /₹26\.9 lakh/.test(document.querySelector('.cmp-ftot b').textContent) && document.querySelectorAll('.cmp-bar').length === 8 && document.querySelector('.cmp-bar.is-on').dataset.i === '0' && /₹4,10,000/.test(document.getElementById('cmpSem').textContent)));
+await ev(() => document.getElementById('fees').scrollIntoView({ block: 'center' })); await p.locator('.cmp-bar[data-i="6"]').tap(); await p.waitForTimeout(200);
+ok('fees: semester 7 is tuition only, ₹2,40,000', await ev(() => { const t = document.getElementById('cmpSem').textContent; return /Semester 7/.test(t) && /₹2,40,000/.test(t) && !/Hostel/.test(t.replace('no hostel', '')); }));
+await ev(() => document.getElementById('loans').scrollIntoView({ block: 'center' })); await p.locator('.adm-lt[data-l="axis"]').tap(); await p.waitForTimeout(200);
+ok('loans: picking Axis shows its terms', await ev(() => document.getElementById('admLName').textContent === 'Axis Bank' && document.getElementById('admLRate').textContent === '10.50%'));
+await p.locator('.adm-lseg button[data-t="1"]').tap(); await p.waitForTimeout(200);
+ok('loans: Unsecured switches the rate', await ev(() => document.getElementById('admLRate').textContent === '11.25%'));
+await ev(() => document.getElementById('laptop').scrollIntoView({ block: 'center' })); await p.locator('.cmp-mseg [data-m="1"]').tap(); await p.waitForTimeout(200);
+ok('laptop: Bring your own shows the two specs', await ev(() => { const p = document.querySelector('.cmp-mp.is-on'); return p.dataset.m === '1' && /M1 to M5 · 16 GB · 512 GB/.test(p.textContent) && /M4 or M5 only/.test(p.textContent); }));
+ok('visit pass: Every Sunday, Sonipat, one CTA', await ev(() => document.querySelector('.cmp-pass .adm-tk-date').textContent === 'Every Sunday' && /Sonipat/.test(document.querySelector('.cmp-pass-where').textContent) && document.querySelectorAll('.cmp-pass .pl-cta').length === 1));
+await ev(() => document.getElementById('faq').scrollIntoView({ block: 'center' })); await p.locator('#plAcc .pl-q:nth-child(3) button').tap(); await p.waitForTimeout(450);
+ok('FAQs: five, one open at a time', await ev(() => document.querySelectorAll('#plAcc .pl-q').length === 5 && document.querySelectorAll('#plAcc .pl-q.is-open').length === 1 && document.querySelector('#plAcc .pl-q:nth-child(3)').classList.contains('is-open')));
+
 // widths: no sideways scroll, one-line subtitle
 for (const w of [360, 390, 402, 430]) {
   const f = await b.newPage({ viewport: { width: w, height: 800 } });
@@ -67,6 +90,11 @@ for (const w of [360, 390, 402, 430]) {
   ok(`${w} px: no sideways scroll, subtitle fits, video full width`, m.x === 0 && m.sub <= m.vw - 16 && m.art === m.vw, m);
   await f.close();
 }
+// his frame is 410 wide: each section's height there (fees within 22: his legend wraps by a pixel, ours fits on one line)
+{ const f = await b.newPage({ viewport: { width: 410, height: 900 } }); await f.goto(URL); await f.evaluate(() => document.fonts.ready); await f.waitForTimeout(300);
+  const his = { only: 627, scholarships: 911, curriculum: 615, fees: 890, loans: 630, laptop: 532, visit: 411, faq: 590 };
+  const got = await f.evaluate(ids => Object.fromEntries(Object.keys(ids).map(id => [id, Math.round(document.getElementById(id).getBoundingClientRect().height)])), his);
+  ok('410 px: section heights as his frame', Object.keys(his).every(k => Math.abs(got[k] - his[k]) <= (k === 'fees' ? 22 : 1)), got); await f.close(); }
 // desktop: the phone column
 const d = await b.newPage({ viewport: { width: 1440, height: 900 } });
 d.on('pageerror', e => errs.push('dt: ' + e.message));
