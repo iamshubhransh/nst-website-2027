@@ -25,7 +25,7 @@ def cut(s, start, end, include_end=True, frm=0):
 head = src[:src.index('<body>')]
 head = re.sub(r'<title>.*?</title>', '<title>Rishihood University, Delhi NCR · Newton School of Technology</title>', head, count=1, flags=re.S)
 head = re.sub(r'(<meta name="description" content=")[^"]*(")', r'\1NST’s B.Tech in CS & AI at Rishihood University, Sonipat, Delhi NCR: a residential campus, a UGC-approved degree, the Venture Studio, fees semester by semester and Sunday campus visits.\2', head, count=1)
-si = head.rindex('</style>')   # the last style block in the head (the Inflight tag now sits between it and </head>)
+si = head.rindex('</style>')   # the last style block in the head (robust to anything between it and </head>)
 head = head[:si] + css + '\n' + head[si:]
 
 # ---- body pieces from the homepage

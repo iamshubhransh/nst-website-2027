@@ -4,7 +4,7 @@ const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true, isMobile: true });
 const errs = [], bad = [];
 p.on('pageerror', e => errs.push(e.message));
-p.on('response', r => { if (r.status() >= 400 && r.url().startsWith('http://localhost')) bad.push(r.status() + ' ' + r.url()); });   /* the Inflight widget's own API 404s on localhost */
+p.on('response', r => { if (r.status() >= 400 && r.url().startsWith('http://localhost')) bad.push(r.status() + ' ' + r.url()); });   /* this site's own requests only */
 const res = []; const ok = (n, c, x) => res.push((c ? 'PASS ' : 'FAIL ') + n + (c ? '' : '  → ' + JSON.stringify(x)));
 const ev = (f, a) => p.evaluate(f, a);
 await p.goto('http://localhost:8765/admissions.html', { waitUntil: 'load' }); await p.waitForTimeout(800);
