@@ -3936,21 +3936,34 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .cmp-fac-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .cmp-fac-stats span{padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:12px;line-height:16px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
 .cmp-fac-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-/* the current page's six keywords: chips that pick a photo below (and light as the strip is swiped) */
-.cmp-kw{display:flex;gap:8px;margin-top:56px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
+/* the current page's six keywords: chips that pick the photo above (and light with it) */
+.cmp-kw{display:flex;gap:8px;margin-top:28px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
 .cmp-kw::-webkit-scrollbar{display:none}
 .cmp-kw-c{flex:none;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-family:var(--font);font-size:14px;line-height:20px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .25s ease,color .25s ease,box-shadow .25s ease}
 .cmp-kw-c svg{flex:none;width:20px;height:20px}
 .cmp-kw-c.is-on{background:#fff;box-shadow:none;color:#16191D}
-/* one photo per keyword: tall cards, swiped; each snaps to the left edge */
-.cmp-spaces{display:flex;gap:12px;margin-top:16px;padding:0 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;scrollbar-width:none;overscroll-behavior-x:contain}
-.cmp-spaces::-webkit-scrollbar{display:none}
-.cmp-sp{position:relative;flex:none;width:260px;height:325px;margin:0;border-radius:16px;overflow:hidden;background:#16191D;scroll-snap-align:start}
-.cmp-sp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.cmp-sp::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);pointer-events:none}
-.cmp-sp-shade{position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(180deg,rgba(11,12,14,0),rgba(11,12,14,.85))}
-.cmp-sp figcaption{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:4px;font-size:17px;line-height:22px;font-weight:600;font-stretch:125%;letter-spacing:-.1px}
-.cmp-sp-n{font-size:11px;line-height:12px;font-weight:600;font-stretch:100%;letter-spacing:1.2px;color:rgba(255,255,255,.6)}
+/* the photos, wholly immersive (20 Oct, his ask): they fill the dome's top as the video did, crossfading with a slow push-in; the
+   number, the name and six progress segments sit at their foot; the segment of the photo on screen fills as it plays (5 s) and
+   its end moves the carousel on. Paused while off screen or touched (.is-paused), still under reduced motion */
+.cmp-fart{position:absolute;left:50%;top:0;width:100cqw;height:604px;transform:translateX(-50%);pointer-events:none;background:#0B0C0E}
+.cmp-fs{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transform:scale(1.02);transition:opacity .8s ease}
+.cmp-fs.is-on{opacity:1;animation:cmpKB 6.5s linear forwards}
+@keyframes cmpKB{from{transform:scale(1.02)}to{transform:scale(1.09)}}
+.cmp-fart-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,14,.3) 0%,rgba(11,12,14,0) 18%,rgba(11,12,14,0) 50%,rgba(11,12,14,.8) 82%,#0B0C0E 98%)}
+.cmp-fstage{position:relative;height:580px;display:flex;flex-direction:column;justify-content:flex-end;padding:0 16px;touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.cmp-fstage.is-drag{cursor:grabbing}
+.cmp-fcap{margin:0;display:flex;flex-direction:column;gap:6px}
+.cmp-fcap-n{font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.6px;color:rgba(255,255,255,.6)}
+.cmp-fcap b{font-size:24px;line-height:30px;font-weight:600;font-stretch:125%;letter-spacing:-.3px;color:#fff}
+.cmp-fcap.is-swap b,.cmp-fcap.is-swap .cmp-fcap-n{animation:admIn .45s cubic-bezier(.22,1,.36,1)}
+.cmp-fseg{display:flex;gap:4px;margin-top:16px}
+.cmp-fseg button{flex:1 1 0;min-width:0;height:18px;padding:7px 0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cmp-fseg i{position:relative;display:block;height:4px;border-radius:2px;background:rgba(255,255,255,.22);overflow:hidden}
+.cmp-fseg i::after{content:"";position:absolute;inset:0;border-radius:inherit;background:#fff;transform:scaleX(0);transform-origin:0 50%}
+.cmp-fseg .is-done i::after{transform:none}
+.cmp-fseg .is-on i::after{animation:cmpSeg 5s linear forwards}
+@keyframes cmpSeg{from{transform:scaleX(0)}to{transform:none}}
+.cmp-fac.is-paused .cmp-fseg .is-on i::after,.cmp-fac.is-paused .cmp-fs.is-on{animation-play-state:paused}
 /* four more places, two by two */
 .cmp-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:48px 16px 0}
 .cmp-ft{position:relative;margin:0;height:128px;border-radius:12px;overflow:hidden;background:#16191D}
@@ -4079,7 +4092,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
 .cmp-tv-x svg{width:20px;height:20px}
 html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
 
-@media (prefers-reduced-motion:reduce){ .cmp-fac.is-live .fest-beam{animation:none} .cmp-hv.is-live .cmp-tour-play::after{animation:none} .cmp-mimg{transition:none} }
+@media (prefers-reduced-motion:reduce){ .cmp-fs.is-on{animation:none} .cmp-fseg .is-on i::after{animation:none;transform:none} .cmp-fs{transition:none} .cmp-fac.is-live .fest-beam{animation:none} .cmp-hv.is-live .cmp-tour-play::after{animation:none} .cmp-mimg{transition:none} }
 
 </style>
 <script src="https://inflight.co/widget.js" data-org="cdpu8ckm" async></script>
@@ -4179,18 +4192,20 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
   <!-- 02 · facilities & amenities (dark; his frame, after the homepage fest section): the tab, the title, the dome. The campus video
        moved up to the hero (20 Oct), so under the arc come the current page's six keywords as chips over a strip of photos, one per
        keyword (stills from the tour), four more places in a grid, and a visit CTA. Media: assets/campus/ru -->
+  <!-- 20 Oct (his ask): the photos fill the arc as the video did, one after another; six segments show where you are and fill as
+       each plays; swipe, a segment or a chip changes it. It moves only while on screen and untouched, never under reduced motion -->
   <section class="cmp-fac" id="facilities" aria-label="Facilities and amenities">
     <div class="cmp-dome" aria-hidden="true">
+      <div class="cmp-fart"><img class="cmp-fs is-on" data-k="0" src="assets/campus/ru/fac-full-classrooms.jpg" alt=""><img class="cmp-fs" data-k="1" src="assets/campus/ru/fac-full-auditorium.jpg" alt=""><img class="cmp-fs" data-k="2" src="assets/campus/ru/fac-full-gym.jpg" alt="" loading="lazy"><img class="cmp-fs" data-k="3" src="assets/campus/ru/fac-full-pool.jpg" alt="" loading="lazy"><img class="cmp-fs" data-k="4" src="assets/campus/ru/fac-full-mess.jpg" alt="" loading="lazy"><img class="cmp-fs" data-k="5" src="assets/campus/ru/fac-full-hostels.jpg" alt="" loading="lazy"><i class="cmp-fart-fade"></i></div>
       <i class="fest-beam fest-beam-soft"></i><i class="fest-beam"></i>
     </div>
     <i class="cmp-dome-fill" aria-hidden="true"></i>
     <div class="fest-tab" aria-hidden="true"><i class="fest-tab-c fest-tab-cl"></i><i class="fest-tab-c fest-tab-cr"></i><span class="fest-pg"><b class="on"></b><b></b></span></div>
     <div class="cmp-fac-head"><h2>Facilities &amp; Amenities</h2><p>State-of-the-art facilities at Rishihood University</p></div>
     <div class="cmp-fac-body">
-
-      
+      <div class="cmp-fstage" id="cmpFStage" role="group" aria-roledescription="carousel" aria-label="Facilities at Rishihood University"><p class="cmp-fcap"><span class="cmp-fcap-n" id="cmpFN">01 / 06</span><b id="cmpFT">Cutting-edge classrooms</b></p><div class="cmp-fseg" id="cmpFSeg"><button type="button" class="is-on" aria-label="Show Cutting-edge classrooms" data-k="0"><i></i></button><button type="button" aria-label="Show Vibrant auditorium" data-k="1"><i></i></button><button type="button" aria-label="Show Fully-equipped gyms" data-k="2"><i></i></button><button type="button" aria-label="Show Swimming pool" data-k="3"><i></i></button><button type="button" aria-label="Show Nutritious food at the mess" data-k="4"><i></i></button><button type="button" aria-label="Show Cozy hostels" data-k="5"><i></i></button></div></div>
       <div class="cmp-kw" id="cmpKw" role="tablist" aria-label="Facilities"><button type="button" role="tab" class="cmp-kw-c is-on" aria-selected="true" data-k="0"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="2.5" y="3" width="15" height="10.5" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="10" cy="7.4" r="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.6 13.5c.5-1.9 1.8-3 3.4-3s2.9 1.1 3.4 3M7 17h6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Cutting-edge classrooms</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="1"><svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="9.5" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M10 12.5v2.2M6.5 17.5l1.6-2.8h3.8l1.6 2.8" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Vibrant auditorium</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="2"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 10h6M2.5 8.2v3.6M17.5 8.2v3.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="4.2" y="5.5" width="2.8" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><rect x="13" y="5.5" width="2.8" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Fully-equipped gyms</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="3"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 12.5V4.8a1.8 1.8 0 013.6 0M12.6 12.5V4.8a1.8 1.8 0 013.6 0M7 7.5h5.6M7 10.2h5.6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2.5 15.6c1.3 0 1.3-.9 2.5-.9s1.3.9 2.5.9 1.3-.9 2.5-.9 1.3.9 2.5.9 1.3-.9 2.5-.9 1.3.9 2.5.9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg><span>Swimming pool</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="4"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5h14a7 7 0 01-14 0zM7.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4M10.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4M13.5 3.5c-.6.8-.6 1.6 0 2.4s.6 1.6 0 2.4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Nutritious food at the mess</span></button><button type="button" role="tab" class="cmp-kw-c" aria-selected="false" data-k="5"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 15.5V4.5M2.5 12h15v3.5M17.5 12V9.6a2 2 0 00-2-2H9.4V12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="5.9" cy="9.3" r="1.6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg><span>Cozy hostels</span></button></div>
-      <div class="cmp-spaces" id="cmpSpaces"><figure class="cmp-sp" data-k="0"><img src="assets/campus/ru/fac-classrooms.jpg" alt="Cutting-edge classrooms at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">01</span>Cutting-edge classrooms</figcaption></figure><figure class="cmp-sp" data-k="1"><img src="assets/campus/ru/fac-auditorium.jpg" alt="Vibrant auditorium at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">02</span>Vibrant auditorium</figcaption></figure><figure class="cmp-sp" data-k="2"><img src="assets/campus/ru/fac-gym.jpg" alt="Fully-equipped gyms at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">03</span>Fully-equipped gyms</figcaption></figure><figure class="cmp-sp" data-k="3"><img src="assets/campus/ru/fac-pool.jpg" alt="Swimming pool at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">04</span>Swimming pool</figcaption></figure><figure class="cmp-sp" data-k="4"><img src="assets/campus/ru/fac-mess.jpg" alt="Nutritious food at the mess at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">05</span>Nutritious food at the mess</figcaption></figure><figure class="cmp-sp" data-k="5"><img src="assets/campus/ru/fac-hostels.jpg" alt="Cozy hostels at Rishihood University" loading="lazy"><i class="cmp-sp-shade"></i><figcaption><span class="cmp-sp-n">06</span>Cozy hostels</figcaption></figure></div>
+      
       <div class="cmp-fgrid"><figure class="cmp-ft"><img src="assets/campus/ru/fac-library.jpg" alt="Library at Rishihood University" loading="lazy"><figcaption>Library</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-lounge.jpg" alt="Learners’ lounge at Rishihood University" loading="lazy"><figcaption>Learners’ lounge</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-badminton.jpg" alt="Badminton court at Rishihood University" loading="lazy"><figcaption>Badminton court</figcaption></figure><figure class="cmp-ft"><img src="assets/campus/ru/fac-nets.jpg" alt="Cricket nets at Rishihood University" loading="lazy"><figcaption>Cricket nets</figcaption></figure></div>
       <a class="fest-cta cmp-fac-cta" href="#">Book a campus visit <img src="assets/icon-arrow-right-ink.svg" alt=""></a>
     </div>
@@ -5039,35 +5054,41 @@ html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
   function cuts(){ document.querySelectorAll('.adm-ticket').forEach(function(t){ var c = t.querySelector('.adm-tk-cut'); if (!c) return; t.style.setProperty('--cut', (c.offsetTop + .5) + 'px'); t.classList.add('has-cut'); if (t.parentNode.classList.contains('adm-tkw')) t.parentNode.style.setProperty('--cutw', (t.offsetTop + c.offsetTop) + 'px'); }); }
   cuts(); addEventListener('resize', cuts); if (document.fonts) document.fonts.ready.then(cuts);
 
-  /* ---- keywords ↔ photos: a chip scrolls the strip to its photo; swiping the strip lights the chip of the photo at its left edge ---- */
-  (function(){
-    var kw = document.getElementById('cmpKw'), strip = document.getElementById('cmpSpaces'); if (!kw || !strip) return;
-    var chips = [].slice.call(kw.querySelectorAll('.cmp-kw-c')), cards = [].slice.call(strip.querySelectorAll('.cmp-sp')), cur = 0, lock = 0;
-    function light(k){
-      if (k === cur) return; cur = k;
+  /* ---- the facilities carousel (20 Oct, his ask): the photos fill the arc one after another. The playing segment's fill (CSS, 5 s) ends
+          each photo; swiping, a segment or a chip changes it. It runs only while the section is on screen and untouched (.is-paused
+          freezes the fill and the push-in where they are), and never under reduced motion ---- */
+  var carousel = (function(){
+    var stage = document.getElementById('cmpFStage'); if (!stage || !fac) return null;
+    var imgs = [].slice.call(fac.querySelectorAll('.cmp-fs')), segs = [].slice.call(stage.querySelectorAll('.cmp-fseg button')), n = imgs.length;
+    var kw = document.getElementById('cmpKw'), chips = kw ? [].slice.call(kw.querySelectorAll('.cmp-kw-c')) : [];
+    var cap = stage.querySelector('.cmp-fcap'), num = document.getElementById('cmpFN'), name = document.getElementById('cmpFT'), cur = 0, onScreen = false, touching = false;
+    function pad(k){ return (k < 9 ? '0' : '') + (k + 1); }
+    function restart(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+    function go(k){
+      k = (k % n + n) % n; cur = k;
+      imgs.forEach(function(im, i){ if (i === k) restart(im, 'is-on'); else im.classList.remove('is-on'); if (Math.abs(i - k) <= 1 || i === (k + 1) % n) im.loading = 'eager'; });
+      segs.forEach(function(s, i){ s.classList.toggle('is-done', i < k); if (i === k) restart(s, 'is-on'); else s.classList.remove('is-on'); s.setAttribute('aria-current', i === k ? 'true' : 'false'); });
+      num.textContent = pad(k) + ' / ' + pad(n - 1); name.textContent = segs[k].getAttribute('aria-label').replace(/^Show /, '');
+      restart(cap, 'is-swap');
       chips.forEach(function(c, i){ var on = i === k; c.classList.toggle('is-on', on); c.setAttribute('aria-selected', on); });
-      var c = chips[k], l = c.offsetLeft - 16, r = c.offsetLeft + c.offsetWidth + 16 - kw.clientWidth;   /* keep the lit chip in view */
-      if (kw.scrollLeft > l) kw.scrollTo({left: l, behavior: reduce ? 'auto' : 'smooth'});
-      else if (kw.scrollLeft < r) kw.scrollTo({left: r, behavior: reduce ? 'auto' : 'smooth'});
+      var c = chips[k]; if (c){ var l = c.offsetLeft - 16, r = c.offsetLeft + c.offsetWidth + 16 - kw.clientWidth;   /* keep the lit chip in view */
+        if (kw.scrollLeft > l) kw.scrollTo({left: l, behavior: reduce ? 'auto' : 'smooth'}); else if (kw.scrollLeft < r) kw.scrollTo({left: r, behavior: reduce ? 'auto' : 'smooth'}); }
     }
-    kw.addEventListener('click', function(e){
-      var c = e.target.closest('.cmp-kw-c'); if (!c) return;
-      var k = +c.dataset.k; light(k);
-      lock = Date.now() + 700;   /* the strip's own scroll events would fight the chip while it glides */
-      strip.scrollTo({left: cards[k].offsetLeft - 16, behavior: reduce ? 'auto' : 'smooth'});
-    });
-    var tick = 0;
-    strip.addEventListener('scroll', function(){
-      if (tick) return;
-      tick = requestAnimationFrame(function(){
-        tick = 0; if (Date.now() < lock) return;
-        var x = strip.scrollLeft, k = 0, best = 1e9;
-        cards.forEach(function(c, i){ var d = Math.abs(c.offsetLeft - 16 - x); if (d < best){ best = d; k = i; } });
-        if (x + strip.clientWidth >= strip.scrollWidth - 2) k = cards.length - 1;   /* the last card can't reach the left edge */
-        light(k);
-      });
-    }, {passive: true});
+    function sync(){ fac.classList.toggle('is-paused', reduce || !onScreen || touching); }
+    segs.forEach(function(s){ s.querySelector('i').addEventListener('animationend', function(e){ if (e.animationName === 'cmpSeg' && s.classList.contains('is-on') && !reduce) go(cur + 1); }); });
+    stage.addEventListener('click', function(e){ var s = e.target.closest('.cmp-fseg button'); if (s) go(+s.dataset.k); });
+    if (kw) kw.addEventListener('click', function(e){ var c = e.target.closest('.cmp-kw-c'); if (c) go(+c.dataset.k); });
+    /* swipe: a horizontal drag of 40 px moves one photo; a held finger pauses the fill */
+    var x0 = null, y0 = 0;
+    stage.addEventListener('pointerdown', function(e){ if (e.target.closest('.cmp-fseg')) return; x0 = e.clientX; y0 = e.clientY; touching = true; stage.classList.add('is-drag'); sync(); });
+    function end(e){ if (x0 === null) return; var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null; touching = false; stage.classList.remove('is-drag');
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1)); sync(); }
+    stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', function(){ x0 = null; touching = false; stage.classList.remove('is-drag'); sync(); });
+    stage.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); go(cur + 1); } else if (e.key === 'ArrowLeft'){ e.preventDefault(); go(cur - 1); } });
+    sync();
+    return { go: go, view: function(on){ onScreen = on; sync(); }, cur: function(){ return cur; } };
   })();
+  if (fac && carousel) onView(fac, carousel.view);
 
   /* Rishihood's fee table, from the current page (19 Oct 2026): per semester, [tuition, hostel & mess, admin & tech, refundable deposit] */
   var CAMPUS = {

@@ -27,23 +27,25 @@ ok('facilities head: tab with two dots, title, subtitle on one line', await ev((
 ok('the dome: his ellipse (1385 × 1308 at 139, centred)', await ev(() => { const s = document.getElementById('facilities').getBoundingClientRect(), d = document.querySelector('.cmp-dome').getBoundingClientRect(); return Math.round(d.width) === 1385 && Math.round(d.height) === 1308 && Math.round(d.top - s.top) === 139 && Math.abs((d.left + d.width / 2) - (s.left + s.width / 2)) < 1; }));
 ok('facilities: no video in the dome now; it opens on the keywords', await ev(() => !document.querySelector('#facilities video') && !document.querySelector('#facilities .cmp-tour') && document.getElementById('cmpKw').getBoundingClientRect().top - document.querySelector('.cmp-dome').getBoundingClientRect().top > 40));
 ok('the current page’s six keywords, in its order', await ev(() => [...document.querySelectorAll('.cmp-kw-c span')].map(s => s.textContent).join('|') === 'Cutting-edge classrooms|Vibrant auditorium|Fully-equipped gyms|Swimming pool|Nutritious food at the mess|Cozy hostels'));
-/* the photos are lazy: load each by bringing it on screen, with a deadline so a missing file fails instead of hanging */
-ok('one photo per keyword, four more in the grid, all loaded', await ev(async () => {
-  const imgs = [...document.querySelectorAll('.cmp-sp img, .cmp-ft img')];
-  for (const i of imgs){ i.loading = 'eager'; i.scrollIntoView({ block: 'center', inline: 'center' }); }
-  await Promise.race([Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))), new Promise(r => setTimeout(r, 5000))]);
-  return document.querySelectorAll('.cmp-sp').length === 6 && document.querySelectorAll('.cmp-ft').length === 4 && imgs.every(i => i.naturalWidth > 0);
-}));
-await ev(() => document.getElementById('cmpSpaces').scrollTo({ left: 0, behavior: 'auto' })); await p.waitForTimeout(300);
-// chip → strip
-await ev(() => document.getElementById('cmpKw').scrollIntoView({ block: 'center' })); await p.waitForTimeout(300);
-await p.locator('.cmp-kw-c[data-k="3"]').tap(); await p.waitForTimeout(900);
-ok('a chip lights and brings its photo to the left edge', await ev(() => { const s = document.getElementById('cmpSpaces'), c = document.querySelector('.cmp-sp[data-k="3"]'); return document.querySelector('.cmp-kw-c.is-on').dataset.k === '3' && Math.abs(c.getBoundingClientRect().left - s.getBoundingClientRect().left - 16) < 3; }));
-// strip → chip
-await ev(() => { const s = document.getElementById('cmpSpaces'); s.scrollTo({ left: document.querySelector('.cmp-sp[data-k="1"]').offsetLeft - 16, behavior: 'auto' }); }); await p.waitForTimeout(400);
-ok('swiping the strip lights the chip of the photo in front', await ev(() => document.querySelector('.cmp-kw-c.is-on').dataset.k === '1'));
-await ev(() => { const s = document.getElementById('cmpSpaces'); s.scrollTo({ left: s.scrollWidth, behavior: 'auto' }); }); await p.waitForTimeout(400);
-ok('the end of the strip lights the last chip, scrolled into view', await ev(() => { const c = document.querySelector('.cmp-kw-c.is-on'), k = document.getElementById('cmpKw').getBoundingClientRect(), r = c.getBoundingClientRect(); return c.dataset.k === '5' && r.right <= k.right + 1; }));
+// the facilities carousel (20 Oct, his ask): the photos fill the arc, one after another, with six progress segments
+ok('six photos fill the arc edge to edge, the first on screen, its name and number over it', await ev(() => { const a = document.querySelector('.cmp-fart').getBoundingClientRect(), s = document.getElementById('facilities').getBoundingClientRect(), on = document.querySelectorAll('.cmp-fs.is-on'); return document.querySelectorAll('.cmp-fs').length === 6 && Math.round(a.width) === Math.round(s.width) && on.length === 1 && on[0].dataset.k === '0' && document.getElementById('cmpFN').textContent === '01 / 06' && document.getElementById('cmpFT').textContent === 'Cutting-edge classrooms' && document.querySelectorAll('#cmpFSeg button').length === 6; }));
+ok('it waits while off screen (paused)', await ev(() => document.getElementById('facilities').classList.contains('is-paused')));
+await ev(() => document.getElementById('cmpFStage').scrollIntoView({ block: 'center' }));
+await p.waitForFunction(() => document.getElementById('cmpFN').textContent === '02 / 06', null, { timeout: 7000, polling: 100 }).catch(() => {});
+ok('on screen it moves on by itself when the segment fills; the chip follows', await ev(() => document.getElementById('cmpFT').textContent === 'Vibrant auditorium' && document.querySelector('.cmp-fs.is-on').dataset.k === '1' && document.querySelector('#cmpFSeg .is-done').dataset.k === '0' && document.querySelector('.cmp-kw-c.is-on').dataset.k === '1'));
+await p.locator('#cmpFSeg button[data-k="4"]').tap(); await p.waitForTimeout(300);
+ok('a segment jumps to its photo', await ev(() => document.getElementById('cmpFT').textContent === 'Nutritious food at the mess' && document.querySelectorAll('#cmpFSeg .is-done').length === 4));
+await ev(() => document.getElementById('cmpKw').scrollIntoView({ block: 'center' })); await p.waitForTimeout(200);
+await p.locator('.cmp-kw-c[data-k="2"]').tap(); await p.waitForTimeout(400);
+ok('a chip jumps to its photo, lit and in view', await ev(() => { const c = document.querySelector('.cmp-kw-c.is-on'), k = document.getElementById('cmpKw').getBoundingClientRect(), r = c.getBoundingClientRect(); return document.getElementById('cmpFT').textContent === 'Fully-equipped gyms' && c.dataset.k === '2' && r.left >= k.left - 1 && r.right <= k.right + 1; }));
+await ev(() => document.getElementById('cmpFStage').scrollIntoView({ block: 'center' })); await p.waitForTimeout(200);
+{ const r = await ev(() => { const b = document.getElementById('cmpFStage').getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + 200 }; });
+  await p.mouse.move(r.x + 80, r.y); await p.mouse.down(); await p.mouse.move(r.x - 60, r.y, { steps: 6 }); await p.mouse.up(); await p.waitForTimeout(300); }
+ok('swiping left moves to the next photo', await ev(() => document.getElementById('cmpFT').textContent === 'Swimming pool'));
+{ const r = await ev(() => { const b = document.getElementById('cmpFStage').getBoundingClientRect(); return { x: b.left + b.width / 2, y: b.top + 200 }; });
+  await p.mouse.move(r.x - 80, r.y); await p.mouse.down(); await p.mouse.move(r.x + 60, r.y, { steps: 6 }); await p.mouse.up(); await p.waitForTimeout(300); }
+ok('swiping right moves back', await ev(() => document.getElementById('cmpFT').textContent === 'Fully-equipped gyms'));
+ok('all six photos load', await ev(async () => { const imgs = [...document.querySelectorAll('.cmp-fs, .cmp-ft img')]; for (const i of imgs){ i.loading = 'eager'; } await Promise.race([Promise.all(imgs.map(i => i.complete ? 0 : new Promise(r => { i.onload = i.onerror = r; }))), new Promise(r => setTimeout(r, 5000))]); return imgs.every(i => i.naturalWidth > 0); }));
 ok('the visit CTA and the ruler at the foot', await ev(() => /Book a campus visit/.test(document.querySelector('.cmp-fac-cta').textContent) && Math.round(document.getElementById('facilities').getBoundingClientRect().bottom - document.querySelector('.cmp-ruler').getBoundingClientRect().bottom) === 0));
 ok('placeholder links do not jump', await ev(() => { scrollTo(0, 1800); const y = scrollY; document.querySelector('.cmp-fac-cta').click(); return Math.abs(scrollY - y) < 2; }));
 // the player
@@ -127,7 +129,8 @@ const rb = await chromium.launch();
 const rp = await rb.newPage({ viewport: { width: 393, height: 852 }, reducedMotion: 'reduce' });
 await rp.goto(URL); await rp.waitForTimeout(300);
 await rp.waitForTimeout(800); await rp.evaluate(() => document.getElementById('facilities').scrollIntoView()); await rp.waitForTimeout(500);
-ok('reduced motion: no beam, no loop (the poster stands in), no pulsing ring', await rp.evaluate(() => !document.getElementById('facilities').classList.contains('is-live') && !document.getElementById('top').classList.contains('is-live') && document.getElementById('cmpLoop').paused));
+await rp.waitForTimeout(5600);
+ok('reduced motion: no beam, no loop (the poster stands in), no pulsing ring, the carousel stays on its first photo', await rp.evaluate(() => !document.getElementById('facilities').classList.contains('is-live') && !document.getElementById('top').classList.contains('is-live') && document.getElementById('cmpLoop').paused && document.getElementById('cmpFN').textContent === '01 / 06'));
 await rb.close();
 
 console.log(res.join('\n')); console.log(res.some(r => r.startsWith('FAIL')) ? 'SOME FAIL' : 'ALL PASS');

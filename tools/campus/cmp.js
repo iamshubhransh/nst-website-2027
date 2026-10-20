@@ -15,35 +15,41 @@
   function cuts(){ document.querySelectorAll('.adm-ticket').forEach(function(t){ var c = t.querySelector('.adm-tk-cut'); if (!c) return; t.style.setProperty('--cut', (c.offsetTop + .5) + 'px'); t.classList.add('has-cut'); if (t.parentNode.classList.contains('adm-tkw')) t.parentNode.style.setProperty('--cutw', (t.offsetTop + c.offsetTop) + 'px'); }); }
   cuts(); addEventListener('resize', cuts); if (document.fonts) document.fonts.ready.then(cuts);
 
-  /* ---- keywords ↔ photos: a chip scrolls the strip to its photo; swiping the strip lights the chip of the photo at its left edge ---- */
-  (function(){
-    var kw = document.getElementById('cmpKw'), strip = document.getElementById('cmpSpaces'); if (!kw || !strip) return;
-    var chips = [].slice.call(kw.querySelectorAll('.cmp-kw-c')), cards = [].slice.call(strip.querySelectorAll('.cmp-sp')), cur = 0, lock = 0;
-    function light(k){
-      if (k === cur) return; cur = k;
+  /* ---- the facilities carousel (20 Oct, his ask): the photos fill the arc one after another. The playing segment's fill (CSS, 5 s) ends
+          each photo; swiping, a segment or a chip changes it. It runs only while the section is on screen and untouched (.is-paused
+          freezes the fill and the push-in where they are), and never under reduced motion ---- */
+  var carousel = (function(){
+    var stage = document.getElementById('cmpFStage'); if (!stage || !fac) return null;
+    var imgs = [].slice.call(fac.querySelectorAll('.cmp-fs')), segs = [].slice.call(stage.querySelectorAll('.cmp-fseg button')), n = imgs.length;
+    var kw = document.getElementById('cmpKw'), chips = kw ? [].slice.call(kw.querySelectorAll('.cmp-kw-c')) : [];
+    var cap = stage.querySelector('.cmp-fcap'), num = document.getElementById('cmpFN'), name = document.getElementById('cmpFT'), cur = 0, onScreen = false, touching = false;
+    function pad(k){ return (k < 9 ? '0' : '') + (k + 1); }
+    function restart(el, cls){ el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); }
+    function go(k){
+      k = (k % n + n) % n; cur = k;
+      imgs.forEach(function(im, i){ if (i === k) restart(im, 'is-on'); else im.classList.remove('is-on'); if (Math.abs(i - k) <= 1 || i === (k + 1) % n) im.loading = 'eager'; });
+      segs.forEach(function(s, i){ s.classList.toggle('is-done', i < k); if (i === k) restart(s, 'is-on'); else s.classList.remove('is-on'); s.setAttribute('aria-current', i === k ? 'true' : 'false'); });
+      num.textContent = pad(k) + ' / ' + pad(n - 1); name.textContent = segs[k].getAttribute('aria-label').replace(/^Show /, '');
+      restart(cap, 'is-swap');
       chips.forEach(function(c, i){ var on = i === k; c.classList.toggle('is-on', on); c.setAttribute('aria-selected', on); });
-      var c = chips[k], l = c.offsetLeft - 16, r = c.offsetLeft + c.offsetWidth + 16 - kw.clientWidth;   /* keep the lit chip in view */
-      if (kw.scrollLeft > l) kw.scrollTo({left: l, behavior: reduce ? 'auto' : 'smooth'});
-      else if (kw.scrollLeft < r) kw.scrollTo({left: r, behavior: reduce ? 'auto' : 'smooth'});
+      var c = chips[k]; if (c){ var l = c.offsetLeft - 16, r = c.offsetLeft + c.offsetWidth + 16 - kw.clientWidth;   /* keep the lit chip in view */
+        if (kw.scrollLeft > l) kw.scrollTo({left: l, behavior: reduce ? 'auto' : 'smooth'}); else if (kw.scrollLeft < r) kw.scrollTo({left: r, behavior: reduce ? 'auto' : 'smooth'}); }
     }
-    kw.addEventListener('click', function(e){
-      var c = e.target.closest('.cmp-kw-c'); if (!c) return;
-      var k = +c.dataset.k; light(k);
-      lock = Date.now() + 700;   /* the strip's own scroll events would fight the chip while it glides */
-      strip.scrollTo({left: cards[k].offsetLeft - 16, behavior: reduce ? 'auto' : 'smooth'});
-    });
-    var tick = 0;
-    strip.addEventListener('scroll', function(){
-      if (tick) return;
-      tick = requestAnimationFrame(function(){
-        tick = 0; if (Date.now() < lock) return;
-        var x = strip.scrollLeft, k = 0, best = 1e9;
-        cards.forEach(function(c, i){ var d = Math.abs(c.offsetLeft - 16 - x); if (d < best){ best = d; k = i; } });
-        if (x + strip.clientWidth >= strip.scrollWidth - 2) k = cards.length - 1;   /* the last card can't reach the left edge */
-        light(k);
-      });
-    }, {passive: true});
+    function sync(){ fac.classList.toggle('is-paused', reduce || !onScreen || touching); }
+    segs.forEach(function(s){ s.querySelector('i').addEventListener('animationend', function(e){ if (e.animationName === 'cmpSeg' && s.classList.contains('is-on') && !reduce) go(cur + 1); }); });
+    stage.addEventListener('click', function(e){ var s = e.target.closest('.cmp-fseg button'); if (s) go(+s.dataset.k); });
+    if (kw) kw.addEventListener('click', function(e){ var c = e.target.closest('.cmp-kw-c'); if (c) go(+c.dataset.k); });
+    /* swipe: a horizontal drag of 40 px moves one photo; a held finger pauses the fill */
+    var x0 = null, y0 = 0;
+    stage.addEventListener('pointerdown', function(e){ if (e.target.closest('.cmp-fseg')) return; x0 = e.clientX; y0 = e.clientY; touching = true; stage.classList.add('is-drag'); sync(); });
+    function end(e){ if (x0 === null) return; var dx = e.clientX - x0, dy = e.clientY - y0; x0 = null; touching = false; stage.classList.remove('is-drag');
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1)); sync(); }
+    stage.addEventListener('pointerup', end); stage.addEventListener('pointercancel', function(){ x0 = null; touching = false; stage.classList.remove('is-drag'); sync(); });
+    stage.addEventListener('keydown', function(e){ if (e.key === 'ArrowRight'){ e.preventDefault(); go(cur + 1); } else if (e.key === 'ArrowLeft'){ e.preventDefault(); go(cur - 1); } });
+    sync();
+    return { go: go, view: function(on){ onScreen = on; sync(); }, cur: function(){ return cur; } };
   })();
+  if (fac && carousel) onView(fac, carousel.view);
 
   /* Rishihood's fee table, from the current page (19 Oct 2026): per semester, [tuition, hostel & mess, admin & tech, refundable deposit] */
   var CAMPUS = {
