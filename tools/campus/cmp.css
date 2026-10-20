@@ -14,13 +14,11 @@
 .cmp-hv-crumb a{color:rgba(255,255,255,.55)}
 .cmp-hv-crumb svg{color:rgba(255,255,255,.35)}
 .cmp-hv-crumb span{color:#fff}
-.cmp-hv-h{margin:18px 0 0;display:flex;flex-direction:column;gap:8px;font-weight:600}
-.cmp-hv-k{font-size:11px;line-height:12px;letter-spacing:2px;text-transform:uppercase;color:#F59700}
-.cmp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.cmp-hv-name{display:flex;align-items:center;gap:12px}
-.cmp-hv-name img{flex:none;width:36px;height:44px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(255,120,80,.55))}
-.cmp-hv-name b{font-size:44px;line-height:48px;font-weight:800;font-stretch:125%;letter-spacing:-1.2px}
-.cmp-hv-u{font-size:15px;line-height:22px;font-weight:500;color:rgba(255,255,255,.7)}
+/* the title as the placements hero's (24/32 expanded), white, with Rishihood's mark set beside its name (his ask, 20 Oct) */
+.cmp-hv-h{margin:12px 0 0;max-width:370px;font-size:24px;line-height:32px;font-weight:600;font-stretch:125%;letter-spacing:-.3px;color:#fff}
+.cmp-hv-name{white-space:nowrap}
+.cmp-hv-name img{display:inline-block;width:20px;height:24px;margin:0 7px 0 1px;vertical-align:-3px;object-fit:contain;filter:drop-shadow(0 0 8px rgba(255,120,80,.45))}
+.cmp-hv-u{margin:8px 0 0;font-size:15px;line-height:22px;font-weight:500;color:rgba(255,255,255,.7)}
 .cmp-hv-stats.cmp-fac-stats{justify-content:flex-start;margin-top:16px}
 .cmp-hv-cta.pl-cta{margin-top:22px}
 .cmp-hv-note{align-self:stretch;margin:12px 0 0;text-align:center;font-size:12.5px;line-height:18px;font-weight:500;color:rgba(255,255,255,.55)}
