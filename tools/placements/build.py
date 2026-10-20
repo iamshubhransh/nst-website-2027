@@ -23,8 +23,8 @@ def cut(s, start, end, include_end=True, frm=0):
 head = src[:src.index('<body>')]
 head = re.sub(r'<title>.*?</title>', '<title>Placements · Newton School of Technology</title>', head, count=1, flags=re.S)
 head = re.sub(r'(<meta name="description" content=")[^"]*(")', r'\1Internships and placements at Newton School of Technology: 98.3% of our first batch held a paid internship in their second year; CTC of ₹20–50 lakhs offered to freshers.\2', head, count=1)
-assert head.count('</style>\n</head>') == 1
-head = head.replace('</style>\n</head>', css + '\n</style>\n</head>')
+si = head.rindex('</style>')   # the last style block in the head (the Inflight tag now sits between it and </head>)
+head = head[:si] + css + '\n' + head[si:]
 
 # ---- body pieces from the homepage
 nav_variants = cut(src, '<script>/* nav variants */', '</script>')

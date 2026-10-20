@@ -1,0 +1,86 @@
+/* ================= campus page · Rishihood University (phone, 402 px design width). Built from his frame 744:61112 (20 Oct 2026).
+   Builds on pl.css (hero) and adm.css (summary tiles), and on the homepage's fest section (tab, dome, beam, CTA), so the page shares
+   one design language with home, placements and admissions ======= */
+
+/* ---- 01 hero: the placements hero; the wall is the first admissions route figure (470 tall, 420 of drawing), uncoloured ---- */
+.cmp-hero{padding-bottom:16px}
+.cmp-hero .pl-crumbs{min-height:22px}   /* his frame keeps the crumbs row 22 tall (the season pill, hidden) */
+.cmp-wall{height:470px}
+.cmp-wall .rt-svg{position:absolute;left:0;top:0;width:100%;height:420px}
+.cmp-wall::before{height:96px}
+.cmp-wall::after{top:352px;height:118px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.85) 55%,#fff 80%)}
+.cmp-wall .rt-walk{fill:#EEF1F5}
+.cmp-wall .rt-flag{fill:#E1E5EA;transition:fill .3s ease}
+.cmp-wall .rt-flag.on{fill:#0673F9}
+.cmp-wall .rt-stu path{fill:#0673F9;stroke:#0450B0}
+.cmp-trust{align-self:stretch;display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0;font-size:12.5px;line-height:16px;font-weight:600;color:rgba(22,25,29,.6)}
+.cmp-trust span{display:inline-flex;align-items:center;gap:6px}
+.cmp-trust svg{width:16px;height:16px;color:#0673F9}
+.cmp-trust i{width:1px;height:14px;background:#E1E5EA}
+
+/* ---- 02 facilities & amenities (dark): his frame's tab, title and dome (1385 × 1308 at 139, centred). Below the dome's middle the
+        fill continues as a plain rectangle, so the arc stays his whatever the section's height ---- */
+.cmp-fac{position:relative;padding:139px 0 150px;background:#16191D;box-shadow:inset 0 1px 0 #30363D;overflow:hidden;color:#fff}
+.cmp-dome{position:absolute;left:calc(50% - 692.5px);top:139px;width:1385px;height:1308px;border-radius:50%;background:#0B0C0E;box-shadow:inset 0 0 0 1.5px #30363D;overflow:hidden}
+.cmp-dome-fill{position:absolute;left:0;right:0;top:793px;bottom:0;background:#0B0C0E}
+.cmp-fac.is-live .fest-beam{opacity:1;animation:festBeam 3.6s linear infinite}
+.cmp-fac.is-live .fest-beam-soft{opacity:.28}
+.cmp-fac .fest-tab{z-index:2}
+.cmp-fac-head{position:absolute;left:0;right:0;top:53px;display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 16px;text-align:center}
+.cmp-fac-head h2{margin:0;font-size:19px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:.1px;color:#fff}
+.cmp-fac-head p{margin:0;font-size:14px;line-height:22px;font-weight:500;letter-spacing:.1px;color:rgba(255,255,255,.5);white-space:nowrap}
+/* the campus, full-bleed under the arc: the silent loop fills the dome's top, fading into its black lower down */
+.cmp-art{position:absolute;left:50%;top:0;width:100cqw;height:620px;transform:translateX(-50%);pointer-events:none}
+.cmp-art-v{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;display:block;background:#0B0C0E}
+.cmp-art-fade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(11,12,14,.28) 0%,rgba(11,12,14,0) 22%,rgba(11,12,14,0) 52%,rgba(11,12,14,.75) 78%,#0B0C0E 100%)}
+.cmp-fac-body{position:relative;z-index:1}
+/* the play button sits on the picture's centre; the label under it, as on the fest dome */
+.cmp-tour{position:relative;display:block;width:100%;height:480px;padding:0;border:0;background:none;cursor:pointer;color:#fff;font-family:var(--font);-webkit-tap-highlight-color:transparent}
+.cmp-tour-play{position:absolute;left:calc(50% - 28px);top:calc(50% - 28px);width:56px;height:56px;border-radius:99px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 8px rgba(255,255,255,.12),0 8px 30px rgba(0,0,0,.45);transition:transform .2s ease}
+.cmp-tour-play img{width:22px;height:22px;display:block;margin-left:2px}
+.cmp-tour-play::after{content:"";position:absolute;inset:-8px;border-radius:inherit;border:1px solid rgba(255,255,255,.5);opacity:0}
+.cmp-fac.is-live .cmp-tour-play::after{animation:festRing 2.4s cubic-bezier(.22,1,.36,1) infinite}
+.cmp-tour:active .cmp-tour-play{transform:scale(.94)}
+.cmp-tour-lab{position:absolute;left:50%;top:calc(50% + 44px);transform:translateX(-50%);padding:6px 12px;border-radius:99px;background:rgba(11,12,14,.6);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);white-space:nowrap;font-size:11px;line-height:12px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase}
+/* the name and three facts, as the fest's caption */
+.cmp-fac-cap{display:flex;flex-direction:column;align-items:center;gap:14px;margin:0 16px}
+.cmp-fac-name{display:flex;align-items:center;gap:10px}
+.cmp-fac-name img{flex:none;width:30px;height:36px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,120,80,.55))}
+.cmp-fac-name b{font-size:34px;line-height:38px;font-weight:800;font-stretch:125%;letter-spacing:-.8px}
+.cmp-fac-stats{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.cmp-fac-stats span{padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.16);font-size:12px;line-height:16px;font-weight:600;letter-spacing:.2px;white-space:nowrap}
+/* the current page's six keywords: chips that pick a photo below (and light as the strip is swiped) */
+.cmp-kw{display:flex;gap:8px;margin-top:48px;padding:0 16px;overflow-x:auto;scrollbar-width:none;scroll-padding:0 16px}
+.cmp-kw::-webkit-scrollbar{display:none}
+.cmp-kw-c{flex:none;display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 16px 0 14px;border:0;border-radius:999px;background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);font-family:var(--font);font-size:14px;line-height:20px;font-weight:600;color:rgba(255,255,255,.75);cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background-color .25s ease,color .25s ease,box-shadow .25s ease}
+.cmp-kw-c svg{flex:none;width:20px;height:20px}
+.cmp-kw-c.is-on{background:#fff;box-shadow:none;color:#16191D}
+/* one photo per keyword: tall cards, swiped; each snaps to the left edge */
+.cmp-spaces{display:flex;gap:12px;margin-top:16px;padding:0 16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;scrollbar-width:none;overscroll-behavior-x:contain}
+.cmp-spaces::-webkit-scrollbar{display:none}
+.cmp-sp{position:relative;flex:none;width:260px;height:325px;margin:0;border-radius:16px;overflow:hidden;background:#16191D;scroll-snap-align:start}
+.cmp-sp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cmp-sp::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);pointer-events:none}
+.cmp-sp-shade{position:absolute;left:0;right:0;bottom:0;height:140px;background:linear-gradient(180deg,rgba(11,12,14,0),rgba(11,12,14,.85))}
+.cmp-sp figcaption{position:absolute;left:16px;right:16px;bottom:16px;display:flex;flex-direction:column;gap:4px;font-size:17px;line-height:22px;font-weight:600;font-stretch:125%;letter-spacing:-.1px}
+.cmp-sp-n{font-size:11px;line-height:12px;font-weight:600;font-stretch:100%;letter-spacing:1.2px;color:rgba(255,255,255,.6)}
+/* four more places, two by two */
+.cmp-fgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:48px 16px 0}
+.cmp-ft{position:relative;margin:0;height:128px;border-radius:12px;overflow:hidden;background:#16191D}
+.cmp-ft img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cmp-ft::after{content:"";position:absolute;inset:0;border-radius:inherit;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);pointer-events:none}
+.cmp-ft figcaption{position:absolute;left:8px;bottom:8px;padding:5px 9px;border-radius:99px;background:rgba(11,12,14,.72);font-size:11.5px;line-height:14px;font-weight:600;color:#fff;white-space:nowrap}
+.cmp-fac-cta.fest-cta{margin:48px 16px 0}
+/* his ruler at the foot: 39 ticks, dots up */
+.cmp-ruler{position:absolute;left:calc(50% - 228px);bottom:0;width:456px;height:103px;transform:scaleY(-1);pointer-events:none}
+
+/* ---- the tour player: black, the tour at full width, its own controls; Esc, the X or a tap outside closes it ---- */
+.cmp-tv{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:rgba(11,12,14,.96);opacity:0;visibility:hidden;transition:opacity .25s ease,visibility 0s linear .25s}
+.cmp-tv.is-open{opacity:1;visibility:visible;transition:opacity .25s ease}
+.cmp-tv-v{display:block;width:100%;max-width:960px;aspect-ratio:16/9;background:#000}
+.cmp-tv-cap{margin:0;padding:0 16px;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.6)}
+.cmp-tv-x{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 16px);right:16px;width:40px;height:40px;padding:0;border:0;border-radius:50%;background:rgba(255,255,255,.12);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.cmp-tv-x svg{width:20px;height:20px}
+html.cmp-tv-on,html.cmp-tv-on body{overflow:hidden}
+
+@media (prefers-reduced-motion:reduce){ .cmp-fac.is-live .fest-beam{animation:none} .cmp-fac.is-live .cmp-tour-play::after{animation:none} }

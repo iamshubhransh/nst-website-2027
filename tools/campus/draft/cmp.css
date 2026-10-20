@@ -1,0 +1,169 @@
+/* ================= campus page · mobile draft (19 Oct 2026), 402 px design width. One template for the four campuses; Rishihood first.
+   Builds on pl.css (hero, internship card, FAQ), adm.css (tiles, tabs, ticket, checklist) and the homepage's bucket sections, so the
+   page shares one design language with home, placements and admissions. Real borders, explicit rgba: they survive the Figma capture ======= */
+
+/* ---- 01 hero: the placements hero; its wall is a photo of the campus, with the tour one tap away ---- */
+.cmp-hero{padding-top:290px}
+.cmp-wall{height:352px}
+.cmp-wall-img{position:absolute;left:0;top:0;width:100%;height:300px;object-fit:cover;object-position:50% 40%}
+.cmp-wall::before{height:104px}
+.cmp-wall::after{top:168px;height:184px;background:linear-gradient(180deg,rgba(255,255,255,0) 0%,rgba(255,255,255,.86) 48%,#fff 68%)}
+.cmp-tour{position:absolute;z-index:3;right:16px;top:150px;display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 14px 0 5px;border-radius:999px;background:rgba(22,25,29,.72);font-size:13px;line-height:18px;font-weight:600;color:#fff;text-decoration:none;pointer-events:auto}
+.cmp-tour i{display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#fff;color:#16191D}
+.cmp-tour svg{width:12px;height:12px;margin-left:1px}
+/* the switcher: the admissions chips, smaller; the page you are on is dark */
+.cmp-switch{align-self:stretch;display:flex;gap:6px;margin:14px -16px 0;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.cmp-switch::-webkit-scrollbar{display:none}
+.cmp-switch a{flex:none;display:inline-flex;align-items:center;height:32px;padding:0 13px;border-radius:999px;background:#F6F7F9;font-size:13px;line-height:18px;font-weight:600;color:#5B6271;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.cmp-switch a.is-on{background:#16191D;color:#fff}
+.cmp-hero .pl-title{margin-top:16px}
+.cmp-trust{align-self:stretch;display:flex;align-items:center;justify-content:center;gap:12px;margin:14px 0 0;font-size:12.5px;line-height:16px;font-weight:600;color:rgba(22,25,29,.6)}
+.cmp-trust span{display:inline-flex;align-items:center;gap:6px}
+.cmp-trust svg{width:16px;height:16px;color:#0673F9}
+.cmp-trust i{width:1px;height:14px;background:#E1E5EA}
+
+/* ---- 02 the campus (dark): the tour across the top, six places below in two columns ---- */
+.cmp-mosaic{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cmp-ph{position:relative;margin:0;height:120px;border-radius:12px;overflow:hidden;background:#0B0C0E;border:1px solid #23282F}
+.cmp-ph img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+.cmp-ph-shade{position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(180deg,rgba(11,12,14,0),rgba(11,12,14,.78))}
+.cmp-ph figcaption{position:absolute;left:12px;bottom:10px;font-size:13px;line-height:18px;font-weight:600;color:#fff}
+.cmp-ph-tour{grid-column:1 / -1;height:190px;display:block;text-decoration:none}
+.cmp-ph-tour img{object-position:50% 62%}
+.cmp-ph-tour .cmp-ph-shade{height:110px}
+.cmp-ph-tour b{position:absolute;left:16px;bottom:30px;font-size:17px;line-height:22px;font-weight:600;font-stretch:125%;color:#fff}
+.cmp-ph-tour em{position:absolute;left:16px;bottom:12px;font-style:normal;font-size:12.5px;line-height:16px;font-weight:500;color:rgba(255,255,255,.7)}
+.cmp-play{position:absolute;left:50%;top:42%;display:flex;align-items:center;justify-content:center;width:52px;height:52px;margin:-26px 0 0 -26px;border-radius:50%;background:#fff;color:#16191D;box-shadow:0 10px 24px -8px rgba(0,0,0,.5)}
+.cmp-play svg{width:18px;height:18px;margin-left:2px}
+
+/* ---- 03 internships (light): the placements card, outlined as a card of its own ---- */
+.cmp-rec.pl-rec{margin-top:0;border:1px solid #E1E5EA;border-radius:16px}
+.cmp-rec.pl-rec::after{display:none}
+.cmp-rec .pl-earn{border-bottom:0}
+.cmp-link{align-self:flex-start;margin-top:-8px;font-size:14px;line-height:20px;font-weight:600;color:#0673F9;text-decoration:none}
+.bk-dark .cmp-link{color:#61A8FF}
+
+/* ---- 04 only at this campus (dark): two tabs, one card. Venture Studio: three student startups fanned out; Neutron: the aftermovie ---- */
+.cmp-otabs{margin-bottom:-8px}
+.cmp-oc{border:1px solid #23282F;border-radius:16px;background:#0B0C0E;overflow:hidden}
+.cmp-oc:not(.is-on){display:none}
+.cmp-fan{position:relative;height:196px;background:#16191D;border-bottom:1px solid #23282F;overflow:hidden}
+.cmp-fan img{position:absolute;top:24px;left:50%;width:104px;height:150px;margin-left:-52px;object-fit:cover;border-radius:12px;border:1px solid rgba(255,255,255,.14);box-shadow:0 14px 26px -12px rgba(0,0,0,.7)}
+.cmp-fan img:nth-child(1){transform:translateX(-92px) rotate(-8deg) translateY(10px)}
+.cmp-fan img:nth-child(3){transform:translateX(92px) rotate(8deg) translateY(10px)}
+.cmp-fan img:nth-child(2){z-index:2;top:18px}
+.cmp-oc-vid{position:relative;height:196px;border-bottom:1px solid #23282F}
+.cmp-oc-vid img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+.cmp-oc-vid .cmp-play{top:50%}
+.cmp-oc-b{padding:16px 17px 18px}
+.cmp-oc h3{margin:0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#fff}
+.cmp-oc-b>p{margin:6px 0 0;font-size:14px;line-height:21px;font-weight:500;color:rgba(255,255,255,.6)}
+.cmp-ost{display:flex;margin:14px 0 0;border:1px solid #23282F;border-radius:12px}
+.cmp-ost div{flex:1 1 0;min-width:0;padding:10px 10px 11px}
+.cmp-ost div+div{border-left:1px solid #23282F}
+.cmp-ost dt{font-size:17px;line-height:22px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:var(--oc,#FBBF24)}
+.cmp-oc[data-o="1"]{--oc:#C4B5FD}
+.cmp-ost dd{margin:2px 0 0;font-size:11.5px;white-space:nowrap;line-height:16px;font-weight:500;color:rgba(255,255,255,.55)}
+.cmp-oc-b>a{display:inline-block;margin-top:16px;font-size:14px;line-height:20px;font-weight:600;color:var(--oc,#FBBF24);text-decoration:none}
+
+/* ---- 05 who can apply (light): a checklist, then the route with this campus's extra round marked ---- */
+.cmp-ecard{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.cmp-checks.adm-jes-cov{margin:0}
+.cmp-checks li{height:auto;min-height:44px;padding:10px 0;box-sizing:border-box;line-height:20px}
+.cmp-ek{margin:18px 0 0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+.cmp-route{display:flex;margin:14px 0 0;padding:0;list-style:none}
+.cmp-route li{position:relative;flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;text-align:center}
+.cmp-route li::before{content:"";position:relative;z-index:1;width:12px;height:12px;border-radius:50%;border:2px solid #0673F9;background:#fff;box-sizing:border-box}
+.cmp-route li+li::after{content:"";position:absolute;top:5px;right:50%;width:100%;border-top:2px dashed #D5DAE1}
+.cmp-route li.is-x::before{border-color:#E08600;background:#E08600;box-shadow:0 0 0 4px #FEF3E0}
+.cmp-route b{margin-top:10px;font-size:12.5px;line-height:16px;font-weight:600;color:#16191D}
+.cmp-route span{margin-top:2px;font-size:11px;line-height:14px;font-weight:500;color:rgba(22,25,29,.5)}
+.cmp-route li.is-x span{color:#C2410C;font-weight:600}
+.cmp-cta.btn{margin-top:-4px}
+
+/* ---- 06 fees (grey band): the four-year total, a bar per semester stacked by component, the picked semester's breakdown ---- */
+.cmp-fees{--bk-bg:#F6F7F9}
+.cmp-fcard{padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.cmp-ftop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.cmp-ftot{margin:0;display:flex;flex-direction:column}
+.cmp-ftot b{font-size:28px;line-height:34px;font-weight:600;font-stretch:125%;letter-spacing:-.6px;color:#16191D}
+.cmp-ftot span{font-size:13px;line-height:18px;font-weight:500;color:rgba(22,25,29,.55)}
+.cmp-ftag{flex:none;height:22px;padding:0 9px;border-radius:999px;background:#F1F3F6;font-style:normal;font-size:11px;line-height:22px;font-weight:600;color:#5B6271}
+.cmp-bars{display:flex;align-items:flex-end;gap:6px;height:168px;margin:18px 0 0;padding-bottom:22px;position:relative;border-bottom:1px solid #EDEFF3}
+.cmp-bar{flex:1 1 0;min-width:0;position:relative;display:flex;flex-direction:column-reverse;gap:2px;height:var(--h);padding:0;border:0;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;opacity:.32;transition:opacity .25s ease}
+.cmp-bar.is-on{opacity:1}
+.cmp-bar i{display:block;flex:none;height:var(--s);border-radius:3px;background:var(--c)}
+.cmp-bar em{position:absolute;left:0;right:0;bottom:-21px;font-style:normal;font-size:11px;line-height:14px;font-weight:600;text-align:center;color:rgba(22,25,29,.45)}
+.cmp-bar.is-on em{color:#16191D}
+.cmp-bar b{position:absolute;left:-6px;right:-6px;top:-18px;font-size:10.5px;line-height:14px;font-weight:600;text-align:center;color:#16191D;white-space:nowrap;opacity:0}
+.cmp-bar.is-on b{opacity:1}
+.cmp-fkey{display:flex;flex-wrap:wrap;gap:6px 14px;margin:14px 0 0}
+.cmp-fkey span{display:inline-flex;align-items:center;gap:6px;font-size:12px;line-height:16px;font-weight:500;color:rgba(22,25,29,.6)}
+.cmp-fkey span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}
+.cmp-fsem{margin:16px 0 0;padding:4px 14px;border-radius:12px;background:#F6F7F9}
+.cmp-fr{display:flex;align-items:center;justify-content:space-between;gap:12px;height:40px;font-size:14px;line-height:20px;font-weight:500;color:rgba(22,25,29,.65)}
+.cmp-fr+.cmp-fr{border-top:1px solid #E7EAEE}
+.cmp-fr span{display:inline-flex;align-items:center;gap:8px}
+.cmp-fr span::before{content:"";width:8px;height:8px;border-radius:2px;background:var(--c)}
+.cmp-fr b{font-weight:600;color:#16191D;font-variant-numeric:tabular-nums}
+.cmp-fr.is-tot{color:#16191D;font-weight:600}
+.cmp-fr.is-tot span::before{display:none}
+.cmp-fr.is-tot b{font-size:16px}
+.cmp-fsem-n{margin:10px 0 2px;font-size:12px;line-height:17px;font-weight:500;color:rgba(22,25,29,.5)}
+.cmp-fnote{margin:-8px 0 0;font-size:12px;line-height:18px;font-weight:500;color:rgba(22,25,29,.5)}
+
+/* ---- 10 visit (light): the admissions ticket as a visit pass ---- */
+.cmp-pass{margin-top:0}
+.cmp-pass-k{background:#E5F1FF;color:#0673F9}
+.cmp-pass-k svg{width:13px;height:13px}
+.cmp-pass-where{color:rgba(22,25,29,.6)}
+
+/* grey band for a light section that would otherwise touch another light one */
+.cmp-grey{--bk-bg:#F6F7F9}
+
+/* ---- 03 curriculum (light): year tabs, one card per year ---- */
+.cmp-ytabs{display:flex;gap:6px;margin:0 -16px -8px;padding:0 16px;overflow-x:auto;scrollbar-width:none}
+.cmp-ytabs::-webkit-scrollbar{display:none}
+.cmp-ytabs button{flex:none;display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-family:var(--font);font-size:13px;line-height:16px;font-weight:600;color:#5B6271;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.cmp-ytabs button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--c)}
+.cmp-ytabs button.is-on{border:1.5px solid var(--c);padding:0 12.5px;background:var(--cb);color:#16191D}
+.cmp-ycard{--c:#007A51;--cb:#E7F6EE;padding:17px;border:1px solid #E1E5EA;border-radius:16px;background:#fff}
+.cmp-yk{margin:0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--c)}
+.cmp-ycard h3{margin:6px 0 0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#16191D}
+.cmp-yout{display:flex;align-items:flex-start;gap:8px;margin:12px 0 0;padding:10px 12px;border-radius:12px;background:var(--cb);font-size:13.5px;line-height:19px;font-weight:600;color:#16191D}
+.cmp-yout svg{flex:none;width:16px;height:16px;margin-top:1.5px;color:var(--c)}
+.cmp-ylab{margin:16px 0 0;font-size:11px;line-height:14px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(22,25,29,.45)}
+.cmp-ychips{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cmp-ychips span{height:28px;padding:0 10px;border:1px solid #E1E5EA;border-radius:999px;background:#fff;font-size:12.5px;line-height:26px;font-weight:500;color:#3D4350;white-space:nowrap}
+.cmp-ychips span.is-more{border-color:#F1F3F6;background:#F1F3F6;font-weight:600;color:#5B6271}
+.cmp-yproj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.cmp-yproj figure{margin:0}
+.cmp-yproj img{display:block;width:100%;height:60px;object-fit:cover;border-radius:10px}
+.cmp-yproj figcaption{margin-top:6px;font-size:12px;line-height:16px;font-weight:600;color:#16191D}
+.cmp-ynote{display:block;font-style:normal;margin-top:12px;padding:8px 10px;border-radius:10px;background:#FEF3E0;font-size:12.5px;line-height:18px;font-weight:500;color:#8A5300}
+.cmp-ycard.is-swap .cmp-ycard-in{animation:admIn .32s cubic-bezier(.22,1,.36,1)}
+.cmp-cur .cmp-link{margin-top:-8px}
+
+/* ---- 09 laptop (dark): a flat MacBook, then a switch between buying through NST and bringing your own ---- */
+.cmp-mcard{padding:17px;border:1px solid #23282F;border-radius:16px;background:#0B0C0E}
+.cmp-mfig{display:flex;justify-content:center;height:118px;margin:-4px 0 14px;border-radius:12px;background:#16191D;border:1px solid #23282F;padding-top:4px}
+.cmp-mfig svg{width:200px;height:110px}
+.cmp-mseg.adm-lseg{display:flex;background:#16191D;border:1px solid #23282F}
+.cmp-mseg.adm-lseg button{flex:1 1 0;height:32px;color:rgba(255,255,255,.6)}
+.cmp-mseg.adm-lseg button.is-on{background:#30363D;color:#fff;box-shadow:none}
+.cmp-mp{margin-top:16px}
+.cmp-mp:not(.is-on){display:none}
+.cmp-mh{margin:0;font-size:18px;line-height:24px;font-weight:600;font-stretch:125%;letter-spacing:-.2px;color:#fff}
+.cmp-ms{margin:6px 0 0;font-size:13.5px;line-height:20px;font-weight:500;color:rgba(255,255,255,.55)}
+.cmp-mrows{margin:14px 0 0}
+.cmp-mrows div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;border-top:1px solid #23282F}
+.cmp-mrows dt{flex:none;display:flex;align-items:center;gap:8px;font-size:13px;line-height:18px;font-weight:500;color:rgba(255,255,255,.55)}
+.cmp-mrows dd{margin:0;text-align:right;font-size:14px;line-height:20px;font-weight:600;color:#fff}
+.cmp-mspec{margin:0}
+.cmp-mspec div{flex-direction:column;align-items:flex-start;gap:4px}
+.cmp-mspec div:first-child{border-top:0;padding-top:0}
+.cmp-mspec dt{font-size:15px;line-height:20px;font-weight:600;color:#fff}
+.cmp-mspec dd{text-align:left;font-size:13px;font-weight:500;color:rgba(255,255,255,.7)}
+.cmp-mrows em{height:20px;padding:0 7px;border-radius:999px;background:rgba(74,222,128,.14);font-style:normal;font-size:10.5px;line-height:20px;font-weight:600;letter-spacing:.4px;color:#4ADE80}
+.cmp-mp .cmp-ms+.cmp-mrows{margin-top:12px}
+.cmp-mspec+.cmp-ms{margin-top:12px;padding-top:12px;border-top:1px solid #23282F;font-size:12.5px;line-height:18px}

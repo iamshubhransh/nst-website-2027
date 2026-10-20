@@ -1,0 +1,225 @@
+  <!-- ===== campus page · Rishihood University, Delhi NCR · mobile draft v1 for Figma (19 Oct 2026). The first of four campus pages on one
+       template: every section is a slot each campus fills with its own facts (see the notes card in Figma and the build notes).
+       Content from the current page (newtonschool.co/newton-school-of-technology-nst/nst-ru-ncr, read 19 Oct), the placements page
+       (Rishihood's internship record), the homepage (ICPC, Neutron, visits) and the IA's campus template (§5.8) ===== -->
+
+  <!-- 01 · hero: the placements hero; its wall is the campus itself. Crumbs, the campus switcher, the claim, one action -->
+  <section class="pl-hero cmp-hero" id="top" aria-label="Rishihood University campus">
+    <div class="pl-wall cmp-wall" aria-hidden="true">
+      <img class="cmp-wall-img" src="assets/campus/delhi-wide.jpg" alt="">
+      <a class="cmp-tour" href="#" tabindex="-1"><i><svg viewBox="0 0 16 16"><path d="M5.5 3.6v8.8a.6.6 0 00.9.5l6.9-4.4a.6.6 0 000-1L6.4 3.1a.6.6 0 00-.9.5z" fill="currentColor"/></svg></i>Campus tour</a>
+    </div>
+    <div class="pl-hero-copy">
+      <div class="pl-crumbs">
+        <nav class="pl-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="#">Campuses</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span aria-current="page">Delhi NCR</span></nav>
+      </div>
+      <!-- the campus switcher: the same chips on all four pages; the current one is dark -->
+      <nav class="cmp-switch" aria-label="Campuses">
+        <a href="#" class="is-on" aria-current="page">Delhi NCR</a><a href="#">Pune</a><a href="#">Bengaluru</a><a href="#">Hyderabad</a>
+      </nav>
+      <h1 class="pl-title">B.Tech in CS &amp; AI at Rishihood University</h1>
+      <p class="pl-lede">A residential campus in Sonipat, Delhi NCR. Rishihood awards the degree; NST teaches it.</p>
+      <a class="btn btn-brand pl-cta" href="#">Apply to Rishihood <img src="assets/icon-arrow-right.svg" alt=""></a>
+      <p class="cmp-trust"><span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.6l5 1.9v3.8c0 3.3-2.1 5.9-5 7.1-2.9-1.2-5-3.8-5-7.1V3.5z" fill="currentColor"/><path d="M5.6 8.1l1.7 1.7 3.2-3.4" fill="none" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>UGC-approved degree</span><i aria-hidden="true"></i><span><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="6.4" r="4.6" fill="currentColor"/><path d="M5.4 10.4L4.6 14.6l3.4-1.6 3.4 1.6-.8-4.2" fill="currentColor"/><path d="M6 6.5l1.4 1.4 2.6-2.8" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>NSDC certified</span></p>
+    </div>
+  </section>
+
+  <!-- 01b · at a glance: the homepage's summary tiles between the hatched bands -->
+  <section class="proof pl-proof cmp-proof" aria-label="Rishihood at a glance">
+    <div class="hatch hatch-flip" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
+    <div class="grid cmp-grid">
+      <article class="tile"><div class="stack"><span class="av adm-av" style="--c:#0673F9;--cb:#E5F1FF"><svg viewBox="0 0 16 16"><path d="M7.6 2.2a.6.6 0 01.8 0l5.7 4.6c.3.2.1.7-.3.7H12.6v5.6c0 .4-.3.7-.7.7H9.7V10.6a1.7 1.7 0 00-3.4 0v3.2H4.1c-.4 0-.7-.3-.7-.7V7.5H2.2c-.4 0-.6-.5-.3-.7z" fill="currentColor"/></svg></span></div><p><b>4 years,</b> <span>residential</span></p></article>
+      <article class="tile"><div class="stack"><span class="av adm-av" style="--c:#007A51;--cb:#E7F6EE"><svg viewBox="0 0 16 16"><path d="M5.6 4.4V3.6c0-.9.7-1.6 1.6-1.6h1.6c.9 0 1.6.7 1.6 1.6v.8" fill="none" stroke="currentColor" stroke-width="1.4"/><rect x="2" y="4.4" width="12" height="9.4" rx="2" fill="currentColor"/><path d="M2 8.4h12" stroke="#E7F6EE" stroke-width="1.2"/></svg></span></div><p><b>93%</b> <span>paid interns, year 2</span></p></article>
+      <article class="tile"><div class="stack"><span class="av adm-av" style="--c:#fff;--cb:#16191D"><svg viewBox="0 0 16 16"><path d="M4.8 2.6h6.4v3.2a3.2 3.2 0 01-6.4 0zM4.8 3.8H2.9v.9a2.1 2.1 0 002.1 2.1M11.2 3.8h1.9v.9A2.1 2.1 0 0111 6.8M8 9v2.4M5.4 13.4h5.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div><p><b>#22</b> <span>at ICPC India, 2025</span></p></article>
+      <article class="tile"><div class="stack"><span class="av adm-av" style="--c:#C77A00;--cb:#FEF3E0"><svg viewBox="0 0 16 16"><path d="M8 1.8c2.3 1.6 3.4 3.9 3.4 6.6L10 10.6H6L4.6 8.4C4.6 5.7 5.7 3.4 8 1.8z" fill="currentColor"/><circle cx="8" cy="6.6" r="1.3" fill="#FEF3E0"/><path d="M6.2 12l-.9 2.4M9.8 12l.9 2.4M8 12v2.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></span></div><p><b>Startup</b> <span>studio on campus</span></p></article>
+    </div>
+    <div class="hatch" aria-hidden="true"><img src="assets/divider-hatch.svg" alt=""></div>
+  </section>
+
+  <!-- 02 · the campus (dark): the tour leads, then six places, each a photo with its name -->
+  <section class="bk bk-dark cmp-life" id="life" aria-label="Campus life">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Life on campus. <span>In Sonipat.</span></h2><p class="bk-sub">AC hostels, a pool and sports, all on site.</p></div></div>
+    <div class="cmp-mosaic">
+      <a class="cmp-ph cmp-ph-tour" href="#"><img src="assets/hero-campus.jpg" alt="The Rishihood University campus from above"><span class="cmp-ph-shade"></span><i class="cmp-play"><svg viewBox="0 0 16 16"><path d="M5.5 3.6v8.8a.6.6 0 00.9.5l6.9-4.4a.6.6 0 000-1L6.4 3.1a.6.6 0 00-.9.5z" fill="currentColor"/></svg></i><b>Walk the campus</b><em>Video tour</em></a>
+      <figure class="cmp-ph"><img src="assets/campus/ru/academic.jpg" alt=""><span class="cmp-ph-shade"></span><figcaption>Academic block</figcaption></figure>
+      <figure class="cmp-ph"><img src="assets/campus/ru/hostel.jpg" alt=""><span class="cmp-ph-shade"></span><figcaption>AC hostels</figcaption></figure>
+      <figure class="cmp-ph"><img src="assets/campus/ru/food.jpg" alt=""><span class="cmp-ph-shade"></span><figcaption>Mess and cafés</figcaption></figure>
+      <figure class="cmp-ph"><img src="assets/campus/ru/auditorium.jpg" alt=""><span class="cmp-ph-shade"></span><figcaption>Auditorium</figcaption></figure>
+      <figure class="cmp-ph"><img src="assets/campus/ru/pool.jpg" alt=""><span class="cmp-ph-shade"></span><figcaption>Swimming pool</figcaption></figure>
+      <figure class="cmp-ph"><img src="assets/campus/ru/sports.jpg" alt=""><span class="cmp-ph-shade"></span><figcaption>Sports courts</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- 03 · curriculum (light): the NST curriculum as taught on this campus. Year tabs, one card per year: the theme, the outcome,
+       six skills, three projects. Data per campus in cmp.js (CAMPUS.years); Pune's page carries the same four years word for word -->
+  <section class="bk bk-light cmp-cur" id="curriculum" aria-label="Curriculum">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">What you’ll learn. <span>Year by year.</span></h2><p class="bk-sub">The NST curriculum, taught on this campus.</p></div></div>
+    <div class="cmp-ytabs" id="cmpYTabs" role="tablist" aria-label="Years"></div>
+    <article class="cmp-ycard" id="cmpYear" aria-live="polite"></article>
+  </section>
+
+  <!-- 04 · proof from this campus (light): the placements page's Rishihood card, unchanged -->
+  <section class="bk bk-light cmp-proofsec cmp-grey" id="internships" aria-label="Internships from this campus">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Paid internships. <span>By year two.</span></h2><p class="bk-sub">How the first Rishihood batch did.</p></div></div>
+    <div class="pl-rec cmp-rec" data-c="1" data-pct="93">
+      <div class="pl-rec-band"><span class="pl-lock"><span class="pl-lock-t"><img src="assets/nst-logo-mark.svg" alt="Newton School of Technology" class="nst"></span><span class="pl-lock-x" aria-hidden="true">X</span><span class="pl-lock-t"><img src="assets/pl/uni-rishihood-mark.png" alt="Rishihood University" class="ru"></span></span><span class="pl-uni-n"><b>Rishihood University</b><em>Delhi NCR</em></span></div>
+      <div class="pl-rec-top"><p class="pl-rec-num"><b class="pl-rec-v">93</b><span>%</span></p><em class="pl-rec-tag pl-rec-live"><i class="pl-live-dot"></i>Live tracking</em></div>
+      <p class="pl-rec-lab">of the 1st batch at Delhi NCR held a paid<br>internship in their 2nd year</p>
+      <div class="pl-commute iso" data-theme="light" data-c="1" aria-hidden="true"><!--@commute--></div>
+      <div class="pl-earn">
+        <div><span>Highest stipend</span><b>₹1,25,000/mo</b></div>
+        <div><span>Average stipend</span><b>₹23,000/mo</b></div>
+      </div>
+    </div>
+    <a class="cmp-link" href="placements.html">See all placements →</a>
+  </section>
+
+  <!-- 05 · only at this campus (dark): what no other NST campus has. Two tabs, one card each: the Venture Studio and Neutron -->
+  <section class="bk bk-dark cmp-only" id="only" aria-label="Only at Rishihood">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Only at Rishihood. <span>Two extras.</span></h2><p class="bk-sub">A startup studio and the Neutron fest.</p></div></div>
+    <div class="adm-qtabs cmp-otabs" role="tablist" aria-label="Only at Rishihood">
+      <button type="button" role="tab" class="is-on" aria-selected="true" data-o="0" style="--c:#FBBF24">Venture Studio</button><button type="button" role="tab" aria-selected="false" data-o="1" style="--c:#B79CFF">Neutron fest</button>
+    </div>
+    <article class="cmp-oc is-on" data-o="0">
+      <div class="cmp-fan" aria-hidden="true"><img src="assets/campus/ru/su-bocadoh.jpg" alt=""><img src="assets/campus/ru/su-inculcate.jpg" alt=""><img src="assets/campus/ru/su-trupahadi.jpg" alt=""></div>
+      <div class="cmp-oc-b">
+        <h3>Venture Studio</h3>
+        <p>Rishihood’s startup incubator. Build, launch and raise while you study.</p>
+        <dl class="cmp-ost"><div><dt>₹50 Cr</dt><dd>Makers Fund</dd></div><div><dt>8+</dt><dd>startups</dd></div><div><dt>12+</dt><dd>mentors</dd></div></dl>
+        <a href="#">Meet the startups →</a>
+      </div>
+    </article>
+    <article class="cmp-oc" data-o="1">
+      <div class="cmp-oc-vid"><img src="assets/fest/neutron-still.jpg" alt=""><i class="cmp-play"><svg viewBox="0 0 16 16"><path d="M5.5 3.6v8.8a.6.6 0 00.9.5l6.9-4.4a.6.6 0 000-1L6.4 3.1a.6.6 0 00-.9.5z" fill="currentColor"/></svg></i></div>
+      <div class="cmp-oc-b">
+        <h3>Neutron</h3>
+        <p>India’s first techno-cultural fest, held on this campus every year.</p>
+        <dl class="cmp-ost"><div><dt>150+</dt><dd>drones</dd></div><div><dt>1,100+</dt><dd>footfall</dd></div><div><dt>₹10L+</dt><dd>prize pool</dd></div></dl>
+        <a href="#">Watch the aftermovie →</a>
+      </div>
+    </article>
+  </section>
+
+  <!-- 06 · who can apply (light): the eligibility as a checklist, then this campus's route with its extra round marked -->
+  <section class="bk bk-light cmp-elig" id="apply" aria-label="Who can apply">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Who can apply. <span>And how.</span></h2><p class="bk-sub">Class 12 with PCM, then four rounds.</p></div></div>
+    <div class="cmp-ecard">
+      <ul class="adm-jes-cov cmp-checks"><li>Class 12 with PCM, in 2025, 2026 or 2027</li><li>60% overall in Class 12</li><li>50% in physics, chemistry and maths</li></ul>
+      <p class="cmp-ek">Your route at Rishihood</p>
+      <ol class="cmp-route">
+        <li><b>NSAT</b><span>Online</span></li>
+        <li><b>Interview</b><span>Online</span></li>
+        <li class="is-x"><b>Group discussion</b><span>Only here</span></li>
+        <li><b>Counselling</b><span>On campus</span></li>
+      </ol>
+    </div>
+    <a class="btn btn-brand pl-cta cmp-cta" href="#">Register for NSAT <img src="assets/icon-arrow-right.svg" alt=""></a>
+  </section>
+
+  <!-- 07 · fees (grey): what you pay, semester by semester. Tap a bar for its breakdown. Figures from the current page's table -->
+  <section class="bk bk-light cmp-fees" id="fees" aria-label="Fees">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Fees, <span>semester by semester.</span></h2><p class="bk-sub">Before scholarships, hostel included.</p></div></div>
+    <div class="cmp-fcard">
+      <div class="cmp-ftop"><p class="cmp-ftot"><b>₹26.9 lakh</b><span>for four years</span></p><em class="cmp-ftag">Current fees</em></div>
+      <div class="cmp-bars" id="cmpBars" role="tablist" aria-label="Semesters"></div>
+      <div class="cmp-fkey" aria-hidden="true"><span style="--c:#0673F9">Tuition</span><span style="--c:#16A34A">Hostel &amp; mess</span><span style="--c:#7B55EE">Admin &amp; tech</span><span style="--c:#E08600">Deposit</span></div>
+      <div class="cmp-fsem" id="cmpSem" aria-live="polite"></div>
+    </div>
+    <p class="cmp-fnote">The MacBook and university exam fees are extra. Scholarships come off tuition.</p>
+  </section>
+
+  <!-- 08 · scholarships (light): the admissions section, unchanged. The four schemes on the Rishihood page match it -->
+  <section class="bk bk-light adm-sch" id="scholarships" aria-label="Scholarships">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Scholarships, <span>up to 100%.</span></h2><p class="bk-sub">On your NSAT, interview and achievements.</p></div></div>
+    <!-- 16 Oct v2 (his ask: the solid blue made the text hard to read): a white card in the route cards' selected style -->
+    <article class="adm-jes">
+      <em class="adm-jes-k">JEE Excellence Scholarship</em>
+      <p class="adm-jes-big"><b>100%</b><span>fee waiver for all four years</span></p>
+      <p class="adm-jes-for">For a JEE Main or Advanced All India Rank under 10,000 (2026).</p>
+      <ul class="adm-jes-cov"><li>Tuition</li><li>Upskilling, admin &amp; tech fees</li><li>Hostel &amp; mess</li></ul>
+      <p class="adm-jes-note">Paid separately: the MacBook, the block fee and the refundable deposit.</p>
+    </article>
+    <div class="adm-schs">
+      <article class="adm-s"><p class="adm-s-v"><span>Up to</span><b>100%</b></p><div><h3>Merit scholarship</h3><p>Of first-year tuition, on your NSAT and interview scores.</p></div></article>
+      <article class="adm-s"><p class="adm-s-v"><span>Up to</span><b>10%</b></p><div><h3>Young Women Leader</h3><p>Of tuition for four years, for women with technical work, state-level achievements or leadership.</p></div></article>
+      <article class="adm-s"><p class="adm-s-v"><span>Up to</span><b>10%</b></p><div><h3>Extraordinary Achievement</h3><p>Of tuition for four years, for Olympiads, tech internships, strong coding ratings or production-grade projects.</p></div></article>
+    </div>
+  </section>
+
+  <!-- 09 · loans (grey): the admissions section, unchanged. The Rishihood page lists the same eight lenders (but shows PNB’s terms for all of them). The logo grid is the picker;
+       the card shows the picked lender's terms, secured or unsecured. Figures from newtonschool.co/…/admission (16 Oct 2026) -->
+  <section class="bk bk-light adm-loans" id="loans" aria-label="Education loans">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Pay over time. <span>8 lenders.</span></h2><p class="bk-sub">Compare their terms; we help you apply.</p></div></div>
+    <div class="adm-lgrid" role="tablist" aria-label="Lending partners"><button type="button" role="tab" class="adm-lt is-on" aria-selected="true" data-l="pnb"><img src="assets/adm/lender-pnb.png" alt="PNB" style="height:22px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="bob"><img src="assets/adm/lender-bank-of-baroda.png" alt="Bank of Baroda" style="height:22px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="axis"><img src="assets/adm/lender-axis.png" alt="Axis Bank" style="height:20px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="icici"><img src="assets/adm/lender-icici.png" alt="ICICI Bank" style="height:18px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="tata"><img src="assets/adm/lender-tata-capital.png" alt="Tata Capital" style="height:24px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="gyandhan"><img src="assets/adm/lender-gyandhan.png" alt="GyanDhan" style="height:30px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="propelld"><img src="assets/adm/lender-propelld.png" alt="Propelld" style="height:15px"></button><button type="button" role="tab" class="adm-lt" aria-selected="false" data-l="kuhoo"><img src="assets/adm/lender-kuhoo.png" alt="Kuhoo" style="height:26px"></button></div>
+    <div class="adm-lcard" id="admLoan" aria-live="polite">
+      <div class="adm-lc-head"><div><b id="admLName">PNB</b><span id="admLVia">Through Edufin</span></div>
+        <div class="adm-lseg" role="group" aria-label="Loan type"><button type="button" class="is-on" data-t="0">Secured</button><button type="button" data-t="1">Unsecured</button></div></div>
+      <dl class="adm-lrows">
+        <div class="adm-lr adm-lr-big"><dt>Interest</dt><dd id="admLRate">7.35% to 9.00%</dd></div>
+        <div class="adm-lr"><dt>Maximum loan</dt><dd id="admLMax">Cost of education</dd></div>
+        <div class="adm-lr"><dt>Tenure</dt><dd id="admLTen">15 years</dd></div>
+        <div class="adm-lr"><dt>Processing</dt><dd id="admLFee">1% + GST</dd></div>
+      </dl>
+    </div>
+    <p class="adm-loan-note">NST only helps you apply; it does not lend or guarantee loans. Rates are indicative and each lender decides on approval.</p>
+  </section>
+
+  <!-- 10 · the laptop (dark): a MacBook is required. Two ways to have one: buy it through NST, or bring your own that meets the bar -->
+  <section class="bk bk-dark cmp-mac" id="laptop" aria-label="Laptop">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Your laptop. <span>A MacBook.</span></h2><p class="bk-sub">Buy it through NST or bring your own.</p></div></div>
+    <div class="cmp-mcard">
+      <div class="cmp-mfig" aria-hidden="true">
+        <svg viewBox="0 0 220 120"><rect x="44" y="10" width="132" height="86" rx="7" fill="#23282F" stroke="#3A414B"/><rect x="51" y="17" width="118" height="72" rx="2" fill="#0B0C0E"/>
+          <rect x="60" y="28" width="30" height="5" rx="2.5" fill="#C4B5FD"/><rect x="95" y="28" width="44" height="5" rx="2.5" fill="#61A8FF"/>
+          <rect x="68" y="40" width="22" height="5" rx="2.5" fill="#4ADE80"/><rect x="95" y="40" width="52" height="5" rx="2.5" fill="#30363D"/>
+          <rect x="68" y="52" width="40" height="5" rx="2.5" fill="#FBBF24"/><rect x="113" y="52" width="26" height="5" rx="2.5" fill="#30363D"/>
+          <rect x="60" y="64" width="18" height="5" rx="2.5" fill="#C4B5FD"/><rect x="83" y="64" width="34" height="5" rx="2.5" fill="#61A8FF"/>
+          <rect x="60" y="76" width="6" height="7" rx="1" fill="#fff"/>
+          <path d="M22 98h176l-8 10a6 6 0 01-4.7 2.3H34.7A6 6 0 0130 108z" fill="#3A414B"/><rect x="94" y="98" width="32" height="4" rx="2" fill="#23282F"/></svg>
+      </div>
+      <div class="adm-lseg cmp-mseg" role="tablist" aria-label="How you get it"><button type="button" role="tab" class="is-on" aria-selected="true" data-m="0">Through NST</button><button type="button" role="tab" aria-selected="false" data-m="1">Bring your own</button></div>
+      <div class="cmp-mp is-on" data-m="0">
+        <p class="cmp-mh">MacBook Pro or Air, M5</p>
+        <p class="cmp-ms">At a subsidised price on MRP, subject to availability.</p>
+        <dl class="cmp-mrows"><div><dt>When you pay</dt><dd>With your semester 1 fees</dd></div><div><dt>Our advice</dt><dd>Choose the Pro</dd></div></dl>
+      </div>
+      <div class="cmp-mp" data-m="1">
+        <dl class="cmp-mrows cmp-mspec">
+          <div><dt>MacBook Pro<em>Recommended</em></dt><dd>M1 to M5 · 16 GB · 512 GB</dd></div>
+          <div><dt>MacBook Air</dt><dd>M4 or M5 only · 16 GB · 512 GB</dd></div>
+        </dl>
+        <p class="cmp-ms">We check it at onboarding. It needs a Pro chip, or enough GPU and Neural Engine.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 · visit (light): the admissions ticket, as a visit pass -->
+  <section class="bk bk-light cmp-visit" id="visit" aria-label="Visit the campus">
+    <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">See it yourself. <span>On a Sunday.</span></h2><p class="bk-sub">A free 45-minute tour with a student.</p></div></div>
+    <div class="adm-ticket cmp-pass">
+      <div class="adm-tk-top">
+        <span class="adm-tk-k cmp-pass-k"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2.5" y="3.5" width="11" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>Campus visit</span>
+        <p class="adm-tk-date">Every Sunday</p>
+        <p class="adm-tk-dl cmp-pass-where"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14.5s4.6-4.3 4.6-7.8a4.6 4.6 0 10-9.2 0C3.4 10.2 8 14.5 8 14.5z" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="6.7" r="1.6" fill="currentColor"/></svg>Rishihood University, Sonipat</p>
+      </div>
+      <div class="adm-tk-cut" aria-hidden="true"><i></i><i></i></div>
+      <div class="adm-tk-bot">
+        <a class="btn btn-brand pl-cta" href="#">Book a visit <img src="assets/icon-arrow-right.svg" alt=""></a>
+        <p class="adm-tk-proof"><span class="stack"><span class="av av-photo"><img src="assets/avatar-1.png" alt="" style="left:-4.81px;top:.08px;width:35.41px;height:34.67px"></span><span class="av av-photo"><img src="assets/avatar-2.png" alt="" style="left:-6.09px;top:3.5px;width:31.53px;height:24.08px"></span><span class="av av-photo"><img src="assets/avatar-3.png" alt="" style="left:-3.52px;top:2.66px;width:31.54px;height:25.75px"></span></span><span>Shown around by a current student</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 · FAQs: the placements FAQ component, this campus's questions -->
+  <section class="pl-faq adm-faq" id="faq" aria-label="Questions about this campus">
+    <p class="pl-kicker">FAQs</p>
+    <h2 class="pl-h2">Rishihood questions, answered.</h2>
+    <div class="pl-acc" id="plAcc">
+      <div class="pl-q is-open"><button type="button" aria-expanded="true"><span>Is the degree approved by UGC?</span><i></i></button><div class="pl-a"><div><p>Yes. Rishihood University is UGC-recognised and NAAC-accredited, and it awards your B.Tech. NST designs and teaches the curriculum.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Do I have to live on campus?</span><i></i></button><div class="pl-a"><div><p>Yes. Hostel and mess are part of the fee for semesters 1 to 6. Semesters 7 and 8 are internship semesters, so you are charged only if you stay.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Is there a group discussion?</span><i></i></button><div class="pl-a"><div><p>Yes, only at Rishihood. It comes after your online interview and before counselling.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Can a loan cover the fees?</span><i></i></button><div class="pl-a"><div><p>Mostly. Partner banks and lenders fund up to 95% of the programme fees. NST helps you apply; the lender sets the rate and approves the loan.</p></div></div></div>
+      <div class="pl-q"><button type="button" aria-expanded="false"><span>Whose alumnus will I be?</span><i></i></button><div class="pl-a"><div><p>Both. You graduate as an alumnus of Newton School of Technology and of Rishihood University.</p></div></div></div>
+    </div>
+    <a class="pl-all" href="#">All FAQs →</a>
+  </section>
