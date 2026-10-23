@@ -1,8 +1,13 @@
+  <!-- section bar (desktop, 23 Oct): this page's sections; the bar's styles and script come from the homepage -->
+  <nav class="snav dt-only" id="snav" aria-label="On this page"><div class="snav-in"><span class="snav-k">On this page</span><div class="snav-l"><i class="snav-pill" aria-hidden="true"></i><a href="#routes">Ways in</a><a href="#nsat">NSAT</a><a href="#process">Six steps</a><a href="#early">Apply early</a><a href="#scholarships">Scholarships</a><a href="#loans">Loans</a><a href="#campuses">Campuses</a><a href="#faq">FAQs</a></div></div></nav>
   <!-- ===== admissions · mobile draft for Figma (16 Oct 2026). Content from the current admissions page
        (newtonschool.co/newton-school-of-technology-nst/admission) and the IA's admissions brief (context/website-ia-2027.md §5.9).
        The hero is the placements hero (same wall box, crumbs, title, lede, strip, CTA); its wall is the route figure ===== -->
   <section class="pl-hero adm-hero" id="top" aria-label="Admissions at NST">
-    <div class="pl-wall adm-wall iso" data-theme="light" aria-hidden="true"><!--@route--></div>
+    <div class="pl-wall adm-wall iso" data-theme="light" aria-hidden="true"><!--@route-->
+      <!-- desktop: each station's step, pinned over its flag (adm.js places them); the lit one follows the student -->
+      <div class="adm-stns dt-only"><span class="adm-stn" data-i="0" style="--c:#0673F9"><i>1</i>Register</span><span class="adm-stn is-on" data-i="1" style="--c:#16A34A"><i>2</i>Take NSAT</span><span class="adm-stn" data-i="2" style="--c:#7B55EE"><i>3</i>Interview</span><span class="adm-stn" data-i="3" style="--c:#E08600"><i>4</i>Counselling</span><span class="adm-stn" data-i="4" style="--c:#E0457B"><i>5</i>Block your seat</span><span class="adm-stn" data-i="5" style="--c:#0B8A86"><i>6</i>Move in</span></div>
+    </div>
     <div class="pl-hero-copy">
       <div class="pl-crumbs">
         <nav class="pl-crumb" aria-label="Breadcrumb"><a href="index.html">Home</a><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5L10.5 8 6 12.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span aria-current="page">Admissions</span></nav>
@@ -49,6 +54,7 @@
         <div class="adm-rc-top"><i class="adm-rc-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19" rx="3"/><path d="M7.3 8.3l1.4 1.4 2.5-2.7M7.3 13.3l1.4 1.4 2.5-2.7" fill="none" stroke="var(--dt)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="12.8" y="7.7" width="4.4" height="1.6" rx=".8" fill="var(--dt)"/><rect x="12.8" y="12.7" width="4.4" height="1.6" rx=".8" fill="var(--dt)"/><rect x="7.3" y="17" width="7.4" height="1.6" rx=".8" fill="var(--dt)"/></svg></i><div class="adm-rc-tt"><em class="adm-tag">Most students</em><h3>NSAT</h3></div><span class="adm-rc-n">01</span></div>
         <p>Maths, English and aptitude, online.</p>
         <div class="adm-rc-more">
+          <div class="adm-crit adm-subj dt-only" aria-label="On the paper"><span style="--d:#0673F9"><i></i>Basic maths</span><span style="--d:#7B55EE"><i></i>Advanced maths</span><span style="--d:#16A34A"><i></i>English</span><span style="--d:#E08600"><i></i>Aptitude</span></div>
           <a href="#">Register for NSAT →</a>
         </div>
       </article>
@@ -109,7 +115,7 @@
   </section>
 
   <!-- 05 · apply early (dark band): three reasons, from the current page -->
-  <section class="bk bk-dark adm-early" aria-label="Why apply early">
+  <section class="bk bk-dark adm-early" id="early" aria-label="Why apply early">
     <div class="bk-head"><span class="bk-bar"></span><div class="bk-text"><h2 class="bk-title">Apply early. <span>It pays.</span></h2><p class="bk-sub">Three things later applicants may miss.</p></div></div>
     <div class="adm-early-list">
       <p><i style="--c:#FBBF24;--cb:rgba(251,191,36,.16)"><svg viewBox="0 0 16 16"><path d="M3.5 12.5l9-9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="4.5" cy="4.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="11.5" cy="11.5" r="1.7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></i><span><b>Better access to scholarships</b><em>More of them are still open.</em></span></p>

@@ -1,6 +1,7 @@
 /* ================= admissions · interactions (phone; his frame 718:5488) ================= */
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var wide = window.matchMedia('(min-width:1024px)');   /* desktop (23 Oct): crossing the breakpoint reloads the page (homepage shell) */
 
   /* 01 · the route: the student walks the stations in order (register → NSAT → interview → counselling → block), each station's
      flag lights while they stand at it; after the last they walk on through the campus gate, fade, and start again at register.
@@ -8,10 +9,10 @@
   (function(){
     var g = document.getElementById('rtStu'), hero = document.querySelector('.adm-hero'); if (!g || !hero) return;
     var ST = __RT_STATIONS__, U = __RT_UNIT__, POSES = __RT_POSES__, STRIDE = __RT_STRIDE__, GATE = ST[ST.length - 1] + 172, flags = hero.querySelectorAll('.rt-flag');
-    var poses = g.querySelectorAll('.rt-pose'), shown = 'idle';
+    var poses = g.querySelectorAll('.rt-pose'), shown = 'idle', stns = hero.querySelectorAll('.adm-stn');
     function at(x){ g.setAttribute('transform', 'translate(' + (U[0] * x).toFixed(1) + ' ' + (U[1] * x).toFixed(1) + ')'); }
     function pose(p){ if (p === shown) return; shown = p; poses.forEach(function(q){ if (q.dataset.p === String(p)) q.removeAttribute('display'); else q.setAttribute('display', 'none'); }); }
-    function light(k){ flags.forEach(function(f){ f.classList.toggle('on', +f.dataset.i === k); }); }
+    function light(k){ flags.forEach(function(f){ f.classList.toggle('on', +f.dataset.i === k); }); stns.forEach(function(s){ s.classList.toggle('is-on', +s.dataset.i === k); }); }
     if (reduce) return;
     g.style.transition = 'opacity .45s ease';
     /* a steady walk between stations (the pose follows the distance walked: one full stride cycle every STRIDE units), a pause at each */
@@ -28,15 +29,31 @@
         pose(Math.floor(((x - ST[0]) % STRIDE) / STRIDE * POSES));
         if (x >= to){
           pose('idle'); t0 = now;
-          if (to === GATE){ phase = 'out'; g.style.opacity = '0'; }
+          if (to === GATE){ phase = 'out'; g.style.opacity = '0'; if (wide.matches) light(5); }
           else { phase = 'hold'; light(i); }
         }
-      } else if (phase === 'out' && now - t0 > 600){
+      } else if (phase === 'out' && now - t0 > (wide.matches ? 1400 : 600)){
         i = 0; x = to = ST[0]; at(x); g.style.opacity = '1'; phase = 'hold'; t0 = now; light(0);
       }
       raf = live ? requestAnimationFrame(frame) : 0;
     }
     new IntersectionObserver(function(en){ live = en[0].isIntersecting; if (live && !raf){ t0 = 0; last = 0; raf = requestAnimationFrame(frame); } }).observe(hero);
+  })();
+
+  /* 01 · desktop: the six steps pinned over the figure. Each label sits above its flag; the gate's ("Move in") is where the walk
+     would put a sixth flag (the stations are evenly spaced), lifted to the arch. Re-placed on resize and when the fonts land. */
+  (function(){
+    var hero = document.querySelector('.adm-hero'), box = hero && hero.querySelector('.adm-stns'); if (!box) return;
+    var flags = hero.querySelectorAll('.rt-flag'), stns = box.querySelectorAll('.adm-stn');
+    function place(){
+      if (!wide.matches || flags.length < 2) return;
+      var b = box.getBoundingClientRect(), P = [];   /* the SVG lists the flags back to front; index them by their step */
+      flags.forEach(function(f){ var r = f.getBoundingClientRect(); P[+f.dataset.i] = [r.left + r.width / 2 - b.left, r.top - b.top]; });
+      var d = [P[1][0] - P[0][0], P[1][1] - P[0][1]], n = P.length, gate = [P[n - 1][0] + d[0] * 1.3, P[n - 1][1] + d[1] * 1.3 - 30];
+      stns.forEach(function(s){ var i = +s.dataset.i, p = i < n ? P[i] : gate; s.style.setProperty('--x', p[0].toFixed(1) + 'px'); s.style.setProperty('--y', (p[1] - 6).toFixed(1) + 'px'); });
+      box.classList.add('is-set');
+    }
+    place(); addEventListener('resize', place); if (document.fonts) document.fonts.ready.then(place);
   })();
 
   /* 01 · the first fold: the whole next-NSAT ticket (date, deadline, CTA, registered count) must be on screen when the page opens, with the browser's toolbars showing (the small viewport,
@@ -50,6 +67,7 @@
     document.body.appendChild(probe);
     var w = 0;
     function fit(force){
+      if (wide.matches){ hero.classList.remove('adm-nofig'); return; }   /* desktop: the hero has its own height; the figure is the scene */
       if (!force && innerWidth === w) return; w = innerWidth;
       var vh = probe.offsetHeight || innerHeight, need = cta.getBoundingClientRect().bottom - copy.getBoundingClientRect().top;
       var fig = Math.min(420, Math.round(vh - need - 10 - 16)), none = fig < 140;   /* under 140 the figure is a sliver behind the nav: drop it */
@@ -112,6 +130,15 @@
     show(0);
   })();
 
+  /* 04 · desktop: the six steps land in turn and the spine draws between them, once, when the row's top reaches the middle of the
+     screen (a reveal that fires at the bottom edge would play while the reader is still higher up). Static under reduced motion. */
+  (function(){
+    var sec = document.querySelector('.adm-steps'), row = sec && sec.querySelector('.adm-tl'); if (!row || reduce || !wide.matches || !('IntersectionObserver' in window)) return;
+    if (row.getBoundingClientRect().top < innerHeight / 2) return;   /* already past the middle (a reload mid-page): leave it drawn */
+    sec.classList.add('is-armed');
+    new IntersectionObserver(function(en, o){ if (en[0].isIntersecting){ sec.classList.add('is-drawn'); o.disconnect(); } }, {rootMargin: '0px 0px -50% 0px'}).observe(row);
+  })();
+
   /* 07 · loans: tap a logo to see that lender's terms; switch secured / unsecured. [rate, max loan, tenure, processing] per type */
   var LOANS = {
     pnb: {n: 'PNB', via: 'Through Edufin', t: [['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST'], ['7.35% to 9.00%', 'Cost of education', '15 years', '1% + GST']]},
@@ -151,7 +178,13 @@
   }, {passive: true});
 
   /* the ticket's notches are real holes on the perforation; the mask needs the perforation's height */
-  function cuts(){ document.querySelectorAll('.adm-ticket').forEach(function(t){ var c = t.querySelector('.adm-tk-cut'); if (!c) return; t.style.setProperty('--cut', (c.offsetTop + .5) + 'px'); t.classList.add('has-cut'); if (t.parentNode.classList.contains('adm-tkw')) t.parentNode.style.setProperty('--cutw', (t.offsetTop + c.offsetTop) + 'px'); }); }
+  function cuts(){ document.querySelectorAll('.adm-ticket').forEach(function(t){
+    var c = t.querySelector('.adm-tk-cut'); if (!c) return;
+    var w = t.parentNode.classList.contains('adm-tkw') ? t.parentNode : null, v = c.offsetHeight > c.offsetWidth;   /* desktop: upright, between the date and the stub */
+    t.classList.toggle('has-cut', !v); t.classList.toggle('has-vcut', v); if (w) w.classList.toggle('is-v', v);
+    if (v){ var x = (c.offsetLeft + .5) + 'px'; t.style.setProperty('--cutx', x); if (w) w.style.setProperty('--cutx', x); }
+    else { t.style.setProperty('--cut', (c.offsetTop + .5) + 'px'); if (w) w.style.setProperty('--cutw', (t.offsetTop + c.offsetTop) + 'px'); }
+  }); }
   cuts(); addEventListener('resize', cuts); if (document.fonts) document.fonts.ready.then(cuts);
 
   /* 09 · FAQ: one open at a time */

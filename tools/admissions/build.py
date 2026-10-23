@@ -4,8 +4,9 @@ plus the admissions body, CSS and JS in this folder. Reuses tools/placements/pl.
 placements page exactly. Run from anywhere:  python3 tools/admissions/build.py
 
 Why a build: the top bar, footer, dock and chat are shared with the homepage. Regenerating keeps them identical
-whenever the homepage changes. Admissions is mobile-first (his frame 718:5488) with no desktop design yet, so the homepage's
-desktop layer (min-width:1024px) is switched off here and wide screens get the 402 px phone column on the grey stage.
+whenever the homepage changes. Phone: his frame 718:5488. Desktop (23 Oct 2026): the homepage's desktop layer (min-width:1024px)
+applies here as on placements; the admissions desktop rules live in adm-dt.css (adm.css is shared with the NSAT, Coding NSAT and
+campus pages, so this page's desktop layer stays out of it).
 """
 import os, re
 
@@ -13,7 +14,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 HERE = os.path.dirname(os.path.abspath(__file__))
 src = open(os.path.join(ROOT, 'index.html'), encoding='utf-8').read()
 body = open(os.path.join(HERE, 'body.html'), encoding='utf-8').read()
-css = open(os.path.join(ROOT, 'tools', 'placements', 'pl.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'adm.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'route.css'), encoding='utf-8').read()
+css = open(os.path.join(ROOT, 'tools', 'placements', 'pl.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'adm.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'route.css'), encoding='utf-8').read() + '\n' + open(os.path.join(HERE, 'adm-dt.css'), encoding='utf-8').read()
 js = open(os.path.join(HERE, 'adm.js'), encoding='utf-8').read()
 
 def cut(s, start, end, include_end=True, frm=0):
@@ -36,9 +37,6 @@ wins = cut(src, '<section class="wins"', '</section>')
 grid = cut(src, '<div class="grid" data-node="76:10567">', '\n    </div>\n\n    <div class="companies"', include_end=False) + '\n    </div>'
 ctc = cut(src, '<div class="ctc">', '\n    </div>\n  </section>', include_end=False) + '\n    </div>'
 tail = src[src.index('<div class="vid" id="vid"'):]
-# the desktop nav's figure module only runs at >= 1024 px, which this page never treats as desktop
-mod_i = tail.index('<script type="module">'); mod_j = tail.index('</script>', mod_i) + len('</script>')
-tail = tail[:mod_i] + tail[mod_j:]
 
 body = body.replace('<!--@route-->', open(os.path.join(HERE, 'route.svg'), encoding='utf-8').read())   # node tools/admissions/route.mjs regenerates it
 for name in ('monitor', 'papers', 'board', 'table', 'letter', 'arch', 'idcard'):
@@ -92,7 +90,6 @@ kept = list(dict.fromkeys(kept))
 tail_js = tail_js[:ms] + '<script>\n' + '\n'.join(kept) + tail_js[me:]
 
 page = (head + '<body>\n' + nav_variants + '\n<div class="page" id="page">\n\n  ' + header + '\n\n' + body + '\n\n  ' + footer + '\n</div>\n\n' + tail_html + tail_js)
-page = page.replace('min-width:1024px', 'min-width:100000px')   # no desktop layer yet (CSS and the JS isDT checks)
 import json
 rt = json.load(open(os.path.join(HERE, 'route.json')))
 js = js.replace('__RT_STATIONS__', json.dumps(rt['stations'])).replace('__RT_UNIT__', json.dumps(rt['unit'])).replace('__RT_POSES__', str(rt['poses'])).replace('__RT_STRIDE__', str(rt['stride']))

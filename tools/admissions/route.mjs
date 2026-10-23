@@ -36,11 +36,12 @@ const toHex = (c) => "#" + c.map((v) => Math.round(Math.max(0, Math.min(255, v))
 const mix = (h, w, t) => toHex(hex(h).map((v, i) => v + (hex(w)[i] - v) * t));
 const MAT = { brick: "#E7AE86", cream: "#F2DDB8", sky: "#9EC4F2", glass: "#B9D4F5", roof: "#6F9BE8", stone: "#E3DED4", leaf: "#86C27A", leaf2: "#69AE66",
   leaf3: "#A5D48C", trunk: "#B98A5E", bus: "#F4A62A", field: "#A6D78F", track: "#E79A7B", bloom: "#F28FB4", bloom2: "#FFD166", plinth0: "#CFE3FB",
-  plinth1: "#D7F0DF", plinth2: "#E6DCFB", plinth3: "#FDE3C2", plinth4: "#FBD5E1", grass: "#EEF6EA", kerb: "#DDE3EA" };
+  plinth1: "#D7F0DF", plinth2: "#E6DCFB", plinth3: "#FDE3C2", plinth4: "#FBD5E1", grass: "#EEF6EA", kerb: "#DDE3EA", water: "#A9D6F2" };
 let PAL = "";
 for (const [n, b] of Object.entries(MAT)) PAL += `.m-${n}{--anatomy-paper:${mix(b, "#ffffff", .35)};--anatomy-face:${mix(b, "#ffffff", .35)};--anatomy-shade-0:${mix(b, "#000000", .14)};--anatomy-shade-1:${mix(b, "#000000", .06)};--anatomy-shade-2:${b};--anatomy-shade-3:${mix(b, "#ffffff", .2)};--anatomy-top:${mix(b, "#ffffff", .5)};--anatomy-lo:${mix(b, "#000000", .32)};--anatomy-mid:${mix(b, "#000000", .32)};--anatomy-faint:${mix(b, "#000000", .18)}}\n`;
 const STEPC = ["#0673F9", "#16A34A", "#7B55EE", "#F59700", "#E0457B"];
 PAL += STEPC.map((c, i) => `.rt-flag[data-i="${i}"]{fill:${c};opacity:.38;transition:opacity .3s ease}`).join("\n") + "\n.rt-flag.on{opacity:1}\n";
+PAL += ".rt-dt{display:none}\n@media (min-width:1024px){.rt-dt{display:inline}}\n";   /* the desktop-only campus around the walk */
 PAL += ".rt-pennant{fill:#0673F9;stroke:none}.rt-walk{fill:#E8EDF4}.rt-track-line{stroke:#fff;stroke-width:1.6;fill:none}.rt-win{fill:#CFE3FB;stroke:none}.rt-win-warm{fill:#FFE7B8;stroke:none}\n";
 const paint = (m, svg) => `<g class="m-${m}">${svg}</g>`;
 
@@ -134,6 +135,58 @@ for (const x of [-480, -100, 100, 270, 430]) tree(x, 60, 0.8);
 for (const [x, y, s2] of [[-460, -290, .85], [-150, -310, .75], [10, -320, .8], [190, -330, .7], [-80, 240, .9], [-480, 240, .8], [160, 150, .85], [330, 180, .8], [460, 70, .7]]) tree(x, y, s2);
 for (const x of [-210, 330]) put("bench", [x, 40, 0], 0.7);
 
+/* ---- desktop only (23 Oct 2026): the campus around the walk, so the wide hero runs edge to edge. On the desktop hero the left
+        of the figure (under the copy) shows the back of the campus, the top right the land past the gate, the bottom right the
+        front lawn. Everything here sits in a .rt-dt group that route.css hides below 1024 px, so the phone figure is unchanged ---- */
+const DT = (svg) => `<g class="rt-dt">${svg}</g>`;
+const addDT = (c, svg) => add(c, DT(svg));
+/* the trees: one drawing per green at the world origin (in <defs>), placed with <use>. The projection is linear, so a tree at (x, y)
+   scaled sc is that drawing scaled sc about the origin's screen point and moved to (x, y)'s; strokes don't scale (.iso-svg paths are
+   non-scaling), so the trees match the phone's */
+let treeD = 0;
+const TREE_DEFS = ["leaf2", "leaf", "leaf3"].map((v, n) => `<g id="rtT${n}">` + paint("trunk", S(k.cylinder(0, 0, 2.4, 0, 24, P, 14), { tone: "mid", crease: "none" })) +
+  paint(v, S(G.sphereOf([0, 0, 38], 15, P, { steps: 16 }), { tone: "mid" }) + S(G.sphereOf([8, 6, 30], 9, P, { steps: 16 }), { tone: "mid" })) + "</g>").join("");
+function treeDT(x, y, sc = 1){
+  const n = treeD++ % 3, [ax, ay] = at([x, y, 0]), [ox, oy] = at([0, 0, 0]);
+  addDT([x, y, 0], `<use href="#rtT${n}" transform="translate(${(ax - sc * ox).toFixed(2)} ${(ay - sc * oy).toFixed(2)}) scale(${sc})"/>`);
+}
+/* a back lane parallel to the walk, and the cricket ground behind it */
+ground.push(DT(`<path class="rt-walk" d="${pd([[-1600, -440, 0], [1600, -440, 0], [1600, -418, 0], [-1600, -418, 0]])}"/>` +
+  paint("kerb", S(k.slabOf({ x: -1600, y: -444, w: 3200, d: 4, r: 0 }, 0, 2, P, 2), { tone: "lo", crease: "none" })) +
+  paint("kerb", S(k.slabOf({ x: -1600, y: -418, w: 3200, d: 4, r: 0 }, 0, 2, P, 2), { tone: "lo", crease: "none" }))));
+const OVAL = { x: -470, y: -800, w: 380, d: 230, r: 110 };
+ground.push(DT(paint("field", S(k.slabOf(OVAL, 0, 0.8, P, 16), { tone: "lo", crease: "none" })) +
+  `<path class="rt-track-line" d="${pd(k.ringOf(k.insetPlan(OVAL, 12), 16).map(([x, y]) => [x, y, 0.9]))}"/>` +
+  paint("stone", S(k.slabOf({ x: -296, y: -700, w: 32, d: 14, r: 1 }, 0.8, 0.5, P, 2), { tone: "lo", crease: "none" }))));
+/* a pond on the front lawn */
+const POND = { x: 20, y: 250, w: 200, d: 110, r: 52 };
+ground.push(DT(paint("stone", S(k.slabOf(POND, 0, 1.6, P, 14), { tone: "lo", crease: "none" })) +
+  paint("water", S(k.slabOf(k.insetPlan(POND, 5), 1.6, 0.3, P, 14), { tone: "faint", crease: "none" }))));
+/* behind the campus: two hostel blocks and the mess, across the back lane */
+for (const [hx, hy] of [[110, -560], [310, -585]]) {
+  const H = { x: hx, y: hy, w: 150, d: 70, r: 1 };
+  addDT([hx + 75, hy + 35, 0], paint("cream", S(k.slabOf(H, 0, 66, P, 2, 0.6), { tone: "mid", inner: windows(H, [12, 26, 40, 54], 14, 7, 7, "rt-win-warm") })) +
+    paint("brick", S(k.slabOf(k.insetPlan(H, -1.5), 66, 4, P, 2, 0.4), { tone: "mid" })));
+}
+const MESS = { x: 530, y: -545, w: 130, d: 84, r: 2 };
+addDT([MESS.x + 65, MESS.y + 42, 0], paint("brick", S(k.slabOf(MESS, 0, 32, P, 2, 0.6), { tone: "mid", inner: windows(MESS, [12], 16, 10, 12, "rt-win-warm") })) +
+  paint("roof", S(k.slabOf(k.insetPlan(MESS, -4), 32, 6, P, 2, 0.6), { tone: "mid" })));
+/* past the gate: a sports hall and a water tower */
+const HALL = { x: 600, y: -330, w: 160, d: 110, r: 2 };
+addDT([HALL.x + 80, HALL.y + 55, 0], paint("glass", S(k.slabOf(HALL, 0, 44, P, 2, 0.6), { tone: "mid", inner: windows(HALL, [12, 26], 15, 9, 9) })) +
+  paint("roof", S(k.slabOf(k.insetPlan(HALL, -3), 44, 7, P, 2, 0.6), { tone: "mid" })));
+const WT = [860, -150];
+addDT([WT[0], WT[1], 0], paint("stone", S(k.cylinder(WT[0], WT[1], 5, 0, 96, P, 16), { tone: "mid", crease: "none" }) + S(k.cylinder(WT[0], WT[1], 22, 96, 26, P, 32, 0.6), { tone: "mid" })) +
+  paint("roof", S(G.sphereOf([WT[0], WT[1], 122], 12, P, { steps: 18 }), { tone: "mid" })));
+/* lamps where the walk leaves the picture, at both ends */
+for (const x of [-520, -660, -800, 560, 690, 820]) { const [sx, sy] = at([x, 32, 0]), P0 = { ...P, origin: [0, 0], scale: P.scale * 0.7 }; addDT([x, 32, 0], `<g transform="translate(${sx.toFixed(1)} ${sy.toFixed(1)})">${O.lamp.draw(P0)}</g>`); }
+/* trees: along the back lane, round the cricket ground, past the gate, on the front lawn */
+for (const x of [-860, -740, -620, -500, -380, -260, -140, -20, 520, 640, 760, 880]) treeDT(x, -380, 0.75);
+for (const x of [-860, -740, -40, 60]) treeDT(x, -480, 0.8);
+for (const [x, y, s2] of [[-560, -660, .85], [-20, -650, .8], [-200, -860, .9], [-420, -880, .8], [40, -820, .75], [160, -700, .85], [300, -720, .8], [460, -690, .75],
+  [100, -960, .8], [260, -900, .85], [420, -1000, .8], [600, -880, .8], [700, -470, .75], [840, -420, .8], [960, -300, .7], [590, -110, .75], [700, -160, .8], [980, -60, .7],
+  [600, 80, .8], [740, 60, .75], [300, 320, .85], [420, 250, .8], [-200, 330, .8], [-10, 400, .75], [250, 420, .8]]) treeDT(x, y, s2);
+
 /* ---- the student (the lit part): drawn at x = 0 on the walk; the page moves it station to station ---- */
 /* the student: a small person walking up the route (+x), so the backpack faces the viewer. Legs and arms are limbs hinged at the
    hip and shoulder; eight walk poses (legs scissor, arms swing the other way, the body dips at full stride) and a standing pose.
@@ -169,7 +222,7 @@ const u0 = at([0, 0, 0]), u1 = at([1, 0, 0]);
 const compact = (svg) => svg.replace(/ d="([^"]*)"/g, (m, d) => ' d="' + d.replace(/-?\d+\.\d{2,}/g, (n) => (+n).toFixed(1)) + '"');
 const FOCUS = +(process.argv[2] ?? 1);   /* the station the static render shows: 1 = NSAT */
 const sx = SX[FOCUS], sp = [u0[0] + (u1[0] - u0[0]) * sx, u0[1] + (u1[1] - u0[1]) * sx];
-const svg = compact(`<svg class="rt-svg iso-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g class="rt-ground">${ground.join("")}</g>${back}<g id="rtStu" class="rt-stu" transform="translate(${(sp[0] - u0[0]).toFixed(1)} ${(sp[1] - u0[1]).toFixed(1)})">${STU}</g>${front}</svg>`)
+const svg = compact(`<svg class="rt-svg iso-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>${TREE_DEFS}</defs><g class="rt-ground">${ground.join("")}</g>${back}<g id="rtStu" class="rt-stu" transform="translate(${(sp[0] - u0[0]).toFixed(1)} ${(sp[1] - u0[1]).toFixed(1)})">${STU}</g>${front}</svg>`)
   .replace(`class="rt-flag" data-i="${FOCUS}"`, `class="rt-flag on" data-i="${FOCUS}"`);
 writeFileSync(new URL("./route.svg", import.meta.url), svg);
 writeFileSync(new URL("./route.json", import.meta.url), JSON.stringify({ poses: POSES, stride: 26, stations: SX, unit: [+(u1[0] - u0[0]).toFixed(4), +(u1[1] - u0[1]).toFixed(4)], W, H }));

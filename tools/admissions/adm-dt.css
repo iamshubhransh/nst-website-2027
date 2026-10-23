@@ -1,0 +1,244 @@
+/* ================= admissions · desktop (23 Oct 2026). The placements desktop system: the 1200 column (--wrap / --side), 120 px
+   section rhythm, 28/40 heads with the 2 px bar, 48 px from a head to its content, 24 px gaps. The phone is untouched: every rule
+   below sits in the min-width:1024px layer, except the one that keeps a desktop-only node hidden on the phone ======= */
+.adm-subj{display:none}   /* .adm-crit's flex (adm.css) would otherwise beat .dt-only's display:none on the phone */
+
+@media (min-width:1024px){
+  /* ---- 01 hero: the placements hero (copy in the left 600, the title 40/48), with the route figure as a full-bleed scene. The
+          figure keeps its phone drawing (same projection, so the walk script and its stations are unchanged), drawn at --u px per
+          unit and anchored so the walk starts just right of the copy and climbs to the campus at the column's right end; the
+          desktop-only campus around it (.rt-dt) fills the rest of the hero to every edge, under the nav. A white veil holds the
+          copy; the scene fades out at the foot into the summary strip ---- */
+  .adm-hero{--u:clamp(.6px,.052vw,.82px);min-height:760px;padding:120px var(--side) 72px}
+  .adm-wall{left:0;right:0;top:0;bottom:0;width:auto;height:auto;-webkit-mask-image:none;mask-image:none}
+  .adm-wall .rt-svg{left:calc(var(--side) + 692px - 146 * var(--u));top:calc(100% - 104px - 652 * var(--u));width:calc(760 * var(--u));height:calc(794 * var(--u));overflow:visible}
+  .adm-wall::before{top:0;bottom:0;right:auto;width:calc(var(--side) + 700px);height:auto;
+    background:linear-gradient(90deg,rgba(255,255,255,.95) 0,rgba(255,255,255,.92) calc(100% - 210px),rgba(255,255,255,.55) calc(100% - 90px),rgba(255,255,255,0) 100%)}
+  .adm-wall::after{top:0;bottom:0;height:auto;background:linear-gradient(180deg,#fff 0,rgba(255,255,255,.7) 56px,rgba(255,255,255,0) 128px),linear-gradient(0deg,#fff 0,rgba(255,255,255,.88) 44px,rgba(255,255,255,0) 168px)}
+  .adm-hero .pl-lede{max-width:480px}
+
+  /* the six steps over the figure: a pill on each station's flag (adm.js measures the flags); the lit one follows the student */
+  .adm-stns{position:absolute;inset:0;z-index:3;pointer-events:none}
+  .adm-stn{position:absolute;left:0;top:0;display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px 0 5px;border-radius:999px;background:rgba(255,255,255,.94);
+    box-shadow:0 0 0 1px rgba(22,25,29,.08),0 8px 18px -10px rgba(22,25,29,.35);font-size:13px;line-height:16px;font-weight:600;color:#16191D;white-space:nowrap;
+    transform:translate(var(--x,0),var(--y,0)) translate(-50%,-100%);opacity:0;transition:opacity .35s ease,box-shadow .35s ease,color .35s ease}
+  .adm-stn i{flex:none;width:20px;height:20px;border-radius:50%;background:var(--c);font-style:normal;font-size:11px;line-height:20px;font-weight:700;text-align:center;color:#fff}
+  .adm-stns.is-set .adm-stn{opacity:.82;color:#5B6271}
+  .adm-stns.is-set .adm-stn.is-on{opacity:1;color:#16191D;box-shadow:0 0 0 1.5px var(--c),0 12px 24px -12px rgba(22,25,29,.45)}
+
+  /* the next-NSAT ticket lies down: the date on the left, an upright perforation, the stub with the CTA on the right */
+  .adm-tkw{align-self:flex-start;width:560px;max-width:100%;margin-top:32px}
+  .adm-ticket{display:flex;align-items:stretch;margin-top:0;border-radius:18px}
+  .adm-tk-top{flex:1 1 auto;min-width:0;padding:24px 28px 24px}
+  .adm-tk-k{height:26px;padding:0 11px;font-size:11.5px}
+  .adm-tk-date{margin-top:14px;font-size:30px;line-height:36px;white-space:nowrap}
+  .adm-tk-dl{margin-top:8px;font-size:15px;line-height:22px}
+  .adm-tk-cut{flex:none;width:0;height:auto;margin:14px 0;border-top:0;border-left:1px dashed #D5DAE1}
+  .adm-tk-cut i{display:none}
+  .adm-tk-bot{flex:none;width:236px;display:flex;flex-direction:column;justify-content:center;padding:20px 22px}
+  .adm-ticket .pl-cta.btn{width:100%;height:52px;margin:0;font-size:16px}
+  .adm-tk-proof{margin-top:12px;font-size:13px;line-height:18px}
+  .adm-ticket.has-vcut{--ch:radial-gradient(circle at var(--cutx) .5px,transparent 9.5px,#000 10px),radial-gradient(circle at var(--cutx) calc(100% - .5px),transparent 9.5px,#000 10px);
+    -webkit-mask:var(--ch);-webkit-mask-composite:source-in;mask:var(--ch);mask-composite:intersect}
+  .adm-ticket.has-vcut::before,.adm-ticket.has-vcut::after{content:"";position:absolute;z-index:1;left:calc(var(--cutx) - 10.5px);width:21px;height:21px;box-sizing:border-box;border:1px solid #E1E5EA;border-radius:50%;pointer-events:none}
+  .adm-ticket.has-vcut::before{top:-11px}
+  .adm-ticket.has-vcut::after{bottom:-11px}
+  /* the lift: two shadows, one under each half, so neither notch shows a shadow through its hole */
+  .adm-tkw.is-v::before{top:30%;left:10px;right:calc(100% - var(--cutx) + 16px)}
+  .adm-tkw.is-v::after{content:"";position:absolute;top:30%;bottom:0;left:calc(var(--cutx) + 16px);right:10px;border-radius:16px;box-shadow:0 16px 26px -14px rgba(22,25,29,.32)}
+
+  /* ---- section heads: the placements rhythm ---- */
+  .bk.adm-routes,.bk.adm-nsat,.bk.adm-steps,.bk.adm-sch,.bk.adm-loans,.bk.adm-camp{padding:120px var(--side);column-gap:24px;row-gap:48px;align-items:start}
+
+  /* ---- 02 three ways in: the chooser on the head's row, the three routes side by side, all open; picking lights one ---- */
+  .bk.adm-routes{grid-template-columns:minmax(0,1fr) auto;align-items:end}
+  .bk.adm-routes>.bk-head{grid-column:1;grid-row:1}
+  .bk.adm-routes>.adm-pick{grid-column:2;grid-row:1;margin:0;padding:4px;gap:4px;border-radius:14px;background:#F6F7F9;overflow:visible}
+  .adm-pick button{height:40px;padding:0 18px;border-radius:10px;background:transparent;font-size:14px;line-height:20px}
+  .adm-pick button:not(.is-on):hover{color:#16191D}
+  .adm-pick button.is-on{background:#16191D;color:#fff}
+  .bk.adm-routes>.adm-rcards{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:stretch}
+  .adm-rc{display:flex;flex-direction:column;padding:28px;border-radius:20px;cursor:pointer}
+  .adm-rc.is-on{padding:27.5px}
+  .adm-rc:not(.is-on):hover{border-color:#C9D0D9}
+  .adm-rc:not(.is-on):active{background:#fff}
+  .adm-rc-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;row-gap:20px;align-items:start}
+  .adm-rc-ic{grid-column:1;grid-row:1;width:56px;height:56px;border-radius:16px}
+  .adm-rc-ic svg{width:28px;height:28px}
+  .adm-rc-n{grid-column:3;grid-row:1;font-size:14px;line-height:18px}
+  .adm-rc-tt{grid-column:1/-1;grid-row:2;gap:8px}
+  .adm-tag{height:22px;padding:0 9px;font-size:11px}
+  .adm-rc h3{font-size:22px;line-height:30px}
+  .adm-rc>p{margin-top:8px;font-size:16px;line-height:24px}
+  .adm-rc:not(.is-on) .adm-rc-more,.adm-rc-more{display:flex;flex:1 1 auto;flex-direction:column;align-items:flex-start}
+  .adm-rc-more>a,.adm-rc-cta{margin-top:auto;padding-top:24px}
+  .adm-rc a{font-size:15px;line-height:22px}
+  .adm-rc a:hover{text-decoration:underline}
+  .adm-rc-cta{align-self:stretch}
+  .adm-rc-cta a{padding-top:0}
+  .adm-crit{gap:8px;margin-top:20px}
+  .adm-crit span{height:32px;font-size:13px}
+  .adm-subj{display:flex}
+  .adm-subj span{gap:8px;padding:0 12px}
+  .adm-subj i{width:8px;height:8px;background:var(--d)}
+  .adm-code{align-self:stretch;margin-top:20px}
+  .adm-code-bar{height:32px;padding:0 12px}
+  .adm-code pre{padding:12px 14px 14px;font-size:13px;line-height:21px}
+
+  /* ---- 03 NSAT: the sample question large on the left; the subjects as a list on the right (the phone's tabs), the kits under them ---- */
+  .bk.adm-nsat{grid-template-columns:minmax(0,1fr) 400px;row-gap:0}
+  .bk.adm-nsat>.bk-head{grid-row:1;margin-bottom:48px}
+  .bk.adm-nsat>.adm-q{display:contents}
+  .bk.adm-nsat .adm-qcard{grid-column:1;grid-row:2/4;align-self:stretch;display:flex;flex-direction:column;padding:32px;border-radius:20px}
+  .bk.adm-nsat .adm-qtabs{grid-column:2;grid-row:2;flex-direction:column;gap:2px;margin:0;padding:8px;overflow:visible;border:1px solid #23282F;border-radius:20px;background:#0B0C0E}
+  .adm-qtabs button{height:54px;padding:0 16px;gap:12px;border:0;border-radius:12px;font-size:15px;line-height:20px;color:rgba(255,255,255,.6)}
+  .adm-qtabs button::before{width:8px;height:8px}
+  .adm-qtabs button::after{content:"";width:16px;height:16px;margin-left:auto;opacity:.35;transition:opacity .2s ease,transform .2s ease;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 3.5L10.5 8 6 12.5' fill='none' stroke='%23fff' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+  .adm-qtabs button:hover{background:rgba(255,255,255,.03);color:#fff}
+  .adm-qtabs button.is-on{background:rgba(255,255,255,.06);box-shadow:inset 0 0 0 1px var(--c);color:#fff}
+  .adm-qtabs button.is-on::after{opacity:.8}
+  .adm-qk{font-size:12px;line-height:16px;letter-spacing:1.2px}
+  .adm-qk em{font-size:13px}
+  .adm-qtext{margin-top:16px;max-width:640px;font-size:24px;line-height:34px}
+  .adm-qopts{gap:12px;margin:28px 0 32px}
+  .adm-qopts button{min-height:60px;padding:10px 16px;gap:14px;border-radius:14px;font-size:16px;line-height:22px}
+  .adm-qopts:not(.is-done) button:hover{border-color:#4A525E;background:#1C2025}
+  .adm-qopts button i{width:28px;height:28px;border-radius:8px;font-size:12px;line-height:28px}
+  .adm-qprep{margin-top:auto;padding:16px 18px 16px 20px;gap:16px;border-radius:14px}
+  .adm-qprep b{font-size:17px;line-height:24px}
+  .adm-qprep em{font-size:14px;line-height:20px}
+  .adm-qprep:hover .adm-go,.adm-kit:hover .adm-go{transform:translateX(3px)}
+  .adm-go{transition:transform .2s ease}
+  .bk.adm-nsat>.adm-kits{grid-column:2;grid-row:3;margin-top:16px;gap:12px}
+  .adm-kit{padding:18px 20px 18px 18px;gap:16px;border-radius:16px;transition:border-color .2s ease}
+  .adm-kit:hover{border-color:#30363D}
+  .adm-kit-ic{width:48px;height:48px;border-radius:13px}
+  .adm-kit-ic svg{width:22px;height:22px}
+  .adm-kit b{font-size:16px;line-height:22px}
+  .adm-kit em{font-size:14px;line-height:20px}
+
+  /* ---- 04 six steps: the phone's timeline lies down, left to right like the walk in the hero; the CTA joins the head's row.
+          The spine draws and the steps land in turn when the row reaches the middle of the screen (adm.js) ---- */
+  .bk.adm-steps{grid-template-columns:minmax(0,1fr) auto;row-gap:56px;align-items:end}
+  .bk.adm-steps>.bk-head{grid-column:1;grid-row:1}
+  .bk.adm-steps>.adm-cta.btn{grid-column:2;grid-row:1;width:auto;height:52px;margin:0;padding:0 28px;font-size:16px}
+  .bk.adm-steps>.adm-tl{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));column-gap:24px;align-items:start}
+  .adm-tl li{display:flex;flex-direction:column;padding:0}
+  .adm-tl-ic{width:56px;height:56px;border-radius:16px;transition:transform .25s cubic-bezier(.22,1,.36,1)}
+  .adm-tl-ic svg{width:26px;height:26px}
+  .adm-tl li:hover .adm-tl-ic{transform:translateY(-3px)}
+  .adm-tl-line{left:72px;right:-8px;top:27px;bottom:auto;width:auto;height:0;border-left:0;border-top:2px dashed #E1E5EA}
+  .adm-tl li>div{margin-top:20px}
+  .adm-tl-n{font-size:12px;line-height:16px}
+  .adm-tl h3{margin-top:6px;font-size:18px;line-height:26px}
+  .adm-tl p{margin-top:6px;font-size:15px;line-height:24px}
+  .adm-note{margin-top:12px;padding:10px 12px;font-size:13px;line-height:19px}
+  .adm-steps.is-armed .adm-tl li{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+  .adm-steps.is-armed .adm-tl-line{clip-path:inset(-2px 100% -2px 0);transition:clip-path .55s cubic-bezier(.65,0,.35,1)}   /* a clip, not a scale: scaling would squash the dashes */
+  .adm-steps.is-drawn .adm-tl li{opacity:1;transform:none}
+  .adm-steps.is-drawn .adm-tl-line{clip-path:inset(-2px 0 -2px 0)}
+  .adm-steps.is-drawn .adm-tl li:nth-child(2){transition-delay:.14s}.adm-steps.is-drawn .adm-tl li:nth-child(3){transition-delay:.28s}
+  .adm-steps.is-drawn .adm-tl li:nth-child(4){transition-delay:.42s}.adm-steps.is-drawn .adm-tl li:nth-child(5){transition-delay:.56s}
+  .adm-steps.is-drawn .adm-tl li:nth-child(6){transition-delay:.7s}
+  .adm-steps.is-drawn .adm-tl li:nth-child(1) .adm-tl-line{transition-delay:.2s}.adm-steps.is-drawn .adm-tl li:nth-child(2) .adm-tl-line{transition-delay:.34s}
+  .adm-steps.is-drawn .adm-tl li:nth-child(3) .adm-tl-line{transition-delay:.48s}.adm-steps.is-drawn .adm-tl li:nth-child(4) .adm-tl-line{transition-delay:.62s}
+  .adm-steps.is-drawn .adm-tl li:nth-child(5) .adm-tl-line{transition-delay:.76s}
+
+  /* ---- 05 apply early: a dark band; the head holds the left, the three reasons stand in a row ---- */
+  .bk.adm-early{padding:96px var(--side);grid-template-columns:360px minmax(0,1fr);column-gap:48px;row-gap:0;align-items:center}
+  .bk.adm-early>.bk-head{grid-column:1;grid-row:1}
+  .adm-early .bk-title>span{display:block}
+  .bk.adm-early>.adm-early-list{grid-column:2;grid-row:1;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+  .adm-early-list p{flex-direction:column;align-items:flex-start;gap:24px;padding:24px;border-radius:16px}
+  .adm-early-list i{width:44px;height:44px;border-radius:12px}
+  .adm-early-list i svg{width:20px;height:20px}
+  .adm-early-list span{gap:4px}
+  .adm-early-list b{font-size:17px;line-height:24px}
+  .adm-early-list em{font-size:14px;line-height:20px}
+
+  /* ---- 06 scholarships: JEE Excellence on the left, the other three stacked on the right, the two columns the same height ---- */
+  .bk.adm-sch{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}
+  .bk.adm-sch>.bk-head{grid-column:1/-1;grid-row:1}
+  .bk.adm-sch>.adm-jes{grid-column:1;grid-row:2;padding:32px;border-radius:20px}
+  .adm-jes-k{height:28px;padding:0 12px;font-size:12px}
+  .adm-jes-big{gap:16px;margin-top:20px}
+  .adm-jes-big b{font-size:80px;line-height:84px;letter-spacing:-3px}
+  .adm-jes-big span{max-width:200px;padding-bottom:12px;font-size:18px;line-height:24px}
+  .adm-jes-for{margin-top:12px;font-size:16px;line-height:24px}
+  .adm-jes-cov{margin-top:24px;padding:4px 18px;border-radius:14px}
+  .adm-jes-cov li{height:48px;gap:12px;font-size:15px;line-height:22px}
+  .adm-jes-cov li::before{width:20px;height:20px;background-size:15px}
+  .adm-jes-note{margin-top:16px;font-size:13px;line-height:20px}
+  .bk.adm-sch>.adm-schs{grid-column:2;grid-row:2;display:grid;grid-template-rows:repeat(3,minmax(0,1fr));gap:16px}
+  .adm-s{align-items:center;gap:24px;padding:24px 28px;border-radius:20px}
+  .adm-s-v{width:104px}
+  .adm-s-v span{font-size:12px;line-height:16px}
+  .adm-s-v b{font-size:36px;line-height:44px;letter-spacing:-1px}
+  .adm-s h3{font-size:18px;line-height:26px}
+  .adm-s p{margin-top:6px;font-size:15px;line-height:24px}
+
+  /* ---- 07 loans: the eight lenders in one row; the picked lender's terms as one wide card, the four terms side by side ---- */
+  .bk.adm-loans{grid-template-columns:minmax(0,1fr);row-gap:24px}
+  .bk.adm-loans>.bk-head{margin-bottom:24px}
+  .adm-lgrid{grid-template-columns:repeat(8,minmax(0,1fr));gap:12px}
+  .adm-lt{height:76px;border-radius:14px}
+  .adm-lt img{zoom:1.15}
+  .adm-lt:not(.is-on):hover{border-color:#C9D0D9}
+  .adm-lcard{padding:0;border-radius:20px;overflow:hidden}
+  .adm-lc-head{padding:20px 28px;border-bottom:1px solid #EDEFF3}
+  .adm-lc-head b{font-size:20px;line-height:28px}
+  .adm-lc-head span{font-size:13px;line-height:18px}
+  .adm-lseg{padding:4px;border-radius:12px}
+  .adm-lseg button{height:36px;padding:0 16px;font-size:14px}
+  .adm-lrows{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:0}
+  .adm-lr{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:8px;padding:24px 28px 28px;border-top:0}
+  .adm-lr+.adm-lr{border-left:1px solid #EDEFF3}
+  .adm-lr dt{font-size:14px;line-height:20px}
+  .adm-lr dd{text-align:left;font-size:18px;line-height:26px}
+  .adm-lr-big dd{font-size:26px;line-height:34px}
+  .adm-loan-note{margin:0;font-size:13px;line-height:20px}
+
+  /* ---- 08 campuses: the four side by side (no swipe, so no dots) ---- */
+  .adm-camps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin:0;padding:0;overflow:visible;scroll-snap-type:none}
+  .adm-cc{width:auto;border-radius:20px;transition:transform .3s cubic-bezier(.22,1,.36,1),border-color .3s ease}
+  .adm-cc:hover{transform:translateY(-4px);border-color:#30363D}
+  .adm-cc img{height:220px}
+  .adm-cc div{padding:18px 20px 20px}
+  .adm-cc b{font-size:17px;line-height:24px}
+  .adm-cc span{margin-top:4px;font-size:14px;line-height:20px}
+  .adm-dots{display:none}
+}
+
+@media (min-width:1024px) and (max-width:1279px){
+  .adm-wall .rt-svg{left:calc(var(--side) + 534px - 146 * var(--u))}
+  .adm-wall::before{width:calc(var(--side) + 580px)}
+  .adm-hero .pl-lede{max-width:420px}
+  .adm-tkw{width:100%}
+  .adm-tk-top{padding:20px 18px}
+  .adm-tk-date{font-size:24px;line-height:30px}
+  .adm-tk-dl{font-size:13px;line-height:20px;white-space:nowrap}
+  .adm-tk-bot{width:188px;padding:18px 16px}
+  .adm-ticket .pl-cta.btn{height:48px;font-size:14px;gap:4px}
+  .adm-tk-proof{font-size:12px;line-height:16px}
+  .adm-rc{padding:22px}
+  .adm-rc.is-on{padding:21.5px}
+  .adm-rc h3{font-size:20px;line-height:28px}
+  .adm-code pre{font-size:10.5px;line-height:19px;padding:10px 10px 12px}
+  .bk.adm-nsat{grid-template-columns:minmax(0,1fr) 340px}
+  .adm-qtext{font-size:22px;line-height:32px}
+  .bk.adm-steps>.adm-tl{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:40px}
+  .adm-tl li:nth-child(3) .adm-tl-line{display:none}
+  .bk.adm-early{grid-template-columns:minmax(0,1fr);row-gap:40px}
+  .bk.adm-early>.adm-early-list{grid-column:1;grid-row:2}
+  .adm-early .bk-title>span{display:inline}
+  .adm-jes-big b{font-size:64px;line-height:68px}
+  .adm-s{gap:16px;padding:20px}
+  .adm-s-v{width:88px}
+  .adm-s-v b{font-size:30px;line-height:36px}
+  .adm-lt{height:64px}
+  .adm-lt img{zoom:1}
+  .adm-lr{padding:20px 20px 24px}
+  .adm-lr-big dd{font-size:21px;line-height:28px}
+  .adm-cc img{height:170px}
+}

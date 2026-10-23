@@ -2,7 +2,7 @@
 import { chromium } from '/Users/shubhanshbhaskar/.npm/_npx/e41f203b7505f1fb/node_modules/playwright/index.mjs';
 const b = await chromium.launch();
 const res = []; const ok = (n, c, x) => res.push((c ? 'PASS ' : 'FAIL ') + n + (c ? '' : '  → ' + JSON.stringify(x)));
-for (const [page, w] of [['index.html', 1440], ['placements.html', 1440], ['index.html', 1024], ['placements.html', 1920]]) {
+for (const [page, w] of [['index.html', 1440], ['placements.html', 1440], ['index.html', 1024], ['placements.html', 1920], ['admissions.html', 1440], ['admissions.html', 1024]]) {
   const p = await b.newPage({ viewport: { width: w, height: 900 } });
   const errs = []; p.on('pageerror', e => errs.push(e.message));
   const ev = (f, a) => p.evaluate(f, a); const T = s => `${page} @${w}: ${s}`;
@@ -25,6 +25,6 @@ for (const [page, w] of [['index.html', 1440], ['placements.html', 1440], ['inde
   await p.close();
 }
 const m = await b.newPage({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
-for (const page of ['index.html', 'placements.html']) { await m.goto('http://localhost:8765/' + page); await m.waitForTimeout(300); ok(page + ' phone: no section bar', await m.evaluate(() => getComputedStyle(document.getElementById('snav')).display === 'none')); }
+for (const page of ['index.html', 'placements.html', 'admissions.html']) { await m.goto('http://localhost:8765/' + page); await m.waitForTimeout(300); ok(page + ' phone: no section bar', await m.evaluate(() => getComputedStyle(document.getElementById('snav')).display === 'none')); }
 await b.close();
 console.log(res.join('\n')); console.log(res.some(r => r.startsWith('FAIL')) ? 'SOME FAIL' : 'ALL PASS');

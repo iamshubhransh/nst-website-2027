@@ -47,7 +47,7 @@ ok('tapping a card opens it and switches the chip', await ev(() => document.quer
 await ev(() => document.querySelector('.adm-rc[data-r="0"]').focus()); await p.keyboard.press('Enter'); await p.waitForTimeout(300);
 ok('a card is reachable by keyboard (Enter selects it)', await ev(() => document.querySelector('.adm-rc[data-r="0"]').classList.contains('is-on') && document.querySelector('.adm-pick button[data-r="0"]').classList.contains('is-on')));
 
-ok('route cards: minimal — object, one-line text; shortlisting shows four criteria and its closing date', await ev(() => document.querySelectorAll('.adm-rc .adm-rc-ic svg').length === 3 && document.querySelectorAll('.adm-crit span').length === 4 && /Closes 6 Jan/.test(document.querySelector('.adm-rc[data-r="2"]').textContent) && [...document.querySelectorAll('.adm-rc > p')].every(p => p.getBoundingClientRect().height <= 23)));
+ok('route cards: minimal — object, one-line text; shortlisting shows four criteria and its closing date; the desktop subject chips stay hidden', await ev(() => document.querySelectorAll('.adm-rc .adm-rc-ic svg').length === 3 && document.querySelectorAll('.adm-rc[data-r="2"] .adm-crit span').length === 4 && getComputedStyle(document.querySelector('.adm-subj')).display === 'none' && /Closes 6 Jan/.test(document.querySelector('.adm-rc[data-r="2"]').textContent) && [...document.querySelectorAll('.adm-rc > p')].every(p => p.getBoundingClientRect().height <= 23)));
 // NSAT paper, timeline, scholarships, loans
 await ev(() => document.getElementById('nsat').scrollIntoView({ block: 'center' })); await p.waitForTimeout(200);
 ok('NSAT: four subject tabs, a sample question with four options, the prep kit under it', await ev(() => document.querySelectorAll('.adm-qtabs button').length === 4 && document.querySelectorAll('#admQo button').length === 4 && !!document.querySelector('#admQ .adm-qprep') && document.querySelectorAll('.adm-kit').length === 2));
@@ -101,7 +101,7 @@ for (const [w, h] of [[375, 548], [360, 560], [390, 664], [412, 780]]) {
 const d = await b.newPage({ viewport: { width: 1440, height: 900 } });
 d.on('pageerror', e => errs.push('dt: ' + e.message));
 await d.goto('http://localhost:8765/admissions.html'); await d.waitForTimeout(500);
-ok('desktop: the 402 px phone column, no overflow', await d.evaluate(() => { const r = document.getElementById('page').getBoundingClientRect(); return r.width <= 402 && document.documentElement.scrollWidth <= innerWidth; }), await d.evaluate(() => document.getElementById('page').getBoundingClientRect().width));
+ok('desktop: its own layout now (23 Oct; tools/admissions/e2e-dt.mjs tests it), full width, no overflow', await d.evaluate(() => { const r = document.getElementById('page').getBoundingClientRect(); return r.width === innerWidth && document.documentElement.scrollWidth <= innerWidth; }), await d.evaluate(() => document.getElementById('page').getBoundingClientRect().width));
 ok('no page errors, no 4xx', errs.length === 0 && bad.length === 0, [errs, bad]);
 await b.close();
 console.log(res.join('\n')); console.log(res.some(r => r.startsWith('FAIL')) ? 'SOME FAIL' : 'ALL PASS');

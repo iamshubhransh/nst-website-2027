@@ -20,10 +20,13 @@
 .m-plinth4{--anatomy-paper:#fce4ec;--anatomy-face:#fce4ec;--anatomy-shade-0:#d8b7c2;--anatomy-shade-1:#ecc8d4;--anatomy-shade-2:#FBD5E1;--anatomy-shade-3:#fcdde7;--anatomy-top:#fdeaf0;--anatomy-lo:#ab9199;--anatomy-mid:#ab9199;--anatomy-faint:#ceafb9}
 .m-grass{--anatomy-paper:#f4f9f1;--anatomy-face:#f4f9f1;--anatomy-shade-0:#cdd4c9;--anatomy-shade-1:#e0e7dc;--anatomy-shade-2:#EEF6EA;--anatomy-shade-3:#f1f8ee;--anatomy-top:#f7fbf5;--anatomy-lo:#a2a79f;--anatomy-mid:#a2a79f;--anatomy-faint:#c3cac0}
 .m-kerb{--anatomy-paper:#e9edf1;--anatomy-face:#e9edf1;--anatomy-shade-0:#bec3c9;--anatomy-shade-1:#d0d5dc;--anatomy-shade-2:#DDE3EA;--anatomy-shade-3:#e4e9ee;--anatomy-top:#eef1f5;--anatomy-lo:#969a9f;--anatomy-mid:#969a9f;--anatomy-faint:#b5bac0}
+.m-water{--anatomy-paper:#c7e4f7;--anatomy-face:#c7e4f7;--anatomy-shade-0:#91b8d0;--anatomy-shade-1:#9fc9e3;--anatomy-shade-2:#A9D6F2;--anatomy-shade-3:#badef5;--anatomy-top:#d4ebf9;--anatomy-lo:#7392a5;--anatomy-mid:#7392a5;--anatomy-faint:#8bafc6}
 .rt-flag[data-i="0"]{fill:#0673F9;opacity:.38;transition:opacity .3s ease}
 .rt-flag[data-i="1"]{fill:#16A34A;opacity:.38;transition:opacity .3s ease}
 .rt-flag[data-i="2"]{fill:#7B55EE;opacity:.38;transition:opacity .3s ease}
 .rt-flag[data-i="3"]{fill:#F59700;opacity:.38;transition:opacity .3s ease}
 .rt-flag[data-i="4"]{fill:#E0457B;opacity:.38;transition:opacity .3s ease}
 .rt-flag.on{opacity:1}
+.rt-dt{display:none}
+@media (min-width:1024px){.rt-dt{display:inline}}
 .rt-pennant{fill:#0673F9;stroke:none}.rt-walk{fill:#E8EDF4}.rt-track-line{stroke:#fff;stroke-width:1.6;fill:none}.rt-win{fill:#CFE3FB;stroke:none}.rt-win-warm{fill:#FFE7B8;stroke:none}
