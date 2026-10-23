@@ -49,6 +49,7 @@ await p.waitForFunction(() => document.querySelector('.adm-stn.is-on')?.dataset.
 const tk = await ev(() => { const t = document.querySelector('.adm-ticket'), r = s => t.querySelector(s).getBoundingClientRect(), c = r('.adm-tk-cut');
   return {v: t.classList.contains('has-vcut'), wv: t.parentNode.classList.contains('is-v'), cutH: c.height, cutW: c.width, dateR: r('.adm-tk-date').right, stubL: r('.adm-tk-bot').left, cta: [r('.pl-cta').left >= r('.adm-tk-bot').left, r('.pl-cta').bottom], tops: Math.abs(r('.adm-tk-top').top - r('.adm-tk-bot').top), dlH: r('.adm-tk-dl').height}; });
 ok('ticket: date left, upright perforation, CTA in the stub', tk.v && tk.wv && tk.cutH > 80 && tk.cutW <= 1 && tk.dateR < tk.stubL && tk.cta[0] && tk.tops < 1 && tk.dlH <= 22, tk);
+ok('ticket: no drop shadow on desktop (his ask, 23 Oct)', await ev(() => { const w = document.querySelector('.adm-tkw'), t = document.querySelector('.adm-ticket'); return getComputedStyle(w, '::before').display === 'none' && getComputedStyle(w, '::after').display === 'none' && getComputedStyle(t).boxShadow === 'none'; }));
 
 // ---- section bar
 await ev(() => scrollTo(0, 0)); await p.waitForTimeout(300);

@@ -3966,9 +3966,7 @@ html.fest-v-dome .fest-cap{display:flex;flex-direction:column;align-items:center
   .adm-ticket.has-vcut::before,.adm-ticket.has-vcut::after{content:"";position:absolute;z-index:1;left:calc(var(--cutx) - 10.5px);width:21px;height:21px;box-sizing:border-box;border:1px solid #E1E5EA;border-radius:50%;pointer-events:none}
   .adm-ticket.has-vcut::before{top:-11px}
   .adm-ticket.has-vcut::after{bottom:-11px}
-  /* the lift: two shadows, one under each half, so neither notch shows a shadow through its hole */
-  .adm-tkw.is-v::before{top:30%;left:10px;right:calc(100% - var(--cutx) + 16px)}
-  .adm-tkw.is-v::after{content:"";position:absolute;top:30%;bottom:0;left:calc(var(--cutx) + 16px);right:10px;border-radius:16px;box-shadow:0 16px 26px -14px rgba(22,25,29,.32)}
+  .adm-tkw::before,.adm-tkw::after{display:none}   /* flat on desktop: no drop shadow (his ask, 23 Oct) */
 
   /* ---- section heads: the placements rhythm ---- */
   .bk.adm-routes,.bk.adm-nsat,.bk.adm-steps,.bk.adm-sch,.bk.adm-loans,.bk.adm-camp{padding:120px var(--side);column-gap:24px;row-gap:48px;align-items:start}
