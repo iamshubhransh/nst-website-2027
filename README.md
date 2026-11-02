@@ -4,6 +4,8 @@ The 2027 Newton School of Technology website, built section by section from the 
 
 Live preview: https://iamshubhransh.github.io/nst-website-2027/
 
+Review build of the production port (newton-marketing-web PR #1532, all 14 pages): https://iamshubhransh.github.io/nst-website-2027/nst-2026/ . `nst-2026/` and `_next/` are a static export of that branch built with `basePath: "/nst-website-2027"`; don't edit them by hand, rebuild and replace both folders.
+
 ## What is in the page
 
 - Figma frame 153:23441, top to bottom: top bar, hero, quick summary (93% stat, stats grid, companies), companies orbit with the CTC card, campus internship card, swipeable internship-win cards, placement-auditor card (frame 234:18365: centred badge and titles, auditor logo marquee, two report cards with calendar icons). seven foundations (frame 234:36816: hanging lines with travelling pulses, a list of the seven buckets that steps up on a loop), then the five achievement buckets (see below). A bottom bar with the play button and Apply Now (frame 153:32692) slides in once the hero has scrolled off the top and stays fixed.
