@@ -4,7 +4,7 @@ The 2027 Newton School of Technology website, built section by section from the 
 
 Live preview: https://iamshubhransh.github.io/nst-website-2027/
 
-Review build of the production port (newton-marketing-web PR #1532, all 14 pages): https://iamshubhransh.github.io/nst-website-2027/nst-2026/ . `nst-2026/` and `_next/` are a static export of that branch built with `basePath: "/nst-website-2027"`; don't edit them by hand, rebuild and replace both folders.
+Review build of the production port (newton-marketing-web PR #1532, all 14 pages): https://iamshubhransh.github.io/nst-website-2027/nst-2026/ . `nst-2026/` and `_next/` are a static export of the local branch `review/ghpages-nst-2026` (PR #1532 plus: basePath `/nst-website-2027`, live NST links to newtonschool.co, every video served from `nst-2026/media/`, the prototype's Ask Newton chat, no analytics). Don't edit them by hand: rebuild that branch and replace both folders.
 
 ## What is in the page
 
